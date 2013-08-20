@@ -7,8 +7,8 @@ export TEXTDOMAIN=openpctv
 commitcam () {
 CARDCLIENT=/etc/vdr/plugins/sc/cardclient.conf
 OSCAMSERVER=/etc/oscam/oscam.server
-CFG="`find /media -maxdepth 2 -name '[Cc][Cc][Cc][Aa][Mm].[Cc][Ff][Gg]'`"
-[ X$CFG = X ] && exit 0
+CFG="`find /media -maxdepth 2 -name '[Cc][Cc][Cc][Aa][Mm].[Cc][Ff][Gg]' | head -n1`"
+[ "X$CFG" = X ] && exit 0
 cp "$CFG" /tmp/CCcam.cfg
 i=1
 if grep -q ^group $OSCAMSERVER && ! grep -q "www.url1.com,port1" $OSCAMSERVER; then
