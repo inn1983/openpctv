@@ -1,0 +1,11 @@
+#!/bin/bash
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
+export HOME=/root
+export TERM=linux
+
+#/usr/bin/openbox &
+#xterm -maximized -u8 -lc -e /bin/bash -l
+xterm -fg white -bg blue4 -fa 'Droid Sans Fallback:style=Regular' -fs 14 -lc -u8 -maximized -e /bin/bash
+#killall -9 openbox 
+#/sbin/start vdr-frontend
+

@@ -1,0 +1,44 @@
+#!/bin/sh
+
+. config/options
+get_meta $1
+
+cd $PKG_BUILD_DIR
+
+require_cxx $1
+
+mkdir -p objdir-host && cd objdir-host
+do_configure host \
+            --disable-static \
+            --enable-shared \
+            --with-server=no \
+            --with-cgi=no \
+            --with-sdk=yes \
+            --with-demos=no \
+            --with-epoll=yes \
+            --with-ssl=no \
+            --with-stressjob=no \
+            --prefix=$ROOT/$TOOLCHAIN
+
+make
+make_install toolchain
+mkdir -p .install/usr
+mv .install/$ROOT/$TOOLCHAIN/* .install/usr
+
+cd ..
+
+mkdir -p objdir-target && cd objdir-target
+do_configure target \
+            --disable-static \
+            --enable-shared \
+            --with-server=no \
+            --with-cgi=no \
+            --with-sdk=yes \
+            --with-demos=no \
+            --with-epoll=yes \
+            --with-stressjob=no
+
+make
+make_install
+
+sed -i "s:\(['= ]\)/usr:\\1$LIB_PREFIX:g" .install/usr/bin/tntnet-config

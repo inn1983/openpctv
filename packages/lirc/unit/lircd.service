@@ -1,0 +1,13 @@
+[Unit]
+Description=Lircd daemon
+After=systemd-udevd.service
+ConditionPathExists=/etc/lirc/lircd.conf
+
+[Service]
+Type=forking
+EnvironmentFile=/etc/lirc/hardware.conf
+ExecStartPre=/usr/bin/lircd_pre.sh
+ExecStart=/usr/sbin/lircd -H $DRIVER -d $DEVICE /etc/lirc/lircd.conf -o /var/run/lirc/lircd
+
+[Install]
+WantedBy=multi-user.target

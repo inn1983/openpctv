@@ -1,0 +1,11 @@
+#!/bin/sh
+
+. config/options
+
+get_meta $1
+cd $BUILD/$1*
+
+cp makefile.linux_any_cpu_gcc_4.X makefile.machine
+sed -i -e "s#gcc#$CC#g" -e "s#g++#$CXX#g" makefile.machine
+
+make 7z

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. config/options
+get_meta $1
+
+cd $PKG_BUILD_DIR
+
+setup_toolchain host
+python setup.py build
+python setup.py install --prefix /usr --root .install

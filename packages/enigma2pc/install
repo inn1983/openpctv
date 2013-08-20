@@ -1,0 +1,26 @@
+#!/bin/sh
+
+. config/options
+
+get_meta $1
+
+cd $PKG_BUILD_DIR
+
+do_install usr/bin
+do_install usr/share
+do_install usr/lib/libopen.*
+do_install usr/lib/enigma2
+do_install etc
+
+rm -rf $INSTALL/etc/enigma2
+cp -a $ROOT/$PACKAGES/$1/config/enigma2 $INSTALL/etc/
+
+cp $ROOT/$PACKAGES/$1/scripts/runenigma2 $INSTALL/usr/bin
+
+mkdir -p $INSTALL/etc/lirc
+cp $ROOT/$PACKAGES/$1/config/lircrc.enigma2pc $INSTALL/etc/lirc
+
+ln -sf video $INSTALL/hdd
+
+mkdir -p $INSTALL/lib/systemd/system/enigma2pc.target.wants
+ln -s ../oscam.service $INSTALL/lib/systemd/system/enigma2pc.target.wants

@@ -1,0 +1,14 @@
+[Unit]
+Description=Eventlircd daemon
+After=systemd-udevd.service
+Before=xorg.service
+ConditionPathExists=!/etc/lirc/mycustom.conf
+
+[Service]
+EnvironmentFile=/etc/eventlircd.conf
+Type=forking
+ExecStartPre=/usr/bin/change-rc
+ExecStart=/usr/sbin/eventlircd $EV_OPTS
+
+[Install]
+WantedBy=multi-user.target

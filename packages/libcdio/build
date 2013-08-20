@@ -1,0 +1,22 @@
+#!/bin/sh
+
+. config/options
+get_meta $1
+
+cd $PKG_BUILD_DIR
+
+do_configure \
+            --enable-cxx \
+            --enable-joliet \
+            --enable-rock \
+            --without-cd-drive \
+            --without-cd-info \
+            --with-cd-paranoia \
+            --without-cdda_player \
+            --without-cd-read \
+            --without-iso-info \
+            --without-iso-read \
+            --without-versioned-libs \
+
+make
+make_install

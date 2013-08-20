@@ -1,0 +1,10 @@
+PKG_NAME=vdr-mousemate
+PKG_VERSION=0.1.7
+PKG_URL="http://projects.vdr-developer.org/git/vdr-plugin-mousemate.git/snapshot/vdr-plugin-mousemate-${PKG_VERSION}.tar.bz2"
+PKG_REV=2
+PKG_BUILD_DEPENDS="toolchain"
+PKG_RUN_DEPENDS="$TARGET_LIBC vdr"
+PKG_PRIORITY=optional
+PKG_SECTION=multimedia
+PKG_SHORTDESC="VDR -- mousemate plugin"
+PKG_LONGDESC="This plugin allows using a mouse to control almost each of VDR's functions by mapping remote control keys to mouse actions. Observed are relative wheel, x axis and y axis movement and up to eight buttons."

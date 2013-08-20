@@ -1,0 +1,10 @@
+[Unit]
+Description=VDR backend for XBMC
+Before=xbmc.service
+
+[Service]
+ExecStart=/usr/bin/runvdr-backend
+Restart=always
+
+[Install]
+WantedBy=xbmc.target

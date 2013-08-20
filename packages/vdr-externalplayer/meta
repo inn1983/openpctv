@@ -1,0 +1,10 @@
+PKG_NAME=vdr-externalplayer
+PKG_VERSION=0.3.2
+PKG_URL="http://www.uli-eckhardt.de/vdr/download/vdr-externalplayer-0.3.2.tgz"
+PKG_REV=1
+PKG_BUILD_DEPENDS="toolchain"
+PKG_RUN_DEPENDS="$TARGET_LIBC vdr"
+PKG_PRIORITY=optional
+PKG_SECTION=multimedia
+PKG_SHORTDESC="VDR -- externalplayer plugin"
+PKG_LONGDESC="Externalplayer-plugin"

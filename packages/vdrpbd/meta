@@ -1,0 +1,9 @@
+PKG_NAME=vdrpbd
+PKG_VERSION=0.1.0
+PKG_URL="http://projects.vdr-developer.org/git/vdrpbd.git/snapshot/${PKG_NAME}-${PKG_VERSION}.tar.bz2"
+PKG_REV=1
+PKG_RUN_DEPENDS="$TARGET_LIBC vdr perl-net-dbus"
+PKG_PRIORITY=optional
+PKG_SECTION=multimedia
+PKG_SHORTDESC="VDR ACPI power button handling daemon"
+PKG_LONGDESC="vdrpbd is meant to be used as a replacement to the usually used "acpid", for VDR based HTPC systems. As it is developed specially for VDR systems."

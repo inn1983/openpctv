@@ -1,0 +1,15 @@
+#!/bin/sh
+
+. config/options
+
+get_meta $1
+
+STAMP=$DEVPKGROOT/$PKG_OPK_DEV
+
+[ ! -f $STAMP ] && exit 0
+
+set_title "UNPACKAGEDEV  $1"
+
+$SCRIPTS/uninstalldev $1
+
+rm -f $STAMP

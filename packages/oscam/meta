@@ -1,0 +1,14 @@
+PKG_NAME=oscam
+#PKG_VERSION=8702
+#PKG_URL="$SFNET_SRCS/openpctv/sources/oscam-${PKG_VERSION}.tar.xz"
+PKG_URL_PROTO=svn
+PKG_URL_REV=8846
+PKG_URL="http://www.streamboard.tv/svn/oscam/trunk"
+PKG_VERSION=1.2+r${PKG_URL_REV}
+PKG_REV=1
+PKG_RUN_DEPENDS="$TARGET_LIBC libusb"
+PKG_BUILD_DEPENDS="toolchain cmake libusb"
+PKG_PRIORITY="optional"
+PKG_SECTION="utils"
+PKG_SHORTDESC="oscam: OSCam is Open Source Conditional Access Modul."
+PKG_LONGDESC="OSCam is Open Source Conditional Access Modul."

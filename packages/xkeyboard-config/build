@@ -1,0 +1,15 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+
+XKBCOMP="/usr/bin/xkbcomp" \
+do_configure \
+            --with-xkb-base=$XORG_PATH_XKB \
+            --enable-compat-rules \
+            --disable-xkbcomp-symlink \
+            --with-xkb-rules-symlink=xorg
+
+make
+make_install

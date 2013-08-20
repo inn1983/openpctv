@@ -1,0 +1,24 @@
+#!/bin/sh
+
+. config/options
+
+get_meta $1
+
+cd $PKG_BUILD_DIR
+
+export CFLAGS="$CFLAGS -fPIC"
+export CPPFLAGS="$CPPFLAGS -fexceptions"
+export LDFLAGS="-L$ROOT/$TOOLCHAIN/$TARGET_NAME/lib"
+export LIBDIR="$SYSROOT_PREFIX/lib"
+
+mkdir -p objdir-target
+cd objdir-target
+
+do_configure \
+	--enable-mpbsd \
+	--enable-cxx \
+
+make
+#make check
+make_install
+

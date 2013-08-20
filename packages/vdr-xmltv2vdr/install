@@ -1,0 +1,29 @@
+#!/bin/sh
+
+. config/options
+
+mkdir -p $INSTALL/usr/lib/vdr
+for i in $BUILD/$1*/lib$1*.so; do
+  cp $i $INSTALL/usr/lib/vdr/${i##*/}.2.0.0
+done
+
+
+for loc in $INCLUDED_LOCALES; do
+  LOCALE=`echo $loc|cut -f1 -d.`
+  if [ -d $BUILD/$1*/locale/$LOCALE ]; then
+    mkdir -p $INSTALL/usr/share/locale/$LOCALE
+    cp -a $BUILD/$1*/locale/$LOCALE/* $INSTALL/usr/share/locale/$LOCALE/
+  fi
+done
+
+NAME=`echo $1 | sed s/vdr-//`
+mkdir -p $INSTALL/etc/vdr/plugins.d
+echo "PLUGIN=${NAME}" > $INSTALL/etc/vdr/plugins.d/50_$NAME
+echo "ENABLED=yes" >> $INSTALL/etc/vdr/plugins.d/50_$NAME
+
+mkdir -p $INSTALL/usr/bin
+cp -a $BUILD/$1*/dist/epgdata2xmltv/epgdata2xmltv $INSTALL/usr/bin
+mkdir -p $INSTALL/var/lib/epgsources/epgdata2xmltv
+cp $BUILD/$1*/dist/epgdata2xmltv/epgdata2xmltv.dist $INSTALL/var/lib/epgsources/epgdata2xmltv
+mkdir -p $INSTALL/var/lib/epgsources/tvm2xmltv
+cp $BUILD/$1*/dist/tvm2xmltv/tvm2xmltv.dist $INSTALL/var/lib/epgsources/tvm2xmltv

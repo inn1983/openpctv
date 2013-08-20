@@ -1,0 +1,25 @@
+# 检测，如果不是存储设备就跳过
+KERNEL!="sd[a-z][0-9]", GOTO="media_by_label_auto_mount_end"
+
+# 检测设备
+IMPORT{program}="/sbin/blkid -o udev -p %N"
+
+# 命名设备，如果有标签就以标签命名，如果没有就按设备名称
+ENV{ID_FS_LABEL}!="", ENV{dir_name}="%E{ID_FS_LABEL}"
+ENV{ID_FS_LABEL}=="", ENV{dir_name}="%k"
+
+# 通用挂载选项
+ACTION=="add", ENV{mount_options}="relatime,sync"
+
+# 特殊挂载选项，fat 和 ntfs
+ACTION=="add", ENV{ID_FS_TYPE}=="vfat", ENV{mount_options}="$env{mount_options},iocharset=utf8,umask=000"
+ACTION=="add", ENV{ID_FS_TYPE}=="ntfs", ENV{mount_options}="$env{mount_options},utf8,umask=000"
+
+# 挂载设备
+ACTION=="add", RUN+="/bin/mkdir -p /media/%E{dir_name}", RUN+="/bin/mount -o $env{mount_options} /dev/%k /media/%E{dir_name}"
+
+# 如果拔出设备:
+ACTION=="remove", ENV{dir_name}!="", RUN+="/bin/umount -l /media/%E{dir_name}", RUN+="/bin/rmdir /media/%E{dir_name}"
+
+# 退出
+LABEL="media_by_label_auto_mount_end"

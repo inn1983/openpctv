@@ -1,0 +1,17 @@
+#!/bin/sh
+
+. config/options
+get_meta $1
+
+cd $PKG_BUILD_DIR
+
+make distclean || true
+do_configure \
+  --enable-utf8 \
+  --enable-unicode-properties \
+  --with-gnu-ld
+
+make
+make_install
+
+sed -i "s:prefix=/usr:prefix=$LIB_PREFIX:" .install/usr/bin/pcre-config

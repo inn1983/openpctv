@@ -1,0 +1,14 @@
+#!/bin/sh
+
+. config/options
+get_meta $1
+
+cd $PKG_BUILD_DIR
+
+cd objdir-target
+do_install etc/grub.d
+do_install usr/sbin
+do_install usr/bin
+do_install usr/lib/grub/*
+do_install usr/share/locale
+do_install usr/share/grub

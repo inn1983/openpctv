@@ -1,0 +1,9 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+export TARGET_LDFLAGS="$TARGET_LDFLAGS -lintl"
+do_configure
+make
+make_install

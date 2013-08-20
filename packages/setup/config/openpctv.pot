@@ -1,0 +1,1154 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-19 16:12+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: packages/setup/scripts/audio-config:8
+#: packages/setup/scripts/audio-config:48
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:235
+msgid "Soundcard Configuration"
+msgstr ""
+
+#: packages/setup/scripts/audio-config:9
+msgid "Select a default PCM output devices from the existing devices list"
+msgstr ""
+
+#: packages/setup/scripts/audio-config:31
+msgid "Audio output test"
+msgstr ""
+
+#: packages/setup/scripts/audio-config:32
+msgid ""
+"Next let's try the audio output. We want to know whether audio output works, "
+"turn on all your speakers."
+msgstr ""
+
+#: packages/setup/scripts/audio-config:43
+msgid "Test audio finish"
+msgstr ""
+
+#: packages/setup/scripts/audio-config:44
+msgid ""
+"Tested successfully yet? Should the test fail for any reason--sound coming "
+"out of the wrong speakers. in this case, check your connections carefully "
+"(and attempting to simply swap some wires around). If you select 'No', then "
+"will return to the previous step"
+msgstr ""
+
+#: packages/setup/scripts/audio-config:49
+msgid ""
+"First you need to get a list of all your sound cards (if you have multiple "
+"ones) and on each card you may have multiple devices ( for example a set of "
+"output for analog and one digital output and one HDMI). Select a default PCM "
+"output devices from the existing devices list, and then specify the number "
+"of channels"
+msgstr ""
+
+#: packages/setup/scripts/audio-config:52
+msgid "Configuration completed, go on audio output test"
+msgstr ""
+
+#: packages/setup/scripts/audio-config:68
+msgid "Specify the number of channel"
+msgstr ""
+
+#: packages/setup/scripts/audio-config:69
+msgid "Stereo"
+msgstr ""
+
+#: packages/setup/scripts/audio-config:70
+msgid "Surround"
+msgstr ""
+
+#: packages/setup/scripts/audio-config:71
+msgid "Full 5.1"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:28
+#, sh-format
+msgid "DiSEqC configuration for VDR v${VERSION}"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:29
+msgid "DiSEqC (Digital Satellite Equipment Control) System Mode."
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:30
+msgid "No DiSEqC switch"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:31
+#, sh-format
+msgid ""
+"Specify the satellite for this LNBF.If the satellite you want to select is "
+"not in this list, you should first patch for your ${VDRCONFDIR}sources.conf."
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:32
+msgid ""
+"Select LNBF LO frequency.There are two different ways that a satellite can "
+"broadcast its signal.If linear,it broadcasts Horizontal and Vertical.If "
+"circular, it broadcasts Right Circular and Left Circular. "
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:33
+msgid "5150MHz Single Linear C Band LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:34
+msgid "5750MHz Single Linear C Band LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:35
+msgid "9750MHz Single Linear Ku Band LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:36
+msgid "10600MHz Single Linear Ku Band LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:37
+msgid "10750MHz Single Linear Ku Band LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:38
+msgid "11250MHz Single Linear Ku Band LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:39
+msgid "11300MHz Single Linear Ku Band LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:40
+msgid "9750/10600MHz Dual Linear Ku Band LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:41
+msgid "9750/10750MHz Dual Linear Ku Band LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:42
+msgid "5150MHz Single Circular C Band LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:43
+msgid "5750MHz Single Circular C Band LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:44
+msgid "9750MHz Single Circular Ku Band LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:45
+msgid "10600MHz Single Circular Ku Band LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:46
+msgid "10750MHz Single Circular Ku Band LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:47
+msgid "11250MHz Single Circular Ku Band LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:48
+msgid "11300MHz Single Circular Ku Band LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:49
+msgid "9750/10600MHz Dual Circular Ku Band Universal LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:50
+msgid "9750/10750MHz Dual Circular Ku Band Universal LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:51
+msgid "User-defined LNBF LO frequency"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:52
+msgid "Polarization,HV for Linear LNBF,RL for Circular LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:53
+msgid ""
+"Input LO frequency, if you use a single C/Ku band LNB, please specify "
+"LnbFrequLo and LnbSLOF with '0'"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:54
+msgid "Low LO frequency"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:55
+msgid "High LO frequency"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:56
+msgid "Correct LO frequency"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:57
+msgid "Edit"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:58
+msgid "Set the parameters of DiSEqC"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:59
+msgid "0/22Khz Switch"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:60
+msgid "Set MiniDiSEqC(Toneburst) Switch"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:61
+msgid "Set DiSEqC 1.0/2.0 committed Switch"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:62
+msgid "Set DiSEqC 1.1/2.1 uncommitted Switch"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:63
+msgid "Set DiSEqC 1.2/2.2 Switch"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:64
+msgid "Non-standard user defined configuration"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:65
+msgid ""
+"Dual LNBF includes 0/22KHZ switch, also be used to switch between two "
+"different single LNBF"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:66
+msgid ""
+"Also be called MiniDiSEqC,switch A & B two different LNB and different from "
+"the 0/22K switch"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:67
+msgid "Allow switching between up to 4 committed LNB's(4x1 DiSEqC Switch)"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:68
+msgid ""
+"Allow switching between up to 16 Uncommitted LNB's(8x1,10x1,12x1,16x1 DiSEqC "
+"Switch)"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:69
+msgid ""
+"Allow switching between up to 16 LNB's, and control of a single axis "
+"satellite motor"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:70
+msgid "Wait nn milliseconds of commands(nn:a integer number,Default: 244)"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:71
+msgid "Select repetitions of commands(Default:1)"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:72
+msgid "One Repeat (Default)"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:73
+msgid "Two Repeat"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:74
+msgid "Three repeat"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:75
+msgid "0/22k has not been set"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:76
+msgid "0/22k has been set"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:77
+msgid ""
+"With an uncommited diseqc 1.1 switch(one out of 16) and 16 commited diseqc "
+"1.0(one out of 4) you can have up to 64 satellites (16*4)."
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:78
+msgid "Set the first DiSEqC port"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:79
+msgid "Set the second DiSEqC port"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:80
+msgid "22Khz Tone Control Devices"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:81
+msgid "No 22K"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:82
+msgid "Not set"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:83
+msgid "Selected satellite"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:84
+msgid "Selected LNBF LO"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:85
+msgid "Do you want to edit diseqc.conf?"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:86
+msgid "Edit diseqc.conf"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:87
+msgid "You can edit diseqc.conf by manual, or you'll skip this step"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:88
+msgid "Do you want to save these settings?"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:89
+msgid "The configuration file(s) will be saved:"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:90
+msgid "or the configuration file(s):"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:91
+#, sh-format
+msgid ""
+"It will be placed in /tmp, you can edit and place it into ${VDRCONFDIR} by "
+"manual"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:92
+msgid "diseqc.conf has been edited"
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:93
+msgid "Finished"
+msgstr ""
+
+#: packages/setup/scripts/getcam:49 packages/setup/scripts/setup.sh:235
+msgid "Select a software emulated CAM"
+msgstr ""
+
+#: packages/setup/scripts/getcam:49
+msgid ""
+"OScam can used by Enigma2(Through dvbsoftwareca module to create symlinks "
+"for dvb adapters),VDR(Through VDR-DVBAPI plugin to act as a bridge between "
+"VDR and OScam) and XBMC(throgh VDR backend, so the same as VDR). VDR-SC only "
+"used by VDR(A software emulated CAM, VDR plugin) and XBMC."
+msgstr ""
+
+#: packages/setup/scripts/getcam:49
+msgid "Open Source Conditional Access Module software"
+msgstr ""
+
+#: packages/setup/scripts/getcam:49
+msgid "A software CAM emulation, a VDR plugin"
+msgstr ""
+
+#: packages/setup/scripts/getcam:60
+msgid ""
+"Would you like to configure OScam/VDR-SC? Of course, you can also put CCcam."
+"cfg file into the USB disk, the system will automatically read and written "
+"into the OScam/VDR-SC configuration file."
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:8
+msgid "Reboot OpenPCTV?"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:8
+msgid ""
+"Driver package has been installed successfully. Now you have to reboot to "
+"verify whether the drive can work well."
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:27
+#, sh-format
+msgid "Found $field"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:27
+msgid ""
+"Sometimes board has no valid PCI(e) Subsystem ID and can't be autodetected. "
+"You can specify the model of the card to pass card=<n> insmod option to "
+"workaround that. Redirect complaints to the vendor of the TV card. Do you "
+"want to do this?"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:32
+#, sh-format
+msgid "Specify the card number of $field board"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:32
+msgid "Here is a list of valid choices for the card=<n> insmod option"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:56
+#: packages/setup/scripts/install-drivers:61
+msgid "Additional V4L and DVB drive"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:57
+msgid ""
+"Your V4L and DVB devices seem to be normal. Perhaps you do not need to "
+"install other additional drivers. If you want to install additional drives "
+"please select 'Yes'"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:62
+msgid ""
+"Your V4L and DVB device does not seem to work properly. Perhaps you should "
+"install another driver. Do you want to install the additional drives?"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:67
+#: packages/setup/scripts/setup.sh:235
+msgid "Install additional V4L and DVB drive"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:68
+msgid ""
+"Before proceeding please confirm your V4L and DVB device specific "
+"information. Choose the drives you need to install carefully."
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:69
+msgid "I do not want to install now."
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:70
+msgid "Support most of the devices,such as DVBWorld,Tevii,Prof..."
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:71
+msgid "Support all the TBS devices"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:12
+#: packages/setup/scripts/installator.sh.new:12
+#: packages/setup/scripts/installator.sh.orig:12
+msgid "Not found or not a block device."
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:13
+#: packages/setup/scripts/installator.sh.new:13
+#: packages/setup/scripts/installator.sh.orig:13
+msgid "does not have any corresponding BIOS drive."
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:16
+#: packages/setup/scripts/installator.sh.new:16
+#: packages/setup/scripts/installator.sh.orig:16
+msgid "Keymap selection"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:18
+#: packages/setup/scripts/installator.sh.new:18
+#: packages/setup/scripts/installator.sh.orig:18
+msgid "Choose Keymap"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:19
+#: packages/setup/scripts/installator.sh.new:19
+#: packages/setup/scripts/installator.sh.orig:19
+msgid "Which keymap do you want to use ?"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:22
+#: packages/setup/scripts/installator.sh.new:22
+#: packages/setup/scripts/installator.sh.orig:22
+msgid "Warning"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:23
+#: packages/setup/scripts/installator.sh.new:23
+#: packages/setup/scripts/installator.sh.orig:23
+msgid "ERROR"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:25
+#: packages/setup/scripts/installator.sh.new:25
+#: packages/setup/scripts/installator.sh.orig:25
+msgid "No disks found on this system.\\nCheck again ?"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:26
+#: packages/setup/scripts/installator.sh.new:26
+#: packages/setup/scripts/installator.sh.orig:26
+msgid "refresh list"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:28
+#: packages/setup/scripts/installator.sh:37
+#: packages/setup/scripts/installator.sh.new:28
+#: packages/setup/scripts/installator.sh.new:37
+#: packages/setup/scripts/installator.sh.orig:28
+#: packages/setup/scripts/installator.sh.orig:37
+msgid "Installation device"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:29
+#: packages/setup/scripts/installator.sh.new:29
+#: packages/setup/scripts/installator.sh.orig:29
+msgid ""
+"You are going to install OpenPCTV. For this you will need an empty partition "
+"with about 5 GB of free space. Be careful to choose the right disk! We won't "
+"take responsibility for any data loss."
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:31
+#: packages/setup/scripts/installator.sh.new:31
+#: packages/setup/scripts/installator.sh.orig:31
+msgid "Microsoft FAT16/32 partition or Linux EXT2/3 partition"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:33
+#: packages/setup/scripts/installator.sh.new:33
+#: packages/setup/scripts/installator.sh.orig:33
+msgid "Please edit your partition table to create a"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:34
+#: packages/setup/scripts/installator.sh.new:34
+#: packages/setup/scripts/installator.sh.orig:34
+msgid ""
+"with about 5 GB of free space. Don't forget to set the bootable flag to this "
+"partition. Remember to commit the changes when done. We won't take "
+"responsibility for any data loss."
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:39
+#: packages/setup/scripts/installator.sh.new:39
+#: packages/setup/scripts/installator.sh.orig:39
+msgid "You don't have any"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:40
+#: packages/setup/scripts/installator.sh.new:40
+#: packages/setup/scripts/installator.sh.orig:40
+msgid ""
+"partition on your system. Please create a partition first using for example "
+"cfdisk."
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:41
+#: packages/setup/scripts/installator.sh.new:41
+#: packages/setup/scripts/installator.sh.orig:41
+msgid "Where do you want to install OpenPCTV ?"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:42
+#: packages/setup/scripts/installator.sh.new:42
+#: packages/setup/scripts/installator.sh.orig:42
+msgid "is not a valid block device."
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:44
+#: packages/setup/scripts/installator.sh.new:44
+#: packages/setup/scripts/installator.sh.orig:44
+msgid "Partition is not formated"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:45
+#: packages/setup/scripts/installator.sh.new:45
+#: packages/setup/scripts/installator.sh.orig:45
+msgid "Partition format type"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:46
+#: packages/setup/scripts/installator.sh.new:46
+#: packages/setup/scripts/installator.sh.orig:46
+msgid "is not supported in your partition type"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:47
+#: packages/setup/scripts/installator.sh.new:47
+#: packages/setup/scripts/installator.sh.orig:47
+msgid "Partition is already formated"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:48
+#: packages/setup/scripts/installator.sh:50
+#: packages/setup/scripts/installator.sh.new:48
+#: packages/setup/scripts/installator.sh.new:50
+#: packages/setup/scripts/installator.sh.orig:48
+#: packages/setup/scripts/installator.sh.orig:50
+msgid "Formatting"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:49
+#: packages/setup/scripts/installator.sh.new:49
+#: packages/setup/scripts/installator.sh.orig:49
+msgid "Do you want to format"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:51
+#: packages/setup/scripts/installator.sh.new:51
+#: packages/setup/scripts/installator.sh.orig:51
+msgid "...\\nPlease wait"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:53
+#: packages/setup/scripts/installator.sh.new:53
+#: packages/setup/scripts/installator.sh.orig:53
+msgid "Linux partition type"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:54
+#: packages/setup/scripts/installator.sh.new:54
+#: packages/setup/scripts/installator.sh.orig:54
+msgid "Which type of Linux partition you want ?"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:56
+#: packages/setup/scripts/installator.sh.new:56
+#: packages/setup/scripts/installator.sh.orig:56
+msgid ""
+"As you don't have formatting tool installed, I won't be able to format the "
+"partition."
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:57
+#: packages/setup/scripts/installator.sh.new:57
+#: packages/setup/scripts/installator.sh.orig:57
+msgid "Hopefully it is already formatted."
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:58
+#: packages/setup/scripts/installator.sh.new:58
+#: packages/setup/scripts/installator.sh.orig:58
+msgid "should be formatted as"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:60
+#: packages/setup/scripts/installator.sh.new:60
+#: packages/setup/scripts/installator.sh.orig:60
+msgid "Failed to mount"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:62
+#: packages/setup/scripts/installator.sh.new:62
+#: packages/setup/scripts/installator.sh.orig:62
+msgid "Installing... Please wait"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:65
+#: packages/setup/scripts/installator.sh.new:65
+#: packages/setup/scripts/installator.sh.orig:65
+msgid "Support for HDTV through X.Org ?"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:66
+#: packages/setup/scripts/installator.sh.new:66
+#: packages/setup/scripts/installator.sh.orig:66
+msgid ""
+"It appears that this version of OpenPCTV has been compiled with support for "
+"HDTV through X.Org video server. Remember that X.Org is only useful if you "
+"want to display high-resolution movies on a wide display (LCD TVs, Plasma "
+"screens ...). It doesn't provide TVOut support any longer. Do you want to "
+"enable support for HDTV as a default ? (previous non-HD mode will still be "
+"available)"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:69
+#: packages/setup/scripts/installator.sh.new:69
+#: packages/setup/scripts/installator.sh.orig:69
+msgid "Bootloader"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:71
+#: packages/setup/scripts/installator.sh.new:71
+#: packages/setup/scripts/installator.sh.orig:71
+msgid "Couldn't find my GRUB partition representation"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:72
+#: packages/setup/scripts/installator.sh.new:72
+#: packages/setup/scripts/installator.sh.orig:72
+msgid "Couldn't install GRUB bootloader!"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:74
+#: packages/setup/scripts/installator.sh.new:74
+#: packages/setup/scripts/installator.sh.orig:74
+msgid ""
+"is now a OpenPCTV partition. To boot from it, you will need to install a "
+"bootloader. I can install one for you. If you have any other operating "
+"system on your computer, I will also install a multiboot for you. If you do "
+"not want me to install a new bootloader, you will need to configure yours "
+"alone.\\nI have found:"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:75
+#: packages/setup/scripts/installator.sh.new:75
+#: packages/setup/scripts/installator.sh.orig:75
+msgid "Do you want to install me to install the boot loader (GRUB) for you ?"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:76
+#: packages/setup/scripts/installator.sh.new:76
+#: packages/setup/scripts/installator.sh.orig:76
+msgid ""
+"is now a OpenPCTV partition. I didn't recognize any other OS on your system, "
+"want me to install boot loader on your MBR ?"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:77
+#: packages/setup/scripts/installator.sh.new:77
+#: packages/setup/scripts/installator.sh.orig:77
+msgid "You must install a boot loader to boot OpenPCTV"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:80
+#: packages/setup/scripts/installator.sh.new:80
+#: packages/setup/scripts/installator.sh.orig:80
+msgid "Installation Log"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:81
+#: packages/setup/scripts/installator.sh.new:81
+#: packages/setup/scripts/installator.sh.orig:81
+msgid ""
+"Do you want to check installation logs ? (it is probably useful for debug "
+"purpose only)"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:84
+#: packages/setup/scripts/installator.sh.new:84
+#: packages/setup/scripts/installator.sh.orig:84
+msgid "Have Fun!"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:85
+#: packages/setup/scripts/installator.sh.new:85
+#: packages/setup/scripts/installator.sh.orig:85
+msgid "OpenPCTV is now installed on"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:86
+msgid "Do you want to reboot? Or press Alt+F2 to configure by manual"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh.new:86
+#: packages/setup/scripts/installator.sh.orig:86
+msgid "Do you want to proceed with its configuration ?"
+msgstr ""
+
+#: packages/setup/scripts/monitor.sh:8
+msgid "Do you need to set the monitor's best resolution?"
+msgstr ""
+
+#: packages/setup/scripts/monitor.sh:8
+msgid ""
+"Most modern monitors/TVs can be probed for EDID data concerning their "
+"capabilities and requirements.So normally you do not need to make any "
+"settings for Xorg. But EDID is not always completely accurate, and for some "
+"situations such as older or unusual display hardware or many HDTVs, it will "
+"be necessary to create a modeline to get the setting right. We'll enter the "
+"monitor configuration if you select 'Yes'"
+msgstr ""
+
+#: packages/setup/scripts/monitor.sh:19
+msgid "Submit"
+msgstr ""
+
+#: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
+#: packages/setup/scripts/setup.sh:235
+msgid "Set the monitor's best resolution"
+msgstr ""
+
+#: packages/setup/scripts/monitor.sh:20
+msgid ""
+"Confirm the optimal resolution your monitor supported. Note that the full HD "
+"resolution is 1920x1080."
+msgstr ""
+
+#: packages/setup/scripts/monitor.sh:34
+msgid "Really quit?"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:27
+msgid "You have successfully detected accessing the Internet"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:28
+msgid ""
+"Failed to detect your Internet connection, please check your hardware or "
+"check /etc/network to configure by manual."
+msgstr ""
+
+#: packages/setup/scripts/netconfig:29
+msgid "Do you want to use DHCP to automatically obtain network address?"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:30
+msgid "Please enter the IP address"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:31
+msgid "Please enter the subnet mask"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:32
+msgid "Please enter the Gateway address"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:33
+msgid "Please enter the domain name server address (DNS)"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:34
+msgid "Wireless network name (SSID)"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:35
+msgid "Please enter the WEP encryption key"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:36
+msgid "Please enter the WPA Shared Key"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:37 packages/setup/scripts/netconfig:40
+msgid "Configure wireless network by manual"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:38
+msgid "Safe Mode"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:39
+msgid "WPA Algorithms"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:41
+msgid ""
+"Select the wireless network encryption, it must be consistent with your "
+"router settings."
+msgstr ""
+
+#: packages/setup/scripts/netconfig:42
+msgid "WEP encrypted wireless network mode"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:43
+msgid "WPA/WPA2 wireless encryption mode"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:44
+msgid "Open mode"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:45
+msgid "Choose A Wireless Network"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:46
+msgid ""
+"Please select the wireless network intercepted, if it is not in the list, "
+"you can enter manual settings"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:47
+msgid ""
+"You have successfully detected accessing the Internet, do you still want to "
+"configure your network?"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:48
+msgid "Scan Network Interface Card fail, please check it or its driver."
+msgstr ""
+
+#: packages/setup/scripts/netconfig:49
+msgid "Select the Network Interface Card"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:50
+msgid "Select the Network Interface Card you want to configure"
+msgstr ""
+
+#: packages/setup/scripts/select-irdrv:13
+msgid "IR configuration"
+msgstr ""
+
+#: packages/setup/scripts/select-irdrv:13
+msgid "Select IR Device"
+msgstr ""
+
+#: packages/setup/scripts/select-irdrv:13
+msgid ""
+"In this machine found the following infrared receiver devices. Please select "
+"a default device as Lirc support."
+msgstr ""
+
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:235
+msgid "Set the default target"
+msgstr ""
+
+#: packages/setup/scripts/select-target:8
+msgid "Please select the default target to boot into."
+msgstr ""
+
+#: packages/setup/scripts/select-target:8
+msgid "Support for AMD/NVIDIA display card"
+msgstr ""
+
+#: packages/setup/scripts/select-target:8
+msgid "Support for Intel/AMD/NVIDIA display card"
+msgstr ""
+
+#: packages/setup/scripts/select-target:8
+msgid "Only support for NVIDIA display card"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:34 packages/setup/scripts/setup.sh:48
+#: packages/setup/scripts/setup.sh:56
+msgid "OK"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:34 packages/setup/scripts/setup.sh:43
+#: packages/setup/scripts/setup.sh:45 packages/setup/scripts/setup.sh:48
+#: packages/setup/scripts/setup.sh:56
+msgid "Auto mount cifs"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:42
+msgid "MSSMBMNT"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:42
+msgid "MSSMBMNTINFO"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:43 packages/setup/scripts/setup.sh:45
+msgid "Specifies"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:43
+msgid "the username"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:45
+msgid "the password"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:48 packages/setup/scripts/setup.sh:56
+msgid "Mount"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:48 packages/setup/scripts/setup.sh:56
+msgid "to"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:48
+msgid "success"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:56
+msgid "fail"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:71 packages/setup/scripts/setup.sh:73
+msgid "MSNFSMNT"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:71
+msgid "The NFS server name or IP address"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:73
+msgid "The name of the NFS share"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:80 packages/setup/scripts/setup.sh:84
+#: packages/setup/scripts/setup.sh:89 packages/setup/scripts/setup.sh:94
+#: packages/setup/scripts/setup.sh:150
+msgid "MSSC"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:80
+msgid "The server name or IP address"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:84
+msgid "The port of the server"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:89
+msgid "Specifies the username"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:94
+msgid "Specifies the password"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:150
+msgid "Specifies the newcamd cfgkey"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:165
+msgid "MSSCMENU"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:165
+msgid "MSCCCAM"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:165
+msgid "MSCAMD35"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:165
+msgid "MSNEWCAMD"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:165
+msgid "MSNOSC"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:174
+msgid "EditSC"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:188
+msgid "Select a partition for OpenPCTV cache..."
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:196
+msgid "Size"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:196
+msgid "Used"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:196
+msgid "Available"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:199
+msgid "Don't mount bind for OpenPCTV cache"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:235
+msgid "OpenPCTV configurator"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:235
+msgid "Main menu"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:235
+msgid "Set global locale and language"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:235
+msgid "Configure Network Environment"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:235
+msgid "Select IR device"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:235
+msgid "Auto update Satellite Transponders from fastsatfinder"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:235
+msgid "DiSEqC configurator"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:235
+msgid "Auto scan channels"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:235
+msgid "Reboot OpenPCTV"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:235
+msgid "Exit to login shell"
+msgstr ""
+
+#: packages/setup/scripts/update-channels:47
+msgid "Scan channels for VDR"
+msgstr ""
+
+#: packages/setup/scripts/update-channels:47
+msgid "Select Satellite"
+msgstr ""
+
+#: packages/setup/scripts/update-channels:47
+msgid ""
+"Please select the satellite you want to scan, noted that the scanning "
+"process may be quite long, please be patient."
+msgstr ""
+
+#: packages/setup/scripts/update-channels:59
+msgid "Split channels in TV and Radio..."
+msgstr ""
+
+#: packages/setup/scripts/update-transponders:8
+msgid "Download transponders for scan-s2"
+msgstr ""
+
+#: packages/setup/scripts/update-transponders:9
+#: packages/setup/scripts/update-transponders:11
+msgid "Can't download,Please check your network settings"
+msgstr ""
+
+#: packages/setup/scripts/update-transponders:10
+msgid "Download transponders for enigma2"
+msgstr ""
+
+#: packages/setup/scripts/update-transponders:15
+msgid "Update /etc/enigma2/satellites.xml..."
+msgstr ""
+
+#: packages/setup/scripts/update-transponders:18
+msgid "Convert transponders data sheet and update transponders for scan-s2..."
+msgstr ""
+
+#: packages/setup/scripts/update-transponders:26
+msgid "Done!"
+msgstr ""

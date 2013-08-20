@@ -1,0 +1,33 @@
+#!/bin/sh
+
+. config/options
+
+get_meta $1
+
+cd $PKG_BUILD_DIR
+
+mkdir -p objdir-host
+cd objdir-host
+do_configure host \
+            --with-freetype-config=$ROOT/$TOOLCHAIN/bin/freetype-config \
+            --with-default-fonts=/usr/share/fonts \
+            --without-add-fonts \
+            --disable-dependency-tracking \
+            --disable-docs \
+
+make
+make_install toolchain
+cd ..
+
+mkdir -p objdir-target
+cd objdir-target
+do_configure target \
+            --with-arch=$TARGET_ARCH \
+            --with-freetype-config=$LIB_PREFIX/bin/freetype-config \
+            --with-default-fonts=/usr/share/fonts \
+            --without-add-fonts \
+            --disable-dependency-tracking \
+            --disable-docs \
+
+make
+make_install

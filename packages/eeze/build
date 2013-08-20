@@ -1,0 +1,14 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+
+setup_toolchain target
+NOCONFIGURE=yes ./autogen.sh
+
+do_configure \
+  --disable-doc \
+
+make
+make_install

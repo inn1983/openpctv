@@ -1,0 +1,14 @@
+PKG_NAME=vdr-skinnopacity
+#PKG_VERSION=0.1.2
+#PKG_URL="$DISTRO_SRCS/vdr-skinnopacity-${PKG_VERSION}.tar.bz2"
+PKG_URL_PROTO=git
+PKG_URL_REV=e99e14c6f02164f53fb5ef01cdc8f091aac1fc4a
+PKG_URL="git://projects.vdr-developer.org/skin-nopacity.git"
+PKG_VERSION=0.1.2+r${PKG_URL_REV}
+PKG_REV=1
+PKG_BUILD_DEPENDS="toolchain ImageMagick jasper"
+PKG_RUN_DEPENDS="$TARGET_LIBC vdr ImageMagick"
+PKG_PRIORITY=optional
+PKG_SECTION=multimedia
+PKG_SHORTDESC="VDR -- skinnopacity plugin"
+PKG_LONGDESC="vdr-skinnopacity is a highly customizable native true color skin for the Video Disc Recorder."

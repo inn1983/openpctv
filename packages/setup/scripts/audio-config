@@ -1,0 +1,96 @@
+#!/bin/bash
+
+export TERM=linux
+. gettext.sh
+export TEXTDOMAIN=openpctv
+
+menudev () {
+echo "dialog --clear --nocancel --title \"$(gettext "Soundcard Configuration")\" --menu \\" > /tmp/menudev.tmp
+echo "\"$(gettext "Select a default PCM output devices from the existing devices list")\" 13 105 5 \\" >> /tmp/menudev.tmp
+grep "^card" /tmp/aplay.log | while read line; do
+  card="$(echo $line | cut -d: -f1 | sed 's/\ /_/g')"
+  device="$(echo $line | cut -d, -f2 | cut -d: -f1 | sed -e 's/^\ //g' -e 's/\ /_/g')"
+  echo "\"$card:$device\" \"$line\" \\" >> /tmp/menudev.tmp
+done
+echo "2>/tmp/result.tmp" >> /tmp/menudev.tmp
+. /tmp/menudev.tmp
+selectdev=$(cat /tmp/result.tmp)
+selectdevinfo="$(cat /tmp/aplay.log | grep "$(echo $selectdev | cut -d: -f1 | sed 's/_/\ /g')" | grep "$(echo $selectdev | cut -d: -f2 | sed 's/_/\ /g')")"
+case "$selectdevinfo" in
+  *Analog*)
+        output="analog";;
+  *Digital*)
+        output="digital";;
+  *HDMI*)
+        output="hdmi";;
+esac
+selectdev="$selectdev:$output"
+}
+
+testaudio () {
+dialog --title "$(gettext "Audio output test")" --clear --msgbox \
+"$(gettext "Next let's try the audio output. We want to know whether audio output works, turn on all your speakers.")" 8 40
+. /usr/lib/alsa-utils/alsa-mixer-setup > /dev/null 2>&1
+case $channels in
+  2)
+    suboption="-c2";;
+  4)
+    suboption="-c4";;
+  6)
+    suboption="-c6";;
+esac
+speaker-test $suboption -twav -l1
+dialog --title "$(gettext "Test audio finish")" --yesno \
+"$(gettext "Tested successfully yet? Should the test fail for any reason--sound coming out of the wrong speakers. in this case, check your connections carefully (and attempting to simply swap some wires around). If you select 'No', then will return to the previous step")" 9 60
+[ $? -eq 1 ] && mainmenu
+}
+mainmenu () {
+dialog --clear --title "$(gettext "Soundcard Configuration")" --menu \
+"$(gettext "First you need to get a list of all your sound cards (if you have multiple ones) and on each card you may have multiple devices ( for example a set of output for analog and one digital output and one HDMI). Select a default PCM output devices from the existing devices list, and then specify the number of channels")" 14 80 3 \
+"Device" "$selectdevinfo" \
+"Channels" "$channels" \
+"Test" "$(gettext "Configuration completed, go on audio output test")" 2>/tmp/mainmenu.tmp
+case  `cat /tmp/mainmenu.tmp` in
+Device)
+	menudev
+	mainmenu;;
+Channels)
+	menuch
+	mainmenu;;
+Test)
+	commit
+	testaudio;;
+esac
+}
+
+menuch () {
+dialog --clear --title "$(gettext "Soundcard Configuration")" --menu \
+"$(gettext "Specify the number of channel")s" 11 50 3 \
+"2" "$(gettext "Stereo")" \
+"4" "$(gettext "Surround")" \
+"6" "$(gettext "Full 5.1")" 2> /tmp/result2.tmp
+channels=$(cat /tmp/result2.tmp)
+}
+
+commit () {
+cardid=$(echo $selectdev | cut -d: -f1 | cut -d_ -f2)
+deviceid=$(echo $selectdev | cut -d: -f2 | cut -d_ -f2)
+output=$(echo $selectdev | cut -d: -f3)
+sed -i -e "s/^ALSA_CARD=.*/ALSA_CARD=\"$cardid\"/g" \
+	-e "s/^ALSA_DEVICE=.*/ALSA_DEVICE=\"$deviceid\"/g" \
+	-e "s/^SOUNDCARD_MODE=.*/SOUNDCARD_MODE=\"$output\"/g" \
+	-e "s/^CHANNELS=.*/CHANNELS=\"$channels\"/g" /etc/audio
+}
+
+aplay -l > /tmp/aplay.log
+selectdevinfo=$(grep ^card -m1 /tmp/aplay.log)
+selectdev=card_0:device_0:analog
+channels=2
+if [ X$1 = "Xinit" ]; then
+  menudev
+  menuch
+  commit
+  testaudio
+else
+  mainmenu
+fi

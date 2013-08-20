@@ -1,0 +1,8 @@
+#
+# Freescale i.MX6 BSP kernel
+#
+# Refer to Freescale Compass for updates
+#
+
+PKG_VERSION=3.0.35-imx-12.08.00
+PKG_URL="$DISTRO_SRCS/linux-${PKG_VERSION}.tar.bz2"

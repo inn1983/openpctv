@@ -1,0 +1,16 @@
+#!/bin/sh
+
+. config/options
+
+get_meta $1
+
+cd $PKG_BUILD_DIR
+
+cp $LIB_PREFIX/lib/perl/$PERL_V/CORE/*.h lib/Params
+
+do_perl_make
+./Build 
+ln -s perl5 .install/usr/lib/perl
+./Build install --prefix=.install/usr
+mv .install/usr/lib/perl5/site_perl/$PERL_V/$TARGET_NAME/* .install/usr/lib/perl5/$PERL_V
+do_perl_strip

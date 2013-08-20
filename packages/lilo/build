@@ -1,0 +1,9 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+
+#make CROSS_COMPILE=$TARGET_PREFIX
+make all
+make_install

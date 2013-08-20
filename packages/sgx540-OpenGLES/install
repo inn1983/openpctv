@@ -1,0 +1,19 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+
+do_install usr/lib/lib*.so*
+
+if pkg_uses $1 devtools && pkg_uses $1 xorg; then
+  do_install usr/bin
+fi
+
+if pkg_uses $1 xorg; then
+  do_install usr/share/sgx-lib
+  do_install usr/share/X11
+  do_install usr/lib/xorg/modules/drivers/*.so
+fi
+
+exit 0

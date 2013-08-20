@@ -1,0 +1,11 @@
+--- a/Makefile.orig	2011-11-17 17:05:56.207335002 +0200
++++ b/Makefile	2011-11-17 17:06:28.619335087 +0200
+@@ -947,7 +947,7 @@
+ # Store (new) KERNELRELASE string in include/config/kernel.release
+ include/config/kernel.release: include/config/auto.conf FORCE
+ 	$(Q)rm -f $@
+-	$(Q)echo "$(KERNELVERSION)$$($(CONFIG_SHELL) $(srctree)/scripts/setlocalversion -s $(srctree) -t v$(KERNELVERSION))" > $@
++	$(Q)echo "$(KERNELVERSION)" > $@
+ 
+ 
+ # Things we need to do before we recursively start building the kernel

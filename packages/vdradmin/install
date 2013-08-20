@@ -1,0 +1,12 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+
+do_install usr/bin/vdradmind
+do_install usr/share/locale
+do_install usr/share/vdradmin
+
+mkdir -p $INSTALL/lib/systemd/system/vdr.target.wants
+ln -s ../vdradmin.service $INSTALL/lib/systemd/system/vdr.target.wants

@@ -1,0 +1,24 @@
+#!/bin/sh
+
+. config/options
+
+get_meta $1
+cd $PKG_BUILD_DIR
+
+export LADD="$LDFLAGS -lxml2"
+
+export MAKEFLAGS=-j1
+
+do_configure --enable-libxml2-backend \
+             --disable-libwww-client  \
+             --disable-wininet-client \
+
+make
+
+echo " Making tools ...."
+make -C tools/xmlrpc
+
+make_install
+
+sed -i "s:/usr/include:$LIB_PREFIX/include:g" .install/usr/bin/xmlrpc-c-config
+sed -i "s:/usr/lib:$LIB_PREFIX/lib:g" .install/usr/bin/xmlrpc-c-config

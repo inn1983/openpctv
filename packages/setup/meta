@@ -1,0 +1,10 @@
+PKG_NAME=setup
+PKG_VERSION=1.0
+PKG_REV=1
+PKG_ARCH="i386 x86_64"
+PKG_RUN_DEPENDS="syslinux util-linux-ng dialog vdr wget gettext"
+PKG_BUILD_DEPENDS="gettext"
+PKG_PRIORITY=optional
+PKG_SECTION=admin
+PKG_SHORTDESC="OpenPCTV Setup"
+PKG_LONGDESC="This package contains the OpenPCTV Setup."

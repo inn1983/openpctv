@@ -1,0 +1,57 @@
+#!/bin/sh
+
+. config/options
+
+mkdir -p $INSTALL/sbin
+cp $PACKAGES/$1/scripts/setup.sh $INSTALL/sbin/setup
+sed $PACKAGES/$1/scripts/installator.sh \
+  -e "s/VERSION=dummy/VERSION=${DISTRO_VERSION}/" \
+  -e "s/DISTRO=dummy/DISTRO=${DISTRONAME}/" \
+  -e "s/ARCH=dummy/ARCH=${TARGET_ARCH}/" > \
+  $INSTALL/sbin/installator
+chmod 755 $INSTALL/sbin/*
+
+mkdir -p $INSTALL/usr/bin
+cp $PACKAGES/$1/scripts/diseqcsetup $INSTALL/usr/bin
+cp $PACKAGES/$1/scripts/monitor.sh $INSTALL/usr/bin
+cp $PACKAGES/$1/scripts/select-irdrv $INSTALL/usr/bin
+cp $PACKAGES/$1/scripts/update-channels $INSTALL/usr/bin
+cp $PACKAGES/$1/scripts/update-transponders $INSTALL/usr/bin
+cp $PACKAGES/$1/scripts/install-drivers $INSTALL/usr/bin
+cp $PACKAGES/$1/scripts/netconfig $INSTALL/usr/bin
+cp $PACKAGES/$1/scripts/select-irdrv $INSTALL/usr/bin
+cp $PACKAGES/$1/scripts/select-language $INSTALL/usr/bin
+cp $PACKAGES/$1/scripts/audio-config $INSTALL/usr/bin
+cp $PACKAGES/$1/scripts/videocache $INSTALL/usr/bin
+cp $PACKAGES/$1/scripts/getcam $INSTALL/usr/bin
+cp $PACKAGES/$1/scripts/select-target $INSTALL/usr/bin
+cp $PACKAGES/$1/scripts/update-epg $INSTALL/usr/bin
+chmod 755 $INSTALL/usr/bin/*
+
+$ROOT/$TOOLCHAIN/bin/xgettext $PACKAGES/$1/scripts/*  -L Shell  -o $PACKAGES/$1/config/openpctv.pot
+for i in $PACKAGES/$1/config/openpctv-*.po; do
+  $ROOT/$TOOLCHAIN/bin/msgmerge $i $PACKAGES/$1/config/openpctv.pot -U
+  loc=$(basename $i | cut -d\- -f2 | sed 's/.po//g')
+  mkdir -p $INSTALL/usr/share/locale/$loc/LC_MESSAGES
+  $ROOT/$TOOLCHAIN/bin/msgfmt $i -o $INSTALL/usr/share/locale/$loc/LC_MESSAGES/openpctv.mo
+done
+
+mkdir -p $INSTALL/etc
+cp $ROOT/$PACKAGES/$1/config/lang.list $INSTALL/etc
+
+cp -rf $ROOT/$PACKAGES/$1/config/dvbcard $INSTALL/etc
+
+mkdir -p $INSTALL/var/spool/cron/crontabs
+cp $ROOT/$PACKAGES/$1/config/cron_root $INSTALL/var/spool/cron/crontabs/root
+
+mkdir -p $INSTALL/usr/share/installator
+cp $PACKAGES/$1/config/grub.cfg  $INSTALL/usr/share/installator
+cp $PACKAGES/$1/config/syslinux.cfg  $INSTALL/usr/share/installator
+
+mkdir -p $INSTALL/etc/installator
+
+mkdir -p $INSTALL/lib/systemd/system/installator.target.wants/
+ln -s /lib/systemd/system/getty@.service $INSTALL/lib/systemd/system/installator.target.wants/getty@tty2.service
+
+mkdir -p $INSTALL/lib/systemd/system/setup.target.wants/
+ln -s /lib/systemd/system/getty@.service $INSTALL/lib/systemd/system/setup.target.wants/getty@tty2.service

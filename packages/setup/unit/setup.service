@@ -1,0 +1,14 @@
+[Unit]
+Description=Setup
+After=systemd-user-sessions.service plymouth-quit-wait.service 
+Before=getty.target
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/setup init
+StandardInput=tty-force
+StandardOutput=inherit
+StandardError=inherit
+
+[Install]
+WantedBy=setup.target

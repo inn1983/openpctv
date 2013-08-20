@@ -1,0 +1,17 @@
+#!/bin/sh
+
+. config/options
+
+get_meta $1
+cd $BUILD/$1*
+
+mkdir -p $INSTALL/usr/bin
+mkdir -p $INSTALL/usr/lib/p7zip
+
+cp -a bin/7z* $INSTALL/usr/lib/p7zip
+cat > $INSTALL/usr/bin/p7zip << _EOF
+#! /bin/sh
+exec /usr/lib/p7zip/7z "\$@"
+_EOF
+
+chmod 755 $INSTALL/usr/bin/p7zip

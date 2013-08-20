@@ -1,0 +1,594 @@
+--- a/PLUGINS/src/xineliboutput/configure	2013-03-11 23:51:31.000000000 +0400
++++ b/PLUGINS/src/xineliboutput/configure	2013-03-12 14:25:26.000000000 +0400
+@@ -283,6 +283,7 @@
+   echo "  --cc=CC                select C compiler"
+   echo "  --cxx=CXX              select C++ compiler"
+   echo "  --add-cflags=FLAGS     add compiler flags"
++  echo "  --pkg-config=PKG_CONFIG set pkg-config"
+ }
+ 
+ for opt do
+@@ -304,6 +305,10 @@
+       CXX=$optval
+       logdbg "C++ compiler: $CXX"
+       ;;
++    --pkg-config=?*)
++      PKG_CONFIG=$optval
++      logdbg "PKG_CONFIG: $PKG_CONFIG"
++      ;;
+     --add-cflags=?*)
+       CFLAGS="$CFLAGS $optval"
+       logdbg "CFLAGS: $CFLAGS"
+--- a/PLUGINS/src/xineliboutput/Makefile	2013-03-11 23:51:31.000000000 +0400
++++ b/PLUGINS/src/xineliboutput/Makefile	2013-03-12 14:25:22.000000000 +0400
+@@ -13,39 +13,36 @@
+ 
+ PLUGIN = xineliboutput
+ 
+-_default: all
+-
+-
+-# check for Apple Darwin
+-ARCH_APPLE_DARWIN = no
+-ifeq ($(shell gcc -dumpmachine | grep -q 'apple-darwin' && echo "1" || echo "0"), 1)
+-    ARCH_APPLE_DARWIN = yes
+-endif
++### The version number of this plugin (taken from the main source file):
+ 
+-#
+-# Override configuration here or in ../../../Make.config
+-#
++VERSION = $(shell grep 'static const char \*VERSION *=' $(PLUGIN).c | cut -d'"' -f2)
+ 
+-#NOSIGNAL_IMAGE_FILE=/usr/share/vdr/xineliboutput/nosignal.mpv
+-#STARTUP_IMAGE_FILE=/usr/share/vdr/xineliboutput/logodisplay.mpv
+-XINELIBOUTPUT_CONFIGURE_OPTS =
++### The directory environment:
+ 
++# Use package data if installed...otherwise assume we're under the VDR source directory:
++PKGCFG = $(if $(VDRDIR),$(shell $(PKG_CONFIG) --variable=$(1) $(VDRDIR)/vdr.pc),$(shell $(PKG_CONFIG) --variable=$(1) vdr || $(PKG_CONFIG) --variable=$(1) ../../../vdr.pc))
++LIBDIR = $(call PKGCFG,libdir)
++DESTLIBDIR = $(call PKGCFG,destlibdir)
++BINDIR = $(call PKGCFG,bindir)
++LOCDIR = $(call PKGCFG,locdir)
++PLGCFG = $(call PKGCFG,plgcfg)
++TMPDIR ?= /tmp
+ 
+-###
+-### The version number of this plugin (taken from the main source file):
+-###
+-
+-VERSION = $(shell grep 'static const char \*VERSION *=' $(PLUGIN).c | cut -d'"' -f2)
++INSTALL ?= install
+ 
++### The compiler options:
+ 
+-###
+-### The C++ compiler and options:
+-###
++export CFLAGS   = $(call PKGCFG,cflags)
++export CXXFLAGS = $(call PKGCFG,cxxflags)
+ 
+-CXX      ?= g++
+-CC       ?= gcc 
+ OPTFLAGS ?= 
+ 
++# check for Apple Darwin
++ARCH_APPLE_DARWIN = no
++ifeq ($(shell $(CC) -dumpmachine | grep -q 'apple-darwin' && echo "1" || echo "0"), 1)
++    ARCH_APPLE_DARWIN = yes
++endif
++
+ ifeq ($(ARCH_APPLE_DARWIN), yes)
+     CXXFLAGS   ?= -O3 -pipe -Wall -Woverloaded-virtual -fPIC -g -fno-common -bundle -flat_namespace -undefined suppress
+     CFLAGS     ?= -O3 -pipe -Wall -fPIC -g -fno-common -bundle -flat_namespace -undefined suppress
+@@ -57,130 +54,34 @@
+     LDFLAGS_SO += -shared
+ endif
+ 
+-###
+-### The directory environment:
+-###
+-
+-VDRDIR  ?= ../../..
+-LIBDIR  ?= ../../lib
+-TMPDIR  ?= /tmp
+-BINDIR  ?= /usr/bin
+-#DESTDIR ?= /
++### The version number of VDR's plugin API:
+ 
+-INSTALL ?= install
++APIVERSION = $(call PKGCFG,apiversion)
+ 
+-VDRINCDIR ?= $(VDRDIR)/include
++# vivakin: need to drop it out - assuming we always in vdr tree
++VDR_TREE = yes
++# vivakin: check if it is needed
++# CONFIGURE_OPTS += --add-cflags=-I$(VDRDIR)
+ 
+-###
+ ### Allow user defined options to overwrite defaults:
+-###
+-
+--include $(VDRDIR)/Make.global
+--include $(VDRDIR)/Make.config
+--include Make.config
+-
+ 
+-###
+-### check for VDR
+-###
+-
+-ifeq ($(ARCH_APPLE_DARWIN), yes)
+-    VDRVERSION = $(shell sed -ne '/define VDRVERSION/s/^.*"\(.*\)".*$$/\1/p' $(VDRDIR)/config.h)
+-    APIVERSION = $(shell sed -ne '/define APIVERSION/s/^.*"\(.*\)".*$$/\1/p' $(VDRDIR)/config.h)
+-else
+-    VDRVERSION = $(shell sed -ne '/define VDRVERSION/ { s/^.*"\(.*\)".*$$/\1/; p }' $(VDRDIR)/config.h)
+-    APIVERSION = $(shell sed -ne '/define APIVERSION/ { s/^.*"\(.*\)".*$$/\1/; p }' $(VDRDIR)/config.h)
+-endif
+-
+-VDR_TREE = no
+-ifeq ($(strip $(VDRVERSION)),)
+-    $(warning ********************************************************)
+-    $(warning VDR not detected ! VDR plugins will not be compiled.    )
+-    $(warning ********************************************************)
+-    CONFIGURE_OPTS += --disable-vdr
+-else
+-    ifeq ($(strip $(APIVERSION)),)
+-        $(warning VDR APIVERSION missing, using VDRVERSION $(VDRVERSION) )
+-        APIVERSION = $(VDRVERSION)
+-    endif
+-    CONFIGURE_OPTS += --add-cflags=-I$(VDRDIR)
+-
+-    ifeq ($(VDRDIR), ../../..)
+-        $(warning Building inside VDR source tree)
+-        VDR_TREE = yes
+-    else
+-        $(warning ********************************************************)
+-        $(warning VDR source tree not detected !                          )
+-        $(warning VDR plugins will not be installed.                      )
+-        $(warning ********************************************************)
+-    endif
+-endif
+-
+-
+-###
+-### run configure script
+-###
+-
+-config.mak: Makefile configure
+-	@echo Running configure
+-	@sh configure --cc="$(CC)" --cxx="$(CXX)" $(CONFIGURE_OPTS) $(XINELIBOUTPUT_CONFIGURE_OPTS)
+--include config.mak
++-include $(PLGCFG)
++#NOSIGNAL_IMAGE_FILE=/usr/share/vdr/xineliboutput/nosignal.mpv
++#STARTUP_IMAGE_FILE=/usr/share/vdr/xineliboutput/logodisplay.mpv
++XINELIBOUTPUT_CONFIGURE_OPTS =
+ 
+-###
+ ### The name of the distribution archive:
+-###
+ 
+ ARCHIVE = $(PLUGIN)-$(VERSION)
+ PACKAGE = vdr-$(ARCHIVE)
+ 
++### The name of the shared object file:
+ 
+-###
+-### The name of executable and libraries
+-###
+-
+-VDRPLUGIN            = libvdr-$(PLUGIN).so.$(APIVERSION)
+-VDRPLUGIN_SXFE       = lib$(PLUGIN)-sxfe.so.$(VERSION)
+-VDRPLUGIN_FBFE       = lib$(PLUGIN)-fbfe.so.$(VERSION)
+-VDRSXFE              = vdr-sxfe
+-VDRFBFE              = vdr-fbfe
+-XINEINPUTVDR         = xineplug_inp_xvdr.so
+-XINEPOSTAUTOCROP     = xineplug_post_autocrop.so
+-XINEPOSTSWSCALE      = xineplug_post_swscale.so
+-XINEPOSTAUDIOCHANNEL = xineplug_post_audiochannel.so
+-
+-###
+-### which programs and libs to build
+-###
+-
+-TARGETS_VDR  =
+-TARGETS_FE   =
+-TARGETS_XINE =
+-ifeq ($(XINELIBOUTPUT_VDRPLUGIN), yes)
+-    TARGETS_VDR += $(VDRPLUGIN)
+-endif
+-ifeq ($(XINELIBOUTPUT_XINEPLUGIN), yes)
+-    TARGETS_XINE += $(XINEINPUTVDR) $(XINEPOSTAUTOCROP) $(XINEPOSTSWSCALE) $(XINEPOSTAUDIOCHANNEL)
+-endif
+-ifeq ($(XINELIBOUTPUT_X11), yes)
+-    TARGETS_FE += $(VDRSXFE)
+-    ifeq ($(XINELIBOUTPUT_VDRPLUGIN), yes)
+-        TARGETS_VDR += $(VDRPLUGIN_SXFE)
+-    endif
+-endif
+-ifeq ($(XINELIBOUTPUT_FB), yes)
+-    TARGETS_FE += $(VDRFBFE)
+-    ifeq ($(XINELIBOUTPUT_VDRPLUGIN), yes)
+-        TARGETS_VDR += $(VDRPLUGIN_FBFE)
+-    endif
+-endif
++SOFILE = libvdr-$(PLUGIN).so
+ 
+-
+-###
+ ### Includes and Defines (add further entries here):
+-###
+-
+-INCLUDES  += -I$(VDRINCDIR)
+ 
++INCLUDES +=
+ ifeq ($(ARCH_APPLE_DARWIN), yes)
+     INCLUDES  += -I/sw/include
+     LIBDIRS   += -L/sw/lib
+@@ -192,7 +93,6 @@
+ DEFINES   += -D_GNU_SOURCE -DPLUGIN_NAME_I18N='"$(PLUGIN)"' \
+              -D_REENTRANT -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 \
+ 	     -DXINELIBOUTPUT_VERSION='"$(VERSION)"'
+-
+ ifdef NOSIGNAL_IMAGE_FILE
+   DEFINES += -DNOSIGNAL_IMAGE_FILE='"$(NOSIGNAL_IMAGE_FILE)"'
+ endif
+@@ -200,22 +100,7 @@
+   DEFINES += -DSTARTUP_IMAGE_FILE='"$(STARTUP_IMAGE_FILE)"'
+ endif
+ 
+-
+-###
+ ### The object files (add further files here):
+-###
+-
+-# VDR plugin
+-ifeq ($(XINELIBOUTPUT_VDRPLUGIN), yes)
+-OBJS = $(PLUGIN).o device.o frontend.o osd.o config.o menu.o setup_menu.o \
+-       menuitems.o media_player.o equalizer.o \
+-       frontend_local.o frontend_svr.o \
+-       tools/cxsocket.o tools/udp_pes_scheduler.o \
+-       tools/backgroundwriter.o tools/playlist.o tools/http.o \
+-       tools/vdrdiscovery.o tools/time_pts.o tools.o \
+-       tools/metainfo_menu.o logdefs.o tools/rle.o
+-OBJS_MPG = black_720x576.o nosignal_720x576.o vdrlogo_720x576.o
+-endif
+ 
+ # frontends
+ OBJS_FE_SO = xine_frontend.o logdefs.o \
+@@ -229,11 +114,6 @@
+ OBJS_FBFE_SO = xine_fbfe_frontend.o $(OBJS_FE_SO)
+ OBJS_FBFE    = xine_fbfe_frontend.o $(OBJS_FE)
+ 
+-ifneq ($(HAVE_DBUS_GLIB_1), no)
+-OBJS_SXFE    += tools/gnome_screensaver.o
+-OBJS_SXFE_SO += tools/gnome_screensaver.o
+-endif
+-
+ # xine plugins
+ OBJS_XINEINPUTVDR = xine_input_vdr.o xine/demux_xvdr.o \
+                     xine/ts2es.o xine/demux_xvdr_tsdata.o \
+@@ -242,144 +122,157 @@
+ 
+ OBJS_XINE = $(OBJS_XINEINPUTVDR) xine_post_autocrop.o xine_post_swscale.o xine_post_audiochannel.o
+ 
+-###
++### The name of executable and libraries
++
++VDRPLUGIN_SXFE       = lib$(PLUGIN)-sxfe.so.$(VERSION)
++VDRPLUGIN_FBFE       = lib$(PLUGIN)-fbfe.so.$(VERSION)
++VDRSXFE              = vdr-sxfe
++VDRFBFE              = vdr-fbfe
++XINEINPUTVDR         = xineplug_inp_xvdr.so
++XINEPOSTAUTOCROP     = xineplug_post_autocrop.so
++XINEPOSTSWSCALE      = xineplug_post_swscale.so
++XINEPOSTAUDIOCHANNEL = xineplug_post_audiochannel.so
++
++_default: all
++
++### run configure script
++config.mak: Makefile configure
++	@echo Running configure
++	@sh configure --cc="$(CC)" --cxx="$(CXX)" --pkg-config="$(PKG_CONFIG)" $(CONFIGURE_OPTS) $(XINELIBOUTPUT_CONFIGURE_OPTS)
++-include config.mak
++
++# VDR plugin
++ifeq ($(XINELIBOUTPUT_VDRPLUGIN), yes)
++OBJS = $(PLUGIN).o device.o frontend.o osd.o config.o menu.o setup_menu.o \
++       menuitems.o media_player.o equalizer.o \
++       frontend_local.o frontend_svr.o \
++       tools/cxsocket.o tools/udp_pes_scheduler.o \
++       tools/backgroundwriter.o tools/playlist.o tools/http.o \
++       tools/vdrdiscovery.o tools/time_pts.o tools.o \
++       tools/metainfo_menu.o logdefs.o tools/rle.o
++OBJS_MPG = black_720x576.o nosignal_720x576.o vdrlogo_720x576.o
++endif
++
++ifneq ($(HAVE_DBUS_GLIB_1), no)
++OBJS_SXFE    += tools/gnome_screensaver.o
++OBJS_SXFE_SO += tools/gnome_screensaver.o
++endif
++
++### which programs and libs to build
++
++TARGETS_VDR  =
++TARGETS_FE   =
++TARGETS_XINE =
++ifeq ($(XINELIBOUTPUT_VDRPLUGIN), yes)
++    TARGETS_VDR += $(SOFILE)
++endif
++ifeq ($(XINELIBOUTPUT_XINEPLUGIN), yes)
++    TARGETS_XINE += $(XINEINPUTVDR) $(XINEPOSTAUTOCROP) $(XINEPOSTSWSCALE) $(XINEPOSTAUDIOCHANNEL)
++endif
++ifeq ($(XINELIBOUTPUT_X11), yes)
++    TARGETS_FE += $(VDRSXFE)
++    ifeq ($(XINELIBOUTPUT_VDRPLUGIN), yes)
++        TARGETS_VDR += $(VDRPLUGIN_SXFE)
++    endif
++endif
++ifeq ($(XINELIBOUTPUT_FB), yes)
++    TARGETS_FE += $(VDRFBFE)
++    ifeq ($(XINELIBOUTPUT_VDRPLUGIN), yes)
++        TARGETS_VDR += $(VDRPLUGIN_FBFE)
++    endif
++endif
++
++### The main target:
++
++all: config $(TARGETS_VDR) frontends i18n
++.PHONY: all
++
+ ### Implicit rules:
+-###
+ 
+ %.o: %.c
+ 	$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) $(CFLAGS_VDR) -o $@ $<
+ 
+-
+-###
+ ### Dependencies:
+-###
+ 
+ MAKEDEP = $(CXX) -MM -MG
+ DEPFILE = .dependencies
+ $(DEPFILE): Makefile config.mak
+ 	@rm -f $@
+ 	@for i in $(OBJS:%.o=%.c) $(OBJS_SXFE:%.o=%.c) $(OBJS_FBFE:%.o=%.c) $(OBJS_XINE:%.o=%.c) ; do \
+-	  $(MAKEDEP) $(DEFINES) $(INCLUDES) -MT "`dirname $$i`/`basename $$i .c`.o" $$i >>$@ ; \
++	  $(MAKEDEP) $(CXXFLAGS) $(DEFINES) $(INCLUDES) -MT "`dirname $$i`/`basename $$i .c`.o" $$i >>$@ ; \
+ 	done
+ 
+ -include $(DEPFILE)
+ 
+-DEFINES += -Wall
+-
+-
+-###
+-### Rules:
+-###
+-
+-mpg2c: mpg2c.c
+-	$(CC) $(CFLAGS) $(LDFLAGS) mpg2c.c -o $@
+-
+-# data
+-black_720x576.c: mpg2c black_720x576.mpg
+-	@./mpg2c black black_720x576.mpg black_720x576.c
+-nosignal_720x576.c: mpg2c nosignal_720x576.mpg
+-	@./mpg2c nosignal nosignal_720x576.mpg nosignal_720x576.c
+-vdrlogo_720x576.c: mpg2c vdrlogo_720x576.mpg
+-	@./mpg2c vdrlogo vdrlogo_720x576.mpg vdrlogo_720x576.c
+-
+-# C code (xine plugins and frontends)
+-$(sort $(OBJS_SXFE) $(OBJS_FBFE) $(OBJS_XINE)):
+-	$(CC) $(CFLAGS) -c $(DEFINES) $(INCLUDES) $(CFLAGS_X11) $(CFLAGS_AVUTIL) $(OPTFLAGS) -o $@ $<
+-
+ ### Internationalization (I18N):
++
+ ifeq ($(HAVE_I18N), yes)
+ ifeq ($(XINELIBOUTPUT_VDRPLUGIN), yes)
+ PODIR     = po
+-LOCALEDIR ?= $(DESTDIR)$(VDRDIR)/locale
+ I18Npo    = $(wildcard $(PODIR)/*.po)
+-I18Nmsgs  = $(addprefix $(LOCALEDIR)/, $(addsuffix /LC_MESSAGES/vdr-$(PLUGIN).mo, $(notdir $(foreach file, $(I18Npo), $(basename $(file))))))
++I18Nmo    = $(addsuffix .mo, $(foreach file, $(I18Npo), $(basename $(file))))
++I18Nmsgs  = $(addprefix $(DESTDIR)$(LOCDIR)/, $(addsuffix /LC_MESSAGES/vdr-$(PLUGIN).mo, $(notdir $(foreach file, $(I18Npo), $(basename $(file))))))
+ I18Npot   = $(PODIR)/$(PLUGIN).pot
+ 
+ %.mo: %.po
+ 	msgfmt -c -o $@ $<
+ 
+ $(I18Npot): $(wildcard *.c)
+-	xgettext -C -cTRANSLATORS --no-wrap --no-location -k -ktr -ktrNOOP --msgid-bugs-address='<phintuka@users.sourceforge.net>' -o $@ $^
++	xgettext -C -cTRANSLATORS --no-wrap --no-location -k -ktr -ktrNOOP --package-name=vdr-$(PLUGIN) --package-version=$(VERSION) --msgid-bugs-address='<phintuka@users.sourceforge.net>' -o $@ `ls $^`
+ 
+ %.po: $(I18Npot)
+-	msgmerge -U --no-wrap --no-location --backup=none -q $@ $<
++	msgmerge -U --no-wrap --no-location --backup=none -q -N $@ $<
+ 	@touch $@
+ 
+-$(I18Nmsgs): $(LOCALEDIR)/%/LC_MESSAGES/vdr-$(PLUGIN).mo: $(PODIR)/%.mo
+-	@mkdir -p $(dir $@)
+-	cp $< $@
++$(I18Nmsgs): $(DESTDIR)$(LOCDIR)/%/LC_MESSAGES/vdr-$(PLUGIN).mo: $(PODIR)/%.mo
++	install -D -m644 $< $@
+ endif
+ endif
+ 
+ .PHONY: i18n
+-i18n: $(I18Nmsgs)
+-
+-###
+-### targets
+-###
+-
+-XINELIBOUTPUT_INSTALL_MSG =  \
+-	    $(warning *********************** xineliboutput ***************************) \
+-	    $(warning  Xine plugins and frontends will not be installed automatically. ) \
+-	    $(warning  To install files execute "make install" in                      ) \
+-	    $(warning  $(shell echo `pwd`)) \
+-	    $(warning *****************************************************************)
++i18n: $(I18Nmo) $(I18Npot)
+ 
+-install : XINELIBOUTPUT_INSTALL_MSG =
++install-i18n: $(I18Nmsgs)
+ 
+-.PHONY: all
+-all: config $(TARGETS_VDR) frontends i18n
++### Rules:
+ 
+-frontends: config $(TARGETS_FE) $(TARGETS_XINE)
+-	$(XINELIBOUTPUT_INSTALL_MSG)
++mpg2c: mpg2c.c
++	$(HOST_CC) $(CFLAGS) $(LDFLAGS) mpg2c.c -o $@
+ 
+-config: config.mak
++# data
++black_720x576.c: mpg2c black_720x576.mpg
++	@./mpg2c black black_720x576.mpg black_720x576.c
++nosignal_720x576.c: mpg2c nosignal_720x576.mpg
++	@./mpg2c nosignal nosignal_720x576.mpg nosignal_720x576.c
++vdrlogo_720x576.c: mpg2c vdrlogo_720x576.mpg
++	@./mpg2c vdrlogo vdrlogo_720x576.mpg vdrlogo_720x576.c
+ 
+-.PHONY: config 
++# C code (xine plugins and frontends)
++$(sort $(OBJS_SXFE) $(OBJS_FBFE) $(OBJS_XINE)):
++	$(CC) $(CFLAGS) -c $(DEFINES) $(INCLUDES) $(CFLAGS_X11) $(CFLAGS_AVUTIL) $(OPTFLAGS) -o $@ $<
+ 
+-.PHONY: frontends install dist clean
++### Targets:
+ 
+-#
+ # VDR plugin
+-#
+ 
+-$(VDRPLUGIN): $(OBJS) $(OBJS_MPG)
++$(SOFILE): $(OBJS) $(OBJS_MPG)
+ 	$(CXX) $(CXXFLAGS) $(LDFLAGS_SO) $(LDFLAGS) $(OBJS) $(OBJS_MPG) $(LIBS) $(LIBS_VDR) -o $@
+-ifeq ($(VDR_TREE), yes)
+-	@-rm -rf $(LIBDIR)/$@
+-	@cp $@ $(LIBDIR)/$@
+-endif
+-# Keep VDR Makefile happy - it requires $(LIBDIR)/.$(APIVERSION) somewhere in this file ...
+ 
+-#
+ # vdr-sxfe
+-#
+ 
+ $(VDRPLUGIN_SXFE): $(OBJS_SXFE_SO)
+ 	$(CC) $(CFLAGS) $(LDFLAGS_SO) $(LDFLAGS) $(OBJS_SXFE_SO) $(LIBS_X11) $(LIBS_XINE) $(LIBS_JPEG) -o $@
+-ifeq ($(VDR_TREE), yes)
+-	@-rm -rf $(LIBDIR)/$(VDRPLUGIN_SXFE)
+-	@cp $@ $(LIBDIR)/$(VDRPLUGIN_SXFE)
+-endif
+ $(VDRSXFE): $(OBJS_SXFE)
+ 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS_SXFE) $(LIBS_X11) $(LIBS_XINE) $(LIBS_JPEG) $(LIBS_PTHREAD) -o $@
+ 
+-#
+ # vdr-fbfe
+-#
+ 
+ $(VDRPLUGIN_FBFE): $(OBJS_FBFE_SO)
+ 	$(CC) $(CFLAGS) $(LDFLAGS_SO) $(LDFLAGS) $(OBJS_FBFE_SO) $(LIBS_XINE) $(LIBS_JPEG) -o $@
+-ifeq ($(VDR_TREE), yes)
+-	@-rm -rf $(LIBDIR)/$(VDRPLUGIN_FBFE)
+-	@cp $@ $(LIBDIR)/$(VDRPLUGIN_FBFE)
+-endif
+ $(VDRFBFE): $(OBJS_FBFE)
+ 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS_FBFE) $(LIBS_XINE) $(LIBS_JPEG) $(LIBS_PTHREAD) -o $@
+ 
+-#
+ # xine plugins
+-#
+ 
+ $(XINEINPUTVDR): $(OBJS_XINEINPUTVDR)
+ 	$(CC) $(CFLAGS) $(LDFLAGS_SO) $(LDFLAGS) $(OBJS_XINEINPUTVDR) $(LIBS_XINE) $(LIBS_AVUTIL) $(LIBS_PTHREAD) -o $@
+@@ -390,11 +283,13 @@
+ $(XINEPOSTAUDIOCHANNEL): xine_post_audiochannel.o
+ 	$(CC) $(CFLAGS) $(LDFLAGS_SO) $(LDFLAGS) $< -o $@ $(LIBS_XINE)
+ 
+-#
+-# install
+-#
++frontends: config $(TARGETS_FE) $(TARGETS_XINE)
+ 
+-install: all
++config: config.mak
++
++.PHONY: frontends config 
++
++install: all install-i18n
+ ifeq ($(XINELIBOUTPUT_XINEPLUGIN), yes)
+ 	@mkdir -p $(DESTDIR)/$(XINEPLUGINDIR)/post
+ 	@echo Installing $(DESTDIR)/$(XINEPLUGINDIR)/$(XINEINPUTVDR)
+@@ -411,12 +306,10 @@
+ 	@$(INSTALL) -m 0644 $(XINEPOSTAUDIOCHANNEL) $(DESTDIR)/$(XINEPLUGINDIR)/post/$(XINEPOSTAUDIOCHANNEL)
+ endif
+ ifeq ($(XINELIBOUTPUT_VDRPLUGIN), yes)
+-  ifeq ($(VDR_TREE), no)
+-	@echo Installing $(DESTDIR)$(LIBDIR)/$(VDRPLUGIN)
+-	@mkdir -p $(DESTDIR)$(LIBDIR)
+-	@-rm -rf $(DESTDIR)$(LIBDIR)/$(VDRPLUGIN)
+-	@$(INSTALL) -D -m 0755 $(VDRPLUGIN) $(DESTDIR)$(LIBDIR)/$(VDRPLUGIN)
+-  endif
++	@echo Installing $(DESTDIR)$(DESTLIBDIR)/$(SOFILE).$(APIVERSION)
++	@mkdir -p $(DESTDIR)$(DESTLIBDIR)
++	@-rm -rf $(DESTDIR)$(DESTLIBDIR)/$(SOFILE).$(APIVERSION)
++	@$(INSTALL) -D -m 0755 $(SOFILE) $(DESTDIR)$(DESTLIBDIR)/$(SOFILE).$(APIVERSION)
+ endif
+ ifeq ($(XINELIBOUTPUT_FB), yes)
+ 	@echo Installing $(DESTDIR)/$(BINDIR)/vdr-fbfe
+@@ -424,12 +317,10 @@
+ 	@-rm -rf $(DESTDIR)/$(BINDIR)/vdr-fbfe
+ 	@$(INSTALL) -m 0755 vdr-fbfe $(DESTDIR)/$(BINDIR)/vdr-fbfe
+   ifeq ($(XINELIBOUTPUT_VDRPLUGIN), yes)
+-    ifeq ($(VDR_TREE), no)
+-	@echo Installing $(DESTDIR)$(LIBDIR)/$(VDRPLUGIN_FBFE)
+-	@mkdir -p $(DESTDIR)$(LIBDIR)
+-	@-rm -rf $(DESTDIR)$(LIBDIR)/$(VDRPLUGIN_FBFE)
+-	@$(INSTALL) -m 0755 $(VDRPLUGIN_FBFE) $(DESTDIR)$(LIBDIR)/$(VDRPLUGIN_FBFE)
+-    endif
++	@echo Installing $(DESTDIR)$(DESTLIBDIR)/$(VDRPLUGIN_FBFE)
++	@mkdir -p $(DESTDIR)$(DESTLIBDIR)
++	@-rm -rf $(DESTDIR)$(DESTLIBDIR)/$(VDRPLUGIN_FBFE)
++	@$(INSTALL) -m 0755 $(VDRPLUGIN_FBFE) $(DESTDIR)$(DESTLIBDIR)/$(VDRPLUGIN_FBFE)
+   endif
+ endif
+ ifeq ($(XINELIBOUTPUT_X11), yes)
+@@ -438,16 +329,15 @@
+ 	@-rm -rf $(DESTDIR)/$(BINDIR)/vdr-sxfe
+ 	@$(INSTALL) -m 0755 vdr-sxfe $(DESTDIR)/$(BINDIR)/vdr-sxfe
+   ifeq ($(XINELIBOUTPUT_VDRPLUGIN), yes)
+-    ifeq ($(VDR_TREE), no)
+-	@echo Installing $(DESTDIR)$(LIBDIR)/$(VDRPLUGIN_SXFE)
+-	@mkdir -p $(DESTDIR)$(LIBDIR)
+-	@-rm -rf $(DESTDIR)$(LIBDIR)/$(VDRPLUGIN_SXFE)
+-	@$(INSTALL) -m 0755 $(VDRPLUGIN_SXFE) $(DESTDIR)$(LIBDIR)/$(VDRPLUGIN_SXFE)
+-    endif
++	@echo Installing $(DESTDIR)$(DESTLIBDIR)/$(VDRPLUGIN_SXFE)
++	@mkdir -p $(DESTDIR)$(DESTLIBDIR)
++	@-rm -rf $(DESTDIR)$(DESTLIBDIR)/$(VDRPLUGIN_SXFE)
++	@$(INSTALL) -m 0755 $(VDRPLUGIN_SXFE) $(DESTDIR)$(DESTLIBDIR)/$(VDRPLUGIN_SXFE)
+   endif
+ endif
++.PHONY: install
+ 
+-dist: clean
++dist: $(I18Npo) clean
+ 	@-rm -rf $(TMPDIR)/$(ARCHIVE)
+ 	@mkdir $(TMPDIR)/$(ARCHIVE)
+ 	@cp -a * $(TMPDIR)/$(ARCHIVE)
+@@ -455,7 +345,6 @@
+ 	@-rm -rf $(TMPDIR)/$(ARCHIVE)
+ 	@echo Distribution package created as $(PACKAGE).tgz
+ 
+-
+ clean:
+ 	@-rm -f $(DEPFILE) *.so* *.o *.tgz core* *~ *.flc *.bak \
+ 		tools/*.o tools/*~ tools/*.flc xine/*.o xine/*~ \
+@@ -465,3 +354,4 @@
+ ifeq ($(HAVE_I18N), yes)
+ 	@-rm -f $(PODIR)/*.mo $(PODIR)/*.pot
+ endif
++.PHONY: dist clean

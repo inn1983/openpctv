@@ -1,0 +1,10 @@
+PKG_NAME=libgtop
+PKG_VERSION=2.28.4
+PKG_URL="http://ftp.gnome.org/pub/gnome/sources/libgtop/2.28/libgtop-${PKG_VERSION}.tar.xz"
+PKG_REV=1
+PKG_BUILD_DEPENDS="toolchain"
+PKG_RUN_DEPENDS="$TARGET_LIBC"
+PKG_PRIORITY=optional
+PKG_SECTION=libs
+PKG_SHORTDESC="LibGTop"
+PKG_LONGDESC="LibGTop is a library to get system specific data such as CPU and Memory Usage and information about running Processes."

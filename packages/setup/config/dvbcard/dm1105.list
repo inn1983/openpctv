@@ -1,0 +1,5 @@
+card=0:UNKNOWN/GENERIC
+card=1:DVBWorld PCI 2002
+card=2:DVBWorld PCI 2004
+card=3:Axess/EasyTv DM05
+card=4:Unbranded DM1105 with i2c on GPIOs

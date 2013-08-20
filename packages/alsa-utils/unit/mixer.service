@@ -1,0 +1,11 @@
+[Unit]
+Description=ALSA mixer configuration
+After=sysinit.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/alsa-utils/alsa-mixer-setup
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

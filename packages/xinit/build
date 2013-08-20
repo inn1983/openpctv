@@ -1,0 +1,20 @@
+#!/bin/sh
+
+. config/options
+
+export CFLAGS="$CFLAGS -O2"
+
+cd $BUILD/$1*
+do_configure
+make
+make_install
+
+mkdir -p .install/etc/X11/xinit
+ln -sf .install/usr/lib/X11/xinit/xinitrc .install/etc/X11/xinit/
+
+cat > .install/etc/X11/xinit/xserverrc <<EOF
+#!/bin/sh
+
+exec /usr/bin/X -nolisten tcp "$@"
+EOF
+chmod 755 .install/etc/X11/xinit/xserverrc

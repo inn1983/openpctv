@@ -1,0 +1,16 @@
+#!/bin/sh
+
+zh_epgurl=http://epg.xltvrobbs.net/epg/dm800/gemini800.tgz
+
+. /etc/locale.conf
+
+case $LANG in
+  zh*)
+    wget $zh_epgurl -O /tmp/epg.tgz || exit
+    tar zvfx /tmp/epg.tgz -C /tmp || exit
+    cp /tmp/gemini.epg.dat /video/epg.dat
+    rm /tmp/epg.tgz /tmp/gemini.epg.dat
+    ;;
+  *)
+    exit
+esac

@@ -1,0 +1,8 @@
+[Unit]
+Description=A web based user interface to the VDR
+
+[Service]
+ExecStart=/usr/bin/vdradmind 
+
+[Install]
+WantedBy=multi-user.target

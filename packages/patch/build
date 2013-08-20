@@ -1,0 +1,17 @@
+#!/bin/sh
+
+. config/options
+get_meta $1
+
+cd $PKG_BUILD_DIR
+
+setup_toolchain host
+
+./configure \
+	--host=$HOST_NAME \
+	--build=$HOST_NAME \
+	--prefix=/
+	
+
+make
+make_install

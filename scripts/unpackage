@@ -1,0 +1,17 @@
+#!/bin/sh
+
+. config/options
+
+get_meta $1
+
+STAMP=$PKGROOT/$PKG_OPK
+
+[ ! -f $STAMP ] && exit 0
+
+set_title "UNPACKAGE  $1"
+
+$SCRIPTS/uninstall $1
+$SCRIPTS/uninstall $1-dbg
+
+rm -f $STAMP
+rm -f $PKGROOT/$PKG_DBG_OPK

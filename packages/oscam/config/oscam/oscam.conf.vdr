@@ -1,0 +1,20 @@
+#
+# main configuration
+#
+
+[global]
+nice          = -1
+WaitForCards  = 0
+
+# logging
+
+logfile       = /var/log/oscam/oscam.log
+usrfile       = /var/log/oscam/oscamuser.log
+cwlogdir      = /var/log/oscam/cw
+
+[dvbapi]
+enabled	      = 1
+au            = 1
+boxtype       = pc
+pmt_mode      = 4
+request_mode  = 1

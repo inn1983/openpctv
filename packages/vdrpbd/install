@@ -1,0 +1,12 @@
+#!/bin/sh
+
+. config/options
+
+mkdir -p $INSTALL/usr/bin
+cp -a $BUILD/$1*/vdrpbd  $INSTALL/usr/bin
+
+mkdir -p $INSTALL/etc
+cp -a $BUILD/$1*/vdrpbd.conf $INSTALL/etc
+
+mkdir -p $INSTALL/lib/systemd/system/vdr.target.wants
+ln -s ../vdrpbd.service $INSTALL/lib/systemd/system/vdr.target.wants

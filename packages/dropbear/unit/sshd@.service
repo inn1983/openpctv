@@ -1,0 +1,8 @@
+[Unit]
+Description=SSH Per-Connection Server
+After=syslog.target
+
+[Service]
+ExecStartPre=/usr/bin/dropbearkeygen
+ExecStart=/usr/sbin/dropbear -i
+StandardInput=socket

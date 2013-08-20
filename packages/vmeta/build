@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+
+setup_toolchain target
+make 
+mkdir -p .install/lib
+cp *.so* .install/lib

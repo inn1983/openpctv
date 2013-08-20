@@ -1,0 +1,76 @@
+#!/bin/sh
+
+append_config() {
+  cat >> /etc/wpa_supplicant/wpa_supplicant.conf <<EOF
+network={
+ssid="$1"
+proto=WPA RSN
+key_mgmt=WPA-PSK
+psk="$2"
+}
+EOF
+}
+
+wait_for_slow_device () {
+  COUNT="1 2 3 4 5 6 7 8 9"
+  for i in $COUNT; do
+    if [ -f /sys/class/net/$1/address ] ; then 
+      echo "found /sys/class/net/$1/address"
+      break
+    else
+      echo "Waiting for $1 : try $i"
+      sleep $i
+    fi
+  done
+}
+
+# first interface
+. /etc/network
+
+[ "$NETWORK_BACKEND" = udhcpc ] || exit 1
+
+cat > /etc/wpa_supplicant/wpa_supplicant.conf <<EOF
+update_config=1
+ctrl_interface=/var/run/wpa_supplicant
+EOF
+
+[ -z "$IFACE" ] && IFACE=eth0
+if [ "$WAIT_FOR_SLOW_DEVICE" = true ] ; then
+  wait_for_slow_device $IFACE
+fi
+[ -n "$SSID" -a "$SECURITY" = "WEP" ] && iwconfig $IFACE essid $SSID key $PASSPHRASE
+if [ -n "$SSID" -a "$SECURITY" = "PSK" ] ; then
+  append_config $SSID $PASSPHRASE
+
+  systemctl stop wpa_supplicant.service
+  /usr/sbin/wpa_supplicant -c /etc/wpa_supplicant/wpa_supplicant.conf -i $IFACE &
+fi
+
+ifconfig $IFACE up
+udhcpc -s /bin/assign-ip -i $IFACE &
+
+## check for a second network interface
+. /etc/network2
+
+if [ "$ENABLE" = "false" ] ; then
+  echo "No 2nd interface configured, leaving ..."
+  exit 0
+fi
+
+[ "$NETWORK_BACKEND" = udhcpc ] || exit 1
+[ -z "$IFACE" ] && IFACE=eth1
+if [ "$WAIT_FOR_SLOW_DEVICE" = true ] ; then
+  wait_for_slow_device $IFACE
+fi
+[ -n "$SSID" -a "$SECURITY" = "WEP" ] && iwconfig $IFACE essid $SSID key $PASSPHRASE
+if [ -n "$SSID" -a "$SECURITY" = "PSK" ] ; then
+  append_config $SSID $PASSPHRASE
+
+  systemctl stop wpa_supplicant.service
+  /usr/sbin/wpa_supplicant -c /etc/wpa_supplicant/wpa_supplicant.conf -i $IFACE &
+fi
+
+ifconfig $IFACE up
+udhcpc -s /bin/assign-ip -i $IFACE &
+
+exit 0

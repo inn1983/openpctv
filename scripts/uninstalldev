@@ -1,0 +1,13 @@
+#!/bin/sh
+
+. config/options
+
+STAMP=$ROOT/$TOOLCHAIN/var/lib/opkg/info/$1.control
+
+[ ! -f $STAMP ] && exit 0
+
+set_title "UNINSTALLDEV  $1"
+
+$ROOT/$TOOLCHAIN/bin/opkg --force-removal-of-dependent-packages \
+                          --offline-root $ROOT/$TOOLCHAIN \
+                          remove $1 >&$VERBOSE_OUT

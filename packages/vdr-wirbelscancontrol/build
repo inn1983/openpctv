@@ -1,0 +1,21 @@
+#!/bin/sh
+
+. config/options
+get_meta $1
+
+$SCRIPTS/build vdr-wirbelscan
+
+VDR_DIR=`basename $BUILD/vdr-2*`
+
+CFLAGS="$CFLAGS -fPIC"
+CXXFLAGS="$CXXFLAGS -fPIC"
+LDFLAGS="$LDFLAGS -fPIC"
+
+cd $PKG_BUILD_DIR
+ln -sf ../vdr-wirbelscan-[0-9]*/wirbelscan_services.h
+
+make \
+  VDRDIR="../$VDR_DIR" \
+  LIBDIR="." \
+  LOCALEDIR="./locale"
+

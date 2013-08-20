@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. config/options
+get_meta $1
+
+cd $PKG_BUILD_DIR
+
+do_install sbin/extlinux
+do_install usr/share/syslinux/mbr.bin
+do_install usr/bin/syslinux

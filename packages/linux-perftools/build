@@ -1,0 +1,25 @@
+#!/bin/sh
+
+. config/options
+
+cd $(kernel_path)/tools/perf
+
+setup_toolchain target
+export MAKEFLAGS=-j1
+
+make \
+  ARCH=$TARGET_ARCH \
+  EXTRA_CFLAGS="$CFLAGS" \
+  CROSS_COMPILE=$TARGET_PREFIX \
+  NO_LIBPERL=1 \
+  NO_LIBPYTHON=1 \
+  WERROR=0 \
+  NO_NEWT=1 \
+  NO_GTK2=1 \
+  V=1 clean all
+
+$STRIP perf
+
+rm -rf .install
+mkdir -p .install/usr/bin
+cp -P perf .install/usr/bin

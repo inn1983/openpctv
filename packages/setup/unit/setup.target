@@ -1,0 +1,9 @@
+[Unit]
+Description=Setup
+Requires=basic.target network.target
+Conflicts=rescue.service rescue.target
+After=basic.target rescue.service rescue.target
+AllowIsolate=yes
+
+[Install]
+Alias=default.target

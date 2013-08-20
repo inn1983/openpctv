@@ -1,0 +1,9 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+
+do_install usr/lib/libMagick*.so*
+do_install usr/bin/import
+do_install usr/bin/convert

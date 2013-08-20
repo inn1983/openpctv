@@ -1,0 +1,1086 @@
+#!/bin/bash
+# -*- coding: UTF-8 -*-
+
+# Copyright (c) 2009-2010 CNVDR.
+# Copyright (c) 2013 OpenPCTV.
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, you can either send email to this
+# program's maintainer.
+
+# Author: Yinghong Liu <relaxbsd@gmail.com>
+
+VERSION=0.16
+export TERM=linux
+. gettext.sh
+export TEXTDOMAIN=openpctv
+
+SYSTEM="$(eval_gettext "DiSEqC configuration for VDR v\${VERSION}")"
+SETDISEQCMODE="$(gettext "DiSEqC (Digital Satellite Equipment Control) System Mode.")"
+SETDISEQCMODE_NO="$(gettext "No DiSEqC switch")"
+SETSATELLITE="$(eval_gettext "Specify the satellite for this LNBF.If the satellite you want to select is not in this list, you should first patch for your \${VDRCONFDIR}sources.conf.")"
+SETLNBTYPE="$(gettext "Select LNBF LO frequency.There are two different ways that a satellite can broadcast its signal.If linear,it broadcasts Horizontal and Vertical.If circular, it broadcasts Right Circular and Left Circular. ")"
+SETLNBTYPE_5150_LINEAR="$(gettext "5150MHz Single Linear C Band LNBF")"
+SETLNBTYPE_5750_LINEAR="$(gettext "5750MHz Single Linear C Band LNBF")"
+SETLNBTYPE_9750_LINEAR="$(gettext "9750MHz Single Linear Ku Band LNBF")"
+SETLNBTYPE_10600_LINEAR="$(gettext "10600MHz Single Linear Ku Band LNBF")"
+SETLNBTYPE_10750_LINEAR="$(gettext "10750MHz Single Linear Ku Band LNBF")"
+SETLNBTYPE_11250_LINEAR="$(gettext "11250MHz Single Linear Ku Band LNBF")"
+SETLNBTYPE_11300_LINEAR="$(gettext "11300MHz Single Linear Ku Band LNBF")"
+SETLNBTYPE_9750_10600_LINEAR="$(gettext "9750/10600MHz Dual Linear Ku Band LNBF")"
+SETLNBTYPE_9750_10750_LINEAR="$(gettext "9750/10750MHz Dual Linear Ku Band LNBF")"
+SETLNBTYPE_5150_CIRCULAR="$(gettext "5150MHz Single Circular C Band LNBF")"
+SETLNBTYPE_5750_CIRCULAR="$(gettext "5750MHz Single Circular C Band LNBF")"
+SETLNBTYPE_9750_CIRCULAR="$(gettext "9750MHz Single Circular Ku Band LNBF")"
+SETLNBTYPE_10600_CIRCULAR="$(gettext "10600MHz Single Circular Ku Band LNBF")"
+SETLNBTYPE_10750_CIRCULAR="$(gettext "10750MHz Single Circular Ku Band LNBF")"
+SETLNBTYPE_11250_CIRCULAR="$(gettext "11250MHz Single Circular Ku Band LNBF")"
+SETLNBTYPE_11300_CIRCULAR="$(gettext "11300MHz Single Circular Ku Band LNBF")"
+SETLNBTYPE_9750_10600_CIRCULAR="$(gettext "9750/10600MHz Dual Circular Ku Band Universal LNBF")"
+SETLNBTYPE_9750_10750_CIRCULAR="$(gettext "9750/10750MHz Dual Circular Ku Band Universal LNBF")"
+SETLNBTYPE_CUSTON="$(gettext "User-defined LNBF LO frequency")"
+LNBPOLAR="$(gettext "Polarization,HV for Linear LNBF,RL for Circular LNBF")"
+CUSTOMLNBTYPE="$(gettext "Input LO frequency, if you use a single C/Ku band LNB, please specify LnbFrequLo and LnbSLOF with '0'")"
+LNBFREQULO="$(gettext "Low LO frequency")"
+LNBFREQUHI="$(gettext "High LO frequency")"
+LNBSLOF="$(gettext "Correct LO frequency")"
+EDITLABEL="$(gettext "Edit")"
+SETDISEQC="$(gettext "Set the parameters of DiSEqC")"
+SETDISEQC_22K="$(gettext "0/22Khz Switch")"
+SETDISEQC_TONEBURST="$(gettext "Set MiniDiSEqC(Toneburst) Switch")"
+SETDISEQC_10="$(gettext "Set DiSEqC 1.0/2.0 committed Switch")"
+SETDISEQC_11="$(gettext "Set DiSEqC 1.1/2.1 uncommitted Switch")"
+SETDISEQC_12="$(gettext "Set DiSEqC 1.2/2.2 Switch")"
+SETDISEQC_USER="$(gettext "Non-standard user defined configuration")"
+DISEQC_22K_INFO="$(gettext "Dual LNBF includes 0/22KHZ switch, also be used to switch between two different single LNBF")"
+DISEQC_TONEBURST_INFO="$(gettext "Also be called MiniDiSEqC,switch A & B two different LNB and different from the 0/22K switch")"
+DISEQC_10_INFO="$(gettext "Allow switching between up to 4 committed LNB's(4x1 DiSEqC Switch)")"
+DISEQC_11_INFO="$(gettext "Allow switching between up to 16 Uncommitted LNB's(8x1,10x1,12x1,16x1 DiSEqC Switch)")"
+DISEQC_12_INFO="$(gettext "Allow switching between up to 16 LNB's, and control of a single axis satellite motor")"
+DISEQCWAITINFO="$(gettext "Wait nn milliseconds of commands(nn:a integer number,Default: 244)")"
+DISEQCREPEATINFO="$(gettext "Select repetitions of commands(Default:1)")"
+DISEQCREPEAT_1="$(gettext "One Repeat (Default)")"
+DISEQCREPEAT_2="$(gettext "Two Repeat")"
+DISEQCREPEAT_3="$(gettext "Three repeat")"
+LNB_22K_NOTSET="$(gettext "0/22k has not been set")"
+LNB_22K_SET="$(gettext "0/22k has been set")"
+DISEQC_USER_INFO="$(gettext "With an uncommited diseqc 1.1 switch(one out of 16) and 16 commited diseqc 1.0(one out of 4) you can have up to 64 satellites (16*4).")"
+SETDISEQCLNB_1ST="$(gettext "Set the first DiSEqC port")"
+SETDISEQCLNB_2ND="$(gettext "Set the second DiSEqC port")"
+SETTUNE22K="$(gettext "22Khz Tone Control Devices")"
+NO22K="$(gettext "No 22K")"
+SETLNB="$(gettext "Not set")"
+SELECTSATLLITE="$(gettext "Selected satellite")"
+SELECTLNB="$(gettext "Selected LNBF LO")"
+COMPLETETILE1="$(gettext "Do you want to edit diseqc.conf?")"
+COMPLETETILE2="$(gettext "Edit diseqc.conf")"
+COMPLETEDIALOG1="$(gettext "You can edit diseqc.conf by manual, or you'll skip this step")"
+FINISHTILE="$(gettext "Do you want to save these settings?")"
+FINISHDIALOG1="$(gettext "The configuration file(s) will be saved:")"
+FINISHDIALOG2="$(gettext "or the configuration file(s):")"
+FINISHDIALOG3="$(eval_gettext "It will be placed in /tmp, you can edit and place it into \${VDRCONFDIR} by manual")"
+DIFFDISEQC="$(gettext "diseqc.conf has been edited")"
+CANCELLABEL="$(gettext "Finished")"
+
+function defaultenv
+{
+tempfile="/tmp/mainTEMP.$$"
+tempsatellitemenu="/tmp/salliteTEMP.$$"
+tempdiseqcmenu="/tmp/diseqcTEMP.$$"
+tempsetlnbtypemenu="/tmp/setlnbtypeTEMP.$$"
+tempsetdiseqclnb="/tmp/setdiseqclnbTEMP.$$"
+tempsettune22k="/tmp/settune22kTEMP.$$"
+tempsetdiseqcuser="/tmp/setdiseqcuserTEMP.$$"
+origdate=$(date +%Y%m%d%H%M%S)
+DISEQC_WAIT=244
+DISEQC_REPEAT=1
+
+if [ -x /bin/dialog ]; then
+  DIALOG="/bin/dialog"
+elif [ -x /usr/bin/dialog ]; then
+  DIALOG="/usr/bin/dialog"
+else
+  echo "Can't find dialog,exit!"
+  exit 1
+fi
+if [ -x /bin/nano ]; then
+  NANO="/bin/nano"
+elif [ -x /usr/bin/nano ]; then
+  NANO="/usr/bin/nano"
+fi
+if [ -x /bin/vi ]; then
+  VI="/bin/vi"
+elif [ -x /usr/bin/vi ]; then
+  VI="/usr/bin/vi"
+fi
+
+if [ -d /video -a -f /video/sources.conf -a -f /video/setup.conf ]; then
+  VDRCONFDIR="/video"
+elif [ -d /etc/vdr -a -f /etc/vdr/sources.conf -a -f /etc/vdr/sources.conf ]; then
+  VDRCONFDIR="/etc/vdr"
+else
+  $DIALOG --no-cancel --title "Please choose the vdr Config directory" --fselect / 14 48 2> ${tempfile}
+  VDRCONFDIR=`cat ${tempfile}`
+  if [ ! -d ${VDRCONFDIR} -o ! -d ${VDRCONFDIR} ]; then
+    echo "Can't find any vdr config directory!,exit!"
+    exit 1
+  fi
+fi
+
+cat > /tmp/diseqc.temp << EOF_
+# DiSEqC configuration for VDR
+#
+# Format:
+#
+# satellite slof polarization lof command...
+#
+# satellite:      one of the 'S' codes defined in sources.conf
+# slof:           switch frequency of LNB; the first entry with
+#                 an slof greater than the actual transponder
+#                 frequency will be used
+# polarization:   V = vertical, H = horizontal, L = Left circular, R = Right circular
+# lof:            the local oscillator frequency to subtract from
+#                 the actual transponder frequency
+# command:
+#   t         tone off
+#   T         tone on
+#   v         voltage low (13V)
+#   V         voltage high (18V)
+#   A         mini A
+#   B         mini B
+#   Wnn       wait nn milliseconds (nn may be any positive integer number)
+#   [xx ...]  hex code sequence (max. 6)
+#
+# The 'command...' part is optional.
+#
+EOF_
+}
+
+function hexcode
+{
+PROTO=$1
+k=$2
+nn=$3
+r=$4
+case $PROTO in
+0)
+  HEX_1=`printf "${HEX_1} W%b [E%X 10 38 F%X]" $nn $r $(expr $k \* 4 - 4)`
+  HEX_2=`printf "${HEX_2} W%b [E%X 10 38 F%X]" $nn $r $(expr $k \* 4 - 3)`
+  HEX_3=`printf "${HEX_3} W%b [E%X 10 38 F%X]" $nn $r $(expr $k \* 4 - 2)`
+  HEX_4=`printf "${HEX_4} W%b [E%X 10 38 F%X]" $nn $r $(expr $k \* 4 - 1)`
+  ;;
+1)
+  HEX_1=`printf "${HEX_1} W%b [E%X 10 39 F%X]" $nn $r $(expr $k - 1)`
+  HEX_2=`printf "${HEX_2} W%b [E%X 10 39 F%X]" $nn $r $(expr $k - 1)`
+  HEX_3=`printf "${HEX_3} W%b [E%X 10 39 F%X]" $nn $r $(expr $k - 1)`
+  HEX_4=`printf "${HEX_4} W%b [E%X 10 39 F%X]" $nn $r $(expr $k - 1)`
+  ;;
+2)
+  HEX_1=`printf "${HEX_1} W%b [E%X 31 6B %02X]" $nn $r $(expr $k - 1)`
+  HEX_2=`printf "${HEX_2} W%b [E%X 31 6B %02X]" $nn $r $(expr $k - 1)`
+  HEX_3=`printf "${HEX_3} W%b [E%X 31 6B %02X]" $nn $r $(expr $k - 1)`
+  HEX_4=`printf "${HEX_4} W%b [E%X 31 6B %02X]" $nn $r $(expr $k - 1)`
+  ;;
+esac
+unset PROTO k
+}
+
+function getcommand
+{
+unset FULLVALUE LO HI SLOF PLAR DISEQC_1 DISEQC_2 TONEBURSTD LO_SALLITE LO_LNB TUNEOFF TUNEON HI_SALLITE HI_LNB VOLTAGE_13V VOLTAGE_18V DISEQC_1_TYPE DISEQC_1_LNB HEX_1_1 HEX_1_2 HEX_1_3 HEX_1_4 DISEQC_2_TYPE DISEQC_2_LNB HEX_2_1 HEX_2_2 HEX_2_3 HEX_2_4 TONEBURSTD_STRING STRING_1 STRING_2 STRING_3 STRING_4 WAIT REPEAT
+FULLVALUE="$1"
+LO=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f1 | cut -d/ -f1`
+HI=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f1 | cut -d/ -f2`
+SLOF=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f1 | cut -d/ -f3`
+PLAR=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f1 | cut -d/ -f4`
+DISEQC_1=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f2 | cut -d: -f1`
+DISEQC_2=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f2 | cut -d: -f2`
+TONEBURSTD=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f3`
+WAIT_CASCADED=`echo ${FULLVALUE} | cut -d\| -f2 | cut -d: -f1`
+REPEAT=`echo ${FULLVALUE} | cut -d\| -f2 | cut -d: -f2`
+if [ X"${WAIT}" == "X" -o X"${REPEAT}" == "X" ]; then
+  WAIT=15
+  WAIT_CASCADED=244
+  REPEAT=1
+fi
+if [ X"$LO" != "X" ]; then
+  LO_SALLITE=`echo ${LO} | cut -d: -f1`
+  LO_LNB=`echo ${LO} | cut -d: -f2`
+  TUNEOFF=" W15 t"
+  TUNEON=" W15 T"
+else
+  LO_SALLITE=""
+  LO_LNB=""
+  TUNEOFF=""
+  TUNEON=""
+fi
+HI_SALLITE=`echo ${HI} | cut -d: -f1`
+HI_LNB=`echo ${HI} | cut -d: -f2`
+VOLTAGE_13V=`echo ${PLAR} | cut -b1`
+VOLTAGE_18V=`echo ${PLAR} | cut -b2`
+if [ X"$DISEQC_1" != "X" ]; then
+  DISEQC_1_TYPE=`echo ${DISEQC_1} | cut -d_ -f1`
+  DISEQC_1_LNB=`echo ${DISEQC_1} | cut -d_ -f2`
+  for ((i=0;$i-${REPEAT};i++)); do
+    hexcode ${DISEQC_1_TYPE} ${DISEQC_1_LNB} ${WAIT} $i
+  done
+  HEX_1_1=${HEX_1}
+  HEX_1_2=${HEX_2}
+  HEX_1_3=${HEX_3}
+  HEX_1_4=${HEX_4}
+  unset HEX_1 HEX_2 HEX_3 HEX_4
+else
+  HEX_1_1=""
+  HEX_1_2=""
+  HEX_1_3=""
+  HEX_1_4=""
+fi
+if [ X"$DISEQC_2" != "X" ]; then
+  DISEQC_2_TYPE=`echo ${DISEQC_2} | cut -d_ -f1`
+  DISEQC_2_LNB=`echo ${DISEQC_2} | cut -d_ -f2`
+  for ((i=0;$i-${REPEAT};i++)); do
+    hexcode ${DISEQC_2_TYPE} ${DISEQC_2_LNB} ${WAIT} $i
+  done
+  HEX_2_1=`echo ${HEX_1} | awk -v wait=" W${WAIT_CASCADED}" '{$1=wait;print}'`
+  HEX_2_2=`echo ${HEX_2} | awk -v wait=" W${WAIT_CASCADED}" '{$1=wait;print}'`
+  HEX_2_3=`echo ${HEX_3} | awk -v wait=" W${WAIT_CASCADED}" '{$1=wait;print}'`
+  HEX_2_4=`echo ${HEX_4} | awk -v wait=" W${WAIT_CASCADED}" '{$1=wait;print}'`
+  unset HEX_1 HEX_2 HEX_3 HEX_4
+else
+  HEX_2_1=""
+  HEX_2_2=""
+  HEX_2_3=""
+  HEX_2_4=""
+fi
+if [ X"$TONEBURSTD" != "X" ]; then
+  TONEBURSTD_STRING=" W15 ${TONEBURSTD}"
+else
+  TONEBURSTD_STRING=""
+fi
+STRING_1="${LO_SALLITE} ${SLOF} ${VOLTAGE_13V} ${LO_LNB} t v${HEX_1_1}${HEX_2_1}${TONEBURSTD_STRING}${TUNEOFF}"
+STRING_2="${HI_SALLITE} 99999 ${VOLTAGE_13V} ${HI_LNB} t v${HEX_1_2}${HEX_2_2}${TONEBURSTD_STRING}${TUNEON}"
+STRING_3="${LO_SALLITE} ${SLOF} ${VOLTAGE_18V} ${LO_LNB} t V${HEX_1_3}${HEX_2_3}${TONEBURSTD_STRING}${TUNEOFF}"
+STRING_4="${HI_SALLITE} 99999 ${VOLTAGE_18V} ${HI_LNB} t V${HEX_1_4}${HEX_2_4}${TONEBURSTD_STRING}${TUNEON}"
+if [ X"$LO" == "X" ]; then
+  STRING_1=""
+  STRING_3=""
+fi
+printf "${STRING_1}\n${STRING_2}\n${STRING_3}\n${STRING_4}\n" | sed '/^$/d'
+unset FULLVALUE LO HI SLOF PLAR DISEQC_1 DISEQC_2 TONEBURSTD LO_SALLITE LO_LNB TUNEOFF TUNEON HI_SALLITE HI_LNB VOLTAGE_13V VOLTAGE_18V DISEQC_1_TYPE DISEQC_1_LNB HEX_1_1 HEX_1_2 HEX_1_3 HEX_1_4 DISEQC_2_TYPE DISEQC_2_LNB HEX_2_1 HEX_2_2 HEX_2_3 HEX_2_4 TONEBURSTD_STRING STRING_1 STRING_2 STRING_3 STRING_4 WAIT REPEAT
+}
+
+function finished
+{
+$DIALOG --title "$FINISHTILE1" --backtitle "${SYSTEM}" --clear \
+	--yesno "${FINISHDIALOG1}${VDRCONFDIR}/diseqc.conf,${VDRCONFDIR}/setup.conf
+${FINISHDIALOG2} diseqc.conf,setup.conf ${FINISHDIALOG3}" 8 72
+if [ $? -eq 0 ]; then
+  [ -f ${VDRCONFDIR}/diseqc.conf ] && cp ${VDRCONFDIR}/diseqc.conf ${VDRCONFDIR}/diseqc.conf.${origdate}
+  [ -f ${VDRCONFDIR}/setup.conf ] && cp ${VDRCONFDIR}/setup.conf ${VDRCONFDIR}/setup.conf.${origdate}
+  cp -f /tmp/diseqc.conf ${VDRCONFDIR}/diseqc.conf
+  cp -f /tmp/setup.conf ${VDRCONFDIR}/setup.conf
+  rm -f /tmp/diseqc.conf /tmp/setup.conf
+fi
+exit 0
+}
+
+function nodiseqcsetup
+{
+setlnbtype
+if [ ${LnbFrequLo} -eq 0 ]; then
+  LnbFrequLo=${LnbFrequHi}
+  LnbSLOF=11700
+fi
+sed -e 's#DiSEqC.*#DiSEqC = 0#' \
+    -e 's#LnbFrequHi.*#LnbFrequHi = '$LnbFrequHi'#' \
+    -e 's#LnbFrequLo.*#LnbFrequLo = '$LnbFrequLo'#' \
+    -e 's#LnbSLOF.*#LnbSLOF = '$LnbSLOF'#' \
+    ${VDRCONFDIR}/setup.conf > /tmp/setup.conf
+$DIALOG --title "$FINISHTILE1" --backtitle "${SYSTEM}" --clear \
+	--yesno "${FINISHDIALOG1}${VDRCONFDIR}/setup.conf
+${FINISHDIALOG2} setup.conf ${FINISHDIALOG3}" 8 72
+if [ $? -eq 0 ]; then
+  cp -f ${VDRCONFDIR}/setup.conf ${VDRCONFDIR}/setup.conf.orig
+  cp -f /tmp/setup.conf ${VDRCONFDIR}/setup.conf
+  rm -f /tmp/setup.conf
+fi
+[ -f /tmp/diseqc.temp ] && cp /tmp/diseqc.temp ${VDRCONFDIR}/diseqc.conf
+exit 0
+}
+
+function completesetup
+{
+$DIALOG --title "$COMPLETETILE1" --backtitle "${SYSTEM}" --clear \
+	--defaultno --yesno "$COMPLETEDIALOG1" 6 60
+if [ $? -eq 0 ]; then
+  if [ none"$NANO" != none ]; then
+    cp /tmp/diseqc.temp /tmp/diseqc.conf
+    $NANO /tmp/diseqc.conf
+  elif [ none"$VI" != none ]; then
+    cp /tmp/diseqc.temp /tmp/diseqc.conf
+    $VI /tmp/diseqc.conf
+  else
+    $DIALOG --title "$COMPLETETILE2" --backtitle "${SYSTEM}" --nocancel \
+    --fixed-font --editbox /tmp/diseqc.temp 0 0 2>/tmp/diseqc.conf
+fi
+
+diff -u /tmp/diseqc.temp /tmp/diseqc.conf > /tmp/diseqc.diff
+checksize=`ls -s /tmp/diseqc.diff | cut -nb 1`
+
+if [ ${checksize} -ne 0 ]; then
+  $DIALOG --clear --title "${DIFFDISEQC}" --backtitle "${SYSTEM}" --textbox /tmp/diseqc.diff 22 77
+fi
+else
+  cp /tmp/diseqc.temp /tmp/diseqc.conf
+fi
+
+sed 's#DiSEqC.*#DiSEqC = 1#' ${VDRCONFDIR}/setup.conf > /tmp/setup.conf
+
+rm -f /tmp/diseqc.temp /tmp/diseqc.diff
+finished
+
+}
+
+function customlnbtype
+{
+returncode=0
+while test $returncode != 1 && test $returncode != 250; do
+  exec 3>&1
+  value=`$DIALOG --clear --no-cancel --extra-label "${EDITLABEL}" \
+	--item-help --backtitle "${SYSTEM}" --inputmenu "${CUSTOMLNBTYPE}" 22 50 12 \
+	"LnbFrequLo:" "${LnbFrequLo}" "${LNBFREQULO}" \
+	"LnbFrequHi:" "${LnbFrequHi}" "${LNBFREQUHI}" \
+	"LnbSLOF:" "${LnbSLOF}" "${LNBSLOF}" \
+	"LnbPolar:" "${LnbPolar}" "${LNBPOLAR}" 2>&1 1>&3`
+  returncode=$?
+  exec 3>&-
+
+  case $returncode in
+  0)
+    break
+     ;;
+  3)
+    tag=`echo "$value" |sed -e 's/^RENAMED //' -e 's/:.*//'`
+    item=`echo "$value" |sed -e 's/^.*:[ ]*//' -e 's/[ ]*$//'`
+    case "$tag" in
+    LnbFrequLo)
+      LnbFrequLo="$item"
+      ;;
+    LnbFrequHi)
+      LnbFrequHi="$item"
+      ;;
+    LnbSLOF)
+      LnbSLOF="$item"
+      ;;
+    LnbPolar)
+      LnbPolar="$item"
+    esac
+     ;;
+  esac
+done
+}
+
+function setlnbtype
+{
+echo "$DIALOG --clear --no-cancel --backtitle \"${SYSTEM}\" --menu \"${SETLNBTYPE}\" 20 66 12 \\" > ${tempsetlnbtypemenu}
+echo "\"5150-linear\" \"${SETLNBTYPE_5150_LINEAR}\" \\" >> ${tempsetlnbtypemenu}
+echo "\"5750-linear\" \"${SETLNBTYPE_5750_LINEAR}\" \\" >> ${tempsetlnbtypemenu}
+echo "\"9750-linear\" \"${SETLNBTYPE_9750_LINEAR}\" \\" >> ${tempsetlnbtypemenu}
+echo "\"10600-linear\" \"${SETLNBTYPE_10600_LINEAR}\" \\" >> ${tempsetlnbtypemenu}
+echo "\"10750-linear\"	\"${SETLNBTYPE_10750_LINEAR}\" \\" >> ${tempsetlnbtypemenu}
+echo "\"11250-linear\"	\"${SETLNBTYPE_11250_LINEAR}\" \\" >> ${tempsetlnbtypemenu}
+echo "\"11300-linear\"	\"${SETLNBTYPE_11300_LINEAR}\" \\" >> ${tempsetlnbtypemenu}
+if [ X"${DISEQCTYPE}" != "XTune-22k" ]; then
+  echo "\"9750/10600-linear\" \"${SETLNBTYPE_9750_10600_LINEAR}\" \\" >> ${tempsetlnbtypemenu}
+  echo "\"9750/10750-linear\" \"${SETLNBTYPE_9750_10750_LINEAR}\" \\" >> ${tempsetlnbtypemenu}
+fi
+echo "\"5150-circular\" \"${SETLNBTYPE_5150_CIRCULAR}\" \\" >> ${tempsetlnbtypemenu}
+echo "\"5750-circular\" \"${SETLNBTYPE_5750_CIRCULAR}\" \\" >> ${tempsetlnbtypemenu}
+echo "\"9750-circular\" \"${SETLNBTYPE_9750_CIRCULAR}\" \\" >> ${tempsetlnbtypemenu}
+echo "\"10600-circular\" \"${SETLNBTYPE_10600_CIRCULAR}\" \\" >> ${tempsetlnbtypemenu}
+echo "\"10750-circular\"	\"${SETLNBTYPE_10750_CIRCULAR}\" \\" >> ${tempsetlnbtypemenu}
+echo "\"11250-circular\"	\"${SETLNBTYPE_11250_CIRCULAR}\" \\" >> ${tempsetlnbtypemenu}
+echo "\"11300-circular\"	\"${SETLNBTYPE_11300_CIRCULAR}\" \\" >> ${tempsetlnbtypemenu}
+if [ X"${DISEQCTYPE}" != "XTune-22k" ]; then
+  echo "\"9750/10600-circular\" \"${SETLNBTYPE_9750_10600_CIRCULAR}\" \\" >> ${tempsetlnbtypemenu}
+  echo "\"9750/10750-circular\" \"${SETLNBTYPE_9750_10750_CIRCULAR}\" \\" >> ${tempsetlnbtypemenu}
+fi
+echo "\"Custom\" \"${SETLNBTYPE_CUSTON}\" 2> ${tempfile}" >> ${tempsetlnbtypemenu}
+sh ${tempsetlnbtypemenu}
+retval=$?
+LNBTYPE=`cat ${tempfile}`
+rm -f ${tempsetlnbtypemenu}
+rm -f ${tempfile}
+
+case ${retval} in
+0)
+  case ${LNBTYPE} in
+  5150-linear)
+    LnbFrequLo=0
+    LnbFrequHi=5150
+    LnbSLOF=0
+    LnbPolar=VH
+    ;;
+  5750-linear)
+    LnbFrequLo=0
+    LnbFrequHi=5750
+    LnbSLOF=0
+    LnbPolar=VH
+    ;;
+  9750-linear)
+    LnbFrequLo=0
+    LnbFrequHi=9750
+    LnbSLOF=0
+    LnbPolar=VH
+    ;;
+  10600-linear)
+    LnbFrequLo=0
+    LnbFrequHi=10600
+    LnbSLOF=0
+    LnbPolar=VH
+    ;;
+  10750-linear)
+    LnbFrequLo=0
+    LnbFrequHi=10750
+    LnbSLOF=0
+    LnbPolar=VH
+    ;;
+  11250-linear)
+    LnbFrequLo=0
+    LnbFrequHi=11250
+    LnbSLOF=0
+    LnbPolar=VH
+    ;;
+  11300-linear)
+    LnbFrequLo=0
+    LnbFrequHi=11300
+    LnbSLOF=0
+    LnbPolar=VH
+    ;;
+  9750/10600-linear)
+    DUALBAND="YES"
+    LnbFrequLo=9750
+    LnbFrequHi=10600
+    LnbSLOF=11700
+    LnbPolar=VH
+    ;;
+  9750/10750-linear)
+    DUALBAND="YES"
+    LnbFrequLo=9750
+    LnbFrequHi=10750
+    LnbSLOF=11700
+    LnbPolar=VH
+    ;;
+  5150-circular)
+    LnbFrequLo=0
+    LnbFrequHi=5150
+    LnbSLOF=0
+    LnbPolar=RL
+    ;;
+  5750-circular)
+    LnbFrequLo=0
+    LnbFrequHi=5750
+    LnbSLOF=0
+    LnbPolar=RL
+    ;;
+  9750-circular)
+    LnbFrequLo=0
+    LnbFrequHi=9750
+    LnbSLOF=0
+    LnbPolar=RL
+    ;;
+  10600-circular)
+    LnbFrequLo=0
+    LnbFrequHi=10600
+    LnbSLOF=0
+    LnbPolar=RL
+    ;;
+  10750-circular)
+    LnbFrequLo=0
+    LnbFrequHi=10750
+    LnbSLOF=0
+    LnbPolar=RL
+    ;;
+  11250-circular)
+    LnbFrequLo=0
+    LnbFrequHi=11250
+    LnbSLOF=0
+    LnbPolar=RL
+    ;;
+  11300-circular)
+    LnbFrequLo=0
+    LnbFrequHi=11300
+    LnbSLOF=0
+    LnbPolar=RL
+    ;;
+  9750/10600-circular)
+    DUALBAND="YES"
+    LnbFrequLo=9750
+    LnbFrequHi=10600
+    LnbSLOF=11700
+    LnbPolar=RL
+    ;;
+  9750/10750-circular)
+    DUALBAND="YES"
+    LnbFrequLo=9750
+    LnbFrequHi=10750
+    LnbSLOF=11700
+    LnbPolar=RL
+    ;;
+  Custom)
+    LnbFrequLo=9750
+    LnbFrequHi=10600
+    LnbSLOF=11700
+    LnbPolar=HV
+    customlnbtype
+    while [ $LnbFrequHi -eq 0 ]; do
+      customlnbtype
+    done
+  esac
+  ;;
+1)
+  exit 0
+esac
+}
+
+function setsatellite 
+{
+echo "${DIALOG} --clear --no-cancel --backtitle \"${SYSTEM}\" --menu \"${SETSATELLITE}\" 34 60 25 \\" > ${tempsatellitemenu}
+sed -e's///g' \
+    -e '/^#/d' \
+    -e '/^[[:space:]]*$/d' \
+    ${VDRCONFDIR}/sources.conf | while read first else; do
+      echo "\"${first}\" \"${else}\" \\" >> ${tempsatellitemenu}
+    done
+echo "2> ${tempfile}" >> ${tempsatellitemenu}
+}
+
+function selectdiseqcport
+{
+echo "${DIALOG} --clear --default-item "${CURRENTLNB}" --cancel-label "${CANCELLABEL}" \
+      --backtitle \"${SYSTEM}\" --menu \"${SETDISEQC}\" \\" > ${tempdiseqcmenu}
+if [ ${DISEQCTYPE} == "Tuneburst" -o ${DISEQCTYPE} == "Tune-22k" ]; then
+  echo "12 73 3 \\" >> ${tempdiseqcmenu}
+elif [ ${DISEQCTYPE} == "DiSEqC-1.0" ]; then
+  echo "13 73 4 \\" >> ${tempdiseqcmenu}
+elif [ ${DISEQCTYPE} == "DiSEqC-1.1" -o ${DISEQCTYPE} == "DiSEqC-1.2" ]; then
+  echo "19 73 10 \\" >> ${tempdiseqcmenu}
+else
+  echo "21 73 14 \\" >> ${tempdiseqcmenu}
+fi
+echo "\"LNB1\" \"${SETLNB1}\" \\" >> ${tempdiseqcmenu}
+echo "\"LNB2\" \"${SETLNB2}\" \\" >> ${tempdiseqcmenu}
+if [ ${DISEQCTYPE} != "Tuneburst" -a ${DISEQCTYPE} != "Tune-22k" ]; then
+  echo "\"LNB3\" \"${SETLNB3}\" \\" >> ${tempdiseqcmenu}
+  echo "\"LNB4\" \"${SETLNB4}\" \\" >> ${tempdiseqcmenu}
+  if [ ${DISEQCTYPE} != "DiSEqC-1.0" ]; then
+    for ((i=5;$i-17;i++)); do
+      echo "\"LNB$i\" \"$(eval echo '$'SETLNB$i)\" \\" >> ${tempdiseqcmenu}
+    done
+    if [ ${DISEQCTYPE} != "DiSEqC-1.1" -a ${DISEQCTYPE} != "DiSEqC-1.2" ]; then
+      for ((i=17;$i-65;i++)); do
+	echo "\"LNB$i\" \"$(eval echo '$'SETLNB$i)\" \\" >> ${tempdiseqcmenu}
+      done
+    fi
+  fi
+fi
+echo "2> ${tempfile}" >> ${tempdiseqcmenu}
+}
+
+function getdiseqcport
+{
+getport=$1
+if [ ${getport} == "None" ]; then
+  echo "None"
+else
+  echo "DiSEqC 1.${getport:7:1}/2.${getport:7:1} port:${getport:9:2}"
+fi
+}
+
+function setdiseqclnb
+{
+echo "${DIALOG} --clear --no-cancel --backtitle \"${SYSTEM}\" \
+      --menu \"${SETDISEQCLNB}\" \\" > ${tempsetdiseqclnb}
+echo "20 45 14 \\" >> ${tempsetdiseqclnb}
+echo "\"None\" \"No any DiSEqC port\" \\" >> ${tempsetdiseqclnb}
+#if [ X"${WITHOUT_TONEBURSTDISEQC}" != "XYES" ]; then
+#  echo "\"DiSEqC_A\" \"MiniDiSEqC port A\" \\" >> ${tempsetdiseqclnb}
+#  echo "\"DiSEqC_B\" \"MiniDiSEqC port B\" \\" >> ${tempsetdiseqclnb}
+#fi
+if [ X"${WITHOUT_DISEQC_0}" != "XYES" ]; then
+  for ((i=1;$i-5;i++)); do
+    echo "\"DiSEqC_0_$i\" \"DiSEqC 1.0/2.0 port $i\" \\" >> ${tempsetdiseqclnb}
+  done
+fi
+if [ X"${WITHOUT_DISEQC_1}" != "XYES" ]; then
+  for ((i=1;$i-17;i++)); do
+    echo "\"DiSEqC_1_$i\" \"DiSEqC 1.1/2.1 port $i\" \\" >> ${tempsetdiseqclnb}
+  done
+fi
+if [ X"${WITHOUT_DISEQC_2}" != "XYES" ]; then
+  for ((i=1;$i-17;i++)); do
+    echo "\"DiSEqC_2_$i\" \"DiSEqC 1.2/2.2 port $i\" \\" >> ${tempsetdiseqclnb}
+  done
+fi
+echo "2> ${tempfile}" >> ${tempsetdiseqclnb}
+}
+
+function settune22kmenu
+{
+echo "${DIALOG} --clear --default-item \"${CURRENTITEM}\" --cancel-label "${CANCELLABEL}" \
+      --backtitle \"${SYSTEM}\" --menu \"${SETTUNE22K}\" \\" > ${tempsettune22k}
+echo "10 60 3 \\" >> ${tempsettune22k}
+echo "\"None\" \"${NO22K}\" \\" >> ${tempsettune22k}
+echo "\"22k_on\" \"${TUNE22KON}\" \\" >> ${tempsettune22k}
+echo "\"22k_off\" \"${TUNE22KOFF}\" \\" >> ${tempsettune22k}
+echo "2> ${tempfile}" >> ${tempsettune22k}
+}
+
+function settune22k
+{
+if [ X${CURRENTITEM} == "X" ]; then
+  CURRENTITEM="None"
+fi
+if [ X${TUNE22KON} == "X" ]; then
+  TUNE22KON=${SETLNB}
+fi
+if [ X${TUNE22KOFF} == "X" ]; then
+  TUNE22KOFF=${SETLNB}
+fi
+retval=0
+while test $retval != 1; do
+  settune22kmenu
+  . ${tempsettune22k}
+  retval=$?
+  SELECTTUNE22K=`cat ${tempfile}`
+  rm ${tempfile}
+  rm ${tempsettune22k}
+  case $SELECTTUNE22K in
+  None)
+    WITHOUT_22K="YES"
+    LNB_22K="${LNB_22K_NOTSET}"
+    retval=1
+    unset SATELLITE_22K_ON LNB_BAND_22K_ON SATELLITE_22K_OFF LNB_BAND_22K_OFF
+    ;;
+  22k_on)
+    if [ X${SATELLITE_22K_OFF} == "X" ]; then
+      SATELLITE_22K_ON="${SATELLITE}"
+      LNB_BAND_22K_ON="${LNB_BAND}"
+      CURRENTITEM="22k_off"
+    else
+      setsatellite
+      . ${tempsatellitemenu}
+      rm -f ${tempsatellitemenu}
+      SATELLITE_22K_ON=`cat ${tempfile}`
+      rm -f ${tempfile}
+      setlnbtype
+      LNB_BAND_22K_ON="${LnbFrequLo}/${LnbFrequHi}/${LnbPolar}"
+    fi
+    LNB_22K="${LNB_22K_SET}"
+    TUNE22KON="${SATELLITE_22K_ON}:${LNB_BAND_22K_ON}"
+#    if [ X${SATELLITE_22K_OFF} == "X" ]; then
+#      settune22k
+#    fi
+    ;;
+  22k_off)
+    if [ X${SATELLITE_22K_ON} == "X" ]; then
+      SATELLITE_22K_OFF="${SATELLITE}"
+      LNB_BAND_22K_OFF="${LNB_BAND}"
+      CURRENTITEM="22k_on"
+    else
+      setsatellite
+      . ${tempsatellitemenu}
+      rm -f ${tempsatellitemenu}
+      SATELLITE_22K_OFF=`cat ${tempfile}`
+      rm -f ${tempfile}
+      setlnbtype
+      LNB_BAND_22K_OFF="${LnbFrequLo}/${LnbFrequHi}/${LnbPolar}"
+    fi
+    LNB_22K="${LNB_22K_SET}"
+    TUNE22KOFF="${SATELLITE_22K_OFF}:${LNB_BAND_22K_OFF}"
+#    if [ X${SATELLITE_22K_OFF} == "X" ]; then
+#      settune22k
+#    fi
+    ;;
+  esac
+done
+}
+
+function diseqcwaitmenu
+{
+${DIALOG} --clear --nocancel --backtitle "${SYSTEM}" \
+          --inputbox "${DISEQCWAITINFO}" 9 51 ${DISEQC_WAIT} 2> $tempfile
+DISEQC_WAIT=`cat $tempfile`
+}
+
+function diseqcrepeatmenu
+{
+${DIALOG} --clear --nocancel --backtitle "${SYSTEM}" \
+          --menu "${DISEQCREPEATINFO}" 10 51 3 \
+          "1" "${DISEQCREPEAT_1}" \
+          "2" "${DISEQCREPEAT_2}" \
+          "3" "${DISEQCREPEAT_3}" 2> ${tempfile}
+DISEQC_REPEAT=`cat $tempfile`
+}
+
+function setdiseqcuser
+{
+echo "${DIALOG} --clear --cancel-label "${CANCELLABEL}" --backtitle \"${SYSTEM}\" \
+      --menu \"${SETDISEQC_USER}\" \\" > ${tempsetdiseqcuser}
+echo "14 60 7 \\" >> ${tempsetdiseqcuser}
+echo "\"DiSEqC_1st\" \"${DISEQC_1ST_PORT}\" \\" >> ${tempsetdiseqcuser}
+if [ X"${WITHOUT_DISEQC_1ST}" != "XYES" ]; then
+  echo "\"DiSEqC_2nd\" \"${DISEQC_2ND_PORT}\" \\" >> ${tempsetdiseqcuser}
+  echo "\"DiSEqC_wait\" \"${DISEQC_WAIT}\" \\" >> ${tempsetdiseqcuser}
+  echo "\"DiSEqC_repeat\" \"${DISEQC_REPEAT}\" \\" >> ${tempsetdiseqcuser}
+fi
+if [ X${LNB_BAND_22K_ON} == "X" -a X${LNB_BAND_22K_OFF} == "X" ]; then
+  echo "\"Satellite\" \"${SATELLITE}\" \\" >> ${tempsetdiseqcuser}
+  echo "\"Lnb_Band\" \"${LNB_BAND}\" \\" >> ${tempsetdiseqcuser}
+fi
+#if [ X"${WITHOUT_22K}" != "XYES" ]; then
+echo "\"Lnb_22k\" \"${LNB_22K}\" \\" >> ${tempsetdiseqcuser}
+#fi
+echo "2> ${tempfile}" >> ${tempsetdiseqcuser}
+}
+
+function selectdiseqclnb
+{
+menuretval=0
+while test $menuretval != 1; do
+  setdiseqcuser
+  . ${tempsetdiseqcuser}
+  menuretval=$?
+  SELECTDISEQCLNB=`cat ${tempfile}`
+  rm -f ${tempfile}
+  rm -f ${tempsetdiseqcuser}
+  case $SELECTDISEQCLNB in
+  DiSEqC_1st)
+    SETDISEQCLNB="${SETDISEQCLNB_1ST}"
+    setdiseqclnb
+    . ${tempsetdiseqclnb}
+    DISEQC_1ST=`cat ${tempfile}`
+    rm ${tempfile}
+    if [ "${DISEQC_1ST}" == "None" ]; then
+      WITHOUT_DISEQC_1ST="YES"
+    else
+      unset WITHOUT_DISEQC_1ST
+    fi
+    DISEQC_1ST_PORT=`getdiseqcport $DISEQC_1ST`
+    rm ${tempsetdiseqclnb}
+    ;;
+  DiSEqC_2nd)
+    SETDISEQCLNB="${SETDISEQCLNB_2ND}"
+    setdiseqclnb
+    . ${tempsetdiseqclnb}
+    DISEQC_2ND=`cat ${tempfile}`
+    rm ${tempfile}
+    DISEQC_2ND_PORT=`getdiseqcport $DISEQC_2ND`
+    rm ${tempsetdiseqclnb}
+     ;;
+  DiSEqC_wait)
+    diseqcwaitmenu
+     ;;
+  DiSEqC_repeat)
+    diseqcrepeatmenu
+     ;;
+  Satellite)
+    setsatellite
+    . ${tempsatellitemenu}
+    SATELLITE=`cat ${tempfile}`
+    rm -f ${tempsatellitemenu}
+    rm -f ${tempfile}
+    ;;
+  Lnb_Band)
+    setlnbtype
+    LNB_BAND="${LnbFrequLo}/${LnbFrequHi}/${LnbPolar}"
+    ;;
+  Lnb_22k)
+    settune22k
+    ;;
+  esac
+done
+}
+
+function setdiseqc 
+{
+count=1
+while [ $count -lt $lnbsum ]; do
+  lnbcount=1
+  count=1
+  for ((lnbcount=1;$lnbcount-($lnbsum+1);lnbcount++)); do
+    if [[ "`eval echo '$'SETLNB$lnbcount`" == *${SETLNB} ]]; then
+      CURRENTLNB="LNB$lnbcount"
+      break
+    else
+      count=`expr $count + 1`
+    fi
+  done
+  selectdiseqcport
+  . ${tempdiseqcmenu}
+  retval=$?
+  [ ${retval} -eq 1 ] && break
+  selectlnb=`cat ${tempfile}`
+  rm ${tempfile}
+  rm -f ${tempdiseqcmenu}
+  lnb=`echo "${selectlnb}" | cut -b4-`
+  if [ "$DISEQCTYPE" == "User-defined" ]; then
+    SETDISEQCLNB="${SETDISEQCLNB_1ST}"
+    setdiseqclnb
+    . ${tempsetdiseqclnb}
+    DISEQC_1ST=`cat ${tempfile}`
+    rm ${tempfile}
+    DISEQC_1ST_PORT=`getdiseqcport $DISEQC_1ST`
+    rm ${tempsetdiseqclnb}
+    if [ "${DISEQC_1ST}" != "None" ]; then
+      if [[ ${DISEQC_1ST} == DiSEqC_0* ]]; then
+	WITHOUT_TONEBURSTDISEQC="YES"
+	WITHOUT_DISEQC_0="YES"
+      else
+	unset WITHOUT_TONEBURSTDISEQC WITHOUT_DISEQC_0
+      fi
+      if [[ ${DISEQC_1ST} == DiSEqC_1* ]]; then
+	WITHOUT_DISEQC_1="YES"
+      else
+	unset WITHOUT_DISEQC_1
+      fi
+      if [[ ${DISEQC_1ST} == DiSEqC_2* ]]; then
+	WITHOUT_DISEQC_2="YES"
+      else
+	unset WITHOUT_DISEQC_2
+      fi
+      SETDISEQCLNB="${SETDISEQCLNB_2ND}"
+      setdiseqclnb
+      . ${tempsetdiseqclnb}
+      DISEQC_2ND=`cat ${tempfile}`
+      rm ${tempfile}
+      DISEQC_2ND_PORT=`getdiseqcport $DISEQC_2ND`
+      rm ${tempsetdiseqclnb}
+      unset WITHOUT_TONEBURSTDISEQC WITHOUT_DISEQC_0 WITHOUT_DISEQC_1 WITHOUT_DISEQC_2
+    fi
+    setsatellite
+    . ${tempsatellitemenu}
+    SATELLITE=`cat ${tempfile}`
+    rm -f ${tempsatellitemenu}
+    rm -f ${tempfile}
+    setlnbtype
+    LNB_BAND="${LnbFrequLo}/${LnbFrequHi}/${LnbPolar}"
+    if [ X"${LnbFrequLo}" == "X0" ]; then
+      settune22k
+    else
+      LNB_22K="${LNB_22K_NOTSET}"
+    fi
+    selectdiseqclnb
+    if [ ${DISEQC_1ST} == "None" ]; then
+      DISEQC_1ST=""
+    fi
+    if [ ${DISEQC_2ND} == "None" ]; then
+      DISEQC_2ND=""
+    fi
+    if [ X${LNB_BAND_22K_ON} != "X" -a X${LNB_BAND_22K_OFF} != "X" ]; then
+      TEMP22KOFF=`echo ${LNB_BAND_22K_OFF} | cut -d/ -f2`
+      TEMPPOLAR=`echo ${LNB_BAND_22K_OFF} | cut -d/ -f3`
+      TEMP22KON=`echo ${LNB_BAND_22K_ON} | cut -d/ -f2`
+      SETLNBSUBT="${SATELLITE_22K_OFF}:${TEMP22KOFF}/${SATELLITE_22K_ON}:${TEMP22KON}/11700/${TEMPPOLAR}%${DISEQC_1ST#DiSEqC_}:${DISEQC_2ND#DiSEqC_}%|${DISEQC_WAIT}:${DISEQC_REPEAT}"
+    else
+      LO_TEMP="`echo ${LNB_BAND} | cut -d/ -f1`"
+      HI_TEMP="`echo ${LNB_BAND} | cut -d/ -f2`"
+      POLAR_TEMP="`echo ${LNB_BAND} | cut -d/ -f3`"
+      if [ "${LO_TEMP}" == 0 ]; then
+	SETLNBSUBT="/${SATELLITE}:${HI_TEMP}//${POLAR_TEMP}%${DISEQC_1ST#DiSEqC_}:${DISEQC_2ND#DiSEqC_}%|${DISEQC_WAIT}:${DISEQC_REPEAT}"
+      else
+	SETLNBSUBT="${SATELLITE}:${LO_TEMP}/${SATELLITE}:${HI_TEMP}/${LnbSLOF}/${POLAR_TEMP}%${DISEQC_1ST#DiSEqC_}:${DISEQC_2ND#DiSEqC_}%|${DISEQC_WAIT}:${DISEQC_REPEAT}"
+      fi
+    fi
+    eval SETLNB$lnb="'Port $lnb:$SETLNBSUBT'"
+    eval SETLNBSUB$lnb="'${SETLNBSUBT}'"
+  else
+    setsatellite
+    . ${tempsatellitemenu}
+    rm -f ${tempsatellitemenu}
+    satellite=`cat ${tempfile}`
+    rm -f ${tempfile}
+    setlnbtype
+  fi
+  case $DISEQCTYPE in
+  Tune-22k)
+    if [ X${selectlnb} = "XLNB1" ]; then
+      eval SETLNB$lnb="'22K ON:${SELECTSATLLITE}:${satellite},${SELECTLNB}:${LnbFrequHi}/${LnbPolar}'"
+      satellite_22k_on=${satellite}
+      LnbFrequHi_22k_on=${LnbFrequHi}
+    elif [ X${selectlnb} = "XLNB2" ]; then
+      eval SETLNB$lnb="'22K OFF:${SELECTSATLLITE}:${satellite},${SELECTLNB}:${LnbFrequHi}/${LnbPolar}'"
+      satellite_22k_off=${satellite}
+      LnbFrequHi_22k_off=${LnbFrequHi}
+    fi
+    if [ X${satellite_22k_on} != "X" -a X${satellite_22k_off} != "X" ]; then
+      eval SETLNBSUB$lnb="'${satellite_22k_on}:${LnbFrequHi_22k_on}/${satellite_22k_off}:${LnbFrequHi_22k_off}/11700/${LnbPolar}%%|'"
+    fi
+    ;;
+  Tuneburst)
+    if [ X${selectlnb} = "XLNB1" ]; then
+      TONEBURSTDISEQCPORT="Port A"
+      eval SETLNB$lnb="'${TONEBURSTDISEQCPORT}:${SELECTSATLLITE}:${satellite},${SELECTLNB}:${LnbFrequLo}/${LnbFrequHi}/${LnbPolar}'"
+    elif [ X${selectlnb} = "XLNB2" ]; then
+      TONEBURSTDISEQCPORT="Port B"
+      eval SETLNB$lnb="'${TONEBURSTDISEQCPORT}:${SELECTSATLLITE}:${satellite},${SELECTLNB}:${LnbFrequLo}/${LnbFrequHi}/${LnbPolar}'"
+    fi
+    TONEBURSTDISEQCPORT=`echo ${TONEBURSTDISEQCPORT} | cut -d" " -f2`
+    if [ ${LnbFrequLo} -eq 0 ]; then
+      eval SETLNBSUB$lnb="'/${satellite}:${LnbFrequHi}//${LnbPolar}%%${TONEBURSTDISEQCPORT}|'"
+    else
+      eval SETLNBSUB$lnb="'${satellite}:${LnbFrequLo}/${satellite}:${LnbFrequHi}/${LnbSLOF}/${LnbPolar}%%${TONEBURSTDISEQCPORT}|'"
+    fi
+    ;;
+  DiSEqC-1.0)
+    if [ X${selectlnb} = "XLNB1" ]; then
+      eval SETLNB$lnb="'Port AA:${SELECTSATLLITE}:${satellite},${SELECTLNB}:${LnbFrequLo}/${LnbFrequHi}/${LnbPolar}'"
+    elif [ X${selectlnb} = "XLNB2" ]; then
+      eval SETLNB$lnb="'Port AB:${SELECTSATLLITE}:${satellite},${SELECTLNB}:${LnbFrequLo}/${LnbFrequHi}/${LnbPolar}'"
+    elif [ X${selectlnb} = "XLNB3" ]; then
+      eval SETLNB$lnb="'Port BA:${SELECTSATLLITE}:${satellite},${SELECTLNB}:${LnbFrequLo}/${LnbFrequHi}/${LnbPolar}'"
+    elif [ X${selectlnb} = "XLNB4" ]; then
+      eval SETLNB$lnb="'Port BB:${SELECTSATLLITE}:${satellite},${SELECTLNB}:${LnbFrequLo}/${LnbFrequHi}/${LnbPolar}'"
+    fi
+    if [ ${LnbFrequLo} -eq 0 ]; then
+      eval SETLNBSUB$lnb="'/${satellite}:${LnbFrequHi}//${LnbPolar}%0_${lnb}:%|'"
+    else
+      eval SETLNBSUB$lnb="'${satellite}:${LnbFrequLo}/${satellite}:${LnbFrequHi}/${LnbSLOF}/${LnbPolar}%0_${lnb}:%|'"
+    fi
+    ;;
+  DiSEqC-1.1)
+    if [ ${LnbFrequLo} -eq 0 ]; then
+      eval SETLNB$lnb="'Port $lnb:${SELECTSATLLITE}:${satellite},${SELECTLNB}:${LnbFrequHi}/${LnbPolar}'"
+      eval SETLNBSUB$lnb="'/${satellite}:${LnbFrequHi}//${LnbPolar}%1_${lnb}:%|'"
+    else
+      eval SETLNB$lnb="'Port $lnb:${SELECTSATLLITE}:${satellite},${SELECTLNB}:${LnbFrequLo}/${LnbFrequHi}/${LnbPolar}|'"
+      eval SETLNBSUB$lnb="'${satellite}:${LnbFrequLo}/${satellite}:${LnbFrequHi}/${LnbSLOF}/${LnbPolar}%1_${lnb}:%|'"
+    fi
+    ;;
+  DiSEqC-1.2)
+    if [ ${LnbFrequLo} -eq 0 ]; then
+      eval SETLNB$lnb="'Port $lnb:${SELECTSATLLITE}:${satellite},${SELECTLNB}:${LnbFrequHi}/${LnbPolar}'"
+      eval SETLNBSUB$lnb="'/${satellite}:${LnbFrequHi}//${LnbPolar}%2_${lnb}:%|'"
+    else
+      eval SETLNB$lnb="'Port $lnb:${SELECTSATLLITE}:${satellite},${SELECTLNB}:${LnbFrequLo}/${LnbFrequHi}/${LnbPolar}'"
+      eval SETLNBSUB$lnb="'${satellite}:${LnbFrequLo}/${satellite}:${LnbFrequHi}/${LnbSLOF}/${LnbPolar}%2_${lnb}:%|'"
+    fi
+    ;;
+  esac
+done
+for ((i=1;$i-65;i++)); do
+  if [ "X$(eval echo '$'SETLNBSUB$i)" != "X" ]; then
+    SETLNBSUB="$SETLNBSUB $(eval echo '$'SETLNBSUB$i)"
+  fi
+done
+for i in $SETLNBSUB; do
+  echo "#codeline#${i}" >> /tmp/diseqc.temp
+  getcommand "${i}" >> /tmp/diseqc.temp
+  echo "" >> /tmp/diseqc.temp
+done
+}
+		
+function setdiseqcmode {
+$DIALOG --clear --no-cancel --item-help --backtitle "${SYSTEM}" --menu "${SETDISEQCMODE}" 15 60 8 \
+	"Tune-22k" "${SETDISEQC_22K}" "${DISEQC_22K_INFO}" \
+	"Tuneburst" "${SETDISEQC_TONEBURST}"  "${DISEQC_TONEBURST_INFO}" \
+	"DiSEqC-1.0" "${SETDISEQC_10}"  "${DISEQC_10_INFO}" \
+	"DiSEqC-1.1" "${SETDISEQC_11}"  "${DISEQC_11_INFO}" \
+	"DiSEqC-1.2" "${SETDISEQC_12}"  "${DISEQC_12_INFO}" \
+	"User-defined" "${SETDISEQC_USER}"  "${DISEQC_USER_INFO}" \
+	"NO"	"${SETDISEQCMODE_NO}" "${SETDISEQCMODE_NO}" 2> ${tempfile}
+
+retval=$?
+DISEQCTYPE=`cat ${tempfile}`
+case $retval in
+0)
+  case $DISEQCTYPE in
+  NO)
+    nodiseqcsetup
+    ;;
+  Tune-22k)
+    lnbsum=2
+    SETDISEQC="${SETDISEQC_22K}. ${DISEQC_22K_INFO}"
+    SETLNB1="22K ON:${SETLNB}"
+    SETLNB2="22k OFF:${SETLNB}"
+    setdiseqc
+    ;;
+  Tuneburst)
+    lnbsum=2
+    SETDISEQC="${SETDISEQC_TONEBURST}. ${DISEQC_TONEBURST_INFO}"
+    SETLNB1="Port A:${SETLNB}"
+    SETLNB2="Port B:${SETLNB}"
+    setdiseqc
+    ;;
+  DiSEqC-1.0)
+    lnbsum=4
+    SETDISEQC="${SETDISEQC_10}. ${DISEQC_10_INFO}"
+    SETLNB1="Port AA:${SETLNB}"
+    SETLNB2="Port AB:${SETLNB}"
+    SETLNB3="Port BA:${SETLNB}"
+    SETLNB4="Port BB:${SETLNB}"
+    setdiseqc
+    ;;
+  DiSEqC-1.1)
+    SETDISEQC="${SETDISEQC_11}. ${DISEQC_11_INFO}"
+    lnbsum=16
+    for ((i=1;$i-($lnbsum+1);i++)); do
+      eval SETLNB$i="'Port $i:${SETLNB}'"
+    done
+    setdiseqc
+    ;;
+  DiSEqC-1.2)
+    SETDISEQC="${SETDISEQC_12}. ${DISEQC_12_INFO}"
+    lnbsum=16
+    for ((i=1;$i-($lnbsum+1);i++)); do
+      eval SETLNB$i="'Port $i:${SETLNB}'"
+    done
+    setdiseqc
+    ;;
+  User-defined)
+    SETDISEQC="${SETDISEQC_USER}. ${DISEQC_USER_INFO}"
+    lnbsum=64
+    for ((i=1;$i-($lnbsum+1);i++)); do
+      eval SETLNB$i="'Port $i:${SETLNB}'"
+    done
+    setdiseqc
+  esac
+  ;;
+1)
+  exit 0
+  ;;
+esac
+completesetup
+}
+
+#case none"$LANG$LC_CTYPE$LC_ALL" in
+#nonezh_CN*)
+#  diseqcsetup_zh_CN
+#  ;;
+#nonezh_TW*)
+#  diseqcsetup_zh_TW
+#  ;;
+#*)
+#  diseqcsetup_en_US
+#  ;;
+#esac
+
+[ -f ${VDRCONFDIR}/diseqc.conf ] && cp ${VDRCONFDIR}/diseqc.conf ${VDRCONFDIR}/diseqc.conf.${origdate}
+[ -f ${VDRCONFDIR}/setup.conf ] && cp ${VDRCONFDIR}/setup.conf ${VDRCONFDIR}/setup.conf.${origdate}
+
+defaultenv
+setdiseqcmode
+
+for i in $tempfile $tempsatellitemenu $tempdiseqcmenu $tempsetlnbtypemenu $tempsetdiseqclnb $tempsettune22k $tempsetdiseqcuser; do
+  [ -f $i ] && rm $i
+done

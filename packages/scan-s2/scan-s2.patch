@@ -1,0 +1,28 @@
+diff -Naur scan-s2-orig/Makefile scan-s2-7effc68db255/Makefile
+--- scan-s2-orig/Makefile	2011-10-31 17:36:15.000000000 +0400
++++ scan-s2-7effc68db255/Makefile	2011-10-31 17:36:34.000000000 +0400
+@@ -1,10 +1,10 @@
+-CC=gcc
++CC?=gcc
+ 
+ SRC=atsc_psip_section.c diseqc.c dump-vdr.c dump-zap.c lnb.c scan.c section.c 
+ HED=atsc_psip_section.h diseqc.h dump-vdr.h dump-zap.h lnb.h scan.h section.h list.h
+ OBJ=atsc_psip_section.o diseqc.o dump-vdr.o dump-zap.o lnb.o scan.o section.o
+ 
+-BIND=/usr/local/bin/
++BIND?=/usr/local/bin/
+ INCLUDE=-I../s2/linux/include
+ 
+ TARGET=scan-s2
+diff -Naur scan-s2-orig/scan.c scan-s2-7effc68db255/scan.c
+--- scan-s2-orig/scan.c	2011-10-31 17:36:15.000000000 +0400
++++ scan-s2-7effc68db255/scan.c	2011-10-31 17:37:14.000000000 +0400
+@@ -47,7 +47,7 @@
+ 
+ #include "atsc_psip_section.h"
+ 
+-#if DVB_API_VERSION != 5 || DVB_API_VERSION_MINOR != 0
++#if DVB_API_VERSION != 5
+ #error scan-s2 requires Linux DVB driver API version 5.0!
+ #endif
+ 

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+
+setup_toolchain host
+
+RIFF_ARCH=""
+[ "$HOST_ARCH" = x86_64 ] && RIFF_ARCH="_x64"
+
+make config
+
+sed -i "s: g++: ${HOST_CXX}:g" .config
+
+make
+make install
+
+rm -rf .install
+mkdir -p .install/usr/lib
+cp -P out/out_linux/liblcdriver${RIFF_ARCH}.so .install/usr/lib/liblcdriver.so

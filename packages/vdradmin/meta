@@ -1,0 +1,15 @@
+PKG_NAME=vdradmin
+#PKG_VERSION=0.1.0
+#PKG_URL="http://projects.vdr-developer.org/git/vdrpbd.git/snapshot/${PKG_NAME}-${PKG_VERSION}.tar.bz2"
+PKG_URL_PROTO=git
+PKG_URL_REV=bce2d98a859c39d6b4c234c193a36c0442ab3f2e
+PKG_URL="git://projects.vdr-developer.org/vdradmin-am.git"
+PKG_VERSION=3.6.9+r${PKG_URL_REV}
+PKG_REV=1
+PKG_RUN_DEPENDS="$TARGET_LIBC vdr"
+PKG_DEPENDS="perl perl-template perl-template-plugin-javascript perl-cgi perl-http-date perl-io perl-time-local perl-mime-base64 perl-file-temp perl-uri perl-gettext perl-io-compress"
+PKG_BUILD_DEPENDS="toolchain host-perl"
+PKG_PRIORITY=optional
+PKG_SECTION=multimedia
+PKG_SHORTDESC="VDRAdmin-AM is a web based interface to VDR."
+PKG_LONGDESC="VDRAdmin-AM is a web based interface to VDR."

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+. config/options
+
+get_meta $1
+
+cd $PKG_BUILD_DIR
+
+do_configure host \
+        --with-internal-glib
+
+make
+make_install toolchain

@@ -1,0 +1,10 @@
+PKG_NAME=libgles-gc
+PKG_VERSION=0.8.0-3184-1
+PKG_URL="$DISTRO_SRCS/${PKG_NAME}-${PKG_VERSION}.tar.xz"
+PKG_REV=1
+PKG_DEPENDS="$TARGET_LIBC"
+PKG_BUILD_DEPENDS="toolchain"
+PKG_PRIORITY=optional
+PKG_SECTION=libs
+PKG_SHORTDESC="libGLES for the VIVANTE included in marvell chip"
+PKG_LONGDESC="libGLES for the VIVANTE included in marvell chip."

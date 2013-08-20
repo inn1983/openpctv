@@ -1,0 +1,14 @@
+#!/bin/sh
+
+. config/options
+
+get_meta $1
+
+cd $PKG_BUILD_DIR
+
+cd libltdl
+do_configure \
+            --enable-ltdl-install \
+
+make
+make_install

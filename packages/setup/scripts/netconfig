@@ -1,0 +1,293 @@
+#!/bin/bash
+# -*- coding: UTF-8 -*-
+
+# Copyright (c) 2009-2010 CNVDR. All rights reserved.
+# Copyright (c) 2013 OpenPCTV. All rights reserved.
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, you can either send email to this
+# program's maintainer.
+
+# Author: Yinghong Liu <relaxbsd@gmail.com>
+
+export TERM=linux
+. gettext.sh
+export TEXTDOMAIN=openpctv
+
+MSOKNet="$(gettext "You have successfully detected accessing the Internet")"
+MSFailNet="$(gettext "Failed to detect your Internet connection, please check your hardware or check /etc/network to configure by manual.")"
+MSEnableDHCP="$(gettext "Do you want to use DHCP to automatically obtain network address?")"
+MSIP="$(gettext "Please enter the IP address")"
+MSNetmask="$(gettext "Please enter the subnet mask")"
+MSGateway="$(gettext "Please enter the Gateway address")"
+MSNameserver="$(gettext "Please enter the domain name server address (DNS)")"
+MSSSID="$(gettext "Wireless network name (SSID)")"
+MSKEY="$(gettext "Please enter the WEP encryption key")"
+MSPSK="$(gettext "Please enter the WPA Shared Key")"
+MSEDITWLAN="$(gettext "Configure wireless network by manual")"
+MSENCRYPTION="$(gettext "Safe Mode")"
+MSPAIRWISE="$(gettext "WPA Algorithms")"
+MSEDITWIRE="$(gettext "Configure wireless network by manual")"
+MSEDITWLANINFO="$(gettext "Select the wireless network encryption, it must be consistent with your router settings.")"
+MSWEPINFO="$(gettext "WEP encrypted wireless network mode")"
+MSWPAINFO="$(gettext "WPA/WPA2 wireless encryption mode")"
+NOKEYINFO="$(gettext "Open mode")"
+MSMENUWLAN="$(gettext "Choose A Wireless Network")"
+MSMENUWLANINFO="$(gettext "Please select the wireless network intercepted, if it is not in the list, you can enter manual settings")"
+MSGoconfig="$(gettext "You have successfully detected accessing the Internet, do you still want to configure your network?")"
+MSNoNet="$(gettext "Scan Network Interface Card fail, please check it or its driver.")"
+MSMenu="$(gettext "Select the Network Interface Card")"
+MSMenuinfo="$(gettext "Select the Network Interface Card you want to configure")"
+
+#检查internet是否联通
+function checkNet
+{
+systemctl restart connman
+printf "Restarting network, please wait for 5s..."
+for i in 5 4 3 2 1; do
+  sleep 1
+  printf " $i"
+done
+printf "\n"
+ison="no"
+ping -c 2 -W 2 8.8.8.8 > /dev/null
+if [ $? -eq 0 ]; then
+  ison="yes"
+else
+   ping -c 5 -W 5 114.114.114.114 > /dev/null
+   [ $? -eq 0 ] && ison="yes"
+fi
+}
+
+#设定网络结束，并判断是否有效。
+function finishNet
+{
+checkNet
+if [ ${ison} == "yes" ]; then
+  dialog --msgbox "${MSOKNet}" 6 50
+  exit 0
+else
+  dialog --msgbox "${MSFailNet}" 6 50
+  exit 1
+fi
+}
+
+#设定DHCP
+function selectDHCP
+{
+dialog --yesno "${MSEnableDHCP}" 6 50
+if [ $? -eq 1 ]; then
+  setNet
+else
+  sed -i -e "s/^IFACE=.*/IFACE=\"$IF\"/g" \
+	-e "s/^ADDRESS=.*/ADDRESS=\"\"/g" \
+	-e "s/^GATEWAY=.*/GATEWAY=\"\"/g" \
+	-e "s/^DNS_SERVER=.*/DNS_SERVER=\"\"/g" $NETCONF
+fi
+}
+
+#设定静态IP
+function setNet
+{
+dialog --no-cancel --inputbox "${MSIP}" 8 50 "${IP:=192.168.1.15}" 2> ${TMP}/IP
+IP="`cat ${TMP}/IP`"
+rm -f ${TMP}/IP
+
+#dialog --no-cancel --inputbox "${MSNetmask}" 8 50 "${NETMASK:=255.255.255.0}" 2> ${TMP}/NETMASK
+#NETMASK="`cat ${TMP}/NETMASK`"
+#rm -f ${TMP}/NETMASK
+
+dialog --no-cancel --inputbox "${MSGateway}" 8 50 "${GATEWAY:=192.168.1.1}" 2> ${TMP}/GATEWAY
+GATEWAY="`cat ${TMP}/GATEWAY`"
+rm -f ${TMP}/GATEWAY
+
+dialog --no-cancel --inputbox "${MSNameserver}" 8 50 "${NAMESERVER:=192.168.1.1}" 2> ${TMP}/NAMESERVER
+NAMESERVER="`cat ${TMP}/NAMESERVER`"
+rm -f ${TMP}/NAMESERVER
+
+sed -i -e "s/^IFACE=.*/IFACE=\"$IF\"/g" \
+	-e "s/^ADDRESS=.*/ADDRESS=\"$IP\"/g" \
+	-e "s/^GATEWAY=.*/GATEWAY=\"${GATEWAY}\"/g" \
+	-e "s/^DNS_SERVER=.*/DNS_SERVER=\"${NAMESERVER}\ 8.8.8.8\"/g" $NETCONF
+}
+
+function finishWlanOFF
+{
+sed -i -e "s/^NETWORK=.*/NETWORK=\"WLAN\"/g" \
+	-e "s/^SSID=.*/SSID=\"$SSID\"/g" $NETCONF
+}
+
+function finishWlanWEP
+{
+
+dialog --no-cancel --inputbox "${MSKEY}" 8 50 "${KEY}" 2> ${TMP}/KEY
+KEY=$(cat ${TMP}/KEY)
+rm -f ${TMP}/KEY
+sed -i -e "s/^NETWORK=.*/NETWORK=\"WLAN\"/g" \
+	-e "s/^SSID=.*/SSID=\"$SSID\"/g" \
+	-e "s/^SECURITY=.*/SECURITY=\"WEP\"/g" \
+	-e "s/^PASSPHRASE=.*/PASSPHRASE=\"${KEY}\"/g" $NETCONF
+}
+
+function finishWlanWPA
+{
+dialog --no-cancel --inputbox "${MSPSK}" 8 50 "${PSK}" 2> ${TMP}/PSK
+PSK=$(cat ${TMP}/PSK)
+rm -f ${TMP}/PSK
+sed -i -e "s/^NETWORK=.*/NETWORK=\"WLAN\"/g" \
+	-e "s/^SSID=.*/SSID=\"$SSID\"/g" \
+	-e "s/^SECURITY=.*/SECURITY=\"PSK\"/g" \
+	-e "s/^PASSPHRASE=.*/PASSPHRASE=\"${PSK}\"/g" $NETCONF
+}
+
+function editWlan
+{
+dialog --no-cancel --clear --title "${MSEDITWLAN}" --menu "${MSEDITWLANINFO}" 10 80 4 \
+"WEP" "${MSWEPINFO}" "WPA/WPA2" "${MSWPAINFO}" "OFF" "${NOKEYINFO}" \
+2> ${TMP}/edwlan
+edwlan=$(cat ${TMP}/edwlan)
+rm ${TMP}/edwlan
+dialog --no-cancel --inputbox "${MSSSID}" 8 50 "${SSID}" 2> ${TMP}/SSID
+SSID=$(cat ${TMP}/SSID)
+rm ${TMP}/SSID
+case $edwlan in
+ WEP)
+   finishWlanWEP;;
+ WPA*)
+   finishWlanWPA;;
+ OFF)
+   finishWlanOFF
+esac
+}
+
+#设定无线网络
+function setWlan
+{
+ifconfig $IF up
+iwlist $IF scan > ${TMP}/iwlist.log
+
+echo "dialog --no-cancel --clear --title \"${MSMENUWLAN}\" --menu \"${MSMENUWLANINFO}\" 12 80 5 \\" > ${TMP}/menu.wlan
+cell=02
+cell_current=01
+grep "Cell" ${TMP}/iwlist.log > /dev/null && \
+cat ${TMP}/iwlist.log | while read line; do
+   if [ $(echo $line | grep -ic "Cell ${cell}") -eq 0 -a X$(echo $line | grep -n '^$') = "X" ]; then
+      echo $line | grep -ic "ESSID:" > /dev/null && \
+      ssid=$(echo $line | cut -d\" -f2)
+      echo $line | grep -ic "Encryption key:off" > /dev/null && encryption=OFF
+      if [ X${encryption} != "XOFF" ]; then
+         echo $line | grep -ic "WPA2" > /dev/null && encryption="WPA2"
+         echo $line | grep -ic "WPA Version" > /dev/null && encryption="WPA"
+         echo $line | grep -ic "Group Cipher" > /dev/null && \
+         group=$(echo $line | cut -d" " -f 4)
+         echo $line | grep -ic "Pairwise Ciphers" > /dev/null && \
+         pairwise=$(echo $line | cut -d: -f2 | sed 's/^[ \t]*//')
+         echo $line | grep -ic "Authentication Suites" > /dev/null && \
+         auth=$(echo $line | cut -d: -f2 | sed 's/^[ \t]*//')
+      fi
+   else
+      cell_current=$cell
+      cell=`expr $cell + 1`
+      [ $(echo $cell | wc -L) -eq 1 ] && cell="0${cell}"
+      if [ X${encryption} != "XOFF" ]; then
+         if [ X$(echo $encryption | cut -b 1-3) == "XWPA" ]; then
+            echo " \"${MSSSID}:${ssid},${MSENCRYPTION}:${encryption},${MSPAIRWISE}:${pairwise}\" \"\" \\" >> ${TMP}/menu.wlan
+         else
+            encryption="WEP"
+            echo " \"${MSSSID}:${ssid},${MSENCRYPTION}:${encryption}\" \"\" \\" >> ${TMP}/menu.wlan
+         fi
+      else
+         echo " \"${MSSSID}:${ssid},${MSENCRYPTION}:${encryption}\" \"\" \\" >> ${TMP}/menu.wlan
+      fi
+      encryption=""
+      group=""
+      auth=""
+   fi
+done
+rm -f ${TMP}/iwlist.log
+echo " \"${MSEDITWIRE}\" \"\" 2> ${TMP}/setwlan \\" >> ${TMP}/menu.wlan
+
+[ -f ${TMP}/setwlan ] && rm -f ${TMP}/setwlan
+. ${TMP}/menu.wlan
+rm ${TMP}/menu.wlan
+
+grep "${MSSSID}" ${TMP}/setwlan > /dev/null && \
+SSID=$(cat /tmp/setwlan | cut -d, -f1 | cut -d: -f2)
+
+if grep "WEP" ${TMP}/setwlan > /dev/null; then
+   finishWlanWEP
+elif grep "WPA" ${TMP}/setwlan > /dev/null; then
+   finishWlanWPA
+elif grep "OFF" ${TMP}/setwlan > /dev/null; then
+   finishWlanOFF
+else
+   editWlan
+fi
+
+selectDHCP
+}
+
+[ -d /sys/class ] || (echo "Cant find sysv";exit 0)
+TMP=/tmp
+export TERM=linux
+NETCONF=/etc/network
+cp $NETCONF ${NETCONF}.$(date +%Y%m%d%H%M%S)
+
+#case none"$LANG$LC_CTYPE$LC_ALL" in
+#nonezh_CN*)
+#   netconfig_zh_CN;;
+#nonezh_TW*)
+#   netconfig_zh_TW;;
+#*)
+#   netconfig_en_US;;
+#esac
+
+systemctl start network-link
+checkNet
+if [ ${ison} == "yes" ]; then
+  dialog --defaultno --yesno "${MSGoconfig}" 6 50
+  [ $? -eq 1 ] && exit 0
+fi
+
+MENU="dialog --no-cancel --clear --title \"${MSMenu}\" --menu \"${MSMenuinfo}\" 10 80 4 "
+for i in /sys/class/net/*; do
+  if [ -d $i/device ]; then
+     IF=${i#/sys/class/net/}
+     ID=$(grep PCI_ID ${i}/device/uevent | cut -d= -f2)
+     DEVICE=$(lspci -d ${ID} | cut -d: -f3 | sed 's/^[ \t]*//')
+     MENU="$MENU \"${IF}\" \"${DEVICE}\""
+  fi
+done
+
+MENU="${MENU} 2>${TMP}/IF"
+eval ${MENU}
+IF="`cat ${TMP}/IF`"
+rm -f ${TMP}/IF
+
+IFTYPE="eth"
+if [ -d /sys/class/net/${IF}/wireless ]; then
+   IFTYPE="wlan"
+fi
+
+echo "$IF $IFTYPE" > /tmp/iftest
+case ${IFTYPE} in
+ eth*)
+   selectDHCP
+   finishNet;;
+ wlan*)
+   setWlan
+   rm ${TMP}/setwlan
+   finishNet;;
+ *)
+  dialog --msgbox "${MSNoNet}" 6 50
+esac

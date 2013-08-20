@@ -1,0 +1,16 @@
+#!/bin/sh
+
+. config/options
+get_meta $1
+
+cd $PKG_BUILD_DIR
+
+do_autoconf
+do_configure \
+            --disable-bdjava \
+            --disable-examples \
+            --disable-debug \
+            --disable-doxygen-doc \
+
+make
+make_install

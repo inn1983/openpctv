@@ -1,0 +1,13 @@
+#!/bin/sh
+
+. config/options
+
+get_meta $1
+
+cd $BUILD/$1*/syslink
+do_autoconf
+do_configure \
+  --disable-debug \
+
+make
+make_install

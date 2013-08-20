@@ -1,0 +1,11 @@
+PKG_NAME=vdr-reelchannelscan
+PKG_VERSION=0.6.1beta
+PKG_URL="ftp://ftp.freebsd.org/pub/FreeBSD/ports/local-distfiles/nox/vdr-plugin-reelchannelscan_0.6.1+beta1.7.15.orig.tar.gz"
+PKG_REV=1
+PKG_DEPENDS="vdr"
+PKG_BUILD_DEPENDS="toolchain"
+PKG_RUN_DEPENDS="$TARGET_LIBC"
+PKG_PRIORITY=optional
+PKG_SECTION=multimedia
+PKG_SHORTDESC="VDR -- reelchannelscan plugin"
+PKG_LONGDESC="vdr-reelchannelscan reads the <vdr-conf-path>/sources.conf and parses the coresponding transponderlist  (.tpl file), then it scans this sat and updates/appends all found channels to the current channel list."

@@ -1,0 +1,13 @@
+[Unit]
+Description=Network Time Protocol
+After=udhcpc.service network-link.service
+ConditionPathExists=/run/geexbox/network/udhcpc
+
+[Service]
+ExecStartPre=/bin/sh -c 'while ! /bin/ping -c1 www.geexbox.org; do sleep 2; done'
+ExecStart=/usr/lib/udhcpc/net-ntpd
+Type=forking
+Restart=always
+
+[Install]
+WantedBy=network.target

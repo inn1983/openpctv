@@ -1,0 +1,1191 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Henry Liu <relaxbsd@gmail.com>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenPCTV 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-17 20:32+0800\n"
+"PO-Revision-Date: 2013-07-23 16:56+0800\n"
+"Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
+"Language-Team: OpenPCTV\n"
+"Language: Simplified Chinese(zh_CN)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: packages/setup/scripts/audio-config:8
+#: packages/setup/scripts/audio-config:48
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:235
+msgid "Soundcard Configuration"
+msgstr "配置声卡"
+
+#: packages/setup/scripts/audio-config:9
+msgid "Select a default PCM output devices from the existing devices list"
+msgstr "从已有的列表中选择一种默认的音频输出设备"
+
+#: packages/setup/scripts/audio-config:31
+msgid "Audio output test"
+msgstr "音频输出测试"
+
+#: packages/setup/scripts/audio-config:32
+msgid ""
+"Next let's try the audio output. We want to know whether audio output works, "
+"turn on all your speakers."
+msgstr ""
+"接下来让我们测试音频输出，我们想要知道音频输出是否工作，打开你的音箱电源"
+
+#: packages/setup/scripts/audio-config:43
+msgid "Test audio finish"
+msgstr "测试音频完成"
+
+#: packages/setup/scripts/audio-config:44
+msgid ""
+"Tested successfully yet? Should the test fail for any reason--sound coming "
+"out of the wrong speakers. in this case, check your connections carefully "
+"(and attempting to simply swap some wires around). If you select 'No', then "
+"will return to the previous step"
+msgstr ""
+"测试成功吗？或许测试失败其中的一个原因是--声音输出到错误的喇叭。在这种情况下"
+"仔细检查你的联接。如果你选择“否”，那将会返回上一步"
+
+#: packages/setup/scripts/audio-config:49
+msgid ""
+"First you need to get a list of all your sound cards (if you have multiple "
+"ones) and on each card you may have multiple devices ( for example a set of "
+"output for analog and one digital output and one HDMI). Select a default PCM "
+"output devices from the existing devices list, and then specify the number "
+"of channels"
+msgstr ""
+"首先我们需要获得所有声卡的列表（如果你拥有多块声卡的话）并且每张声卡会有多个"
+"接口(比如一组模拟音频输出，一组数字音频输出及HDMI输出)。从已有的列表中选择一"
+"个缺省的音频输出设备，并指定输出喇叭的数量。"
+
+#: packages/setup/scripts/audio-config:52
+msgid "Configuration completed, go on audio output test"
+msgstr "配置完成，继续音频测试"
+
+#: packages/setup/scripts/audio-config:68
+msgid "Specify the number of channel"
+msgstr "指定输出声道数量"
+
+#: packages/setup/scripts/audio-config:69
+msgid "Stereo"
+msgstr "双声道"
+
+#: packages/setup/scripts/audio-config:70
+msgid "Surround"
+msgstr "四声道"
+
+#: packages/setup/scripts/audio-config:71
+msgid "Full 5.1"
+msgstr "5.1声道"
+
+#: packages/setup/scripts/diseqcsetup:28
+#, sh-format
+msgid "DiSEqC configuration for VDR v${VERSION}"
+msgstr "基于VDR的DiSEqC配置程序 v${VERSION}"
+
+#: packages/setup/scripts/diseqcsetup:29
+msgid "DiSEqC (Digital Satellite Equipment Control) System Mode."
+msgstr "请选择你的DiSEqC模式"
+
+#: packages/setup/scripts/diseqcsetup:30
+msgid "No DiSEqC switch"
+msgstr "无DiSEqC切换器"
+
+#: packages/setup/scripts/diseqcsetup:31
+#, sh-format
+msgid ""
+"Specify the satellite for this LNBF.If the satellite you want to select is "
+"not in this list, you should first patch for your ${VDRCONFDIR}sources.conf."
+msgstr ""
+"指定这个高频头的卫星编号，如果你想要选择的卫星编号不在这个列表中，你应该为 "
+"${VDRCONFDIR}sources.conf 文件打个补丁。"
+
+#: packages/setup/scripts/diseqcsetup:32
+msgid ""
+"Select LNBF LO frequency.There are two different ways that a satellite can "
+"broadcast its signal.If linear,it broadcasts Horizontal and Vertical.If "
+"circular, it broadcasts Right Circular and Left Circular. "
+msgstr ""
+"请设置该端口上所连接的高频头类型，有两种极化方式接收卫星信号，如果是线性极化"
+"的，它分为水平极化与垂直极化，如果是圆极化的，它分为左旋极化与右旋极化"
+
+#: packages/setup/scripts/diseqcsetup:33
+msgid "5150MHz Single Linear C Band LNBF"
+msgstr "5150MHz C波段线性极化单本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:34
+msgid "5750MHz Single Linear C Band LNBF"
+msgstr "5750MHz C波段线性极化单本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:35
+msgid "9750MHz Single Linear Ku Band LNBF"
+msgstr "9750MHz Ku波段线性极化单本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:36
+msgid "10600MHz Single Linear Ku Band LNBF"
+msgstr "10600MHz Ku波段线性极化单本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:37
+msgid "10750MHz Single Linear Ku Band LNBF"
+msgstr "10750MHz Ku波段线性极化单本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:38
+msgid "11250MHz Single Linear Ku Band LNBF"
+msgstr "11250MHz Ku波段线性极化单本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:39
+msgid "11300MHz Single Linear Ku Band LNBF"
+msgstr "11300MHz Ku波段线性极化单本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:40
+msgid "9750/10600MHz Dual Linear Ku Band LNBF"
+msgstr "9750/10600MHz Ku波段线性极化双本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:41
+msgid "9750/10750MHz Dual Linear Ku Band LNBF"
+msgstr "9750/10750MHz Ku波段线性极化双本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:42
+msgid "5150MHz Single Circular C Band LNBF"
+msgstr "5150MHz C波段圆极化单本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:43
+msgid "5750MHz Single Circular C Band LNBF"
+msgstr "5750MHz C波段圆极化单本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:44
+msgid "9750MHz Single Circular Ku Band LNBF"
+msgstr "9750MHz Ku波段圆极化单本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:45
+msgid "10600MHz Single Circular Ku Band LNBF"
+msgstr "10600MHz Ku波段圆极化单本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:46
+msgid "10750MHz Single Circular Ku Band LNBF"
+msgstr "10750MHz Ku波段圆极化单本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:47
+msgid "11250MHz Single Circular Ku Band LNBF"
+msgstr "11250MHz Ku波段圆极化单本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:48
+msgid "11300MHz Single Circular Ku Band LNBF"
+msgstr "11300MHz Ku波段圆极化单本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:49
+msgid "9750/10600MHz Dual Circular Ku Band Universal LNBF"
+msgstr "9750/10600MHz Ku波段圆极化双本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:50
+msgid "9750/10750MHz Dual Circular Ku Band Universal LNBF"
+msgstr "9750/10750MHz Ku波段圆极化双本振高频头"
+
+#: packages/setup/scripts/diseqcsetup:51
+msgid "User-defined LNBF LO frequency"
+msgstr "自定义高频头类型"
+
+#: packages/setup/scripts/diseqcsetup:52
+msgid "Polarization,HV for Linear LNBF,RL for Circular LNBF"
+msgstr "极化，线性极化请输入HV，圆极化请输入RL"
+
+#: packages/setup/scripts/diseqcsetup:53
+msgid ""
+"Input LO frequency, if you use a single C/Ku band LNB, please specify "
+"LnbFrequLo and LnbSLOF with '0'"
+msgstr ""
+"请输入自定义高频头频率，如果你用单本振高频头，请将LnbFrequHi与LnbSLOF两个位置"
+"的值设定为0"
+
+#: packages/setup/scripts/diseqcsetup:54
+msgid "Low LO frequency"
+msgstr "低本振"
+
+#: packages/setup/scripts/diseqcsetup:55
+msgid "High LO frequency"
+msgstr "高本振"
+
+#: packages/setup/scripts/diseqcsetup:56
+msgid "Correct LO frequency"
+msgstr "转折频率"
+
+#: packages/setup/scripts/diseqcsetup:57
+msgid "Edit"
+msgstr "修改"
+
+#: packages/setup/scripts/diseqcsetup:58
+msgid "Set the parameters of DiSEqC"
+msgstr "设定DiSEqC参数"
+
+#: packages/setup/scripts/diseqcsetup:59
+msgid "0/22Khz Switch"
+msgstr "22Khz 切换器"
+
+#: packages/setup/scripts/diseqcsetup:60
+msgid "Set MiniDiSEqC(Toneburst) Switch"
+msgstr "设定 Mini DiSEqC 切换器"
+
+#: packages/setup/scripts/diseqcsetup:61
+msgid "Set DiSEqC 1.0/2.0 committed Switch"
+msgstr "设定 DiSEqC 1.0/2.0 切换器"
+
+#: packages/setup/scripts/diseqcsetup:62
+msgid "Set DiSEqC 1.1/2.1 uncommitted Switch"
+msgstr "设定 DiSEqC 1.1/2.1 切换器"
+
+#: packages/setup/scripts/diseqcsetup:63
+msgid "Set DiSEqC 1.2/2.2 Switch"
+msgstr "设定 DiSEqC 1.2/2.2 切换器"
+
+#: packages/setup/scripts/diseqcsetup:64
+msgid "Non-standard user defined configuration"
+msgstr "非标准用户定义的配置"
+
+#: packages/setup/scripts/diseqcsetup:65
+msgid ""
+"Dual LNBF includes 0/22KHZ switch, also be used to switch between two "
+"different single LNBF"
+msgstr "0/22k切换器使用个一个22k开关来调整输入以切换两个不同的卫星信号"
+
+#: packages/setup/scripts/diseqcsetup:66
+msgid ""
+"Also be called MiniDiSEqC,switch A & B two different LNB and different from "
+"the 0/22K switch"
+msgstr "可以切换两个不同的卫星天线的切换器（MiniDiSEqC二切一)"
+
+#: packages/setup/scripts/diseqcsetup:67
+msgid "Allow switching between up to 4 committed LNB's(4x1 DiSEqC Switch)"
+msgstr "可以切换四个不同的卫星天线的切换器（一般的四切一）"
+
+#: packages/setup/scripts/diseqcsetup:68
+msgid ""
+"Allow switching between up to 16 Uncommitted LNB's(8x1,10x1,12x1,16x1 DiSEqC "
+"Switch)"
+msgstr ""
+"可以切换十六个不同的卫星天线的切换器（部分四切一、八切一、十切一、十六切一"
+"等）"
+
+#: packages/setup/scripts/diseqcsetup:69
+msgid ""
+"Allow switching between up to 16 LNB's, and control of a single axis "
+"satellite motor"
+msgstr "可以切换十六个不同的可极轴控制的卫星天线的切换器"
+
+#: packages/setup/scripts/diseqcsetup:70
+msgid "Wait nn milliseconds of commands(nn:a integer number,Default: 244)"
+msgstr "等待nn毫秒（nn是一个整数，默认为244ms）"
+
+#: packages/setup/scripts/diseqcsetup:71
+msgid "Select repetitions of commands(Default:1)"
+msgstr "选择重复次"
+
+#: packages/setup/scripts/diseqcsetup:72
+msgid "One Repeat (Default)"
+msgstr "重复一次（默认）"
+
+#: packages/setup/scripts/diseqcsetup:73
+msgid "Two Repeat"
+msgstr "重复两次"
+
+#: packages/setup/scripts/diseqcsetup:74
+msgid "Three repeat"
+msgstr "重复三次"
+
+#: packages/setup/scripts/diseqcsetup:75
+msgid "0/22k has not been set"
+msgstr "22K未设定"
+
+#: packages/setup/scripts/diseqcsetup:76
+msgid "0/22k has been set"
+msgstr "22K已设定"
+
+#: packages/setup/scripts/diseqcsetup:77
+msgid ""
+"With an uncommited diseqc 1.1 switch(one out of 16) and 16 commited diseqc "
+"1.0(one out of 4) you can have up to 64 satellites (16*4)."
+msgstr ""
+"使用一个十六输入的diseqc 1.1与四个四输入的diseqc 1.0可获得(16*4)64个输入"
+
+#: packages/setup/scripts/diseqcsetup:78
+msgid "Set the first DiSEqC port"
+msgstr "设定第一个DiSEqC 端口"
+
+#: packages/setup/scripts/diseqcsetup:79
+msgid "Set the second DiSEqC port"
+msgstr "设定第二个DiSEqC 端口"
+
+#: packages/setup/scripts/diseqcsetup:80
+msgid "22Khz Tone Control Devices"
+msgstr "22Khz控制设备"
+
+#: packages/setup/scripts/diseqcsetup:81
+msgid "No 22K"
+msgstr "无22K切换器"
+
+#: packages/setup/scripts/diseqcsetup:82
+msgid "Not set"
+msgstr "未设定"
+
+#: packages/setup/scripts/diseqcsetup:83
+msgid "Selected satellite"
+msgstr "选择的卫星"
+
+#: packages/setup/scripts/diseqcsetup:84
+msgid "Selected LNBF LO"
+msgstr "选择的高频头"
+
+#: packages/setup/scripts/diseqcsetup:85
+msgid "Do you want to edit diseqc.conf?"
+msgstr "是否编辑diseqc.conf?"
+
+#: packages/setup/scripts/diseqcsetup:86
+msgid "Edit diseqc.conf"
+msgstr "编辑diseqc.conf"
+
+#: packages/setup/scripts/diseqcsetup:87
+msgid "You can edit diseqc.conf by manual, or you'll skip this step"
+msgstr "你可以手动编辑diseqc.conf文件，否则将跳过这一步"
+
+#: packages/setup/scripts/diseqcsetup:88
+msgid "Do you want to save these settings?"
+msgstr "是否保存这些设置?"
+
+#: packages/setup/scripts/diseqcsetup:89
+msgid "The configuration file(s) will be saved:"
+msgstr "即将保存的配置文件:"
+
+#: packages/setup/scripts/diseqcsetup:90
+msgid "or the configuration file(s):"
+msgstr "否则你配置文件:"
+
+#: packages/setup/scripts/diseqcsetup:91
+#, sh-format
+msgid ""
+"It will be placed in /tmp, you can edit and place it into ${VDRCONFDIR} by "
+"manual"
+msgstr "它将存放在 /tmp 下，你可以手动编辑并将其放到 ${VDRCONFDIR} 下"
+
+#: packages/setup/scripts/diseqcsetup:92
+msgid "diseqc.conf has been edited"
+msgstr "diseqc.conf已被编辑"
+
+#: packages/setup/scripts/diseqcsetup:93
+msgid "Finished"
+msgstr "完成"
+
+#: packages/setup/scripts/getcam:49 packages/setup/scripts/setup.sh:235
+msgid "Select a software emulated CAM"
+msgstr "选择一种模拟CAM软件"
+
+#: packages/setup/scripts/getcam:49
+msgid ""
+"OScam can used by Enigma2(Through dvbsoftwareca module to create symlinks "
+"for dvb adapters),VDR(Through VDR-DVBAPI plugin to act as a bridge between "
+"VDR and OScam) and XBMC(throgh VDR backend, so the same as VDR). VDR-SC only "
+"used by VDR(A software emulated CAM, VDR plugin) and XBMC."
+msgstr ""
+"Enigma2(通过dvbsoftwareca内核模块为DVB卡建立ca链接), VDR(通过VDR-DVBAPI插件来"
+"实现VDR与OScam之间的通信)和XBMC（通过VDR后端，因此与VDR相同)可使用OScam，而"
+"VDR-SC（一种CAM模拟软件，VDR的插件)和XBMC可使用VDR-SC"
+
+#: packages/setup/scripts/getcam:49
+msgid "Open Source Conditional Access Module software"
+msgstr "开放源代码的条件接收模块"
+
+#: packages/setup/scripts/getcam:49
+msgid "A software CAM emulation, a VDR plugin"
+msgstr "一种CAM模拟软件，VDR的插件"
+
+#: packages/setup/scripts/getcam:60
+msgid ""
+"Would you like to configure OScam/VDR-SC? Of course, you can also put CCcam."
+"cfg file into the USB disk, the system will automatically read and written "
+"into the OScam/VDR-SC configuration file."
+msgstr ""
+"你想要配置OScam/VDR-SC吗？当然你也可以将CCcam.cfg文件放在U盘中，系统将会自动"
+"读取并写入OScam/VDR-SC的配置文件中。"
+
+#: packages/setup/scripts/install-drivers:8
+msgid "Reboot OpenPCTV?"
+msgstr "重启启动OpenoPCTV"
+
+#: packages/setup/scripts/install-drivers:8
+msgid ""
+"Driver package has been installed successfully. Now you have to reboot to "
+"verify whether the drive can work well."
+msgstr "驱动包已安装成功，现在你必须重新启动以验证驱动是否能工作。"
+
+#: packages/setup/scripts/install-drivers:27
+#, sh-format
+msgid "Found $field"
+msgstr "找到$field"
+
+#: packages/setup/scripts/install-drivers:27
+msgid ""
+"Sometimes board has no valid PCI(e) Subsystem ID and can't be autodetected. "
+"You can specify the model of the card to pass card=<n> insmod option to "
+"workaround that. Redirect complaints to the vendor of the TV card. Do you "
+"want to do this?"
+msgstr ""
+"有时DVB卡没有有效的PCI(e)硬件ID并且系统不能自动检测到。你可以通过指定insmod加"
+"载驱动时附带的card=<n>参数来使用之加载正常。同时你可以向电视卡商询问其解决方"
+"案。你想继续吗？"
+
+#: packages/setup/scripts/install-drivers:32
+#, sh-format
+msgid "Specify the card number of $field board"
+msgstr "指定$field 卡的序号"
+
+#: packages/setup/scripts/install-drivers:32
+msgid "Here is a list of valid choices for the card=<n> insmod option"
+msgstr "这里是电视卡设备有效的列表，请选择你的卡的正确编号。"
+
+#: packages/setup/scripts/install-drivers:56
+#: packages/setup/scripts/install-drivers:61
+msgid "Additional V4L and DVB drive"
+msgstr "附加的V4L及DVB驱动"
+
+#: packages/setup/scripts/install-drivers:57
+msgid ""
+"Your V4L and DVB devices seem to be normal. Perhaps you do not need to "
+"install other additional drivers. If you want to install additional drives "
+"please select 'Yes'"
+msgstr ""
+"你的V4L及DVB设备驱动看上是正常的。也许你并不需要安装其它附加的驱动。如果你想"
+"安装附加驱动，请选择'是'"
+
+#: packages/setup/scripts/install-drivers:62
+msgid ""
+"Your V4L and DVB device does not seem to work properly. Perhaps you should "
+"install another driver. Do you want to install the additional drives?"
+msgstr ""
+"你的V4L及DVB设备看上去似乎并不正常，或许你应该安装另外一个驱动。你想要安装附"
+"加的驱动吗？"
+
+#: packages/setup/scripts/install-drivers:67
+#: packages/setup/scripts/setup.sh:235
+msgid "Install additional V4L and DVB drive"
+msgstr "安装附加的V4L及DVB驱动"
+
+#: packages/setup/scripts/install-drivers:68
+msgid ""
+"Before proceeding please confirm your V4L and DVB device specific "
+"information. Choose the drives you need to install carefully."
+msgstr "在继续之前你请确认你的V4L及DVB设备的信息，仔细选择你想要安装的驱动。"
+
+#: packages/setup/scripts/install-drivers:69
+msgid "I do not want to install now."
+msgstr "我现在不想要安装。"
+
+#: packages/setup/scripts/install-drivers:70
+msgid "Support most of the devices,such as DVBWorld,Tevii,Prof..."
+msgstr "支持大多数的设备，例如DVBWorld，Tevii，Prof等"
+
+#: packages/setup/scripts/install-drivers:71
+msgid "Support all the TBS devices"
+msgstr "支持全系列的TBS设备"
+
+#: packages/setup/scripts/installator.sh:12
+#: packages/setup/scripts/installator.sh.new:12
+#: packages/setup/scripts/installator.sh.orig:12
+msgid "Not found or not a block device."
+msgstr "没有发现或不存在块设备"
+
+#: packages/setup/scripts/installator.sh:13
+#: packages/setup/scripts/installator.sh.new:13
+#: packages/setup/scripts/installator.sh.orig:13
+msgid "does not have any corresponding BIOS drive."
+msgstr "没有任何相应的BIOS驱动"
+
+#: packages/setup/scripts/installator.sh:16
+#: packages/setup/scripts/installator.sh.new:16
+#: packages/setup/scripts/installator.sh.orig:16
+msgid "Keymap selection"
+msgstr "键位映射选择"
+
+#: packages/setup/scripts/installator.sh:18
+#: packages/setup/scripts/installator.sh.new:18
+#: packages/setup/scripts/installator.sh.orig:18
+msgid "Choose Keymap"
+msgstr "选择键位映射"
+
+#: packages/setup/scripts/installator.sh:19
+#: packages/setup/scripts/installator.sh.new:19
+#: packages/setup/scripts/installator.sh.orig:19
+msgid "Which keymap do you want to use ?"
+msgstr "你想要使用哪种键位映射？"
+
+#: packages/setup/scripts/installator.sh:22
+#: packages/setup/scripts/installator.sh.new:22
+#: packages/setup/scripts/installator.sh.orig:22
+msgid "Warning"
+msgstr "警告"
+
+#: packages/setup/scripts/installator.sh:23
+#: packages/setup/scripts/installator.sh.new:23
+#: packages/setup/scripts/installator.sh.orig:23
+msgid "ERROR"
+msgstr "错误"
+
+#: packages/setup/scripts/installator.sh:25
+#: packages/setup/scripts/installator.sh.new:25
+#: packages/setup/scripts/installator.sh.orig:25
+msgid "No disks found on this system.\\nCheck again ?"
+msgstr "在这个系统中没发现磁盘。\\n再检查一次吗？"
+
+#: packages/setup/scripts/installator.sh:26
+#: packages/setup/scripts/installator.sh.new:26
+#: packages/setup/scripts/installator.sh.orig:26
+msgid "refresh list"
+msgstr "刷新列表"
+
+#: packages/setup/scripts/installator.sh:28
+#: packages/setup/scripts/installator.sh:37
+#: packages/setup/scripts/installator.sh.new:28
+#: packages/setup/scripts/installator.sh.new:37
+#: packages/setup/scripts/installator.sh.orig:28
+#: packages/setup/scripts/installator.sh.orig:37
+msgid "Installation device"
+msgstr "安装设备"
+
+#: packages/setup/scripts/installator.sh:29
+#: packages/setup/scripts/installator.sh.new:29
+#: packages/setup/scripts/installator.sh.orig:29
+msgid ""
+"You are going to install OpenPCTV. For this you will need an empty partition "
+"with about 5 GB of free space. Be careful to choose the right disk! We won't "
+"take responsibility for any data loss."
+msgstr ""
+"你将要安装OpenPCTV。对此，你将需要一个空白的并不少于5G空间的分区。小心选择正"
+"确的磁盘！我们不会对任何数据损失负责。"
+
+#: packages/setup/scripts/installator.sh:31
+#: packages/setup/scripts/installator.sh.new:31
+#: packages/setup/scripts/installator.sh.orig:31
+msgid "Microsoft FAT16/32 partition or Linux EXT2/3 partition"
+msgstr "微软FAT16/32分区或Linux EXT2/3分区"
+
+#: packages/setup/scripts/installator.sh:33
+#: packages/setup/scripts/installator.sh.new:33
+#: packages/setup/scripts/installator.sh.orig:33
+msgid "Please edit your partition table to create a"
+msgstr "请编辑你的分区表来建立一个"
+
+#: packages/setup/scripts/installator.sh:34
+#: packages/setup/scripts/installator.sh.new:34
+#: packages/setup/scripts/installator.sh.orig:34
+msgid ""
+"with about 5 GB of free space. Don't forget to set the bootable flag to this "
+"partition. Remember to commit the changes when done. We won't take "
+"responsibility for any data loss."
+msgstr ""
+"不少于5 GB空间的分区。不要忘记在完成后提交修改。我们不会对任何数据损失负责。"
+
+#: packages/setup/scripts/installator.sh:39
+#: packages/setup/scripts/installator.sh.new:39
+#: packages/setup/scripts/installator.sh.orig:39
+msgid "You don't have any"
+msgstr "你没有任何"
+
+#: packages/setup/scripts/installator.sh:40
+#: packages/setup/scripts/installator.sh.new:40
+#: packages/setup/scripts/installator.sh.orig:40
+msgid ""
+"partition on your system. Please create a partition first using for example "
+"cfdisk."
+msgstr "分区在你的系统上。请首先使用像cfdisk这个的工具来建立一个分区。"
+
+#: packages/setup/scripts/installator.sh:41
+#: packages/setup/scripts/installator.sh.new:41
+#: packages/setup/scripts/installator.sh.orig:41
+msgid "Where do you want to install OpenPCTV ?"
+msgstr "你想将OpenPCV安装到哪里？"
+
+#: packages/setup/scripts/installator.sh:42
+#: packages/setup/scripts/installator.sh.new:42
+#: packages/setup/scripts/installator.sh.orig:42
+msgid "is not a valid block device."
+msgstr "不是一个有效的块设备。"
+
+#: packages/setup/scripts/installator.sh:44
+#: packages/setup/scripts/installator.sh.new:44
+#: packages/setup/scripts/installator.sh.orig:44
+msgid "Partition is not formated"
+msgstr "分区没有被格式化"
+
+#: packages/setup/scripts/installator.sh:45
+#: packages/setup/scripts/installator.sh.new:45
+#: packages/setup/scripts/installator.sh.orig:45
+msgid "Partition format type"
+msgstr "分区格式类型"
+
+#: packages/setup/scripts/installator.sh:46
+#: packages/setup/scripts/installator.sh.new:46
+#: packages/setup/scripts/installator.sh.orig:46
+msgid "is not supported in your partition type"
+msgstr "不支持你分区类型"
+
+#: packages/setup/scripts/installator.sh:47
+#: packages/setup/scripts/installator.sh.new:47
+#: packages/setup/scripts/installator.sh.orig:47
+msgid "Partition is already formated"
+msgstr "分区已经被格式化"
+
+#: packages/setup/scripts/installator.sh:48
+#: packages/setup/scripts/installator.sh:50
+#: packages/setup/scripts/installator.sh.new:48
+#: packages/setup/scripts/installator.sh.new:50
+#: packages/setup/scripts/installator.sh.orig:48
+#: packages/setup/scripts/installator.sh.orig:50
+msgid "Formatting"
+msgstr "格式化中"
+
+#: packages/setup/scripts/installator.sh:49
+#: packages/setup/scripts/installator.sh.new:49
+#: packages/setup/scripts/installator.sh.orig:49
+msgid "Do you want to format"
+msgstr "你想格式化"
+
+#: packages/setup/scripts/installator.sh:51
+#: packages/setup/scripts/installator.sh.new:51
+#: packages/setup/scripts/installator.sh.orig:51
+msgid "...\\nPlease wait"
+msgstr "...\\n请等待"
+
+#: packages/setup/scripts/installator.sh:53
+#: packages/setup/scripts/installator.sh.new:53
+#: packages/setup/scripts/installator.sh.orig:53
+msgid "Linux partition type"
+msgstr "Linux分区类型"
+
+#: packages/setup/scripts/installator.sh:54
+#: packages/setup/scripts/installator.sh.new:54
+#: packages/setup/scripts/installator.sh.orig:54
+msgid "Which type of Linux partition you want ?"
+msgstr "你想要哪种Linux分区类型？"
+
+#: packages/setup/scripts/installator.sh:56
+#: packages/setup/scripts/installator.sh.new:56
+#: packages/setup/scripts/installator.sh.orig:56
+msgid ""
+"As you don't have formatting tool installed, I won't be able to format the "
+"partition."
+msgstr "因为你没有任何用来格式化的工具被安装，我无法格式化分区。"
+
+#: packages/setup/scripts/installator.sh:57
+#: packages/setup/scripts/installator.sh.new:57
+#: packages/setup/scripts/installator.sh.orig:57
+msgid "Hopefully it is already formatted."
+msgstr "但愿它已经被格式化了。"
+
+#: packages/setup/scripts/installator.sh:58
+#: packages/setup/scripts/installator.sh.new:58
+#: packages/setup/scripts/installator.sh.orig:58
+msgid "should be formatted as"
+msgstr "应该被格式化为"
+
+#: packages/setup/scripts/installator.sh:60
+#: packages/setup/scripts/installator.sh.new:60
+#: packages/setup/scripts/installator.sh.orig:60
+msgid "Failed to mount"
+msgstr "挂载失败"
+
+#: packages/setup/scripts/installator.sh:62
+#: packages/setup/scripts/installator.sh.new:62
+#: packages/setup/scripts/installator.sh.orig:62
+msgid "Installing... Please wait"
+msgstr "安装中... 请等待"
+
+#: packages/setup/scripts/installator.sh:65
+#: packages/setup/scripts/installator.sh.new:65
+#: packages/setup/scripts/installator.sh.orig:65
+msgid "Support for HDTV through X.Org ?"
+msgstr "通过X.Org支持HDTV吗？"
+
+#: packages/setup/scripts/installator.sh:66
+#: packages/setup/scripts/installator.sh.new:66
+#: packages/setup/scripts/installator.sh.orig:66
+msgid ""
+"It appears that this version of OpenPCTV has been compiled with support for "
+"HDTV through X.Org video server. Remember that X.Org is only useful if you "
+"want to display high-resolution movies on a wide display (LCD TVs, Plasma "
+"screens ...). It doesn't provide TVOut support any longer. Do you want to "
+"enable support for HDTV as a default ? (previous non-HD mode will still be "
+"available)"
+msgstr ""
+
+#: packages/setup/scripts/installator.sh:69
+#: packages/setup/scripts/installator.sh.new:69
+#: packages/setup/scripts/installator.sh.orig:69
+msgid "Bootloader"
+msgstr "引导管理器"
+
+#: packages/setup/scripts/installator.sh:71
+#: packages/setup/scripts/installator.sh.new:71
+#: packages/setup/scripts/installator.sh.orig:71
+msgid "Couldn't find my GRUB partition representation"
+msgstr "不能找到我的GRUB分区"
+
+#: packages/setup/scripts/installator.sh:72
+#: packages/setup/scripts/installator.sh.new:72
+#: packages/setup/scripts/installator.sh.orig:72
+msgid "Couldn't install GRUB bootloader!"
+msgstr "不能安装GRUB引导管理器！"
+
+#: packages/setup/scripts/installator.sh:74
+#: packages/setup/scripts/installator.sh.new:74
+#: packages/setup/scripts/installator.sh.orig:74
+msgid ""
+"is now a OpenPCTV partition. To boot from it, you will need to install a "
+"bootloader. I can install one for you. If you have any other operating "
+"system on your computer, I will also install a multiboot for you. If you do "
+"not want me to install a new bootloader, you will need to configure yours "
+"alone.\\nI have found:"
+msgstr ""
+"现在是一个OpenPCTV分区了。为了从之启动，你将需要安装一个引导管理器。我能为你"
+"安装一个。如果在你的计算机上还拥有其它的操作系统，我也将为你安装多重引导。如"
+"果你不想安装一个新的引导管理器，你将需要自己配置。我已找到："
+
+#: packages/setup/scripts/installator.sh:75
+#: packages/setup/scripts/installator.sh.new:75
+#: packages/setup/scripts/installator.sh.orig:75
+msgid "Do you want to install me to install the boot loader (GRUB) for you ?"
+msgstr "你想安装引导管理器（GRUB）吗？"
+
+#: packages/setup/scripts/installator.sh:76
+#: packages/setup/scripts/installator.sh.new:76
+#: packages/setup/scripts/installator.sh.orig:76
+msgid ""
+"is now a OpenPCTV partition. I didn't recognize any other OS on your system, "
+"want me to install boot loader on your MBR ?"
+msgstr ""
+"现在是一个OpenPCTV的分区了。我识别在你系统中的其它操作系统，你想让我在你的MBR"
+"上安装一个引导管理器吗？"
+
+#: packages/setup/scripts/installator.sh:77
+#: packages/setup/scripts/installator.sh.new:77
+#: packages/setup/scripts/installator.sh.orig:77
+msgid "You must install a boot loader to boot OpenPCTV"
+msgstr "你必须为启动OpenPCTV安装一个启动引导器"
+
+#: packages/setup/scripts/installator.sh:80
+#: packages/setup/scripts/installator.sh.new:80
+#: packages/setup/scripts/installator.sh.orig:80
+msgid "Installation Log"
+msgstr "安装日志"
+
+#: packages/setup/scripts/installator.sh:81
+#: packages/setup/scripts/installator.sh.new:81
+#: packages/setup/scripts/installator.sh.orig:81
+msgid ""
+"Do you want to check installation logs ? (it is probably useful for debug "
+"purpose only)"
+msgstr "你想检查安装日志吗？（对于以调试为目的或许有用）"
+
+#: packages/setup/scripts/installator.sh:84
+#: packages/setup/scripts/installator.sh.new:84
+#: packages/setup/scripts/installator.sh.orig:84
+msgid "Have Fun!"
+msgstr "祝好运！"
+
+#: packages/setup/scripts/installator.sh:85
+#: packages/setup/scripts/installator.sh.new:85
+#: packages/setup/scripts/installator.sh.orig:85
+msgid "OpenPCTV is now installed on"
+msgstr "OpenPCTV现在已经安装"
+
+#: packages/setup/scripts/installator.sh:86
+#: packages/setup/scripts/installator.sh.new:86
+#: packages/setup/scripts/installator.sh.orig:86
+msgid "Do you want to proceed with its configuration ?"
+msgstr "是否继续执行它的配置?"
+
+#: packages/setup/scripts/monitor.sh:8
+msgid "Do you need to set the monitor's best resolution?"
+msgstr "你需要为你显示器设定最佳分辨率吗？"
+
+#: packages/setup/scripts/monitor.sh:8
+msgid ""
+"Most modern monitors/TVs can be probed for EDID data concerning their "
+"capabilities and requirements.So normally you do not need to make any "
+"settings for Xorg. But EDID is not always completely accurate, and for some "
+"situations such as older or unusual display hardware or many HDTVs, it will "
+"be necessary to create a modeline to get the setting right. We'll enter the "
+"monitor configuration if you select 'Yes'"
+msgstr ""
+"大多数型号的显示器/电视机可以通过检测其EDID数据获得其参数性能。因此一般情况下"
+"你并不需要为xorg作任何设置。但是EDID并不总是完全准确，在某些情况下比如旧的或"
+"不标准的硬件及许多高清电视机，有必要指定其最佳分辨率以获得正确的设定。如果你"
+"选择'是'的话将进入显示器设置"
+
+#: packages/setup/scripts/monitor.sh:19
+msgid "Submit"
+msgstr "提交"
+
+#: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
+#: packages/setup/scripts/setup.sh:235
+msgid "Set the monitor's best resolution"
+msgstr "设定显示器的最佳分辨率"
+
+#: packages/setup/scripts/monitor.sh:20
+msgid ""
+"Confirm the optimal resolution your monitor supported. Note that the full HD "
+"resolution is 1920x1080."
+msgstr ""
+"请确认你的显示所支持的最佳分辨率。注意的是全高清(Full HD)分辨率是1920x1080"
+
+#: packages/setup/scripts/monitor.sh:34
+msgid "Really quit?"
+msgstr "真的退出吗？"
+
+#: packages/setup/scripts/netconfig:27
+msgid "You have successfully detected accessing the Internet"
+msgstr "检测到你已成功联入互联网"
+
+#: packages/setup/scripts/netconfig:28
+msgid ""
+"Failed to detect your Internet connection, please check your hardware or "
+"check /etc/network to configure by manual."
+msgstr "检测你的互联网联接失败，请检查你的硬件及检查并手动配置 /etc/network"
+
+#: packages/setup/scripts/netconfig:29
+msgid "Do you want to use DHCP to automatically obtain network address?"
+msgstr "你想使用DHCP自动获取网络地址吗？"
+
+#: packages/setup/scripts/netconfig:30
+msgid "Please enter the IP address"
+msgstr "请输入IP地址"
+
+#: packages/setup/scripts/netconfig:31
+msgid "Please enter the subnet mask"
+msgstr "请输入子网掩码"
+
+#: packages/setup/scripts/netconfig:32
+msgid "Please enter the Gateway address"
+msgstr "请输入网关地址"
+
+#: packages/setup/scripts/netconfig:33
+msgid "Please enter the domain name server address (DNS)"
+msgstr "请输入DNS服务器地址"
+
+#: packages/setup/scripts/netconfig:34
+msgid "Wireless network name (SSID)"
+msgstr "无线网络名(SSID)"
+
+#: packages/setup/scripts/netconfig:35
+msgid "Please enter the WEP encryption key"
+msgstr "请输入WEP加密密钥"
+
+#: packages/setup/scripts/netconfig:36
+msgid "Please enter the WPA Shared Key"
+msgstr "请输入WPA共享密钥"
+
+#: packages/setup/scripts/netconfig:37 packages/setup/scripts/netconfig:40
+msgid "Configure wireless network by manual"
+msgstr "手动配置无线网络"
+
+#: packages/setup/scripts/netconfig:38
+msgid "Safe Mode"
+msgstr "安全模式"
+
+#: packages/setup/scripts/netconfig:39
+msgid "WPA Algorithms"
+msgstr "WPA算法"
+
+#: packages/setup/scripts/netconfig:41
+msgid ""
+"Select the wireless network encryption, it must be consistent with your "
+"router settings."
+msgstr "选择无线加密模式，它应当与你的路由器设置保持一致。"
+
+#: packages/setup/scripts/netconfig:42
+msgid "WEP encrypted wireless network mode"
+msgstr "WEP无线网络加密模式"
+
+#: packages/setup/scripts/netconfig:43
+msgid "WPA/WPA2 wireless encryption mode"
+msgstr "WPA/WPA2无线网络加密模式"
+
+#: packages/setup/scripts/netconfig:44
+msgid "Open mode"
+msgstr "开放模式"
+
+#: packages/setup/scripts/netconfig:45
+msgid "Choose A Wireless Network"
+msgstr "选择无线网络"
+
+#: packages/setup/scripts/netconfig:46
+msgid ""
+"Please select the wireless network intercepted, if it is not in the list, "
+"you can enter manual settings"
+msgstr "请选择被截获的无线网络，如果列表中未列出你你的无线网络，请选择手动设置"
+
+#: packages/setup/scripts/netconfig:47
+msgid ""
+"You have successfully detected accessing the Internet, do you still want to "
+"configure your network?"
+msgstr "检测到你的计算机成功联入Internet，你仍想继续配置你的网络吗?"
+
+#: packages/setup/scripts/netconfig:48
+msgid "Scan Network Interface Card fail, please check it or its driver."
+msgstr "没有检测到任何网络接入设备，请检查你的网卡或驱动。"
+
+#: packages/setup/scripts/netconfig:49
+msgid "Select the Network Interface Card"
+msgstr "选择网卡"
+
+#: packages/setup/scripts/netconfig:50
+msgid "Select the Network Interface Card you want to configure"
+msgstr "请选择你将要配置的网卡"
+
+#: packages/setup/scripts/select-irdrv:13
+msgid "IR configuration"
+msgstr "红外线接收配置"
+
+#: packages/setup/scripts/select-irdrv:13
+msgid "Select IR Device"
+msgstr "选择红外线设备"
+
+#: packages/setup/scripts/select-irdrv:13
+msgid ""
+"In this machine found the following infrared receiver devices. Please select "
+"a default device as Lirc support."
+msgstr "在这台机器上找到了如下红外接遥控接收设备，请为lirc选择一种默认设备"
+
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:235
+msgid "Set the default target"
+msgstr "选择默认的启动项"
+
+#: packages/setup/scripts/select-target:8
+msgid "Please select the default target to boot into."
+msgstr "请选择默认的启动项"
+
+#: packages/setup/scripts/select-target:8
+msgid "Support for AMD/NVIDIA display card"
+msgstr "支持AMD/NVIDIA显卡"
+
+#: packages/setup/scripts/select-target:8
+msgid "Support for Intel/AMD/NVIDIA display card"
+msgstr "支持Intel/AMD/NVIDIA显卡"
+
+#: packages/setup/scripts/select-target:8
+msgid "Only support for NVIDIA display card"
+msgstr "只支持NVIDIA显卡"
+
+#: packages/setup/scripts/setup.sh:34 packages/setup/scripts/setup.sh:48
+#: packages/setup/scripts/setup.sh:56
+msgid "OK"
+msgstr "确认"
+
+#: packages/setup/scripts/setup.sh:34 packages/setup/scripts/setup.sh:43
+#: packages/setup/scripts/setup.sh:45 packages/setup/scripts/setup.sh:48
+#: packages/setup/scripts/setup.sh:56
+msgid "Auto mount cifs"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:42
+msgid "MSSMBMNT"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:42
+msgid "MSSMBMNTINFO"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:43 packages/setup/scripts/setup.sh:45
+msgid "Specifies"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:43
+msgid "the username"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:45
+msgid "the password"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:48 packages/setup/scripts/setup.sh:56
+msgid "Mount"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:48 packages/setup/scripts/setup.sh:56
+msgid "to"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:48
+msgid "success"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:56
+msgid "fail"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:71 packages/setup/scripts/setup.sh:73
+msgid "MSNFSMNT"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:71
+msgid "The NFS server name or IP address"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:73
+msgid "The name of the NFS share"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:80 packages/setup/scripts/setup.sh:84
+#: packages/setup/scripts/setup.sh:89 packages/setup/scripts/setup.sh:94
+#: packages/setup/scripts/setup.sh:150
+msgid "MSSC"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:80
+msgid "The server name or IP address"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:84
+msgid "The port of the server"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:89
+msgid "Specifies the username"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:94
+msgid "Specifies the password"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:150
+msgid "Specifies the newcamd cfgkey"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:165
+msgid "MSSCMENU"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:165
+msgid "MSCCCAM"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:165
+msgid "MSCAMD35"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:165
+msgid "MSNEWCAMD"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:165
+msgid "MSNOSC"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:174
+msgid "EditSC"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:188
+msgid "Select a partition for OpenPCTV cache..."
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:196
+msgid "Size"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:196
+msgid "Used"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:196
+msgid "Available"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:199
+msgid "Don't mount bind for OpenPCTV cache"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:235
+msgid "OpenPCTV configurator"
+msgstr "配置OpenPCTV"
+
+#: packages/setup/scripts/setup.sh:235
+msgid "Main menu"
+msgstr "主菜单"
+
+#: packages/setup/scripts/setup.sh:235
+msgid "Set global locale and language"
+msgstr "设置全局区域和语言"
+
+#: packages/setup/scripts/setup.sh:235
+msgid "Configure Network Environment"
+msgstr "配置网络环境"
+
+#: packages/setup/scripts/setup.sh:235
+msgid "Select IR device"
+msgstr "选择红外接收设备"
+
+#: packages/setup/scripts/setup.sh:235
+msgid "Auto update Satellite Transponders from fastsatfinder"
+msgstr "从fastsatfinder自动更新卫星参数"
+
+#: packages/setup/scripts/setup.sh:235
+msgid "DiSEqC configurator"
+msgstr "DiSEqC配置"
+
+#: packages/setup/scripts/setup.sh:235
+msgid "Auto scan channels"
+msgstr "自动扫描频道"
+
+#: packages/setup/scripts/setup.sh:235
+msgid "Reboot OpenPCTV"
+msgstr "重新启动OpenPCTV"
+
+#: packages/setup/scripts/setup.sh:235
+msgid "Exit to login shell"
+msgstr "退出并登录shell"
+
+#: packages/setup/scripts/update-channels:47
+msgid "Scan channels for VDR"
+msgstr "为VDR扫描频道"
+
+#: packages/setup/scripts/update-channels:47
+msgid "Select Satellite"
+msgstr "选择卫星"
+
+#: packages/setup/scripts/update-channels:47
+msgid ""
+"Please select the satellite you want to scan, noted that the scanning "
+"process may be quite long, please be patient."
+msgstr ""
+"请选择你想要扫描的卫星，注意整个扫描的过程可能需要很长时间，请耐心等待。"
+
+#: packages/setup/scripts/update-channels:59
+msgid "Split channels in TV and Radio..."
+msgstr "分离电视和收音的频道列表"
+
+#: packages/setup/scripts/update-transponders:8
+msgid "Download transponders for scan-s2"
+msgstr "为scan-s2下载卫星参数"
+
+#: packages/setup/scripts/update-transponders:9
+#: packages/setup/scripts/update-transponders:11
+msgid "Can't download,Please check your network settings"
+msgstr "不能下载，请检查你的网络设置"
+
+#: packages/setup/scripts/update-transponders:10
+msgid "Download transponders for enigma2"
+msgstr "下载基于enigma2的卫星参数"
+
+#: packages/setup/scripts/update-transponders:15
+msgid "Update /etc/enigma2/satellites.xml..."
+msgstr "更新 /etc/enigma2/satellites.xml..."
+
+#: packages/setup/scripts/update-transponders:18
+msgid "Convert transponders data sheet and update transponders for scan-s2..."
+msgstr "转换卫星参数并更新基于scan-s2的卫星参数"
+
+#: packages/setup/scripts/update-transponders:26
+msgid "Done!"
+msgstr "完成！"

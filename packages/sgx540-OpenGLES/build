@@ -1,0 +1,14 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+
+install_dir="$PWD/.install"
+install_dir_debug="$PWD/.install-debuginfo"
+
+rm -rf "$install_dir"
+mkdir -p "$install_dir"
+cp -PR usr/lib/debug/* $install_dir_debug
+cp -PR usr $install_dir
+rm -rf $install_dir/usr/lib/debug

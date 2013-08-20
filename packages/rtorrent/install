@@ -1,0 +1,13 @@
+#!/bin/sh
+
+. config/options
+
+get_meta $1
+cd $PKG_BUILD_DIR
+
+mkdir -p .install/etc
+cp -P $ROOT/$PACKAGES/$1/config/* .install/etc
+cp -P $ROOT/$PACKAGES/$1/script/* .install/usr/bin
+
+do_install usr/bin
+do_install etc

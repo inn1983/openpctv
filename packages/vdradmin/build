@@ -1,0 +1,12 @@
+#!/bin/sh
+
+. config/options
+
+export VDRCONF=/etc/vdr
+
+cd $BUILD/$1*
+
+export DESTDIR="$PWD/.install"
+
+./make.sh po
+./make.sh install

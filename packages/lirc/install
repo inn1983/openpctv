@@ -1,0 +1,35 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1-[0-9]*
+
+do_install usr/lib/liblirc_client.so*
+do_install usr/sbin/lircd
+do_install usr/bin/ircat
+do_install usr/bin/irexec
+do_install usr/bin/irpty
+do_install usr/bin/irrecord
+do_install usr/bin/irsend
+do_install usr/bin/irw
+do_install usr/bin/lircrcd
+do_install usr/bin/mode2
+do_install usr/bin/pronto2lirc
+do_install usr/bin/irxevent
+
+if pkg_uses $1 devtools; then
+  do_install usr/bin
+else
+  do_install usr/bin/irpty
+fi
+
+mkdir -p $INSTALL/etc/lirc
+cp remotes/mceusb/lircd.conf.mceusb $INSTALL/etc/lirc/
+cp remotes/devinput/lircd.conf.devinput $INSTALL/etc/lirc/lircd.conf
+cp -R remotes $INSTALL/etc/lirc
+cp $ROOT/$PACKAGES/$1/config/hardware.conf $INSTALL/etc/lirc
+cp $ROOT/$PACKAGES/$1/scripts/lircd_pre.sh $INSTALL/usr/bin
+chmod 755 $INSTALL/usr/bin/lircd_pre.sh
+
+mkdir -p $INSTALL/lib/systemd/system/multi-user.target.wants
+ln -s ../lircd.service $INSTALL/lib/systemd/system/multi-user.target.wants

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+. config/options
+
+get_meta vdr
+VDR_VERSION=$PKG_VERSION
+
+get_meta $1
+
+CFLAGS="$CFLAGS -fPIC"
+CXXFLAGS="$CXXFLAGS -fPIC"
+LDFLAGS="$LDFLAGS -fPIC"
+MAKEFLAGS=-j1
+
+cd $PKG_BUILD_DIR
+make \
+  VDRDIR="$ROOT/$BUILD/vdr-${VDR_VERSION}" \
+  LIBDIR="." \
+  LOCALEDIR="./locale"

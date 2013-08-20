@@ -1,0 +1,23 @@
+#!/bin/sh
+
+. config/options
+
+get_meta $1
+
+setup_toolchain host
+
+cd $PKG_BUILD_DIR
+
+mkdir -p objdir-host
+cd objdir-host
+../configure --host=$HOST_NAME \
+             --build=$HOST_NAME \
+             --target=$TARGET_NAME \
+             --prefix=/usr \
+             --disable-shared \
+             --enable-static \
+             --with-gmp="$ROOT/$TOOLCHAIN" \
+             --with-mpfr="$ROOT/$TOOLCHAIN" \
+
+make
+make_install toolchain

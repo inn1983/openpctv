@@ -1,0 +1,12 @@
+[Unit]
+Description=Mount Samba/CIFS resources
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/automount_smb.sh
+RemainAfterExit=yes
+
+
+[Install]
+WantedBy=multi-user.target

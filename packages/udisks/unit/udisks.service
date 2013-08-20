@@ -1,0 +1,9 @@
+[Unit]
+Description=Storage Daemon
+
+[Service]
+Type=dbus
+BusName=org.freedesktop.UDisks
+ExecStartPre=/bin/mkdir -p /media /var/run/udisks
+ExecStartPre=/bin/mount -t tmpfs tmpfs /media
+ExecStart=/usr/lib/udisks/udisks-daemon --no-debug

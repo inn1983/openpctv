@@ -1,0 +1,17 @@
+PKG_NAME=installator
+PKG_VERSION=3.0
+PKG_REV=3
+PKG_ARCH="i386 x86_64"
+PKG_RUN_DEPENDS="syslinux util-linux-ng dialog e2fsprogs parted efibootmgr hdparm"
+PKG_PRIORITY=optional
+PKG_SECTION=admin
+PKG_SHORTDESC="GeeXboX installator"
+PKG_LONGDESC="This package contains the GeeXboX installer."
+
+# flag option checked by packages/syslinux/installdev
+PKG_KCONFIG_EXTRA="
+config OPT_INSTALLATOR
+  bool
+  depends on PKG_installator
+  default y 
+"

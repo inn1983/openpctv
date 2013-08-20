@@ -1,0 +1,18 @@
+#!/bin/sh
+
+. config/options
+get_meta $1
+
+cd $PKG_BUILD_DIR
+
+do_configure \
+            --with-plugindir=/usr/lib/alsa \
+            --disable-jack \
+            --disable-samplerate \
+            --disable-avcodec \
+            --disable-samplerate \
+            --enable-pulseaudio \
+            --with-speex=lib \
+
+make
+make_install

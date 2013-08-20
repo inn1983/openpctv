@@ -1,0 +1,49 @@
+#!/bin/sh
+
+[ ! -f /etc/lang.list ] && exit
+export TERM=linux
+
+echo "dialog --clear --no-cancel --title \"Set global locale and language\" --menu \"Select a language environment, after this, we'll set the locale and modify XBMC/VDR/Enigma2 depending on selected language\" 50 70 40 \\" > /tmp/menufile
+grep -v ^# /etc/lang.list | while read line; do
+  locale=$(echo $line | cut -d: -f2)
+  lang=$(echo $line | cut -d: -f1)
+  echo "\"$locale\" \"$lang\" \\" >> /tmp/menufile
+done
+echo "2> /tmp/tmpfile" >> /tmp/menufile
+. /tmp/menufile
+
+result=$(cat /tmp/tmpfile)
+rm /tmp/tmpfile
+langline=$(grep $result /etc/lang.list)
+locale=$(echo $langline | cut -d: -f2)
+xbmclang="$(echo $langline | cut -d: -f1 | cut -d\/ -f1)"
+xbmcregion="$(grep  "region\ name=" /usr/share/xbmc/language/"$xbmclang"/langinfo.xml -m1 | cut -d\" -f2)"
+vdrlang=$(echo $langline | cut -d: -f3)
+e2lang=$(echo $langline | cut -d: -f4)
+tzlocal=$(echo $locale | cut -d\. -f1 | cut -d_ -f2)
+tztime=$(grep ^$tzlocal /usr/share/zoneinfo/zone.tab -m1 | awk '{print $3}')
+
+#echo "langline:$langline"
+#echo "locale:$locale xbmclang:$xbmclang vdrlang:$vdrlang e2lang:$e2lang"
+sed -i "s/^LANG=.*/LANG=$locale/g" /etc/locale.conf
+source /etc/profile
+
+sed -i -e "s#<language>.*#<language>$xbmclang</language>#g" \
+	-e "s#<country>.*#<country>$xbmcregion</country>#g" \
+	-e "s#<font>Default</font>#<font>Arial</font>#g" \
+	/root/.xbmc/userdata/guisettings.xml
+
+[ "$vdrlang" = "none" ] && vdrlang=en_US
+sed -i "s/^OSDLanguage\ =.*/OSDLanguage\ =\ $vdrlang/g" /etc/vdr/setup.conf
+
+if grep "^config.osd.language" /etc/enigma2/settings > /dev/null; then
+  if [ "$e2lang" = "none" ]; then
+     sed -i /^config.osd.language/d /etc/enigma2/settings
+  else
+     sed -i "s/^config.osd.language=.*/config.osd.language=$e2lang/g" /etc/enigma2/settings
+  fi
+else
+  [ "$e2lang" != "none" ] && echo "config.osd.language=$e2lang" >> /etc/enigma2/settings
+fi
+
+cp /usr/share/zoneinfo/$tztime /etc/localtime

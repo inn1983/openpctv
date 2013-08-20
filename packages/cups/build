@@ -1,0 +1,43 @@
+#!/bin/sh
+
+. config/options
+
+get_meta $1
+
+cd $PKG_BUILD_DIR
+
+export DSOFLAGS="$LDFLAGS"
+
+do_configure  --enable-gnutls \
+               --enable-dbus \
+               --enable-browsing \
+               --disable-openssl \
+               --disable-tiff \
+               --without-php \
+               --without-perl \
+               --without-python \
+               --without-java \
+               --with-pdftops=none \
+               --disable-gssapi \
+               --libdir=/usr/lib \
+               LIBTOOL=""
+               
+               
+
+sed -i s:STRIP:NOSTRIP: Makedefs
+sed -i s:serial:: backend/Makefile
+echo "all:"    >  man/Makefile
+echo "libs:" >> man/Makefile
+echo "install:" >> man/Makefile
+echo "install-data:" >> man/Makefile
+echo "install-exec:" >> man/Makefile
+echo "install-headers:" >> man/Makefile
+echo "install-libs:" >> man/Makefile
+
+
+make
+make_install
+
+#clash with cups-filters
+rm -R .install/usr/share/cups/banners
+rm .install/usr/share/cups/data/testprint
