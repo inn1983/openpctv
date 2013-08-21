@@ -1,6 +1,10 @@
 PKG_NAME=linux
-PKG_VERSION=3.11-rc5
-PKG_URL="http://www.kernel.org/pub/linux/kernel/v3.x/testing/linux-${PKG_VERSION}.tar.xz"
+#PKG_VERSION=3.11-rc5
+#PKG_URL="http://www.kernel.org/pub/linux/kernel/v3.x/testing/linux-${PKG_VERSION}.tar.xz"
+PKG_URL_PROTO=git
+PKG_URL_REV=c7cac0b0
+PKG_URL="git://people.freedesktop.org/~agd5f/linux"
+PKG_VERSION=3.12-drm-next+r${PKG_URL_REV}
 PKG_REV=1
 PKG_BUILD_DEPENDS="toolchain kmod-host"
 PKG_USE="alsa arm bluetooth dab dvb ethernet hwmon gameport ipv6 lirc lvm mmc ms pata pccard radio rtc sata usb usbnet v4l wifi intel mga nouveau poulsbo r128 radeon savage sis tdfx unichrome vmwgfx tidsp"
