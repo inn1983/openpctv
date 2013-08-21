@@ -42,6 +42,17 @@ y=$(xrandr | grep "\*" | awk '{print $1}' | cut -dx -f2)
 sed -i -e "s/^config.pc.initial_window_width=.*/config.pc.initial_window_width=$x/g" \
 	-e "s/^config.pc.initial_window_height=.*/config.pc.initial_window_height=$y/g" /etc/enigma2/settings
 
+if [ -f /sys/class/drm/card0/device/vendor ]; then
+  VENDOR=$(cat /sys/class/drm/card0/device/vendor)
+  if [ $VENDOR = "0x10de" ]; then
+    sed -i 's/^video.driver:.*/video.driver:vdpau/g' /usr/share/enigma2/xine.conf
+  elif [ $VENDOR = "0x8086" ]; then
+    sed -i 's/^video.driver:.*/video.driver:vaapi/g' /usr/share/enigma2/xine.conf
+  else
+    sed -i 's/^video.driver:.*/video.driver:opengl/g' /usr/share/enigma2/xine.conf
+  fi
+fi
+
 chvt 4
 sync
 LD_PRELOAD=$LIBS ${exec_prefix}/bin/enigma2
