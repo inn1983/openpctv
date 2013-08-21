@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPCTV 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-19 16:07+0800\n"
+"POT-Creation-Date: 2013-08-21 19:40+0800\n"
 "PO-Revision-Date: 2013-07-23 16:56+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -492,55 +492,46 @@ msgstr "支持全系列的TBS设备"
 
 #: packages/setup/scripts/installator.sh:12
 #: packages/setup/scripts/installator.sh.new:12
-#: packages/setup/scripts/installator.sh.orig:12
 msgid "Not found or not a block device."
 msgstr "没有发现或不存在块设备"
 
 #: packages/setup/scripts/installator.sh:13
 #: packages/setup/scripts/installator.sh.new:13
-#: packages/setup/scripts/installator.sh.orig:13
 msgid "does not have any corresponding BIOS drive."
 msgstr "没有任何相应的BIOS驱动"
 
 #: packages/setup/scripts/installator.sh:16
 #: packages/setup/scripts/installator.sh.new:16
-#: packages/setup/scripts/installator.sh.orig:16
 msgid "Keymap selection"
 msgstr "键位映射选择"
 
 #: packages/setup/scripts/installator.sh:18
 #: packages/setup/scripts/installator.sh.new:18
-#: packages/setup/scripts/installator.sh.orig:18
 msgid "Choose Keymap"
 msgstr "选择键位映射"
 
 #: packages/setup/scripts/installator.sh:19
 #: packages/setup/scripts/installator.sh.new:19
-#: packages/setup/scripts/installator.sh.orig:19
 msgid "Which keymap do you want to use ?"
 msgstr "你想要使用哪种键位映射？"
 
 #: packages/setup/scripts/installator.sh:22
 #: packages/setup/scripts/installator.sh.new:22
-#: packages/setup/scripts/installator.sh.orig:22
 msgid "Warning"
 msgstr "警告"
 
 #: packages/setup/scripts/installator.sh:23
 #: packages/setup/scripts/installator.sh.new:23
-#: packages/setup/scripts/installator.sh.orig:23
 msgid "ERROR"
 msgstr "错误"
 
 #: packages/setup/scripts/installator.sh:25
 #: packages/setup/scripts/installator.sh.new:25
-#: packages/setup/scripts/installator.sh.orig:25
 msgid "No disks found on this system.\\nCheck again ?"
 msgstr "在这个系统中没发现磁盘。\\n再检查一次吗？"
 
 #: packages/setup/scripts/installator.sh:26
 #: packages/setup/scripts/installator.sh.new:26
-#: packages/setup/scripts/installator.sh.orig:26
 msgid "refresh list"
 msgstr "刷新列表"
 
@@ -548,14 +539,11 @@ msgstr "刷新列表"
 #: packages/setup/scripts/installator.sh:37
 #: packages/setup/scripts/installator.sh.new:28
 #: packages/setup/scripts/installator.sh.new:37
-#: packages/setup/scripts/installator.sh.orig:28
-#: packages/setup/scripts/installator.sh.orig:37
 msgid "Installation device"
 msgstr "安装设备"
 
 #: packages/setup/scripts/installator.sh:29
 #: packages/setup/scripts/installator.sh.new:29
-#: packages/setup/scripts/installator.sh.orig:29
 msgid ""
 "You are going to install OpenPCTV. For this you will need an empty partition "
 "with about 5 GB of free space. Be careful to choose the right disk! We won't "
@@ -566,19 +554,16 @@ msgstr ""
 
 #: packages/setup/scripts/installator.sh:31
 #: packages/setup/scripts/installator.sh.new:31
-#: packages/setup/scripts/installator.sh.orig:31
 msgid "Microsoft FAT16/32 partition or Linux EXT2/3 partition"
 msgstr "微软FAT16/32分区或Linux EXT2/3分区"
 
 #: packages/setup/scripts/installator.sh:33
 #: packages/setup/scripts/installator.sh.new:33
-#: packages/setup/scripts/installator.sh.orig:33
 msgid "Please edit your partition table to create a"
 msgstr "请编辑你的分区表来建立一个"
 
 #: packages/setup/scripts/installator.sh:34
 #: packages/setup/scripts/installator.sh.new:34
-#: packages/setup/scripts/installator.sh.orig:34
 msgid ""
 "with about 5 GB of free space. Don't forget to set the bootable flag to this "
 "partition. Remember to commit the changes when done. We won't take "
@@ -588,13 +573,11 @@ msgstr ""
 
 #: packages/setup/scripts/installator.sh:39
 #: packages/setup/scripts/installator.sh.new:39
-#: packages/setup/scripts/installator.sh.orig:39
 msgid "You don't have any"
 msgstr "你没有任何"
 
 #: packages/setup/scripts/installator.sh:40
 #: packages/setup/scripts/installator.sh.new:40
-#: packages/setup/scripts/installator.sh.orig:40
 msgid ""
 "partition on your system. Please create a partition first using for example "
 "cfdisk."
@@ -602,37 +585,31 @@ msgstr "分区在你的系统上。请首先使用像cfdisk这个的工具来建
 
 #: packages/setup/scripts/installator.sh:41
 #: packages/setup/scripts/installator.sh.new:41
-#: packages/setup/scripts/installator.sh.orig:41
 msgid "Where do you want to install OpenPCTV ?"
 msgstr "你想将OpenPCV安装到哪里？"
 
 #: packages/setup/scripts/installator.sh:42
 #: packages/setup/scripts/installator.sh.new:42
-#: packages/setup/scripts/installator.sh.orig:42
 msgid "is not a valid block device."
 msgstr "不是一个有效的块设备。"
 
 #: packages/setup/scripts/installator.sh:44
 #: packages/setup/scripts/installator.sh.new:44
-#: packages/setup/scripts/installator.sh.orig:44
 msgid "Partition is not formated"
 msgstr "分区没有被格式化"
 
 #: packages/setup/scripts/installator.sh:45
 #: packages/setup/scripts/installator.sh.new:45
-#: packages/setup/scripts/installator.sh.orig:45
 msgid "Partition format type"
 msgstr "分区格式类型"
 
 #: packages/setup/scripts/installator.sh:46
 #: packages/setup/scripts/installator.sh.new:46
-#: packages/setup/scripts/installator.sh.orig:46
 msgid "is not supported in your partition type"
 msgstr "不支持你分区类型"
 
 #: packages/setup/scripts/installator.sh:47
 #: packages/setup/scripts/installator.sh.new:47
-#: packages/setup/scripts/installator.sh.orig:47
 msgid "Partition is already formated"
 msgstr "分区已经被格式化"
 
@@ -640,38 +617,31 @@ msgstr "分区已经被格式化"
 #: packages/setup/scripts/installator.sh:50
 #: packages/setup/scripts/installator.sh.new:48
 #: packages/setup/scripts/installator.sh.new:50
-#: packages/setup/scripts/installator.sh.orig:48
-#: packages/setup/scripts/installator.sh.orig:50
 msgid "Formatting"
 msgstr "格式化中"
 
 #: packages/setup/scripts/installator.sh:49
 #: packages/setup/scripts/installator.sh.new:49
-#: packages/setup/scripts/installator.sh.orig:49
 msgid "Do you want to format"
 msgstr "你想格式化"
 
 #: packages/setup/scripts/installator.sh:51
 #: packages/setup/scripts/installator.sh.new:51
-#: packages/setup/scripts/installator.sh.orig:51
 msgid "...\\nPlease wait"
 msgstr "...\\n请等待"
 
 #: packages/setup/scripts/installator.sh:53
 #: packages/setup/scripts/installator.sh.new:53
-#: packages/setup/scripts/installator.sh.orig:53
 msgid "Linux partition type"
 msgstr "Linux分区类型"
 
 #: packages/setup/scripts/installator.sh:54
 #: packages/setup/scripts/installator.sh.new:54
-#: packages/setup/scripts/installator.sh.orig:54
 msgid "Which type of Linux partition you want ?"
 msgstr "你想要哪种Linux分区类型？"
 
 #: packages/setup/scripts/installator.sh:56
 #: packages/setup/scripts/installator.sh.new:56
-#: packages/setup/scripts/installator.sh.orig:56
 msgid ""
 "As you don't have formatting tool installed, I won't be able to format the "
 "partition."
@@ -679,37 +649,31 @@ msgstr "因为你没有任何用来格式化的工具被安装，我无法格式
 
 #: packages/setup/scripts/installator.sh:57
 #: packages/setup/scripts/installator.sh.new:57
-#: packages/setup/scripts/installator.sh.orig:57
 msgid "Hopefully it is already formatted."
 msgstr "但愿它已经被格式化了。"
 
 #: packages/setup/scripts/installator.sh:58
 #: packages/setup/scripts/installator.sh.new:58
-#: packages/setup/scripts/installator.sh.orig:58
 msgid "should be formatted as"
 msgstr "应该被格式化为"
 
 #: packages/setup/scripts/installator.sh:60
 #: packages/setup/scripts/installator.sh.new:60
-#: packages/setup/scripts/installator.sh.orig:60
 msgid "Failed to mount"
 msgstr "挂载失败"
 
 #: packages/setup/scripts/installator.sh:62
 #: packages/setup/scripts/installator.sh.new:62
-#: packages/setup/scripts/installator.sh.orig:62
 msgid "Installing... Please wait"
 msgstr "安装中... 请等待"
 
 #: packages/setup/scripts/installator.sh:65
 #: packages/setup/scripts/installator.sh.new:65
-#: packages/setup/scripts/installator.sh.orig:65
 msgid "Support for HDTV through X.Org ?"
 msgstr "通过X.Org支持HDTV吗？"
 
 #: packages/setup/scripts/installator.sh:66
 #: packages/setup/scripts/installator.sh.new:66
-#: packages/setup/scripts/installator.sh.orig:66
 msgid ""
 "It appears that this version of OpenPCTV has been compiled with support for "
 "HDTV through X.Org video server. Remember that X.Org is only useful if you "
@@ -721,25 +685,21 @@ msgstr ""
 
 #: packages/setup/scripts/installator.sh:69
 #: packages/setup/scripts/installator.sh.new:69
-#: packages/setup/scripts/installator.sh.orig:69
 msgid "Bootloader"
 msgstr "引导管理器"
 
 #: packages/setup/scripts/installator.sh:71
 #: packages/setup/scripts/installator.sh.new:71
-#: packages/setup/scripts/installator.sh.orig:71
 msgid "Couldn't find my GRUB partition representation"
 msgstr "不能找到我的GRUB分区"
 
 #: packages/setup/scripts/installator.sh:72
 #: packages/setup/scripts/installator.sh.new:72
-#: packages/setup/scripts/installator.sh.orig:72
 msgid "Couldn't install GRUB bootloader!"
 msgstr "不能安装GRUB引导管理器！"
 
 #: packages/setup/scripts/installator.sh:74
 #: packages/setup/scripts/installator.sh.new:74
-#: packages/setup/scripts/installator.sh.orig:74
 msgid ""
 "is now a OpenPCTV partition. To boot from it, you will need to install a "
 "bootloader. I can install one for you. If you have any other operating "
@@ -748,40 +708,35 @@ msgid ""
 "alone.\\nI have found:"
 msgstr ""
 "现在是一个OpenPCTV分区了。为了从之启动，你将需要安装一个引导管理器。我能为你"
-"安装GRUB引导管理。如果在你的计算机上还拥有其它的操作系统，我也将为你安装多重引导。"
-"如果你不想安装一个新的引导管理器，你将需要自己配置。我已找到："
+"安装GRUB引导管理。如果在你的计算机上还拥有其它的操作系统，我也将为你安装多重"
+"引导。如果你不想安装一个新的引导管理器，你将需要自己配置。我已找到："
 
 #: packages/setup/scripts/installator.sh:75
 #: packages/setup/scripts/installator.sh.new:75
-#: packages/setup/scripts/installator.sh.orig:75
 msgid "Do you want to install me to install the boot loader (GRUB) for you ?"
 msgstr "你想安装引导管理器（GRUB）吗？"
 
 #: packages/setup/scripts/installator.sh:76
 #: packages/setup/scripts/installator.sh.new:76
-#: packages/setup/scripts/installator.sh.orig:76
 msgid ""
 "is now a OpenPCTV partition. I didn't recognize any other OS on your system, "
 "want me to install boot loader on your MBR ?"
 msgstr ""
-"现在是一个OpenPCTV的分区了。我们可以识别在你计算机中的其它操作系统，你想在硬盘的MBR"
-"上安装一个引导管理器吗？"
+"现在是一个OpenPCTV的分区了。我们可以识别在你计算机中的其它操作系统，你想在硬"
+"盘的MBR上安装一个引导管理器吗？"
 
 #: packages/setup/scripts/installator.sh:77
 #: packages/setup/scripts/installator.sh.new:77
-#: packages/setup/scripts/installator.sh.orig:77
 msgid "You must install a boot loader to boot OpenPCTV"
 msgstr "你必须为启动OpenPCTV安装一个启动引导器"
 
 #: packages/setup/scripts/installator.sh:80
 #: packages/setup/scripts/installator.sh.new:80
-#: packages/setup/scripts/installator.sh.orig:80
 msgid "Installation Log"
 msgstr "安装日志"
 
 #: packages/setup/scripts/installator.sh:81
 #: packages/setup/scripts/installator.sh.new:81
-#: packages/setup/scripts/installator.sh.orig:81
 msgid ""
 "Do you want to check installation logs ? (it is probably useful for debug "
 "purpose only)"
@@ -789,13 +744,11 @@ msgstr "你想检查安装日志吗？（对于以调试为目的或许有用）
 
 #: packages/setup/scripts/installator.sh:84
 #: packages/setup/scripts/installator.sh.new:84
-#: packages/setup/scripts/installator.sh.orig:84
 msgid "Have Fun!"
 msgstr "祝好运！"
 
 #: packages/setup/scripts/installator.sh:85
 #: packages/setup/scripts/installator.sh.new:85
-#: packages/setup/scripts/installator.sh.orig:85
 msgid "OpenPCTV is now installed on"
 msgstr "OpenPCTV现在已经安装"
 
@@ -804,7 +757,6 @@ msgid "Do you want to reboot? Or press Alt+F2 to configure by manual"
 msgstr "你想重新启动吗？或者按Alt+F2登录并进行手动配置"
 
 #: packages/setup/scripts/installator.sh.new:86
-#: packages/setup/scripts/installator.sh.orig:86
 msgid "Do you want to proceed with its configuration ?"
 msgstr "是否继续执行它的配置?"
 
