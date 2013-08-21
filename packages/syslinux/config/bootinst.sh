@@ -25,15 +25,15 @@ cd "$MYMNT"
 
 clear
 echo "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
-echo "                        Welcome to CNVDR boot installer                         "
+echo "                        Welcome to OPENPCTV boot installer                         "
 echo "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
 echo
-echo "This installer will setup disk $TARGET to boot only CNVDR."
+echo "This installer will setup disk $TARGET to boot only OPENPCTV."
 if [ "$MBR" != "$TARGET" ]; then
    echo
    echo "Warning! Master boot record (MBR) of $MBR will be overwritten."
    echo "If you use $MBR to boot any existing operating system, it will not work"
-   echo "anymore. Only CNVDR will boot from this device. Be careful!"
+   echo "anymore. Only OPENPCTV will boot from this device. Be careful!"
 fi
 echo
 echo "Press any key to continue, or Ctrl+C to abort..."

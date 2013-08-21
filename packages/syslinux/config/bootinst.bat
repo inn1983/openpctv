@@ -13,10 +13,10 @@ del \%BOOTFLAG%
 if %DISK% == none goto DiskNotFound
 
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-echo                          Welcome to CNVDR boot installer
+echo                          Welcome to OPENPCTV boot installer
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 echo.
-echo This installer will setup disk %DISK%: to boot only CNVDR.
+echo This installer will setup disk %DISK%: to boot only OPENPCTV.
 echo.
 echo Warning! Master Boot Record (MBR) of the device %DISK%: will be overwritten.
 echo If %DISK%: is a partition on the same disk drive like your Windows installation,
@@ -28,22 +28,13 @@ pause > nul
 cls
 echo Setting up boot record for %DISK%:, wait please...
 
-if %OS% == Windows_NT goto setupNT
-goto setup95
-
-:setupNT
 \boot\syslinux\syslinux.exe -maf -d \boot\syslinux %DISK%:
-goto setupDone
 
-:setup95
-\boot\syslinux\syslinux.com -maf -d \boot\syslinux %DISK%:
-
-:setupDone
 echo Disk %DISK%: should be bootable now. Installation finished.
 goto pauseit
 
 :readOnly
-echo You're starting CNVDR installer from a read-only media, this will not work.
+echo You're starting OPENPCTV installer from a read-only media, this will not work.
 goto pauseit
 
 :DiskNotFound
