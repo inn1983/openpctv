@@ -48,8 +48,10 @@ if [ -f /sys/class/drm/card0/device/vendor ]; then
     sed -i 's/^video.driver:.*/video.driver:vdpau/g' /usr/share/enigma2/xine.conf
   elif [ $VENDOR = "0x8086" ]; then
     sed -i 's/^video.driver:.*/video.driver:vaapi/g' /usr/share/enigma2/xine.conf
-  else
+  elif [ $VENDOR = "0x1002" ]; then
     sed -i 's/^video.driver:.*/video.driver:opengl/g' /usr/share/enigma2/xine.conf
+  else
+    sed -i 's/^video.driver:.*/video.driver:xshm/g' /usr/share/enigma2/xine.conf
   fi
 fi
 
