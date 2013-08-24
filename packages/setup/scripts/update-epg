@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ -f /video/epg.dat ]; then
+  a=`find /video -mmin +480 -name epg.dat -print`
+  [ X$a = "X" ] && exit 0
+fi
+
 zh_epgurl=http://epg.xltvrobbs.net/epg/dm800/gemini800.tgz
 
 . /etc/locale.conf

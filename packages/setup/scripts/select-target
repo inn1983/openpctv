@@ -5,7 +5,7 @@ export TERM=linux
 export TEXTDOMAIN=openpctv
 
 
-dialog --no-cancel --clear --title "$(gettext "Set the default target")" --menu "$(gettext "Please select the default target to boot into.")" 10 60 3 vdr "$(gettext "Support for AMD/NVIDIA display card")" xbmc "$(gettext "Support for Intel/AMD/NVIDIA display card")" enigma2pc "$(gettext "Only support for NVIDIA display card")" 2> /tmp/target.tmp
+dialog --no-cancel --clear --title "$(gettext "Set the default target")" --menu "$(gettext "Please select the default target to boot into.")" 10 85 3 enigma2pc "$(gettext "An openpliPC project for PC,work well with NVIDIA/Intel/AMD Display card")" vdr "$(gettext "The Video Disk Recorder,work well with AMD/NVIDIA display card")" xbmc "$(gettext "Open Source Home Theatre Software, work well with Intel/AMD/NVIDIA display card")" 2> /tmp/target.tmp
 target=$(cat /tmp/target.tmp)
 rm /tmp/target.tmp
 case $target in

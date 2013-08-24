@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPCTV 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-21 19:40+0800\n"
+"POT-Creation-Date: 2013-08-23 16:53+0800\n"
 "PO-Revision-Date: 2013-07-23 16:56+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: packages/setup/scripts/audio-config:8
 #: packages/setup/scripts/audio-config:48
-#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:238
 msgid "Soundcard Configuration"
 msgstr "配置声卡"
 
@@ -378,7 +378,7 @@ msgstr "diseqc.conf已被编辑"
 msgid "Finished"
 msgstr "完成"
 
-#: packages/setup/scripts/getcam:49 packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/getcam:49 packages/setup/scripts/setup.sh:238
 msgid "Select a software emulated CAM"
 msgstr "选择一种模拟CAM软件"
 
@@ -468,7 +468,7 @@ msgstr ""
 "加的驱动吗？"
 
 #: packages/setup/scripts/install-drivers:67
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Install additional V4L and DVB drive"
 msgstr "安装附加的V4L及DVB驱动"
 
@@ -783,7 +783,7 @@ msgid "Submit"
 msgstr "提交"
 
 #: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Set the monitor's best resolution"
 msgstr "设定显示器的最佳分辨率"
 
@@ -912,7 +912,7 @@ msgid ""
 "a default device as Lirc support."
 msgstr "在这台机器上找到了如下红外接遥控接收设备，请为lirc选择一种默认设备"
 
-#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:238
 msgid "Set the default target"
 msgstr "选择默认的启动项"
 
@@ -921,16 +921,20 @@ msgid "Please select the default target to boot into."
 msgstr "请选择默认的启动项"
 
 #: packages/setup/scripts/select-target:8
-msgid "Support for AMD/NVIDIA display card"
-msgstr "支持AMD/NVIDIA显卡"
+msgid ""
+"An openpliPC project for PC,work well with NVIDIA/Intel/AMD Display card"
+msgstr ""
+"一个基于PC的openpliPC项目，NVIDIA/Intel/AMD显可以工作得很好。"
 
 #: packages/setup/scripts/select-target:8
-msgid "Support for Intel/AMD/NVIDIA display card"
-msgstr "支持Intel/AMD/NVIDIA显卡"
+msgid "The Video Disk Recorder,work well with AMD/NVIDIA display card"
+msgstr "硬盘录像机，可以在AMD/NVIDIA显卡下工作得很好。"
 
 #: packages/setup/scripts/select-target:8
-msgid "Only support for NVIDIA display card"
-msgstr "只支持NVIDIA显卡"
+msgid ""
+"Open Source Home Theatre Software, work well with Intel/AMD/NVIDIA display "
+"card"
+msgstr "开源的家庭剧院，NVIDIA/Intel/AMD显可以工作得很好。"
 
 #: packages/setup/scripts/setup.sh:34 packages/setup/scripts/setup.sh:48
 #: packages/setup/scripts/setup.sh:56
@@ -1061,43 +1065,51 @@ msgstr ""
 msgid "Don't mount bind for OpenPCTV cache"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:228
+msgid ""
+"Would you like to configure DiSEqC and scan channels for VDR/XBMC? If you "
+"use only enigma2, then you could not continue with the configuration."
+msgstr ""
+"你想为VDR/SBMC配置DiSEqC及频道扫描吗？如果你只使用enigma2，那么你可以不再"
+"继续接下来的配置。"
+
+#: packages/setup/scripts/setup.sh:238
 msgid "OpenPCTV configurator"
 msgstr "配置OpenPCTV"
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Main menu"
 msgstr "主菜单"
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Set global locale and language"
 msgstr "设置全局区域和语言"
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Configure Network Environment"
 msgstr "配置网络环境"
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Select IR device"
 msgstr "选择红外接收设备"
 
-#: packages/setup/scripts/setup.sh:235
-msgid "Auto update Satellite Transponders from fastsatfinder"
-msgstr "从fastsatfinder自动更新卫星参数"
+#: packages/setup/scripts/setup.sh:238
+msgid "Auto update Satellite Transponders and EPG data"
+msgstr "自动更新卫星参数及EPG数据"
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "DiSEqC configurator"
 msgstr "DiSEqC配置"
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Auto scan channels"
 msgstr "自动扫描频道"
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Reboot OpenPCTV"
 msgstr "重新启动OpenPCTV"
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Exit to login shell"
 msgstr "退出并登录shell"
 
@@ -1144,3 +1156,4 @@ msgstr "转换卫星参数并更新基于scan-s2的卫星参数"
 #: packages/setup/scripts/update-transponders:26
 msgid "Done!"
 msgstr "完成！"
+

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openpctv 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-21 19:40+0800\n"
+"POT-Creation-Date: 2013-08-23 16:53+0800\n"
 "PO-Revision-Date: 2013-07-28 09:19+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: packages/setup/scripts/audio-config:8
 #: packages/setup/scripts/audio-config:48
-#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:238
 msgid "Soundcard Configuration"
 msgstr "配置音效卡"
 
@@ -379,7 +379,7 @@ msgstr "diseqc.conf已被編輯"
 msgid "Finished"
 msgstr "完成"
 
-#: packages/setup/scripts/getcam:49 packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/getcam:49 packages/setup/scripts/setup.sh:238
 msgid "Select a software emulated CAM"
 msgstr ""
 
@@ -462,7 +462,7 @@ msgstr ""
 "加的驅動嗎？"
 
 #: packages/setup/scripts/install-drivers:67
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Install additional V4L and DVB drive"
 msgstr "安裝附加的V4L及DVB驅動"
 
@@ -773,7 +773,7 @@ msgid "Submit"
 msgstr "提交"
 
 #: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Set the monitor's best resolution"
 msgstr "設定顯示器的最佳解析度"
 
@@ -902,7 +902,7 @@ msgid ""
 "a default device as Lirc support."
 msgstr "在這台機器上找到了如下紅外接遙控接收設備，請為lirc選擇一種預設設備"
 
-#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:238
 msgid "Set the default target"
 msgstr ""
 
@@ -911,15 +911,18 @@ msgid "Please select the default target to boot into."
 msgstr ""
 
 #: packages/setup/scripts/select-target:8
-msgid "Support for AMD/NVIDIA display card"
+msgid ""
+"An openpliPC project for PC,work well with NVIDIA/Intel/AMD Display card"
 msgstr ""
 
 #: packages/setup/scripts/select-target:8
-msgid "Support for Intel/AMD/NVIDIA display card"
+msgid "The Video Disk Recorder,work well with AMD/NVIDIA display card"
 msgstr ""
 
 #: packages/setup/scripts/select-target:8
-msgid "Only support for NVIDIA display card"
+msgid ""
+"Open Source Home Theatre Software, work well with Intel/AMD/NVIDIA display "
+"card"
 msgstr ""
 
 #: packages/setup/scripts/setup.sh:34 packages/setup/scripts/setup.sh:48
@@ -1051,43 +1054,50 @@ msgstr ""
 msgid "Don't mount bind for OpenPCTV cache"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:228
+msgid ""
+"Would you like to configure DiSEqC and scan channels for VDR/XBMC? If you "
+"use only enigma2, then you could not continue with the configuration."
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:238
 msgid "OpenPCTV configurator"
 msgstr "配置OpenPCTV"
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Main menu"
 msgstr "主菜單"
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Set global locale and language"
 msgstr "設置全域區域和語言"
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Configure Network Environment"
 msgstr "配置網路環境"
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Select IR device"
 msgstr "選擇紅外接收設備"
 
-#: packages/setup/scripts/setup.sh:235
-msgid "Auto update Satellite Transponders from fastsatfinder"
+#: packages/setup/scripts/setup.sh:238
+#, fuzzy
+msgid "Auto update Satellite Transponders and EPG data"
 msgstr "從fastsatfinder自動更新衛星參數"
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "DiSEqC configurator"
 msgstr "DiSEqC配置"
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Auto scan channels"
 msgstr "自動掃描頻道"
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Reboot OpenPCTV"
 msgstr "重新啟動OpenPCTV"
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Exit to login shell"
 msgstr "退出並登錄shell"
 

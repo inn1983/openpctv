@@ -53,20 +53,21 @@ MSMenuinfo="$(gettext "Select the Network Interface Card you want to configure")
 function checkNet
 {
 systemctl restart connman
-printf "Restarting network, please wait for 5s..."
-for i in 5 4 3 2 1; do
+ison="no"
+printf "Restarting network, please wait ..."
+for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
+  ping -c 2 -W 2 8.8.8.8 > /dev/null 2>&1
+  if [ $? -eq 0 ]; then
+    ison="yes"
+  else
+    ping -c 5 -W 5 114.114.114.114 > /dev/null 2>&1
+    [ $? -eq 0 ] && ison="yes"
+  fi
+  [ $ison = "yes" ] && break
   sleep 1
   printf " $i"
 done
 printf "\n"
-ison="no"
-ping -c 2 -W 2 8.8.8.8 > /dev/null
-if [ $? -eq 0 ]; then
-  ison="yes"
-else
-   ping -c 5 -W 5 114.114.114.114 > /dev/null
-   [ $? -eq 0 ] && ison="yes"
-fi
 }
 
 #设定网络结束，并判断是否有效。
@@ -100,7 +101,7 @@ fi
 function setNet
 {
 dialog --no-cancel --inputbox "${MSIP}" 8 50 "${IP:=192.168.1.15}" 2> ${TMP}/IP
-IP="`cat ${TMP}/IP`"
+IP="`cat ${TMP}/IP`/24"
 rm -f ${TMP}/IP
 
 #dialog --no-cancel --inputbox "${MSNetmask}" 8 50 "${NETMASK:=255.255.255.0}" 2> ${TMP}/NETMASK
@@ -116,7 +117,7 @@ NAMESERVER="`cat ${TMP}/NAMESERVER`"
 rm -f ${TMP}/NAMESERVER
 
 sed -i -e "s/^IFACE=.*/IFACE=\"$IF\"/g" \
-	-e "s/^ADDRESS=.*/ADDRESS=\"$IP\"/g" \
+	-e "s#^ADDRESS=.*#ADDRESS=\"$IP\"#g" \
 	-e "s/^GATEWAY=.*/GATEWAY=\"${GATEWAY}\"/g" \
 	-e "s/^DNS_SERVER=.*/DNS_SERVER=\"${NAMESERVER}\ 8.8.8.8\"/g" $NETCONF
 }

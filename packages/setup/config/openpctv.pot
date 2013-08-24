@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-21 19:40+0800\n"
+"POT-Creation-Date: 2013-08-24 08:21+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: packages/setup/scripts/audio-config:8
 #: packages/setup/scripts/audio-config:48
-#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:238
 msgid "Soundcard Configuration"
 msgstr ""
 
@@ -364,7 +364,7 @@ msgstr ""
 msgid "Finished"
 msgstr ""
 
-#: packages/setup/scripts/getcam:49 packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/getcam:49 packages/setup/scripts/setup.sh:238
 msgid "Select a software emulated CAM"
 msgstr ""
 
@@ -442,7 +442,7 @@ msgid ""
 msgstr ""
 
 #: packages/setup/scripts/install-drivers:67
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Install additional V4L and DVB drive"
 msgstr ""
 
@@ -745,7 +745,7 @@ msgid "Submit"
 msgstr ""
 
 #: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Set the monitor's best resolution"
 msgstr ""
 
@@ -873,7 +873,7 @@ msgid ""
 "a default device as Lirc support."
 msgstr ""
 
-#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:238
 msgid "Set the default target"
 msgstr ""
 
@@ -882,15 +882,18 @@ msgid "Please select the default target to boot into."
 msgstr ""
 
 #: packages/setup/scripts/select-target:8
-msgid "Support for AMD/NVIDIA display card"
+msgid ""
+"An openpliPC project for PC,work well with NVIDIA/Intel/AMD Display card"
 msgstr ""
 
 #: packages/setup/scripts/select-target:8
-msgid "Support for Intel/AMD/NVIDIA display card"
+msgid "The Video Disk Recorder,work well with AMD/NVIDIA display card"
 msgstr ""
 
 #: packages/setup/scripts/select-target:8
-msgid "Only support for NVIDIA display card"
+msgid ""
+"Open Source Home Theatre Software, work well with Intel/AMD/NVIDIA display "
+"card"
 msgstr ""
 
 #: packages/setup/scripts/setup.sh:34 packages/setup/scripts/setup.sh:48
@@ -1022,43 +1025,49 @@ msgstr ""
 msgid "Don't mount bind for OpenPCTV cache"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:228
+msgid ""
+"Would you like to configure DiSEqC and scan channels for VDR/XBMC? If you "
+"use only enigma2, then you could not continue with the configuration."
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:238
 msgid "OpenPCTV configurator"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Main menu"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Set global locale and language"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Configure Network Environment"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Select IR device"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:235
-msgid "Auto update Satellite Transponders from fastsatfinder"
+#: packages/setup/scripts/setup.sh:238
+msgid "Auto update Satellite Transponders and EPG data"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "DiSEqC configurator"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Auto scan channels"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Reboot OpenPCTV"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:235
+#: packages/setup/scripts/setup.sh:238
 msgid "Exit to login shell"
 msgstr ""
 
