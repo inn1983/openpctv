@@ -1,0 +1,10 @@
+PKG_NAME=vdr-screenshot
+PKG_VERSION=0.0.15
+PKG_URL="http://www.joachim-wilke.de/downloads/vdr-screenshot/vdr-screenshot-0.0.15.tgz"
+PKG_REV=1
+PKG_BUILD_DEPENDS="toolchain"
+PKG_RUN_DEPENDS="$TARGET_LIBC vdr"
+PKG_PRIORITY=optional
+PKG_SECTION=multimedia
+PKG_SHORTDESC="VDR -- screenshot plugin"
+PKG_LONGDESC="vdr-screenshot with this plugin you can take still images of your screen. After installing the plugin, a new mainmenu entry "Screenshot" will show up."
