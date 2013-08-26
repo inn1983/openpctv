@@ -3,21 +3,21 @@
     <default pathversion="1"></default>
     <source>
       <name>Default Locations</name>
-      <path pathversion="1">/mnt/</path>
+      <path pathversion="1">/media/</path>
     </source>
   </video>
   <music>
     <default pathversion="1"></default>
     <source>
       <name>Default Locations</name>
-      <path pathversion="1">/mnt/</path>
+      <path pathversion="1">/media/</path>
     </source>
   </music>
   <pictures>
     <default pathversion="1"></default>
     <source>
       <name>Default Locations</name>
-      <path pathversion="1">/mnt/</path>
+      <path pathversion="1">/media/</path>
     </source>
   </pictures>
 </sources>
