@@ -6,12 +6,12 @@
 
 . /etc/funcs
 
-MOUNT_POINT=/mnt/nfs
+MOUNT_POINT=/media/nfs
 
 clean_up () {
   echo "Trap : exiting ..."
   while read i ; do 
-  a=`echo $i | grep "/mnt/nfs/"| cut -d" " -f2`
+  a=`echo $i | grep "/media/nfs/"| cut -d" " -f2`
   if [ -n "$a" ] ; then
     echo " Found $a , trying to umount ..."
     if umount $a ; then 

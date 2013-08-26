@@ -6,7 +6,7 @@
 
 . /etc/funcs
 
-MOUNT_POINT=/mnt/9p
+MOUNT_POINT=/media/9p
 
 mount_9p () {
   # Mount 9P.2000u
