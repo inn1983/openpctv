@@ -924,17 +924,17 @@ msgstr "请选择默认的启动项"
 msgid ""
 "An openpliPC project for PC,work well with NVIDIA/Intel/AMD Display card"
 msgstr ""
-"一个基于PC的openpliPC项目，NVIDIA/Intel/AMD显可以工作得很好。"
+"一个基于PC的openpliPC项目，NVIDIA/Intel/AMD显卡可以工作得很好。"
 
 #: packages/setup/scripts/select-target:8
 msgid "The Video Disk Recorder,work well with AMD/NVIDIA display card"
-msgstr "硬盘录像机，可以在AMD/NVIDIA显卡下工作得很好。"
+msgstr "硬盘录像机，可以在AMD/NVIDIA显卡可以工作得很好。"
 
 #: packages/setup/scripts/select-target:8
 msgid ""
 "Open Source Home Theatre Software, work well with Intel/AMD/NVIDIA display "
 "card"
-msgstr "开源的家庭剧院，NVIDIA/Intel/AMD显可以工作得很好。"
+msgstr "开源的家庭剧院，NVIDIA/Intel/AMD显卡可以工作得很好。"
 
 #: packages/setup/scripts/setup.sh:34 packages/setup/scripts/setup.sh:48
 #: packages/setup/scripts/setup.sh:56
