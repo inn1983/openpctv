@@ -1,6 +1,6 @@
 PKG_NAME=vdr-reelchannelscan
-PKG_VERSION=0.6.1beta
-PKG_URL="ftp://ftp.freebsd.org/pub/FreeBSD/ports/local-distfiles/nox/vdr-plugin-reelchannelscan_0.6.1+beta1.7.15.orig.tar.gz"
+PKG_VERSION=0.6.2
+PKG_URL="$SFNET_SRCS/openpctv/sources/reelchannelscan-${PKG_VERSION}.tar.xz"
 PKG_REV=1
 PKG_DEPENDS="vdr"
 PKG_BUILD_DEPENDS="toolchain"
