@@ -1,6 +1,5 @@
-diff -uNr vdr-2.1.1.orig/cutter.c vdr-2.1.1/cutter.c
---- vdr-2.1.1.orig/cutter.c	2013-08-21 21:15:24.000000000 +0800
-+++ vdr-2.1.1/cutter.c	2013-08-26 13:00:06.289003868 +0800
+--- a/cutter.c
++++ b/cutter.c
 @@ -8,6 +8,7 @@
   */
  
@@ -38,9 +37,8 @@ diff -uNr vdr-2.1.1.orig/cutter.c vdr-2.1.1/cutter.c
          char *e = strrchr(s, '.');
          if (e) {
             if (strcmp(e, ".rec") == 0) {
-diff -uNr vdr-2.1.1.orig/cutter.h vdr-2.1.1/cutter.h
---- vdr-2.1.1.orig/cutter.h	2012-02-16 20:05:33.000000000 +0800
-+++ vdr-2.1.1/cutter.h	2013-08-26 13:00:06.289003868 +0800
+--- a/cutter.h
++++ b/cutter.h
 @@ -24,7 +24,7 @@
    static bool error;
    static bool ended;
@@ -50,9 +48,8 @@ diff -uNr vdr-2.1.1.orig/cutter.h vdr-2.1.1/cutter.h
    static void Stop(void);
    static bool Active(const char *FileName = NULL);
           ///< Returns true if the cutter is currently active.
-diff -uNr vdr-2.1.1.orig/dvbplayer.c vdr-2.1.1/dvbplayer.c
---- vdr-2.1.1.orig/dvbplayer.c	2013-03-08 21:44:19.000000000 +0800
-+++ vdr-2.1.1/dvbplayer.c	2013-08-26 13:00:06.293003867 +0800
+--- a/dvbplayer.c
++++ b/dvbplayer.c
 @@ -374,11 +374,16 @@
    if (index) {
       int Index = ptsIndex.FindIndex(DeviceGetSTC());
@@ -74,9 +71,8 @@ diff -uNr vdr-2.1.1.orig/dvbplayer.c vdr-2.1.1/dvbplayer.c
          if (Index >= 0)
             return index->StoreResume(Index);
          }
-diff -uNr vdr-2.1.1.orig/filetransfer.c vdr-2.1.1/filetransfer.c
---- vdr-2.1.1.orig/filetransfer.c	1970-01-01 08:00:00.000000000 +0800
-+++ vdr-2.1.1/filetransfer.c	2013-08-26 13:00:06.293003867 +0800
+--- /dev/null
++++ b/filetransfer.c
 @@ -0,0 +1,281 @@
 +/*
 + * filetransfer.c: The video file transfer facilities
@@ -359,9 +355,8 @@ diff -uNr vdr-2.1.1.orig/filetransfer.c vdr-2.1.1/filetransfer.c
 +  ended = false;
 +  return result;
 +}
-diff -uNr vdr-2.1.1.orig/filetransfer.h vdr-2.1.1/filetransfer.h
---- vdr-2.1.1.orig/filetransfer.h	1970-01-01 08:00:00.000000000 +0800
-+++ vdr-2.1.1/filetransfer.h	2013-08-26 13:00:06.293003867 +0800
+--- /dev/null
++++ b/filetransfer.h
 @@ -0,0 +1,33 @@
 +/*
 + * filetransfer.h: The video file transfer facilities
@@ -396,21 +391,21 @@ diff -uNr vdr-2.1.1.orig/filetransfer.h vdr-2.1.1/filetransfer.h
 +  };
 +
 +#endif //__FILETRANSFER_H
-diff -uNr vdr-2.1.1.orig/Makefile vdr-2.1.1/Makefile
---- vdr-2.1.1.orig/Makefile	2013-04-14 20:18:08.000000000 +0800
-+++ vdr-2.1.1/Makefile	2013-08-26 13:04:20.456993234 +0800
-@@ -67,7 +67,7 @@
+--- a/Makefile
++++ b/Makefile
+@@ -67,8 +67,8 @@
  SILIB    = $(LSIDIR)/libsi.a
  
  OBJS = audio.o channels.o ci.o config.o cutter.o device.o diseqc.o dvbdevice.o dvbci.o\
 -       dvbplayer.o dvbspu.o dvbsubtitle.o eit.o eitscan.o epg.o filter.o font.o i18n.o interface.o keys.o\
-+       dvbplayer.o dvbspu.o dvbsubtitle.o eit.o eitscan.o epg.o filetransfer.o filter.o font.o i18n.o interface.o keys.o\
-        lirc.o menu.o menuitems.o nit.o osdbase.o osd.o pat.o player.o plugin.o positioner.o\
+-       lirc.o menu.o menuitems.o nit.o osdbase.o osd.o pat.o player.o plugin.o\
++       dvbplayer.o dvbspu.o dvbsubtitle.o eit.o eitscan.o epg.o filetransfer.o filter.o font.o i18n.o\
++       interface.o keys.o lirc.o menu.o menuitems.o nit.o osdbase.o osd.o pat.o player.o plugin.o\
         receiver.o recorder.o recording.o remote.o remux.o ringbuffer.o sdt.o sections.o shutdown.o\
         skinclassic.o skinlcars.o skins.o skinsttng.o sourceparams.o sources.o spu.o status.o svdrp.o themes.o thread.o\
-diff -uNr vdr-2.1.1.orig/MANUAL vdr-2.1.1/MANUAL
---- vdr-2.1.1.orig/MANUAL	2013-08-21 18:47:04.000000000 +0800
-+++ vdr-2.1.1/MANUAL	2013-08-26 13:00:06.297003865 +0800
+        timers.o tools.o transfer.o vdr.o videodir.o
+--- a/MANUAL
++++ b/MANUAL
 @@ -48,7 +48,7 @@
    FastRew     fast rewind
  
@@ -420,9 +415,8 @@ diff -uNr vdr-2.1.1.orig/MANUAL vdr-2.1.1/MANUAL
  
    Channel+    channel up
    Channel-    channel down
-diff -uNr vdr-2.1.1.orig/menu.c vdr-2.1.1/menu.c
---- vdr-2.1.1.orig/menu.c	2013-08-21 18:45:11.000000000 +0800
-+++ vdr-2.1.1/menu.c	2013-08-26 13:00:06.301003864 +0800
+--- a/menu.c
++++ b/menu.c
 @@ -18,6 +18,7 @@
  #include "config.h"
  #include "cutter.h"
@@ -599,7 +593,7 @@ diff -uNr vdr-2.1.1.orig/menu.c vdr-2.1.1/menu.c
  // --- cMenuRecordings -------------------------------------------------------
  
  cMenuRecordings::cMenuRecordings(const char *Base, int Level, bool OpenSubMenus)
-@@ -2458,6 +2620,16 @@
+@@ -2460,6 +2622,16 @@
    return osContinue;
  }
  
@@ -616,7 +610,7 @@ diff -uNr vdr-2.1.1.orig/menu.c vdr-2.1.1/menu.c
  eOSState cMenuRecordings::ProcessKey(eKeys Key)
  {
    bool HadSubMenu = HasSubMenu();
-@@ -2471,7 +2643,7 @@
+@@ -2473,7 +2645,7 @@
         case kRed:    return (helpKeys > 1 && RecordingCommands.Count()) ? Commands() : Play();
         case kGreen:  return Rewind();
         case kYellow: return Delete();
@@ -625,7 +619,7 @@ diff -uNr vdr-2.1.1.orig/menu.c vdr-2.1.1/menu.c
         case kBlue:   return Info();
         case k0:      return Sort();
         case k1...k9: return Commands(Key);
-@@ -3380,6 +3552,7 @@
+@@ -3373,6 +3545,7 @@
    replaying = false;
    stopReplayItem = NULL;
    cancelEditingItem = NULL;
@@ -633,7 +627,7 @@ diff -uNr vdr-2.1.1.orig/menu.c vdr-2.1.1/menu.c
    stopRecordingItem = NULL;
    recordControlsState = 0;
    Set();
-@@ -3474,6 +3647,19 @@
+@@ -3467,6 +3640,19 @@
       result = true;
       }
  
@@ -653,7 +647,7 @@ diff -uNr vdr-2.1.1.orig/menu.c vdr-2.1.1/menu.c
    // Record control:
    if (cRecordControls::StateChanged(recordControlsState)) {
       while (stopRecordingItem) {
-@@ -3522,6 +3708,12 @@
+@@ -3515,6 +3701,12 @@
                            return osEnd;
                            }
                         break;
@@ -666,7 +660,7 @@ diff -uNr vdr-2.1.1.orig/menu.c vdr-2.1.1/menu.c
      case osPlugin:     {
                           cMenuPluginItem *item = (cMenuPluginItem *)Get(Current());
                           if (item) {
-@@ -4508,6 +4700,10 @@
+@@ -4488,6 +4680,10 @@
  
  // --- cReplayControl --------------------------------------------------------
  
@@ -677,7 +671,7 @@ diff -uNr vdr-2.1.1.orig/menu.c vdr-2.1.1/menu.c
  cReplayControl *cReplayControl::currentReplayControl = NULL;
  cString cReplayControl::fileName;
  
-@@ -4522,6 +4718,9 @@
+@@ -4502,6 +4698,9 @@
    lastCurrent = lastTotal = -1;
    lastPlay = lastForward = false;
    lastSpeed = -2; // an invalid value
@@ -687,7 +681,7 @@ diff -uNr vdr-2.1.1.orig/menu.c vdr-2.1.1/menu.c
    timeoutShow = 0;
    timeSearchActive = false;
    cRecording Recording(fileName);
-@@ -4858,7 +5057,7 @@
+@@ -4836,7 +5035,7 @@
             Skins.Message(mtError, tr("No editing marks defined!"));
          else if (!marks.GetNumSequences())
             Skins.Message(mtError, tr("No editing sequences defined!"));
@@ -696,7 +690,7 @@ diff -uNr vdr-2.1.1.orig/menu.c vdr-2.1.1/menu.c
             Skins.Message(mtError, tr("Can't start editing process!"));
          else
             Skins.Message(mtInfo, tr("Editing process started"));
-@@ -4956,6 +5155,32 @@
+@@ -4934,6 +5133,32 @@
      case kGreen:   SkipSeconds(-60); break;
      case kYellow|k_Repeat:
      case kYellow:  SkipSeconds( 60); break;
@@ -729,7 +723,7 @@ diff -uNr vdr-2.1.1.orig/menu.c vdr-2.1.1/menu.c
      case kStop:
      case kBlue:    Hide();
                     Stop();
-@@ -4965,12 +5190,8 @@
+@@ -4943,12 +5168,8 @@
        switch (int(Key)) {
          // Editing:
          case kMarkToggle:      MarkToggle(); break;
@@ -742,9 +736,8 @@ diff -uNr vdr-2.1.1.orig/menu.c vdr-2.1.1/menu.c
          case kMarkJumpForward|k_Repeat:
          case kMarkJumpForward: MarkJump(true); break;
          case kMarkMoveBack|k_Repeat:
-diff -uNr vdr-2.1.1.orig/menu.h vdr-2.1.1/menu.h
---- vdr-2.1.1.orig/menu.h	2013-06-01 21:44:57.000000000 +0800
-+++ vdr-2.1.1/menu.h	2013-08-26 13:00:06.301003864 +0800
+--- a/menu.h
++++ b/menu.h
 @@ -101,6 +101,7 @@
    bool replaying;
    cOsdItem *stopReplayItem;
@@ -753,7 +746,7 @@ diff -uNr vdr-2.1.1.orig/menu.h vdr-2.1.1/menu.h
    cOsdItem *stopRecordingItem;
    int recordControlsState;
    static cOsdObject *pluginOsdObject;
-@@ -207,6 +208,7 @@
+@@ -206,6 +207,7 @@
    eOSState Info(void);
    eOSState Sort(void);
    eOSState Commands(eKeys Key = kNone);
@@ -761,7 +754,7 @@ diff -uNr vdr-2.1.1.orig/menu.h vdr-2.1.1/menu.h
  protected:
    cString DirectoryName(void);
  public:
-@@ -265,6 +267,9 @@
+@@ -264,6 +266,9 @@
    int lastCurrent, lastTotal;
    bool lastPlay, lastForward;
    int lastSpeed;
@@ -771,9 +764,8 @@ diff -uNr vdr-2.1.1.orig/menu.h vdr-2.1.1/menu.h
    time_t timeoutShow;
    bool timeSearchActive, timeSearchHide;
    int timeSearchTime, timeSearchPos;
-diff -uNr vdr-2.1.1.orig/osdbase.c vdr-2.1.1/osdbase.c
---- vdr-2.1.1.orig/osdbase.c	2013-05-24 18:19:31.000000000 +0800
-+++ vdr-2.1.1/osdbase.c	2013-08-26 13:00:06.301003864 +0800
+--- a/osdbase.c
++++ b/osdbase.c
 @@ -82,6 +82,7 @@
  {
    isMenu = true;
@@ -791,7 +783,7 @@ diff -uNr vdr-2.1.1.orig/osdbase.c vdr-2.1.1/osdbase.c
          s = buffer;
          }
       }
-@@ -477,20 +478,60 @@
+@@ -481,20 +482,60 @@
       }
  }
  
@@ -855,7 +847,7 @@ diff -uNr vdr-2.1.1.orig/osdbase.c vdr-2.1.1/osdbase.c
    return osContinue;
  }
  
-@@ -529,8 +570,8 @@
+@@ -533,8 +574,8 @@
          }
       }
    switch (int(Key)) {
@@ -866,9 +858,8 @@ diff -uNr vdr-2.1.1.orig/osdbase.c vdr-2.1.1/osdbase.c
      case kUp|k_Repeat:
      case kUp:   CursorUp();   break;
      case kDown|k_Repeat:
-diff -uNr vdr-2.1.1.orig/osdbase.h vdr-2.1.1/osdbase.h
---- vdr-2.1.1.orig/osdbase.h	2012-12-07 17:49:35.000000000 +0800
-+++ vdr-2.1.1/osdbase.h	2013-08-26 13:00:06.301003864 +0800
+--- a/osdbase.h
++++ b/osdbase.h
 @@ -30,6 +30,7 @@
                  osStopRecord,
                  osStopReplay,
@@ -886,10 +877,9 @@ diff -uNr vdr-2.1.1.orig/osdbase.h vdr-2.1.1/osdbase.h
    void DisplayHelp(bool Force = false);
  protected:
    void SetDisplayMenu(void);
-diff -uNr vdr-2.1.1.orig/po/de_DE.po vdr-2.1.1/po/de_DE.po
---- vdr-2.1.1.orig/po/de_DE.po	2013-08-21 17:35:15.000000000 +0800
-+++ vdr-2.1.1/po/de_DE.po	2013-08-26 13:00:06.305003864 +0800
-@@ -1429,3 +1429,70 @@
+--- a/po/de_DE.po
++++ b/po/de_DE.po
+@@ -1398,3 +1398,70 @@
  
  msgid "free"
  msgstr "frei"
@@ -960,10 +950,9 @@ diff -uNr vdr-2.1.1.orig/po/de_DE.po vdr-2.1.1/po/de_DE.po
 +
 +msgid "File already exists - overwrite?"
 +msgstr "Datei besteht bereits - überschreiben?"
-diff -uNr vdr-2.1.1.orig/po/fi_FI.po vdr-2.1.1/po/fi_FI.po
---- vdr-2.1.1.orig/po/fi_FI.po	2013-08-21 17:35:15.000000000 +0800
-+++ vdr-2.1.1/po/fi_FI.po	2013-08-26 13:00:06.305003864 +0800
-@@ -1433,3 +1433,70 @@
+--- a/po/fi_FI.po
++++ b/po/fi_FI.po
+@@ -1402,3 +1402,70 @@
  
  msgid "free"
  msgstr "vapaana"
@@ -1034,10 +1023,9 @@ diff -uNr vdr-2.1.1.orig/po/fi_FI.po vdr-2.1.1/po/fi_FI.po
 +
 +msgid "File already exists - overwrite?"
 +msgstr "Tiedosto on jo olemassa - ylikirjoitetaanko?"
-diff -uNr vdr-2.1.1.orig/recording.c vdr-2.1.1/recording.c
---- vdr-2.1.1.orig/recording.c	2013-08-21 21:03:38.000000000 +0800
-+++ vdr-2.1.1/recording.c	2013-08-26 13:00:06.305003864 +0800
-@@ -1072,6 +1072,16 @@
+--- a/recording.c
++++ b/recording.c
+@@ -1066,6 +1066,16 @@
    return NULL;
  }
  
@@ -1054,7 +1042,7 @@ diff -uNr vdr-2.1.1.orig/recording.c vdr-2.1.1/recording.c
  int cRecording::HierarchyLevels(void) const
  {
    const char *s = name;
-@@ -1364,7 +1374,7 @@
+@@ -1358,7 +1368,7 @@
       }
  }
  
@@ -1063,7 +1051,7 @@ diff -uNr vdr-2.1.1.orig/recording.c vdr-2.1.1/recording.c
  {
    LOCK_THREAD;
    cRecording *recording = GetByName(FileName);
-@@ -1372,7 +1382,7 @@
+@@ -1366,7 +1376,7 @@
       cThreadLock DeletedRecordingsLock(&DeletedRecordings);
       Del(recording, false);
       char *ext = strrchr(recording->fileName, '.');
@@ -1072,9 +1060,8 @@ diff -uNr vdr-2.1.1.orig/recording.c vdr-2.1.1/recording.c
          strncpy(ext, DELEXT, strlen(ext));
          if (access(recording->FileName(), F_OK) == 0) {
             recording->deleted = time(NULL);
-diff -uNr vdr-2.1.1.orig/recording.h vdr-2.1.1/recording.h
---- vdr-2.1.1.orig/recording.h	2013-03-04 22:01:23.000000000 +0800
-+++ vdr-2.1.1/recording.h	2013-08-26 13:00:06.305003864 +0800
+--- a/recording.h
++++ b/recording.h
 @@ -119,6 +119,7 @@
    const char *Title(char Delimiter = ' ', bool NewIndicator = false, int Level = -1) const;
    const cRecordingInfo *Info(void) const { return info; }
@@ -1101,9 +1088,8 @@ diff -uNr vdr-2.1.1.orig/recording.h vdr-2.1.1/recording.h
    void UpdateByName(const char *FileName);
    int TotalFileSizeMB(void);
    double MBperMinute(void);
-diff -uNr vdr-2.1.1.orig/shutdown.c vdr-2.1.1/shutdown.c
---- vdr-2.1.1.orig/shutdown.c	2013-02-18 18:33:26.000000000 +0800
-+++ vdr-2.1.1/shutdown.c	2013-08-26 13:00:06.305003864 +0800
+--- a/shutdown.c
++++ b/shutdown.c
 @@ -17,6 +17,7 @@
  #include "channels.h"
  #include "config.h"
@@ -1134,9 +1120,8 @@ diff -uNr vdr-2.1.1.orig/shutdown.c vdr-2.1.1/shutdown.c
  
    cTimer *timer = Timers.GetNextActiveTimer();
    time_t Next  = timer ? timer->StartTime() : 0;
-diff -uNr vdr-2.1.1.orig/svdrp.c vdr-2.1.1/svdrp.c
---- vdr-2.1.1.orig/svdrp.c	2013-02-17 21:18:01.000000000 +0800
-+++ vdr-2.1.1/svdrp.c	2013-08-26 13:00:06.305003864 +0800
+--- a/svdrp.c
++++ b/svdrp.c
 @@ -31,6 +31,7 @@
  #include "cutter.h"
  #include "device.h"
@@ -1251,9 +1236,8 @@ diff -uNr vdr-2.1.1.orig/svdrp.c vdr-2.1.1/svdrp.c
    else if (CMD("NEWC"))  CmdNEWC(s);
    else if (CMD("NEWT"))  CmdNEWT(s);
    else if (CMD("NEXT"))  CmdNEXT(s);
-diff -uNr vdr-2.1.1.orig/svdrp.h vdr-2.1.1/svdrp.h
---- vdr-2.1.1.orig/svdrp.h	2012-04-26 18:30:06.000000000 +0800
-+++ vdr-2.1.1/svdrp.h	2013-08-26 13:00:06.305003864 +0800
+--- a/svdrp.h
++++ b/svdrp.h
 @@ -56,6 +56,7 @@
    void PrintHelpTopics(const char **hp);
    void CmdCHAN(const char *Option);
@@ -1270,9 +1254,8 @@ diff -uNr vdr-2.1.1.orig/svdrp.h vdr-2.1.1/svdrp.h
    void CmdNEWC(const char *Option);
    void CmdNEWT(const char *Option);
    void CmdNEXT(const char *Option);
-diff -uNr vdr-2.1.1.orig/vdr.c vdr-2.1.1/vdr.c
---- vdr-2.1.1.orig/vdr.c	2013-06-10 22:28:43.000000000 +0800
-+++ vdr-2.1.1/vdr.c	2013-08-26 13:00:06.305003864 +0800
+--- a/vdr.c
++++ b/vdr.c
 @@ -45,6 +45,7 @@
  #include "dvbdevice.h"
  #include "eitscan.h"
@@ -1281,7 +1264,7 @@ diff -uNr vdr-2.1.1.orig/vdr.c vdr-2.1.1/vdr.c
  #include "i18n.h"
  #include "interface.h"
  #include "keys.h"
-@@ -1326,6 +1327,12 @@
+@@ -1331,6 +1332,12 @@
                else
                   Skins.Message(mtInfo, tr("Editing process finished"));
                }
@@ -1294,7 +1277,7 @@ diff -uNr vdr-2.1.1.orig/vdr.c vdr-2.1.1/vdr.c
             }
  
          // SIGHUP shall cause a restart:
-@@ -1341,7 +1348,7 @@
+@@ -1346,7 +1353,7 @@
                ShutdownHandler.countdown.Cancel();
             }
  
@@ -1303,7 +1286,7 @@ diff -uNr vdr-2.1.1.orig/vdr.c vdr-2.1.1/vdr.c
             // Handle housekeeping tasks
  
             // Shutdown:
-@@ -1390,6 +1397,7 @@
+@@ -1395,6 +1402,7 @@
  
    PluginManager.StopPlugins();
    cRecordControls::Shutdown();
@@ -1311,10 +1294,9 @@ diff -uNr vdr-2.1.1.orig/vdr.c vdr-2.1.1/vdr.c
    cCutter::Stop();
    delete Menu;
    cControl::Shutdown();
-diff -uNr vdr-2.1.1.orig/videodir.c vdr-2.1.1/videodir.c
---- vdr-2.1.1.orig/videodir.c	2013-08-23 20:28:06.000000000 +0800
-+++ vdr-2.1.1/videodir.c	2013-08-26 13:00:06.305003864 +0800
-@@ -257,6 +257,22 @@
+--- a/videodir.c
++++ b/videodir.c
+@@ -229,6 +229,22 @@
    return NULL;
  }
  
@@ -1337,9 +1319,8 @@ diff -uNr vdr-2.1.1.orig/videodir.c vdr-2.1.1/videodir.c
  void RemoveEmptyVideoDirectories(const char *IgnoreFiles[])
  {
    cVideoDirectory Dir;
-diff -uNr vdr-2.1.1.orig/videodir.h vdr-2.1.1/videodir.h
---- vdr-2.1.1.orig/videodir.h	2012-09-30 19:01:15.000000000 +0800
-+++ vdr-2.1.1/videodir.h	2013-08-26 13:00:06.305003864 +0800
+--- a/videodir.h
++++ b/videodir.h
 @@ -23,6 +23,7 @@
  bool VideoFileSpaceAvailable(int SizeMB);
  int VideoDiskSpace(int *FreeMB = NULL, int *UsedMB = NULL); // returns the used disk space in percent
