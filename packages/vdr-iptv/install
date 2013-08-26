@@ -4,7 +4,7 @@
 
 mkdir -p $INSTALL/usr/lib/vdr
 for i in $BUILD/$1*/lib$1*.so; do
-  cp $i $INSTALL/usr/lib/vdr/${i##*/}.2.0.0
+  cp $i $INSTALL/usr/lib/vdr/${i##*/}.2.1.1
 done
 
 for loc in $INCLUDED_LOCALES; do
@@ -18,6 +18,6 @@ done
 NAME=`echo $1 | sed s/vdr-//`
 mkdir -p $INSTALL/etc/vdr/plugins.d
 echo "PLUGIN=${NAME}" > $INSTALL/etc/vdr/plugins.d/50_$NAME
-echo "ENABLED=yes" >> $INSTALL/etc/vdr/plugins.d/50_$NAME
+echo "ENABLED=no" >> $INSTALL/etc/vdr/plugins.d/50_$NAME
 mkdir -p $INSTALL/etc/vdr/plugins/iptv
 cp -a $BUILD/$1*/iptv/* $INSTALL/etc/vdr/plugins/iptv
