@@ -1,0 +1,15 @@
+PKG_NAME=vdr-rotor
+PKG_VERSION=0.0.7
+PKG_URL="http://projects.vdr-developer.org/attachments/download/1088/rotorng-0.3.1.tar.gz"
+#PKG_URL_PROTO=git
+#PKG_URL_REV=53afeeb974fab96f2801ef65edcea607f23c925e
+#PKG_URL="git://projects.vdr-developer.org/vdr-plugin-pin.git"
+#PKG_VERSION=0.1.14+r${PKG_URL_REV}
+PKG_REV=1
+PKG_DEPENDS="vdr"
+PKG_BUILD_DEPENDS="toolchain"
+PKG_RUN_DEPENDS="$TARGET_LIBC"
+PKG_PRIORITY=optional
+PKG_SECTION=multimedia
+PKG_SHORTDESC="VDR -- Rotor plugin"
+PKG_LONGDESC="vdr- Next generation of a VDR plugin design to drive a diseqc rotor."
