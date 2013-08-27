@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPCTV 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-23 16:53+0800\n"
+"POT-Creation-Date: 2013-08-27 13:40+0800\n"
 "PO-Revision-Date: 2013-07-23 16:56+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -923,8 +923,7 @@ msgstr "请选择默认的启动项"
 #: packages/setup/scripts/select-target:8
 msgid ""
 "An openpliPC project for PC,work well with NVIDIA/Intel/AMD Display card"
-msgstr ""
-"一个基于PC的openpliPC项目，NVIDIA/Intel/AMD显卡可以工作得很好。"
+msgstr "一个基于PC的openpliPC项目，NVIDIA/Intel/AMD显卡可以工作得很好。"
 
 #: packages/setup/scripts/select-target:8
 msgid "The Video Disk Recorder,work well with AMD/NVIDIA display card"
@@ -1065,13 +1064,13 @@ msgstr ""
 msgid "Don't mount bind for OpenPCTV cache"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:228
+#: packages/setup/scripts/setup.sh:229
 msgid ""
-"Would you like to configure DiSEqC and scan channels for VDR/XBMC? If you "
-"use only enigma2, then you could not continue with the configuration."
+"Would you like to scan channels for VDR/XBMC(It'll take quiet long to do "
+"it)? If you only use enigma2, then you could continue without scanning "
+"channels for VDR/XBMC."
 msgstr ""
-"你想为VDR/SBMC配置DiSEqC及频道扫描吗？如果你只使用enigma2，那么你可以不再"
-"继续接下来的配置。"
+"你想为VDR/SBMC进行频道扫描吗？如果你只使用enigma2，那么你可以不用扫描了"
 
 #: packages/setup/scripts/setup.sh:238
 msgid "OpenPCTV configurator"
@@ -1150,10 +1149,13 @@ msgid "Update /etc/enigma2/satellites.xml..."
 msgstr "更新 /etc/enigma2/satellites.xml..."
 
 #: packages/setup/scripts/update-transponders:18
+msgid "update transponders for vdr-reelchannelscan"
+msgstr "为vdr-reelchannelscan下载卫星参数"
+
+#: packages/setup/scripts/update-transponders:20
 msgid "Convert transponders data sheet and update transponders for scan-s2..."
 msgstr "转换卫星参数并更新基于scan-s2的卫星参数"
 
-#: packages/setup/scripts/update-transponders:26
+#: packages/setup/scripts/update-transponders:29
 msgid "Done!"
 msgstr "完成！"
-

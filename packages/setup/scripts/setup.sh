@@ -225,9 +225,9 @@ systemctl stop vdr-backend
 /usr/bin/getcam
 /usr/bin/update-epg
 /usr/bin/update-transponders
-dialog --defaultno --clear --yesno "$(gettext "Would you like to configure DiSEqC and scan channels for VDR/XBMC? If you use only enigma2, then you could not continue with the configuration.")" 7 70
+/usr/bin/diseqcsetup
+dialog --defaultno --clear --yesno "$(gettext "Would you like to scan channels for VDR/XBMC(It'll take quiet long to do it)? If you only use enigma2, then you could continue without scanning channels for VDR/XBMC.")" 7 70
 if [ $? -eq 0 ]; then
-  /usr/bin/diseqcsetup
   /usr/bin/update-channels
 fi
 }

@@ -14,11 +14,14 @@ mkdir /tmp/transponders
 p7zip x /tmp/transponders.7z -o/tmp/transponders
 echo "$(gettext "Update /etc/enigma2/satellites.xml...")"
 unzip -o /tmp/dreambox.zip -d /etc/tuxbox
+[ ! -d /etc/vdr/plugins/transponders ] && mkdir -p /etc/vdr/plugins/transponders
+echo "$(gettext "update transponders for vdr-reelchannelscan")"
 [ ! -d /usr/share/transponders ] && mkdir -p /usr/share/transponders
 echo "$(gettext "Convert transponders data sheet and update transponders for scan-s2...")"
 for i in /tmp/transponders/*.ini; do
   sed -i 's///g' $i
   j=$(grep "^2=.*[E|W]" $i | sed 's/2=/S/g')
+  cp $i /etc/vdr/plugins/transponders/$j.tpl
   awk -F',|=' 'NR>=14{if($6=="DVB-S"){a="S1";}else{a="S2"};b=$2"000"; split($5,arr,""); split($5,arr,"");print a,b,$3,$4"000",arr[1]"/"arr[2],"AUTO",$7}' $i > /usr/share/transponders/$j.ini
 echo "$(gettext "Convert transponders data sheet:/usr/share/transponders/$j.ini")"
 done
