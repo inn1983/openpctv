@@ -1,0 +1,16 @@
+#!/bin/sh
+
+. config/options
+
+get_meta $1
+
+cd $BUILD/$1*
+do_autoconf
+do_configure --with-mount-prog=/bin/mount \
+             --with-umount-prog=/bin/umount \
+             --with-losetup-prog=/sbin/losetup \
+             --with-setfacl-prog=/usr/bin/setfacl
+
+
+make
+make_install
