@@ -1,0 +1,117 @@
+diff --git a/AUTHORS b/AUTHORS
+index 54f5e42..87b126b 100644
+--- a/AUTHORS
++++ b/AUTHORS
+@@ -578,6 +578,10 @@ Christoph Pfister <christophpfister@gmail.com>
+ Albert Lee <trisk+xine@acm.jhu.edu>
+   Solaris portability fixes (and other miscellaneous fixes)
+ 
++Christophe Thommeret <hftom@free.fr>
++  OpenGL 2.0 video out plugin, new VDPAU h264 decoder,
++  VDPAU bugfixes
++
+ Edgar Hucek <gimli|@dark-green.com>
+    VAAPI Support
+ 
+diff --git a/doc/README.dvb b/doc/README.dvb
+index 21e2a41..3feab71 100644
+--- a/doc/README.dvb
++++ b/doc/README.dvb
+@@ -133,5 +133,20 @@ at any time by pressing MENU4 (F3 in xine-ui, F4 in gxine). An OSD in the
+ top left hand corner will notify you of the status of the recording.
+ Pressing MENU4 again will resume recording.
+ 
++
++Using the Kaffeine DVB frontend
++-------------------------------
++
++Kaffeine has a very nice DVB (digital TV) frontend. However,
++since Qt/KDE 4, Kaffeine no longer has a built-in configuration GUI.
++The defaults are not really optimal. A suggested quick solution is:
++  * close Kaffeine
++  * build/install xine-ui
++  * do your configuration with that
++  * make Kaffeine use it too:
++    $ ln -sf ~/.xine/config ~/.kde4/share/apps/kaffeine/xine-config
++A similar trick applies to previewing videos in Gwenview via phonon:
++    $ ln -sf ~/.xine/config ~/.config/kde.org/Phonon-Xine.xine.conf
++
+ Have fun.
+ 
+diff --git a/src/combined/ffmpeg/xine_video.list b/src/combined/ffmpeg/xine_video.list
+index 009f4da..6364c45 100644
+--- a/src/combined/ffmpeg/xine_video.list
++++ b/src/combined/ffmpeg/xine_video.list
+@@ -70,7 +70,7 @@ WNV1			WNV1			Winnow Video
+ XL			VIXL			Miro/Pinnacle VideoXL
+ RT21			INDEO2			Indeo/RealTime 2
+ FPS1			FRAPS			Fraps
+-MPEG			MPEG1VIDEO		MPEG 1/2
++MPEG			MPEG2VIDEO		MPEG 1/2
+ CSCD			CSCD			CamStudio
+ AVS			AVS			AVS
+ ALGMM			MMVIDEO			American Laser Games MM
+diff --git a/src/video_out/video_out_opengl2.c b/src/video_out/video_out_opengl2.c
+index fed693a..aadfca1 100644
+--- a/src/video_out/video_out_opengl2.c
++++ b/src/video_out/video_out_opengl2.c
+@@ -1158,7 +1158,10 @@ static void opengl2_draw_video_bilinear( opengl2_driver_t *that, int guiw, int g
+ 
+ static void opengl2_draw( opengl2_driver_t *that, opengl2_frame_t *frame )
+ {
+-  glXMakeCurrent( that->display, that->drawable, that->context );
++  if ( !glXMakeCurrent( that->display, that->drawable, that->context ) ) {
++    xprintf( that->xine, XINE_VERBOSITY_LOG, "video_out_opengl2: display unavailable for rendering\n" );
++    return;
++  }
+ 
+   if ( !opengl2_check_textures_size( that, frame->width, frame->height ) ) {
+     glXMakeCurrent( that->display, None, NULL );
+diff --git a/src/xine-engine/video_out.c b/src/xine-engine/video_out.c
+index 5a31e22..7d92991 100644
+--- a/src/xine-engine/video_out.c
++++ b/src/xine-engine/video_out.c
+@@ -1364,21 +1364,11 @@ static void overlay_and_display_frame (vos_t *this,
+     pthread_mutex_unlock( &img->stream->current_extra_info_lock );
+   }
+ 
+-  if (this->overlay_source) {
+-    this->overlay_source->multiple_overlay_blend (this->overlay_source,
+-						  vpts,
+-						  this->driver, img,
+-						  this->video_loop_running && this->overlay_enabled);
+-  }
+-
+-  vo_grab_current_frame (this, img, vpts);
+-
+-  this->driver->display_frame (this->driver, img);
+-
+-  /*
+-   * Wake up xine_play if it's waiting for a frame
++  /* xine_play() may be called from a thread that has the display device locked
++   * (eg an X window event handler). If it is waiting for a frame we better wake
++   * it up _before_ we start displaying, or the first 10 seconds of video are lost.
+    */
+-  if( this->last_frame->is_first ) {
++  if( img->is_first ) {
+     pthread_mutex_lock(&this->streams_lock);
+     for (ite = xine_list_front(this->streams); ite;
+          ite = xine_list_next(this->streams, ite)) {
+@@ -1394,6 +1384,17 @@ static void overlay_and_display_frame (vos_t *this,
+     pthread_mutex_unlock(&this->streams_lock);
+   }
+ 
++  if (this->overlay_source) {
++    this->overlay_source->multiple_overlay_blend (this->overlay_source,
++						  vpts,
++						  this->driver, img,
++						  this->video_loop_running && this->overlay_enabled);
++  }
++
++  vo_grab_current_frame (this, img, vpts);
++
++  this->driver->display_frame (this->driver, img);
++
+   this->redraw_needed = 0;
+ }
+ 
