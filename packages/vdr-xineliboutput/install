@@ -37,7 +37,7 @@ done
 
 mkdir -p $INSTALL/etc/vdr/plugins/xineliboutput
 cp -P examples/allowed_hosts.conf $INSTALL/etc/vdr/plugins/xineliboutput
-[ "$SERVICES" = yes ] && echo '127.0.0.1' >>$INSTALL/etc/vdr/plugins/xineliboutput/allowed_hosts.conf
+[ "$SERVICES" = no ] && echo '127.0.0.1' >>$INSTALL/etc/vdr/plugins/xineliboutput/allowed_hosts.conf
 
 NAME=`echo $1 | sed s/vdr-//`
 mkdir -p $INSTALL/etc/vdr/plugins.d

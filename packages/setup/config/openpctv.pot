@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-26 13:35+0800\n"
+"POT-Creation-Date: 2013-08-27 13:58+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1025,10 +1025,11 @@ msgstr ""
 msgid "Don't mount bind for OpenPCTV cache"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:228
+#: packages/setup/scripts/setup.sh:229
 msgid ""
-"Would you like to configure DiSEqC and scan channels for VDR/XBMC? If you "
-"use only enigma2, then you could not continue with the configuration."
+"Would you like to scan channels for VDR/XBMC(It'll take quiet long to do "
+"it)? If you only use enigma2, then you could continue without scanning "
+"channels for VDR/XBMC."
 msgstr ""
 
 #: packages/setup/scripts/setup.sh:238
@@ -1107,9 +1108,13 @@ msgid "Update /etc/enigma2/satellites.xml..."
 msgstr ""
 
 #: packages/setup/scripts/update-transponders:18
+msgid "update transponders for vdr-reelchannelscan"
+msgstr ""
+
+#: packages/setup/scripts/update-transponders:20
 msgid "Convert transponders data sheet and update transponders for scan-s2..."
 msgstr ""
 
-#: packages/setup/scripts/update-transponders:26
+#: packages/setup/scripts/update-transponders:29
 msgid "Done!"
 msgstr ""

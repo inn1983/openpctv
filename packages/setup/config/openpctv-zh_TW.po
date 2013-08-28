@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openpctv 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-23 16:53+0800\n"
+"POT-Creation-Date: 2013-08-27 13:40+0800\n"
 "PO-Revision-Date: 2013-07-28 09:19+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -1054,10 +1054,11 @@ msgstr ""
 msgid "Don't mount bind for OpenPCTV cache"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:228
+#: packages/setup/scripts/setup.sh:229
 msgid ""
-"Would you like to configure DiSEqC and scan channels for VDR/XBMC? If you "
-"use only enigma2, then you could not continue with the configuration."
+"Would you like to scan channels for VDR/XBMC(It'll take quiet long to do "
+"it)? If you only use enigma2, then you could continue without scanning "
+"channels for VDR/XBMC."
 msgstr ""
 
 #: packages/setup/scripts/setup.sh:238
@@ -1138,9 +1139,14 @@ msgid "Update /etc/enigma2/satellites.xml..."
 msgstr "更新 /etc/enigma2/satellites.xml..."
 
 #: packages/setup/scripts/update-transponders:18
+#, fuzzy
+msgid "update transponders for vdr-reelchannelscan"
+msgstr "為scan-s2下載衛星參數"
+
+#: packages/setup/scripts/update-transponders:20
 msgid "Convert transponders data sheet and update transponders for scan-s2..."
 msgstr "轉換衛星參數並更新基於scan-s2的衛星參數"
 
-#: packages/setup/scripts/update-transponders:26
+#: packages/setup/scripts/update-transponders:29
 msgid "Done!"
 msgstr "完成！"

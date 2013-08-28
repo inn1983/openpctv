@@ -21,3 +21,4 @@ do_install sbin/fstrim
 do_install sbin/mkfs
 do_install sbin/fdisk
 do_install sbin/cfdisk
+do_install sbin/losetup

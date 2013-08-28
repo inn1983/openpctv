@@ -3,7 +3,8 @@
 . config/options
 
 cd $BUILD/$1*
-
+aclocal --force --verbose -I m4
+do_autoconf
 do_configure \
             --enable-lib \
             --enable-util \
