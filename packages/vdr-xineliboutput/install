@@ -42,7 +42,7 @@ cp -P examples/allowed_hosts.conf $INSTALL/etc/vdr/plugins/xineliboutput
 NAME=`echo $1 | sed s/vdr-//`
 mkdir -p $INSTALL/etc/vdr/plugins.d
 echo "PLUGIN=${NAME}" > $INSTALL/etc/vdr/plugins.d/50_$NAME
-echo "OPTIONS=\"--local=none --remote=127.0.0.1:37890 --primary\"" >> $INSTALL/etc/vdr/plugins.d/50_$NAME
+echo "OPTIONS=\"-l sxfe -A alsa -V vaapi -f\"" >> $INSTALL/etc/vdr/plugins.d/50_$NAME
 echo "ENABLED=no" >> $INSTALL/etc/vdr/plugins.d/50_$NAME
 
 if pkg_uses $1 bluray; then

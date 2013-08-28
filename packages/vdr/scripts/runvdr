@@ -12,6 +12,22 @@ elif [ $CAM = "VDR-SC" ]; then
   /usr/bin/getcam auto
   systemctl stop oscam
 fi
+if [ -f /sys/class/drm/card0/device/vendor ]; then
+  VENDOR=$(cat /sys/class/drm/card0/device/vendor)
+  if [ $VENDOR = "0x8086" ]; then
+    sed -i -e 's/^OPTIONS=.*/OPTIONS="-l sxfe -A alsa -V vaapi -f"/' \
+	-e 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_xineliboutput
+    sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_softhddevice
+    sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_skinflat
+    sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_skinnopacity
+  else
+    sed -i -e 's/^OPTIONS=.*/OPTIONS="-l sxfe -A alsa -V vdpau -f"/' \
+        -e 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_xineliboutput
+    sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_softhddevice
+    sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_skinflat
+    sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_skinnopacity
+  fi
+fi
 sync
 sleep 0.1
 for file in /etc/vdr/plugins.d/*; do
