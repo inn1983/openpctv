@@ -1,0 +1,12 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+
+setup_toolchain host
+
+make CC="$CC"
+
+mkdir -p .install/usr/bin
+cp -P epgen .install/usr/bin
