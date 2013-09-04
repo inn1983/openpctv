@@ -1,7 +1,6 @@
 [Unit]
 Description=TV streaming server
 After=syslog.target pvr.service
-ConditionPathExists=/run/geexbox/pvr/tvheadend
 
 [Service]
 User=root
@@ -13,4 +12,4 @@ TTYPath=/dev/tty10
 Restart=always
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=tvheadend.target
