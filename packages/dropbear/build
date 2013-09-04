@@ -4,12 +4,7 @@
 
 cd $BUILD/$1*
 
-do_configure --disable-bundled-libtom \
-             --enable-zlib \
-             --disable-pam \
-             --enable-openpty \
-             --enable-syslog \
-             --enable-shadow 
+do_configure 
 
 PROGRAMS="dropbear dropbearkey"
 pkg_uses $1 scp && PROGRAMS="$PROGRAMS scp"
