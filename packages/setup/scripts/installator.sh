@@ -362,7 +362,7 @@ format_if_needed () {
     if ( [ -x /usr/sbin/lvm ] && lvm lvdisplay $LOC_DEV >/dev/null 2>&1 ); then
       LOC_MKFS_TYPE=`dialog --stdout --aspect 15 --backtitle "$BACKTITLE" \
         --title "$MSG_INSTALL_PART_TYPE" --menu "$MSG_INSTALL_PART_TYPE_DESC"\
-        0 0 0 ext2 "Linux ext2" ext3 "Linux ext3" ext4 "Linux ext4" vfat "Dos vfat"` \
+        0 0 0 ext4 "Linux ext4" ext3 "Linux ext3" ext2 "Linux ext2" vfat "Dos vfat"` \
         || exit 1
     else
       case `sfdisk --print-id ${LOC_DEV%%[0-9]*} ${LOC_DEV#${LOC_DEV%%[0-9]*}}` in
@@ -375,7 +375,7 @@ format_if_needed () {
         83) # Linux
           LOC_MKFS_TYPE=`dialog --stdout --aspect 15 --backtitle "$BACKTITLE" \
             --title "$MSG_INSTALL_PART_TYPE" --menu "$MSG_INSTALL_PART_TYPE_DESC"\
-            0 0 0 ext2 "Linux ext2" ext3 "Linux ext3" ext4 "Linux ext4"` \
+            0 0 0 ext4 "Linux ext4" ext3 "Linux ext3" ext2 "Linux ext2"` \
             || exit 1
           ;;
       esac
@@ -486,9 +486,9 @@ install_grub (){
   # Detect others OS and ask for MBR only in the case where OpenPCTV
   # is not installed on a removable device.
   # Note: lvm is not recognized as removable no matter what it's installed on!
-  # FIXME: should be possible to have lvm boot on removable device as well, but with less priority
+  # should be possible to have lvm boot on removable device as well, but with less priority
   dialog --aspect 15 --backtitle "$BACKTITLE" --title "$MSG_BOOTLOADER" \
-         --defaultno --yesno "\n'$LOC_DEV' $MSG_LOADER_MULTIBOOT_BEGIN $supported_os_list\n${MSG_LOADER_MULTIBOOT_END}\n" 0 0 1>&2 \
+         --yesno "\n'$LOC_DEV' $MSG_LOADER_MULTIBOOT_BEGIN $supported_os_list\n${MSG_LOADER_MULTIBOOT_END}\n" 0 0 1>&2 \
          && MBR=yes
 
   sed /usr/share/installator/grub.cfg \
@@ -522,14 +522,17 @@ has_ssd_with_tirm() {
   return $RETVAL
 }
 
-VERSION=1.0
 DISTRO=OpenPCTV
 INSTALL_FSYS=flat
 BACKTITLE="OpenPCTV $VERSION installator"
 
 # should not be present in install mode, but in case of ...
-initctl stop automountd >/dev/null 2>&1
+systemctl stop automountd >/dev/null 2>&1
 killall -9 automountd >/dev/null 2>&1
+
+for i in /media/*; do
+  umount "$i" >/dev/null 2>&1
+done
 
 setup_lang
 

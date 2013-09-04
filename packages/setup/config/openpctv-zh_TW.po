@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openpctv 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-27 13:40+0800\n"
+"POT-Creation-Date: 2013-09-01 19:56+0800\n"
 "PO-Revision-Date: 2013-07-28 09:19+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -485,59 +485,47 @@ msgid "Support all the TBS devices"
 msgstr "支援全系列的TBS設備"
 
 #: packages/setup/scripts/installator.sh:12
-#: packages/setup/scripts/installator.sh.new:12
 msgid "Not found or not a block device."
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:13
-#: packages/setup/scripts/installator.sh.new:13
 msgid "does not have any corresponding BIOS drive."
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:16
-#: packages/setup/scripts/installator.sh.new:16
 msgid "Keymap selection"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:18
-#: packages/setup/scripts/installator.sh.new:18
 msgid "Choose Keymap"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:19
-#: packages/setup/scripts/installator.sh.new:19
 msgid "Which keymap do you want to use ?"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:22
-#: packages/setup/scripts/installator.sh.new:22
 msgid "Warning"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:23
-#: packages/setup/scripts/installator.sh.new:23
 msgid "ERROR"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:25
-#: packages/setup/scripts/installator.sh.new:25
 msgid "No disks found on this system.\\nCheck again ?"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:26
-#: packages/setup/scripts/installator.sh.new:26
 msgid "refresh list"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:28
 #: packages/setup/scripts/installator.sh:37
-#: packages/setup/scripts/installator.sh.new:28
-#: packages/setup/scripts/installator.sh.new:37
 msgid "Installation device"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:29
-#: packages/setup/scripts/installator.sh.new:29
 msgid ""
 "You are going to install OpenPCTV. For this you will need an empty partition "
 "with about 5 GB of free space. Be careful to choose the right disk! We won't "
@@ -545,17 +533,14 @@ msgid ""
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:31
-#: packages/setup/scripts/installator.sh.new:31
 msgid "Microsoft FAT16/32 partition or Linux EXT2/3 partition"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:33
-#: packages/setup/scripts/installator.sh.new:33
 msgid "Please edit your partition table to create a"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:34
-#: packages/setup/scripts/installator.sh.new:34
 msgid ""
 "with about 5 GB of free space. Don't forget to set the bootable flag to this "
 "partition. Remember to commit the changes when done. We won't take "
@@ -563,110 +548,89 @@ msgid ""
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:39
-#: packages/setup/scripts/installator.sh.new:39
 msgid "You don't have any"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:40
-#: packages/setup/scripts/installator.sh.new:40
 msgid ""
 "partition on your system. Please create a partition first using for example "
 "cfdisk."
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:41
-#: packages/setup/scripts/installator.sh.new:41
 #, fuzzy
 msgid "Where do you want to install OpenPCTV ?"
 msgstr "我現在不想要安裝。"
 
 #: packages/setup/scripts/installator.sh:42
-#: packages/setup/scripts/installator.sh.new:42
 msgid "is not a valid block device."
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:44
-#: packages/setup/scripts/installator.sh.new:44
 msgid "Partition is not formated"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:45
-#: packages/setup/scripts/installator.sh.new:45
 msgid "Partition format type"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:46
-#: packages/setup/scripts/installator.sh.new:46
 msgid "is not supported in your partition type"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:47
-#: packages/setup/scripts/installator.sh.new:47
 msgid "Partition is already formated"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:48
 #: packages/setup/scripts/installator.sh:50
-#: packages/setup/scripts/installator.sh.new:48
-#: packages/setup/scripts/installator.sh.new:50
 msgid "Formatting"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:49
-#: packages/setup/scripts/installator.sh.new:49
 #, fuzzy
 msgid "Do you want to format"
 msgstr "是否保存這些設置?"
 
 #: packages/setup/scripts/installator.sh:51
-#: packages/setup/scripts/installator.sh.new:51
 msgid "...\\nPlease wait"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:53
-#: packages/setup/scripts/installator.sh.new:53
 msgid "Linux partition type"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:54
-#: packages/setup/scripts/installator.sh.new:54
 msgid "Which type of Linux partition you want ?"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:56
-#: packages/setup/scripts/installator.sh.new:56
 msgid ""
 "As you don't have formatting tool installed, I won't be able to format the "
 "partition."
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:57
-#: packages/setup/scripts/installator.sh.new:57
 msgid "Hopefully it is already formatted."
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:58
-#: packages/setup/scripts/installator.sh.new:58
 msgid "should be formatted as"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:60
-#: packages/setup/scripts/installator.sh.new:60
 msgid "Failed to mount"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:62
-#: packages/setup/scripts/installator.sh.new:62
 msgid "Installing... Please wait"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:65
-#: packages/setup/scripts/installator.sh.new:65
 msgid "Support for HDTV through X.Org ?"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:66
-#: packages/setup/scripts/installator.sh.new:66
 msgid ""
 "It appears that this version of OpenPCTV has been compiled with support for "
 "HDTV through X.Org video server. Remember that X.Org is only useful if you "
@@ -677,22 +641,18 @@ msgid ""
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:69
-#: packages/setup/scripts/installator.sh.new:69
 msgid "Bootloader"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:71
-#: packages/setup/scripts/installator.sh.new:71
 msgid "Couldn't find my GRUB partition representation"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:72
-#: packages/setup/scripts/installator.sh.new:72
 msgid "Couldn't install GRUB bootloader!"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:74
-#: packages/setup/scripts/installator.sh.new:74
 msgid ""
 "is now a OpenPCTV partition. To boot from it, you will need to install a "
 "bootloader. I can install one for you. If you have any other operating "
@@ -702,52 +662,40 @@ msgid ""
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:75
-#: packages/setup/scripts/installator.sh.new:75
 msgid "Do you want to install me to install the boot loader (GRUB) for you ?"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:76
-#: packages/setup/scripts/installator.sh.new:76
 msgid ""
 "is now a OpenPCTV partition. I didn't recognize any other OS on your system, "
 "want me to install boot loader on your MBR ?"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:77
-#: packages/setup/scripts/installator.sh.new:77
 msgid "You must install a boot loader to boot OpenPCTV"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:80
-#: packages/setup/scripts/installator.sh.new:80
 msgid "Installation Log"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:81
-#: packages/setup/scripts/installator.sh.new:81
 msgid ""
 "Do you want to check installation logs ? (it is probably useful for debug "
 "purpose only)"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:84
-#: packages/setup/scripts/installator.sh.new:84
 msgid "Have Fun!"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:85
-#: packages/setup/scripts/installator.sh.new:85
 msgid "OpenPCTV is now installed on"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:86
 #, fuzzy
 msgid "Do you want to reboot? Or press Alt+F2 to configure by manual"
-msgstr "是否編輯diseqc.conf?"
-
-#: packages/setup/scripts/installator.sh.new:86
-#, fuzzy
-msgid "Do you want to proceed with its configuration ?"
 msgstr "是否編輯diseqc.conf?"
 
 #: packages/setup/scripts/monitor.sh:8
@@ -1054,11 +1002,11 @@ msgstr ""
 msgid "Don't mount bind for OpenPCTV cache"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:229
+#: packages/setup/scripts/setup.sh:228
 msgid ""
-"Would you like to scan channels for VDR/XBMC(It'll take quiet long to do "
-"it)? If you only use enigma2, then you could continue without scanning "
-"channels for VDR/XBMC."
+"Would you like to configure the DiSEqC and scan channels for VDR/XBMC(It'll "
+"take quiet long to do it)?  If you only use Enigma2, you needn't proceed "
+"with its configuration."
 msgstr ""
 
 #: packages/setup/scripts/setup.sh:238
@@ -1150,3 +1098,7 @@ msgstr "轉換衛星參數並更新基於scan-s2的衛星參數"
 #: packages/setup/scripts/update-transponders:29
 msgid "Done!"
 msgstr "完成！"
+
+#, fuzzy
+#~ msgid "Do you want to proceed with its configuration ?"
+#~ msgstr "是否編輯diseqc.conf?"
