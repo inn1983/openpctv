@@ -1,7 +1,5 @@
 PKG_NAME=MPlayer
 PKG_VERSION=1.1.1
-#PKG_VERSION=1.1.1-r36265
-#PKG_URL="http://pkgbuild.com/~foutrelis/sources/mplayer-vaapi/mplayer-vaapi-36265.tar.xz"
 PKG_URL="http://www.mplayerhq.hu/MPlayer/releases/MPlayer-${PKG_VERSION}.tar.xz"
 PKG_REV=1
 PKG_DEPENDS="zlib ffmpeg freetype alsa-lib fribidi libcdio faad2 libpng enca libass fontconfig libvorbis libtheora libmad"
