@@ -11,10 +11,17 @@ zh_epgurl=http://epg.xltvrobbs.net/epg/dm800/gemini800.tgz
 
 case $LANG in
   zh*)
-    wget $zh_epgurl -O /tmp/epg.tgz || exit
+    for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
+      if wget $zh_epgurl -O /tmp/epg.tgz; then
+        break
+      else
+        sleep 1
+      fi
+    done
     tar zvfx /tmp/epg.tgz -C /tmp || exit
     cp /tmp/gemini.epg.dat /video/epg.dat
     rm /tmp/epg.tgz /tmp/gemini.epg.dat
+    epgen -i /video/epg.dat -o /video/epg.xml
     ;;
   *)
     exit
