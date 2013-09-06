@@ -1,6 +1,6 @@
 [Unit]
 Description=Update EPG
-After=oscam.service
+After=network.target
 
 [Service]
 Type=oneshot
