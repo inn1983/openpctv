@@ -49,4 +49,4 @@ export DISPLAY=":0.0"
 # special for germany :
 [ "$LANG" = de_DE.UTF-8 ] && export VDR_CHARSET_OVERRIDE=”ISO-8859-15″
 chvt 4
-eval vdr -g /tmp --vfat $PLUGINS -v /video -c /etc/vdr -p 2001 --lirc -s shutdown
+eval vdr -g /tmp --vfat $PLUGINS -v /video -c /etc/vdr --lirc -s shutdown

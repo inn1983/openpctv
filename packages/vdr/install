@@ -36,6 +36,8 @@ cp $ROOT/$PACKAGES/${PKG_NAME}/config/setup.conf $INSTALL/etc/vdr
 cp $ROOT/$PACKAGES/${PKG_NAME}/config/remote.conf $INSTALL/etc/vdr
 cp $ROOT/$PACKAGES/${PKG_NAME}/config/commands.conf $INSTALL/etc/vdr
 
+cp $ROOT/$PACKAGES/${PKG_NAME}/config/channels.xml $INSTALL/etc/vdr/plugins
+
 mkdir $INSTALL/video
 
 mkdir -p $INSTALL/lib/systemd/system/vdr.target.wants
