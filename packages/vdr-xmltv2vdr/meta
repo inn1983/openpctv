@@ -1,7 +1,7 @@
 PKG_NAME="vdr-xmltv2vdr"
 #PKG_VERSION="30903cc0"
 PKG_URL_PROTO=git
-PKG_URL_REV=26fc8262
+PKG_URL_REV=e9c18b3
 PKG_URL="git://projects.vdr-developer.org/vdr-plugin-xmltv2vdr.git"
 PKG_VERSION=0.1.2+r${PKG_URL_REV}
 PKG_REV="1"

@@ -32,4 +32,4 @@ fi
 # special for germany :
 #[ "$LANG" = de_DE.UTF-8 ] && export VDR_CHARSET_OVERRIDE=”ISO-8859-15″
 #chvt 4
-eval vdr -g /tmp --vfat $CAMPLUGIN -Pxvdr -v /video -c /etc/vdr -p 2001 -s shutdown
+eval vdr -g /tmp --vfat $CAMPLUGIN -Pxvdr -v /video -c /etc/vdr -s shutdown
