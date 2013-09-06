@@ -1,0 +1,1968 @@
+diff --git a/AUTHORS b/AUTHORS
+index d4c757f..54f5e42 100644
+--- a/AUTHORS
++++ b/AUTHORS
+@@ -578,4 +578,7 @@ Christoph Pfister <christophpfister@gmail.com>
+ Albert Lee <trisk+xine@acm.jhu.edu>
+   Solaris portability fixes (and other miscellaneous fixes)
+ 
++Edgar Hucek <gimli|@dark-green.com>
++   VAAPI Support
++
+ (let us know if we've forgotten anyone)
+diff --git a/ChangeLog b/ChangeLog
+index 38c6b4e..70bc0b8 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,3 +1,6 @@
++xine-lib (1.2.3.1) 2013-??-??
++  * Distribute one missing header file. No VAAPI plugin without this.
++
+ xine-lib (1.2.3) 2013-05-29
+   * Add VAAPI HW decoding support
+   * Add OpenGL 2.0 output plugin
+diff --git a/contrib/nosefart/dis6502.c b/contrib/nosefart/dis6502.c
+index ff552d2..ad6340b 100644
+--- a/contrib/nosefart/dis6502.c
++++ b/contrib/nosefart/dis6502.c
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/dis6502.h b/contrib/nosefart/dis6502.h
+index a02fd73..b839228 100644
+--- a/contrib/nosefart/dis6502.h
++++ b/contrib/nosefart/dis6502.h
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/fds_snd.c b/contrib/nosefart/fds_snd.c
+index fe2e4d6..a653087 100644
+--- a/contrib/nosefart/fds_snd.c
++++ b/contrib/nosefart/fds_snd.c
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/fds_snd.h b/contrib/nosefart/fds_snd.h
+index 9d20b5b..10e5d18 100644
+--- a/contrib/nosefart/fds_snd.h
++++ b/contrib/nosefart/fds_snd.h
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/log.c b/contrib/nosefart/log.c
+index 8935a59..5887116 100644
+--- a/contrib/nosefart/log.c
++++ b/contrib/nosefart/log.c
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/log.h b/contrib/nosefart/log.h
+index da2548c..965806d 100644
+--- a/contrib/nosefart/log.h
++++ b/contrib/nosefart/log.h
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/memguard.c b/contrib/nosefart/memguard.c
+index 35b3ef6..0b9864b 100644
+--- a/contrib/nosefart/memguard.c
++++ b/contrib/nosefart/memguard.c
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/memguard.h b/contrib/nosefart/memguard.h
+index d80d6fb..cc28042 100644
+--- a/contrib/nosefart/memguard.h
++++ b/contrib/nosefart/memguard.h
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/mmc5_snd.c b/contrib/nosefart/mmc5_snd.c
+index 7269fa9..9032c33 100644
+--- a/contrib/nosefart/mmc5_snd.c
++++ b/contrib/nosefart/mmc5_snd.c
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/mmc5_snd.h b/contrib/nosefart/mmc5_snd.h
+index 256cc22..640f892 100644
+--- a/contrib/nosefart/mmc5_snd.h
++++ b/contrib/nosefart/mmc5_snd.h
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/nes6502.c b/contrib/nosefart/nes6502.c
+index d84bae9..6d48e7d 100644
+--- a/contrib/nosefart/nes6502.c
++++ b/contrib/nosefart/nes6502.c
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/nes6502.h b/contrib/nosefart/nes6502.h
+index 8713304..eeab276 100644
+--- a/contrib/nosefart/nes6502.h
++++ b/contrib/nosefart/nes6502.h
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/nes_apu.c b/contrib/nosefart/nes_apu.c
+index 474e2ca..9774e3a 100644
+--- a/contrib/nosefart/nes_apu.c
++++ b/contrib/nosefart/nes_apu.c
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/nes_apu.h b/contrib/nosefart/nes_apu.h
+index 9efbb56..1779dcc 100644
+--- a/contrib/nosefart/nes_apu.h
++++ b/contrib/nosefart/nes_apu.h
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/nsf.c b/contrib/nosefart/nsf.c
+index 69f7754..700aeb3 100644
+--- a/contrib/nosefart/nsf.c
++++ b/contrib/nosefart/nsf.c
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/nsf.h b/contrib/nosefart/nsf.h
+index 79ce55c..117e031 100644
+--- a/contrib/nosefart/nsf.h
++++ b/contrib/nosefart/nsf.h
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/osd.h b/contrib/nosefart/osd.h
+index 38b9480..e25b2eb 100644
+--- a/contrib/nosefart/osd.h
++++ b/contrib/nosefart/osd.h
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/types.h b/contrib/nosefart/types.h
+index c029306..f0401b3 100644
+--- a/contrib/nosefart/types.h
++++ b/contrib/nosefart/types.h
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/version.h b/contrib/nosefart/version.h
+index 38d69c6..52e2821 100644
+--- a/contrib/nosefart/version.h
++++ b/contrib/nosefart/version.h
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/vrc7_snd.c b/contrib/nosefart/vrc7_snd.c
+index 42cff01..0680fee 100644
+--- a/contrib/nosefart/vrc7_snd.c
++++ b/contrib/nosefart/vrc7_snd.c
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/vrc7_snd.h b/contrib/nosefart/vrc7_snd.h
+index fd3880b..4feaa2f 100644
+--- a/contrib/nosefart/vrc7_snd.h
++++ b/contrib/nosefart/vrc7_snd.h
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/vrcvisnd.c b/contrib/nosefart/vrcvisnd.c
+index b1f26fe..a4bdea1 100644
+--- a/contrib/nosefart/vrcvisnd.c
++++ b/contrib/nosefart/vrcvisnd.c
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/contrib/nosefart/vrcvisnd.h b/contrib/nosefart/vrcvisnd.h
+index 7666fec..81c3400 100644
+--- a/contrib/nosefart/vrcvisnd.h
++++ b/contrib/nosefart/vrcvisnd.h
+@@ -11,7 +11,8 @@
+ ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ ** Library General Public License for more details.  To obtain a 
+ ** copy of the GNU Library General Public License, write to the Free 
+-** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++** Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
++** MA 02110-1301, USA.
+ **
+ ** Any permitted reproduction of these routines, in whole or in part,
+ ** must bear this legend.
+diff --git a/debian/changelog b/debian/changelog
+index c59b5cf..6e1bc3a 100644
+--- a/debian/changelog
++++ b/debian/changelog
+@@ -1,10 +1,10 @@
+-xine-lib-1.2 (1.2.2+hg-0) experimental; urgency=low
++xine-lib-1.2 (1.2.3+hg-0) experimental; urgency=low
+ 
+   * Hg snapshot.
+   * Adjust for libxine2.
+   * libxine-dev → libxine2-dev.
+ 
+- -- Darren Salt <linux@youmustbejoking.demon.co.uk>  Wed, 25 Jan 2012 00:53:33 +0000
++ -- Darren Salt <linux@youmustbejoking.demon.co.uk>  Sun, 30 Jun 2013 17:30:14 +0100
+ 
+ xine-lib (1.1.21~hg-0) unstable; urgency=low
+ 
+diff --git a/debian/control b/debian/control
+index 60e11e0..4aca689 100644
+--- a/debian/control
++++ b/debian/control
+@@ -11,6 +11,7 @@ Build-Depends: debhelper (>= 5.0.1), binutils (>= 2.12.90.0.9), pkg-config,
+ 	libxcb-xv0-dev, libxcb-shm0-dev, libxcb-shape0-dev,
+ 	libxinerama-dev, libxv-dev, libxvmc-dev, libxt-dev,
+ 	libvdpau-dev | nvidia-libvdpau-dev,
++	libva-dev,
+ 	libasound2-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386],
+ 	libcam-dev [kfreebsd-i386 kfreebsd-amd64],
+ 	libaa1-dev, libcaca-dev, libmodplug-dev,
+diff --git a/m4/input.m4 b/m4/input.m4
+index 21d7e21..0401bd9 100644
+--- a/m4/input.m4
++++ b/m4/input.m4
+@@ -79,8 +79,10 @@ AC_DEFUN([XINE_INPUT_PLUGINS], [
+     dnl libsmbclient
+     XINE_ARG_ENABLE([samba], [Enable support for the Samba plugin])
+     if test x"$enable_samba" != x"no"; then
+-        AC_CHECK_LIB([smbclient], [smbc_init],
+-                     [AC_CHECK_HEADERS([libsmbclient.h], [have_samba=yes LIBSMBCLIENT_LIBS="-lsmbclient"])])
++        PKG_CHECK_MODULES([LIBSMBCLIENT], [smbclient],
++          [have_samba=yes],
++          AC_MSG_RESULT(*** All libsmbclient dependent parts will be disabled ***))
++        AC_SUBST(LIBSMBCLIENT_CFLAGS)
+         AC_SUBST(LIBSMBCLIENT_LIBS)
+         if test x"$hard_enable_samba" = x"yes" && test x"$have_samba" != x"yes"; then
+             AC_MSG_ERROR([Samba support requested, but Samba not found])
+diff --git a/m4/xine.m4 b/m4/xine.m4
+index db530e2..c9955ca 100644
+--- a/m4/xine.m4
++++ b/m4/xine.m4
+@@ -14,7 +14,7 @@ dnl GNU General Public License for more details.
+ dnl
+ dnl You should have received a copy of the GNU General Public License
+ dnl along with this program; if not, write to the Free Software
+-dnl Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++dnl Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+ dnl
+ dnl
+ dnl As a special exception to the GNU General Public License, if you
+diff --git a/src/combined/ffmpeg/ff_audio_decoder.c b/src/combined/ffmpeg/ff_audio_decoder.c
+index 205a643..1a80b9d 100644
+--- a/src/combined/ffmpeg/ff_audio_decoder.c
++++ b/src/combined/ffmpeg/ff_audio_decoder.c
+@@ -46,6 +46,8 @@
+ 
+ #define AUDIOBUFSIZE (64 * 1024)
+ 
++#define MAX_CHANNELS 6
++
+ typedef struct {
+   audio_decoder_class_t   decoder_class;
+ 
+@@ -59,11 +61,6 @@ typedef struct ff_audio_decoder_s {
+ 
+   xine_stream_t    *stream;
+ 
+-  int               output_open;
+-  int               audio_channels;
+-  int               audio_bits;
+-  int               audio_sample_rate;
+-
+   unsigned char    *buf;
+   int               bufsize;
+   int               size;
+@@ -78,6 +75,29 @@ typedef struct ff_audio_decoder_s {
+ #if AVAUDIO > 3
+   AVFrame          *av_frame;
+ #endif
++
++  /* decoder settings */
++  int               ff_channels;
++  int               ff_bits;
++  int               ff_sample_rate;
++  int64_t           ff_map;
++
++  /* channel mixer settings */
++  /* map[ao_channel] = ff_channel */
++  int8_t            map[MAX_CHANNELS];
++  int8_t            left[4], right[4];
++  /* how many left[] / right[] entries are in use */
++  int               front_mixes;
++  /* volume adjustment */
++  int               downmix_shift;
++
++  /* audio out settings */
++  int               output_open;
++  int               ao_channels;
++  int               new_mode;
++  int               ao_mode;
++  int               ao_caps;
++
+ } ff_audio_decoder_t;
+ 
+ 
+@@ -163,11 +183,11 @@ static void ff_audio_init_codec(ff_audio_decoder_t *this, unsigned int codec_typ
+   /* Current ffmpeg audio decoders usually use 16 bits/sample
+    * buf->decoder_info[2] can't be used as it doesn't refer to the output
+    * bits/sample for some codecs (e.g. MS ADPCM) */
+-  this->audio_bits = 16;
++  this->ff_bits = 16;
+ 
+-  this->context->bits_per_sample = this->audio_bits;
+-  this->context->sample_rate = this->audio_sample_rate;
+-  this->context->channels    = this->audio_channels;
++  this->context->bits_per_sample = this->ff_bits;
++  this->context->sample_rate = this->ff_sample_rate;
++  this->context->channels    = this->ff_channels;
+   this->context->codec_id    = this->codec->id;
+   this->context->codec_type  = this->codec->type;
+   this->context->codec_tag   = _x_stream_info_get(this->stream, XINE_STREAM_INFO_AUDIO_FOURCC);
+@@ -237,8 +257,8 @@ static void ff_handle_header_buffer(ff_audio_decoder_t *this, buf_element_t *buf
+   }
+ 
+   if(buf->decoder_flags & BUF_FLAG_STDHEADER) {
+-    this->audio_sample_rate = buf->decoder_info[1];
+-    this->audio_channels    = buf->decoder_info[3];
++    this->ff_sample_rate = buf->decoder_info[1];
++    this->ff_channels    = buf->decoder_info[3];
+ 
+     if(this->size) {
+       audio_header = (xine_waveformatex *)this->buf;
+@@ -259,15 +279,15 @@ static void ff_handle_header_buffer(ff_audio_decoder_t *this, buf_element_t *buf
+ 
+     switch(codec_type) {
+     case BUF_AUDIO_14_4:
+-      this->audio_sample_rate = 8000;
+-      this->audio_channels    = 1;
++      this->ff_sample_rate = 8000;
++      this->ff_channels    = 1;
+ 
+       this->context->block_align = 240;
+       break;
+     case BUF_AUDIO_28_8:
+-      this->audio_sample_rate = _X_BE_16(&this->buf[0x30]);
+-      this->audio_channels    = this->buf[0x37];
+-      /* this->audio_bits = buf->content[0x35] */
++      this->ff_sample_rate = _X_BE_16(&this->buf[0x30]);
++      this->ff_channels    = this->buf[0x37];
++      /* this->ff_bits = buf->content[0x35] */
+ 
+       this->context->block_align = _X_BE_32(&this->buf[0x18]);
+ 
+@@ -284,7 +304,7 @@ static void ff_handle_header_buffer(ff_audio_decoder_t *this, buf_element_t *buf
+ 
+       xprintf(this->stream->xine, XINE_VERBOSITY_LOG,
+               "ffmpeg_audio_dec: 28_8 audio channels %d bits %d sample rate %d block align %d\n",
+-              this->audio_channels, this->audio_bits, this->audio_sample_rate,
++              this->ff_channels, this->ff_bits, this->ff_sample_rate,
+               this->context->block_align);
+       break;
+     case BUF_AUDIO_COOK:
+@@ -295,15 +315,15 @@ static void ff_handle_header_buffer(ff_audio_decoder_t *this, buf_element_t *buf
+ 
+         version = _X_BE_16 (this->buf+4);
+         if (version == 4) {
+-          this->audio_sample_rate = _X_BE_16 (this->buf+48);
+-          this->audio_bits = _X_BE_16 (this->buf+52);
+-          this->audio_channels = _X_BE_16 (this->buf+54);
++          this->ff_sample_rate = _X_BE_16 (this->buf+48);
++          this->ff_bits = _X_BE_16 (this->buf+52);
++          this->ff_channels = _X_BE_16 (this->buf+54);
+           data_len = _X_BE_32 (this->buf+67);
+           extradata = 71;
+         } else {
+-          this->audio_sample_rate = _X_BE_16 (this->buf+54);
+-          this->audio_bits = _X_BE_16 (this->buf+58);
+-          this->audio_channels = _X_BE_16 (this->buf+60);
++          this->ff_sample_rate = _X_BE_16 (this->buf+54);
++          this->ff_bits = _X_BE_16 (this->buf+58);
++          this->ff_channels = _X_BE_16 (this->buf+60);
+           data_len = _X_BE_32 (this->buf+74);
+           extradata = 78;
+         }
+@@ -311,7 +331,7 @@ static void ff_handle_header_buffer(ff_audio_decoder_t *this, buf_element_t *buf
+ 
+         xprintf(this->stream->xine, XINE_VERBOSITY_LOG,
+                 "ffmpeg_audio_dec: cook audio channels %d bits %d sample rate %d block align %d\n",
+-                this->audio_channels, this->audio_bits, this->audio_sample_rate,
++                this->ff_channels, this->ff_bits, this->ff_sample_rate,
+                 this->context->block_align);
+ 
+         if (extradata + data_len > this->size)
+@@ -363,11 +383,146 @@ static void ff_audio_output_close(ff_audio_decoder_t *this)
+     this->output_open = 0;
+   }
+ 
+-  this->audio_bits = 0;
+-  this->audio_sample_rate = 0;
+-  this->audio_channels = 0;
++  this->ff_sample_rate = 0;
++  this->ao_mode = 0;
+ }
+ 
++static void ff_map_channels (ff_audio_decoder_t *this) {
++  uint64_t ff_map;
++  int caps = this->stream->audio_out->get_capabilities (this->stream->audio_out);
++
++  /* safety kludge for very old libavcodec */
++#ifdef AV_CH_FRONT_LEFT
++  ff_map = this->context->channel_layout;
++  if (!ff_map) /* wma2 bug */
++#endif
++    ff_map = (1 << this->context->channels) - 1;
++
++  if ((caps != this->ao_caps) || (ff_map != this->ff_map)) {
++    int i, j;
++    /* ff: see names[] below; xine: L R RL RR C LFE */
++    const int8_t base_map[] = {0, 1, 4, 5, 2, 3, -1, -1, -1, 2, 3};
++    int8_t name_map[MAX_CHANNELS];
++    const int modes[] = {
++      AO_CAP_MODE_MONO, AO_CAP_MODE_STEREO,
++      AO_CAP_MODE_4CHANNEL, AO_CAP_MODE_4_1CHANNEL,
++      AO_CAP_MODE_5CHANNEL, AO_CAP_MODE_5_1CHANNEL
++    };
++    const int num_modes = sizeof (modes) / sizeof (modes[0]);
++    const int8_t mode_channels[]   = {1, 2, 4, 6, 6, 6};
++    const int8_t wishlist[] = {
++      0, 1, 2, 3, 4, 5, /* mono */
++      1, 2, 3, 4, 5, 0, /* stereo */
++      5, 4, 3, 2, 1, 0, /* center + lfe */
++      4, 5, 2, 3, 1, 0, /* center */
++      3, 5, 2, 4, 1, 0, /* lfe */
++      2, 3, 4, 5, 1, 0  /* 4.0 */
++    };
++    const int8_t *tries;
++
++    this->ao_caps     = caps;
++    this->ff_map      = ff_map;
++    this->ff_channels = this->context->channels;
++
++    /* silence out */
++    for (i = 0; i < MAX_CHANNELS; i++)
++      this->map[i] = -1;
++    for (i = 0; i < 4; i++)
++      this->left[i] = this->right[i] = -1;
++
++    /* set up raw map and ao mode wishlist */
++    if (this->ff_channels == 1) { /* mono */
++      name_map[0] = 2;
++      this->left[0] = this->right[0] = 0;
++      tries = wishlist + 0 * num_modes;
++    } else if (this->ff_channels == 2) { /* stereo */
++      name_map[0] = 0;
++      name_map[1] = 1;
++      this->left[0] = 0;
++      this->right[0] = 1;
++      tries = wishlist + 1 * num_modes;
++    } else {
++      for (i = j = 0; i < sizeof (base_map) / sizeof (base_map[0]); i++) {
++        if ((ff_map >> i) & 1) {
++          int8_t target = base_map[i];
++          if ((target >= 0) && (this->map[target] < 0))
++            this->map[target] = j;
++          name_map[j] = i; /* for debug output below */
++          j++;
++        }
++      }
++      this->left[0]  = this->map[0] < 0 ? 0 : this->map[0];
++      this->map[0]   = -1;
++      this->right[0] = this->map[1] < 0 ? 1 : this->map[1];
++      this->map[1]   = -1;
++      tries = wishlist
++        + (2 + (this->map[4] < 0 ? 2 : 0) + (this->map[5] < 0 ? 1 : 0)) * num_modes;
++    }
++    this->front_mixes = 1;
++
++    /* find ao mode */
++    for (i = 0; i < num_modes; i++) if (caps & modes[tries[i]]) break;
++    i = i == num_modes ? 1 : tries[i];
++    this->new_mode = modes[i];
++    this->ao_channels = mode_channels[i];
++
++    /* mix center to front */
++    if ((this->map[4] >= 0) && !((0x30 >> i) & 1)) {
++      this->left[this->front_mixes]    = this->map[4];
++      this->right[this->front_mixes++] = this->map[4];
++      this->map[4] = -1;
++    }
++    /* mix lfe to front */
++    if ((this->map[5] >= 0) && !((0x28 >> i) & 1)) {
++      this->left[this->front_mixes]    = this->map[5];
++      this->right[this->front_mixes++] = this->map[5];
++      this->map[5] = -1;
++    }
++    /* mix surround to front */
++    if ((this->map[2] >= 0) && (this->map[3] >= 0) && !((0x3c >> i) & 1)) {
++      this->left[this->front_mixes]    = this->map[2];
++      this->right[this->front_mixes++] = this->map[3];
++      this->map[2] = -1;
++      this->map[3] = -1;
++    }
++
++    this->downmix_shift = this->front_mixes > 1 ? 1 : 0;
++    /* this will be on the safe side but usually too soft?? */
++#if 0
++    if (this->front_mixes > 2)
++      this->downmix_shift = 2;
++#endif
++
++    if (this->stream->xine->verbosity >= XINE_VERBOSITY_LOG) {
++      const int8_t *names[] = {
++        "left", "right", "center", "bass",
++        "rear left", "rear right",
++        "half left", "half right",
++        "rear center",
++        "side left", "side right"
++      };
++      int8_t buf[200];
++      int p = sprintf (buf, "ff_audio_dec: channel layout: ");
++      int8_t *indx = this->left;
++      for (i = 0; i < 2; i++) {
++        buf[p++] = '[';
++        for (j = 0; j < this->front_mixes; j++)
++          p += sprintf (buf + p, "%s%s", names[name_map[indx[j]]], (j < this->front_mixes - 1) ? " + " : "");
++        buf[p++] = ']';
++        buf[p++] = ' ';
++        indx = this->right;
++      }
++      for (i = 2; i < this->ao_channels; i++)
++        p += sprintf (buf + p, "[%s] ",
++          ((this->map[i] < 0) || (this->map[i] > 5)) ? (const int8_t *)"-" : names[name_map[this->map[i]]]);
++      buf[p++] = '\n';
++      fwrite (buf, 1, p, stdout);
++    }
++  }
++}
++
++#define CLIP_16(v) ((v + 0x8000) & ~0xffff ? (v >> 31) ^ 0x7fff : v)
++
+ static int ff_audio_decode (ff_audio_decoder_t *this,
+   int16_t *decode_buffer, int *decode_buffer_size, uint8_t *buf, int size) {
+   int consumed;
+@@ -408,106 +563,250 @@ static int ff_audio_decode (ff_audio_decoder_t *this,
+   avpkt.flags = AV_PKT_FLAG_KEY;
+ #  if AVAUDIO > 3
+   int got_frame;
+-  const float gain = this->class->gain;
++  float gain = this->class->gain;
+   if (!this->av_frame)
+     this->av_frame = avcodec_alloc_frame ();
+ 
+   consumed = avcodec_decode_audio4 (this->context, this->av_frame, &got_frame, &avpkt);
+   if ((consumed >= 0) && got_frame) {
++    /* setup may have altered while decoding */
++    ff_map_channels (this);
++
+     int16_t *q = decode_buffer;
+     int samples = this->av_frame->nb_samples;
+-    int channels = this->context->channels;
+-    int bytes, i, j;
++    int channels = this->ao_channels;
++    int bytes, i, j, shift = this->downmix_shift;
+     /* limit buffer */
+-    if (channels > 12)
+-      channels = 12;
+     if (*decode_buffer_size < samples * channels * 2)
+       samples = *decode_buffer_size / (channels * 2);
+     bytes = samples * channels * 2;
+     *decode_buffer_size = bytes;
+-    /* convert to packed int16_t. I guess there is something
+-       in libavfilter but also another dependency... */
++    /* TJ. convert to packed int16_t while respecting the user's speaker arrangement.
++       I tried to speed up and not to pull in libswresample. */
++    for (i = 2; i < channels; i++) if (this->map[i] < 0) {
++      /* clear if there is an upmix mute channel */
++      memset (q, 0, bytes);
++      break;
++    }
++    /* For mono output, downmix to stereo first */
++    if ((channels == 1) && (this->ff_channels > 1))
++      channels = 2;
++    gain /= (float)(1 << shift);
+     switch (this->context->sample_fmt) {
++#define MIX_AUDIO(stype,planar,idx,num,dindx) {\
++    stype *p1, *p2, *p3, *p4;\
++    int i, sstep;\
++    int8_t *x = idx;\
++    int16_t *dptr = (int16_t *)decode_buffer + dindx;\
++    if (planar) {\
++      p1 = (stype *)this->av_frame->extended_data[x[0]];\
++      sstep = 1;\
++    } else {\
++      p1 = (stype *)this->av_frame->extended_data[0] + x[0];\
++      sstep = this->ff_channels;\
++    }\
++    if (num == 1) {\
++      if (p1) for (i = 0; i < samples; i++) {\
++        int32_t v = MIX_FIX(*p1);\
++        p1       += sstep;\
++        v       >>= shift;\
++        *dptr     = (v);\
++        dptr     += channels;\
++      }\
++    } else {\
++      if (planar)\
++        p2 = (stype *)this->av_frame->extended_data[x[1]];\
++      else\
++        p2 = (stype *)this->av_frame->extended_data[0] + x[1];\
++      if (num == 2) {\
++        if (p1 && p2) for (i = 0; i < samples; i++) {\
++          int32_t v = MIX_FIX(*p1);\
++          p1       += sstep;\
++          v        += MIX_FIX(*p2);\
++          p2       += sstep;\
++          v       >>= shift;\
++          *dptr     = CLIP_16(v);\
++          dptr     += channels;\
++        }\
++      } else {\
++        if (planar)\
++          p3 = (stype *)this->av_frame->extended_data[x[2]];\
++        else\
++          p3 = (stype *)this->av_frame->extended_data[0] + x[2];\
++        if (num == 3) {\
++          if (p1 && p2 && p3) for (i = 0; i < samples; i++) {\
++            int32_t v = MIX_FIX(*p1);\
++            p1       += sstep;\
++            v        += MIX_FIX(*p2);\
++            p2       += sstep;\
++            v        += MIX_FIX(*p3);\
++            p3       += sstep;\
++            v       >>= shift;\
++            *dptr     = CLIP_16(v);\
++            dptr     += channels;\
++          }\
++        } else {\
++          if (planar)\
++            p4 = (stype *)this->av_frame->extended_data[x[3]];\
++          else\
++            p4 = (stype *)this->av_frame->extended_data[0] + x[3];\
++          if (p1 && p2 && p3 && p4) for (i = 0; i < samples; i++) {\
++            int32_t v = MIX_FIX(*p1);\
++            p1       += sstep;\
++            v        += MIX_FIX(*p2);\
++            p2       += sstep;\
++            v        += MIX_FIX(*p3);\
++            p3       += sstep;\
++            v        += MIX_FIX(*p4);\
++            p4       += sstep;\
++            v       >>= shift;\
++            *dptr     = CLIP_16(v);\
++            dptr     += channels;\
++          }\
++        }\
++      }\
++    }\
++  }
++#define MIX_FIX(v) (((int16_t)(v)<<8)^0x8000)
+       case AV_SAMPLE_FMT_U8P:
+-        if (channels > 1) {
+-          uint8_t *p[12];
+-          for (i = 0; i < channels; i++)
+-            p[i] = (uint8_t *)this->av_frame->extended_data[i];
+-          for (i = samples; i; i--) {
+-            for (j = 0; j < channels; j++)
+-              *q++ = ((uint16_t)(*p[j]++) << 8) ^ 0x8000;
+-          }
+-          break;
+-        }
++        MIX_AUDIO (uint8_t, 1, this->left,  this->front_mixes, 0);
++        MIX_AUDIO (uint8_t, 1, this->right, this->front_mixes, 1);
++        for (j = 0; j < channels; j++) if (this->map[j] >= 0)
++          MIX_AUDIO (uint8_t, 1, this->map + j, 1, j);
++      break;
+       case AV_SAMPLE_FMT_U8:
+-        {
+-          uint8_t *p = (uint8_t *)this->av_frame->extended_data[0];
+-          for (i = samples * channels; i; i--)
+-            *q++ = ((uint16_t)(*p++) << 8) ^ 0x8000;
+-        }
++        MIX_AUDIO (uint8_t, 0, this->left,  this->front_mixes, 0);
++        MIX_AUDIO (uint8_t, 0, this->right, this->front_mixes, 1);
++        for (j = 0; j < channels; j++) if (this->map[j] >= 0)
++          MIX_AUDIO (uint8_t, 0, this->map + j, 1, j);
+       break;
++#undef MIX_FIX
++#define MIX_FIX(v) (v)
+       case AV_SAMPLE_FMT_S16P:
+-        if (channels > 1) {
+-          int16_t *p[12];
+-          for (i = 0; i < channels; i++)
+-            p[i] = (int16_t *)this->av_frame->extended_data[i];
+-          for (i = samples; i; i--) {
+-            for (j = 0; j < channels; j++)
+-              *q++ = *p[j]++;
+-          }
+-          break;
+-        }
++        MIX_AUDIO (int16_t, 1, this->left,  this->front_mixes, 0);
++        MIX_AUDIO (int16_t, 1, this->right, this->front_mixes, 1);
++        for (j = 0; j < channels; j++) if (this->map[j] >= 0)
++          MIX_AUDIO (int16_t, 1, this->map + j, 1, j);
++      break;
+       case AV_SAMPLE_FMT_S16:
+-        xine_fast_memcpy (q, this->av_frame->extended_data[0], bytes);
++        MIX_AUDIO (int16_t, 0, this->left,  this->front_mixes, 0);
++        MIX_AUDIO (int16_t, 0, this->right, this->front_mixes, 1);
++        for (j = 0; j < channels; j++) if (this->map[j] >= 0)
++          MIX_AUDIO (int16_t, 0, this->map + j, 1, j);
+       break;
++#undef MIX_FIX
++#define MIX_FIX(v) ((v)>>16)
+       case AV_SAMPLE_FMT_S32P:
+-        if (channels > 1) {
+-          int32_t *p[12];
+-          for (i = 0; i < channels; i++)
+-            p[i] = (int32_t *)this->av_frame->extended_data[i];
+-          for (i = samples; i; i--) {
+-            for (j = 0; j < channels; j++)
+-              *q++ = *p[j]++ >> 16;
+-          }
+-          break;
+-        }
++        MIX_AUDIO (int32_t, 1, this->left,  this->front_mixes, 0);
++        MIX_AUDIO (int32_t, 1, this->right, this->front_mixes, 1);
++        for (j = 0; j < channels; j++) if (this->map[j] >= 0)
++          MIX_AUDIO (int32_t, 1, this->map + j, 1, j);
++      break;
+       case AV_SAMPLE_FMT_S32:
+-        {
+-          int32_t *p = (int32_t *)this->av_frame->extended_data[0];
+-          for (i = samples * channels; i; i--)
+-            *q++ = *p++ >> 16;
+-        }
++        MIX_AUDIO (int32_t, 0, this->left,  this->front_mixes, 0);
++        MIX_AUDIO (int32_t, 0, this->right, this->front_mixes, 1);
++        for (j = 0; j < channels; j++) if (this->map[j] >= 0)
++          MIX_AUDIO (int32_t, 0, this->map + j, 1, j);
+       break;
++#undef MIX_FIX
++#undef MIX_AUDIO
++#define MIX_AUDIO(stype,planar,idx,num,dindx) {\
++    stype *p1, *p2, *p3, *p4;\
++    int i, sstep;\
++    int8_t *x = idx;\
++    int16_t *dptr = (int16_t *)decode_buffer + dindx;\
++    if (planar) {\
++      p1 = (stype *)this->av_frame->extended_data[x[0]];\
++      sstep = 1;\
++    } else {\
++      p1 = (stype *)this->av_frame->extended_data[0] + x[0];\
++      sstep = this->ff_channels;\
++    }\
++    if (num == 1) {\
++      if (p1) for (i = 0; i < samples; i++) {\
++        int32_t v = (*p1) * gain;\
++        p1       += sstep;\
++        *dptr     = CLIP_16(v);\
++        dptr     += channels;\
++      }\
++    } else {\
++      if (planar)\
++        p2 = (stype *)this->av_frame->extended_data[x[1]];\
++      else\
++        p2 = (stype *)this->av_frame->extended_data[0] + x[1];\
++      if (num == 2) {\
++        if (p1 && p2) for (i = 0; i < samples; i++) {\
++          int32_t v = (*p1 + *p2) * gain;\
++          p1       += sstep;\
++          p2       += sstep;\
++          *dptr     = CLIP_16(v);\
++          dptr     += channels;\
++        }\
++      } else {\
++        if (planar)\
++          p3 = (stype *)this->av_frame->extended_data[x[2]];\
++        else\
++          p3 = (stype *)this->av_frame->extended_data[0] + x[2];\
++        if (num == 3) {\
++          if (p1 && p2 && p3) for (i = 0; i < samples; i++) {\
++            int32_t v = (*p1 + *p2 + *p3) * gain;\
++            p1       += sstep;\
++            p2       += sstep;\
++            p3       += sstep;\
++            *dptr     = CLIP_16(v);\
++            dptr     += channels;\
++          }\
++        } else {\
++          if (planar)\
++            p4 = (stype *)this->av_frame->extended_data[x[3]];\
++          else\
++            p4 = (stype *)this->av_frame->extended_data[0] + x[3];\
++          if (p1 && p2 && p3 && p4) for (i = 0; i < samples; i++) {\
++            int32_t v = (*p1 + *p2 + *p3 + *p4) * gain;\
++            p1       += sstep;\
++            p2       += sstep;\
++            p3       += sstep;\
++            p4       += sstep;\
++            *dptr     = CLIP_16(v);\
++            dptr     += channels;\
++          }\
++        }\
++      }\
++    }\
++  }
+       case AV_SAMPLE_FMT_FLTP: /* the most popular one */
+-        if (channels > 1) {
+-          float *p[12];
+-          for (i = 0; i < channels; i++)
+-            p[i] = (float *)this->av_frame->extended_data[i];
+-          for (i = samples; i; i--) {
+-            for (j = 0; j < channels; j++) {
+-              int v = *p[j]++ * gain;
+-              *q++ = (v + 0x8000) & ~0xffff ? (v >> 31) ^ 0x7fff : v;
+-            }
+-          }
+-          break;
+-        }
++        MIX_AUDIO (float, 1, this->left,  this->front_mixes, 0);
++        MIX_AUDIO (float, 1, this->right, this->front_mixes, 1);
++        for (j = 0; j < channels; j++) if (this->map[j] >= 0)
++          MIX_AUDIO (float, 1, this->map + j, 1, j);
++      break;
+       case AV_SAMPLE_FMT_FLT:
+-        {
+-          float *p = (float *)this->av_frame->extended_data[0];
+-          for (i = samples * channels; i; i--) {
+-            int v = *p++ * gain;
+-            *q++ = (v + 0x8000) & ~0xffff ? (v >> 31) ^ 0x7fff : v;
+-          }
+-        }
++        MIX_AUDIO (float, 0, this->left,  this->front_mixes, 0);
++        MIX_AUDIO (float, 0, this->right, this->front_mixes, 1);
++        for (j = 0; j < channels; j++) if (this->map[j] >= 0)
++          MIX_AUDIO (float, 0, this->map + j, 1, j);
+       break;
+       default: ;
+     }
++    if (channels > this->ao_channels) {
++      /* final mono downmix */
++      int16_t *p = decode_buffer;
++      q = p;
++      for (i = samples; i; i--) {
++        int v = *p++;
++        v += *p++;
++        *q++ = v >> 1;
++      }
++      *decode_buffer_size = samples * 2;
++    }
+   } else *decode_buffer_size = 0;
+ #  else
+   consumed = avcodec_decode_audio3 (this->context, decode_buffer, decode_buffer_size, &avpkt);
++  ff_map_channels (this);
+ #  endif
+ #else
+   consumed = avcodec_decode_audio2 (this->context, decode_buffer, decode_buffer_size, buf, size);
++  ff_map_channels (this);
+ #endif
+ 
+   if (consumed < 0) {
+@@ -567,23 +866,25 @@ static void ff_audio_decode_data (audio_decoder_t *this_gen, buf_element_t *buf)
+       while (this->size>=0) {
+         decode_buffer_size = AVCODEC_MAX_AUDIO_FRAME_SIZE;
+ 
+-	bytes_consumed =
+-          ff_audio_decode(this,
+-                          (int16_t *)this->decode_buffer, &decode_buffer_size,
+-                          &this->buf[offset], this->size);
++        bytes_consumed = ff_audio_decode (this, (int16_t *)this->decode_buffer, &decode_buffer_size,
++          &this->buf[offset], this->size);
+ 
+-        if (bytes_consumed<0) {
+-          this->size=0;
+-          return;
+-        } else if (bytes_consumed == 0 && decode_buffer_size == 0) {
++        if (bytes_consumed < 0)
++          break;
++
++        offset     += bytes_consumed;
++        this->size -= bytes_consumed;
++
++        if (decode_buffer_size == 0) {
++          if (bytes_consumed)
++            continue;
+           if (offset)
+             memmove(this->buf, &this->buf[offset], this->size);
+           return;
+         }
+ 
+-        if (this->audio_bits        != this->context->bits_per_sample ||
+-            this->audio_sample_rate != this->context->sample_rate ||
+-            this->audio_channels    != this->context->channels) {
++        if (this->ff_sample_rate != this->context->sample_rate ||
++            this->ao_mode        != this->new_mode) {
+           xprintf(this->stream->xine, XINE_VERBOSITY_LOG,
+                   _("ffmpeg_audio_dec: codec parameters changed\n"));
+           /* close if it was open, and always trigger 1 new open attempt below */
+@@ -591,12 +892,11 @@ static void ff_audio_decode_data (audio_decoder_t *this_gen, buf_element_t *buf)
+         }
+ 
+ 	if (!this->output_open) {
+-	  if (!this->audio_bits || !this->audio_sample_rate || !this->audio_channels) {
+-	    this->audio_bits = this->context->bits_per_sample;
+-	    this->audio_sample_rate = this->context->sample_rate;
+-	    this->audio_channels = this->context->channels;
++	  if (!this->ff_sample_rate || !this->ao_mode) {
++	    this->ff_sample_rate = this->context->sample_rate;
++	    this->ao_mode        = this->new_mode;
+ 	  }
+-	  if (!this->audio_bits || !this->audio_sample_rate || !this->audio_channels) {
++	  if (!this->ff_sample_rate || !this->new_mode) {
+ 	    xprintf(this->stream->xine, XINE_VERBOSITY_LOG,
+ 		    _("ffmpeg_audio_dec: cannot read codec parameters from packet\n"));
+ 	    /* try to decode next packet. */
+@@ -606,8 +906,8 @@ static void ff_audio_decode_data (audio_decoder_t *this_gen, buf_element_t *buf)
+ 	    buf->pts = 0;
+ 	  } else {
+ 	    this->output_open = (this->stream->audio_out->open) (this->stream->audio_out,
+-								 this->stream, this->audio_bits, this->audio_sample_rate,
+-								 _x_ao_channels2mode(this->audio_channels));
++								 this->stream, 16, this->ff_sample_rate,
++								 this->ao_mode);
+ 	    if (!this->output_open) {
+ 	      xprintf(this->stream->xine, XINE_VERBOSITY_LOG,
+ 		      "ffmpeg_audio_dec: error opening audio output\n");
+@@ -617,6 +917,84 @@ static void ff_audio_decode_data (audio_decoder_t *this_gen, buf_element_t *buf)
+ 	  }
+ 	}
+ 
++#if AVAUDIO < 4
++        /* Old style postprocessing */
++        if (codec_type == BUF_AUDIO_WMAPRO) {
++          /* the above codecs output float samples, not 16-bit integers */
++          int samples = decode_buffer_size / sizeof(float);
++          float gain  = this->class->gain;
++          float *p    = (float *)this->decode_buffer;
++          int16_t *q  = (int16_t *)this->decode_buffer;
++          int i;
++          for (i = samples; i; i--) {
++            int v = *p++ * gain;
++            *q++ = CLIP_16 (v);
++          }
++          decode_buffer_size = samples * 2;
++        }
++
++        if ((this->ao_channels != this->ff_channels) || (this->ao_channels > 2)) {
++          /* Channel reordering and/or mixing */
++          int samples     = decode_buffer_size / (this->ff_channels * 2);
++          int channels    = this->ao_channels;
++          int ff_channels = this->ff_channels;
++          int16_t *p      = (int16_t *)this->decode_buffer;
++          int16_t *q      = p;
++          int shift       = this->downmix_shift, i, j;
++          /* downmix mono output to stereo first */
++          if ((channels == 1) && (ff_channels > 1))
++            channels = 2;
++          /* move to end of buf for in-place editing */
++          p += AVCODEC_MAX_AUDIO_FRAME_SIZE - decode_buffer_size;
++          if (p >= q + decode_buffer_size)
++            xine_fast_memcpy (p, q, decode_buffer_size);
++          else
++            memmove (p, q, decode_buffer_size);
++          /* not very optimized but it only hits when playing multichannel audio through
++             old ffmpeg - and its still better than previous code there */
++          if (this->front_mixes < 2) {
++            /* just reorder and maybe upmix */
++            for (i = samples; i; i--) {
++              q[0] = p[0];
++              q[1] = p[this->right[0]];
++              for (j = 2; j < channels; j++)
++                q[j] = this->map[j] < 0 ? 0 : p[this->map[j]];
++              p += ff_channels;
++              q += channels;
++            }
++          } else {
++            /* downmix */
++            for (i = samples; i; i--) {
++              int left  = p[0];
++              int right = p[this->right[0]];
++              for (j = 1; j < this->front_mixes; j++) {
++                left  += p[this->left[j]];
++                right += p[this->right[j]];
++              }
++              left  >>= shift;
++              q[0]    = CLIP_16 (left);
++              right >>= shift;
++              q[1]    = CLIP_16 (right);
++              for (j = 2; j < channels; j++)
++                q[j] = this->map[j] < 0 ? 0 : p[this->map[j]] >> shift;
++              p += ff_channels;
++              q += channels;
++            }
++          }
++          /* final mono downmix */
++          if (channels > this->ao_channels) {
++            p = (int16_t *)this->decode_buffer;
++            q = p;
++            for (i = samples; i; i--) {
++              int v = *p++;
++              v += *p++;
++              *q++ = v >> 1;
++            }
++          }
++          decode_buffer_size = samples * this->ao_channels * 2;
++        }
++#endif
++
+         /* dispatch the decoded audio */
+         out = 0;
+         while (out < decode_buffer_size) {
+@@ -636,40 +1014,16 @@ static void ff_audio_decode_data (audio_decoder_t *this_gen, buf_element_t *buf)
+           }
+ 
+           /* fill up this buffer */
+-#if AVAUDIO < 4
+-          if (codec_type == BUF_AUDIO_WMAPRO) {
+-            /* the above codecs output float samples, not 16-bit integers */
+-            int bytes_per_sample = sizeof(float);
+-            if (((decode_buffer_size - out) * 2 / bytes_per_sample) > audio_buffer->mem_size)
+-              bytes_to_send = audio_buffer->mem_size * bytes_per_sample / 2;
+-            else
+-              bytes_to_send = decode_buffer_size - out;
+-
+-            int16_t *int_buffer = calloc(1, bytes_to_send * 2 / bytes_per_sample);
+-            int i;
+-            for (i = 0; i < (bytes_to_send / bytes_per_sample); i++) {
+-              float *float_sample = (float *)&this->decode_buffer[i * bytes_per_sample + out];
+-              int_buffer[i] = (int16_t)lrintf(*float_sample * 32768.);
+-            }
++          if ((decode_buffer_size - out) > audio_buffer->mem_size)
++            bytes_to_send = audio_buffer->mem_size;
++          else
++            bytes_to_send = decode_buffer_size - out;
+ 
+-            out += bytes_to_send;
+-            bytes_to_send = bytes_to_send * 2 / bytes_per_sample;
+-            xine_fast_memcpy(audio_buffer->mem, int_buffer, bytes_to_send);
+-            free(int_buffer);
+-          } else
+-#endif
+-          {
+-            if ((decode_buffer_size - out) > audio_buffer->mem_size)
+-              bytes_to_send = audio_buffer->mem_size;
+-            else
+-              bytes_to_send = decode_buffer_size - out;
+-
+-            xine_fast_memcpy(audio_buffer->mem, &this->decode_buffer[out], bytes_to_send);
+-            out += bytes_to_send;
+-          }
++          xine_fast_memcpy(audio_buffer->mem, &this->decode_buffer[out], bytes_to_send);
++          out += bytes_to_send;
+ 
+           /* byte count / 2 (bytes / sample) / channels */
+-          audio_buffer->num_frames = bytes_to_send / 2 / this->audio_channels;
++          audio_buffer->num_frames = bytes_to_send / 2 / this->ao_channels;
+ 
+           audio_buffer->vpts = buf->pts;
+ 
+@@ -677,11 +1031,7 @@ static void ff_audio_decode_data (audio_decoder_t *this_gen, buf_element_t *buf)
+           this->stream->audio_out->put_buffer (this->stream->audio_out,
+             audio_buffer, this->stream);
+         }
+-
+-        this->size -= bytes_consumed;
+-        offset += bytes_consumed;
+       }
+-
+       /* reset internal accumulation buffer */
+       this->size = 0;
+     }
+@@ -765,7 +1115,7 @@ static audio_decoder_t *ff_audio_open_plugin (audio_decoder_class_t *class_gen,
+   this->audio_decoder.dispose             = ff_audio_dispose;
+ 
+   this->output_open = 0;
+-  this->audio_channels = 0;
++  this->ff_channels = 0;
+   this->stream = stream;
+   this->buf = NULL;
+   this->size = 0;
+diff --git a/src/combined/ffmpeg/ff_video_decoder.c b/src/combined/ffmpeg/ff_video_decoder.c
+index 94a0d25..b24f108 100644
+--- a/src/combined/ffmpeg/ff_video_decoder.c
++++ b/src/combined/ffmpeg/ff_video_decoder.c
+@@ -131,7 +131,7 @@ struct ff_video_decoder_s {
+   double            aspect_ratio;
+   int               aspect_ratio_prio;
+   int               frame_flags;
+-  int               crop_right, crop_bottom;
++  int               edge;
+ 
+   int               output_format;
+ 
+@@ -157,6 +157,8 @@ struct ff_video_decoder_s {
+   uint8_t           set_stream_info;
+ 
+ #ifdef ENABLE_VAAPI
++  int                   vaapi_width, vaapi_height;
++  int                   vaapi_profile;
+   struct vaapi_context  vaapi_context;
+   vaapi_accel_t         *accel;
+   vo_frame_t            *accel_img;
+@@ -225,6 +227,7 @@ static int get_buffer(AVCodecContext *context, AVFrame *av_frame){
+   vo_frame_t *img;
+   int width  = context->width;
+   int height = context->height;
++  int crop_right = 0, crop_bottom = 0;
+   int guarded_render = 0;
+ 
+   ff_check_colorspace (this);
+@@ -232,13 +235,13 @@ static int get_buffer(AVCodecContext *context, AVFrame *av_frame){
+   if (!this->bih.biWidth || !this->bih.biHeight) {
+     this->bih.biWidth = width;
+     this->bih.biHeight = height;
++  }
+ 
+-    if (this->aspect_ratio_prio == 0) {
+-      this->aspect_ratio = (double)width / (double)height;
+-      this->aspect_ratio_prio = 1;
+-      lprintf("default aspect ratio: %f\n", this->aspect_ratio);
+-      this->set_stream_info = 1;
+-    }
++  if (this->aspect_ratio_prio == 0) {
++    this->aspect_ratio = (double)width / (double)height;
++    this->aspect_ratio_prio = 1;
++    lprintf("default aspect ratio: %f\n", this->aspect_ratio);
++    this->set_stream_info = 1;
+   }
+ 
+   avcodec_align_dimensions(context, &width, &height);
+@@ -257,6 +260,26 @@ static int get_buffer(AVCodecContext *context, AVFrame *av_frame){
+ #endif
+     av_frame->reordered_opaque = context->reordered_opaque;
+ 
++    /* reinitialize vaapi for new image size */
++    if (context->width != this->vaapi_width || context->height != this->vaapi_height) {
++      VAStatus status;
++
++      this->vaapi_width  = context->width;
++      this->vaapi_height = context->height;
++      status = this->accel->vaapi_init (this->accel_img, this->vaapi_profile,
++        context->width, context->height, 0);
++
++      if (status == VA_STATUS_SUCCESS) {
++        ff_vaapi_context_t *va_context = this->accel->get_context (this->accel_img);
++
++        if (va_context) {
++          this->vaapi_context.config_id  = va_context->va_config_id;
++          this->vaapi_context.context_id = va_context->va_context_id;
++          this->vaapi_context.display    = va_context->va_display;
++        }
++      }
++    }
++
+     if(!this->accel->guarded_render(this->accel_img)) {
+       img = this->stream->video_out->get_frame (this->stream->video_out,
+                                             width,
+@@ -305,6 +328,12 @@ static int get_buffer(AVCodecContext *context, AVFrame *av_frame){
+     guarded_render = this->accel->guarded_render(this->accel_img);
+ #endif /* ENABLE_VAAPI */
+ 
++  /* The alignment rhapsody */
++  width  += 2 * this->edge;
++  height += 2 * this->edge;
++  width   = (width + 15) & ~15;
++  height  = (height + 15) & ~15;
++
+   if ((this->full2mpeg || (this->context->pix_fmt != PIX_FMT_YUV420P &&
+ 			   this->context->pix_fmt != PIX_FMT_YUVJ420P)) || guarded_render) {
+     if (!this->is_direct_rendering_disabled) {
+@@ -322,8 +351,8 @@ static int get_buffer(AVCodecContext *context, AVFrame *av_frame){
+ 
+   if((width != this->bih.biWidth) || (height != this->bih.biHeight)) {
+     if(this->stream->video_out->get_capabilities(this->stream->video_out) & VO_CAP_CROP) {
+-      this->crop_right = width - this->bih.biWidth;
+-      this->crop_bottom = height - this->bih.biHeight;
++      crop_right = width - this->bih.biWidth - this->edge;
++      crop_bottom = height - this->bih.biHeight - this->edge;
+     } else {
+       if (!this->is_direct_rendering_disabled) {
+         xprintf(this->stream->xine, XINE_VERBOSITY_LOG,
+@@ -349,6 +378,8 @@ static int get_buffer(AVCodecContext *context, AVFrame *av_frame){
+ 
+   av_frame->opaque = img;
+ 
++  av_frame->extended_data = av_frame->data;
++
+   av_frame->data[0]= img->base[0];
+   av_frame->data[1]= img->base[1];
+   av_frame->data[2]= img->base[2];
+@@ -357,6 +388,16 @@ static int get_buffer(AVCodecContext *context, AVFrame *av_frame){
+   av_frame->linesize[1] = img->pitches[1];
+   av_frame->linesize[2] = img->pitches[2];
+ 
++  if (this->output_format == XINE_IMGFMT_YV12) {
++    av_frame->data[0] += (img->pitches[0] + 1) * this->edge;
++    av_frame->data[1] += (img->pitches[1] + 1) * this->edge / 2;
++    av_frame->data[2] += (img->pitches[2] + 1) * this->edge / 2;
++    img->crop_left   = this->edge;
++    img->crop_top    = this->edge;
++    img->crop_right  = crop_right;
++    img->crop_bottom = crop_bottom;
++  }
++
+   /* We should really keep track of the ages of xine frames (see
+    * avcodec_default_get_buffer in libavcodec/utils.c)
+    * For the moment tell ffmpeg that every frame is new (age = bignumber) */
+@@ -436,9 +477,14 @@ static const int skip_loop_filter_enum_values[] = {
+ };
+ 
+ #ifdef ENABLE_VAAPI
++/* TJ. libavcodec calls this with a list of supported pixel formats and lets us choose 1.
++   Returning PIX_FMT_VAAPI_VLD enables VAAPI.
++   However, at this point we only got image width and height from container, being unreliable
++   or zero (MPEG-TS). Thus we repeat vaapi_context initialization in get_buffer when needed.
++   This should be OK since NAL unit parsing is always done in software. */
+ static enum PixelFormat get_format(struct AVCodecContext *context, const enum PixelFormat *fmt)
+ {
+-  int i, profile;
++  int i;
+   ff_video_decoder_t *this = (ff_video_decoder_t *)context->opaque;
+ 
+   if(!this->class->enable_vaapi || !this->accel_img)
+@@ -450,12 +496,21 @@ static enum PixelFormat get_format(struct AVCodecContext *context, const enum Pi
+     if (fmt[i] != PIX_FMT_VAAPI_VLD)
+       continue;
+ 
+-    profile = accel->profile_from_imgfmt(this->accel_img, fmt[i], context->codec_id, this->class->vaapi_mpeg_softdec);
++    this->vaapi_profile = accel->profile_from_imgfmt (this->accel_img, fmt[i],
++      context->codec_id, this->class->vaapi_mpeg_softdec);
+ 
+-    if (profile >= 0) {
++    if (this->vaapi_profile >= 0) {
++      int width  = context->width;
++      int height = context->height;
+       VAStatus status;
+ 
+-      status = accel->vaapi_init(this->accel_img, profile, context->width, context->height, 0);
++      if (!width || !height) {
++        width  = 1920;
++        height = 1080;
++      }
++      this->vaapi_width  = width;
++      this->vaapi_height = height;
++      status = accel->vaapi_init (this->accel_img, this->vaapi_profile, width, height, 0);
+ 
+       if( status == VA_STATUS_SUCCESS ) {
+         ff_vaapi_context_t *va_context = accel->get_context(this->accel_img);
+@@ -513,10 +568,20 @@ static void init_video_codec (ff_video_decoder_t *this, unsigned int codec_type)
+     _x_stream_info_get(this->stream, XINE_STREAM_INFO_VIDEO_FOURCC);
+ 
+ 
+-  /* Some codecs (eg rv10) copy flags in init so it's necessary to set
+-   * this flag here in case we are going to use direct rendering */
++  this->stream->video_out->open (this->stream->video_out, this->stream);
++
++  this->edge = 0;
+   if(this->codec->capabilities & CODEC_CAP_DR1 && this->class->enable_dri) {
+-    this->context->flags |= CODEC_FLAG_EMU_EDGE;
++    if (this->stream->video_out->get_capabilities (this->stream->video_out) & VO_CAP_CROP) {
++      /* We can crop. Fine. Lets allow decoders to paint over the frame edges.
++         This will be slightly faster. And it is also a workaround for buggy
++         v54 who likes to ignore EMU_EDGE for wmv2 and xvid. */
++      this->edge = avcodec_get_edge_width ();
++    } else {
++      /* Some codecs (eg rv10) copy flags in init so it's necessary to set
++       * this flag here in case we are going to use direct rendering */
++      this->context->flags |= CODEC_FLAG_EMU_EDGE;
++    }
+   }
+ 
+   /* TJ. without this, it wont work at all on my machine */
+@@ -575,6 +640,7 @@ static void init_video_codec (ff_video_decoder_t *this, unsigned int codec_type)
+     free(this->context);
+     this->context = NULL;
+     _x_stream_info_set(this->stream, XINE_STREAM_INFO_VIDEO_HANDLED, 0);
++    this->stream->video_out->close (this->stream->video_out, this->stream);
+     return;
+   }
+ 
+@@ -590,6 +656,7 @@ static void init_video_codec (ff_video_decoder_t *this, unsigned int codec_type)
+       free(this->context);
+       this->context = NULL;
+       _x_stream_info_set(this->stream, XINE_STREAM_INFO_VIDEO_HANDLED, 0);
++      this->stream->video_out->close (this->stream->video_out, this->stream);
+       return;
+     }
+   }
+@@ -620,8 +687,6 @@ static void init_video_codec (ff_video_decoder_t *this, unsigned int codec_type)
+     set_stream_info(this);
+   }
+ 
+-  (this->stream->video_out->open) (this->stream->video_out, this->stream);
+-
+   this->skipframes = 0;
+ 
+   /* flag for interlaced streams */
+@@ -1450,9 +1515,6 @@ static void ff_handle_mpeg12_buffer (ff_video_decoder_t *this, buf_element_t *bu
+       else
+         img->duration = this->video_step;
+ 
+-      img->crop_right  = this->crop_right;
+-      img->crop_bottom = this->crop_bottom;
+-
+ #ifdef ENABLE_VAAPI
+       if( this->context->pix_fmt == PIX_FMT_VAAPI_VLD) {
+         if(this->accel->guarded_render(this->accel_img)) {
+@@ -1731,6 +1793,8 @@ static void ff_handle_buffer (ff_video_decoder_t *this, buf_element_t *buf) {
+                                                     this->aspect_ratio,
+                                                     this->output_format,
+                                                     VO_BOTH_FIELDS|this->frame_flags);
++          img->crop_right  = img->width  - this->bih.biWidth;
++          img->crop_bottom = img->height - this->bih.biHeight;
+           free_img = 1;
+         } else {
+           /* DR1 */
+@@ -1745,19 +1809,22 @@ static void ff_handle_buffer (ff_video_decoder_t *this, buf_element_t *buf) {
+         if(this->pp_available && this->pp_quality && this->context->pix_fmt != PIX_FMT_VAAPI_VLD) {
+ 
+           if(this->av_frame->opaque) {
+-            /* DR1 */
++            /* DR1: filter into a new frame. Same size to avoid reallcation, just move the
++               image to top left corner. */
+             img = this->stream->video_out->get_frame (this->stream->video_out,
+-                                                      (img->width  + 15) & ~15,
+-                                                      (img->height + 15) & ~15,
++                                                      img->width,
++                                                      img->height,
+                                                       this->aspect_ratio,
+                                                       this->output_format,
+                                                       VO_BOTH_FIELDS|this->frame_flags);
++            img->crop_right  = img->width  - this->bih.biWidth;
++            img->crop_bottom = img->height - this->bih.biHeight;
+             free_img = 1;
+           }
+ 
+           pp_postprocess((const uint8_t **)this->av_frame->data, this->av_frame->linesize,
+                         img->base, img->pitches,
+-                        img->width, img->height,
++                        this->bih.biWidth, this->bih.biHeight,
+                         this->av_frame->qscale_table, this->av_frame->qstride,
+                         this->our_mode, this->our_context,
+                         this->av_frame->pict_type);
+@@ -1786,10 +1853,6 @@ static void ff_handle_buffer (ff_video_decoder_t *this, buf_element_t *buf) {
+         else
+           img->duration = video_step_to_use;
+ 
+-        /* additionally crop away the extra pixels due to adjusting frame size above */
+-        img->crop_right  = img->width  - this->bih.biWidth;
+-        img->crop_bottom = img->height - this->bih.biHeight;
+-
+         /* transfer some more frame settings for deinterlacing */
+         img->progressive_frame = !this->av_frame->interlaced_frame;
+         img->top_field_first   = this->av_frame->top_field_first;
+diff --git a/src/combined/ffmpeg/ffmpeg_compat.h b/src/combined/ffmpeg/ffmpeg_compat.h
+index 5a44ae2..588cce2 100644
+--- a/src/combined/ffmpeg/ffmpeg_compat.h
++++ b/src/combined/ffmpeg/ffmpeg_compat.h
+@@ -146,4 +146,8 @@
+ #  define AVCODEC_MAX_AUDIO_FRAME_SIZE 192000
+ #endif
+ 
++#if LIBAVCODEC_VERSION_INT < ((52<<16)|(66<<8))
++#  define avcodec_get_edge_width() (16)
++#endif
++
+ #endif /* XINE_AVCODEC_COMPAT_H */
+diff --git a/src/demuxers/demux_playlist.c b/src/demuxers/demux_playlist.c
+index 5fa62b6..8b1a054 100644
+--- a/src/demuxers/demux_playlist.c
++++ b/src/demuxers/demux_playlist.c
+@@ -15,7 +15,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA.
+  *
+  *
+  * Playlist parser/demuxer by
+diff --git a/src/input/Makefile.am b/src/input/Makefile.am
+index f518e9d..804b363 100644
+--- a/src/input/Makefile.am
++++ b/src/input/Makefile.am
+@@ -151,6 +151,7 @@ xineplug_inp_gnome_vfs_la_CFLAGS = $(AM_CFLAGS) $(GNOME_VFS_CFLAGS)
+ 
+ xineplug_inp_smb_la_SOURCES = input_smb.c
+ xineplug_inp_smb_la_LIBADD = $(XINE_LIB) $(LIBSMBCLIENT_LIBS) $(LTLIBINTL)
++xineplug_inp_smb_la_CFLAGS = $(AM_CFLAGS) $(LIBSMBCLIENT_CFLAGS)
+ 
+ xineplug_inp_pvr_la_SOURCES = input_pvr.c
+ xineplug_inp_pvr_la_LIBADD = $(XINE_LIB) $(PTHREAD_LIBS) $(LTLIBINTL)
+diff --git a/src/post/deinterlace/plugins/greedy2frame_template.c b/src/post/deinterlace/plugins/greedy2frame_template.c
+index e881248..780fafd 100644
+--- a/src/post/deinterlace/plugins/greedy2frame_template.c
++++ b/src/post/deinterlace/plugins/greedy2frame_template.c
+@@ -7,7 +7,8 @@
+ **  published by the Free Software Foundation.  A copy of this license is
+ **  included with this software distribution in the file COPYING.  If you
+ **  do not have a copy, you may obtain a copy by writing to the Free
+-**  Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
++**  Software Foundation, 51 Franklin St, Fifth Floor, Boston, MA
++**  02110-1301, USA.
+ **
+ **  This software is distributed in the hope that it will be useful,
+ **  but WITHOUT ANY WARRANTY; without even the implied warranty of
+diff --git a/src/post/deinterlace/plugins/greedy2frame_template_sse2.c b/src/post/deinterlace/plugins/greedy2frame_template_sse2.c
+index 379a784..f5b7499 100644
+--- a/src/post/deinterlace/plugins/greedy2frame_template_sse2.c
++++ b/src/post/deinterlace/plugins/greedy2frame_template_sse2.c
+@@ -7,7 +7,8 @@
+ **  published by the Free Software Foundation.  A copy of this license is
+ **  included with this software distribution in the file COPYING.  If you
+ **  do not have a copy, you may obtain a copy by writing to the Free
+-**  Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
++**  Software Foundation, 51 Franklin St, Fifth Floor, Boston, MA
++**  02110-1301, USA.
+ **
+ **  This software is distributed in the hope that it will be useful,
+ **  but WITHOUT ANY WARRANTY; without even the implied warranty of
+diff --git a/src/post/deinterlace/plugins/greedyh.asm b/src/post/deinterlace/plugins/greedyh.asm
+index c96bfbf..46d687c 100644
+--- a/src/post/deinterlace/plugins/greedyh.asm
++++ b/src/post/deinterlace/plugins/greedyh.asm
+@@ -7,7 +7,8 @@
+ //	published by the Free Software Foundation.  A copy of this license is
+ //	included with this software distribution in the file COPYING.  If you
+ //	do not have a copy, you may obtain a copy by writing to the Free
+-//	Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
++//	Software Foundation, 51 Franklin St, Fifth Floor, Boston, MA 
++//  02110-1301, USA.
+ //
+ //	This software is distributed in the hope that it will be useful,
+ //	but WITHOUT ANY WARRANTY; without even the implied warranty of
+diff --git a/src/post/deinterlace/plugins/tomsmocomp/TomsMoCompAll.inc b/src/post/deinterlace/plugins/tomsmocomp/TomsMoCompAll.inc
+index d3ee46a..c5770f2 100644
+--- a/src/post/deinterlace/plugins/tomsmocomp/TomsMoCompAll.inc
++++ b/src/post/deinterlace/plugins/tomsmocomp/TomsMoCompAll.inc
+@@ -7,7 +7,8 @@
+ //  published by the Free Software Foundation.  A copy of this license is
+ //  included with this software distribution in the file COPYING.  If you
+ //  do not have a copy, you may obtain a copy by writing to the Free
+-//  Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
++//	Software Foundation, 51 Franklin St, Fifth Floor, Boston, MA 
++//  02110-1301, USA.
+ //
+ //  This software is distributed in the hope that it will be useful,
+ //  but WITHOUT ANY WARRANTY; without even the implied warranty of
+diff --git a/src/post/goom/goomsl_yacc.c b/src/post/goom/goomsl_yacc.c
+index 589b171..cfe80b2 100644
+--- a/src/post/goom/goomsl_yacc.c
++++ b/src/post/goom/goomsl_yacc.c
+@@ -15,8 +15,7 @@
+ 
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+-   Foundation, Inc., 59 Temple Place - Suite 330,
+-   Boston, MA 02111-1307, USA.  */
++   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.  */
+ 
+ /* As a special exception, when this file is copied by Bison into a
+    Bison output file, you may use that output file without restriction.
+diff --git a/src/post/goom/goomsl_yacc.h b/src/post/goom/goomsl_yacc.h
+index fae0c01..4d77932 100644
+--- a/src/post/goom/goomsl_yacc.h
++++ b/src/post/goom/goomsl_yacc.h
+@@ -15,8 +15,7 @@
+ 
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+-   Foundation, Inc., 59 Temple Place - Suite 330,
+-   Boston, MA 02111-1307, USA.  */
++   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.  */
+ 
+ /* As a special exception, when this file is copied by Bison into a
+    Bison output file, you may use that output file without restriction.
+diff --git a/src/video_dec/libmpeg2/cpu_state.c b/src/video_dec/libmpeg2/cpu_state.c
+index d1507ee..55f23a8 100644
+--- a/src/video_dec/libmpeg2/cpu_state.c
++++ b/src/video_dec/libmpeg2/cpu_state.c
+@@ -18,7 +18,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ #include "config.h"
+diff --git a/src/video_dec/libmpeg2/decode.c b/src/video_dec/libmpeg2/decode.c
+index 848d111..3e110ab 100644
+--- a/src/video_dec/libmpeg2/decode.c
++++ b/src/video_dec/libmpeg2/decode.c
+@@ -18,7 +18,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  *
+  * xine-specific version by G. Bartsch
+  *
+diff --git a/src/video_dec/libmpeg2/header.c b/src/video_dec/libmpeg2/header.c
+index 67cf63a..4f3db09 100644
+--- a/src/video_dec/libmpeg2/header.c
++++ b/src/video_dec/libmpeg2/header.c
+@@ -18,7 +18,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ /*
+diff --git a/src/video_dec/libmpeg2/idct.c b/src/video_dec/libmpeg2/idct.c
+index 9f216db..d9e9dd0 100644
+--- a/src/video_dec/libmpeg2/idct.c
++++ b/src/video_dec/libmpeg2/idct.c
+@@ -22,7 +22,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ /**********************************************************/
+diff --git a/src/video_dec/libmpeg2/idct_altivec.c b/src/video_dec/libmpeg2/idct_altivec.c
+index de39656..8636463 100644
+--- a/src/video_dec/libmpeg2/idct_altivec.c
++++ b/src/video_dec/libmpeg2/idct_altivec.c
+@@ -18,7 +18,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ #include "config.h"
+diff --git a/src/video_dec/libmpeg2/idct_mlib.c b/src/video_dec/libmpeg2/idct_mlib.c
+index e573c97..ceb751a 100644
+--- a/src/video_dec/libmpeg2/idct_mlib.c
++++ b/src/video_dec/libmpeg2/idct_mlib.c
+@@ -17,7 +17,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ #include "config.h"
+diff --git a/src/video_dec/libmpeg2/idct_mmx.c b/src/video_dec/libmpeg2/idct_mmx.c
+index 92ae365..6fe5432 100644
+--- a/src/video_dec/libmpeg2/idct_mmx.c
++++ b/src/video_dec/libmpeg2/idct_mmx.c
+@@ -18,7 +18,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ #include "config.h"
+diff --git a/src/video_dec/libmpeg2/motion_comp.c b/src/video_dec/libmpeg2/motion_comp.c
+index 4a324b8..9386450 100644
+--- a/src/video_dec/libmpeg2/motion_comp.c
++++ b/src/video_dec/libmpeg2/motion_comp.c
+@@ -18,7 +18,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ #include "config.h"
+diff --git a/src/video_dec/libmpeg2/motion_comp_altivec.c b/src/video_dec/libmpeg2/motion_comp_altivec.c
+index 99719b7..c0d8aa0 100644
+--- a/src/video_dec/libmpeg2/motion_comp_altivec.c
++++ b/src/video_dec/libmpeg2/motion_comp_altivec.c
+@@ -18,7 +18,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ #include "config.h"
+diff --git a/src/video_dec/libmpeg2/motion_comp_mlib.c b/src/video_dec/libmpeg2/motion_comp_mlib.c
+index 1a37070..2392b3a 100644
+--- a/src/video_dec/libmpeg2/motion_comp_mlib.c
++++ b/src/video_dec/libmpeg2/motion_comp_mlib.c
+@@ -17,7 +17,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ #include "config.h"
+diff --git a/src/video_dec/libmpeg2/motion_comp_mmx.c b/src/video_dec/libmpeg2/motion_comp_mmx.c
+index 9c5ab45..9a8c4ba 100644
+--- a/src/video_dec/libmpeg2/motion_comp_mmx.c
++++ b/src/video_dec/libmpeg2/motion_comp_mmx.c
+@@ -18,7 +18,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ #include "config.h"
+diff --git a/src/video_dec/libmpeg2/motion_comp_vis.c b/src/video_dec/libmpeg2/motion_comp_vis.c
+index d0a6673..c3ebec4 100644
+--- a/src/video_dec/libmpeg2/motion_comp_vis.c
++++ b/src/video_dec/libmpeg2/motion_comp_vis.c
+@@ -17,7 +17,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ #include "config.h"
+diff --git a/src/video_dec/libmpeg2/mpeg2.h b/src/video_dec/libmpeg2/mpeg2.h
+index ae69688..30e89c1 100644
+--- a/src/video_dec/libmpeg2/mpeg2.h
++++ b/src/video_dec/libmpeg2/mpeg2.h
+@@ -16,7 +16,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ /* Structure for the mpeg2dec decoder */
+diff --git a/src/video_dec/libmpeg2/mpeg2_internal.h b/src/video_dec/libmpeg2/mpeg2_internal.h
+index eeaa162..3254744 100644
+--- a/src/video_dec/libmpeg2/mpeg2_internal.h
++++ b/src/video_dec/libmpeg2/mpeg2_internal.h
+@@ -18,7 +18,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ #ifndef MPEG2_INTERNAL_H
+diff --git a/src/video_dec/libmpeg2/slice.c b/src/video_dec/libmpeg2/slice.c
+index 8247a9a..8f14a4a 100644
+--- a/src/video_dec/libmpeg2/slice.c
++++ b/src/video_dec/libmpeg2/slice.c
+@@ -18,7 +18,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ #include "config.h"
+diff --git a/src/video_dec/libmpeg2/slice_xvmc.c b/src/video_dec/libmpeg2/slice_xvmc.c
+index b46886b..a2fcf64 100644
+--- a/src/video_dec/libmpeg2/slice_xvmc.c
++++ b/src/video_dec/libmpeg2/slice_xvmc.c
+@@ -18,7 +18,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ #include "config.h"
+diff --git a/src/video_dec/libmpeg2/stats.c b/src/video_dec/libmpeg2/stats.c
+index 63c7011..d15cf5a 100644
+--- a/src/video_dec/libmpeg2/stats.c
++++ b/src/video_dec/libmpeg2/stats.c
+@@ -18,7 +18,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ #include "config.h"
+diff --git a/src/video_dec/libmpeg2/vis.h b/src/video_dec/libmpeg2/vis.h
+index 69dd490..d2c5d94 100644
+--- a/src/video_dec/libmpeg2/vis.h
++++ b/src/video_dec/libmpeg2/vis.h
+@@ -17,7 +17,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ /* You may be asking why I hard-code the instruction opcodes and don't
+diff --git a/src/video_dec/libmpeg2/vlc.h b/src/video_dec/libmpeg2/vlc.h
+index 65de9a8..5fb32ae 100644
+--- a/src/video_dec/libmpeg2/vlc.h
++++ b/src/video_dec/libmpeg2/vlc.h
+@@ -18,7 +18,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ #define GETWORD(bit_buf,shift,bit_ptr)				\
+diff --git a/src/video_dec/libmpeg2/xvmc.h b/src/video_dec/libmpeg2/xvmc.h
+index 5d61bcf..0fe83c9 100644
+--- a/src/video_dec/libmpeg2/xvmc.h
++++ b/src/video_dec/libmpeg2/xvmc.h
+@@ -18,7 +18,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  */
+ 
+ #ifndef _XVMC_H
+diff --git a/src/video_out/Makefile.am b/src/video_out/Makefile.am
+index 9a88b80..b6a6a57 100644
+--- a/src/video_out/Makefile.am
++++ b/src/video_out/Makefile.am
+@@ -135,7 +135,7 @@ xineplug_vo_out_vdpau_la_CFLAGS = $(VISIBILITY_FLAG) $(MLIB_CFLAGS) $(X_CFLAGS)
+ 
+ xineplug_vo_out_vaapi_la_SOURCES = $(X11OSD) video_out_vaapi.c
+ xineplug_vo_out_vaapi_la_LIBADD = $(YUV_LIBS) $(XINE_LIB) $(OPENGL_LIBS) $(FFMPEG_LIBS) $(AVUTIL_LIBS) $(X_LIBS) $(PTHREAD_LIBS) $(LTLIBINTL) -ldl -lGLU -lva-glx -lva-x11 -lva
+-xineplug_vo_out_vaapi_la_CFLAGS = $(AM_CFLAGS) $(X_CFLAGS) $(XV_CFLAGS) -fno-strict-aliasing
++xineplug_vo_out_vaapi_la_CFLAGS = $(AM_CFLAGS) $(X_CFLAGS) $(XV_CFLAGS) $(AVUTIL_CFLAGS) -fno-strict-aliasing
+ 
+ xineplug_vo_out_xcbshm_la_SOURCES = video_out_xcbshm.c $(XCBOSD)
+ xineplug_vo_out_xcbshm_la_LIBADD = $(YUV_LIBS) $(PTHREAD_LIBS) $(XCB_LIBS) $(XCBSHM_LIBS) $(LTLIBINTL)
+diff --git a/src/video_out/video_out_opengl2.c b/src/video_out/video_out_opengl2.c
+index cce35e8..fed693a 100644
+--- a/src/video_out/video_out_opengl2.c
++++ b/src/video_out/video_out_opengl2.c
+@@ -17,7 +17,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  *
+  *
+  * video_out_opengl2.c, a video output plugin using opengl 2.0
+diff --git a/src/video_out/video_out_raw.c b/src/video_out/video_out_raw.c
+index 50f3859..32de423 100644
+--- a/src/video_out/video_out_raw.c
++++ b/src/video_out/video_out_raw.c
+@@ -16,7 +16,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  *
+  *
+  * video_out_raw.c, a video output plugin to pass raw data to frontend
+diff --git a/src/video_out/video_out_vdpau.c b/src/video_out/video_out_vdpau.c
+index c4c4ef7..9f9d3dd 100644
+--- a/src/video_out/video_out_vdpau.c
++++ b/src/video_out/video_out_vdpau.c
+@@ -17,7 +17,7 @@
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+  *
+  *
+  * video_out_vdpau.c, a video output plugin
+diff --git a/src/xine-engine/Makefile.am b/src/xine-engine/Makefile.am
+index e422c36..10b8ff4 100644
+--- a/src/xine-engine/Makefile.am
++++ b/src/xine-engine/Makefile.am
+@@ -11,7 +11,7 @@ XINEUTILS_LIB = $(top_builddir)/src/xine-utils/libxineutils.la
+ YUV_LIB = $(top_builddir)/src/video_out/libyuv2rgb.la
+ 
+ # FIXME: these are currently unused:
+-EXTRA_DIST = lrb.c lrb.h accel_vdpau.h accel_xvmc.h
++EXTRA_DIST = lrb.c lrb.h accel_vaapi.h accel_vdpau.h accel_xvmc.h
+ 
+ if WIN32
+ DEF_FILE = libxine-$(XINE_MAJOR).def
+diff --git a/src/xine-engine/accel_vaapi.h b/src/xine-engine/accel_vaapi.h
+index 666b23f..5ff6cee 100644
+--- a/src/xine-engine/accel_vaapi.h
++++ b/src/xine-engine/accel_vaapi.h
+@@ -18,7 +18,7 @@
+  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
+  *
+  *
+- * Common acceleration definitions for vdpau
++ * Common acceleration definitions for vaapi
+  *
+  *
+  */
