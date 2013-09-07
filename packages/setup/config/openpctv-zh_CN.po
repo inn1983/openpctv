@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPCTV 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-01 19:56+0800\n"
+"POT-Creation-Date: 2013-09-07 19:05+0800\n"
 "PO-Revision-Date: 2013-07-23 16:56+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -378,11 +378,11 @@ msgstr "diseqc.conf已被编辑"
 msgid "Finished"
 msgstr "完成"
 
-#: packages/setup/scripts/getcam:49 packages/setup/scripts/setup.sh:238
+#: packages/setup/scripts/getcam:53 packages/setup/scripts/setup.sh:238
 msgid "Select a software emulated CAM"
 msgstr "选择一种模拟CAM软件"
 
-#: packages/setup/scripts/getcam:49
+#: packages/setup/scripts/getcam:53
 msgid ""
 "OScam can used by Enigma2(Through dvbsoftwareca module to create symlinks "
 "for dvb adapters),VDR(Through VDR-DVBAPI plugin to act as a bridge between "
@@ -393,15 +393,19 @@ msgstr ""
 "实现VDR与OScam之间的通信)和XBMC（通过VDR后端，因此与VDR相同)可使用OScam，而"
 "VDR-SC（一种CAM模拟软件，VDR的插件)和XBMC可使用VDR-SC"
 
-#: packages/setup/scripts/getcam:49
+#: packages/setup/scripts/getcam:53
 msgid "Open Source Conditional Access Module software"
 msgstr "开放源代码的条件接收模块"
 
-#: packages/setup/scripts/getcam:49
+#: packages/setup/scripts/getcam:53
 msgid "A software CAM emulation, a VDR plugin"
 msgstr "一种CAM模拟软件，VDR的插件"
 
-#: packages/setup/scripts/getcam:60
+#: packages/setup/scripts/getcam:53
+msgid "TTcam CAM - Applicable to China's exclusive cam"
+msgstr "TTcam CAM - 只适用于中国的专用CAM"
+
+#: packages/setup/scripts/getcam:64
 msgid ""
 "Would you like to configure OScam/VDR-SC? Of course, you can also put CCcam."
 "cfg file into the USB disk, the system will automatically read and written "
@@ -412,7 +416,7 @@ msgstr ""
 
 #: packages/setup/scripts/install-drivers:8
 msgid "Reboot OpenPCTV?"
-msgstr "重启启动OpenoPCTV"
+msgstr "重启启动OpenPCTV"
 
 #: packages/setup/scripts/install-drivers:8
 msgid ""
@@ -876,7 +880,7 @@ msgstr "一个基于PC的openpliPC项目，NVIDIA/Intel/AMD显卡可以工作得
 
 #: packages/setup/scripts/select-target:8
 msgid "The Video Disk Recorder,work well with AMD/NVIDIA display card"
-msgstr "硬盘录像机，可以在AMD/NVIDIA显卡可以工作得很好。"
+msgstr "硬盘录像机，可以在AMD/Intel/NVIDIA显卡可以工作得很好。"
 
 #: packages/setup/scripts/select-target:8
 msgid ""

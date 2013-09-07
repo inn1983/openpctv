@@ -1,0 +1,9 @@
+[Unit]
+Description=xmltv2vdr
+After=epg.service
+
+[Service]
+ExecStart=/usr/bin/xmltv2vdr.sh
+
+[Install]
+WantedBy=multi-user.target

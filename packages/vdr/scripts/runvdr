@@ -6,9 +6,15 @@ PLUGINS=""
 if [ $CAM = "OScam" ]; then
   sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/10_sc
   sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_dvbapi
+  sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_dvbapi_ttcam
+elif [ $CAM = "TTcam" ]; then
+  sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/10_sc
+  sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_dvbapi
+  sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_dvbapi_ttcam
 elif [ $CAM = "VDR-SC" ]; then
   sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/10_sc
   sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_dvbapi
+  sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_dvbapi_ttcam
   /usr/bin/getcam auto
   systemctl stop oscam
 fi
