@@ -10,7 +10,7 @@ for i in 10 9 8 7 6 5 4 3 2 1; do
      [ -L /dev/dvb/adapter0/demux1 ] || ln -s /dev/dvb/adapter0/demux0 /dev/dvb/adapter0/demux1
      break
   else
-     sleep 0.5
+     sleep 0.6
   fi
 done
 target=$(systemctl get-default)

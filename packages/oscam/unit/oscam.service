@@ -5,7 +5,7 @@ ConditionPathExists=/etc/oscam/oscam.conf
 
 [Service]
 ExecStartPre=/usr/bin/oscam-pre.sh
-ExecStart=/usr/bin/oscam -c /etc/oscam
+ExecStart=/usr/bin/oscam.sh
 
 [Install]
 WantedBy=multi-user.target
