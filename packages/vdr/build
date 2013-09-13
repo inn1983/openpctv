@@ -19,6 +19,8 @@ require_cxx $1
 
 cd $PKG_BUILD_DIR
 
+cp -P $ROOT/$PACKAGES/$1/config/zh_CN.po po/
+
 cat > Make.config <<EOF
 PREFIX=/usr
 PLUGINLIBDIR=/usr/lib/vdr
