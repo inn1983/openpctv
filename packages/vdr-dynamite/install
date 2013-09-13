@@ -18,7 +18,7 @@ done
 NAME=`echo ${PKG_NAME} | sed s/vdr-//`
 mkdir -p $INSTALL/etc/vdr/plugins.d
 echo "PLUGIN=${NAME}" > $INSTALL/etc/vdr/plugins.d/50_$NAME
-echo "ENABLED=yes" >> $INSTALL/etc/vdr/plugins.d/50_$NAME
+echo "ENABLED=no" >> $INSTALL/etc/vdr/plugins.d/50_$NAME
 
 mkdir -p $INSTALL/lib/udev/rules.d
 cp $ROOT/$PACKAGES/${PKG_NAME}/config/*.rules  $INSTALL/lib/udev/rules.d
