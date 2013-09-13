@@ -10,4 +10,5 @@ cd $BUILD/$1*
 make all \
   VDRDIR="../$VDR_DIR" \
   LIBDIR="." \
-  LOCALEDIR="./locale"
+  LOCALEDIR="./locale" \
+  HEADLESS=1

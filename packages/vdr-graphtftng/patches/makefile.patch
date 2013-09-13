@@ -1,0 +1,12 @@
+diff -uNr vdr-graphtftng-0.4.1+r8308c113.orig/Makefile vdr-graphtftng-0.4.1+r8308c113/Makefile
+--- vdr-graphtftng-0.4.1+r8308c113.orig/Makefile	2013-08-16 17:00:30.000000000 +0800
++++ vdr-graphtftng-0.4.1+r8308c113/Makefile	2013-09-13 20:39:07.405081026 +0800
+@@ -92,7 +92,7 @@
+ 
+ DEFINES += -D__STL_CONFIG_H
+ 
+-LIBS += $(shell imlib2-config --libs)
++LIBS += $(shell pkg-config imlib2 --libs)
+ LIBS += -ljpeg
+ LIBS += $(shell pkg-config libgtop-2.0 --libs)
+ 
