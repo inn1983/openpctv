@@ -1,1 +1,1 @@
-0 9,15,21 * * * /usr/bin/update-epg >/dev/null 2>&1
+0 7,9,11,13,15,17,19,21 * * * /usr/bin/update-epg >/dev/null 2>&1

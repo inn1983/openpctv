@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-07 19:05+0800\n"
+"POT-Creation-Date: 2013-09-12 16:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -978,11 +978,10 @@ msgstr ""
 msgid "Don't mount bind for OpenPCTV cache"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:228
+#: packages/setup/scripts/setup.sh:229
 msgid ""
-"Would you like to configure the DiSEqC and scan channels for VDR/XBMC(It'll "
-"take quiet long to do it)?  If you only use Enigma2, you needn't proceed "
-"with its configuration."
+"Would you like to scan channels for VDR/XBMC(It'll take quiet long to do "
+"it)?  You can also scan channels with vdr reelscanchannels plugin in vdr."
 msgstr ""
 
 #: packages/setup/scripts/setup.sh:238
