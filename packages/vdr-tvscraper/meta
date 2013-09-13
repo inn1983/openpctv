@@ -1,0 +1,13 @@
+PKG_NAME=vdr-tvscraper
+PKG_URL_PROTO=git
+PKG_URL_REV=225d6d6
+PKG_URL="git://projects.vdr-developer.org/vdr-plugin-tvscraper.git"
+PKG_VERSION=0.0.5+r${PKG_URL_REV}
+PKG_REV=1
+PKG_DEPENDS="vdr sqlite curl libxml2 jansson"
+PKG_BUILD_DEPENDS="toolchain"
+PKG_RUN_DEPENDS="$TARGET_LIBC"
+PKG_PRIORITY=optional
+PKG_SECTION=multimedia
+PKG_SHORTDESC="VDR -- tvscraper plugin"
+PKG_LONGDESC="TVScraper runs in the background and collects metadata (posters, banners, fanart, actor thumbs and roles, descriptions) for all available EPG events on selectable channels and for recordings. Additionally the plugin provides the collected metadata via the VDR service interface to other plugins which deal with EPG information."
