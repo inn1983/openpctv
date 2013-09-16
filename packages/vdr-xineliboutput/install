@@ -27,12 +27,10 @@ mkdir -p $INSTALL/usr/lib/vdr
 cp -P libvdr-xineliboutput.so* libxineliboutput*.so* \
   $INSTALL/usr/lib/vdr
 
-for loc in $INCLUDED_LOCALES; do
-  LOCALE=`echo $loc|cut -f1 -d.`
-  if [ -d locale/$LOCALE ]; then
-    mkdir -p $INSTALL/usr/share/locale/$LOCALE
-    cp -a locale/$LOCALE/* $INSTALL/usr/share/locale/$LOCALE/
-  fi
+for i in $ROOT/$BUILD/$1*/po/*.po; do
+  loc=$(basename $i | cut -d\- -f2 | sed 's/.po//g')
+  mkdir -p $INSTALL/usr/share/locale/$loc/LC_MESSAGES
+  $ROOT/$TOOLCHAIN/bin/msgfmt $i -o $INSTALL/usr/share/locale/$loc/LC_MESSAGES/$1.mo
 done
 
 mkdir -p $INSTALL/etc/vdr/plugins/xineliboutput

@@ -4,16 +4,14 @@
 get_meta $1
 
 mkdir -p $INSTALL/usr/lib/vdr
-for i in $BUILD/${PKG_NAME}-${PKG_VERSION}/libvdr-*.so; do
+for i in $BUILD/$1*/libvdr-*.so; do
   cp $i $INSTALL/usr/lib/vdr/${i##*/}.2.1.1
 done
 
-for loc in $INCLUDED_LOCALES; do
-  LOCALE=`echo $loc|cut -f1 -d.`
-  if [ -d $BUILD/${PKG_NAME}-${PKG_VERSION}/locale/$LOCALE ]; then
-    mkdir -p $INSTALL/usr/share/locale/$LOCALE
-    cp -a $BUILD/${PKG_NAME}-${PKG_VERSION}/locale/$LOCALE/* $INSTALL/usr/share/locale/$LOCALE/
-  fi
+for i in $BUILD/$1*/po/*.po; do
+  loc=$(basename $i | cut -d\- -f2 | sed 's/.po//g')
+  mkdir -p $INSTALL/usr/share/locale/$loc/LC_MESSAGES
+  $ROOT/$TOOLCHAIN/bin/msgfmt $i -o $INSTALL/usr/share/locale/$loc/LC_MESSAGES/$1.mo
 done
 
 NAME=`echo ${PKG_NAME} | sed s/vdr-//`

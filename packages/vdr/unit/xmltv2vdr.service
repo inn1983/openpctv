@@ -1,6 +1,6 @@
 [Unit]
 Description=xmltv2vdr
-After=epg.service
+After=vdr.service vdr-backend.service
 
 [Service]
 ExecStart=/usr/bin/xmltv2vdr.sh
