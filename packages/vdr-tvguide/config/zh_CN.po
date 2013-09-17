@@ -1,0 +1,596 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: vdr-tvguide 1.1.0\n"
+"Report-Msgid-Bugs-To: <see README>\n"
+"POT-Creation-Date: 2013-09-12 10:59+0800\n"
+"PO-Revision-Date: 2013-09-12 10:59+0800\n"
+"Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
+"Language-Team: OpenPCTV\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Main Program"
+msgstr "主程序"
+
+msgid "RERUNS OF THIS SHOW"
+msgstr "返回这次展示"
+
+msgid "Actors"
+msgstr "演员"
+
+msgid "No EPG Information available"
+msgstr "没有可用的EPG信息"
+
+msgid "Search & Rec"
+msgstr "搜索并录像"
+
+msgid "Channels back"
+msgstr "频道返回"
+
+msgid "Channels forward"
+msgstr "频道前进"
+
+msgid "Switch to Channel"
+msgstr "切换到频道"
+
+msgid "Detailed EPG"
+msgstr "详细的EPG"
+
+msgid "Transp."
+msgstr ""
+
+msgid "Timer Conflict"
+msgstr "定时器冲突"
+
+msgid "all Channels"
+msgstr "所有的频道"
+
+msgid "unknown channel"
+msgstr "未知的频道"
+
+msgid "Duration"
+msgstr "持续时间"
+
+msgid "min"
+msgstr "分钟"
+
+msgid "recorded at"
+msgstr "录像在"
+
+msgid "from"
+msgstr "从"
+
+msgid "Instant Record"
+msgstr "立即录像"
+
+msgid "Delete Timer"
+msgstr "删除定时器"
+
+msgid "Edit Timer"
+msgstr "编辑定时器"
+
+msgid "Create Series Timer"
+msgstr "创建连续的定时器"
+
+msgid "Create Search Timer"
+msgstr "创建搜索定时器"
+
+msgid "Create Switch Timer"
+msgstr "建立切换定时器"
+
+msgid "Delete Switch Timer"
+msgstr "删除定时器切换"
+
+msgid "Search"
+msgstr "搜索"
+
+msgid "Search in Recordings"
+msgstr "在录像中搜索"
+
+msgid "Check for Timer Conflicts"
+msgstr "检查定时器冲突"
+
+msgid "Set Folder for"
+msgstr "设置文件夹为"
+
+msgid "root video folder"
+msgstr ""
+
+msgid "Timer created"
+msgstr "定时器已创建"
+
+msgid "Timer NOT created"
+msgstr "定时器未创建"
+
+msgid "OK"
+msgstr ""
+
+msgid "Timer deleted"
+msgstr "定时器被删除"
+
+msgid "Timer"
+msgstr "定时器"
+
+msgid "still recording - really delete?"
+msgstr "仍然录像中 - 真的删除吗？"
+
+msgid "Yes"
+msgstr "是"
+
+msgid "No"
+msgstr "否"
+
+msgid "One"
+msgstr "一"
+
+msgid "detected"
+msgstr "检测到的"
+
+msgid "Timer Conflicts"
+msgstr "定时器冲突"
+
+msgid "Show conflict"
+msgstr "显示冲突"
+
+msgid "timers involved"
+msgstr "相关的定时器"
+
+msgid "Ignore Conflicts"
+msgstr "忽略冲突"
+
+msgid "Ignore Conflict"
+msgstr "忽略冲突"
+
+msgid "No Timer Conflicts found"
+msgstr "没找到冲突的定时器"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Timer Active"
+msgstr "激活定时器"
+
+msgid "Priority"
+msgstr "优先"
+
+msgid "Lifetime"
+msgstr "使用期限"
+
+msgid "Day"
+msgstr "日"
+
+msgid "Timer start time"
+msgstr "定时器开始时间"
+
+msgid "Timer stop time"
+msgstr "定时器结束时间"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Create Series Timer based on"
+msgstr "建立定时器器序列基于"
+
+msgid "Channel"
+msgstr "频道"
+
+msgid "Series Timer start time"
+msgstr "定时器序列开始时间"
+
+msgid "Series Timer stop time"
+msgstr "定时器序列结束时间"
+
+msgid "Days to record"
+msgstr "录像日期"
+
+msgid "Day to start"
+msgstr "开始日期"
+
+msgid "Create Timer"
+msgstr "建立定时器"
+
+msgid "Series Timer created"
+msgstr "定时器序列建立"
+
+msgid "Start"
+msgstr "开始"
+
+msgid "Stop"
+msgstr "结束"
+
+msgid "Configure Search Timer based on"
+msgstr "配置搜索定时器基于"
+
+msgid "Search Expression:"
+msgstr "搜索关键词:"
+
+msgid "Continue"
+msgstr "继续"
+
+msgid "Configure Search Timer for Search String"
+msgstr "为搜索字串配置搜索的定时器"
+
+msgid "Manually configure Options"
+msgstr "手动配置选项"
+
+msgid "Use Template"
+msgstr "使用模板"
+
+msgid "Creating Search Timer"
+msgstr "建立搜索定时器"
+
+msgid "Search Term"
+msgstr "搜索条件"
+
+msgid "Using Template"
+msgstr "使用模板"
+
+msgid "Display Results for Search Timer"
+msgstr "显示定时器搜索的结果"
+
+msgid "Use other Template"
+msgstr "使用其它模板"
+
+msgid "Configure Search Timer Options for Search String"
+msgstr "为搜索字串配置定时器搜索选项"
+
+msgid "whole term must appear"
+msgstr ""
+
+msgid "all terms must exist"
+msgstr "所有条件必须存在"
+
+msgid "one term must exist"
+msgstr "一个条件必须存在"
+
+msgid "exact match"
+msgstr "一模一样"
+
+msgid "regular expression"
+msgstr "正则表达式"
+
+msgid "Search Mode"
+msgstr "搜索模式"
+
+msgid "Use Title"
+msgstr "使用标题"
+
+msgid "Use Subtitle"
+msgstr "使用副标题"
+
+msgid "Use Description"
+msgstr "使用描述"
+
+msgid "Limit Channels"
+msgstr "限制频道"
+
+msgid "Start Channel"
+msgstr "开始频道"
+
+msgid "Stop Channel"
+msgstr "停止频道"
+
+msgid "Use Time"
+msgstr "使用时间"
+
+msgid "Start after"
+msgstr "开始之后"
+
+msgid "Start before"
+msgstr "开始之前"
+
+msgid "search results for Search Timer"
+msgstr "为定时器搜索提供搜索结果"
+
+msgid "search result for Search Timer"
+msgstr "为定时器搜索提供搜索结果"
+
+msgid "Nothing found for Search String"
+msgstr "没找到搜索的字串"
+
+msgid "Search Timer sucessfully created."
+msgstr "定时器搜索成功创建"
+
+msgid "Search Timer update initialised"
+msgstr "定时器搜索升级初始化"
+
+msgid "Search Timer NOT sucessfully created"
+msgstr "定时器搜索未成功创建"
+
+msgid "Configure Options for Switchtimer"
+msgstr "为切换定时器配置选项"
+
+msgid "Minutes before switching"
+msgstr "开始切换的分钟数"
+
+msgid "switch"
+msgstr "切换"
+
+msgid "announce only"
+msgstr ""
+
+msgid "ask for switch"
+msgstr "询问切换"
+
+msgid "Switch Mode"
+msgstr "切换模式"
+
+msgid "Create"
+msgstr "创建"
+
+msgid "Switch Timer sucessfully created"
+msgstr "切换定时已成功创建"
+
+msgid "Switch Timer NOT sucessfully created"
+msgstr ""
+
+msgid "Switch Timer deleted"
+msgstr ""
+
+msgid "Show Search Options"
+msgstr ""
+
+msgid "Perform Search"
+msgstr ""
+
+msgid "Channel to Search"
+msgstr ""
+
+msgid "Search in title"
+msgstr ""
+
+msgid "Search in Subtitle"
+msgstr ""
+
+msgid "Search in Description"
+msgstr ""
+
+msgid "search results for"
+msgstr ""
+
+msgid "search result for"
+msgstr ""
+
+msgid "Adapt Search"
+msgstr ""
+
+msgid "Found"
+msgstr "找到"
+
+msgid "recording"
+msgstr "录像"
+
+msgid "recordings"
+msgstr "录像"
+
+msgid "for"
+msgstr "为"
+
+msgid "No recordings found for"
+msgstr ""
+
+msgid "General Settings"
+msgstr "通用设置"
+
+msgid "Screen Presentation"
+msgstr ""
+
+msgid "Fonts and Fontsizes"
+msgstr ""
+
+msgid "x channels back / forward"
+msgstr ""
+
+msgid "previous / next channel group"
+msgstr ""
+
+msgid "Blue: Channel Switch, Ok: Detailed EPG"
+msgstr ""
+
+msgid "Blue: Detailed EPG, Ok: Channel Switch"
+msgstr ""
+
+msgid "never"
+msgstr "从不"
+
+msgid "if exists"
+msgstr "如果存在"
+
+msgid "always"
+msgstr "总是"
+
+msgid "Show Main Menu Entry"
+msgstr "显示主菜单入口"
+
+msgid "Replace VDR Schedules Menu"
+msgstr "替换VDR计划中菜单"
+
+msgid "Theme"
+msgstr "主题"
+
+msgid "Rounded Corners"
+msgstr ""
+
+msgid "Channel Jump Mode (Keys Green / Yellow)"
+msgstr "频道跳跃模式（绿键/黄键）"
+
+msgid "Keys Blue and OK"
+msgstr "按蓝键OK"
+
+msgid "Close TVGuide after channel switch"
+msgstr "在频道切换后关闭TVGuide"
+
+msgid "Hide last Channel Group"
+msgstr "隐藏最后的频道群组"
+
+msgid "Time to display in minutes"
+msgstr "以分钟数显示"
+
+msgid "Big Step (Keys 1 / 3) in hours"
+msgstr ""
+
+msgid "Huge Step (Keys 4 / 6) in hours"
+msgstr ""
+
+msgid "Time Format (12h/24h)"
+msgstr "时间格式（12小时/24小时）"
+
+msgid "Use folders for instant records"
+msgstr "为即时录像使用的文件夹"
+
+msgid "Use Remotetimers"
+msgstr "使用远程定时器"
+
+msgid "Display Reruns in detailed EPG View"
+msgstr ""
+
+msgid "Number of reruns to display"
+msgstr ""
+
+msgid "Use Subtitle for reruns"
+msgstr ""
+
+msgid "Display Mode"
+msgstr "显示模式"
+
+msgid "Height of Channel Header (Perc. of osd height)"
+msgstr ""
+
+msgid "Width of Timeline (Perc. of osd width)"
+msgstr ""
+
+msgid "Number of Channels to display"
+msgstr ""
+
+msgid "Width of Channel Header (Perc. of osd width)"
+msgstr ""
+
+msgid "Height of Timeline (Perc. of osd height)"
+msgstr ""
+
+msgid "Display time in EPG Grids"
+msgstr ""
+
+msgid "Height of Footer"
+msgstr ""
+
+msgid "Display status header"
+msgstr ""
+
+msgid "Height of status header (Perc. of osd height)"
+msgstr ""
+
+msgid "Scale video to upper right corner"
+msgstr ""
+
+msgid "Rounded corners around video frame"
+msgstr ""
+
+msgid "Display Channel Names in Header"
+msgstr ""
+
+msgid "Display channel groups"
+msgstr ""
+
+msgid "Height of channel groups (Perc. of osd height)"
+msgstr ""
+
+msgid "Width of channel groups (Perc. of osd width)"
+msgstr ""
+
+msgid "Show Channel Logos"
+msgstr ""
+
+msgid "Logo Path used"
+msgstr ""
+
+msgid "Logo Extension"
+msgstr ""
+
+msgid "Logo width ratio"
+msgstr ""
+
+msgid "Logo height ratio"
+msgstr ""
+
+msgid "Show EPG Images"
+msgstr ""
+
+msgid "EPG Images Path used"
+msgstr ""
+
+msgid "EPG Image width"
+msgstr ""
+
+msgid "EPG Image height"
+msgstr ""
+
+msgid "Number of additional EPG Images"
+msgstr ""
+
+msgid "Additional EPG Image width"
+msgstr ""
+
+msgid "Additional EPG Image height"
+msgstr ""
+
+msgid "Font"
+msgstr "字体"
+
+msgid "Status Header Font Size"
+msgstr ""
+
+msgid "Status Header Large Font Size"
+msgstr ""
+
+msgid "Detail EPG View Font Size"
+msgstr ""
+
+msgid "Detail EPG View Header Font Size"
+msgstr ""
+
+msgid "Message Font Size"
+msgstr ""
+
+msgid "Message Large Font Size"
+msgstr ""
+
+msgid "Button Font Size"
+msgstr ""
+
+msgid "Channel Header Font Size"
+msgstr ""
+
+msgid "Channel Groups Font Size"
+msgstr ""
+
+msgid "Grid Font Size"
+msgstr ""
+
+msgid "Grid Font Small Size"
+msgstr ""
+
+msgid "Timeline Weekday Font Size"
+msgstr ""
+
+msgid "Timeline Date Font Size"
+msgstr ""
+
+msgid "Timeline Time Font Size"
+msgstr ""
+
+msgid "Search & Recording Menu Font Size"
+msgstr ""
+
+msgid "Search & Recording Menu Small Font Size"
+msgstr ""
