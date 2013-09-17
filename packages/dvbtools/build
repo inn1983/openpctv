@@ -1,0 +1,21 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+for i in dvbarchive dvbdate dvbstream dvbtscut dvbtune; do
+  cd $i
+  make CC=$CC
+  cd ..
+done
+
+mkdir -p .install/usr/bin
+cp dvbarchive/dvbarchive .install/usr/bin
+cp dvbdate/dvbdate .install/usr/bin
+cp dvbstream/dumprtp .install/usr/bin
+cp dvbstream/dvbstream .install/usr/bin
+cp dvbstream/rtpfeed .install/usr/bin
+cp dvbstream/ts_filter .install/usr/bin
+cp dvbtscut/dvbtscut .install/usr/bin
+cp dvbtune/dvbtune .install/usr/bin
+cp dvbtune/xml2vdr .install/usr/bin

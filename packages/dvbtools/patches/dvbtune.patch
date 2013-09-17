@@ -1,0 +1,9 @@
+diff -uNr dvbtools-0.1+rcbef32.orig/dvbtune/Makefile dvbtools-0.1+rcbef32/dvbtune/Makefile
+--- dvbtools-0.1+rcbef32.orig/dvbtune/Makefile	2013-07-11 08:57:21.000000000 +0800
++++ dvbtools-0.1+rcbef32/dvbtune/Makefile	2013-09-18 00:02:27.741925263 +0800
+@@ -1,4 +1,4 @@
+-INCS=-I /usr/include/libxml2
++INCS=$(shell xml2-config --cflags)
+ CFLAGS= -Wall $(INCS)
+ LDFLAGS=-lxml2
+ CC=gcc
