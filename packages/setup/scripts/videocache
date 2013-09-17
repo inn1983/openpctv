@@ -22,3 +22,4 @@ if ! mountpoint -q /video && test $(dfsize /) -lt 3000000; then
    fi
 fi
 
+[ -d /video/hdd ] || mkdir -p /video/hdd

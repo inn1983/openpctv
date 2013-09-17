@@ -4,8 +4,6 @@ prefix=/usr
 exec_prefix=${prefix}
 datarootdir=${prefix}/share
 
-/usr/bin/videocache
-
 if [ -x ${exec_prefix}/bin/showiframe ]; then
 	if [ -f /etc/enigma2/backdrop.mvi ]; then
 		${exec_prefix}/bin/showiframe /etc/enigma2/backdrop.mvi

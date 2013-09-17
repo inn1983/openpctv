@@ -1,0 +1,11 @@
+[Unit]
+Description=mount video cache dir
+Conflicts=installator.target
+After=automountd.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/videocache
+
+[Install]
+WantedBy=multi-user.target
