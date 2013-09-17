@@ -1,0 +1,4032 @@
+diff --git a/include/xine.h b/include/xine.h
+index b6112e9..dc629d1 100644
+--- a/include/xine.h
++++ b/include/xine.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/array.h b/include/xine/array.h
+index cd0780e..90e221a 100644
+--- a/include/xine/array.h
++++ b/include/xine/array.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/audio_decoder.h b/include/xine/audio_decoder.h
+index a37967e..92da676 100644
+--- a/include/xine/audio_decoder.h
++++ b/include/xine/audio_decoder.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/audio_out.h b/include/xine/audio_out.h
+index ebd5a90..8ef83ad 100644
+--- a/include/xine/audio_out.h
++++ b/include/xine/audio_out.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/broadcaster.h b/include/xine/broadcaster.h
+index 0cd416c..361dd50 100644
+--- a/include/xine/broadcaster.h
++++ b/include/xine/broadcaster.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/buffer.h b/include/xine/buffer.h
+index 1570e8d..92c50f7 100644
+--- a/include/xine/buffer.h
++++ b/include/xine/buffer.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/compat.h b/include/xine/compat.h
+index 0392b45..be7d39f 100644
+--- a/include/xine/compat.h
++++ b/include/xine/compat.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2001 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a unix video player.
+  *
+diff --git a/include/xine/configfile.h b/include/xine/configfile.h
+index a0b9ad1..cb38351 100644
+--- a/include/xine/configfile.h
++++ b/include/xine/configfile.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/demux.h b/include/xine/demux.h
+index 2803c30..f696ef9 100644
+--- a/include/xine/demux.h
++++ b/include/xine/demux.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/info_helper.h b/include/xine/info_helper.h
+index 666b94f..1c6b40e 100644
+--- a/include/xine/info_helper.h
++++ b/include/xine/info_helper.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/input_plugin.h b/include/xine/input_plugin.h
+index ca7ec73..e9e17cb 100644
+--- a/include/xine/input_plugin.h
++++ b/include/xine/input_plugin.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/io_helper.h b/include/xine/io_helper.h
+index 0aac8fc..003c090 100644
+--- a/include/xine/io_helper.h
++++ b/include/xine/io_helper.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project,
++ * Copyright (C) 2000-2007 the xine project,
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/list.h b/include/xine/list.h
+index 4910f99..98bd842 100644
+--- a/include/xine/list.h
++++ b/include/xine/list.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/metronom.h b/include/xine/metronom.h
+index 06beb3a..f061590 100644
+--- a/include/xine/metronom.h
++++ b/include/xine/metronom.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/os_types.h b/include/xine/os_types.h
+index aa6eddb..b68d052 100644
+--- a/include/xine/os_types.h
++++ b/include/xine/os_types.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2004-2006 the xine project
++ * Copyright (C) 2004-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/osd.h b/include/xine/osd.h
+index 4447153..3a72c58 100644
+--- a/include/xine/osd.h
++++ b/include/xine/osd.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/plugin_catalog.h b/include/xine/plugin_catalog.h
+index 0f4a464..1b9bb79 100644
+--- a/include/xine/plugin_catalog.h
++++ b/include/xine/plugin_catalog.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/pool.h b/include/xine/pool.h
+index 37f6022..36e5315 100644
+--- a/include/xine/pool.h
++++ b/include/xine/pool.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/post.h b/include/xine/post.h
+index f0d0c93..c7e1e1c 100644
+--- a/include/xine/post.h
++++ b/include/xine/post.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/refcounter.h b/include/xine/refcounter.h
+index 9e2a58f..54c2c83 100644
+--- a/include/xine/refcounter.h
++++ b/include/xine/refcounter.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/resample.h b/include/xine/resample.h
+index 842434c..f6e0b3d 100644
+--- a/include/xine/resample.h
++++ b/include/xine/resample.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/ring_buffer.h b/include/xine/ring_buffer.h
+index 7678aa9..6ccd78d 100644
+--- a/include/xine/ring_buffer.h
++++ b/include/xine/ring_buffer.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/scratch.h b/include/xine/scratch.h
+index c0c927b..b4bab4e 100644
+--- a/include/xine/scratch.h
++++ b/include/xine/scratch.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/sorted_array.h b/include/xine/sorted_array.h
+index 0d22919..cf70a3e 100644
+--- a/include/xine/sorted_array.h
++++ b/include/xine/sorted_array.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/spu.h b/include/xine/spu.h
+index e534622..a5a919a 100644
+--- a/include/xine/spu.h
++++ b/include/xine/spu.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2007 the xine project
++ * Copyright (C) 2007-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/vdr.h b/include/xine/vdr.h
+index 4093472..1b90433 100644
+--- a/include/xine/vdr.h
++++ b/include/xine/vdr.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/video_decoder.h b/include/xine/video_decoder.h
+index faf7eac..749c7ad 100644
+--- a/include/xine/video_decoder.h
++++ b/include/xine/video_decoder.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/video_out.h b/include/xine/video_out.h
+index fae62b3..94cf1ec 100644
+--- a/include/xine/video_out.h
++++ b/include/xine/video_out.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/video_overlay.h b/include/xine/video_overlay.h
+index ba710c9..008bf07 100644
+--- a/include/xine/video_overlay.h
++++ b/include/xine/video_overlay.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/vo_scale.h b/include/xine/vo_scale.h
+index 3197632..a58bc15 100644
+--- a/include/xine/vo_scale.h
++++ b/include/xine/vo_scale.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/xine_buffer.h b/include/xine/xine_buffer.h
+index 7f6a392..3e124d2 100644
+--- a/include/xine/xine_buffer.h
++++ b/include/xine/xine_buffer.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/xine_internal.h b/include/xine/xine_internal.h
+index ea0f007..543d01c 100644
+--- a/include/xine/xine_internal.h
++++ b/include/xine/xine_internal.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2005 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/xine_plugin.h b/include/xine/xine_plugin.h
+index 31a14b5..80ae185 100644
+--- a/include/xine/xine_plugin.h
++++ b/include/xine/xine_plugin.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/xineintl.h b/include/xine/xineintl.h
+index bb9c006..0041e08 100644
+--- a/include/xine/xineintl.h
++++ b/include/xine/xineintl.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2005 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/xineutils.h b/include/xine/xineutils.h
+index 9276986..8e3394a 100644
+--- a/include/xine/xineutils.h
++++ b/include/xine/xineutils.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/xmllexer.h b/include/xine/xmllexer.h
+index 70fa86e..9fde5c0 100644
+--- a/include/xine/xmllexer.h
++++ b/include/xine/xmllexer.h
+@@ -1,5 +1,5 @@
+ /*
+- *  Copyright (C) 2002-2003,2007 the xine project
++ *  Copyright (C) 2002-2009 the xine project
+  *
+  *  This file is part of xine, a free video player.
+  *
+diff --git a/include/xine/xmlparser.h b/include/xine/xmlparser.h
+index 495e513..32311e8 100644
+--- a/include/xine/xmlparser.h
++++ b/include/xine/xmlparser.h
+@@ -1,5 +1,5 @@
+ /*
+- *  Copyright (C) 2002-2003,2007 the xine project
++ *  Copyright (C) 2002-2009 the xine project
+  *
+  *  This file is part of xine, a free video player.
+  *
+diff --git a/lib/asprintf.c b/lib/asprintf.c
+index 5359e51..797e07a 100644
+--- a/lib/asprintf.c
++++ b/lib/asprintf.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2006 the xine project
++ * Copyright (C) 2006-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/misc/cdda_server.c b/misc/cdda_server.c
+index 0fe09c1..939d83d 100644
+--- a/misc/cdda_server.c
++++ b/misc/cdda_server.c
+@@ -1,7 +1,7 @@
+ /*
+  * CDDA / DVD server
+  *
+- * Copyright (C) 2003-2007 the xine project
++ * Copyright (C) 2003-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/misc/xine-fontconv.c b/misc/xine-fontconv.c
+index 2eb8473..865a201 100644
+--- a/misc/xine-fontconv.c
++++ b/misc/xine-fontconv.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2003 the xine project
++ * Copyright (C) 2001-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_dec/ff_dvaudio_decoder.c b/src/audio_dec/ff_dvaudio_decoder.c
+index f38167c..144aeab 100644
+--- a/src/audio_dec/ff_dvaudio_decoder.c
++++ b/src/audio_dec/ff_dvaudio_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2005 the xine project
++ * Copyright (C) 2005-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_dec/fooaudio.c b/src/audio_dec/fooaudio.c
+index d2f1f74..27e7274 100644
+--- a/src/audio_dec/fooaudio.c
++++ b/src/audio_dec/fooaudio.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2001 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_dec/gsm610.c b/src/audio_dec/gsm610.c
+index be98da7..0a03d4f 100644
+--- a/src/audio_dec/gsm610.c
++++ b/src/audio_dec/gsm610.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_dec/xine_a52_decoder.c b/src/audio_dec/xine_a52_decoder.c
+index 628920f..ab7e572 100644
+--- a/src/audio_dec/xine_a52_decoder.c
++++ b/src/audio_dec/xine_a52_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_dec/xine_dts_decoder.c b/src/audio_dec/xine_dts_decoder.c
+index 9711650..966f505 100644
+--- a/src/audio_dec/xine_dts_decoder.c
++++ b/src/audio_dec/xine_dts_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2007 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a unix video player.
+  *
+diff --git a/src/audio_dec/xine_faad_decoder.c b/src/audio_dec/xine_faad_decoder.c
+index c4f5470..61abed5 100644
+--- a/src/audio_dec/xine_faad_decoder.c
++++ b/src/audio_dec/xine_faad_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2005 the xine project
++ * Copyright (C) 2000-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_dec/xine_lpcm_decoder.c b/src/audio_dec/xine_lpcm_decoder.c
+index e63fe49..55a6129 100644
+--- a/src/audio_dec/xine_lpcm_decoder.c
++++ b/src/audio_dec/xine_lpcm_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_dec/xine_mad_decoder.c b/src/audio_dec/xine_mad_decoder.c
+index ac16e84..a8a3879 100644
+--- a/src/audio_dec/xine_mad_decoder.c
++++ b/src/audio_dec/xine_mad_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2010 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_dec/xine_musepack_decoder.c b/src/audio_dec/xine_musepack_decoder.c
+index 758ca97..f4613df 100644
+--- a/src/audio_dec/xine_musepack_decoder.c
++++ b/src/audio_dec/xine_musepack_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2005 the xine project
++ * Copyright (C) 2005-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_out/audio_alsa_out.c b/src/audio_out/audio_alsa_out.c
+index 32a9004..c162502 100644
+--- a/src/audio_out/audio_alsa_out.c
++++ b/src/audio_out/audio_alsa_out.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_out/audio_coreaudio_out.c b/src/audio_out/audio_coreaudio_out.c
+index b2e7ef7..e1f0746 100644
+--- a/src/audio_out/audio_coreaudio_out.c
++++ b/src/audio_out/audio_coreaudio_out.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_out/audio_directx2_out.c b/src/audio_out/audio_directx2_out.c
+index de1aadd..643e3c6 100644
+--- a/src/audio_out/audio_directx2_out.c
++++ b/src/audio_out/audio_directx2_out.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2004-2005 the xine project
++ * Copyright (C) 2004-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_out/audio_directx_out.c b/src/audio_out/audio_directx_out.c
+index 0df4b21..0b71df3 100644
+--- a/src/audio_out/audio_directx_out.c
++++ b/src/audio_out/audio_directx_out.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2003 the xine project
++ * Copyright (C) 2001-2009 the xine project
+  *
+  * This file is part of xine, a unix video player.
+  *
+diff --git a/src/audio_out/audio_esd_out.c b/src/audio_out/audio_esd_out.c
+index 917a4bf..5fd06e5 100644
+--- a/src/audio_out/audio_esd_out.c
++++ b/src/audio_out/audio_esd_out.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_out/audio_file_out.c b/src/audio_out/audio_file_out.c
+index 0a4471a..2299c76 100644
+--- a/src/audio_out/audio_file_out.c
++++ b/src/audio_out/audio_file_out.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_out/audio_fusionsound_out.c b/src/audio_out/audio_fusionsound_out.c
+index c3455fd..94ccfaf 100644
+--- a/src/audio_out/audio_fusionsound_out.c
++++ b/src/audio_out/audio_fusionsound_out.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project and Claudio Ciccani
++ * Copyright (C) 2000-2009 the xine project and Claudio Ciccani
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_out/audio_irixal_out.c b/src/audio_out/audio_irixal_out.c
+index 3a0f211..2f77516 100644
+--- a/src/audio_out/audio_irixal_out.c
++++ b/src/audio_out/audio_irixal_out.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_out/audio_none_out.c b/src/audio_out/audio_none_out.c
+index c63d3a5..9e1ce57 100644
+--- a/src/audio_out/audio_none_out.c
++++ b/src/audio_out/audio_none_out.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_out/audio_oss_out.c b/src/audio_out/audio_oss_out.c
+index a51a0b1..6d83191 100644
+--- a/src/audio_out/audio_oss_out.c
++++ b/src/audio_out/audio_oss_out.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_out/audio_pulse_out.c b/src/audio_out/audio_pulse_out.c
+index 96c7711..9d7b2cd 100644
+--- a/src/audio_out/audio_pulse_out.c
++++ b/src/audio_out/audio_pulse_out.c
+@@ -1,7 +1,7 @@
+ /* -*- Mode: C; c-basic-offset: 2; indent-tabs-mode: nil -*- */
+ 
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/audio_out/audio_sun_out.c b/src/audio_out/audio_sun_out.c
+index 34d2f14..147d109 100644
+--- a/src/audio_out/audio_sun_out.c
++++ b/src/audio_out/audio_sun_out.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2003 the xine project
++ * Copyright (C) 2001-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/ffmpeg/Makefile.am b/src/combined/ffmpeg/Makefile.am
+index 3ae65f1..f10bd70 100644
+--- a/src/combined/ffmpeg/Makefile.am
++++ b/src/combined/ffmpeg/Makefile.am
+@@ -37,7 +37,10 @@ AV_CPP = $(CPP) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAG
+ avcodec_audio.list: AV_CODECS:=/CODEC_ID_PCM_S16LE/,/CODEC_ID_DVD_SUBTITLE/
+ avcodec_video.list: AV_CODECS:=/CODEC_ID_MPEG1VIDEO/,/CODEC_ID_PCM_S16LE/
+ 
+-avcodec_audio.list avcodec_video.list:
++# that weird shell call just yields full path of the avcodec.h file
++avcodec_audio.list avcodec_video.list: $(shell \
++ echo '#include "$(srcdir)/ffmpeg_decoder.h"' | $(AV_CPP) -M - |\
++ sed -e 's/ \+/\n/g;' | sed -n -e '/avcodec\.h/p;')
+ 	$(AM_V_GEN)echo '#include "$(srcdir)/ffmpeg_decoder.h"' | $(AV_CPP) - |\
+ 	  sed -e $(AV_CODECS)'! d; s/^[ \t]*//; s/[=,].*//; /^$$/ d' >$@
+ 
+diff --git a/src/combined/ffmpeg/ff_audio_decoder.c b/src/combined/ffmpeg/ff_audio_decoder.c
+index 1a80b9d..d5f62f7 100644
+--- a/src/combined/ffmpeg/ff_audio_decoder.c
++++ b/src/combined/ffmpeg/ff_audio_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2008 the xine project
++ * Copyright (C) 2001-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/ffmpeg/ff_mpeg_parser.c b/src/combined/ffmpeg/ff_mpeg_parser.c
+index 54f7d6c..dd85421 100644
+--- a/src/combined/ffmpeg/ff_mpeg_parser.c
++++ b/src/combined/ffmpeg/ff_mpeg_parser.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2004 the xine project
++ * Copyright (C) 2001-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/ffmpeg/ff_mpeg_parser.h b/src/combined/ffmpeg/ff_mpeg_parser.h
+index c1ebc32..0aab174 100644
+--- a/src/combined/ffmpeg/ff_mpeg_parser.h
++++ b/src/combined/ffmpeg/ff_mpeg_parser.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2004 the xine project
++ * Copyright (C) 2001-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/ffmpeg/ff_video_decoder.c b/src/combined/ffmpeg/ff_video_decoder.c
+index b24f108..b07d687 100644
+--- a/src/combined/ffmpeg/ff_video_decoder.c
++++ b/src/combined/ffmpeg/ff_video_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2008 the xine project
++ * Copyright (C) 2001-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/ffmpeg/ffmpeg_compat.h b/src/combined/ffmpeg/ffmpeg_compat.h
+index 588cce2..f1927ed 100644
+--- a/src/combined/ffmpeg/ffmpeg_compat.h
++++ b/src/combined/ffmpeg/ffmpeg_compat.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2012 the xine project
++ * Copyright (C) 2000-2013 the xine project
+  *
+  * This file is part of xine, a unix video player.
+  *
+diff --git a/src/combined/ffmpeg/ffmpeg_decoder.c b/src/combined/ffmpeg/ffmpeg_decoder.c
+index 4f44a7f..e5480cc 100644
+--- a/src/combined/ffmpeg/ffmpeg_decoder.c
++++ b/src/combined/ffmpeg/ffmpeg_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2004 the xine project
++ * Copyright (C) 2001-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/ffmpeg/ffmpeg_decoder.h b/src/combined/ffmpeg/ffmpeg_decoder.h
+index b0185d5..d3db209 100644
+--- a/src/combined/ffmpeg/ffmpeg_decoder.h
++++ b/src/combined/ffmpeg/ffmpeg_decoder.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2005 the xine project
++ * Copyright (C) 2001-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/flac_decoder.c b/src/combined/flac_decoder.c
+index 2d4176f..36d8124 100644
+--- a/src/combined/flac_decoder.c
++++ b/src/combined/flac_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/flac_demuxer.c b/src/combined/flac_demuxer.c
+index 7b4ed3c..abf694f 100644
+--- a/src/combined/flac_demuxer.c
++++ b/src/combined/flac_demuxer.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/nsf_combined.c b/src/combined/nsf_combined.c
+index c4c19f4..deca36f 100644
+--- a/src/combined/nsf_combined.c
++++ b/src/combined/nsf_combined.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2007 the xine project
++ * Copyright (C) 2007-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/nsf_combined.h b/src/combined/nsf_combined.h
+index 4376ecf..eb893a8 100644
+--- a/src/combined/nsf_combined.h
++++ b/src/combined/nsf_combined.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2001 the xine project
++ * Copyright (C) 2000-2007 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/nsf_decoder.c b/src/combined/nsf_decoder.c
+index 36f7f29..5b1ee63 100644
+--- a/src/combined/nsf_decoder.c
++++ b/src/combined/nsf_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2001 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/nsf_demuxer.c b/src/combined/nsf_demuxer.c
+index 2081d13..672edf6 100644
+--- a/src/combined/nsf_demuxer.c
++++ b/src/combined/nsf_demuxer.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/wavpack_combined.c b/src/combined/wavpack_combined.c
+index 8fe241d..47a804d 100644
+--- a/src/combined/wavpack_combined.c
++++ b/src/combined/wavpack_combined.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2007 the xine project
++ * Copyright (C) 2007-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/wavpack_combined.h b/src/combined/wavpack_combined.h
+index 8735816..64ec63b 100644
+--- a/src/combined/wavpack_combined.h
++++ b/src/combined/wavpack_combined.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2007 the xine project
++ * Copyright (C) 2007-2008 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/wavpack_decoder.c b/src/combined/wavpack_decoder.c
+index 253180c..8654f23 100644
+--- a/src/combined/wavpack_decoder.c
++++ b/src/combined/wavpack_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2007 the xine project
++ * Copyright (C) 2007-2010 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/wavpack_demuxer.c b/src/combined/wavpack_demuxer.c
+index a4cec9e..d49ba44 100644
+--- a/src/combined/wavpack_demuxer.c
++++ b/src/combined/wavpack_demuxer.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2006-2007 the xine project
++ * Copyright (C) 2006-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/xine_ogg_demuxer.c b/src/combined/xine_ogg_demuxer.c
+index c8cc93f..e254c6c 100644
+--- a/src/combined/xine_ogg_demuxer.c
++++ b/src/combined/xine_ogg_demuxer.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/xine_speex_decoder.c b/src/combined/xine_speex_decoder.c
+index acdf5e3..685d3c3 100644
+--- a/src/combined/xine_speex_decoder.c
++++ b/src/combined/xine_speex_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/xine_theora_decoder.c b/src/combined/xine_theora_decoder.c
+index fbea502..2752099 100644
+--- a/src/combined/xine_theora_decoder.c
++++ b/src/combined/xine_theora_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2003 the xine project
++ * Copyright (C) 2001-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/combined/xine_vorbis_decoder.c b/src/combined/xine_vorbis_decoder.c
+index 9864177..288202c 100644
+--- a/src/combined/xine_vorbis_decoder.c
++++ b/src/combined/xine_vorbis_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/asfheader.h b/src/demuxers/asfheader.h
+index 265f0e6..21c5335 100644
+--- a/src/demuxers/asfheader.h
++++ b/src/demuxers/asfheader.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2008 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_4xm.c b/src/demuxers/demux_4xm.c
+index 5f941e5..4557946 100644
+--- a/src/demuxers/demux_4xm.c
++++ b/src/demuxers/demux_4xm.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_aac.c b/src/demuxers/demux_aac.c
+index 2e1b7f6..d5c8db4 100644
+--- a/src/demuxers/demux_aac.c
++++ b/src/demuxers/demux_aac.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2007 the xine project
++ * Copyright (C) 2001-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_ac3.c b/src/demuxers/demux_ac3.c
+index d42396f..b846174 100644
+--- a/src/demuxers/demux_ac3.c
++++ b/src/demuxers/demux_ac3.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2005 the xine project
++ * Copyright (C) 2001-2010 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_aiff.c b/src/demuxers/demux_aiff.c
+index 8ddb7b6..d6f372c 100644
+--- a/src/demuxers/demux_aiff.c
++++ b/src/demuxers/demux_aiff.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2003 the xine project
++ * Copyright (C) 2001-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_asf.c b/src/demuxers/demux_asf.c
+index 71fc2b2..683c5c5 100644
+--- a/src/demuxers/demux_asf.c
++++ b/src/demuxers/demux_asf.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_aud.c b/src/demuxers/demux_aud.c
+index 258494f..bb87591 100644
+--- a/src/demuxers/demux_aud.c
++++ b/src/demuxers/demux_aud.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_avi.c b/src/demuxers/demux_avi.c
+index ae97b57..d40a315 100644
+--- a/src/demuxers/demux_avi.c
++++ b/src/demuxers/demux_avi.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_cdda.c b/src/demuxers/demux_cdda.c
+index f936ff4..6dfd586 100644
+--- a/src/demuxers/demux_cdda.c
++++ b/src/demuxers/demux_cdda.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2003 the xine project
++ * Copyright (C) 2001-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_dts.c b/src/demuxers/demux_dts.c
+index 3c624a8..81d4470 100644
+--- a/src/demuxers/demux_dts.c
++++ b/src/demuxers/demux_dts.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2005-2008 the xine project
++ * Copyright (C) 2005-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_eawve.c b/src/demuxers/demux_eawve.c
+index 7357355..58f31e8 100644
+--- a/src/demuxers/demux_eawve.c
++++ b/src/demuxers/demux_eawve.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_elem.c b/src/demuxers/demux_elem.c
+index ddd067e..d188efc 100644
+--- a/src/demuxers/demux_elem.c
++++ b/src/demuxers/demux_elem.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_film.c b/src/demuxers/demux_film.c
+index c2cd271..aec0807 100644
+--- a/src/demuxers/demux_film.c
++++ b/src/demuxers/demux_film.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_flac.c b/src/demuxers/demux_flac.c
+index 2135f8d..deda900 100644
+--- a/src/demuxers/demux_flac.c
++++ b/src/demuxers/demux_flac.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2007 the xine project
++ * Copyright (C) 2000-2010 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_fli.c b/src/demuxers/demux_fli.c
+index 498f7f0..5e56fbd 100644
+--- a/src/demuxers/demux_fli.c
++++ b/src/demuxers/demux_fli.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_idcin.c b/src/demuxers/demux_idcin.c
+index 954a2fc..6fd51f1 100644
+--- a/src/demuxers/demux_idcin.c
++++ b/src/demuxers/demux_idcin.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_iff.c b/src/demuxers/demux_iff.c
+index f199723..ab11503 100644
+--- a/src/demuxers/demux_iff.c
++++ b/src/demuxers/demux_iff.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2004 the xine project
++ * Copyright (C) 2004-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_image.c b/src/demuxers/demux_image.c
+index 491cc3b..7509264 100644
+--- a/src/demuxers/demux_image.c
++++ b/src/demuxers/demux_image.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2003-2005 the xine project
++ * Copyright (C) 2003-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_ipmovie.c b/src/demuxers/demux_ipmovie.c
+index a8930b8..8f73b2b 100644
+--- a/src/demuxers/demux_ipmovie.c
++++ b/src/demuxers/demux_ipmovie.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_matroska.c b/src/demuxers/demux_matroska.c
+index ea1ee71..c7f2bdc 100644
+--- a/src/demuxers/demux_matroska.c
++++ b/src/demuxers/demux_matroska.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_matroska.h b/src/demuxers/demux_matroska.h
+index 6708275..dc8cd6d 100644
+--- a/src/demuxers/demux_matroska.h
++++ b/src/demuxers/demux_matroska.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_mng.c b/src/demuxers/demux_mng.c
+index 3b7161c..e70af6c 100644
+--- a/src/demuxers/demux_mng.c
++++ b/src/demuxers/demux_mng.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_mod.c b/src/demuxers/demux_mod.c
+index 4de5ca7..39becba 100644
+--- a/src/demuxers/demux_mod.c
++++ b/src/demuxers/demux_mod.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2010 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_mpc.c b/src/demuxers/demux_mpc.c
+index 6658e82..07a75ae 100644
+--- a/src/demuxers/demux_mpc.c
++++ b/src/demuxers/demux_mpc.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2005 the xine project
++ * Copyright (C) 2005-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_mpeg.c b/src/demuxers/demux_mpeg.c
+index a0d813d..92ec31e 100644
+--- a/src/demuxers/demux_mpeg.c
++++ b/src/demuxers/demux_mpeg.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_mpeg_block.c b/src/demuxers/demux_mpeg_block.c
+index cad8414..21f1857 100644
+--- a/src/demuxers/demux_mpeg_block.c
++++ b/src/demuxers/demux_mpeg_block.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_mpeg_pes.c b/src/demuxers/demux_mpeg_pes.c
+index 4d53b6d..8eac7b8 100644
+--- a/src/demuxers/demux_mpeg_pes.c
++++ b/src/demuxers/demux_mpeg_pes.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_mpgaudio.c b/src/demuxers/demux_mpgaudio.c
+index 8bcb7b7..5bff178 100644
+--- a/src/demuxers/demux_mpgaudio.c
++++ b/src/demuxers/demux_mpgaudio.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2007 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_nsv.c b/src/demuxers/demux_nsv.c
+index 89b6de6..bb77572 100644
+--- a/src/demuxers/demux_nsv.c
++++ b/src/demuxers/demux_nsv.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_playlist.c b/src/demuxers/demux_playlist.c
+index 8b1a054..55f5be2 100644
+--- a/src/demuxers/demux_playlist.c
++++ b/src/demuxers/demux_playlist.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2007 the xine project
++ * Copyright (C) 2007-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_pva.c b/src/demuxers/demux_pva.c
+index 532a11f..cfc1069 100644
+--- a/src/demuxers/demux_pva.c
++++ b/src/demuxers/demux_pva.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_qt.c b/src/demuxers/demux_qt.c
+index 7c08605..4fc7f8a 100644
+--- a/src/demuxers/demux_qt.c
++++ b/src/demuxers/demux_qt.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2004 the xine project
++ * Copyright (C) 2001-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_rawdv.c b/src/demuxers/demux_rawdv.c
+index 199100a..2533bca 100644
+--- a/src/demuxers/demux_rawdv.c
++++ b/src/demuxers/demux_rawdv.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_real.c b/src/demuxers/demux_real.c
+index 47d1801..8e95f28 100644
+--- a/src/demuxers/demux_real.c
++++ b/src/demuxers/demux_real.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_realaudio.c b/src/demuxers/demux_realaudio.c
+index 6f29e46..6faeddd 100644
+--- a/src/demuxers/demux_realaudio.c
++++ b/src/demuxers/demux_realaudio.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2003 the xine project
++ * Copyright (C) 2001-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_roq.c b/src/demuxers/demux_roq.c
+index 9bc0f4e..08724f3 100644
+--- a/src/demuxers/demux_roq.c
++++ b/src/demuxers/demux_roq.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_shn.c b/src/demuxers/demux_shn.c
+index 7e25a70..5ed104c 100644
+--- a/src/demuxers/demux_shn.c
++++ b/src/demuxers/demux_shn.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2005 the xine project
++ * Copyright (C) 2005-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_slave.c b/src/demuxers/demux_slave.c
+index 5530892..c44e121 100644
+--- a/src/demuxers/demux_slave.c
++++ b/src/demuxers/demux_slave.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  * May 2003 - Miguel Freitas
+  * This plugin was sponsored by 1Control
+  *
+diff --git a/src/demuxers/demux_smjpeg.c b/src/demuxers/demux_smjpeg.c
+index 6f0cb38..a932952 100644
+--- a/src/demuxers/demux_smjpeg.c
++++ b/src/demuxers/demux_smjpeg.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_snd.c b/src/demuxers/demux_snd.c
+index 1b6b780..6d79cbf 100644
+--- a/src/demuxers/demux_snd.c
++++ b/src/demuxers/demux_snd.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2003 the xine project
++ * Copyright (C) 2001-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_str.c b/src/demuxers/demux_str.c
+index e4c439f..0856a75 100644
+--- a/src/demuxers/demux_str.c
++++ b/src/demuxers/demux_str.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_ts.c b/src/demuxers/demux_ts.c
+index eeab134..7bb1fd1 100644
+--- a/src/demuxers/demux_ts.c
++++ b/src/demuxers/demux_ts.c
+@@ -1,6 +1,6 @@
+ 
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_tta.c b/src/demuxers/demux_tta.c
+index 1a2f5ca..283b9af 100644
+--- a/src/demuxers/demux_tta.c
++++ b/src/demuxers/demux_tta.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2006 the xine project
++ * Copyright (C) 2006-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_vc1es.c b/src/demuxers/demux_vc1es.c
+index 8896ea9..aabb8c4 100644
+--- a/src/demuxers/demux_vc1es.c
++++ b/src/demuxers/demux_vc1es.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2008 the xine project
++ * Copyright (C) 2008-2009 the xine project
+  * Copyright (C) 2008 Christophe Thommeret <hftom@free.fr>
+  *
+  * This file is part of xine, a free video player.
+diff --git a/src/demuxers/demux_vmd.c b/src/demuxers/demux_vmd.c
+index 1bd052c..45993c7 100644
+--- a/src/demuxers/demux_vmd.c
++++ b/src/demuxers/demux_vmd.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2004 the xine project
++ * Copyright (C) 2004-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_voc.c b/src/demuxers/demux_voc.c
+index 0e4b736..36dcbe2 100644
+--- a/src/demuxers/demux_voc.c
++++ b/src/demuxers/demux_voc.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2003 the xine project
++ * Copyright (C) 2001-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_vox.c b/src/demuxers/demux_vox.c
+index 2d33952..dff224e 100644
+--- a/src/demuxers/demux_vox.c
++++ b/src/demuxers/demux_vox.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2003 the xine project
++ * Copyright (C) 2001-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_vqa.c b/src/demuxers/demux_vqa.c
+index 6980c6e..d2e1e88 100644
+--- a/src/demuxers/demux_vqa.c
++++ b/src/demuxers/demux_vqa.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_wav.c b/src/demuxers/demux_wav.c
+index 39e96be..0a89ee2 100644
+--- a/src/demuxers/demux_wav.c
++++ b/src/demuxers/demux_wav.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2008 the xine project
++ * Copyright (C) 2001-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_wc3movie.c b/src/demuxers/demux_wc3movie.c
+index db115fe..985d03a 100644
+--- a/src/demuxers/demux_wc3movie.c
++++ b/src/demuxers/demux_wc3movie.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_yuv4mpeg2.c b/src/demuxers/demux_yuv4mpeg2.c
+index f06201d..51a3580 100644
+--- a/src/demuxers/demux_yuv4mpeg2.c
++++ b/src/demuxers/demux_yuv4mpeg2.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/demux_yuv_frames.c b/src/demuxers/demux_yuv_frames.c
+index e8e8938..78d5e07 100644
+--- a/src/demuxers/demux_yuv_frames.c
++++ b/src/demuxers/demux_yuv_frames.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2003-2004 the xine project
++ * Copyright (C) 2003-2009 the xine project
+  * Copyright (C) 2003 Jeroen Asselman <j.asselman@itsec-ps.nl>
+  *
+  * This file is part of xine, a free video player.
+diff --git a/src/demuxers/ebml.c b/src/demuxers/ebml.c
+index c979d29..aabdea3 100644
+--- a/src/demuxers/ebml.c
++++ b/src/demuxers/ebml.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/ebml.h b/src/demuxers/ebml.h
+index 65db6c2..26be664 100644
+--- a/src/demuxers/ebml.h
++++ b/src/demuxers/ebml.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/flacutils.h b/src/demuxers/flacutils.h
+index e696399..3286777 100644
+--- a/src/demuxers/flacutils.h
++++ b/src/demuxers/flacutils.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2006 the xine project
++ * Copyright (C) 2006-2007 the xine project
+  * Based on the FLAC File Demuxer by Mike Melanson
+  *
+  * This file is part of xine, a free video player.
+diff --git a/src/demuxers/group_audio.c b/src/demuxers/group_audio.c
+index fe03b64..0aedda4 100644
+--- a/src/demuxers/group_audio.c
++++ b/src/demuxers/group_audio.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/group_audio.h b/src/demuxers/group_audio.h
+index 6b48a54..1764bea 100644
+--- a/src/demuxers/group_audio.h
++++ b/src/demuxers/group_audio.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2005 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/group_games.c b/src/demuxers/group_games.c
+index 5eacbfd..89e6339 100644
+--- a/src/demuxers/group_games.c
++++ b/src/demuxers/group_games.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/group_games.h b/src/demuxers/group_games.h
+index 34cb6e2..6db0543 100644
+--- a/src/demuxers/group_games.h
++++ b/src/demuxers/group_games.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/id3.c b/src/demuxers/id3.c
+index 2b433f5..4860feb 100644
+--- a/src/demuxers/id3.c
++++ b/src/demuxers/id3.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2010 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/id3.h b/src/demuxers/id3.h
+index d69642f..ef11491 100644
+--- a/src/demuxers/id3.h
++++ b/src/demuxers/id3.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2007 the xine project
++ * Copyright (C) 2000-2008 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/iff.h b/src/demuxers/iff.h
+index 921963c..7d7a7a3 100644
+--- a/src/demuxers/iff.h
++++ b/src/demuxers/iff.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2004 the xine project
++ * Copyright (C) 2004-2008 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/demuxers/matroska.h b/src/demuxers/matroska.h
+index 2edc4a6..c608a06 100644
+--- a/src/demuxers/matroska.h
++++ b/src/demuxers/matroska.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2009 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/dxr3/dxr3.h b/src/dxr3/dxr3.h
+index be151d0..9dbd543 100644
+--- a/src/dxr3/dxr3.h
++++ b/src/dxr3/dxr3.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/dxr3/dxr3_decode_spu.c b/src/dxr3/dxr3_decode_spu.c
+index 0dc0242..8aab9b6 100644
+--- a/src/dxr3/dxr3_decode_spu.c
++++ b/src/dxr3/dxr3_decode_spu.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/dxr3/dxr3_decode_video.c b/src/dxr3/dxr3_decode_video.c
+index ec28b46..61fd503 100644
+--- a/src/dxr3/dxr3_decode_video.c
++++ b/src/dxr3/dxr3_decode_video.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/dxr3/dxr3_mpeg_encoders.c b/src/dxr3/dxr3_mpeg_encoders.c
+index 7e9a0e5..01c73a1 100644
+--- a/src/dxr3/dxr3_mpeg_encoders.c
++++ b/src/dxr3/dxr3_mpeg_encoders.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a unix video player.
+  *
+diff --git a/src/dxr3/dxr3_scr.c b/src/dxr3/dxr3_scr.c
+index b38a884..94d0e3e 100644
+--- a/src/dxr3/dxr3_scr.c
++++ b/src/dxr3/dxr3_scr.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/dxr3/dxr3_scr.h b/src/dxr3/dxr3_scr.h
+index 28e2e0f..52f4c53 100644
+--- a/src/dxr3/dxr3_scr.h
++++ b/src/dxr3/dxr3_scr.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/dxr3/dxr3_spu_encoder.c b/src/dxr3/dxr3_spu_encoder.c
+index 4eb506e..6421f02 100644
+--- a/src/dxr3/dxr3_spu_encoder.c
++++ b/src/dxr3/dxr3_spu_encoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/dxr3/ffmpeg_encoder.c b/src/dxr3/ffmpeg_encoder.c
+index bf0cda8..5422ce6 100644
+--- a/src/dxr3/ffmpeg_encoder.c
++++ b/src/dxr3/ffmpeg_encoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2013 the xine project
+  *
+  * This file is part of xine, a unix video player.
+  *
+diff --git a/src/dxr3/video_out_dxr3.c b/src/dxr3/video_out_dxr3.c
+index 1fd1028..1944c17 100644
+--- a/src/dxr3/video_out_dxr3.c
++++ b/src/dxr3/video_out_dxr3.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/dxr3/video_out_dxr3.h b/src/dxr3/video_out_dxr3.h
+index 8158bba..3e5cb36 100644
+--- a/src/dxr3/video_out_dxr3.h
++++ b/src/dxr3/video_out_dxr3.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2001 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a unix video player.
+  *
+diff --git a/src/input/http_helper.c b/src/input/http_helper.c
+index 9b3560b..6ef1a3f 100644
+--- a/src/input/http_helper.c
++++ b/src/input/http_helper.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/http_helper.h b/src/input/http_helper.h
+index 9996331..15392f3 100644
+--- a/src/input/http_helper.h
++++ b/src/input/http_helper.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/input_bluray.c b/src/input/input_bluray.c
+index c953de0..3a7926f 100644
+--- a/src/input/input_bluray.c
++++ b/src/input/input_bluray.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2011 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  * Copyright (C) 2009-2011 Petri Hintukainen <phintuka@users.sourceforge.net>
+  *
+  * This file is part of xine, a free video player.
+diff --git a/src/input/input_cdda.c b/src/input/input_cdda.c
+index 5cbcc2c..02271a9 100644
+--- a/src/input/input_cdda.c
++++ b/src/input/input_cdda.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/input_dvb.c b/src/input/input_dvb.c
+index b6003ae..6ac520f 100644
+--- a/src/input/input_dvb.c
++++ b/src/input/input_dvb.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/input_dvd.c b/src/input/input_dvd.c
+index ca6f9bf..a8d805f 100644
+--- a/src/input/input_dvd.c
++++ b/src/input/input_dvd.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2005 the xine project,
++ * Copyright (C) 2000-2012 the xine project,
+  *                         Rich Wareham <richwareham@users.sourceforge.net>
+  *
+  * This file is part of xine, a free video player.
+diff --git a/src/input/input_file.c b/src/input/input_file.c
+index 796c789..9e49fae 100644
+--- a/src/input/input_file.c
++++ b/src/input/input_file.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2005 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/input_gnome_vfs.c b/src/input/input_gnome_vfs.c
+index b655309..9a68040 100644
+--- a/src/input/input_gnome_vfs.c
++++ b/src/input/input_gnome_vfs.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  * 2002 Bastien Nocera <hadess@hadess.net>
+  *
+  * This file is part of totem,
+diff --git a/src/input/input_http.c b/src/input/input_http.c
+index 34437c9..3c48ce3 100644
+--- a/src/input/input_http.c
++++ b/src/input/input_http.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/input_mms.c b/src/input/input_mms.c
+index ec921e1..66d85af 100644
+--- a/src/input/input_mms.c
++++ b/src/input/input_mms.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2003 the xine project
++ * Copyright (C) 2002-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/input_net.c b/src/input/input_net.c
+index 801093e..ef7b87b 100644
+--- a/src/input/input_net.c
++++ b/src/input/input_net.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/input_pnm.c b/src/input/input_pnm.c
+index 2ee4676..26ebb17 100644
+--- a/src/input/input_pnm.c
++++ b/src/input/input_pnm.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2003 the xine project
++ * Copyright (C) 2002-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/input_pvr.c b/src/input/input_pvr.c
+index 0503316..1ebd498 100644
+--- a/src/input/input_pvr.c
++++ b/src/input/input_pvr.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2005 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  * March 2003 - Miguel Freitas
+  * This plugin was sponsored by 1Control
+  *
+diff --git a/src/input/input_rtp.c b/src/input/input_rtp.c
+index c62c4ce..bd60a4d 100644
+--- a/src/input/input_rtp.c
++++ b/src/input/input_rtp.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/input_rtsp.c b/src/input/input_rtsp.c
+index 4188569..6ddf13b 100644
+--- a/src/input/input_rtsp.c
++++ b/src/input/input_rtsp.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2003 the xine project
++ * Copyright (C) 2002-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/input_smb.c b/src/input/input_smb.c
+index f3c2c03..e291b5b 100644
+--- a/src/input/input_smb.c
++++ b/src/input/input_smb.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2008 the xine project
++ * Copyright (C) 2008-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/input_stdin_fifo.c b/src/input/input_stdin_fifo.c
+index 4abb31e..264ccf5 100644
+--- a/src/input/input_stdin_fifo.c
++++ b/src/input/input_stdin_fifo.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/input_v4l.c b/src/input/input_v4l.c
+index c91b273..79c7f34 100644
+--- a/src/input/input_v4l.c
++++ b/src/input/input_v4l.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2003-2008 the xine project
++ * Copyright (C) 2003-2011 the xine project
+  * Copyright (C) 2003 J.Asselman <j.asselman@itsec-ps.nl>
+  *
+  * This file is part of xine, a free video player.
+diff --git a/src/input/input_vcd.c b/src/input/input_vcd.c
+index 015e489..7f1e58e 100644
+--- a/src/input/input_vcd.c
++++ b/src/input/input_vcd.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/libreal/asmrp.c b/src/input/libreal/asmrp.c
+index 070d9cb..45730eb 100644
+--- a/src/input/libreal/asmrp.c
++++ b/src/input/libreal/asmrp.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2004 the xine project
++ * Copyright (C) 2002-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/libreal/asmrp.h b/src/input/libreal/asmrp.h
+index dcc373b..5fd20cd 100644
+--- a/src/input/libreal/asmrp.h
++++ b/src/input/libreal/asmrp.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2003 the xine project
++ * Copyright (C) 2002-2007 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/libreal/real.c b/src/input/libreal/real.c
+index 7ce3457..d5320ab 100644
+--- a/src/input/libreal/real.c
++++ b/src/input/libreal/real.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2003 the xine project
++ * Copyright (C) 2002-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/libreal/real.h b/src/input/libreal/real.h
+index f299b90..608c028 100644
+--- a/src/input/libreal/real.h
++++ b/src/input/libreal/real.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2003 the xine project
++ * Copyright (C) 2002-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/libreal/rmff.c b/src/input/libreal/rmff.c
+index 5690eb1..55ae4b8 100644
+--- a/src/input/libreal/rmff.c
++++ b/src/input/libreal/rmff.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2003 the xine project
++ * Copyright (C) 2002-2010 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/libreal/rmff.h b/src/input/libreal/rmff.h
+index 996adc7..4b83c99 100644
+--- a/src/input/libreal/rmff.h
++++ b/src/input/libreal/rmff.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2003 the xine project
++ * Copyright (C) 2002-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/libreal/sdpplin.c b/src/input/libreal/sdpplin.c
+index c9f5afa..3f35700 100644
+--- a/src/input/libreal/sdpplin.c
++++ b/src/input/libreal/sdpplin.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2003 the xine project
++ * Copyright (C) 2002-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/libreal/sdpplin.h b/src/input/libreal/sdpplin.h
+index 2296c31..f676a68 100644
+--- a/src/input/libreal/sdpplin.h
++++ b/src/input/libreal/sdpplin.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2003 the xine project
++ * Copyright (C) 2002-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/librtsp/rtsp.c b/src/input/librtsp/rtsp.c
+index aa4a640..54fc790 100644
+--- a/src/input/librtsp/rtsp.c
++++ b/src/input/librtsp/rtsp.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/librtsp/rtsp.h b/src/input/librtsp/rtsp.h
+index 98a87fb..8bd3c75 100644
+--- a/src/input/librtsp/rtsp.h
++++ b/src/input/librtsp/rtsp.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2003 the xine project
++ * Copyright (C) 2002-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/librtsp/rtsp_session.c b/src/input/librtsp/rtsp_session.c
+index a4b4c83..6571ab6 100644
+--- a/src/input/librtsp/rtsp_session.c
++++ b/src/input/librtsp/rtsp_session.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/librtsp/rtsp_session.h b/src/input/librtsp/rtsp_session.h
+index 33ac579..8da0de7 100644
+--- a/src/input/librtsp/rtsp_session.h
++++ b/src/input/librtsp/rtsp_session.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2008 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/media_helper.c b/src/input/media_helper.c
+index 1a82a40..999fd02 100644
+--- a/src/input/media_helper.c
++++ b/src/input/media_helper.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project,
++ * Copyright (C) 2000-2011 the xine project,
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/media_helper.h b/src/input/media_helper.h
+index a8e376f..bed3a8d 100644
+--- a/src/input/media_helper.h
++++ b/src/input/media_helper.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project,
++ * Copyright (C) 2000-2007 the xine project,
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/mms.c b/src/input/mms.c
+index 67f8775..2a2fb20 100644
+--- a/src/input/mms.c
++++ b/src/input/mms.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2004 the xine project
++ * Copyright (C) 2002-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/mms.h b/src/input/mms.h
+index 2fdfdac..749c90b 100644
+--- a/src/input/mms.h
++++ b/src/input/mms.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2003 the xine project
++ * Copyright (C) 2002-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/mmsh.c b/src/input/mmsh.c
+index 2a65dd7..6b4fcd6 100644
+--- a/src/input/mmsh.c
++++ b/src/input/mmsh.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2003 the xine project
++ * Copyright (C) 2002-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/mmsh.h b/src/input/mmsh.h
+index 1e337a2..1dc5226 100644
+--- a/src/input/mmsh.h
++++ b/src/input/mmsh.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2003 the xine project
++ * Copyright (C) 2002-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/net_buf_ctrl.c b/src/input/net_buf_ctrl.c
+index a087fd3..2913255 100644
+--- a/src/input/net_buf_ctrl.c
++++ b/src/input/net_buf_ctrl.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/net_buf_ctrl.h b/src/input/net_buf_ctrl.h
+index 0e5ff3f..731d405 100644
+--- a/src/input/net_buf_ctrl.h
++++ b/src/input/net_buf_ctrl.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/pnm.c b/src/input/pnm.c
+index d07d35c..117a1fe 100644
+--- a/src/input/pnm.c
++++ b/src/input/pnm.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2010 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/input/pnm.h b/src/input/pnm.h
+index cf547f5..f6f7e5d 100644
+--- a/src/input/pnm.h
++++ b/src/input/pnm.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2003 the xine project
++ * Copyright (C) 2002-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/libreal/real_common.c b/src/libreal/real_common.c
+index c7ba381..6254424 100644
+--- a/src/libreal/real_common.c
++++ b/src/libreal/real_common.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2007 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/libreal/real_common.h b/src/libreal/real_common.h
+index fb1e103..e9ef149 100644
+--- a/src/libreal/real_common.h
++++ b/src/libreal/real_common.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2007 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/libreal/xine_real_audio_decoder.c b/src/libreal/xine_real_audio_decoder.c
+index 50c5268..8f97972 100644
+--- a/src/libreal/xine_real_audio_decoder.c
++++ b/src/libreal/xine_real_audio_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/libreal/xine_real_video_decoder.c b/src/libreal/xine_real_video_decoder.c
+index ce717fe..48ff6f4 100644
+--- a/src/libreal/xine_real_video_decoder.c
++++ b/src/libreal/xine_real_video_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/libw32dll/qt_decoder.c b/src/libw32dll/qt_decoder.c
+index 9b20672..ebb7065 100644
+--- a/src/libw32dll/qt_decoder.c
++++ b/src/libw32dll/qt_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/libw32dll/w32codec.c b/src/libw32dll/w32codec.c
+index 231a062..e4e73b8 100644
+--- a/src/libw32dll/w32codec.c
++++ b/src/libw32dll/w32codec.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2010 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/libw32dll/w32codec.h b/src/libw32dll/w32codec.h
+index 78dcb5c..057c81a 100644
+--- a/src/libw32dll/w32codec.h
++++ b/src/libw32dll/w32codec.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2001 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a unix video player.
+  *
+diff --git a/src/libw32dll/wine/ldt_keeper.c b/src/libw32dll/wine/ldt_keeper.c
+index 39f1e0f..1335178 100644
+--- a/src/libw32dll/wine/ldt_keeper.c
++++ b/src/libw32dll/wine/ldt_keeper.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2007 the xine project
+  * 
+  * This file is part of xine, a free video player.
+  * 
+diff --git a/src/post/audio/audio_filters.c b/src/post/audio/audio_filters.c
+index 78f495c..5553d7d 100644
+--- a/src/post/audio/audio_filters.c
++++ b/src/post/audio/audio_filters.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/audio/audio_filters.h b/src/post/audio/audio_filters.h
+index 144e858..c07ad82 100644
+--- a/src/post/audio/audio_filters.h
++++ b/src/post/audio/audio_filters.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/audio/stretch.c b/src/post/audio/stretch.c
+index 1f130ef..a3a6062 100644
+--- a/src/post/audio/stretch.c
++++ b/src/post/audio/stretch.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/audio/upmix.c b/src/post/audio/upmix.c
+index 97edd47..bdbac91 100644
+--- a/src/post/audio/upmix.c
++++ b/src/post/audio/upmix.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2010 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/audio/upmix_mono.c b/src/post/audio/upmix_mono.c
+index 7fb6c7b..b676cea 100644
+--- a/src/post/audio/upmix_mono.c
++++ b/src/post/audio/upmix_mono.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/audio/volnorm.c b/src/post/audio/volnorm.c
+index dda38fa..b962473 100644
+--- a/src/post/audio/volnorm.c
++++ b/src/post/audio/volnorm.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/deinterlace/xine_plugin.c b/src/post/deinterlace/xine_plugin.c
+index 3cce424..c63cac6 100644
+--- a/src/post/deinterlace/xine_plugin.c
++++ b/src/post/deinterlace/xine_plugin.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/goom/xine_goom.c b/src/post/goom/xine_goom.c
+index 2dd42ce..b04eedd 100644
+--- a/src/post/goom/xine_goom.c
++++ b/src/post/goom/xine_goom.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/mosaico/mosaico.c b/src/post/mosaico/mosaico.c
+index 79272e8..f97c63c 100644
+--- a/src/post/mosaico/mosaico.c
++++ b/src/post/mosaico/mosaico.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/mosaico/switch.c b/src/post/mosaico/switch.c
+index 1bc9058..e23575a 100644
+--- a/src/post/mosaico/switch.c
++++ b/src/post/mosaico/switch.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/planar/boxblur.c b/src/post/planar/boxblur.c
+index ea3085f..ff67bb7 100644
+--- a/src/post/planar/boxblur.c
++++ b/src/post/planar/boxblur.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/planar/denoise3d.c b/src/post/planar/denoise3d.c
+index 793a377..741f481 100644
+--- a/src/post/planar/denoise3d.c
++++ b/src/post/planar/denoise3d.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/planar/eq.c b/src/post/planar/eq.c
+index dcf9b47..d35825a 100644
+--- a/src/post/planar/eq.c
++++ b/src/post/planar/eq.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/planar/eq2.c b/src/post/planar/eq2.c
+index a3e1aca..867699b 100644
+--- a/src/post/planar/eq2.c
++++ b/src/post/planar/eq2.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/planar/expand.c b/src/post/planar/expand.c
+index 513def8..368dc04 100644
+--- a/src/post/planar/expand.c
++++ b/src/post/planar/expand.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2003 the xine project
++ * Copyright (C) 2003-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/planar/fill.c b/src/post/planar/fill.c
+index c79033a..6c7c936 100644
+--- a/src/post/planar/fill.c
++++ b/src/post/planar/fill.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2005 the xine project
++ * Copyright (C) 2005-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/planar/invert.c b/src/post/planar/invert.c
+index 462b8fa..824088e 100644
+--- a/src/post/planar/invert.c
++++ b/src/post/planar/invert.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/planar/noise.c b/src/post/planar/noise.c
+index 471670f..3af9a1b 100644
+--- a/src/post/planar/noise.c
++++ b/src/post/planar/noise.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/planar/planar.c b/src/post/planar/planar.c
+index e2bd658..4d536d6 100644
+--- a/src/post/planar/planar.c
++++ b/src/post/planar/planar.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/planar/pp.c b/src/post/planar/pp.c
+index ab1fc3a..d8083e4 100644
+--- a/src/post/planar/pp.c
++++ b/src/post/planar/pp.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/planar/unsharp.c b/src/post/planar/unsharp.c
+index ffa6a39..86c3e04 100644
+--- a/src/post/planar/unsharp.c
++++ b/src/post/planar/unsharp.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/visualizations/fft.c b/src/post/visualizations/fft.c
+index 0b61625..2092cbd 100644
+--- a/src/post/visualizations/fft.c
++++ b/src/post/visualizations/fft.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/visualizations/fft.h b/src/post/visualizations/fft.h
+index 358cec3..5d660fa 100644
+--- a/src/post/visualizations/fft.h
++++ b/src/post/visualizations/fft.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/visualizations/fftgraph.c b/src/post/visualizations/fftgraph.c
+index 2d13c40..fa3f5f9 100644
+--- a/src/post/visualizations/fftgraph.c
++++ b/src/post/visualizations/fftgraph.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/visualizations/fftscope.c b/src/post/visualizations/fftscope.c
+index 3ec72fb..133bd6f 100644
+--- a/src/post/visualizations/fftscope.c
++++ b/src/post/visualizations/fftscope.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/visualizations/fooviz.c b/src/post/visualizations/fooviz.c
+index 9c8a9c1..7acb5af 100644
+--- a/src/post/visualizations/fooviz.c
++++ b/src/post/visualizations/fooviz.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/visualizations/oscope.c b/src/post/visualizations/oscope.c
+index ffd6f08..ccba05f 100644
+--- a/src/post/visualizations/oscope.c
++++ b/src/post/visualizations/oscope.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/visualizations/visualizations.c b/src/post/visualizations/visualizations.c
+index 17c8491..8d03b4a 100644
+--- a/src/post/visualizations/visualizations.c
++++ b/src/post/visualizations/visualizations.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2008 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/post/visualizations/visualizations.h b/src/post/visualizations/visualizations.h
+index c72a1ad..af45066 100644
+--- a/src/post/visualizations/visualizations.h
++++ b/src/post/visualizations/visualizations.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2007 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/spu_dec/cc_decoder.c b/src/spu_dec/cc_decoder.c
+index d60d2cf..aadfb5a 100644
+--- a/src/spu_dec/cc_decoder.c
++++ b/src/spu_dec/cc_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * Copyright (C) Christian Vogler
+  *               cvogler@gradient.cis.upenn.edu - December 2001
+diff --git a/src/spu_dec/cc_decoder.h b/src/spu_dec/cc_decoder.h
+index 58bd5aa..2bca1bc 100644
+--- a/src/spu_dec/cc_decoder.h
++++ b/src/spu_dec/cc_decoder.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * Copyright (C) Christian Vogler
+  *               cvogler@gradient.cis.upenn.edu - December 2001
+diff --git a/src/spu_dec/cmml_decoder.c b/src/spu_dec/cmml_decoder.c
+index 53d5fa9..4f0be8f 100644
+--- a/src/spu_dec/cmml_decoder.c
++++ b/src/spu_dec/cmml_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2010 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/spu_dec/spu_decoder.c b/src/spu_dec/spu_decoder.c
+index 9244564..dbcccf8 100644
+--- a/src/spu_dec/spu_decoder.c
++++ b/src/spu_dec/spu_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2010 the xine project
+  *
+  * Copyright (C) James Courtier-Dutton James@superbug.demon.co.uk - July 2001
+  *
+diff --git a/src/spu_dec/spudec.c b/src/spu_dec/spudec.c
+index fc305b8..635d90b 100644
+--- a/src/spu_dec/spudec.c
++++ b/src/spu_dec/spudec.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2002-2004 the xine project
++ * Copyright (C) 2002-2010 the xine project
+  *
+  * Copyright (C) James Courtier-Dutton James@superbug.demon.co.uk - July 2001
+  *
+diff --git a/src/spu_dec/spudec.h b/src/spu_dec/spudec.h
+index 225a87f..899d8c3 100644
+--- a/src/spu_dec/spudec.h
++++ b/src/spu_dec/spudec.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2010 the xine project
+  *
+  * Copyright (C) James Courtier-Dutton James@superbug.demon.co.uk - July 2001
+  *
+diff --git a/src/spu_dec/spudvb_decoder.c b/src/spu_dec/spudvb_decoder.c
+index 518903e..0132df2 100644
+--- a/src/spu_dec/spudvb_decoder.c
++++ b/src/spu_dec/spudvb_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2010 the xine project
++ * Copyright (C) 2010-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/spu_dec/spuhdmv_decoder.c b/src/spu_dec/spuhdmv_decoder.c
+index 85d35ae..4a32d98 100644
+--- a/src/spu_dec/spuhdmv_decoder.c
++++ b/src/spu_dec/spuhdmv_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2009 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * Copyright (C) 2009 Petri Hintukainen <phintuka@users.sourceforge.net>
+  *
+diff --git a/src/spu_dec/sputext_decoder.c b/src/spu_dec/sputext_decoder.c
+index 0eb42d6..5db52b9 100644
+--- a/src/spu_dec/sputext_decoder.c
++++ b/src/spu_dec/sputext_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/spu_dec/sputext_demuxer.c b/src/spu_dec/sputext_demuxer.c
+index a8e252c..7b4cd95 100644
+--- a/src/spu_dec/sputext_demuxer.c
++++ b/src/spu_dec/sputext_demuxer.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/spu_dec/xine_cc_decoder.c b/src/spu_dec/xine_cc_decoder.c
+index fc69304..789f62b 100644
+--- a/src/spu_dec/xine_cc_decoder.c
++++ b/src/spu_dec/xine_cc_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/vdr/combined_vdr.c b/src/vdr/combined_vdr.c
+index 0dd7a5f..c09d70c 100644
+--- a/src/vdr/combined_vdr.c
++++ b/src/vdr/combined_vdr.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/vdr/combined_vdr.h b/src/vdr/combined_vdr.h
+index 9757bff..560d5b9 100644
+--- a/src/vdr/combined_vdr.h
++++ b/src/vdr/combined_vdr.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2007 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/vdr/input_vdr.c b/src/vdr/input_vdr.c
+index 53da46c..2bf74ea 100644
+--- a/src/vdr/input_vdr.c
++++ b/src/vdr/input_vdr.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2003-2004 the xine project
++ * Copyright (C) 2003-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/vdr/post_vdr_audio.c b/src/vdr/post_vdr_audio.c
+index d85bb36..e576dfc 100644
+--- a/src/vdr/post_vdr_audio.c
++++ b/src/vdr/post_vdr_audio.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/vdr/post_vdr_video.c b/src/vdr/post_vdr_video.c
+index 772374d..5d90b0e 100644
+--- a/src/vdr/post_vdr_video.c
++++ b/src/vdr/post_vdr_video.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_dec/bitplane.c b/src/video_dec/bitplane.c
+index 638d390..ca847dd 100644
+--- a/src/video_dec/bitplane.c
++++ b/src/video_dec/bitplane.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2004 the xine project
++ * Copyright (C) 2004-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_dec/foovideo.c b/src/video_dec/foovideo.c
+index 99ec128..1504e73 100644
+--- a/src/video_dec/foovideo.c
++++ b/src/video_dec/foovideo.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_dec/gdkpixbuf.c b/src/video_dec/gdkpixbuf.c
+index 4b0d7b4..3879e04 100644
+--- a/src/video_dec/gdkpixbuf.c
++++ b/src/video_dec/gdkpixbuf.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2006 the xine project
++ * Copyright (C) 2006-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_dec/image.c b/src/video_dec/image.c
+index d44ed66..a2d95e3 100644
+--- a/src/video_dec/image.c
++++ b/src/video_dec/image.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2003-2005 the xine project
++ * Copyright (C) 2003-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+@@ -102,13 +102,15 @@ static void image_decode_data (video_decoder_t *this_gen, buf_element_t *buf) {
+   this->index += buf->size;
+ 
+   if (buf->decoder_flags & BUF_FLAG_FRAME_END) {
+-    int                width, height, i, x, y, img_stride;
++    int                width, height, img_stride;
+     int                status;
+     MagickWand        *wand;
+-    uint8_t           *img_buf, *img_buf_ptr;
+-    yuv_planes_t       yuv_planes;
++    uint8_t           *img_buf;
+     vo_frame_t        *img;
+ 
++    void              *rgb2yuy2;
++    int                frame_flags, cm;
++
+     /*
+      * this->image -> rgb data
+      */
+@@ -135,8 +137,8 @@ static void image_decode_data (video_decoder_t *this_gen, buf_element_t *buf) {
+ 
+     width = MagickGetImageWidth(wand);
+     height = MagickGetImageHeight(wand);
+-    img_buf = malloc(width * height * 3);
+     img_stride = 3 * width;
++    img_buf = malloc (img_stride * height);
+ #if MAGICK_VERSION < 0x671
+     MagickGetImagePixels(wand, 0, 0, width, height, "RGB", CharPixel, img_buf);
+     DestroyMagickWand(wand);
+@@ -152,13 +154,19 @@ static void image_decode_data (video_decoder_t *this_gen, buf_element_t *buf) {
+ 
+     lprintf("image loaded successfully\n");
+ 
++    frame_flags = VO_BOTH_FIELDS;
++    cm = 10; /* mpeg range ITU-R 601 */
++    if (this->stream->video_out->get_capabilities (this->stream->video_out) & VO_CAP_FULLRANGE)
++      cm = 11; /* full range */
++    VO_SET_FLAGS_CM (cm, frame_flags);
++
+     /*
+      * alloc video frame and set cropping
+      */
+     img = this->stream->video_out->get_frame (this->stream->video_out, width, height,
+ 					      (double)width / (double)height,
+ 					      XINE_IMGFMT_YUY2,
+-					      VO_BOTH_FIELDS);
++					      frame_flags);
+ 
+     if (width > img->width)
+       width = img->width;
+@@ -169,25 +177,10 @@ static void image_decode_data (video_decoder_t *this_gen, buf_element_t *buf) {
+     /*
+      * rgb data -> yuv_planes
+      */
+-    width &= ~1; /* must be even for init_yuv_planes */
+-    init_yuv_planes(&yuv_planes, width, height);
+-
+-    img_buf_ptr = img_buf;
+-    i = 0;
+-    for (y = 0; y < height; y++) {
+-    for (x = 0; x < width; x++) {
+-      uint8_t r = *(img_buf_ptr++);
+-      uint8_t g = *(img_buf_ptr++);
+-      uint8_t b = *(img_buf_ptr++);
+-
+-      yuv_planes.y[i] = COMPUTE_Y(r, g, b);
+-      yuv_planes.u[i] = COMPUTE_U(r, g, b);
+-      yuv_planes.v[i] = COMPUTE_V(r, g, b);
+-      i++;
+-    }
+-    img_buf_ptr += img_stride - 3 * width;
+-    }
+-    free(img_buf);
++    rgb2yuy2 = rgb2yuy2_alloc (cm, "rgb");
++    rgb2yuy2_slice (rgb2yuy2, img_buf, img_stride, img->base[0], img->pitches[0], width, height);
++    rgb2yuy2_free (rgb2yuy2);
++    free (img_buf);
+ 
+     /*
+      * draw video frame
+@@ -196,9 +189,6 @@ static void image_decode_data (video_decoder_t *this_gen, buf_element_t *buf) {
+     img->duration = 3600;
+     img->bad_frame = 0;
+ 
+-    yuv444_to_yuy2(&yuv_planes, img->base[0], img->pitches[0]);
+-    free_yuv_planes(&yuv_planes);
+-
+     _x_stream_info_set(this->stream, XINE_STREAM_INFO_FRAME_DURATION, img->duration);
+ 
+     img->draw(img, this->stream);
+diff --git a/src/video_dec/libmpeg2/xine_mpeg2_decoder.c b/src/video_dec/libmpeg2/xine_mpeg2_decoder.c
+index c4c7fac..ce3ca3c 100644
+--- a/src/video_dec/libmpeg2/xine_mpeg2_decoder.c
++++ b/src/video_dec/libmpeg2/xine_mpeg2_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_dec/libmpeg2new/xine_mpeg2new_decoder.c b/src/video_dec/libmpeg2new/xine_mpeg2new_decoder.c
+index 2678168..3e3cb48 100644
+--- a/src/video_dec/libmpeg2new/xine_mpeg2new_decoder.c
++++ b/src/video_dec/libmpeg2new/xine_mpeg2new_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_dec/libvdpau/alterh264_bits_reader.h b/src/video_dec/libvdpau/alterh264_bits_reader.h
+index 81f6414..e32747a 100644
+--- a/src/video_dec/libvdpau/alterh264_bits_reader.h
++++ b/src/video_dec/libvdpau/alterh264_bits_reader.h
+@@ -1,6 +1,6 @@
+ /* kate: tab-indent on; indent-width 4; mixedindent off; indent-mode cstyle; remove-trailing-space on; */
+ /*
+- * Copyright (C) 2008 the xine project
++ * Copyright (C) 2008-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_dec/libvdpau/alterh264_decode.c b/src/video_dec/libvdpau/alterh264_decode.c
+index 55e9fdf..8eaeafa 100644
+--- a/src/video_dec/libvdpau/alterh264_decode.c
++++ b/src/video_dec/libvdpau/alterh264_decode.c
+@@ -1,5 +1,5 @@
+ /* kate: space-indent on; indent-width 2; mixedindent off; indent-mode cstyle; remove-trailing-space on;
+- * Copyright (C) 2008 the xine project
++ * Copyright (C) 2008-2013 the xine project
+  * Copyright (C) 2008 Christophe Thommeret <hftom@free.fr>
+  *
+  * This file is part of xine, a free video player.
+diff --git a/src/video_dec/libvdpau/alterh264_decode.h b/src/video_dec/libvdpau/alterh264_decode.h
+index 368f054..97bd9df 100644
+--- a/src/video_dec/libvdpau/alterh264_decode.h
++++ b/src/video_dec/libvdpau/alterh264_decode.h
+@@ -1,6 +1,6 @@
+ /* kate: tab-indent on; indent-width 4; mixedindent off; indent-mode cstyle; remove-trailing-space on; */
+ /*
+- * Copyright (C) 2008 the xine project
++ * Copyright (C) 2008-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_dec/libvdpau/bits_reader.h b/src/video_dec/libvdpau/bits_reader.h
+index 9c7ea28..1ce939f 100644
+--- a/src/video_dec/libvdpau/bits_reader.h
++++ b/src/video_dec/libvdpau/bits_reader.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2008 the xine project
++ * Copyright (C) 2008-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_dec/libvdpau/vdpau_mpeg12.c b/src/video_dec/libvdpau/vdpau_mpeg12.c
+index 1f4ba3c..65121f2 100644
+--- a/src/video_dec/libvdpau/vdpau_mpeg12.c
++++ b/src/video_dec/libvdpau/vdpau_mpeg12.c
+@@ -1,6 +1,6 @@
+ /*
+  * kate: space-indent on; indent-width 2; mixedindent off; indent-mode cstyle; remove-trailing-space on;
+- * Copyright (C) 2008 the xine project
++ * Copyright (C) 2008-2013 the xine project
+  * Copyright (C) 2008 Christophe Thommeret <hftom@free.fr>
+  *
+  * This file is part of xine, a free video player.
+diff --git a/src/video_dec/libvdpau/vdpau_mpeg4.c b/src/video_dec/libvdpau/vdpau_mpeg4.c
+index d4325d4..81573d5 100644
+--- a/src/video_dec/libvdpau/vdpau_mpeg4.c
++++ b/src/video_dec/libvdpau/vdpau_mpeg4.c
+@@ -1,7 +1,7 @@
+ /*
+  * kate: space-indent on; indent-width 2; mixedindent off; indent-mode cstyle; remove-trailing-space on;
+  *
+- * Copyright (C) 2010 the xine project
++ * Copyright (C) 2010-2013 the xine project
+  * Copyright (C) 2010 Christophe Thommeret <hftom@free.fr>
+  *
+  * This file is part of xine, a free video player.
+diff --git a/src/video_dec/libvdpau/vdpau_vc1.c b/src/video_dec/libvdpau/vdpau_vc1.c
+index 5c66882..1ee00fe 100644
+--- a/src/video_dec/libvdpau/vdpau_vc1.c
++++ b/src/video_dec/libvdpau/vdpau_vc1.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2008 the xine project
++ * Copyright (C) 2008-2013 the xine project
+  * Copyright (C) 2008 Christophe Thommeret <hftom@free.fr>
+  *
+  * This file is part of xine, a free video player.
+diff --git a/src/video_dec/rgb.c b/src/video_dec/rgb.c
+index 678ce81..05ccba8 100644
+--- a/src/video_dec/rgb.c
++++ b/src/video_dec/rgb.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_dec/yuv.c b/src/video_dec/yuv.c
+index 91f8ed2..001cb3c 100644
+--- a/src/video_dec/yuv.c
++++ b/src/video_dec/yuv.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/macosx/XineOpenGLView.h b/src/video_out/macosx/XineOpenGLView.h
+index 69e2905..0857ee0 100644
+--- a/src/video_out/macosx/XineOpenGLView.h
++++ b/src/video_out/macosx/XineOpenGLView.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2004 the xine project
++ * Copyright (C) 2004-2007 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/macosx/XineVideoWindow.h b/src/video_out/macosx/XineVideoWindow.h
+index c8f9b59..1f7dfe8 100644
+--- a/src/video_out/macosx/XineVideoWindow.h
++++ b/src/video_out/macosx/XineVideoWindow.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2004 the xine project
++ * Copyright (C) 2004-2007 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/macosx/video_window.h b/src/video_out/macosx/video_window.h
+index 0a3655c..15cdcd2 100644
+--- a/src/video_out/macosx/video_window.h
++++ b/src/video_out/macosx/video_window.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2004 the xine project
++ * Copyright (C) 2004-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_aa.c b/src/video_out/video_out_aa.c
+index 1af2501..4ef74d1 100644
+--- a/src/video_out/video_out_aa.c
++++ b/src/video_out/video_out_aa.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_caca.c b/src/video_out/video_out_caca.c
+index 0748291..e402db4 100644
+--- a/src/video_out/video_out_caca.c
++++ b/src/video_out/video_out_caca.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2003, 2004 the xine project
++ * Copyright (C) 2003-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_directfb.c b/src/video_out/video_out_directfb.c
+index 2b6c315..745971c 100644
+--- a/src/video_out/video_out_directfb.c
++++ b/src/video_out/video_out_directfb.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project and Claudio Ciccani
++ * Copyright (C) 2000-2011 the xine project and Claudio Ciccani
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_directx.c b/src/video_out/video_out_directx.c
+index f37c730..c05a5b2 100644
+--- a/src/video_out/video_out_directx.c
++++ b/src/video_out/video_out_directx.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2005 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a unix video player.
+  *
+diff --git a/src/video_out/video_out_fb.c b/src/video_out/video_out_fb.c
+index 8669eca..a0a3d75 100644
+--- a/src/video_out/video_out_fb.c
++++ b/src/video_out/video_out_fb.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2007 the xine project and Fredrik Noring
++ * Copyright (C) 2000-2012 the xine project and Fredrik Noring
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_none.c b/src/video_out/video_out_none.c
+index b6bba95..acbc2ca 100644
+--- a/src/video_out/video_out_none.c
++++ b/src/video_out/video_out_none.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_opengl.c b/src/video_out/video_out_opengl.c
+index 0d54dff..56bab13 100644
+--- a/src/video_out/video_out_opengl.c
++++ b/src/video_out/video_out_opengl.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_pgx32.c b/src/video_out/video_out_pgx32.c
+index ac19ef3..47dbba3 100644
+--- a/src/video_out/video_out_pgx32.c
++++ b/src/video_out/video_out_pgx32.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_pgx64.c b/src/video_out/video_out_pgx64.c
+index 7c82f61..afef30a 100644
+--- a/src/video_out/video_out_pgx64.c
++++ b/src/video_out/video_out_pgx64.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_raw.c b/src/video_out/video_out_raw.c
+index 32de423..47f290d 100644
+--- a/src/video_out/video_out_raw.c
++++ b/src/video_out/video_out_raw.c
+@@ -1,6 +1,6 @@
+ 
+ /*
+- * Copyright (C) 2007-2008 the xine project
++ * Copyright (C) 2007-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_sdl.c b/src/video_out/video_out_sdl.c
+index bc26c63..d8be095 100644
+--- a/src/video_out/video_out_sdl.c
++++ b/src/video_out/video_out_sdl.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_stk.c b/src/video_out/video_out_stk.c
+index eb6ccb0..f3e664e 100644
+--- a/src/video_out/video_out_stk.c
++++ b/src/video_out/video_out_stk.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_vdpau.c b/src/video_out/video_out_vdpau.c
+index 9f9d3dd..4b4cc7d 100644
+--- a/src/video_out/video_out_vdpau.c
++++ b/src/video_out/video_out_vdpau.c
+@@ -1,6 +1,6 @@
+ /*
+  * kate: space-indent on; indent-width 2; mixedindent off; indent-mode cstyle; remove-trailing-space on;
+- * Copyright (C) 2008 the xine project
++ * Copyright (C) 2008-2013 the xine project
+  * Copyright (C) 2008 Christophe Thommeret <hftom@free.fr>
+  *
+  * This file is part of xine, a free video player.
+diff --git a/src/video_out/video_out_vidix.c b/src/video_out/video_out_vidix.c
+index 81ae8e0..3b8be1b 100644
+--- a/src/video_out/video_out_vidix.c
++++ b/src/video_out/video_out_vidix.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_xcbshm.c b/src/video_out/video_out_xcbshm.c
+index 05e5ad7..d1af695 100644
+--- a/src/video_out/video_out_xcbshm.c
++++ b/src/video_out/video_out_xcbshm.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003, 2007-2008 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_xcbxv.c b/src/video_out/video_out_xcbxv.c
+index 7ce165e..6ff4b7b 100644
+--- a/src/video_out/video_out_xcbxv.c
++++ b/src/video_out/video_out_xcbxv.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004, 2007-2008 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_xshm.c b/src/video_out/video_out_xshm.c
+index 6b52acc..ea4754e 100644
+--- a/src/video_out/video_out_xshm.c
++++ b/src/video_out/video_out_xshm.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003, 2008 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_xv.c b/src/video_out/video_out_xv.c
+index 75cf12e..e9d3cff 100644
+--- a/src/video_out/video_out_xv.c
++++ b/src/video_out/video_out_xv.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004, 2008 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_xvmc.c b/src/video_out/video_out_xvmc.c
+index 554609d..375a859 100644
+--- a/src/video_out/video_out_xvmc.c
++++ b/src/video_out/video_out_xvmc.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004, 2008 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/video_out_xxmc.c b/src/video_out/video_out_xxmc.c
+index d8571e7..32097dc 100644
+--- a/src/video_out/video_out_xxmc.c
++++ b/src/video_out/video_out_xxmc.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004, 2008 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  * Copyright (C) 2004 the Unichrome project
+  *
+  * This file is part of xine, a free video player.
+diff --git a/src/video_out/x11osd.c b/src/video_out/x11osd.c
+index 8d8a781..95fb0d3 100644
+--- a/src/video_out/x11osd.c
++++ b/src/video_out/x11osd.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2003 the xine project
++ * Copyright (C) 2003-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/x11osd.h b/src/video_out/x11osd.h
+index 15ea3dc..4a8733b 100644
+--- a/src/video_out/x11osd.h
++++ b/src/video_out/x11osd.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2003 the xine project
++ * Copyright (C) 2003-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/xcbosd.c b/src/video_out/xcbosd.c
+index 1e99134..538bb32 100644
+--- a/src/video_out/xcbosd.c
++++ b/src/video_out/xcbosd.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2003, 2007 the xine project
++ * Copyright (C) 2003-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/xcbosd.h b/src/video_out/xcbosd.h
+index 89c317f..6331b00 100644
+--- a/src/video_out/xcbosd.h
++++ b/src/video_out/xcbosd.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2003, 2007 the xine project
++ * Copyright (C) 2003-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/xvmc_mocomp.c b/src/video_out/xvmc_mocomp.c
+index 9bb3c5d..2861494 100644
+--- a/src/video_out/xvmc_mocomp.c
++++ b/src/video_out/xvmc_mocomp.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/video_out/xvmc_vld.c b/src/video_out/xvmc_vld.c
+index 87373c9..238d511 100644
+--- a/src/video_out/xvmc_vld.c
++++ b/src/video_out/xvmc_vld.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  * Copyright (C) 2004 the Unichrome project
+  *
+  * This file is part of xine, a free video player.
+diff --git a/src/video_out/xxmc.h b/src/video_out/xxmc.h
+index 7ea60be..cde8b91 100644
+--- a/src/video_out/xxmc.h
++++ b/src/video_out/xxmc.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2010 the xine project
+  * Copyright (C) 2004 the unichrome project
+  *
+  * This file is part of xine, a free video player.
+diff --git a/src/video_out/yuv2rgb.c b/src/video_out/yuv2rgb.c
+index 5f97221..2ce4f1f 100644
+--- a/src/video_out/yuv2rgb.c
++++ b/src/video_out/yuv2rgb.c
+@@ -1,7 +1,7 @@
+ /*
+  * yuv2rgb.c
+  *
+- * Copyright (C) 2003-2004 the xine project
++ * Copyright (C) 2003-2012 the xine project
+  * This file is part of xine, a free video player.
+  *
+  * based on work from mpeg2dec:
+diff --git a/src/xine-engine/accel_vdpau.h b/src/xine-engine/accel_vdpau.h
+index 54eab75..178b411 100644
+--- a/src/xine-engine/accel_vdpau.h
++++ b/src/xine-engine/accel_vdpau.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2008 the xine project
++ * Copyright (C) 2008-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/accel_xvmc.h b/src/xine-engine/accel_xvmc.h
+index f7deeeb..3809a6b 100644
+--- a/src/xine-engine/accel_xvmc.h
++++ b/src/xine-engine/accel_xvmc.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  * Copyright (C) 2004 the Unichrome project
+  *
+  * This file is part of xine, a free video player.
+diff --git a/src/xine-engine/alphablend.c b/src/xine-engine/alphablend.c
+index 34c3f3c..db43fd5 100644
+--- a/src/xine-engine/alphablend.c
++++ b/src/xine-engine/alphablend.c
+@@ -3,7 +3,7 @@
+  * Copyright (C) James Courtier-Dutton James@superbug.demon.co.uk - July 2001
+  *
+  * Copyright (C) 2000  Thomas Mirlacher
+- *               2002-2004 the xine project
++ *               2002-2012 the xine project
+  *
+  * This program is free software; you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+diff --git a/src/xine-engine/audio_decoder.c b/src/xine-engine/audio_decoder.c
+index b7c256d..6ff8141 100644
+--- a/src/xine-engine/audio_decoder.c
++++ b/src/xine-engine/audio_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2005 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/audio_out.c b/src/xine-engine/audio_out.c
+index 86b4d78..ca84758 100644
+--- a/src/xine-engine/audio_out.c
++++ b/src/xine-engine/audio_out.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+@@ -250,8 +250,6 @@ typedef struct {
+   int64_t         last_audio_vpts;
+   pthread_mutex_t current_speed_lock;
+   uint32_t        current_speed;        /* the current playback speed */
+-  /* FIXME: replace all this->clock->speed with this->current_speed. we should make
+-   * sure nobody will change speed without going through xine.c:set_speed_internal */
+   int             slow_fast_audio;      /* play audio even on slow/fast speeds */
+ 
+   int16_t	  last_sample[RESAMPLE_MAX_CHANNELS];
+@@ -1045,6 +1043,12 @@ static void *ao_loop (void *this_gen) {
+     }
+     pthread_mutex_unlock(&this->flush_audio_driver_lock);
+ 
++    /* Paranoia? */
++    {
++      int new_speed = this->clock->speed;
++      if (new_speed != this->current_speed)
++        ao_set_property (&this->ao, AO_PROP_CLOCK_SPEED, new_speed);
++    }
+ 
+     /*
+      * wait until user unpauses stream
+@@ -1054,11 +1058,11 @@ static void *ao_loop (void *this_gen) {
+ 
+     pthread_mutex_lock(&this->current_speed_lock);
+     if ( this->audio_loop_running &&
+-         (this->clock->speed == XINE_SPEED_PAUSE ||
+-          (this->clock->speed != XINE_FINE_SPEED_NORMAL &&
++         (this->current_speed == XINE_SPEED_PAUSE ||
++          (this->current_speed != XINE_FINE_SPEED_NORMAL &&
+            !this->slow_fast_audio) ) )  {
+ 
+-      if (this->clock->speed != XINE_SPEED_PAUSE) {
++      if (this->current_speed != XINE_SPEED_PAUSE) {
+ 
+ 	cur_time = this->clock->get_current_time (this->clock);
+ 	if (in_buf->vpts < cur_time ) {
+@@ -1640,8 +1644,8 @@ static void ao_close(xine_audio_port_t *this_gen, xine_stream_t *stream) {
+ 
+     if (this->audio_loop_running) {
+       /* make sure there are no more buffers on queue */
+-      if (this->clock->speed == XINE_SPEED_PAUSE ||
+-          (this->clock->speed != XINE_FINE_SPEED_NORMAL && !this->slow_fast_audio)) {
++      if (this->current_speed == XINE_SPEED_PAUSE ||
++          (this->current_speed != XINE_FINE_SPEED_NORMAL && !this->slow_fast_audio)) {
+         int discard = ao_get_property(this_gen, AO_PROP_DISCARD_BUFFERS);
+         /* discard buffers while waiting, otherwise we'll wait forever */
+         ao_set_property(this_gen, AO_PROP_DISCARD_BUFFERS, 1);
+@@ -1948,6 +1952,14 @@ static int ao_set_property (xine_audio_port_t *this_gen, int property, int value
+     break;
+ 
+   case AO_PROP_CLOCK_SPEED:
++    /* something to do? */
++    if (value == this->current_speed)
++      break;
++    /* TJ. pthread mutex implementation on my multicore AMD box is somewhat buggy.
++       When fed by a fast single threaded decoder like mad, audio out loop does
++       not release current speed lock long enough to wake us up here.
++       So tell loop to enter unpause waiting _before_ we wait. */
++    this->current_speed = value;
+     /*
+      * slow motion / fast forward does not play sound, drop buffered
+      * samples from the sound driver (check slow_fast_audio flag)
+@@ -1964,7 +1976,6 @@ static int ao_set_property (xine_audio_port_t *this_gen, int property, int value
+     } else {
+       this->ao.control(&this->ao, AO_CTRL_PLAY_RESUME, NULL);
+     }
+-    this->current_speed = value;
+     if( this->slow_fast_audio )
+       ao_update_resample_factor(this);
+     break;
+@@ -2016,7 +2027,7 @@ static void ao_flush (xine_audio_port_t *this_gen) {
+     this->flush_audio_driver++;
+ 
+     /* do not try this in paused mode */
+-    while( this->flush_audio_driver && this->clock->speed != XINE_SPEED_PAUSE) {
++    while( this->flush_audio_driver && this->current_speed != XINE_SPEED_PAUSE) {
+       struct timeval  tv;
+       struct timespec ts;
+ 
+diff --git a/src/xine-engine/broadcaster.c b/src/xine-engine/broadcaster.c
+index 0c2f2d4..24bf5a9 100644
+--- a/src/xine-engine/broadcaster.c
++++ b/src/xine-engine/broadcaster.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  * May 2003 - Miguel Freitas
+  * This feature was sponsored by 1Control
+  *
+diff --git a/src/xine-engine/bswap.h b/src/xine-engine/bswap.h
+index f586487..018ac10 100644
+--- a/src/xine-engine/bswap.h
++++ b/src/xine-engine/bswap.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/buffer.c b/src/xine-engine/buffer.c
+index 50ffb57..f9ced08 100644
+--- a/src/xine-engine/buffer.c
++++ b/src/xine-engine/buffer.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/buffer_types.c b/src/xine-engine/buffer_types.c
+index 53f7483..edc0957 100644
+--- a/src/xine-engine/buffer_types.c
++++ b/src/xine-engine/buffer_types.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/configfile.c b/src/xine-engine/configfile.c
+index 8669176..4dbb62c 100644
+--- a/src/xine-engine/configfile.c
++++ b/src/xine-engine/configfile.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/demux.c b/src/xine-engine/demux.c
+index d61ca96..3084562 100644
+--- a/src/xine-engine/demux.c
++++ b/src/xine-engine/demux.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2005 the xine project
++ * Copyright (C) 2000-2010 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/events.c b/src/xine-engine/events.c
+index 5bd827c..be825d6 100644
+--- a/src/xine-engine/events.c
++++ b/src/xine-engine/events.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/info_helper.c b/src/xine-engine/info_helper.c
+index 85f43b3..df3588b 100644
+--- a/src/xine-engine/info_helper.c
++++ b/src/xine-engine/info_helper.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/input_cache.c b/src/xine-engine/input_cache.c
+index 40aaba6..a68ba48 100644
+--- a/src/xine-engine/input_cache.c
++++ b/src/xine-engine/input_cache.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/input_rip.c b/src/xine-engine/input_rip.c
+index c1cbbf0..5b345ff 100644
+--- a/src/xine-engine/input_rip.c
++++ b/src/xine-engine/input_rip.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/io_helper.c b/src/xine-engine/io_helper.c
+index 1336fc7..bc46c35 100644
+--- a/src/xine-engine/io_helper.c
++++ b/src/xine-engine/io_helper.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project,
++ * Copyright (C) 2000-2011 the xine project,
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/load_plugins.c b/src/xine-engine/load_plugins.c
+index c86cc5f..3aab541 100644
+--- a/src/xine-engine/load_plugins.c
++++ b/src/xine-engine/load_plugins.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/lrb.c b/src/xine-engine/lrb.c
+index 9acc2f1..1a5c69f 100644
+--- a/src/xine-engine/lrb.c
++++ b/src/xine-engine/lrb.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/lrb.h b/src/xine-engine/lrb.h
+index dfac5e5..9b096a0 100644
+--- a/src/xine-engine/lrb.h
++++ b/src/xine-engine/lrb.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2003 the xine project
++ * Copyright (C) 2001-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/metronom.c b/src/xine-engine/metronom.c
+index 81d99f0..cdadf11 100644
+--- a/src/xine-engine/metronom.c
++++ b/src/xine-engine/metronom.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/osd.c b/src/xine-engine/osd.c
+index cf54cac..b95f758 100644
+--- a/src/xine-engine/osd.c
++++ b/src/xine-engine/osd.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2005 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/post.c b/src/xine-engine/post.c
+index 86e153c..44b2f6c 100644
+--- a/src/xine-engine/post.c
++++ b/src/xine-engine/post.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/refcounter.c b/src/xine-engine/refcounter.c
+index 216693e..66978b9 100644
+--- a/src/xine-engine/refcounter.c
++++ b/src/xine-engine/refcounter.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/resample.c b/src/xine-engine/resample.c
+index c354bbd..7a8443b 100644
+--- a/src/xine-engine/resample.c
++++ b/src/xine-engine/resample.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/scratch.c b/src/xine-engine/scratch.c
+index a15cd42..bc55edd 100644
+--- a/src/xine-engine/scratch.c
++++ b/src/xine-engine/scratch.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/spu.c b/src/xine-engine/spu.c
+index 9bc1de8..5d3fce5 100644
+--- a/src/xine-engine/spu.c
++++ b/src/xine-engine/spu.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2007 the xine project
++ * Copyright (C) 2007-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/video_decoder.c b/src/xine-engine/video_decoder.c
+index d6f88cd..ccb3b44 100644
+--- a/src/xine-engine/video_decoder.c
++++ b/src/xine-engine/video_decoder.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2005 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/video_out.c b/src/xine-engine/video_out.c
+index 7d92991..043578d 100644
+--- a/src/xine-engine/video_out.c
++++ b/src/xine-engine/video_out.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/video_overlay.c b/src/xine-engine/video_overlay.c
+index 0052375..fb20790 100644
+--- a/src/xine-engine/video_overlay.c
++++ b/src/xine-engine/video_overlay.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/vo_scale.c b/src/xine-engine/vo_scale.c
+index e44fc49..b622749 100644
+--- a/src/xine-engine/vo_scale.c
++++ b/src/xine-engine/vo_scale.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/xine.c b/src/xine-engine/xine.c
+index 9a7e28a..49e4fd0 100644
+--- a/src/xine-engine/xine.c
++++ b/src/xine-engine/xine.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/xine_interface.c b/src/xine-engine/xine_interface.c
+index ab1bafa..d6fc8b7 100644
+--- a/src/xine-engine/xine_interface.c
++++ b/src/xine-engine/xine_interface.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2010 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-engine/xine_private.h b/src/xine-engine/xine_private.h
+index 6d74e93..b201860 100644
+--- a/src/xine-engine/xine_private.h
++++ b/src/xine-engine/xine_private.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2011 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-utils/array.c b/src/xine-utils/array.c
+index 2cc540c..e0439b8 100644
+--- a/src/xine-utils/array.c
++++ b/src/xine-utils/array.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-utils/color.c b/src/xine-utils/color.c
+index 6c2fe46..b5925ea 100644
+--- a/src/xine-utils/color.c
++++ b/src/xine-utils/color.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-utils/copy.c b/src/xine-utils/copy.c
+index ed762fa..686b2e3 100644
+--- a/src/xine-utils/copy.c
++++ b/src/xine-utils/copy.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2004 the xine project
++ * Copyright (C) 2004-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-utils/list.c b/src/xine-utils/list.c
+index 32c1d8f..8612829 100644
+--- a/src/xine-utils/list.c
++++ b/src/xine-utils/list.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-utils/memcpy.c b/src/xine-utils/memcpy.c
+index 0c44e08..6eda220 100644
+--- a/src/xine-utils/memcpy.c
++++ b/src/xine-utils/memcpy.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001-2004 the xine project
++ * Copyright (C) 2001-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-utils/monitor.c b/src/xine-utils/monitor.c
+index 0c68cd5..7073174 100644
+--- a/src/xine-utils/monitor.c
++++ b/src/xine-utils/monitor.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2008 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-utils/pool.c b/src/xine-utils/pool.c
+index a6166bf..43c904f 100644
+--- a/src/xine-utils/pool.c
++++ b/src/xine-utils/pool.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-utils/ring_buffer.c b/src/xine-utils/ring_buffer.c
+index 1da9d7c..32b09b0 100644
+--- a/src/xine-utils/ring_buffer.c
++++ b/src/xine-utils/ring_buffer.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-utils/sorted_array.c b/src/xine-utils/sorted_array.c
+index 2f4bbeb..f392965 100644
+--- a/src/xine-utils/sorted_array.c
++++ b/src/xine-utils/sorted_array.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-utils/utils.c b/src/xine-utils/utils.c
+index 1ca5f4d..12641da 100644
+--- a/src/xine-utils/utils.c
++++ b/src/xine-utils/utils.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2005 the xine project
++ * Copyright (C) 2000-2012 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-utils/xine_buffer.c b/src/xine-utils/xine_buffer.c
+index 436991b..41f34a7 100644
+--- a/src/xine-utils/xine_buffer.c
++++ b/src/xine-utils/xine_buffer.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-utils/xine_mmx.h b/src/xine-utils/xine_mmx.h
+index 58e0d2b..37f94d1 100644
+--- a/src/xine-utils/xine_mmx.h
++++ b/src/xine-utils/xine_mmx.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2006 the xine project
++ * Copyright (C) 2000-2013 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-utils/xine_mutex.c b/src/xine-utils/xine_mutex.c
+index 64722e0..5e0ad28 100644
+--- a/src/xine-utils/xine_mutex.c
++++ b/src/xine-utils/xine_mutex.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2003 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-utils/xmllexer.c b/src/xine-utils/xmllexer.c
+index a3b395a..bd8ac23 100644
+--- a/src/xine-utils/xmllexer.c
++++ b/src/xine-utils/xmllexer.c
+@@ -1,5 +1,5 @@
+ /*
+- *  Copyright (C) 2002-2003,2007 the xine project
++ *  Copyright (C) 2002-2012 the xine project
+  *
+  *  This file is part of xine, a free video player.
+  *
+diff --git a/src/xine-utils/xmlparser.c b/src/xine-utils/xmlparser.c
+index deee255..f6a8d03 100644
+--- a/src/xine-utils/xmlparser.c
++++ b/src/xine-utils/xmlparser.c
+@@ -1,5 +1,5 @@
+ /*
+- *  Copyright (C) 2002-2003,2007 the xine project
++ *  Copyright (C) 2002-2012 the xine project
+  *
+  *  This file is part of xine, a free video player.
+  *
+diff --git a/win32/include/dlfcn.h b/win32/include/dlfcn.h
+index 648fae3..cbdbac8 100644
+--- a/win32/include/dlfcn.h
++++ b/win32/include/dlfcn.h
+@@ -1,5 +1,5 @@
+ /* 
+- * Copyright (C) 2000-2001 the xine project
++ * Copyright (C) 2000-2007 the xine project
+  * 
+  * This file is part of xine, a unix video player.
+  * 
+diff --git a/win32/include/msvc/inttypes.h b/win32/include/msvc/inttypes.h
+index 6a4659f..da0976d 100644
+--- a/win32/include/msvc/inttypes.h
++++ b/win32/include/msvc/inttypes.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a unix video player.
+  *
+diff --git a/win32/include/msvc/stdint.h b/win32/include/msvc/stdint.h
+index 1201295..508b28d 100644
+--- a/win32/include/msvc/stdint.h
++++ b/win32/include/msvc/stdint.h
+@@ -9,7 +9,7 @@ Cygwin license.  Please consult the file "CYGWIN_LICENSE" for
+ details. */
+ 
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a free video player.
+  *
+diff --git a/win32/include/msvc/sys/time.h b/win32/include/msvc/sys/time.h
+index 2664d2a..22c5d04 100644
+--- a/win32/include/msvc/sys/time.h
++++ b/win32/include/msvc/sys/time.h
+@@ -1,5 +1,5 @@
+ /* 
+- * Copyright (C) 2000-2001 the xine project
++ * Copyright (C) 2000-2007 the xine project
+  * 
+  * This file is part of xine, a unix video player.
+  * 
+diff --git a/win32/include/sys/socket.h b/win32/include/sys/socket.h
+index 0a331c5..cfb9796 100755
+--- a/win32/include/sys/socket.h
++++ b/win32/include/sys/socket.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2000-2004 the xine project
++ * Copyright (C) 2000-2009 the xine project
+  *
+  * This file is part of xine, a unix video player.
+  *
