@@ -12,7 +12,8 @@ if [ -f $cachedir/epg.dat ]; then
   [ X$a = "X" ] && exit 0
 fi
 
-zh_epgurl=http://epg.xltvrobbs.net/epg/dm800/gemini800.tgz
+#zh_epgurl=http://epg.xltvrobbs.net/epg/dm800/gemini800.tgz
+zh_epgurl=http://epg.xltvrobbs.net/epg/G/gemini.tgz
 
 . /etc/locale.conf
 
@@ -26,9 +27,8 @@ case $LANG in
       fi
     done
     tar zvfx /tmp/epg.tgz -C /tmp || exit
-    cp /tmp/gemini.epg.dat $cachedir/epg.dat
+    epgen -i /tmp/gemini.epg.dat -o $cachedir/epg.dat -v7le
     rm /tmp/epg.tgz /tmp/gemini.epg.dat
-    epgen -i $cachedir/epg.dat -o $cachedir/epg.xml
     ;;
   *)
     exit
