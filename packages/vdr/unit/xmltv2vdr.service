@@ -1,9 +1,0 @@
-[Unit]
-Description=xmltv2vdr
-After=vdr.service vdr-backend.service
-
-[Service]
-ExecStart=/usr/bin/xmltv2vdr.sh
-
-[Install]
-WantedBy=multi-user.target

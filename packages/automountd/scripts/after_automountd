@@ -1,5 +1,0 @@
-#!/bin/sh
-
-for i in /media/*; do
-  mountpoint -q "$i" || rm -rf "$i"
-done
