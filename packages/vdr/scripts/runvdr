@@ -1,6 +1,5 @@
 #!/bin/sh
 
-/usr/bin/videocache
 PLUGINS=""
 . /etc/system.options
 if [ $CAM = "OScam" ]; then
@@ -35,6 +34,8 @@ if [ -f /sys/class/drm/card0/device/vendor ]; then
   fi
 fi
 sync
+epgen -i /video/epg.dat -o /tmp/epg.dat && epgtrans &
+
 sleep 0.1
 for file in /etc/vdr/plugins.d/*; do
   if [ -f "$file" ]; then
@@ -55,4 +56,4 @@ export DISPLAY=":0.0"
 # special for germany :
 [ "$LANG" = de_DE.UTF-8 ] && export VDR_CHARSET_OVERRIDE=”ISO-8859-15″
 chvt 4
-eval vdr -g /tmp --vfat $PLUGINS -v /video -c /etc/vdr --lirc -s shutdown
+eval vdr -g /tmp --vfat $PLUGINS -v /video -c /etc/vdr --lirc -E /etc/vdr/epg.data -s shutdown

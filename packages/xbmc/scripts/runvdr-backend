@@ -1,7 +1,5 @@
 #!/bin/sh
 
-/usr/bin/videocache
-
 . /etc/system.options
 if [ $CAM = "OScam" ]; then
   CAMPLUGIN="-Pdvbapi"
@@ -32,4 +30,5 @@ fi
 # special for germany :
 #[ "$LANG" = de_DE.UTF-8 ] && export VDR_CHARSET_OVERRIDE=”ISO-8859-15″
 #chvt 4
-eval vdr -g /tmp --vfat $CAMPLUGIN -Pxvdr -v /video -c /etc/vdr -s shutdown
+epgen -i /video/epg.dat -o /tmp/epg.dat && epgtrans &
+eval vdr -g /tmp --vfat $CAMPLUGIN -Pxvdr -v /video -c /etc/vdr -E /etc/vdr/epg.data -s shutdown
