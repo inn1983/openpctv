@@ -1,0 +1,241 @@
+diff --git a/ChangeLog b/ChangeLog
+index 70bc0b8..91e24ac 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,5 +1,27 @@
+-xine-lib (1.2.3.1) 2013-??-??
+-  * Distribute one missing header file. No VAAPI plugin without this.
++xine-lib (1.2.4) 2013-??-??
++  * Some VAAPI plugin fixes (build, image size changes).
++  * ffmpeg multi-channel playback fixes:
++    - Handle channel configuration changes sooner.
++    - Generic layout if none provided; follow user changes.
++    - Defer opening output if nothing to play.
++    - Don't re-open with identical settings.
++    - Don't use the bits-per-sample value (may not match decoder output).
++  * ffmpeg video fixes:
++    - Default to square pixels, avoiding black bars & unnecessary scaling.
++    - Avoid CODEC_FLAG_EMU_EDGE (and some possible segfaults).
++    - Use MPEG2VIDEO.
++  * OpenGL2 output: don't render into invalid drawable.
++  * Fix a possible xine_play() hang related to display locking.
++  * FLV demuxer rewrite:
++    - Improved metadata parsing.
++    - PTS/DTS fixes.
++    - Large file support on 32-bit.
++    - Much improved seeking.
++    - Much optimisation.
++    - More codecs supported.
++  * audio_out speed control fixes.
++  * Optimised RGB→YUY2 conversion.
++  * Avoid a possible performance penalty where AVX-optimised memcpy is used.
+ 
+ xine-lib (1.2.3) 2013-05-29
+   * Add VAAPI HW decoding support
+diff --git a/Makefile.am b/Makefile.am
+index 02c819d..0ebd8a6 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -8,7 +8,7 @@ AUTOMAKE_OPTIONS = 1.9 no-dist-gzip dist-bzip2
+ 
+ ACLOCAL_AMFLAGS = -I m4
+ 
+-SUBDIRS = doc m4 po misc include lib src win32 contrib
++SUBDIRS = doc m4 po include lib src win32 contrib misc
+ 
+ DEBFILES = debian/README.Debian debian/changelog debian/control \
+ 	debian/copyright debian/rules debian/compat \
+diff --git a/debian/changelog b/debian/changelog
+index 6e1bc3a..f4dd6dc 100644
+--- a/debian/changelog
++++ b/debian/changelog
+@@ -1,10 +1,10 @@
+-xine-lib-1.2 (1.2.3+hg-0) experimental; urgency=low
++xine-lib-1.2 (1.2.4+hg-0) experimental; urgency=low
+ 
+   * Hg snapshot.
+   * Adjust for libxine2.
+   * libxine-dev → libxine2-dev.
+ 
+- -- Darren Salt <linux@youmustbejoking.demon.co.uk>  Sun, 30 Jun 2013 17:30:14 +0100
++ -- Darren Salt <linux@youmustbejoking.demon.co.uk>  Wed, 18 Sep 2013 12:54:48 +0100
+ 
+ xine-lib (1.1.21~hg-0) unstable; urgency=low
+ 
+diff --git a/m4/decoders.m4 b/m4/decoders.m4
+index b5c9770..fbea178 100644
+--- a/m4/decoders.m4
++++ b/m4/decoders.m4
+@@ -138,16 +138,16 @@ AC_DEFUN([XINE_DECODER_PLUGINS], [
+                 [AS_HELP_STRING([--with-imagemagick], [Enable ImageMagick image decoder support (default: enabled)])],
+                 [test x"$withval" != x"no" && with_imagemagick="yes"])
+     if test x"$with_imagemagick" != x"no"; then
+-        PKG_CHECK_MODULES([WAND], [Wand], [have_imagemagick=yes], [AC_MSG_RESULT([no]); have_imagemagick=no])
++        PKG_CHECK_MODULES([WAND], [Wand], [have_imagemagick=yes], [have_imagemagick=no])
+         if test "x$have_imagemagick" = 'xno'; then
+-            PKG_CHECK_MODULES([MAGICKWAND], [MagickWand], [have_imagemagick=yes], [AC_MSG_RESULT([no]); have_imagemagick=no])
++            PKG_CHECK_MODULES([MAGICKWAND], [MagickWand], [have_imagemagick=yes], [have_imagemagick=no])
+             dnl Avoid $(WAND_FLAGS) $(MAGICKWAND_FLAGS) ...
+             WAND_CFLAGS="$MAGICKWAND_CFLAGS"
+             WAND_LIBS="$MAGICKWAND_LIBS"
+         fi
+         if test "x$have_imagemagick" = 'xno'; then
+-            PKG_CHECK_MODULES([GRAPHICSMAGICK], [ImageMagick], [have_imagemagick=yes], [AC_MSG_RESULT([no]); have_imagemagick=no])
+-            PKG_CHECK_MODULES([GRAPHICSMAGICKWAND], [GraphicsMagickWand], [have_imagemagick=yes], [AC_MSG_RESULT([no]); have_imagemagick=no])
++            PKG_CHECK_MODULES([GRAPHICSMAGICK], [ImageMagick], [have_imagemagick=yes], [have_imagemagick=no])
++            PKG_CHECK_MODULES([GRAPHICSMAGICKWAND], [GraphicsMagickWand], [have_imagemagick=yes], [have_imagemagick=no])
+             dnl The following assignments are safe, since they include
+             dnl the flags for plain GraphicsMagick
+             WAND_CFLAGS="$GRAPHICSMAGICKWAND_CFLAGS"
+diff --git a/src/demuxers/Makefile.am b/src/demuxers/Makefile.am
+index 32b5616..1f7948f 100644
+--- a/src/demuxers/Makefile.am
++++ b/src/demuxers/Makefile.am
+@@ -84,6 +84,8 @@ xineplug_dmx_qt_la_SOURCES = demux_qt.c
+ xineplug_dmx_qt_la_LIBADD = $(XINE_LIB) $(LTLIBINTL) $(ZLIB_LIBS)
+ xineplug_dmx_qt_la_CPPFLAGS = $(AM_CPPFLAGS) $(ZLIB_CPPFLAGS)
+ 
++# note: asfheader.c also used from ../input
++# is safe given same compiler options
+ xineplug_dmx_asf_la_SOURCES = demux_asf.c asfheader.c
+ xineplug_dmx_asf_la_LIBADD = $(XINE_LIB) $(LTLIBINTL) $(LTLIBICONV)
+ xineplug_dmx_asf_la_CFLAGS = $(AM_CFLAGS) -fno-strict-aliasing
+diff --git a/src/demuxers/demux_mod.c b/src/demuxers/demux_mod.c
+index 39becba..08ca877 100644
+--- a/src/demuxers/demux_mod.c
++++ b/src/demuxers/demux_mod.c
+@@ -46,7 +46,7 @@
+ #include <xine/xineutils.h>
+ #include <xine/compat.h>
+ #include <xine/demux.h>
+-#include "modplug.h"
++#include <libmodplug/modplug.h>
+ #include "bswap.h"
+ 
+ #define MOD_SAMPLERATE 44100
+diff --git a/src/input/Makefile.am b/src/input/Makefile.am
+index 804b363..3752d4c 100644
+--- a/src/input/Makefile.am
++++ b/src/input/Makefile.am
+@@ -103,6 +103,7 @@ xineplug_inp_dvd_la_CFLAGS = $(AM_CFLAGS) $(DVD_CFLAGS)
+ xineplug_inp_net_la_SOURCES = input_net.c net_buf_ctrl.c
+ xineplug_inp_net_la_LIBADD = $(XINE_LIB) $(NET_LIBS) $(PTHREAD_LIBS) $(LTLIBINTL)
+ 
++# note: compiling ../demuxers/asfheader.c here is safe given same compiler options
+ xineplug_inp_mms_la_SOURCES = input_mms.c net_buf_ctrl.c mms.c mmsh.c http_helper.c ../demuxers/asfheader.c
+ xineplug_inp_mms_la_LIBADD = $(XINE_LIB) $(LTLIBICONV) $(PTHREAD_LIBS) $(LTLIBINTL)
+ 
+diff --git a/src/video_out/video_out_vaapi.c b/src/video_out/video_out_vaapi.c
+index ade498d..6f0b5c1 100644
+--- a/src/video_out/video_out_vaapi.c
++++ b/src/video_out/video_out_vaapi.c
+@@ -72,6 +72,12 @@
+ 
+ #include "accel_vaapi.h"
+ 
++#ifdef HAVE_FFMPEG_AVUTIL_H
++#  include <mem.h>
++#else
++#  include <libavutil/mem.h>
++#endif
++
+ #ifndef VA_SURFACE_ATTRIB_SETTABLE
+ #define vaCreateSurfaces(d, f, w, h, s, ns, a, na) \
+     vaCreateSurfaces(d, w, h, f, ns, s)
+@@ -1637,7 +1643,7 @@ static void vaapi_property_callback (void *property_gen, xine_cfg_entry_t *entry
+ 
+   lprintf("vaapi_property_callback property=%d, value=%d\n", property->type, entry->num_value );
+ 
+-  VAStatus vaStatus = vaSetDisplayAttributes(va_context->va_display, &attr, 1);
++  /*VAStatus vaStatus = */ vaSetDisplayAttributes(va_context->va_display, &attr, 1);
+   //vaapi_check_status((vo_driver_t *)this, vaStatus, "vaSetDisplayAttributes()");
+ 
+   vaapi_show_display_props((vo_driver_t*)this);
+@@ -1769,7 +1775,7 @@ static void vaapi_display_attribs(vo_driver_t *this_gen) {
+ static void vaapi_set_background_color(vo_driver_t *this_gen) {
+   vaapi_driver_t      *this = (vaapi_driver_t *)this_gen;
+   ff_vaapi_context_t  *va_context = this->va_context;
+-  VAStatus            vaStatus;
++  //VAStatus            vaStatus;
+ 
+   if(!va_context->valid_context)
+     return;
+@@ -1780,7 +1786,7 @@ static void vaapi_set_background_color(vo_driver_t *this_gen) {
+   attr.type  = VADisplayAttribBackgroundColor;
+   attr.value = 0x000000;
+ 
+-  vaStatus = vaSetDisplayAttributes(va_context->va_display, &attr, 1);
++  /*vaStatus =*/ vaSetDisplayAttributes(va_context->va_display, &attr, 1);
+   //vaapi_check_status(this_gen, vaStatus, "vaSetDisplayAttributes()");
+ }
+ 
+@@ -3677,13 +3683,12 @@ static int vaapi_gui_data_exchange (vo_driver_t *this_gen,
+   return 0;
+ }
+ 
+-static void vaapi_dispose (vo_driver_t *this_gen) {
++static void vaapi_dispose_locked (vo_driver_t *this_gen) {
+   vaapi_driver_t      *this = (vaapi_driver_t *) this_gen;
+   ff_vaapi_context_t  *va_context = this->va_context;
+ 
+-  lprintf("vaapi_dispose\n");
++  // vaapi_lock is locked at this point, either from vaapi_dispose or vaapi_open_plugin
+ 
+-  pthread_mutex_lock(&this->vaapi_lock);
+   DO_LOCKDISPLAY;
+ 
+   this->ovl_yuv2rgb->dispose(this->ovl_yuv2rgb);
+@@ -3713,6 +3718,12 @@ static void vaapi_dispose (vo_driver_t *this_gen) {
+   free (this);
+ }
+ 
++static void vaapi_dispose (vo_driver_t *this_gen) {
++  lprintf("vaapi_dispose\n");
++  pthread_mutex_lock(&((vaapi_driver_t *)this_gen)->vaapi_lock);
++  vaapi_dispose_locked(this_gen);
++}
++
+ static void vaapi_vdr_osd_width_flag( void *this_gen, xine_cfg_entry_t *entry )
+ {
+   vaapi_driver_t  *this  = (vaapi_driver_t *) this_gen;
+@@ -3971,7 +3982,7 @@ static vo_driver_t *vaapi_open_plugin (video_driver_class_t *class_gen, const vo
+   this->va_context->last_sub_image_fmt       = 0;
+ 
+   if(vaapi_init_internal((vo_driver_t *)this, SW_CONTEXT_INIT_FORMAT, SW_WIDTH, SW_HEIGHT, 0) != VA_STATUS_SUCCESS) {
+-    vaapi_dispose((vo_driver_t *)this);
++    vaapi_dispose_locked((vo_driver_t *)this);
+     return NULL;
+   }
+   vaapi_close((vo_driver_t *)this);
+diff --git a/src/xine-utils/memcpy.c b/src/xine-utils/memcpy.c
+index 6eda220..e00171e 100644
+--- a/src/xine-utils/memcpy.c
++++ b/src/xine-utils/memcpy.c
+@@ -342,6 +342,7 @@ static void * avx_memcpy(void * to, const void * from, size_t len)
+     /* since movntq is weakly-ordered, a "sfence"
+      * is needed to become ordered again. */
+     __asm__ __volatile__ ("sfence":::"memory");
++    __asm__ __volatile__ ("vzeroupper");
+   }
+   /*
+    *	Now do the tail of the block
+diff --git a/version.sh b/version.sh
+index e8d5f2f..bcf1c06 100755
+--- a/version.sh
++++ b/version.sh
+@@ -30,13 +30,13 @@
+ 
+ XINE_VERSION_MAJOR=1
+ XINE_VERSION_MINOR=2
+-XINE_VERSION_SUB=3
++XINE_VERSION_SUB=4
+ XINE_VERSION_PATCH=
+ # Release series number (usually $XINE_MAJOR.$XINE_MINOR)
+ XINE_VERSION_SERIES=1.2
+ 
+ XINE_LT_CURRENT=5
+-XINE_LT_REVISION=0
++XINE_LT_REVISION=1
+ XINE_LT_AGE=3
+ 
+ test -f "`dirname $0`/.cvsversion" && XINE_VERSION_SUFFIX="hg"
