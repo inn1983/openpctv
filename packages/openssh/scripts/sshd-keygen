@@ -1,0 +1,30 @@
+#!/bin/sh
+
+KEYGEN="/usr/bin/ssh-keygen"
+RSA1_KEY="/etc/ssh/ssh_host_key"
+RSA2_KEY="/etc/ssh/ssh_host_rsa_key"
+DSA2_KEY="/etc/ssh/ssh_host_dsa_key"
+
+
+mkdir -p /storage/.cache/ssh
+
+# Check for the SSH1 RSA key
+  if [ ! -s $RSA1_KEY ] ; then
+    progress "SSH: generating SSH1 RSA key"
+      $KEYGEN -q -t rsa1 -f $RSA1_KEY -C '' -N '' >&/dev/null
+      chmod 600 $RSA1_KEY
+  fi
+
+# Check for the SSH2 RSA key
+  if [ ! -s $RSA2_KEY ] ; then
+    progress "SSH: generating SSH2 RSA key"
+      $KEYGEN -q -t rsa -f $RSA2_KEY -C '' -N '' >&/dev/null
+      chmod 600 $RSA2_KEY
+  fi
+
+# Check for the SSH2 DSA key
+  if [ ! -s $DSA2_KEY ] ; then
+    progress "SSH: generating SSH2 DSA key"
+      $KEYGEN -q -t dsa -f $DSA2_KEY -C '' -N '' >&/dev/null
+      chmod 600 $DSA2_KEY
+  fi

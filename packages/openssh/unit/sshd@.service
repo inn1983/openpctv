@@ -1,0 +1,8 @@
+[Unit]
+Description=OpenSSH server daemon
+After=syslog.target network.target
+
+[Service]
+ExecStartPre=/usr/sbin/sshd-keygen
+ExecStart=/usr/sbin/sshd -i
+StandardInput=socket

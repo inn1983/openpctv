@@ -1,0 +1,14 @@
+PKG_NAME=dvbsnoop
+#PKG_URL_REV=df39298
+#PKG_VERSION=1.4.50+r${PKG_URL_REV}
+#PKG_URL_PROTO=hg
+#PKG_URL="https://bitbucket.org/CrazyCat/dvbsnoop"
+PKG_VERSION=1.4.50
+PKG_URL="$SFNET_SRCS/dvbsnoop/dvbsnoop/dvbsnoop-1.4.50/dvbsnoop-1.4.50.tar.gz"
+PKG_REV=1
+PKG_DEPENDS="$TARGET_LIBC zlib bzip2"
+PKG_BUILD_DEPENDS="toolchain"
+PKG_PRIORITY=optional
+PKG_SECTION=utils
+PKG_SHORTDESC="An open source DVB/MPEG stream analyze"
+PKG_LONGDESC="dvbsnoop is a DVB/MPEG stream analyzer program.The program can be used to sniff, monitor, debug, dump or view DVB/MPEG/DSM-CC/MHP stream information (digital television or data broadcasts) sent via satellite, cable or terrestrial."
