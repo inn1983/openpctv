@@ -1,5 +1,5 @@
 PKG_NAME=libva-intel
-PKG_URL_REV=719fbef
+PKG_URL_REV=d22d367
 PKG_URL_PROTO=git
 PKG_VERSION=1.2.0+${PKG_URL_REV}
 PKG_URL="git://anongit.freedesktop.org/vaapi/intel-driver"

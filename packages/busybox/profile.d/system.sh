@@ -5,3 +5,4 @@ export HOSTNAME=$(cat /etc/hostname)
 [ -r /etc/locale.conf ] && . /etc/locale.conf && export LANG
 
 alias ll='ls -l'
+alias ls='ls --color'

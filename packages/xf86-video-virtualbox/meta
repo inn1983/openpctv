@@ -1,6 +1,6 @@
 PKG_NAME=xf86-video-virtualbox
-PKG_VERSION=4.2.16-86992
-PKG_URL="http://download2.polytechnic.edu.na/pub4/sourceforge/v/vi/virtualbox.mirror/VirtualBox%204.2.16/VirtualBox-$PKG_VERSION-Linux_amd64.run"
+PKG_VERSION=4.2.18-88780
+PKG_URL="http://download2.polytechnic.edu.na/pub4/sourceforge/v/vi/virtualbox.mirror/VirtualBox%204.2.18/VirtualBox-4.2.18-88780-Linux_x86.run"
 PKG_REV=1
 PKG_ARCH="i386 x86_64"
 PKG_BUILD_DEPENDS="toolchain xorriso"

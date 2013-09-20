@@ -25,11 +25,29 @@ case $TARGET_ARCH in
     ;;
 esac
 
-FEATURES="zlib-dynamic threads shared no-idea no-mdc2 no-rc5 no-krb5 -DHAVE_CRYPTODEV"
+#FEATURES="zlib-dynamic threads shared no-idea no-mdc2 no-rc5 no-krb5 -DHAVE_CRYPTODEV"
 
 cd $BUILD/$1*
 
-./Configure $FEATURES --prefix=/usr --openssldir=/etc/ssl $TARGET
+./Configure $FEATURES --prefix=/usr --openssldir=/etc/ssl \
+            shared \
+            threads \
+            zlib \
+            enable-camellia \
+            enable-seed \
+            enable-tlsext \
+            enable-rfc3779 \
+            enable-cms \
+            enable-md2 \
+            no-krb5 \
+            no-mdc2 \
+            no-rc5 \
+            no-ec \
+            no-ec2m \
+            no-ecdh \
+            no-ecdsa \
+            no-srp \
+            $TARGET
 sed -i Makefile \
   -e "s:CFLAG= \(.*\):CFLAG=\1 ${CFLAGS}:" \
   -e "s:SHARED_LDFLAGS= \(.*\):SHARED_LDFLAGS=\1 ${LDFLAGS}:" \

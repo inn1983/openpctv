@@ -11,6 +11,8 @@ cp $PACKAGES/$1/config/group $INSTALL/etc
 cp $PACKAGES/$1/config/profile $INSTALL/etc
 cp $PACKAGES/$1/config/funcs $INSTALL/etc
 cp $PACKAGES/$1/scripts/assign-ip $INSTALL/bin
+rm $INSTALL/bin/ls
+cp $PACKAGES/$1/scripts/ls $INSTALL/bin
 #cp $PACKAGES/$1/scripts/pre-umount-* $INSTALL/bin
 #ln -s ../bin/pre-umount-poweroff $INSTALL/sbin/poweroff
 #ln -s ../bin/pre-umount-reboot $INSTALL/sbin/reboot
