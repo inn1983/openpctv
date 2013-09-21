@@ -2,6 +2,7 @@
 
 PLUGINS=""
 . /etc/system.options
+export VDPAU_NVIDIA_NO_OVERLAY=1
 if [ $CAM = "OScam" ]; then
   sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/10_sc
   sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_dvbapi
