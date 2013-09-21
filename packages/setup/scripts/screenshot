@@ -1,0 +1,5 @@
+#!/bin/sh
+
+origdate=$(date +%Y%m%d%H%M%S)
+
+import -window root /root/screen_$origdate.png

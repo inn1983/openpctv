@@ -12,21 +12,10 @@ sed $PACKAGES/$1/scripts/installator.sh \
 chmod 755 $INSTALL/sbin/*
 
 mkdir -p $INSTALL/usr/bin
-cp $PACKAGES/$1/scripts/diseqcsetup $INSTALL/usr/bin
-cp $PACKAGES/$1/scripts/monitor.sh $INSTALL/usr/bin
-cp $PACKAGES/$1/scripts/select-irdrv $INSTALL/usr/bin
-cp $PACKAGES/$1/scripts/update-channels $INSTALL/usr/bin
-cp $PACKAGES/$1/scripts/update-transponders $INSTALL/usr/bin
-cp $PACKAGES/$1/scripts/install-drivers $INSTALL/usr/bin
-cp $PACKAGES/$1/scripts/netconfig $INSTALL/usr/bin
-cp $PACKAGES/$1/scripts/select-irdrv $INSTALL/usr/bin
-cp $PACKAGES/$1/scripts/select-language $INSTALL/usr/bin
-cp $PACKAGES/$1/scripts/audio-config $INSTALL/usr/bin
-cp $PACKAGES/$1/scripts/videocache $INSTALL/usr/bin
-cp $PACKAGES/$1/scripts/getcam $INSTALL/usr/bin
-cp $PACKAGES/$1/scripts/select-target $INSTALL/usr/bin
-cp $PACKAGES/$1/scripts/update-epg $INSTALL/usr/bin
-chmod 755 $INSTALL/usr/bin/*
+for i in diseqcsetup monitor.sh select-irdrv update-channels update-transponders install-drivers netconfig select-irdrv select-language audio-config videocache getcam select-target update-epg screenshot; do
+  cp $PACKAGES/$1/scripts/$i $INSTALL/usr/bin
+  chmod 755 $INSTALL/usr/bin/$i
+done
 
 $ROOT/$TOOLCHAIN/bin/xgettext $PACKAGES/$1/scripts/*  -L Shell  -o $PACKAGES/$1/config/openpctv.pot
 for i in $PACKAGES/$1/config/openpctv-*.po; do
