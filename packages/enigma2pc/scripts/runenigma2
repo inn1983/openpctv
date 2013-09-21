@@ -3,6 +3,7 @@
 prefix=/usr
 exec_prefix=${prefix}
 datarootdir=${prefix}/share
+export VDPAU_NVIDIA_NO_OVERLAY=1
 
 if [ -x ${exec_prefix}/bin/showiframe ]; then
 	if [ -f /etc/enigma2/backdrop.mvi ]; then
