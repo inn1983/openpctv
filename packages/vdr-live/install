@@ -19,8 +19,9 @@ echo "PLUGIN=${NAME}" > $INSTALL/etc/vdr/plugins.d/50_$NAME
 echo "OPTIONS=\"-p 80\"" >> $INSTALL/etc/vdr/plugins.d/50_$NAME
 echo "ENABLED=yes" >> $INSTALL/etc/vdr/plugins.d/50_$NAME
 
-mkdir -p $INSTALL/etc/vdr/plugins
-cp -a $BUILD/$1*/live $INSTALL/etc/vdr/plugins
+mkdir -p $INSTALL/etc/vdr/plugins/live
+mkdir -p $INSTALL/usr/share/vdr/plugins
+cp -a $BUILD/$1*/live $INSTALL/usr/share/vdr/plugins
 
 if [ "$SERVICES" = yes ]; then
   echo 'live.LocalNetMask = 0.0.0.0/0' >> $INSTALL/etc/vdr/setup.conf

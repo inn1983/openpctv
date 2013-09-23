@@ -1,0 +1,9 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+
+mkdir -p $INSTALL/usr/bin
+cp szap-s2 $INSTALL/usr/bin
+cp tzap-t2 $INSTALL/usr/bin

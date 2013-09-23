@@ -1,0 +1,12 @@
+PKG_NAME=szap-s2
+PKG_URL_PROTO=hg
+PKG_URL_REV=7e3dd74
+PKG_URL="https://bitbucket.org/CrazyCat/szap-s2"
+PKG_VERSION=r${PKG_URL_REV}
+PKG_REV=5
+PKG_DEPENDS="$TARGET_LIBC"
+PKG_BUILD_DEPENDS="toolchain"
+PKG_PRIORITY=optional
+PKG_SECTION=utils
+PKG_SHORTDESC="simple zapping tool for the Linux DVB S2 API"
+PKG_LONGDESC="simple zapping tool for the Linux DVB S2 API"

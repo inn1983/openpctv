@@ -6,5 +6,7 @@ $SCRIPTS/build vdr
 
 cd $BUILD/$1*
 
+cp -P $ROOT/$PACKAGES/$1/config/zh_CN.po po/
+
 export MALLOC_CHECK_=0
 make ECPPC=$ROOT/$TOOLCHAIN/bin/ecppc
