@@ -1,0 +1,26 @@
+#!/bin/sh
+
+[ -d /dev/dvb/adapter0 ] || exit
+
+rm /etc/tuxbox/nim_sockets
+for i in /dev/dvb/adapter*; do
+  id=`echo $i | sed 's#/dev/dvb/adapter##'`
+  dvbsnoop -s feinfo -adapter $id > /tmp/dvbinfo.$id
+  name=`grep "Name:" /tmp/dvbinfo.$id | cut -d\" -f2`
+  name="$name adapter$id"
+  if grep -q DVB-S /tmp/dvbinfo.$id; then
+    type=DVB-S2
+  elif grep -q DVB-C /tmp/dvbinfo.$id; then
+    type=DVB-C
+  elif grep -q DVB-T /tmp/dvbinfo.$id; then
+    type=DVB-T
+  fi
+  rm /tmp/dvbinfo.$id
+  cat >> /etc/tuxbox/nim_sockets << _EOF
+NIM Socket $id:
+        Type: $type
+        Name: $name
+        Has_Outputs: no
+        Frontend_Device: $id
+_EOF
+done
