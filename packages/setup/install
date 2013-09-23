@@ -12,7 +12,7 @@ sed $PACKAGES/$1/scripts/installator.sh \
 chmod 755 $INSTALL/sbin/*
 
 mkdir -p $INSTALL/usr/bin
-for i in diseqcsetup monitor.sh select-irdrv update-channels update-transponders install-drivers netconfig select-irdrv select-language audio-config videocache getcam select-target update-epg screenshot; do
+for i in diseqcsetup monitor.sh select-irdrv update-channels update-dvbdevice update-transponders install-drivers netconfig select-irdrv select-language audio-config videocache getcam select-target update-epg screenshot; do
   cp $PACKAGES/$1/scripts/$i $INSTALL/usr/bin
   chmod 755 $INSTALL/usr/bin/$i
 done

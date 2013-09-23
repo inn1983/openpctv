@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-21 00:27+0800\n"
+"POT-Creation-Date: 2013-09-22 19:37+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: packages/setup/scripts/audio-config:8
 #: packages/setup/scripts/audio-config:48
-#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:238
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:239
 msgid "Soundcard Configuration"
 msgstr ""
 
@@ -364,7 +364,7 @@ msgstr ""
 msgid "Finished"
 msgstr ""
 
-#: packages/setup/scripts/getcam:53 packages/setup/scripts/setup.sh:238
+#: packages/setup/scripts/getcam:53 packages/setup/scripts/setup.sh:239
 msgid "Select a software emulated CAM"
 msgstr ""
 
@@ -446,7 +446,7 @@ msgid ""
 msgstr ""
 
 #: packages/setup/scripts/install-drivers:67
-#: packages/setup/scripts/setup.sh:238
+#: packages/setup/scripts/setup.sh:239
 msgid "Install additional V4L and DVB drive"
 msgstr ""
 
@@ -698,7 +698,7 @@ msgid "Submit"
 msgstr ""
 
 #: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
-#: packages/setup/scripts/setup.sh:238
+#: packages/setup/scripts/setup.sh:239
 msgid "Set the monitor's best resolution"
 msgstr ""
 
@@ -826,7 +826,7 @@ msgid ""
 "a default device as Lirc support."
 msgstr ""
 
-#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:238
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:239
 msgid "Set the default target"
 msgstr ""
 
@@ -978,49 +978,49 @@ msgstr ""
 msgid "Don't mount bind for OpenPCTV cache"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:229
+#: packages/setup/scripts/setup.sh:230
 msgid ""
 "Would you like to scan channels for VDR/XBMC(It'll take quiet long to do "
 "it)?  You can also scan channels with vdr reelscanchannels plugin in vdr."
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:238
+#: packages/setup/scripts/setup.sh:239
 msgid "OpenPCTV configurator"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:238
+#: packages/setup/scripts/setup.sh:239
 msgid "Main menu"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:238
+#: packages/setup/scripts/setup.sh:239
 msgid "Set global locale and language"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:238
+#: packages/setup/scripts/setup.sh:239
 msgid "Configure Network Environment"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:238
+#: packages/setup/scripts/setup.sh:239
 msgid "Select IR device"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:238
+#: packages/setup/scripts/setup.sh:239
 msgid "Auto update Satellite Transponders and EPG data"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:238
+#: packages/setup/scripts/setup.sh:239
 msgid "DiSEqC configurator"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:238
+#: packages/setup/scripts/setup.sh:239
 msgid "Auto scan channels"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:238
+#: packages/setup/scripts/setup.sh:239
 msgid "Reboot OpenPCTV"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:238
+#: packages/setup/scripts/setup.sh:239
 msgid "Exit to login shell"
 msgstr ""
 

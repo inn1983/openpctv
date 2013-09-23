@@ -6,10 +6,11 @@ get_meta $1
 
 cd $PKG_BUILD_DIR
 
+do_autoconf
+
 xorg_drv_configure_prepend
 
 do_configure \
-            --enable-dri \
             --enable-kms-only \
             --disable-xvmc \
             --enable-sna \
