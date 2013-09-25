@@ -47,6 +47,14 @@ EOF
      i=$( expr $i + 1 )
   fi
 done
+cat >> $OSCAMSERVER << EOF
+[reader]
+label = cw
+protocol = constcw
+device = /etc/oscam/constant.cw
+group = $i
+EOF
+
 }
 
 selectcam () {
