@@ -5,11 +5,7 @@ get_meta $1
 
 cd $PKG_BUILD_DIR
 
-if pkg_uses $1 devtools; then
-  DEVTOOLS_CONFIG="--enable-alsamixer --with-curses=ncurses"
-else
-  DEVTOOLS_CONFIG="--disable-alsamixer --without-curses"
-fi
+DEVTOOLS_CONFIG="--enable-alsamixer --with-curses=ncurses"
 
 do_configure \
   --disable-dependency-tracking \
