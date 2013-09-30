@@ -1,0 +1,11 @@
+PKG_NAME=libtuxtxt
+PKG_URL_PROTO=git
+PKG_URL_REV=569b09
+PKG_URL="git://git.code.sf.net/p/openpli/tuxtxt"
+PKG_VERSION=0.1.4+r${PKG_URL_REV}
+PKG_REV=1
+PKG_BUILD_DEPENDS="toolchain"
+PKG_PRIORITY=optional
+PKG_SECTION=utils
+PKG_SHORTDESC="dreambox tuxbox-libtuxtxt"
+PKG_LONGDESC="dreambox tuxbox-libtuxtxt"

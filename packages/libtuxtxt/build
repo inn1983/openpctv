@@ -1,0 +1,12 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+
+cd libtuxtxt
+echo "" > NEWS > README > AUTHORS > ChangeLog
+do_autoconf
+do_configure --with-boxtype=generic
+make
+make_install

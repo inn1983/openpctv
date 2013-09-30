@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*/tuxtxt
+
+do_install usr/lib/*so*
+do_install usr/lib/enigma2
+do_install usr/share
+do_install etc
