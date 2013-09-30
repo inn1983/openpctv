@@ -1,10 +1,8 @@
 PKG_NAME=vdr-skinpearlhd
-#PKG_VERSION=1.0
-PKG_URL_REV=1791feac
-PKG_VERSION=1.0
+PKG_URL_REV=9899940
+PKG_VERSION=0.0.1
 PKG_URL_PROTO=git
-PKG_URL="git://projects.vdr-developer.org/skin-pearlhd.git"
-#PKG_URL="http://95.225.138.70/sifbox/pearlhd.tar.gz"
+PKG_URL="git://projects.vdr-developer.org/vdr-plugin-skinpearlhd.git"
 PKG_REV=1
 PKG_DEPENDS="$TARGET_LIBC vdr"
 PKG_BUILD_DEPENDS="toolchain"

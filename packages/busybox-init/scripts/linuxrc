@@ -373,12 +373,10 @@ else
       if [ ! -f /mnt/loopdisk.img ]; then
         dd if=/dev/zero of=/mnt/loopdisk.img bs=1M seek=500 count=0
 	sync
-        sleep 1
-	sync
-        /sbin/mke2fs -T ext4 -F -q /mnt/loopdisk.img
+	sleep 1
+	/sbin/mke2fs -T ext4 -F -q /mnt/loopdisk.img
 	sync
 	sleep 1
-	sync
       fi
       for i in 0 1 2 3 4 5 6 7 8 9; do
         mount -o loop,sync /mnt/loopdisk.img /rw && break

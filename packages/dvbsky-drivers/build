@@ -6,6 +6,10 @@ $SCRIPTS/build linux
 
 cd $BUILD/$1*
 
+chmod -R +x linux v4l
+[ "$TARGET_ARCH" = "i386" ] && sh ./v4l/build_x86.sh
+[ "$TARGET_ARCH" = "x86_64" ] && sh ./v4l/build_x64.sh
+
 make \
   KDIR=$(kernel_path) \
   KERNELRELEASE=$(kernel_version) \

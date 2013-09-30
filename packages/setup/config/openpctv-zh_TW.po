@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openpctv 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-24 23:35+0800\n"
+"POT-Creation-Date: 2013-09-30 18:12+0800\n"
 "PO-Revision-Date: 2013-07-28 09:19+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -486,6 +486,11 @@ msgstr "支援大多數的設備，例如DVBWorld，Tevii，Prof等"
 
 #: packages/setup/scripts/install-drivers:71
 msgid "Support all the TBS devices"
+msgstr "支援全系列的TBS設備"
+
+#: packages/setup/scripts/install-drivers:72
+#, fuzzy
+msgid "Support all the DVBSky devices"
 msgstr "支援全系列的TBS設備"
 
 #: packages/setup/scripts/installator.sh:12

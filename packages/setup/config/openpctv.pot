@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-24 23:35+0800\n"
+"POT-Creation-Date: 2013-09-30 23:05+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -466,6 +466,10 @@ msgstr ""
 
 #: packages/setup/scripts/install-drivers:71
 msgid "Support all the TBS devices"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:72
+msgid "Support all the DVBSky devices"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:12
