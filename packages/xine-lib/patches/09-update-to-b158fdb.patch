@@ -1,0 +1,1486 @@
+diff --git a/include/xine/buffer.h b/include/xine/buffer.h
+index 92c50f7..99c4b05 100644
+--- a/include/xine/buffer.h
++++ b/include/xine/buffer.h
+@@ -269,6 +269,7 @@ extern "C" {
+ #define BUF_AUDIO_AMR_WB	0x03400000
+ #define BUF_AUDIO_EAC3		0x03410000
+ #define BUF_AUDIO_AAC_LATM	0x03420000
++#define BUF_AUDIO_ADPCM_G726	0x03430000
+ /*@}*/
+ 
+ /**
+diff --git a/include/xine/post.h b/include/xine/post.h
+index 31899c4..f889371 100644
+--- a/include/xine/post.h
++++ b/include/xine/post.h
+@@ -392,12 +392,17 @@ do {                                                               \
+ /* macros to create parameter descriptors */
+ 
+ #define START_PARAM_DESCR( param_t ) \
++typedef param_t temp_t; \
+ static param_t temp_s; \
+ static xine_post_api_parameter_t temp_p[] = {
+ 
++#ifndef offsetof
++#include <stddef.h>
++#endif
++
+ #define PARAM_ITEM( param_type, var, enumv, min, max, readonly, descr ) \
+ { param_type, #var, sizeof(temp_s.var), \
+-  offsetof(__typeof__(temp_s), var), enumv, min, max, readonly, descr },
++  offsetof(temp_t, var), enumv, min, max, readonly, descr },
+ 
+ #define END_PARAM_DESCR( name ) \
+   { POST_PARAM_TYPE_LAST, NULL, 0, 0, NULL, 0, 0, 1, NULL } \
+diff --git a/src/audio_dec/xine_musepack_decoder.c b/src/audio_dec/xine_musepack_decoder.c
+index f4613df..b47e8c2 100644
+--- a/src/audio_dec/xine_musepack_decoder.c
++++ b/src/audio_dec/xine_musepack_decoder.c
+@@ -102,8 +102,13 @@ typedef struct mpc_decoder_s {
+  *************************************************************************/
+ 
+ /* Reads size bytes of data into buffer at ptr. */
++#ifndef HAVE_MPC_MPCDEC_H
+ static int32_t mpc_reader_read(void *const data, void *const ptr, int size) {
+   mpc_decoder_t *const this = (mpc_decoder_t *) data;
++#else
++static int32_t mpc_reader_read(mpc_reader *data, void *ptr, int32_t size) {
++  mpc_decoder_t *const this = (mpc_decoder_t *) data->data;
++#endif
+ 
+   lprintf("mpc_reader_read: size=%d\n", size);
+ 
+diff --git a/src/audio_out/Makefile.am b/src/audio_out/Makefile.am
+index 7932d7a..1f9c312 100644
+--- a/src/audio_out/Makefile.am
++++ b/src/audio_out/Makefile.am
+@@ -5,6 +5,8 @@ include $(top_srcdir)/misc/Makefile.common
+ AM_CFLAGS  = $(DEFAULT_OCFLAGS) $(VISIBILITY_FLAG)
+ AM_LDFLAGS = $(xineplug_ldflags)
+ 
++noinst_HEADERS = speakers.h
++
+ ##
+ # IMPORTANT:
+ # ---------
+diff --git a/src/audio_out/audio_alsa_out.c b/src/audio_out/audio_alsa_out.c
+index c162502..8a462e4 100644
+--- a/src/audio_out/audio_alsa_out.c
++++ b/src/audio_out/audio_alsa_out.c
+@@ -55,6 +55,8 @@
+ #include <xine/compat.h>
+ #include <xine/audio_out.h>
+ 
++#include "speakers.h"
++
+ /*
+ #define ALSA_LOG
+ #define ALSA_LOG_BUFFERS
+@@ -572,6 +574,10 @@ static int ao_alsa_open(ao_driver_t *this_gen, uint32_t bits, uint32_t rate, int
+ 	     "audio_alsa_out: Unable to determine current swparams: %s\n", snd_strerror(err));
+     goto close;
+   }
++
++#if defined(SND_LIB_VERSION) && SND_LIB_VERSION >= 0x010016
++  /* snd_pcm_sw_params_set_xfer_align() is deprecated, alignment is always 1 */
++#else
+   /* align all transfers to 1 sample */
+   err = snd_pcm_sw_params_set_xfer_align(this->audio_fd, swparams, 1);
+   if (err < 0) {
+@@ -579,6 +585,8 @@ static int ao_alsa_open(ao_driver_t *this_gen, uint32_t bits, uint32_t rate, int
+ 	     "audio_alsa_out: Unable to set transfer alignment: %s\n", snd_strerror(err));
+     goto close;
+   }
++#endif
++
+   /* allow the transfer when at least period_size samples can be processed */
+   err = snd_pcm_sw_params_set_avail_min(this->audio_fd, swparams, period_size);
+   if (err < 0) {
+@@ -1359,23 +1367,8 @@ static ao_driver_t *open_plugin (audio_driver_class_t *class_gen, const void *da
+   int                  err;
+   char                *pcm_device;
+   snd_pcm_hw_params_t *params;
+-  /* for usability reasons, keep this in sync with audio_oss_out.c */
+-  static const char * const speaker_arrangement[] = {"Mono 1.0", "Stereo 2.0", "Headphones 2.0", "Stereo 2.1",
+-    "Surround 3.0", "Surround 4.0", "Surround 4.1", "Surround 5.0", "Surround 5.1", "Surround 6.0",
+-    "Surround 6.1", "Surround 7.1", "Pass Through", NULL};
+-  #define MONO		0
+-  #define STEREO	1
+-  #define HEADPHONES	2
+-  #define SURROUND21	3
+-  #define SURROUND3	4
+-  #define SURROUND4	5
+-  #define SURROUND41	6
+-  #define SURROUND5	7
+-  #define SURROUND51	8
+-  #define SURROUND6	9
+-  #define SURROUND61	10
+-  #define SURROUND71	11
+-  #define A52_PASSTHRU	12
++
++  AUDIO_DEVICE_SPEAKER_ARRANGEMENT_TYPES;
+   int speakers;
+ 
+   this = calloc(1, sizeof (alsa_driver_t));
+@@ -1494,36 +1487,9 @@ static ao_driver_t *open_plugin (audio_driver_class_t *class_gen, const void *da
+ 
+   /* for usability reasons, keep this in sync with audio_oss_out.c */
+   speakers = config->register_enum(config, "audio.output.speaker_arrangement", STEREO,
+-			speaker_arrangement,
+-			_("speaker arrangement"),
+-			_("Select how your speakers are arranged, "
+-			  "this determines which speakers xine uses for sound output. "
+-			  "The individual values are:\n\n"
+-			  "Mono 1.0: You have only one speaker.\n"
+-			  "Stereo 2.0: You have two speakers for left and right channel.\n"
+-			  "Headphones 2.0: You use headphones.\n"
+-			  "Stereo 2.1: You have two speakers for left and right channel, and one "
+-			  "subwoofer for the low frequencies.\n"
+-			  "Surround 3.0: You have three speakers for left, right and rear channel.\n"
+-			  "Surround 4.0: You have four speakers for front left and right and rear "
+-			  "left and right channels.\n"
+-			  "Surround 4.1: You have four speakers for front left and right and rear "
+-			  "left and right channels, and one subwoofer for the low frequencies.\n"
+-			  "Surround 5.0: You have five speakers for front left, center and right and "
+-			  "rear left and right channels.\n"
+-			  "Surround 5.1: You have five speakers for front left, center and right and "
+-			  "rear left and right channels, and one subwoofer for the low frequencies.\n"
+-			  "Surround 6.0: You have six speakers for front left, center and right and "
+-			  "rear left, center and right channels.\n"
+-			  "Surround 6.1: You have six speakers for front left, center and right and "
+-			  "rear left, center and right channels, and one subwoofer for the low frequencies.\n"
+-			  "Surround 7.1: You have seven speakers for front left, center and right, "
+-			  "left and right and rear left and right channels, and one subwoofer for the "
+-			  "low frequencies.\n"
+-			  "Pass Through: Your sound system will receive undecoded digital sound from xine. "
+-			  "You need to connect a digital surround decoder capable of decoding the "
+-			  "formats you want to play to your sound card's digital output."),
+-			0, alsa_speaker_arrangement_cb, this);
++                                   speaker_arrangement,
++                                   AUDIO_DEVICE_SPEAKER_ARRANGEMENT_HELP,
++                                   0, alsa_speaker_arrangement_cb, this);
+ 
+   char *logmsg = strdup (_("audio_alsa_out : supported modes are"));
+ 
+diff --git a/src/audio_out/audio_jack_out.c b/src/audio_out/audio_jack_out.c
+index 16f68fa..9b2d8ef 100644
+--- a/src/audio_out/audio_jack_out.c
++++ b/src/audio_out/audio_jack_out.c
+@@ -17,6 +17,8 @@
+ 
+ #include <jack/jack.h>
+ 
++#include "speakers.h"
++
+ #define AO_OUT_JACK_IFACE_VERSION 9
+ 
+ #define GAP_TOLERANCE        AO_MAX_GAP
+@@ -687,26 +689,7 @@ static ao_driver_t *open_jack_plugin (audio_driver_class_t *class_gen,
+   char *jack_device;
+   const char **matching_ports = NULL;
+ 
+-  /* for usability reasons, keep this in sync with audio_oss_out.c */
+-  static const char * const speaker_arrangement[] = {
+-    "Mono 1.0", "Stereo 2.0", "Headphones 2.0", "Stereo 2.1",
+-    "Surround 3.0", "Surround 4.0", "Surround 4.1", "Surround 5.0",
+-    "Surround 5.1", "Surround 6.0",
+-    "Surround 6.1", "Surround 7.1", "Pass Through", NULL
+-  };
+-#define MONO		0
+-#define STEREO		1
+-#define HEADPHONES	2
+-#define SURROUND21	3
+-#define SURROUND3	4
+-#define SURROUND4	5
+-#define SURROUND41	6
+-#define SURROUND5	7
+-#define SURROUND51	8
+-#define SURROUND6	9
+-#define SURROUND61	10
+-#define SURROUND71	11
+-#define A52_PASSTHRU	12
++  AUDIO_DEVICE_SPEAKER_ARRANGEMENT_TYPES;
+   int speakers;
+ 
+   /* Try to create a client called "xine[-NN]" */
+@@ -738,34 +721,7 @@ static ao_driver_t *open_jack_plugin (audio_driver_class_t *class_gen,
+   speakers =
+     config->register_enum (config, "audio.output.speaker_arrangement",
+ 			   STEREO, speaker_arrangement,
+-			   _("speaker arrangement"),
+-			   _("Select how your speakers are arranged, "
+-			     "this determines which speakers xine uses for sound output. "
+-			     "The individual values are:\n\n"
+-			     "Mono 1.0: You have only one speaker.\n"
+-			     "Stereo 2.0: You have two speakers for left and right channel.\n"
+-			     "Headphones 2.0: You use headphones.\n"
+-			     "Stereo 2.1: You have two speakers for left and right channel, and one "
+-			     "subwoofer for the low frequencies.\n"
+-			     "Surround 3.0: You have three speakers for left, right and rear channel.\n"
+-			     "Surround 4.0: You have four speakers for front left and right and rear "
+-			     "left and right channels.\n"
+-			     "Surround 4.1: You have four speakers for front left and right and rear "
+-			     "left and right channels, and one subwoofer for the low frequencies.\n"
+-			     "Surround 5.0: You have five speakers for front left, center and right and "
+-			     "rear left and right channels.\n"
+-			     "Surround 5.1: You have five speakers for front left, center and right and "
+-			     "rear left and right channels, and one subwoofer for the low frequencies.\n"
+-			     "Surround 6.0: You have six speakers for front left, center and right and "
+-			     "rear left, center and right channels.\n"
+-			     "Surround 6.1: You have six speakers for front left, center and right and "
+-			     "rear left, center and right channels, and one subwoofer for the low frequencies.\n"
+-			     "Surround 7.1: You have seven speakers for front left, center and right, "
+-			     "left and right and rear left and right channels, and one subwoofer for the "
+-			     "low frequencies.\n"
+-			     "Pass Through: Your sound system will receive undecoded digital sound from xine. "
+-			     "You need to connect a digital surround decoder capable of decoding the "
+-			     "formats you want to play to your sound card's digital output."),
++                           AUDIO_DEVICE_SPEAKER_ARRANGEMENT_HELP,
+ 			   0, jack_speaker_arrangement_cb, this);
+ 
+   int port_flags = JackPortIsInput;
+diff --git a/src/audio_out/audio_oss_out.c b/src/audio_out/audio_oss_out.c
+index 6d83191..b09137e 100644
+--- a/src/audio_out/audio_oss_out.c
++++ b/src/audio_out/audio_oss_out.c
+@@ -71,6 +71,8 @@
+ 
+ #include <sys/time.h>
+ 
++#include "speakers.h"
++
+ #ifndef SNDCTL_DSP_SETFMT
+ /* Deprecated OSS API */
+ #define SNDCTL_DSP_SETFMT SOUND_PCM_SETFMT
+@@ -707,23 +709,8 @@ static ao_driver_t *open_plugin (audio_driver_class_t *class_gen, const void *da
+   static const char * const sync_methods[] = {"auto", "getodelay", "getoptr", "softsync", "probebuffer", NULL};
+   static const char * const devname_opts[] = {"auto", "/dev/dsp", "/dev/sound/dsp", NULL};
+   int devname_val, devname_num;
+-  /* for usability reasons, keep this in sync with audio_alsa_out.c */
+-  static const char * const speaker_arrangement[] = {"Mono 1.0", "Stereo 2.0", "Headphones 2.0", "Stereo 2.1",
+-    "Surround 3.0", "Surround 4.0", "Surround 4.1", "Surround 5.0", "Surround 5.1", "Surround 6.0",
+-    "Surround 6.1", "Surround 7.1", "Pass Through", NULL};
+-  #define MONO		0
+-  #define STEREO	1
+-  #define HEADPHONES	2
+-  #define SURROUND21	3
+-  #define SURROUND3	4
+-  #define SURROUND4	5
+-  #define SURROUND41	6
+-  #define SURROUND5	7
+-  #define SURROUND51	8
+-  #define SURROUND6	9
+-  #define SURROUND61	10
+-  #define SURROUND71	11
+-  #define A52_PASSTHRU	12
++
++  AUDIO_DEVICE_SPEAKER_ARRANGEMENT_TYPES;
+   int speakers;
+ 
+ 
+@@ -921,36 +908,9 @@ static ao_driver_t *open_plugin (audio_driver_class_t *class_gen, const void *da
+ 
+   /* for usability reasons, keep this in sync with audio_alsa_out.c */
+   speakers = config->register_enum(config, "audio.output.speaker_arrangement", STEREO,
+-			speaker_arrangement,
+-			_("speaker arrangement"),
+-			_("Select how your speakers are arranged, "
+-			  "this determines which speakers xine uses for sound output. "
+-			  "The individual values are:\n\n"
+-			  "Mono 1.0: You have only one speaker.\n"
+-			  "Stereo 2.0: You have two speakers for left and right channel.\n"
+-			  "Headphones 2.0: You use headphones.\n"
+-			  "Stereo 2.1: You have two speakers for left and right channel, and one "
+-			  "subwoofer for the low frequencies.\n"
+-			  "Surround 3.0: You have three speakers for left, right and rear channel.\n"
+-			  "Surround 4.0: You have four speakers for front left and right and rear "
+-			  "left and right channels.\n"
+-			  "Surround 4.1: You have four speakers for front left and right and rear "
+-			  "left and right channels, and one subwoofer for the low frequencies.\n"
+-			  "Surround 5.0: You have five speakers for front left, center and right and "
+-			  "rear left and right channels.\n"
+-			  "Surround 5.1: You have five speakers for front left, center and right and "
+-			  "rear left and right channels, and one subwoofer for the low frequencies.\n"
+-			  "Surround 6.0: You have six speakers for front left, center and right and "
+-			  "rear left, center and right channels.\n"
+-			  "Surround 6.1: You have six speakers for front left, center and right and "
+-			  "rear left, center and right channels, and one subwoofer for the low frequencies.\n"
+-			  "Surround 7.1: You have seven speakers for front left, center and right, "
+-			  "left and right and rear left and right channels, and one subwoofer for the "
+-			  "low frequencies.\n"
+-			  "Pass Through: Your sound system will receive undecoded digital sound from xine. "
+-			  "You need to connect a digital surround decoder capable of decoding the "
+-			  "formats you want to play to your sound card's digital output."),
+-			0, oss_speaker_arrangement_cb, this);
++                                   speaker_arrangement,
++                                   AUDIO_DEVICE_SPEAKER_ARRANGEMENT_HELP,
++                                   0, oss_speaker_arrangement_cb, this);
+ 
+ 
+   char *logmsg = strdup (_("audio_oss_out: supported modes are"));
+diff --git a/src/audio_out/speakers.h b/src/audio_out/speakers.h
+new file mode 100644
+index 0000000..ea8c518
+--- /dev/null
++++ b/src/audio_out/speakers.h
+@@ -0,0 +1,70 @@
++/*
++ * Copyright (C) 2013 the xine project
++ *
++ * This file is part of xine, a free video player.
++ *
++ * xine is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * xine is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
++ */
++
++#define MONO            0
++#define STEREO          1
++#define HEADPHONES      2
++#define SURROUND21      3
++#define SURROUND3       4
++#define SURROUND4       5
++#define SURROUND41      6
++#define SURROUND5       7
++#define SURROUND51      8
++#define SURROUND6       9
++#define SURROUND61      10
++#define SURROUND71      11
++#define A52_PASSTHRU    12
++
++#define AUDIO_DEVICE_SPEAKER_ARRANGEMENT_HELP                           \
++    _("speaker arrangement"),                                           \
++    _("Select how your speakers are arranged, "                         \
++      "this determines which speakers xine uses for sound output. "     \
++      "The individual values are:\n\n"                                  \
++      "Mono 1.0: You have only one speaker.\n"                          \
++      "Stereo 2.0: You have two speakers for left and right channel.\n" \
++      "Headphones 2.0: You use headphones.\n"                           \
++      "Stereo 2.1: You have two speakers for left and right channel, and one " \
++      "subwoofer for the low frequencies.\n"                            \
++      "Surround 3.0: You have three speakers for left, right and rear channel.\n" \
++      "Surround 4.0: You have four speakers for front left and right and rear " \
++      "left and right channels.\n"                                      \
++      "Surround 4.1: You have four speakers for front left and right and rear " \
++      "left and right channels, and one subwoofer for the low frequencies.\n" \
++      "Surround 5.0: You have five speakers for front left, center and right and " \
++      "rear left and right channels.\n"                                 \
++      "Surround 5.1: You have five speakers for front left, center and right and " \
++      "rear left and right channels, and one subwoofer for the low frequencies.\n" \
++      "Surround 6.0: You have six speakers for front left, center and right and " \
++      "rear left, center and right channels.\n"                         \
++      "Surround 6.1: You have six speakers for front left, center and right and " \
++      "rear left, center and right channels, and one subwoofer for the low frequencies.\n" \
++      "Surround 7.1: You have seven speakers for front left, center and right, " \
++      "left and right and rear left and right channels, and one subwoofer for the " \
++      "low frequencies.\n"                                              \
++      "Pass Through: Your sound system will receive undecoded digital sound from xine. " \
++      "You need to connect a digital surround decoder capable of decoding the " \
++      "formats you want to play to your sound card's digital output.")
++
++#define AUDIO_DEVICE_SPEAKER_ARRANGEMENT_TYPES \
++  static const char * const speaker_arrangement[] = { \
++    "Mono 1.0", "Stereo 2.0", "Headphones 2.0", "Stereo 2.1", \
++    "Surround 3.0", "Surround 4.0", "Surround 4.1", "Surround 5.0", \
++    "Surround 5.1", "Surround 6.0", "Surround 6.1", "Surround 7.1", \
++    "Pass Through", NULL};
+diff --git a/src/combined/Makefile.am b/src/combined/Makefile.am
+index cfb33d5..82629a7 100644
+--- a/src/combined/Makefile.am
++++ b/src/combined/Makefile.am
+@@ -41,7 +41,7 @@ xineplug_nsf_la_LIBADD = $(XINE_LIB) $(top_builddir)/contrib/nosefart/libnosefar
+ xineplug_nsf_la_CFLAGS = $(AM_CFLAGS) -fno-strict-aliasing
+ xineplug_nsf_la_CPPFLAGS = $(AM_CPPFLAGS) -DNSF_PLAYER -I$(top_srcdir)/contrib/nosefart -I$(top_srcdir)/src/demuxers
+ 
+-xineplug_xiph_la_SOURCES = xine_ogg_demuxer.c
++xineplug_xiph_la_SOURCES = xine_ogg_demuxer.c ogg_combined.h
+ xineplug_xiph_la_LIBADD = $(XINE_LIB) $(LTLIBINTL)
+ xineplug_xiph_la_CFLAGS = $(AM_CFLAGS)
+ xineplug_xiph_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(top_srcdir)/src/demuxers
+diff --git a/src/combined/ffmpeg/xine_audio.list b/src/combined/ffmpeg/xine_audio.list
+index e44f6ac..2002dd7 100644
+--- a/src/combined/ffmpeg/xine_audio.list
++++ b/src/combined/ffmpeg/xine_audio.list
+@@ -43,6 +43,7 @@ AMR_WB			AMR_WB			AMR wide band
+ EAC3			EAC3			E-AC-3
+ AAC			AAC			MPEG4
+ AAC_LATM		AAC_LATM		AAC LATM
++ADPCM_G726		ADPCM_G726		ADPCM G726
+ 
+ # disabled codecs (ref. configure.ac)
+ !			AC3
+diff --git a/src/combined/flac_demuxer.c b/src/combined/flac_demuxer.c
+index abf694f..2292455 100644
+--- a/src/combined/flac_demuxer.c
++++ b/src/combined/flac_demuxer.c
+@@ -97,6 +97,8 @@ typedef struct demux_flac_class_s {
+ 
+ } demux_flac_class_t;
+ 
++void *demux_flac_init_class (xine_t *xine, void *data);
++
+ /* FLAC Callbacks */
+ static
+ #ifdef LEGACY_FLAC
+@@ -227,6 +229,10 @@ flac_length_callback (const FLAC__SeekableStreamDecoder *decoder,
+ 
+     offset = input->get_length (input);
+ 
++    if (offset > 0) {
++      *stream_length = offset;
++    }
++
+     /* FIXME, can flac handle -1 as offset ? */
+ #ifdef LEGACY_FLAC
+     return FLAC__SEEKABLE_STREAM_DECODER_LENGTH_STATUS_OK;
+diff --git a/src/combined/ogg_combined.h b/src/combined/ogg_combined.h
+new file mode 100644
+index 0000000..e7b4393
+--- /dev/null
++++ b/src/combined/ogg_combined.h
+@@ -0,0 +1,27 @@
++/*
++ * Copyright (C) 2013 the xine project
++ *
++ * This file is part of xine, a free video player.
++ *
++ * xine is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * xine is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
++ *
++ */
++
++#include <xine/os_types.h>
++#include <xine/attributes.h>
++
++void *vorbis_init_plugin (xine_t *xine, void *data);
++void *speex_init_plugin (xine_t *xine, void *data);
++void *theora_init_plugin (xine_t *xine, void *data);
+diff --git a/src/combined/xine_ogg_demuxer.c b/src/combined/xine_ogg_demuxer.c
+index e254c6c..38e970a 100644
+--- a/src/combined/xine_ogg_demuxer.c
++++ b/src/combined/xine_ogg_demuxer.c
+@@ -71,6 +71,8 @@
+ #include "bswap.h"
+ #include "flacutils.h"
+ 
++#include "ogg_combined.h"
++
+ #define CHUNKSIZE                8500
+ #define PACKET_TYPE_HEADER       0x01
+ #define PACKET_TYPE_COMMENT      0x03
+@@ -2237,11 +2239,8 @@ static const demuxer_info_t demux_info_ogg = {
+ };
+ 
+ extern const demuxer_info_t dec_info_vorbis;
+-void *vorbis_init_plugin (xine_t *xine, void *data);
+ extern const demuxer_info_t dec_info_speex;
+-void *speex_init_plugin (xine_t *xine, void *data);
+ extern const demuxer_info_t dec_info_theora;
+-void *theora_init_plugin (xine_t *xine, void *data);
+ 
+ const plugin_info_t xine_plugin_info[] EXPORTED = {
+   /* type, API, "name", version, special_info, init_function */
+diff --git a/src/combined/xine_speex_decoder.c b/src/combined/xine_speex_decoder.c
+index 685d3c3..4998ec3 100644
+--- a/src/combined/xine_speex_decoder.c
++++ b/src/combined/xine_speex_decoder.c
+@@ -45,6 +45,8 @@
+ #include <speex/speex_callbacks.h>
+ #include <speex/speex_stereo.h>
+ 
++#include "ogg_combined.h"
++
+ #define MAX_FRAME_SIZE 2000
+ 
+ typedef struct {
+diff --git a/src/combined/xine_theora_decoder.c b/src/combined/xine_theora_decoder.c
+index 25e46a5..303c24e 100644
+--- a/src/combined/xine_theora_decoder.c
++++ b/src/combined/xine_theora_decoder.c
+@@ -45,6 +45,8 @@
+ #include <xine/metronom.h>
+ #include <xine/xineutils.h>
+ 
++#include "ogg_combined.h"
++
+ typedef struct theora_class_s {
+   video_decoder_class_t   decoder_class;
+ } theora_class_t;
+diff --git a/src/combined/xine_vorbis_decoder.c b/src/combined/xine_vorbis_decoder.c
+index 288202c..9736fdc 100644
+--- a/src/combined/xine_vorbis_decoder.c
++++ b/src/combined/xine_vorbis_decoder.c
+@@ -40,6 +40,8 @@
+ #include <ogg/ogg.h>
+ #include <vorbis/codec.h>
+ 
++#include "ogg_combined.h"
++
+ #define MAX_NUM_SAMPLES 4096
+ #define INIT_BUFSIZE    8192
+ 
+diff --git a/src/demuxers/asfheader.c b/src/demuxers/asfheader.c
+index 9810aea..0fb7802 100644
+--- a/src/demuxers/asfheader.c
++++ b/src/demuxers/asfheader.c
+@@ -472,7 +472,7 @@ static int asf_header_parse_stream_extended_properties(asf_header_t *header, uin
+ static int asf_header_parse_stream_bitrate_properties(asf_header_t *header_pub, uint8_t *buffer, int buffer_len) {
+   asf_header_internal_t *header = (asf_header_internal_t *)header_pub;
+   asf_reader_t reader;
+-  uint16_t bitrate_count;
++  uint16_t bitrate_count = 0;
+   int i;
+   int stream_id;
+ 
+@@ -513,7 +513,7 @@ static int asf_header_parse_metadata(asf_header_t *header_pub, uint8_t *buffer,
+ {
+   asf_header_internal_t *header = (asf_header_internal_t *)header_pub;
+   asf_reader_t reader;
+-  uint16_t i, records_count;
++  uint16_t i, records_count = 0;
+   iconv_t iconv_cd;
+ 
+   if (buffer_len < 2)
+@@ -631,7 +631,7 @@ static int asf_header_parse_content_description(asf_header_t *header_pub, uint8_
+   asf_header_internal_t *header = (asf_header_internal_t *)header_pub;
+   asf_reader_t reader;
+   asf_content_t *content;
+-  uint16_t title_length, author_length, copyright_length, description_length, rating_length;
++  uint16_t title_length = 0, author_length = 0, copyright_length = 0, description_length = 0, rating_length = 0;
+   iconv_t iconv_cd;
+ 
+   if (buffer_len < 10)
+diff --git a/src/post/deinterlace/pulldown.c b/src/post/deinterlace/pulldown.c
+index 2218855..6729fb0 100644
+--- a/src/post/deinterlace/pulldown.c
++++ b/src/post/deinterlace/pulldown.c
+@@ -302,7 +302,7 @@ int determine_pulldown_offset_history_new( int top_repeat, int bot_repeat, int t
+     int minbotpos = -1;
+     int min2botval = -1;
+     int min2botpos = -1;
+-    int predicted_pos = 0;
++    /*int predicted_pos = 0;*/
+ 
+     tophistory[ histpos ] = top_repeat;
+     bothistory[ histpos ] = bot_repeat;
+@@ -314,7 +314,7 @@ int determine_pulldown_offset_history_new( int top_repeat, int bot_repeat, int t
+     avgtop /= 5;
+     avgbot /= 5;
+ 
+-    for( i = 0; i < 5; i++ ) { if( (1<<i) == predicted ) { predicted_pos = i; break; } }
++    for( i = 0; i < 5; i++ ) { if( (1<<i) == predicted ) { /*predicted_pos = i;*/ break; } }
+ 
+     /*
+     printf(top: %8d bot: %8d\ttop-avg: %8d bot-avg: %8d (%d)\n", top_repeat, bot_repeat, top_repeat - avgtop, bot_repeat - avgbot, (5 + predicted_pos - reference) % 5 );
+@@ -410,7 +410,7 @@ int determine_pulldown_offset_short_history_new( int top_repeat, int bot_repeat,
+     int minbotpos = -1;
+     int min2botval = -1;
+     int min2botpos = -1;
+-    int predicted_pos = 0;
++    /*int predicted_pos = 0;*/
+ 
+     tophistory[ histpos ] = top_repeat;
+     bothistory[ histpos ] = bot_repeat;
+@@ -422,7 +422,7 @@ int determine_pulldown_offset_short_history_new( int top_repeat, int bot_repeat,
+     avgtop /= 3;
+     avgbot /= 3;
+ 
+-    for( i = 0; i < 5; i++ ) { if( (1<<i) == predicted ) { predicted_pos = i; break; } }
++    for( i = 0; i < 5; i++ ) { if( (1<<i) == predicted ) { /*predicted_pos = i;*/ break; } }
+ 
+     /*
+     printf( "top: %8d bot: %8d\ttop-avg: %8d bot-avg: %8d (%d)\n",
+diff --git a/src/post/deinterlace/speedtools.h b/src/post/deinterlace/speedtools.h
+index 94ab191..b4cddee 100644
+--- a/src/post/deinterlace/speedtools.h
++++ b/src/post/deinterlace/speedtools.h
+@@ -31,16 +31,21 @@
+         prefetchnta( pfetcha + 128 ); \
+         prefetchnta( pfetcha + 192 ); }
+ 
++static inline unsigned int read_pf(volatile unsigned int *addr)
++{
++    return *addr;
++}
++
+ #define READ_PREFETCH_2048(x) \
+-    { int *pfetcha = (int *) x; int pfetchtmp; \
+-        pfetchtmp = pfetcha[ 0 ] + pfetcha[ 16 ] + pfetcha[ 32 ] + pfetcha[ 48 ] + \
+-            pfetcha[ 64 ] + pfetcha[ 80 ] + pfetcha[ 96 ] + pfetcha[ 112 ] + \
+-            pfetcha[ 128 ] + pfetcha[ 144 ] + pfetcha[ 160 ] + pfetcha[ 176 ] + \
+-            pfetcha[ 192 ] + pfetcha[ 208 ] + pfetcha[ 224 ] + pfetcha[ 240 ]; \
+-        pfetcha += 256; \
+-        pfetchtmp = pfetcha[ 0 ] + pfetcha[ 16 ] + pfetcha[ 32 ] + pfetcha[ 48 ] + \
+-            pfetcha[ 64 ] + pfetcha[ 80 ] + pfetcha[ 96 ] + pfetcha[ 112 ] + \
+-            pfetcha[ 128 ] + pfetcha[ 144 ] + pfetcha[ 160 ] + pfetcha[ 176 ] + \
+-            pfetcha[ 192 ] + pfetcha[ 208 ] + pfetcha[ 224 ] + pfetcha[ 240 ]; }
++    { int * pfetcha = (int *) x; \
++        read_pf(pfetcha);       read_pf(pfetcha + 16);  read_pf(pfetcha + 32);  read_pf(pfetcha + 48); \
++        read_pf(pfetcha + 64);  read_pf(pfetcha + 80);  read_pf(pfetcha + 96);  read_pf(pfetcha + 112); \
++        read_pf(pfetcha + 128); read_pf(pfetcha + 144); read_pf(pfetcha + 160); read_pf(pfetcha + 176); \
++        read_pf(pfetcha + 192); read_pf(pfetcha + 208); read_pf(pfetcha + 224); read_pf(pfetcha + 240); \
++        pfetcha += 256;                                                 \
++        read_pf(pfetcha);       read_pf(pfetcha + 16);  read_pf(pfetcha + 32);  read_pf(pfetcha + 48); \
++        read_pf(pfetcha + 64);  read_pf(pfetcha + 80);  read_pf(pfetcha + 96);  read_pf(pfetcha + 112); \
++        read_pf(pfetcha + 128); read_pf(pfetcha + 144); read_pf(pfetcha + 160); read_pf(pfetcha + 176); \
++        read_pf(pfetcha + 192); read_pf(pfetcha + 208); read_pf(pfetcha + 224); read_pf(pfetcha + 240); }
+ 
+ #endif /* SPEEDTOOLS_H_INCLUDED */
+diff --git a/src/post/deinterlace/speedy.c b/src/post/deinterlace/speedy.c
+index 4c9d5c0..f3b4c6f 100644
+--- a/src/post/deinterlace/speedy.c
++++ b/src/post/deinterlace/speedy.c
+@@ -388,7 +388,7 @@ static unsigned int diff_factor_packed422_scanline_sse2_aligned( uint8_t *cur, u
+ #if defined(ARCH_X86) || defined(ARCH_X86_64)
+ static unsigned int diff_factor_packed422_scanline_sse2( uint8_t *cur, uint8_t *old, int width )
+ {
+-    if (0 == (((unsigned int)cur|(unsigned int)old) & 15)) {
++    if (0 == (((intptr_t)cur | (intptr_t)old) & 15)) {
+         return diff_factor_packed422_scanline_sse2_aligned(cur, old, width);
+     }
+ 
+@@ -865,7 +865,7 @@ static void vfilter_chroma_332_packed422_scanline_sse2( uint8_t *output, int wid
+ {
+     int i;
+ 
+-    if (0 == (((unsigned int)output|(unsigned int)m|(unsigned int)t|(unsigned int)b) & 15)) {
++    if (0 == (((intptr_t)output | (intptr_t)m | (intptr_t)t | (intptr_t)b) & 15)) {
+       vfilter_chroma_332_packed422_scanline_sse2_aligned(output, width, m, t, b);
+       return;
+     }
+diff --git a/src/post/deinterlace/xine_plugin.c b/src/post/deinterlace/xine_plugin.c
+index c63cac6..b6f0bab 100644
+--- a/src/post/deinterlace/xine_plugin.c
++++ b/src/post/deinterlace/xine_plugin.c
+@@ -688,7 +688,7 @@ static int deinterlace_draw(vo_frame_t *frame, xine_stream_t *stream)
+   vo_frame_t *orig_frame;
+   vo_frame_t *yuy2_frame;
+   int i, skip = 0, progressive = 0;
+-  int fields[2];
++  int fields[2] = {0, 0};
+   int framerate_mode;
+ 
+   orig_frame = frame;
+diff --git a/src/post/goom/config_param.c b/src/post/goom/config_param.c
+index c640283..db3f7c8 100644
+--- a/src/post/goom/config_param.c
++++ b/src/post/goom/config_param.c
+@@ -26,7 +26,7 @@ PluginParam goom_secure_param() {
+   return p;
+ }
+ 
+-PluginParam goom_secure_f_param(char *name) {
++PluginParam goom_secure_f_param(const char *name) {
+   PluginParam p = secure_param();
+   p.name = name;
+   p.type = PARAM_FLOATVAL;
+@@ -37,13 +37,13 @@ PluginParam goom_secure_f_param(char *name) {
+   return p;
+ }
+ 
+-PluginParam goom_secure_f_feedback(char *name) {
++PluginParam goom_secure_f_feedback(const char *name) {
+   PluginParam p = secure_f_param(name);
+   p.rw = 0;
+   return p;
+ }
+ 
+-PluginParam goom_secure_s_param(char *name) {
++PluginParam goom_secure_s_param(const char *name) {
+     PluginParam p = secure_param();
+     p.name = name;
+     p.type = PARAM_STRVAL;
+@@ -51,7 +51,7 @@ PluginParam goom_secure_s_param(char *name) {
+     return p;
+ }
+ 
+-PluginParam goom_secure_b_param(char *name, int value) {
++PluginParam goom_secure_b_param(const char *name, int value) {
+   PluginParam p = secure_param();
+   p.name = name;
+   p.type = PARAM_BOOLVAL;
+@@ -59,7 +59,7 @@ PluginParam goom_secure_b_param(char *name, int value) {
+   return p;
+ }
+ 
+-PluginParam goom_secure_i_param(char *name) {
++PluginParam goom_secure_i_param(const char *name) {
+   PluginParam p = secure_param();
+   p.name = name;
+   p.type = PARAM_INTVAL;
+@@ -70,7 +70,7 @@ PluginParam goom_secure_i_param(char *name) {
+   return p;
+ }
+ 
+-PluginParam goom_secure_i_feedback(char *name) {
++PluginParam goom_secure_i_feedback(const char *name) {
+   PluginParam p = secure_i_param(name);
+   p.rw = 0;
+   return p;
+@@ -78,7 +78,7 @@ PluginParam goom_secure_i_feedback(char *name) {
+ 
+ PluginParameters goom_plugin_parameters(const char *name, int nb) {
+   PluginParameters p;
+-  p.name = (char *)name;
++  p.name = name;
+   p.desc = "";
+   p.nbParams = nb;
+   p.params = (PluginParam**)malloc(nb*sizeof(PluginParam*));
+diff --git a/src/post/goom/convolve_fx.c b/src/post/goom/convolve_fx.c
+index ee36dfd..ada6191 100644
+--- a/src/post/goom/convolve_fx.c
++++ b/src/post/goom/convolve_fx.c
+@@ -64,7 +64,7 @@ static void compute_tables(VisualFX *_this, PluginInfo *info)
+   }
+ }
+ 
+-static void set_motif(ConvData *data, Motif motif)
++static void set_motif(ConvData *data, const Motif motif)
+ {
+   int i,j;
+   for (i=0;i<CONV_MOTIF_W;++i) for (j=0;j<CONV_MOTIF_W;++j)
+@@ -100,7 +100,7 @@ static void convolve_init(VisualFX *_this, PluginInfo *info) {
+   data->theta = 0;
+   data->ftheta = 0.0;
+   data->visibility = 1.0;
+-  set_motif(data, CONV_MOTIF2);
++  set_motif(data, CONV_MOTIF2.motif);
+   data->inverse_motif = 0;
+ 
+   _this->params = &data->params;
+@@ -296,9 +296,9 @@ static void convolve_apply(VisualFX *_this, Pixel *src, Pixel *dest, PluginInfo
+     switch (goom_irand(info->gRandom, 300))
+     {
+       case 1:
+-        set_motif(data, CONV_MOTIF1); data->inverse_motif = 1; break;
++        set_motif(data, CONV_MOTIF1.motif); data->inverse_motif = 1; break;
+       case 2:
+-        set_motif(data, CONV_MOTIF2); data->inverse_motif = 0; break;
++        set_motif(data, CONV_MOTIF2.motif); data->inverse_motif = 0; break;
+     }
+   }
+ 
+diff --git a/src/post/goom/goom_config_param.h b/src/post/goom/goom_config_param.h
+index 3c6838d..82bc5e3 100644
+--- a/src/post/goom/goom_config_param.h
++++ b/src/post/goom/goom_config_param.h
+@@ -44,8 +44,8 @@ struct BoolVal {
+ 
+ 
+ typedef struct _PARAM {
+-  char *name;
+-  char *desc;
++  const char *name;
++  const char *desc;
+   char rw;
+   ParamType type;
+   union {
+@@ -81,20 +81,20 @@ typedef struct _PARAM {
+ 
+ PluginParam goom_secure_param(void);
+ 
+-PluginParam goom_secure_f_param(char *name);
+-PluginParam goom_secure_i_param(char *name);
+-PluginParam goom_secure_b_param(char *name, int value);
+-PluginParam goom_secure_s_param(char *name);
++PluginParam goom_secure_f_param(const char *name);
++PluginParam goom_secure_i_param(const char *name);
++PluginParam goom_secure_b_param(const char *name, int value);
++PluginParam goom_secure_s_param(const char *name);
+ 
+-PluginParam goom_secure_f_feedback(char *name);
+-PluginParam goom_secure_i_feedback(char *name);
++PluginParam goom_secure_f_feedback(const char *name);
++PluginParam goom_secure_i_feedback(const char *name);
+ 
+ void goom_set_str_param_value(PluginParam *p, const char *str);
+ void goom_set_list_param_value(PluginParam *p, const char *str);
+     
+ typedef struct _PARAMETERS {
+-  char *name;
+-  char *desc;
++  const char *name;
++  const char *desc;
+   int nbParams;
+   PluginParam **params;
+ } PluginParameters;
+diff --git a/src/post/goom/goom_core.c b/src/post/goom/goom_core.c
+index 7d40c0f..4040aa4 100644
+--- a/src/post/goom/goom_core.c
++++ b/src/post/goom/goom_core.c
+@@ -823,6 +823,9 @@ choose_a_goom_line (PluginInfo *goomInfo, float *param1, float *param2, int *cou
+                 *amplitude = 1.5f;
+             }
+             break;
++        default:
++            *param1 = *param2 = 0;
++            break;
+     }
+     
+     *couleur = goom_irand(goomInfo->gRandom,6);
+diff --git a/src/post/goom/goom_fx.h b/src/post/goom/goom_fx.h
+index e672ece..5597b35 100644
+--- a/src/post/goom/goom_fx.h
++++ b/src/post/goom/goom_fx.h
+@@ -4,7 +4,7 @@
+ #include "goom_visual_fx.h"
+ #include "goom_plugin_info.h"
+ 
+-VisualFX convolve_create ();
++VisualFX convolve_create (void);
+ VisualFX flying_star_create (void);
+ 
+ void zoom_filter_c(int sizeX, int sizeY, Pixel *src, Pixel *dest, int *brutS, int *brutD, int buffratio, int precalCoef[16][16]);
+diff --git a/src/post/goom/goomsl.c b/src/post/goom/goomsl.c
+index e978506..be5ccba 100644
+--- a/src/post/goom/goomsl.c
++++ b/src/post/goom/goomsl.c
+@@ -133,7 +133,7 @@ void gsl_instr_set_namespace(Instruction *_this, GoomHash *ns)
+   _this->vnamespace[_this->cur_param-1] = ns;
+ } /* }}} */
+ 
+-void gsl_instr_add_param(Instruction *instr, char *param, int type)
++void gsl_instr_add_param(Instruction *instr, const char *param, int type)
+ { /* {{{ */
+   int len;
+   if (instr==NULL)
+@@ -915,6 +915,7 @@ static void calculate_labels(InstructionFlow *iflow)
+   }
+ } /* }}} */
+ 
++#ifdef USE_JITC_X86
+ static int powerOfTwo(int i)
+ {
+   int b;
+@@ -923,6 +924,7 @@ static int powerOfTwo(int i)
+       return b;
+   return 0;
+ }
++#endif
+ 
+ /* Cree un flow d'instruction optimise */
+ static void gsl_create_fast_iflow(void)
+@@ -1456,7 +1458,10 @@ static char *gsl_read_file(const char *fname)
+   fsize = ftell(f);
+   rewind(f);
+   buffer = (char*)malloc(fsize+512);
+-  fread(buffer,1,fsize,f);
++  if (fread(buffer,1,fsize,f) != fsize) {
++    fprintf(stderr, "ERROR: Could not read file %s\n", fname);
++    exit(1);
++  }
+   fclose(f);
+   buffer[fsize]=0;
+   return buffer;
+diff --git a/src/post/goom/goomsl_hash.c b/src/post/goom/goomsl_hash.c
+index af2ec44..07eed0f 100644
+--- a/src/post/goom/goomsl_hash.c
++++ b/src/post/goom/goomsl_hash.c
+@@ -58,7 +58,7 @@ static HashValue *entry_get(GoomHashEntry *entry, const char *key) {
+ 		return &(entry->value);
+ }
+ 
+-GoomHash *goom_hash_new() {
++GoomHash *goom_hash_new(void) {
+ 	GoomHash *_this = (GoomHash*)malloc(sizeof(GoomHash));
+ 	_this->root = NULL;
+   _this->number_of_puts = 0;
+diff --git a/src/post/goom/goomsl_hash.h b/src/post/goom/goomsl_hash.h
+index 26f4516..7c0ac7b 100644
+--- a/src/post/goom/goomsl_hash.h
++++ b/src/post/goom/goomsl_hash.h
+@@ -22,7 +22,7 @@ struct GOOM_HASH {
+   int number_of_puts;
+ };
+ 
+-GoomHash *goom_hash_new();
++GoomHash *goom_hash_new(void);
+ void      goom_hash_free(GoomHash *gh);
+ 
+ void goom_hash_put(GoomHash *gh, const char *key, HashValue value);
+diff --git a/src/post/goom/goomsl_lex.c b/src/post/goom/goomsl_lex.c
+index 988fb99..f2d0856 100644
+--- a/src/post/goom/goomsl_lex.c
++++ b/src/post/goom/goomsl_lex.c
+@@ -593,6 +593,8 @@ int yy_flex_debug = 0;
+ static yy_state_type *yy_state_buf=0, *yy_state_ptr=0;
+ static char *yy_full_match;
+ static int yy_lp;
++
++#if 0
+ #define REJECT \
+ { \
+ *yy_cp = (yy_hold_char); /* undo effects of setting up yytext */ \
+@@ -600,11 +602,12 @@ yy_cp = (yy_full_match); /* restore poss. backed-over text */ \
+ ++(yy_lp); \
+ goto find_rule; \
+ }
++#endif
+ 
+ static int yy_more_offset = 0;
+ static int yy_prev_more_offset = 0;
+-#define yymore() ((yy_more_offset) = yy_flex_strlen( yytext ))
+-#define YY_NEED_STRLEN
++//#define yymore() ((yy_more_offset) = yy_flex_strlen( yytext ))
++//#define YY_NEED_STRLEN
+ #define YY_MORE_ADJ 0
+ #define YY_RESTORE_YY_MORE_OFFSET \
+ 	{ \
+@@ -626,7 +629,7 @@ char *yytext_ptr;
+ #include "goomsl.h"
+ #include "goomsl_private.h"
+ #include "goomsl_yacc.h"
+-void yyerror(char *);
++void yyerror(const char *);
+ void yyparse(void);
+ 
+ GoomSL *currentGoomSL;
+@@ -861,7 +864,9 @@ yy_match:
+ yy_find_action:
+ 		yy_current_state = *--(yy_state_ptr);
+ 		(yy_lp) = yy_accept[yy_current_state];
++#if 0
+ find_rule: /* we branch to this label when backing up */
++#endif
+ 		for ( ; ; ) /* until we find what rule we matched */
+ 			{
+ 			if ( (yy_lp) && (yy_lp) < yy_accept[yy_current_state + 1] )
+@@ -1944,15 +1949,18 @@ static void yy_fatal_error (yyconst char* msg )
+ /** Get the current line number.
+  * 
+  */
++#if 0
+ int yyget_lineno  (void)
+ {
+         
+     return yylineno;
+ }
++#endif
+ 
+ /** Get the input stream.
+  * 
+  */
++#if 0
+ FILE *yyget_in  (void)
+ {
+         return yyin;
+@@ -1987,6 +1995,7 @@ char *yyget_text  (void)
+  * @param line_number
+  * 
+  */
++
+ void yyset_lineno (int  line_number )
+ {
+     
+@@ -1999,6 +2008,7 @@ void yyset_lineno (int  line_number )
+  * 
+  * @see yy_switch_to_buffer
+  */
++
+ void yyset_in (FILE *  in_str )
+ {
+         yyin = in_str ;
+@@ -2018,7 +2028,9 @@ void yyset_debug (int  bdebug )
+ {
+         yy_flex_debug = bdebug ;
+ }
++#endif
+ 
++#if 0
+ /* yylex_destroy is for both reentrant and non-reentrant scanners. */
+ int yylex_destroy  (void)
+ {
+@@ -2038,6 +2050,7 @@ int yylex_destroy  (void)
+ 
+     return 0;
+ }
++#endif
+ 
+ /*
+  * Internal utility routines.
+diff --git a/src/post/goom/goomsl_private.h b/src/post/goom/goomsl_private.h
+index 8be1515..4b6beab 100644
+--- a/src/post/goom/goomsl_private.h
++++ b/src/post/goom/goomsl_private.h
+@@ -196,7 +196,7 @@ struct _GoomSL { /* {{{ */
+ extern GoomSL *currentGoomSL;
+ 
+ Instruction *gsl_instr_init(GoomSL *parent, const char *name, int id, int nb_param, int line_number);
+-void gsl_instr_add_param(Instruction *_this, char *param, int type);
++void gsl_instr_add_param(Instruction *_this, const char *param, int type);
+ void gsl_instr_set_namespace(Instruction *_this, GoomHash *ns);
+ 
+ void gsl_declare_task(const char *name);
+diff --git a/src/post/goom/goomsl_yacc.c b/src/post/goom/goomsl_yacc.c
+index cfe80b2..a787dd5 100644
+--- a/src/post/goom/goomsl_yacc.c
++++ b/src/post/goom/goomsl_yacc.c
+@@ -115,7 +115,7 @@
+ /* #define VERBOSE  */
+ 
+     int yylex(void);
+-    void yyerror(char *);
++    void yyerror(const char *);
+     extern GoomSL *currentGoomSL;
+ 
+     static NodeType *nodeNew(const char *str, int type, int line_number);
+@@ -133,10 +133,10 @@
+     static NodeType *new_nop(const char *str);
+     static NodeType *new_op(const char *str, int type, int nbOp);
+ 
+-    static int  allocateLabel();
+-    static int  allocateTemp();
++    static int  allocateLabel(void);
++    static int  allocateTemp(void);
+     static void releaseTemp(int n);
+-    static void releaseAllTemps();
++    static void releaseAllTemps(void);
+ 
+     static int is_tmp_expr(NodeType *node) {
+         if (node->str) {
+@@ -173,7 +173,7 @@
+       gsl_instr_add_param(currentGoomSL->instr, name, TYPE_LABEL);
+     } /* }}} */
+ 
+-    static void GSL_PUT_JXXX(char *name, char *iname, int instr_id, int line_number)
++    static void GSL_PUT_JXXX(const char *name, const char *iname, int instr_id, int line_number)
+     { /* {{{ */
+ #ifdef VERBOSE
+       printf("%s %s\n", iname, name);
+@@ -181,11 +181,11 @@
+       currentGoomSL->instr = gsl_instr_init(currentGoomSL, iname, instr_id, 1, line_number);
+       gsl_instr_add_param(currentGoomSL->instr, name, TYPE_LABEL);
+     } /* }}} */
+-    static void GSL_PUT_JZERO(char *name,int line_number)
++    static void GSL_PUT_JZERO(const char *name,int line_number)
+     { /* {{{ */
+       GSL_PUT_JXXX(name,"jzero.i",INSTR_JZERO,line_number);
+     } /* }}} */
+-    static void GSL_PUT_JNZERO(char *name, int line_number)
++    static void GSL_PUT_JNZERO(const char *name, int line_number)
+     { /* {{{ */
+       GSL_PUT_JXXX(name,"jnzero.i",INSTR_JNZERO,line_number);
+     } /* }}} */
+@@ -199,7 +199,7 @@
+    }}
+ 
+     /* */
+-    void gsl_prepare_struct(GSL_Struct *s, int s_align, int i_align, int f_align)
++    static void gsl_prepare_struct(GSL_Struct *s, int s_align, int i_align, int f_align)
+     {
+       int i;
+       int consumed = 0;
+@@ -291,7 +291,7 @@
+     }
+ 
+     /* Returns the ID of a struct from its name */
+-    int gsl_get_struct_id(const char *name) /* {{{ */
++    static int gsl_get_struct_id(const char *name) /* {{{ */
+     {
+       HashValue *ret = goom_hash_get(currentGoomSL->structIDS, name);
+       if (ret != NULL) return ret->i;
+@@ -299,7 +299,7 @@
+     } /* }}} */
+ 
+     /* Adds the definition of a struct */
+-    void gsl_add_struct(const char *name, GSL_Struct *gsl_struct) /* {{{ */
++    static void gsl_add_struct(const char *name, GSL_Struct *gsl_struct) /* {{{ */
+     {
+       /* Prepare the struct: ie calculate internal storage format */
+       gsl_prepare_struct(gsl_struct, STRUCT_ALIGNMENT, STRUCT_ALIGNMENT, STRUCT_ALIGNMENT);
+@@ -320,7 +320,7 @@
+     } /* }}} */
+     
+     /* Creates a field for a struct */
+-    GSL_StructField *gsl_new_struct_field(const char *name, int type)
++    static GSL_StructField *gsl_new_struct_field(const char *name, int type)
+     {
+       GSL_StructField *field = (GSL_StructField*)malloc(sizeof(GSL_StructField));
+       strcpy(field->name, name);
+@@ -329,7 +329,7 @@
+     }
+     
+     /* Create as field for a struct which will be a struct itself */
+-    GSL_StructField *gsl_new_struct_field_struct(const char *name, const char *type)
++    static GSL_StructField *gsl_new_struct_field_struct(const char *name, const char *type)
+     {
+       GSL_StructField *field = gsl_new_struct_field(name, gsl_get_struct_id(type));
+       if (field->type < 0) {
+@@ -341,7 +341,7 @@
+     }
+ 
+     /* Creates a Struct */
+-    GSL_Struct *gsl_new_struct(GSL_StructField *field)
++    static GSL_Struct *gsl_new_struct(GSL_StructField *field)
+     {
+       GSL_Struct *s = (GSL_Struct*)malloc(sizeof(GSL_Struct));
+       s->nbFields = 1;
+@@ -350,7 +350,7 @@
+     }
+ 
+     /* Adds a field to a struct */
+-    void gsl_add_struct_field(GSL_Struct *s, GSL_StructField *field)
++    static void gsl_add_struct_field(GSL_Struct *s, GSL_StructField *field)
+     {
+       s->fields[s->nbFields++] = field;
+     }
+@@ -1097,16 +1097,16 @@
+     } /* }}} */
+ 
+ #if 1
+-    int allocateTemp() {
++    int allocateTemp(void) {
+       return allocateLabel();
+     }
+-    void releaseAllTemps() {}
++    void releaseAllTemps(void) {}
+     void releaseTemp(int n) {}
+ #else
+     static int nbTemp = 0;
+     static int *tempArray = 0;
+     static int tempArraySize = 0;
+-    int allocateTemp() { /* TODO: allocateITemp, allocateFTemp */
++    int allocateTemp(void) { /* TODO: allocateITemp, allocateFTemp */
+         int i = 0; /* {{{ */
+         if (tempArray == 0) {
+           tempArraySize = 256;
+@@ -1128,7 +1128,7 @@
+           i++;
+         }
+     } /* }}} */
+-    void releaseAllTemps() {
++    void releaseAllTemps(void) {
+       nbTemp = 0; /* {{{ */
+     } /* }}} */
+     void releaseTemp(int n) {
+@@ -1143,7 +1143,7 @@
+ #endif
+ 
+     static int lastLabel = 0;
+-    int allocateLabel() {
++    int allocateLabel(void) {
+         return ++lastLabel; /* {{{ */
+     } /* }}} */
+ 
+@@ -1281,7 +1281,7 @@
+     } /* }}} */
+ 
+ 
+-    void gsl_declare_global_variable(int type, char *name) {
++    static void gsl_declare_global_variable(int type, char *name) {
+       switch(type){
+         case -1: break;
+         case FLOAT_TK:gsl_float_decl_global(name);break;
+@@ -2986,7 +2986,7 @@ yyreturn:
+ 
+ 
+ 
+-void yyerror(char *str)
++void yyerror(const char *str)
+ { /* {{{ */
+     fprintf(stderr, "ERROR: Line %d, %s\n", currentGoomSL->num_lines, str);
+     currentGoomSL->compilationOK = 0;
+diff --git a/src/post/goom/ifs.c b/src/post/goom/ifs.c
+index 4c7ec75..1fddae4 100644
+--- a/src/post/goom/ifs.c
++++ b/src/post/goom/ifs.c
+@@ -481,7 +481,7 @@ static void ifs_update (PluginInfo *goomInfo, Pixel * data, Pixel * back, int in
+ 	static int cycle = 0;
+ 	int     cycle10;
+ 
+-	int     nbpt;
++	int     nbpt = 0;
+ 	IFSPoint *points;
+ 	int     i;
+ 
+diff --git a/src/post/goom/motif_goom1.h b/src/post/goom/motif_goom1.h
+index b4a9f3f..0a40a35 100644
+--- a/src/post/goom/motif_goom1.h
++++ b/src/post/goom/motif_goom1.h
+@@ -1,4 +1,7 @@
+-static Motif CONV_MOTIF1 = {
++static const union {
++    const char  u8[sizeof(Motif)];
++    const Motif motif;
++} CONV_MOTIF1 = {{
+ 	15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+ 	15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+ 	15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+@@ -1023,4 +1026,4 @@ static Motif CONV_MOTIF1 = {
+ 	15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+ 	15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+ 	15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15
+-	};
++        }};
+diff --git a/src/post/goom/motif_goom2.h b/src/post/goom/motif_goom2.h
+index 4bde2a3..2d507c9 100644
+--- a/src/post/goom/motif_goom2.h
++++ b/src/post/goom/motif_goom2.h
+@@ -1,4 +1,7 @@
+-static Motif CONV_MOTIF2 = {
++static const union {
++    const char  u8[sizeof(Motif)];
++    const Motif motif;
++} CONV_MOTIF2 = {{
+ 	15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+ 	15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+ 	15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+@@ -1023,4 +1026,4 @@ static Motif CONV_MOTIF2 = {
+ 	15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+ 	15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+ 	15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15
+-	};
++        }};
+diff --git a/src/post/planar/pp.c b/src/post/planar/pp.c
+index d8083e4..bdc1bb7 100644
+--- a/src/post/planar/pp.c
++++ b/src/post/planar/pp.c
+@@ -317,7 +317,7 @@ static int pp_draw(vo_frame_t *frame, xine_stream_t *stream)
+                                                       this->params.quality);
+ 
+     if(this->our_mode)
+-      pp_postprocess(yv12_frame->base, yv12_frame->pitches,
++      pp_postprocess((const uint8_t **)yv12_frame->base, yv12_frame->pitches,
+                      out_frame->base, out_frame->pitches,
+                      (frame->width+7)&(~7), frame->height,
+                      NULL, 0,
+diff --git a/src/video_dec/gdkpixbuf.c b/src/video_dec/gdkpixbuf.c
+index 3879e04..72d2a16 100644
+--- a/src/video_dec/gdkpixbuf.c
++++ b/src/video_dec/gdkpixbuf.c
+@@ -175,7 +175,7 @@ static void image_decode_data (video_decoder_t *this_gen, buf_element_t *buf) {
+       }
+     }
+     rgb2yuy2_free (rgb2yuy2);
+-    gdk_pixbuf_unref (pixbuf);
++    g_object_unref (pixbuf);
+ 
+     /*
+      * draw video frame
+@@ -255,7 +255,9 @@ static video_decoder_t *open_plugin (video_decoder_class_t *class_gen,
+ 
+   lprintf("opened\n");
+ 
++#if (GLIB_MAJOR_VERSION < 2 || (GLIB_MAJOR_VERSION == 2 && GLIB_MINOR_VERSION <= 35))
+   g_type_init ();
++#endif
+ 
+   this = (image_decoder_t *) calloc(1, sizeof(image_decoder_t));
+ 
+diff --git a/src/video_out/video_out_vaapi.c b/src/video_out/video_out_vaapi.c
+index 6aaf945..4b480b7 100644
+--- a/src/video_out/video_out_vaapi.c
++++ b/src/video_out/video_out_vaapi.c
+@@ -553,50 +553,54 @@ static int gl_visual_attr[] = {
+ 
+ static void delay_usec(unsigned int usec)
+ {
++    // FIXME: xine_usec_sleep?
+     int was_error;
+ 
+ #if defined(USE_NANOSLEEP)
+     struct timespec elapsed, tv;
++
++    elapsed.tv_sec = 0;
++    elapsed.tv_nsec = usec * 1000;
++
++    do {
++        errno = 0;
++        tv.tv_sec = elapsed.tv_sec;
++        tv.tv_nsec = elapsed.tv_nsec;
++        was_error = nanosleep(&tv, &elapsed);
++    } while (was_error && (errno == EINTR));
++
+ #elif defined(USE_COND_TIMEDWAIT)
+     // Use a local mutex and cv, so threads remain independent
+     pthread_cond_t delay_cond = PTHREAD_COND_INITIALIZER;
+     pthread_mutex_t delay_mutex = PTHREAD_MUTEX_INITIALIZER;
+     struct timespec elapsed;
+     uint64_t future;
+-#else
+-    struct timeval tv;
+-#ifndef SELECT_SETS_REMAINING
+-    uint64_t then, now, elapsed;
+-#endif
+-#endif
+ 
+-    // Set the timeout interval - Linux only needs to do this once
+-#if defined(SELECT_SETS_REMAINING)
+-    tv.tv_sec = 0;
+-    tv.tv_usec = usec;
+-#elif defined(USE_NANOSLEEP)
+-    elapsed.tv_sec = 0;
+-    elapsed.tv_nsec = usec * 1000;
+-#elif defined(USE_COND_TIMEDWAIT)
+     future = get_ticks_usec() + usec;
+     elapsed.tv_sec = future / 1000000;
+     elapsed.tv_nsec = (future % 1000000) * 1000;
+-#else
+-    then = get_ticks_usec();
+-#endif
+ 
+     do {
+         errno = 0;
+-#if defined(USE_NANOSLEEP)
+-        tv.tv_sec = elapsed.tv_sec;
+-        tv.tv_nsec = elapsed.tv_nsec;
+-        was_error = nanosleep(&tv, &elapsed);
+-#elif defined(USE_COND_TIMEDWAIT)
+         was_error = pthread_mutex_lock(&delay_mutex);
+         was_error = pthread_cond_timedwait(&delay_cond, &delay_mutex, &elapsed);
+         was_error = pthread_mutex_unlock(&delay_mutex);
+-#else
+-#ifndef SELECT_SETS_REMAINING
++    } while (was_error && (errno == EINTR));
++
++#else // using select()
++    struct timeval tv;
++# ifndef SELECT_SETS_REMAINING
++    uint64_t then, now, elapsed;
++
++    then = get_ticks_usec();
++# endif
++
++    tv.tv_sec = 0;
++    tv.tv_usec = usec;
++
++    do {
++        errno = 0;
++# ifndef SELECT_SETS_REMAINING
+         // Calculate the time interval left (in case of interrupt)
+         now = get_ticks_usec();
+         elapsed = now - then;
+@@ -606,10 +610,10 @@ static void delay_usec(unsigned int usec)
+         usec -= elapsed;
+         tv.tv_sec = 0;
+         tv.tv_usec = usec;
+-#endif
++# endif
+         was_error = select(0, NULL, NULL, NULL, &tv);
+-#endif
+     } while (was_error && (errno == EINTR));
++#endif
+ }
+ 
+ static void vaapi_x11_wait_event(Display *dpy, Window w, int type)
+diff --git a/src/video_out/video_out_vdpau.c b/src/video_out/video_out_vdpau.c
+index 19a8361..06476ef 100644
+--- a/src/video_out/video_out_vdpau.c
++++ b/src/video_out/video_out_vdpau.c
+@@ -1008,7 +1008,7 @@ static void vdpau_process_overlays (vdpau_driver_t *this)
+ 
+ static void vdpau_frame_proc_slice (vo_frame_t *vo_img, uint8_t **src)
+ {
+-  vdpau_frame_t  *frame = (vdpau_frame_t *) vo_img ;
++  /*vdpau_frame_t  *frame = (vdpau_frame_t *) vo_img;*/
+ 
+   vo_img->proc_called = 1;
+ }
+@@ -1539,8 +1539,8 @@ static void vdpau_update_noise( vdpau_driver_t *this_gen )
+     fprintf(stderr, "vo_vdpau: enable noise reduction.\n" );
+   }
+ 
+-  VdpVideoMixerAttribute attributes [] = { VDP_VIDEO_MIXER_ATTRIBUTE_NOISE_REDUCTION_LEVEL };
+-  void* attribute_values[] = { &value };
++  const VdpVideoMixerAttribute attributes [] = { VDP_VIDEO_MIXER_ATTRIBUTE_NOISE_REDUCTION_LEVEL };
++  const void * const attribute_values[] = { &value };
+   VdpStatus st = vdp_video_mixer_set_attribute_values( this_gen->video_mixer, 1, attributes, attribute_values );
+   if ( st != VDP_STATUS_OK )
+     fprintf(stderr, "vo_vdpau: error, can't set noise reduction level !!\n" );
+@@ -1568,8 +1568,8 @@ static void vdpau_update_sharpness( vdpau_driver_t *this_gen )
+     fprintf(stderr, "vo_vdpau: enable sharpness.\n" );
+   }
+ 
+-  VdpVideoMixerAttribute attributes [] = { VDP_VIDEO_MIXER_ATTRIBUTE_SHARPNESS_LEVEL };
+-  void* attribute_values[] = { &value };
++  const VdpVideoMixerAttribute attributes [] = { VDP_VIDEO_MIXER_ATTRIBUTE_SHARPNESS_LEVEL };
++  const void * const attribute_values[] = { &value };
+   VdpStatus st = vdp_video_mixer_set_attribute_values( this_gen->video_mixer, 1, attributes, attribute_values );
+   if ( st != VDP_STATUS_OK )
+     fprintf(stderr, "vo_vdpau: error, can't set sharpness level !!\n" );
+@@ -1651,8 +1651,8 @@ static void vdpau_update_csc_matrix (vdpau_driver_t *that, vdpau_frame_t *frame)
+     that->color_matrix = color_matrix;
+     that->update_csc = 0;
+ 
+-    VdpVideoMixerAttribute attributes [] = {VDP_VIDEO_MIXER_ATTRIBUTE_CSC_MATRIX};
+-    void* attribute_values[] = {&matrix};
++    const VdpVideoMixerAttribute attributes [] = {VDP_VIDEO_MIXER_ATTRIBUTE_CSC_MATRIX};
++    const void * const attribute_values[] = {&matrix};
+     st = vdp_video_mixer_set_attribute_values (that->video_mixer, 1, attributes, attribute_values);
+     if (st != VDP_STATUS_OK)
+       fprintf (stderr, "vo_vdpau: error, can't set csc matrix !!\n");
+@@ -1669,8 +1669,8 @@ static void vdpau_update_skip_chroma( vdpau_driver_t *this_gen )
+   if ( !this_gen->skip_chroma_is_supported )
+     return;
+ 
+-  VdpVideoMixerAttribute attributes [] = { VDP_VIDEO_MIXER_ATTRIBUTE_SKIP_CHROMA_DEINTERLACE };
+-  void* attribute_values[] = { &(this_gen->skip_chroma) };
++  const VdpVideoMixerAttribute attributes [] = { VDP_VIDEO_MIXER_ATTRIBUTE_SKIP_CHROMA_DEINTERLACE };
++  const void* attribute_values[] = { &(this_gen->skip_chroma) };
+   VdpStatus st = vdp_video_mixer_set_attribute_values( this_gen->video_mixer, 1, attributes, attribute_values );
+   if ( st != VDP_STATUS_OK )
+     fprintf(stderr, "vo_vdpau: error, can't set skip_chroma !!\n" );
+@@ -1695,8 +1695,8 @@ static void vdpau_update_background( vdpau_driver_t *this_gen )
+     return;
+ 
+   VdpVideoMixerAttribute attributes [] = { VDP_VIDEO_MIXER_ATTRIBUTE_BACKGROUND_COLOR };
+-  VdpColor bg = { (this_gen->background >> 16) / 255.f, ((this_gen->background >> 8) & 0xff) / 255.f, (this_gen->background & 0xff) / 255.f, 1 };
+-  void* attribute_values[] = { &bg };
++  const VdpColor bg = { (this_gen->background >> 16) / 255.f, ((this_gen->background >> 8) & 0xff) / 255.f, (this_gen->background & 0xff) / 255.f, 1 };
++  const void* attribute_values[] = { &bg };
+   VdpStatus st = vdp_video_mixer_set_attribute_values( this_gen->video_mixer, 1, attributes, attribute_values );
+   if ( st != VDP_STATUS_OK )
+     printf( "vo_vdpau: error, can't set background_color !!\n" );
+diff --git a/src/xine-engine/buffer_types.c b/src/xine-engine/buffer_types.c
+index 52777db..2048859 100644
+--- a/src/xine-engine/buffer_types.c
++++ b/src/xine-engine/buffer_types.c
+@@ -1205,6 +1205,13 @@ static const audio_db_t audio_db[] = {
+   BUF_AUDIO_AAC_LATM,
+   "AAC LATM"
+ },
++{
++  {
++    0
++  },
++  BUF_AUDIO_ADPCM_G726,
++  "ADPCM G.726"
++},
+ { { 0 }, 0, "last entry" }
+ };
+ 
+diff --git a/src/xine-utils/utils.c b/src/xine-utils/utils.c
+index 12641da..ed00892 100644
+--- a/src/xine-utils/utils.c
++++ b/src/xine-utils/utils.c
+@@ -508,7 +508,7 @@ void xine_usec_sleep(unsigned usec) {
+   struct timeval tm;
+   tm.tv_sec  = usec / 1000000;
+   tm.tv_usec = usec % 1000000;
+-  select(0, 0, 0, 0, &tm);
++  select(0, 0, 0, 0, &tm); /* FIXME: EINTR? */
+ #  endif
+ #endif
+ }

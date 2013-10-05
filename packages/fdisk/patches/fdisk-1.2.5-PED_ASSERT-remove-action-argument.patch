@@ -1,0 +1,343 @@
+diff -pruN fdisk-1.2.5/ChangeLog fdisk-1.2.5-PED_ASSERT-remove-action-argument/ChangeLog
+--- fdisk-1.2.5/ChangeLog	2011-02-19 15:21:44.000000000 +0100
++++ fdisk-1.2.5-PED_ASSERT-remove-action-argument/ChangeLog	2011-05-20 21:14:12.696064195 +0200
+@@ -1,3 +1,9 @@
++20/05/2011 Guido Trentalancia <guido@trentalancia.com>
++
++	* Remove PED_ASSERT action argument which has been removed
++		in parted 2.4
++	* Require parted >= 2.4
++
+ 21/07/2009 Christian <mail.kristian@yahoo.it>
+ 	
+ 	* Handle system where `ped_free' is not defined.
+diff -pruN fdisk-1.2.5/configure fdisk-1.2.5-PED_ASSERT-remove-action-argument/configure
+--- fdisk-1.2.5/configure	2011-05-15 18:55:47.000000000 +0200
++++ fdisk-1.2.5-PED_ASSERT-remove-action-argument/configure	2011-05-20 21:31:45.549256119 +0200
+@@ -7294,7 +7294,7 @@ if test "x$ac_cv_header_parted_parted_h"
+ 
+ else
+   as_fn_error "<parted/parted.h> not found; install GNU/Parted" "$LINENO" 5
+-		as_fn_error "*** libparted >= 1.7.0 not installed - please install first ***" "$LINENO" 5
++		as_fn_error "*** libparted >= 2.4 not installed - please install first ***" "$LINENO" 5
+ fi
+ 
+ 
+@@ -7343,7 +7343,7 @@ _ACEOF
+ 
+ else
+   as_fn_error "libuuid not found; install e2fsprogs available at http://web.mit.edu/tytso/www/linux/e2fsprogs.html" "$LINENO" 5
+-             as_fn_error "*** libparted >= 1.7.0 not installed - please install first ***" "$LINENO" 5
++             as_fn_error "*** libparted >= 2.4 not installed - please install first ***" "$LINENO" 5
+ fi
+ 
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for ped_device_read in -lparted" >&5
+@@ -7391,7 +7391,7 @@ _ACEOF
+ 
+ else
+   as_fn_error "libparted not found; install GNU/Parted available at http://www.gnu.org/software/parted/parted.html" "$LINENO" 5
+-             as_fn_error "*** libparted >= 1.7.0 not installed - please install first ***" "$LINENO" 5
++             as_fn_error "*** libparted >= 2.4 not installed - please install first ***" "$LINENO" 5
+ fi
+ 
+ 
+@@ -7445,7 +7445,7 @@ _ACEOF
+ 
+ else
+   as_fn_error "libshouldbeinlibc not found; install the Hurd development libraries." "$LINENO" 5
+-                as_fn_error "*** libparted >= 1.7.0 not installed - please install first ***" "$LINENO" 5
++                as_fn_error "*** libparted >= 2.4 not installed - please install first ***" "$LINENO" 5
+ fi
+ 
+ 
+@@ -7494,15 +7494,15 @@ _ACEOF
+ 
+ else
+   as_fn_error "libstore not found; install the Hurd development libraries." "$LINENO" 5
+-                as_fn_error "*** libparted >= 1.7.0 not installed - please install first ***" "$LINENO" 5
++                as_fn_error "*** libparted >= 2.4 not installed - please install first ***" "$LINENO" 5
+ fi
+ 
+ 		;;
+ 	*)	;;
+ esac
+ 
+-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for libparted - version >= 1.7.0" >&5
+-$as_echo_n "checking for libparted - version >= 1.7.0... " >&6; }
++{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for libparted - version >= 2.4" >&5
++$as_echo_n "checking for libparted - version >= 2.4... " >&6; }
+ 
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+@@ -7532,11 +7532,11 @@ fi
+ rm -f core conftest.err conftest.$ac_objext \
+     conftest$ac_exeext conftest.$ac_ext
+ 
+-parted_config_major_version=`echo 1.7.0 | \
++parted_config_major_version=`echo 2.4.0 | \
+     sed 's/\([0-9]*\).\([0-9]*\).\([0-9]*\)/\1/'`
+-parted_config_minor_version=`echo 1.7.0 | \
++parted_config_minor_version=`echo 2.4.0 | \
+     sed 's/\([0-9]*\).\([0-9]*\).\([0-9]*\)/\2/'`
+-parted_config_micro_version=`echo 1.7.0 | \
++parted_config_micro_version=`echo 2.4.0 | \
+     sed 's/\([0-9]*\).\([0-9]*\).\([0-9]*\)/\3/'`
+ 
+ if test "$cross_compiling" = yes; then :
+@@ -7593,7 +7593,7 @@ if ac_fn_c_try_run "$LINENO"; then :
+ $as_echo "yes" >&6; };
+ else
+   { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+-$as_echo "no" >&6; } ; as_fn_error "*** libparted >= 1.7.0 not installed - please install first ***" "$LINENO" 5
++$as_echo "no" >&6; } ; as_fn_error "*** libparted >= 2.4 not installed - please install first ***" "$LINENO" 5
+ fi
+ rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+   conftest.$ac_objext conftest.beam conftest.$ac_ext
+diff -pruN fdisk-1.2.5/configure.ac fdisk-1.2.5-PED_ASSERT-remove-action-argument/configure.ac
+--- fdisk-1.2.5/configure.ac	2011-05-15 18:51:44.000000000 +0200
++++ fdisk-1.2.5-PED_ASSERT-remove-action-argument/configure.ac	2011-05-20 21:35:43.638678375 +0200
+@@ -57,8 +57,8 @@ dnl libparted
+ ## better hack
+ XLIBS="$LIBS"
+ LIBS="$LIBS -ldl"
+-CHECK_LIBPARTED([1.7.0], ,
+-	AC_MSG_ERROR([*** libparted >= 1.7.0 not installed - please install first ***]))
++CHECK_LIBPARTED([2.4.0], ,
++	AC_MSG_ERROR([*** libparted >= 2.4 not installed - please install first ***]))
+ AC_SUBST(PARTED_LIBS)
+ 
+ LIBS="$LIBS -lparted"
+diff -pruN fdisk-1.2.5/fdisk.spec fdisk-1.2.5-PED_ASSERT-remove-action-argument/fdisk.spec
+--- fdisk-1.2.5/fdisk.spec	2011-02-19 15:21:44.000000000 +0100
++++ fdisk-1.2.5-PED_ASSERT-remove-action-argument/fdisk.spec	2011-05-20 21:07:19.915137446 +0200
+@@ -9,7 +9,7 @@ URL: http://svn.debian.org/wsvn/parted/u
+ 
+ Source: %name-%version.tar.gz
+ 
+-BuildRequires: libparted-devel >= 1.7.0 libe2fs-devel
++BuildRequires: libparted-devel >= 2.4 libe2fs-devel
+ 
+ %description
+ Clone of Linux fdisk with libparted as backend.
+diff -pruN fdisk-1.2.5/README fdisk-1.2.5-PED_ASSERT-remove-action-argument/README
+--- fdisk-1.2.5/README	2011-02-19 15:21:44.000000000 +0100
++++ fdisk-1.2.5-PED_ASSERT-remove-action-argument/README	2011-05-20 21:07:02.380555181 +0200
+@@ -12,7 +12,7 @@ Implementations targeted (please contrib
+     * mac-fdisk
+     * FreeBSD fdisk
+ 
+-You need libparted from GNU Parted >= 1.7.0 to compile and run the programs.
++You need libparted from GNU Parted >= 2.4 to compile and run the programs.
+ 
+ The GNU fdisk home page can be found at
+ 
+diff -pruN fdisk-1.2.5/src/common.c fdisk-1.2.5-PED_ASSERT-remove-action-argument/src/common.c
+--- fdisk-1.2.5/src/common.c	2011-03-20 09:55:54.000000000 +0100
++++ fdisk-1.2.5-PED_ASSERT-remove-action-argument/src/common.c	2011-05-20 21:09:57.828789170 +0200
+@@ -363,7 +363,7 @@ static PedSector metadata_tail_sectors(P
+ static int
+ snap (PedSector* sector, PedSector new_sector, PedGeometry* range)
+ {
+-        PED_ASSERT (ped_geometry_test_sector_inside (range, *sector), return 0);
++        PED_ASSERT (ped_geometry_test_sector_inside (range, *sector));
+         if (!ped_geometry_test_sector_inside (range, new_sector))
+                 return 0;
+         *sector = new_sector;
+@@ -399,7 +399,7 @@ prefer_snap (PedSector s, int what, PedG
+         PedSector new_sect;
+         EMoves move;
+ 
+-        PED_ASSERT (what == SECT_START || what == SECT_END, return 0);
++        PED_ASSERT (what == SECT_START || what == SECT_END);
+ 
+         if (!(*allow & (MOVE_UP | MOVE_DOWN))) {
+                 *dist = 0;
+@@ -431,7 +431,7 @@ prefer_snap (PedSector s, int what, PedG
+                                                  && what == SECT_END) )
+                         move = MOVE_UP;
+                 else
+-                        PED_ASSERT (0, return 0);
++                        PED_ASSERT (0);
+         } else if (*allow & MOVE_UP)
+                 move = MOVE_UP;
+         else if (*allow & MOVE_DOWN)
+@@ -493,7 +493,7 @@ snap_to_boundaries (PedGeometry* new_geo
+         end_want = prefer_snap (end, SECT_END, end_range, &end_allow,
+                                 end_part, &end_dist );
+ 
+-        PED_ASSERT (start_dist >= 0 && end_dist >= 0, return);
++        PED_ASSERT (start_dist >= 0 && end_dist >= 0);
+ 
+         /* If start and end are on adjacent partitions,    */
+         /* and if they would prefer crossing, then refrain */
+@@ -504,13 +504,13 @@ snap_to_boundaries (PedGeometry* new_geo
+                         start_want = prefer_snap (start, SECT_START,
+                                                   start_range, &start_allow,
+                                                   start_part, &start_dist );
+-                        PED_ASSERT (start_dist >= 0, return);
++                        PED_ASSERT (start_dist >= 0);
+                 } else {
+                         end_allow &= ~MOVE_DOWN;
+                         end_want = prefer_snap (end, SECT_END,
+                                                 end_range, &end_allow,
+                                                 end_part, &end_dist );
+-                        PED_ASSERT (end_dist >= 0, return);
++                        PED_ASSERT (end_dist >= 0);
+                 }
+         }
+ 
+@@ -521,10 +521,9 @@ snap_to_boundaries (PedGeometry* new_geo
+         end = ( end_want == MOVE_DOWN ? end_part->geom.start - 1 :
+               ( end_want == MOVE_UP ? end_part->geom.end :
+                 end ) );
+-        PED_ASSERT (ped_geometry_test_sector_inside(start_range,start), return);
+-        PED_ASSERT (ped_geometry_test_sector_inside (end_range, end), return);
+-        PED_ASSERT (start <= end,
+-                    PED_DEBUG (0, "start = %d, end = %d\n", start, end));
++        PED_ASSERT (ped_geometry_test_sector_inside(start_range,start));
++        PED_ASSERT (ped_geometry_test_sector_inside (end_range, end));
++        PED_ASSERT (start <= end);
+         ped_geometry_set (new_geom, start, end - start + 1);
+ }
+ 
+@@ -937,7 +936,7 @@ get_disk_type (const char* prompt, const
+ 		if (!uiquery->getdisktype(prompt, &disk_type)) return 0;
+ 	}
+ 	*value = disk_type;
+-	PED_ASSERT (*value != NULL, return 0);
++	PED_ASSERT (*value != NULL);
+ 	return 1;
+ }
+ 
+@@ -1619,10 +1618,10 @@ perform_mkpart (PedDisk* disk, PartPos *
+         /* create constraints */
+         user_constraint = constraint_from_start_end (disk->dev,
+                         pos->start.range, pos->end.range);
+-        PED_ASSERT (user_constraint != NULL, return 0);
++        PED_ASSERT (user_constraint != NULL);
+ 
+         dev_constraint = _get_aligned_device_constraint(disk->dev);
+-        PED_ASSERT (dev_constraint != NULL, return 0);
++        PED_ASSERT (dev_constraint != NULL);
+ 
+         final_constraint = ped_constraint_intersect (user_constraint,
+                         dev_constraint);
+@@ -1711,7 +1710,7 @@ perform_mkpart (PedDisk* disk, PartPos *
+ 
+         /* set minor attributes */
+         if (part_name)
+-                PED_ASSERT (ped_partition_set_name (part, part_name), return 0);
++                PED_ASSERT (ped_partition_set_name (part, part_name));
+         if (!ped_partition_set_system (part, fs_type))
+                 goto error;
+         if (ped_partition_is_flag_available (part, PED_PARTITION_LBA))
+diff -pruN fdisk-1.2.5/src/fdisk.c fdisk-1.2.5-PED_ASSERT-remove-action-argument/src/fdisk.c
+--- fdisk-1.2.5/src/fdisk.c	2011-04-02 22:16:36.000000000 +0200
++++ fdisk-1.2.5-PED_ASSERT-remove-action-argument/src/fdisk.c	2011-05-20 21:17:33.264828823 +0200
+@@ -341,7 +341,7 @@ _disk_warn_busy (PedDisk* disk)
+ static int
+ snap (PedSector* sector, PedSector new_sector, PedGeometry* range)
+ {
+-	PED_ASSERT (ped_geometry_test_sector_inside (range, *sector), return 0);
++	PED_ASSERT (ped_geometry_test_sector_inside (range, *sector));
+ 	if (!ped_geometry_test_sector_inside (range, new_sector))
+ 		return 0;
+ 	*sector = new_sector;
+@@ -377,7 +377,7 @@ prefer_snap (PedSector s, int what, PedG
+ 	PedSector new_sect;
+ 	EMoves move;
+ 
+-	PED_ASSERT (what == SECT_START || what == SECT_END, return 0);
++	PED_ASSERT (what == SECT_START || what == SECT_END);
+ 
+ 	if (!(*allow & (MOVE_UP | MOVE_DOWN))) {
+ 		*dist = 0;
+@@ -409,7 +409,7 @@ prefer_snap (PedSector s, int what, PedG
+ 						 && what == SECT_END) )
+ 			move = MOVE_UP;
+ 		else
+-			PED_ASSERT (0, return 0);
++			PED_ASSERT (0);
+ 	}
+ 
+ 	*dist = ( move == MOVE_DOWN ? down_dist :
+@@ -468,7 +468,7 @@ snap_to_boundaries (PedGeometry* new_geo
+ 	end_want = prefer_snap (end, SECT_END, end_range, &end_allow,
+ 				end_part, &end_dist );
+ 
+-	PED_ASSERT (start_dist >= 0 && end_dist >= 0, return);
++	PED_ASSERT (start_dist >= 0 && end_dist >= 0);
+ 
+ 	/* If start and end are on adjacent partitions,    */
+ 	/* and if they would prefer crossing, then refrain */
+@@ -479,13 +479,13 @@ snap_to_boundaries (PedGeometry* new_geo
+ 			start_want = prefer_snap (start, SECT_START,
+ 						  start_range, &start_allow,
+ 						  start_part, &start_dist );
+-			PED_ASSERT (start_dist >= 0, return);
++			PED_ASSERT (start_dist >= 0);
+ 		} else {
+ 			end_allow &= ~MOVE_DOWN;
+ 			end_want = prefer_snap (end, SECT_END,
+ 						end_range, &end_allow,
+ 						end_part, &end_dist );
+-			PED_ASSERT (end_dist >= 0, return);
++			PED_ASSERT (end_dist >= 0);
+ 		}
+ 	}
+ 
+@@ -496,9 +496,9 @@ snap_to_boundaries (PedGeometry* new_geo
+ 	end = ( end_want == MOVE_DOWN ? end_part->geom.start - 1 :
+ 	      ( end_want == MOVE_UP ? end_part->geom.end :
+ 	        end ) );
+-	PED_ASSERT (ped_geometry_test_sector_inside(start_range,start), return);
+-	PED_ASSERT (ped_geometry_test_sector_inside (end_range, end), return);
+-	PED_ASSERT (start <= end, return);
++	PED_ASSERT (ped_geometry_test_sector_inside(start_range,start));
++	PED_ASSERT (ped_geometry_test_sector_inside (end_range, end));
++	PED_ASSERT (start <= end);
+ 	ped_geometry_set (new_geom, start, end - start + 1);
+ }
+ 
+diff -pruN fdisk-1.2.5/src/strlist.c fdisk-1.2.5-PED_ASSERT-remove-action-argument/src/strlist.c
+--- fdisk-1.2.5/src/strlist.c	2011-02-19 15:21:45.000000000 +0100
++++ fdisk-1.2.5-PED_ASSERT-remove-action-argument/src/strlist.c	2011-05-20 21:16:43.356608945 +0200
+@@ -472,7 +472,7 @@ str_list_print_wrap (const StrList* list
+ 	int		search_result;
+ 	int		line_break;
+ 
+-	PED_ASSERT (line_length - indent > 10, return);
++	PED_ASSERT (line_length - indent > 10);
+ 
+ 	spaces = get_spaces (indent);
+ 	line_left = line_length - offset;
+diff -pruN fdisk-1.2.5/src/ui.c fdisk-1.2.5-PED_ASSERT-remove-action-argument/src/ui.c
+--- fdisk-1.2.5/src/ui.c	2011-02-19 15:55:39.000000000 +0100
++++ fdisk-1.2.5-PED_ASSERT-remove-action-argument/src/ui.c	2011-05-20 21:15:37.140697567 +0200
+@@ -413,7 +413,7 @@ _construct_prompt (const char* head, con
+   char*	prompt = strdup (head);
+ 
+   if (def && possibilities)
+-    PED_ASSERT (str_list_match_any (possibilities, def), return NULL);
++    PED_ASSERT (str_list_match_any (possibilities, def));
+ 
+   if (possibilities &&
+       prompt_possibilities &&
+@@ -1074,7 +1074,7 @@ fdisk_command_line_pop_word ()
+ 	char*		result;
+ 	StrList*	next;
+ 
+-	PED_ASSERT (command_line != NULL, return NULL);
++	PED_ASSERT (command_line != NULL);
+ 
+ 	result = str_list_convert_node (command_line);
+ 	next = command_line->next;
+@@ -1176,7 +1176,7 @@ fdisk_command_line_get_disk_type (const
+ 	}
+ 	*value = ped_disk_type_get (disk_type_name);
+ 	free (disk_type_name);
+-	PED_ASSERT (*value != NULL, return 0);
++	PED_ASSERT (*value != NULL);
+ 	return 1;
+ }
+ #endif

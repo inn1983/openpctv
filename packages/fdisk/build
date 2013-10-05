@@ -1,0 +1,13 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+
+do_configure
+
+sed -i -e 's#-Wall##g' \
+	-e 's#-D_FILE_OFFSET_BITS=no##g'  src/Makefile
+make
+make_install
+

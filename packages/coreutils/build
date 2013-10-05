@@ -1,0 +1,15 @@
+#!/bin/sh
+
+. config/options
+get_meta $1
+
+cd $PKG_BUILD_DIR
+
+sed -i -e "/doc\/local.mk/d" \
+	-e "/man\/local.mk/d" \
+	-e "/tests\/local.mk/d" Makefile.am
+do_autoconf
+do_configure
+
+make
+make_install

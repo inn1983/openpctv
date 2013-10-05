@@ -1,0 +1,35 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+
+mkdir -p $INSTALL/usr/bin
+cp os-prober $INSTALL/usr/bin
+cp linux-boot-prober $INSTALL/usr/bin
+chmod 755 $INSTALL/usr/bin/os-prober $INSTALL/usr/bin/linux-boot-prober
+
+mkdir -p $INSTALL/usr/lib/linux-boot-probes/mounted
+cp linux-boot-probes/common/* $INSTALL/usr/lib/linux-boot-probes
+cp linux-boot-probes/mounted/common/* $INSTALL/usr/lib/linux-boot-probes/mounted
+cp linux-boot-probes/mounted/x86/* $INSTALL/usr/lib/linux-boot-probes/mounted
+
+mkdir -p $INSTALL/usr/lib/os-probes/init
+mkdir -p $INSTALL/usr/lib/os-probes/mounted
+cp os-probes/common/* $INSTALL/usr/lib/os-probes
+cp os-probes/init/common/* $INSTALL/usr/lib/os-probes/init
+cp os-probes/mounted/common/* $INSTALL/usr/lib/os-probes/mounted
+cp os-probes/mounted/x86/[0-9]* $INSTALL/usr/lib/os-probes/mounted
+
+chmod -R 755 $INSTALL/usr/lib/linux-boot-probes
+chmod -R 755 $INSTALL/usr/lib/os-probes
+
+mkdir -p $INSTALL/usr/lib/os-prober
+cp newns $INSTALL/usr/lib/os-prober
+chmod 755 $INSTALL/usr/lib/os-prober/newns
+
+mkdir -p $INSTALL/usr/share/os-prober
+cp common.sh $INSTALL/usr/share/os-prober
+chmod 755 $INSTALL/usr/share/os-prober/common.sh
+
+mkdir -p $INSTALL/var/lib/os-prober

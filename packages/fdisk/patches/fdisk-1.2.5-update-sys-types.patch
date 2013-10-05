@@ -1,0 +1,30 @@
+diff -pruN fdisk-1.2.5/src/sys_types.h fdisk-1.2.5-update-sys-types/src/sys_types.h
+--- fdisk-1.2.5/src/sys_types.h	2011-02-19 15:21:45.000000000 +0100
++++ fdisk-1.2.5-update-sys-types/src/sys_types.h	2011-05-20 22:29:08.227004936 +0200
+@@ -65,7 +65,8 @@ SysType msdos_systypes[] = {
+ 	{ 0x1b, N_("Hidd FAT32") }, 
+ 	{ 0x1c, N_("Hidd FAT32 LBA") }, 
+ 	{ 0x1e, N_("Hidd FAT16 LBA") }, 
+-	{ 0x24, N_("NEC DOS") }, 
++	{ 0x24, N_("NEC DOS") },
++	{ 0x27, N_("Hidden NTFS WinRE") },
+ 	{ 0x39, N_("Plan 9") }, 
+ 	{ 0x3c, N_("PMagic recovery") }, 
+ 	{ 0x40, N_("Venix 80286") }, 
+@@ -109,6 +110,7 @@ SysType msdos_systypes[] = {
+ 	{ 0xa8, N_("Darwin UFS") }, 
+ 	{ 0xa9, N_("NetBSD") }, 
+ 	{ 0xab, N_("Darwin boot") }, 
++	{ 0xaf, N_("HFS / HFS+") },
+ 	{ 0xb7, N_("BSDI fs") }, 
+ 	{ 0xb8, N_("BSDI swap") }, 
+ 	/* Beware of the hidden wizard */
+@@ -137,6 +139,8 @@ SysType msdos_systypes[] = {
+ 	{ 0xf2, N_("DOS secondary") }, 
+ 	/* Are these guys trying for a Guinness record or something? */
+ 	{ 0xf4, N_("SpeedStor") },  
++	{ 0xfb, N_("VMware VMFS") },
++	{ 0xfc, N_("VMware VMKCORE") },
+ 	{ 0xfd, N_("Lnx RAID auto") }, 
+ 	{ 0xfe, N_("LANstep") }, 
+ 	{ 0xff, N_("XENIX BBT") },

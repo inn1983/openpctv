@@ -1,0 +1,10 @@
+PKG_NAME=os-prober
+PKG_VERSION=1.63
+PKG_URL="http://ftp.de.debian.org/debian/pool/main/o/os-prober/os-prober_1.63.tar.gz"
+PKG_REV=1
+PKG_DEPENDS="$TARGET_LIBC"
+PKG_BUILD_DEPENDS="toolchain"
+PKG_PRIORITY=optional
+PKG_SECTION=utils
+PKG_SHORTDESC="Scan all disks available on the system for other operating systems"
+PKG_LONGDESC="All one has to do is Depend on os-prober, and then run the os-prober command. This command takes no arguments: it will scan all disks available on the system for other operating systems, and output a list of strings"

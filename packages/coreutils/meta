@@ -1,0 +1,10 @@
+PKG_NAME=coreutils
+PKG_VERSION=8.21
+PKG_REV=3
+PKG_URL="http://ftp.gnu.org/gnu/coreutils/coreutils-${PKG_VERSION}.tar.xz"
+PKG_BUILD_DEPENDS="toolchain"
+PKG_RUN_DEPENDS="$TARGET_LIBC"
+PKG_PRIORITY=standard
+PKG_SECTION=system
+PKG_SHORTDESC="The GNU Core Utilities are the basic file."
+PKG_LONGDESC="The GNU Core Utilities are the basic file, shell and text manipulation utilities of the GNU operating system. These are the core utilities which are expected to exist on every operating system."
