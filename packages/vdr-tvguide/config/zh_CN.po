@@ -7,119 +7,119 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vdr-tvguide 1.1.0\n"
 "Report-Msgid-Bugs-To: <see README>\n"
-"POT-Creation-Date: 2013-09-12 10:59+0800\n"
-"PO-Revision-Date: 2013-09-12 10:59+0800\n"
-"Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
-"Language-Team: OpenPCTV\n"
-"Language: zh_CN\n"
+"POT-Creation-Date: 2013-09-21 00:41+0800\n"
+"PO-Revision-Date: 2013-09-29 21:29+0800\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
 
 msgid "Main Program"
 msgstr "主程序"
 
 msgid "RERUNS OF THIS SHOW"
-msgstr "返回这次展示"
+msgstr "重播"
 
 msgid "Actors"
 msgstr "演员"
 
 msgid "No EPG Information available"
-msgstr "没有可用的EPG信息"
+msgstr "无可用EPG信息"
 
 msgid "Search & Rec"
-msgstr "搜索并录像"
+msgstr "搜索和录像"
 
 msgid "Channels back"
-msgstr "频道返回"
+msgstr "上一个频道"
 
 msgid "Channels forward"
-msgstr "频道前进"
+msgstr "下一个频道"
 
 msgid "Switch to Channel"
-msgstr "切换到频道"
+msgstr "切换频道"
 
 msgid "Detailed EPG"
-msgstr "详细的EPG"
+msgstr "EPG列表"
 
 msgid "Transp."
 msgstr ""
 
 msgid "Timer Conflict"
-msgstr "定时器冲突"
+msgstr "计时器冲突"
 
 msgid "all Channels"
-msgstr "所有的频道"
+msgstr "全部频道"
 
 msgid "unknown channel"
-msgstr "未知的频道"
+msgstr "未知频道"
 
 msgid "Duration"
-msgstr "持续时间"
+msgstr "继续"
 
 msgid "min"
 msgstr "分钟"
 
 msgid "recorded at"
-msgstr "录像在"
+msgstr "记录到"
 
 msgid "from"
 msgstr "从"
 
 msgid "Instant Record"
-msgstr "立即录像"
+msgstr "即时录像"
 
 msgid "Delete Timer"
-msgstr "删除定时器"
+msgstr "删除计时器"
 
 msgid "Edit Timer"
-msgstr "编辑定时器"
+msgstr "编辑计时器"
 
 msgid "Create Series Timer"
-msgstr "创建连续的定时器"
+msgstr "创建定时器"
 
 msgid "Create Search Timer"
-msgstr "创建搜索定时器"
+msgstr "创建定时器"
 
 msgid "Create Switch Timer"
-msgstr "建立切换定时器"
+msgstr "创建定时器"
 
 msgid "Delete Switch Timer"
-msgstr "删除定时器切换"
+msgstr "删除定时器"
 
 msgid "Search"
 msgstr "搜索"
 
 msgid "Search in Recordings"
-msgstr "在录像中搜索"
+msgstr "搜索录像"
 
 msgid "Check for Timer Conflicts"
-msgstr "检查定时器冲突"
+msgstr "检查计时器冲突"
 
 msgid "Set Folder for"
-msgstr "设置文件夹为"
+msgstr "设置文档"
 
 msgid "root video folder"
-msgstr ""
+msgstr "最高权限视频文档"
 
 msgid "Timer created"
-msgstr "定时器已创建"
+msgstr "创建计时器"
 
 msgid "Timer NOT created"
-msgstr "定时器未创建"
+msgstr "计时器未创建"
 
 msgid "OK"
-msgstr ""
+msgstr "好"
 
 msgid "Timer deleted"
-msgstr "定时器被删除"
+msgstr "删除计时器"
 
 msgid "Timer"
-msgstr "定时器"
+msgstr "计时器"
 
 msgid "still recording - really delete?"
-msgstr "仍然录像中 - 真的删除吗？"
+msgstr "录像中，确认删除？"
 
 msgid "Yes"
 msgstr "是"
@@ -131,46 +131,46 @@ msgid "One"
 msgstr "一"
 
 msgid "detected"
-msgstr "检测到的"
+msgstr "发现"
 
 msgid "Timer Conflicts"
-msgstr "定时器冲突"
+msgstr "计时器冲突"
 
 msgid "Show conflict"
 msgstr "显示冲突"
 
 msgid "timers involved"
-msgstr "相关的定时器"
+msgstr "相关计时器"
 
 msgid "Ignore Conflicts"
 msgstr "忽略冲突"
 
 msgid "Ignore Conflict"
-msgstr "忽略冲突"
+msgstr "忽略的冲突"
 
 msgid "No Timer Conflicts found"
-msgstr "没找到冲突的定时器"
+msgstr "未发现计时器冲突"
 
 msgid "Close"
 msgstr "关闭"
 
 msgid "Timer Active"
-msgstr "激活定时器"
+msgstr "激活计时器"
 
 msgid "Priority"
 msgstr "优先"
 
 msgid "Lifetime"
-msgstr "使用期限"
+msgstr "一生"
 
 msgid "Day"
 msgstr "日"
 
 msgid "Timer start time"
-msgstr "定时器开始时间"
+msgstr "开始时间"
 
 msgid "Timer stop time"
-msgstr "定时器结束时间"
+msgstr "停止时间"
 
 msgid "Save"
 msgstr "保存"
@@ -179,46 +179,46 @@ msgid "Cancel"
 msgstr "取消"
 
 msgid "Create Series Timer based on"
-msgstr "建立定时器器序列基于"
+msgstr "依据X创建系列计时器"
 
 msgid "Channel"
 msgstr "频道"
 
 msgid "Series Timer start time"
-msgstr "定时器序列开始时间"
+msgstr "开始时间"
 
 msgid "Series Timer stop time"
-msgstr "定时器序列结束时间"
+msgstr "停止时间"
 
 msgid "Days to record"
 msgstr "录像日期"
 
 msgid "Day to start"
-msgstr "开始日期"
+msgstr "开始日"
 
 msgid "Create Timer"
-msgstr "建立定时器"
+msgstr "创建计时器"
 
 msgid "Series Timer created"
-msgstr "定时器序列建立"
+msgstr "创建系列计时器"
 
 msgid "Start"
 msgstr "开始"
 
 msgid "Stop"
-msgstr "结束"
+msgstr "停止"
 
 msgid "Configure Search Timer based on"
-msgstr "配置搜索定时器基于"
+msgstr "依据X配置搜索计时器"
 
 msgid "Search Expression:"
-msgstr "搜索关键词:"
+msgstr "搜索表达式"
 
 msgid "Continue"
 msgstr "继续"
 
 msgid "Configure Search Timer for Search String"
-msgstr "为搜索字串配置搜索的定时器"
+msgstr "给计时器配置搜索字符串"
 
 msgid "Manually configure Options"
 msgstr "手动配置选项"
@@ -227,34 +227,34 @@ msgid "Use Template"
 msgstr "使用模板"
 
 msgid "Creating Search Timer"
-msgstr "建立搜索定时器"
+msgstr "创建计时器"
 
 msgid "Search Term"
-msgstr "搜索条件"
+msgstr "检索项"
 
 msgid "Using Template"
 msgstr "使用模板"
 
 msgid "Display Results for Search Timer"
-msgstr "显示定时器搜索的结果"
+msgstr "显示搜索计时器结果"
 
 msgid "Use other Template"
-msgstr "使用其它模板"
+msgstr "使用其他模板"
 
 msgid "Configure Search Timer Options for Search String"
-msgstr "为搜索字串配置定时器搜索选项"
+msgstr "给计时器配置搜索字符串"
 
 msgid "whole term must appear"
-msgstr ""
+msgstr "所有选项必选"
 
 msgid "all terms must exist"
-msgstr "所有条件必须存在"
+msgstr "所有选项必选"
 
 msgid "one term must exist"
-msgstr "一个条件必须存在"
+msgstr "一个选项必选"
 
 msgid "exact match"
-msgstr "一模一样"
+msgstr "精确匹配"
 
 msgid "regular expression"
 msgstr "正则表达式"
@@ -266,10 +266,10 @@ msgid "Use Title"
 msgstr "使用标题"
 
 msgid "Use Subtitle"
-msgstr "使用副标题"
+msgstr "使用字幕"
 
 msgid "Use Description"
-msgstr "使用描述"
+msgstr "使用说明书"
 
 msgid "Limit Channels"
 msgstr "限制频道"
@@ -290,82 +290,82 @@ msgid "Start before"
 msgstr "开始之前"
 
 msgid "search results for Search Timer"
-msgstr "为定时器搜索提供搜索结果"
+msgstr "计时器搜索结果"
 
 msgid "search result for Search Timer"
-msgstr "为定时器搜索提供搜索结果"
+msgstr "搜索结果"
 
 msgid "Nothing found for Search String"
-msgstr "没找到搜索的字串"
+msgstr "未发现搜索字符串"
 
 msgid "Search Timer sucessfully created."
-msgstr "定时器搜索成功创建"
+msgstr "成功创建"
 
 msgid "Search Timer update initialised"
-msgstr "定时器搜索升级初始化"
+msgstr "初始化更新"
 
 msgid "Search Timer NOT sucessfully created"
-msgstr "定时器搜索未成功创建"
+msgstr "未成功创建"
 
 msgid "Configure Options for Switchtimer"
-msgstr "为切换定时器配置选项"
+msgstr "配置选项"
 
 msgid "Minutes before switching"
-msgstr "开始切换的分钟数"
+msgstr "切换前时间"
 
 msgid "switch"
-msgstr "切换"
+msgstr "开关"
 
 msgid "announce only"
-msgstr ""
+msgstr "匿名模式"
 
 msgid "ask for switch"
-msgstr "询问切换"
+msgstr "要求开关"
 
 msgid "Switch Mode"
-msgstr "切换模式"
+msgstr "开关模式"
 
 msgid "Create"
 msgstr "创建"
 
 msgid "Switch Timer sucessfully created"
-msgstr "切换定时已成功创建"
+msgstr "计时器创建成功"
 
 msgid "Switch Timer NOT sucessfully created"
-msgstr ""
+msgstr "计时器未创建成功"
 
 msgid "Switch Timer deleted"
-msgstr ""
+msgstr "计时器已删除"
 
 msgid "Show Search Options"
-msgstr ""
+msgstr "显示搜索选项"
 
 msgid "Perform Search"
-msgstr ""
+msgstr "执行搜索"
 
 msgid "Channel to Search"
-msgstr ""
+msgstr "搜寻频道"
 
 msgid "Search in title"
-msgstr ""
+msgstr "在标题里搜索"
 
 msgid "Search in Subtitle"
-msgstr ""
+msgstr "在字幕里搜索"
 
 msgid "Search in Description"
-msgstr ""
+msgstr "在描述中搜索"
 
 msgid "search results for"
-msgstr ""
+msgstr "搜寻结果"
 
 msgid "search result for"
-msgstr ""
+msgstr "搜寻结果"
 
 msgid "Adapt Search"
-msgstr ""
+msgstr "适应搜索"
 
 msgid "Found"
-msgstr "找到"
+msgstr "创建"
 
 msgid "recording"
 msgstr "录像"
@@ -377,64 +377,64 @@ msgid "for"
 msgstr "为"
 
 msgid "No recordings found for"
-msgstr ""
+msgstr "没有发现录像"
 
 msgid "General Settings"
-msgstr "通用设置"
+msgstr "整体设置"
 
 msgid "Screen Presentation"
-msgstr ""
+msgstr "屏幕描述"
 
 msgid "Fonts and Fontsizes"
-msgstr ""
+msgstr "字体和字体大小"
 
 msgid "x channels back / forward"
-msgstr ""
+msgstr "X频道后退/前进"
 
 msgid "previous / next channel group"
-msgstr ""
+msgstr "前一个/下一个频道组"
 
 msgid "Blue: Channel Switch, Ok: Detailed EPG"
-msgstr ""
+msgstr "好：详细的EPG，蓝色：切换频道"
 
 msgid "Blue: Detailed EPG, Ok: Channel Switch"
-msgstr ""
+msgstr "蓝色：详细的EPG，好：切换频道"
 
 msgid "never"
-msgstr "从不"
+msgstr "绝不"
 
 msgid "if exists"
 msgstr "如果存在"
 
 msgid "always"
-msgstr "总是"
+msgstr "一直"
 
 msgid "Show Main Menu Entry"
 msgstr "显示主菜单入口"
 
 msgid "Replace VDR Schedules Menu"
-msgstr "替换VDR计划中菜单"
+msgstr "替换VDR时间菜单"
 
 msgid "Theme"
 msgstr "主题"
 
 msgid "Rounded Corners"
-msgstr ""
+msgstr "圆角"
 
 msgid "Channel Jump Mode (Keys Green / Yellow)"
-msgstr "频道跳跃模式（绿键/黄键）"
+msgstr "频道跳跃模式(绿/黄键)"
 
 msgid "Keys Blue and OK"
-msgstr "按蓝键OK"
+msgstr "按蓝色键和OK键"
 
 msgid "Close TVGuide after channel switch"
-msgstr "在频道切换后关闭TVGuide"
+msgstr "切换频道后关闭电视指南"
 
 msgid "Hide last Channel Group"
-msgstr "隐藏最后的频道群组"
+msgstr "隐藏上一个频道组"
 
 msgid "Time to display in minutes"
-msgstr "以分钟数显示"
+msgstr "显示时间"
 
 msgid "Big Step (Keys 1 / 3) in hours"
 msgstr ""
@@ -446,151 +446,151 @@ msgid "Time Format (12h/24h)"
 msgstr "时间格式（12小时/24小时）"
 
 msgid "Use folders for instant records"
-msgstr "为即时录像使用的文件夹"
+msgstr "及时录制使用文件夹"
 
 msgid "Use Remotetimers"
-msgstr "使用远程定时器"
+msgstr "使用远程计时器"
 
 msgid "Display Reruns in detailed EPG View"
-msgstr ""
+msgstr "在详细的EPG里显示重播"
 
 msgid "Number of reruns to display"
-msgstr ""
+msgstr "显示重播次数"
 
 msgid "Use Subtitle for reruns"
-msgstr ""
+msgstr "重播使用字幕"
 
 msgid "Display Mode"
 msgstr "显示模式"
 
 msgid "Height of Channel Header (Perc. of osd height)"
-msgstr ""
+msgstr "频道栏高度"
 
 msgid "Width of Timeline (Perc. of osd width)"
-msgstr ""
+msgstr "时间轴宽度"
 
 msgid "Number of Channels to display"
-msgstr ""
+msgstr "显示频道序号"
 
 msgid "Width of Channel Header (Perc. of osd width)"
-msgstr ""
+msgstr "状态栏宽度"
 
 msgid "Height of Timeline (Perc. of osd height)"
-msgstr ""
+msgstr "时间轴高度"
 
 msgid "Display time in EPG Grids"
-msgstr ""
+msgstr "在EPG栅格显示时间"
 
 msgid "Height of Footer"
-msgstr ""
+msgstr "编注长度"
 
 msgid "Display status header"
-msgstr ""
+msgstr "显示状态头"
 
 msgid "Height of status header (Perc. of osd height)"
-msgstr ""
+msgstr "状态栏长度"
 
 msgid "Scale video to upper right corner"
-msgstr ""
+msgstr "右上方比例显示视频"
 
 msgid "Rounded corners around video frame"
 msgstr ""
 
 msgid "Display Channel Names in Header"
-msgstr ""
+msgstr "在前面显示频道序号"
 
 msgid "Display channel groups"
-msgstr ""
+msgstr "显示频道组"
 
 msgid "Height of channel groups (Perc. of osd height)"
-msgstr ""
+msgstr "频道组长度"
 
 msgid "Width of channel groups (Perc. of osd width)"
-msgstr ""
+msgstr "频道组宽度"
 
 msgid "Show Channel Logos"
-msgstr ""
+msgstr "显示频道徽标"
 
 msgid "Logo Path used"
-msgstr ""
+msgstr "徽标使用路径"
 
 msgid "Logo Extension"
-msgstr ""
+msgstr "徽标放大"
 
 msgid "Logo width ratio"
-msgstr ""
+msgstr "徽标宽度比"
 
 msgid "Logo height ratio"
-msgstr ""
+msgstr "徽标长度比"
 
 msgid "Show EPG Images"
-msgstr ""
+msgstr "显示EPG图标"
 
 msgid "EPG Images Path used"
-msgstr ""
+msgstr "EPG图像使用路径"
 
 msgid "EPG Image width"
-msgstr ""
+msgstr "EPG图像宽度"
 
 msgid "EPG Image height"
-msgstr ""
+msgstr "EPG图像长度"
 
 msgid "Number of additional EPG Images"
-msgstr ""
+msgstr "EPG图像数目"
 
 msgid "Additional EPG Image width"
-msgstr ""
+msgstr "附带EPG图像宽度"
 
 msgid "Additional EPG Image height"
-msgstr ""
+msgstr "附带EPG图像长度"
 
 msgid "Font"
 msgstr "字体"
 
 msgid "Status Header Font Size"
-msgstr ""
+msgstr "状态字体大小"
 
 msgid "Status Header Large Font Size"
-msgstr ""
+msgstr "状态大字体"
 
 msgid "Detail EPG View Font Size"
-msgstr ""
+msgstr "EPG显示字体大小"
 
 msgid "Detail EPG View Header Font Size"
-msgstr ""
+msgstr "EPG预览字体大小"
 
 msgid "Message Font Size"
-msgstr ""
+msgstr "信息字体大小"
 
 msgid "Message Large Font Size"
-msgstr ""
+msgstr "信息大号字体"
 
 msgid "Button Font Size"
-msgstr ""
+msgstr "按钮字体大小"
 
 msgid "Channel Header Font Size"
-msgstr ""
+msgstr "频道名字体大小"
 
 msgid "Channel Groups Font Size"
-msgstr ""
+msgstr "频道组字体大小"
 
 msgid "Grid Font Size"
-msgstr ""
+msgstr "栅格字体大小"
 
 msgid "Grid Font Small Size"
-msgstr ""
+msgstr "栅格小字体"
 
 msgid "Timeline Weekday Font Size"
-msgstr ""
+msgstr "时间轴工作日字体大小"
 
 msgid "Timeline Date Font Size"
-msgstr ""
+msgstr "时间轴日期字体大小"
 
 msgid "Timeline Time Font Size"
-msgstr ""
+msgstr "时间轴时间字体大小"
 
 msgid "Search & Recording Menu Font Size"
-msgstr ""
+msgstr "搜索和录制菜单字体大小"
 
 msgid "Search & Recording Menu Small Font Size"
-msgstr ""
+msgstr "搜索和录制菜单小字体"

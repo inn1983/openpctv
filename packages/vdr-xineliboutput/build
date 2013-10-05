@@ -53,13 +53,14 @@ export VDRDIR="$ROOT/$BUILD/$VDR_DIR"
 make \
   LIBDIR="." \
   LOCALEDIR="./locale" \
+  VDR_TREE="no" \
   HOST_CC="$HOST_CC" \
   HOST_CFLAGS="$HOST_CFLAGS" \
   HOST_LDFLAGS="$HOST_LDFLAGS"
 
 do_strip bin lib$1.so.*
 
-make_install
+make_install 
 
 if pkg_uses $1 bluray; then
   cd xine/BluRay

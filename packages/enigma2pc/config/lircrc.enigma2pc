@@ -61,11 +61,24 @@ begin
         repeat = 0
 end
 
-
 begin
         prog = irxevent
         button = KEY_LEFT
         config = Key Left CurrentWindow
+        repeat = 0
+end
+
+begin
+        prog = irxevent
+        button = KEY_CHANNELDOWN
+        config = Key Left CurrentWindow
+        repeat = 0
+end
+
+begin
+        prog = irxevent
+        button = KEY_CHANNELUP
+        config = Key Right CurrentWindow
         repeat = 0
 end
 
@@ -228,20 +241,6 @@ begin
         prog = irxevent
         button = KEY_PLAY
         config = Key P CurrentWindow
-        repeat = 0
-end
-
-begin
-        prog = irxevent
-        button = KEY_CHANNELDOWN
-        config = Key Z CurrentWindow
-        repeat = 0
-end
-
-begin
-        prog = irxevent
-        button = KEY_CHANNELUP
-        config = Key C CurrentWindow
         repeat = 0
 end
 

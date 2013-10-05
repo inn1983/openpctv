@@ -6,6 +6,7 @@ export TEXTDOMAIN=openpctv
 
 LOGFILE=/tmp/install.log
 BOOTDISK_MNT=/mnt/BootDisk
+. /etc/os-release
 
 installmsg () {
 # Convert an OS device to the corresponding GRUB drive.
@@ -28,17 +29,17 @@ MSG_DISK_REFRESH="$(gettext "refresh list")"
 MSG_DISK_DEVICE="$(gettext "Installation device")"
 MSG_DISK_DEVICE_DESC="$(gettext "You are going to install OpenPCTV. For this you will need an empty partition with about 5 GB of free space. Be careful to choose the right disk! We won't take responsibility for any data loss.")"
 
-MSG_DISK_PART="$(gettext "Microsoft FAT16/32 partition or Linux EXT2/3 partition")"
+MSG_DISK_PART="$(gettext "Linux EXT4 partition")"
 
-MSG_CFDISK_BEGIN="$(gettext "Please edit your partition table to create a")"
-MSG_CFDISK_END="$(gettext "with about 5 GB of free space. Don't forget to set the bootable flag to this partition. Remember to commit the changes when done. We won't take responsibility for any data loss.")"
+MSG_CFDISK_BEGIN="$(gettext "Before continue the installator program you need to define the Linux partition(s) on your hard disk. We can use other partitioning tool under Linux/Windows before this. Or if you select 'Yes', you'll use cfdisk to edit your partition table to create a")"
+MSG_CFDISK_END="$(gettext "with about 5 GB of free space. The partition type can be arbitrary. Don't forget to set the bootable flag to this partition. Remember to commit the changes when done. We won't take responsibility for any data loss. If you choose 'No' means that you've prepared a partition for it.")"
 
 # Installation
 MSG_INSTALL_DEV_CONFIG="$(gettext "Installation device")"
 
 MSG_INSTALL_DEV_NOPART_BEGIN="$(gettext "You don't have any")"
 MSG_INSTALL_DEV_NOPART_END="$(gettext "partition on your system. Please create a partition first using for example cfdisk.")"
-MSG_INSTALL_DEV_DESC="$(gettext "Where do you want to install OpenPCTV ?")"
+MSG_INSTALL_DEV_DESC="$(gettext "Where do you want to install OpenPCTV? Please choose carefully!")"
 MSG_INSTALL_DEV_BAD_BLOCK="$(gettext "is not a valid block device.")"
 
 MSG_INSTALL_DEV_NO_FORMAT="$(gettext "Partition is not formated")"
@@ -84,6 +85,11 @@ MSG_LOG_DESC="$(gettext "Do you want to check installation logs ? (it is probabl
 MSG_SUCCESS="$(gettext "Have Fun!")"
 MSG_SUCCESS_DESC_BEGIN="$(gettext "OpenPCTV is now installed on")"
 MSG_SUCCESS_DESC_END="$(gettext "Do you want to reboot? Or press Alt+F2 to configure by manual")"
+
+MSG_GRUB_START="$(gettext "Start")"
+MSG_GRUB_DEFAULT="$(gettext "Default target")"
+MSG_GRUB_SETUP="$(gettext "setup mode")"
+MSG_GRUB_DEBUG="$(gettext "debugging mode")"
 }
 
 # Acts just like echo cmd, with automatic redirection
@@ -242,19 +248,23 @@ choose_disk () {
 # and returns the device name of that partition
 choose_partition_dev () {
   local LOC_DISK="$1"
-  local DEV_SEL DEV_LIST SIZE VENDOR MODEL DEVNAME i
+  local DEV_SEL DEV_LIST SIZE VENDOR MODEL FSTYPE DEVNAME i
   dbglg "Input arg for DISK is $1"
   while [ ! -b "$DEV_SEL" ]; do
     DEV_LIST=""
-    for i in `sfdisk -lq /dev/$LOC_DISK 2>/dev/null | grep ${LOC_DISK%disc} | \
+    for i in `fdisk -l /dev/$LOC_DISK 2>/dev/null | grep ${LOC_DISK%disc} | \
               cut -f1 -d' ' | grep dev`; do
       case `sfdisk --print-id ${i%%[0-9]*} ${i#${i%%[0-9]*}}` in
-        1|11|6|e|16|1e|b|c|1b|1c|83)
+        f)
+	  ;;
+	*)
           SIZE=`sfdisk -s "$i" | sed 's/\([0-9]*\)[0-9]\{3\}/\1/'`
           VENDOR=`cat /sys/block/$LOC_DISK/device/vendor`
           MODEL=`cat /sys/block/$LOC_DISK/device/model`
-          DEVNAME=`echo $VENDOR $MODEL ${SIZE}MB | sed 's/ /_/g'`
+          FSTYPE=`grub-probe -d $i -t fs`
+          DEVNAME=`echo $VENDOR $MODEL $FSTYPE ${SIZE}MB | sed 's/ /_/g'`
           DEV_LIST="$DEV_LIST $i $DEVNAME"
+          LASTITEM="--default-item $i"
           ;;
       esac
     done
@@ -266,6 +276,7 @@ choose_partition_dev () {
       LVNAME=`echo $i | cut -d\: -f1 | sed 's/ /_/g'`
       DEVNAME=`echo $VENDOR $MODEL ${SIZE}MB | sed 's/ /_/g'`
       DEV_LIST="$DEV_LIST /dev/${LOC_DISK}/${LVNAME} $DEVNAME"
+      LASTITEM="--default-item $i"
     done
 
     if [ -z "$DEV_LIST" ]; then
@@ -274,7 +285,7 @@ choose_partition_dev () {
         --msgbox "\n$MSG_INSTALL_DEV_NOPART_BEGIN $MSG_DISK_PART $MSG_INSTALL_DEV_NOPART_END\n" 0 0 1>&2
       exit 1
     else
-      DEV_SEL=`dialog --stdout --aspect 15 --backtitle "$BACKTITLE" \
+      DEV_SEL=`dialog --stdout --aspect 15 --backtitle "$BACKTITLE" $LASTITEM \
         --title "$MSG_INSTALL_DEV_CONFIG" --menu "$MSG_INSTALL_DEV_DESC" \
         0 0 0 $DEV_LIST`
     fi
@@ -310,7 +321,7 @@ guess_partition_type () {
 # $2 is DEV
 format_if_needed () {
   local NEED_FORMAT=yes
-  local FORMAT_DEFAULT="--defaultno"
+  local FORMAT_DEFAULT=""
   local LOC_MKFS_TYPE="$1"
   local LOC_DEV="$2"
   local FORMAT_MSG FORMAT MKFS MKFS_OPT MKFS_TYPENAME FORMAT
@@ -496,7 +507,11 @@ install_grub (){
       -e "s/INSTALL_FSYS/$INSTALL_FSYS/" \
       -e "s/DISTRO/$DISTRO/" \
       -e "s/ARCH/$ARCH/" \
-      -e "s/VERSION/$VERSION/" >> \
+      -e "s/VERSION/$BUILD_DATE/" \
+      -e "s/Start/$MSG_GRUB_START/" \
+      -e "s/Default target/$MSG_GRUB_DEFAULT/" \
+      -e "s/setup mode/$MSG_GRUB_SETUP/" \
+      -e "s/debugging mode/$MSG_GRUB_DEBUG/" >> \
       $BOOTDISK_MNT/etc/grub.d/08_openpctv
   chmod 755 $BOOTDISK_MNT/etc/grub.d/08_openpctv
 
@@ -505,11 +520,14 @@ install_grub (){
   else #try to install into partition
     grub-install --root-directory=$BOOTDISK_MNT $LOC_DEV
   fi
+  cp -rf /usr/lib/grub/themes $BOOTDISK_MNT/boot/grub/
+  cp -rf /usr/lib/grub/fonts $BOOTDISK_MNT/boot/grub/
 
   mount -t proc none $BOOTDISK_MNT/proc
   mount -t sysfs sys $BOOTDISK_MNT/sys
   mount -o bind /dev $BOOTDISK_MNT/dev
 
+  dbglg "chroot $BOOTDISK_MNT /bin/bash -c \"grub-mkconfig -o /boot/grub/grub.cfg\""
   chroot $BOOTDISK_MNT /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg"
 }
 
@@ -539,7 +557,7 @@ setup_lang
 # disable kernel messages to avoid screen corruption
 echo 0 > /proc/sys/kernel/printk
 
-setup_keymap
+#setup_keymap
 
 DISK="`choose_disk`"
 [ -z "$DISK" ] && exit 1
@@ -550,7 +568,7 @@ if ( [ -x /usr/sbin/lvm ] && vgdisplay /dev/$DISK >/dev/null 2>&1 ); then
 else
   umount /dev/${DISK}* 2>/dev/null
 fi
-for d in /mnt/*; do rmdir $d >/dev/null 2>&1; done
+for d in /media/*; do rmdir $d >/dev/null 2>&1; done
 
 # Create directory for the install partition to be mounted
 mkdir -p $BOOTDISK_MNT
@@ -559,23 +577,35 @@ CFDISK_MSG="$MSG_CFDISK_BEGIN $MSG_DISK_PART $MSG_CFDISK_END"
 
 # Guide user on how to setup with cfdisk tool in the next step only if no VG was selected
 if ( ! [ -x /usr/sbin/lvm ] || ! lvm vgdisplay /dev/$DISK >/dev/null 2>&1 ); then
-  dialog --stdout --backtitle "$BACKTITLE" --title "$MSG_INSTALL_DEV_CONFIG" \
-    --msgbox "$CFDISK_MSG" 0 0 \
-    || exit 1
-
-  cfdisk /dev/$DISK
+  if dialog --stdout --defaultno --backtitle "$BACKTITLE" --title "$MSG_INSTALL_DEV_CONFIG" \
+    --yesno "$CFDISK_MSG" 10 80; then
+    cfdisk /dev/$DISK
+  fi
 fi
 
 DEV="`choose_partition_dev $DISK`"
 [ -z "$DEV" ] && exit 1
 
+PARTID=`echo "$DEV" | sed "s#/dev/$DISK##"`
+
+fdisk /dev/$DISK << _EOF
+t
+$PARTID
+83
+w
+_EOF
+
 MKFS_TYPE="`guess_partition_type $DEV`"
 
-format_if_needed "$MKFS_TYPE" "$DEV"
+#format_if_needed "$MKFS_TYPE" "$DEV"
+dbglg "mke2fs -L OPENPCTV -t ext4 \"$DEV\""
+dialog --backtitle "$BACKTITLE" \
+       --infobox "$MSG_INSTALL_DEV_FORMATTING_WAIT_BEGIN '$DEV'$MSG_INSTALL_DEV_FORMATTING_WAIT_END" 0 0
+mke2fs -L OPENPCTV -t ext4 "$DEV" >> $LOGFILE 2>&1
 
 # Attempt to mount the prepared partition using the given partition fs type
-dbglg "mount -t $MKFS_TYPE $DEV $BOOTDISK_MNT"
-mount -t $MKFS_TYPE "$DEV" $BOOTDISK_MNT
+dbglg "mount $DEV $BOOTDISK_MNT"
+mount "$DEV" $BOOTDISK_MNT
 ret=$?
 if [ $ret -ne 0 ]; then
   # FS is not mountable! Return an error msg and exit
@@ -592,11 +622,11 @@ dialog --backtitle "$BACKTITLE" --infobox "$MSG_INSTALLING_WAIT" 0 0
 dbglg "cp -PR /.squashfs/* $BOOTDISK_MNT/"
 cp -PR /.squashfs/* $BOOTDISK_MNT/ 2>&1 >> $LOGFILE
 
-dbglg "UUID=${ID_FS_UUID} / $MKFS_TYPE relatime,errors=remount-ro 0 1"
+dbglg "UUID=${ID_FS_UUID} / ext4 relatime,errors=remount-ro 0 1"
 blkid -o udev $DEV > /tmp/blkid
 . /tmp/blkid
 echo "proc /proc proc defaults 0 0" > $BOOTDISK_MNT/etc/fstab
-echo "UUID=${ID_FS_UUID} / $MKFS_TYPE relatime,errors=remount-ro 0 1" >> $BOOTDISK_MNT/etc/fstab
+echo "UUID=${ID_FS_UUID} / ext4 relatime,errors=remount-ro 0 1" >> $BOOTDISK_MNT/etc/fstab
 
 # Installing the kernel
 mkdir -p $BOOTDISK_MNT/boot >> $LOGFILE 2>&1
