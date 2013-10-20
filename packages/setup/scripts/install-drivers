@@ -65,11 +65,13 @@ else
 fi
 
 dialog --clear --title "$(gettext "Install additional V4L and DVB drive")" --menu \
-"$(gettext "Before proceeding please confirm your V4L and DVB device specific information. Choose the drives you need to install carefully.")" 12 80 4 \
+"$(gettext "Before proceeding please confirm your V4L and DVB device specific information. Choose the drives you need to install carefully.")" 15 80 6 \
  "Exit" "$(gettext "I do not want to install now.")" \
  "s2-liplianin" "$(gettext "Support most of the devices,such as DVBWorld,Tevii,Prof...")" \
  "tbs-drivers" "$(gettext "Support all the TBS devices")" \
- "dvbsky-drivers" "$(gettext "Support all the DVBSky devices")" 2> /tmp/driver.tmp
+ "dvbsky-drivers" "$(gettext "Support all the DVBSky devices")" \
+ "tbs-dvbc-drivers" "$(gettext "Support all the TBS DVB-C devices")" \
+ "dvbsky-dvbc-drivers" "$(gettext "Support all the DVBSky DVB-C devices")" 2> /tmp/driver.tmp
 kernelver=$(uname -r)
 if [[ "$(uname -m)" == *86 ]]; then
   machine=i586
@@ -95,6 +97,18 @@ case "$(cat /tmp/driver.tmp)" in
                 rm -rf /lib/modules/$kernelver/kernel/drivers/media
                 echo "Download and install dvbsky-drivers-${kernelver}_Last_${machine}.opk, please wait..."
                 opkg install http://sourceforge.net/projects/openpctv/files/packages/dvbsky-drivers-${kernelver}_Last_${machine}.opk/download --force-overwrite || (echo "Can't download dvbsky-drivers-${kernelver}_Last_${machine}.opk, check your network settings."; exit)
+                finishinstall
+                ;;
+  tbs-dvbc-drivers)  tar -czf /root/kernel_media_$(date +%Y%m%d%H%M%S)_backup.tgz /lib/modules/$kernelver/kernel/drivers/media
+                rm -rf /lib/modules/$kernelver/kernel/drivers/media
+                echo "Download and install tbs-dvbc-drivers-${kernelver}_Last_${machine}.opk, please wait..."
+                opkg install http://sourceforge.net/projects/openpctv/files/packages/tbs-dvbc-drivers-${kernelver}_Last_${machine}.opk/download --force-overwrite || (echo "Can't download tbs-dvbc-drivers-${kernelver}_Last_${machine}.opk, check your network settings."; exit)
+                finishinstall
+                ;;
+  dvbsky-dvbc-drivers)  tar -czf /root/kernel_media_$(date +%Y%m%d%H%M%S)_backup.tgz /lib/modules/$kernelver/kernel/drivers/media
+                rm -rf /lib/modules/$kernelver/kernel/drivers/media
+                echo "Download and install dvbsky-dvbc-drivers-${kernelver}_Last_${machine}.opk, please wait..."
+                opkg install http://sourceforge.net/projects/openpctv/files/packages/dvbsky-dvbc-drivers-${kernelver}_Last_${machine}.opk/download --force-overwrite || (echo "Can't download dvbsky-dvbc-drivers-${kernelver}_Last_${machine}.opk, check your network settings."; exit)
                 finishinstall
                 ;;
 esac

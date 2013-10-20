@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 15:30+0800\n"
+"POT-Creation-Date: 2013-10-20 20:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -364,11 +364,11 @@ msgstr ""
 msgid "Finished"
 msgstr ""
 
-#: packages/setup/scripts/getcam:61 packages/setup/scripts/setup.sh:239
+#: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:239
 msgid "Select a software emulated CAM"
 msgstr ""
 
-#: packages/setup/scripts/getcam:61
+#: packages/setup/scripts/getcam:62
 msgid ""
 "OScam can used by Enigma2(Through dvbsoftwareca module to create symlinks "
 "for dvb adapters),VDR(Through VDR-DVBAPI plugin to act as a bridge between "
@@ -376,19 +376,19 @@ msgid ""
 "used by VDR(A software emulated CAM, VDR plugin) and XBMC."
 msgstr ""
 
-#: packages/setup/scripts/getcam:61
+#: packages/setup/scripts/getcam:62
 msgid "Open Source Conditional Access Module software"
 msgstr ""
 
-#: packages/setup/scripts/getcam:61
+#: packages/setup/scripts/getcam:62
 msgid "A software CAM emulation, a VDR plugin"
 msgstr ""
 
-#: packages/setup/scripts/getcam:61
+#: packages/setup/scripts/getcam:62
 msgid "TTcam CAM - Applicable to China's exclusive cam"
 msgstr ""
 
-#: packages/setup/scripts/getcam:72
+#: packages/setup/scripts/getcam:73
 msgid ""
 "Would you like to configure OScam/VDR-SC? Of course, you can also put CCcam."
 "cfg file into the USB disk, the system will automatically read and written "
@@ -470,6 +470,14 @@ msgstr ""
 
 #: packages/setup/scripts/install-drivers:72
 msgid "Support all the DVBSky devices"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:73
+msgid "Support all the TBS DVB-C devices"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:74
+msgid "Support all the DVBSky DVB-C devices"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:13

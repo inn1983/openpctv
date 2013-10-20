@@ -20,6 +20,7 @@ done
 $ROOT/$TOOLCHAIN/bin/xgettext $PACKAGES/$1/scripts/*  -L Shell  -o $PACKAGES/$1/config/openpctv.pot
 for i in $PACKAGES/$1/config/openpctv-*.po; do
   $ROOT/$TOOLCHAIN/bin/msgmerge $i $PACKAGES/$1/config/openpctv.pot -U
+  rm ${i}~
   loc=$(basename $i | cut -d\- -f2 | sed 's/.po//g')
   mkdir -p $INSTALL/usr/share/locale/$loc/LC_MESSAGES
   $ROOT/$TOOLCHAIN/bin/msgfmt $i -o $INSTALL/usr/share/locale/$loc/LC_MESSAGES/openpctv.mo

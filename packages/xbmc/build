@@ -143,6 +143,7 @@ do_configure \
   --enable-ffmpeg-libvorbis \
   --disable-asap-codec \
   --disable-external-libraries \
+  --enable-texturepacker \
   $CFG_TEGRA \
   $EXTRA_CONFIG \
 

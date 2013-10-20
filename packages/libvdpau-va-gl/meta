@@ -1,6 +1,6 @@
 PKG_NAME=libvdpau-va-gl
 PKG_URL_PROTO=git
-PKG_URL_REV=cd2e0cf
+PKG_URL_REV=f86ed86
 PKG_URL="https://github.com/i-rinat/libvdpau-va-gl.git"
 PKG_VERSION=0.2.0+r${PKG_URL_REV}
 PKG_REV=1

@@ -47,14 +47,15 @@ EOF
      i=$( expr $i + 1 )
   fi
 done
-cat >> $OSCAMSERVER << EOF
+if ! grep -q "constant.cw" $OSCAMSERVER; then
+  cat >> $OSCAMSERVER << EOF
 [reader]
 label = cw
 protocol = constcw
 device = /etc/oscam/constant.cw
 group = $i
 EOF
-
+fi
 }
 
 selectcam () {

@@ -43,12 +43,10 @@ sed -i -e "s/^config.pc.initial_window_width=.*/config.pc.initial_window_width=$
 
 if [ -f /sys/class/drm/card0/device/vendor ]; then
   VENDOR=$(cat /sys/class/drm/card0/device/vendor)
-  if [ $VENDOR = "0x10de" ]; then
+  if [ $VENDOR = "0x10de" -o $VENDOR = "0x1002" ]; then
     sed -i 's/^video.driver:.*/video.driver:vdpau/g' /usr/share/enigma2/xine.conf
   elif [ $VENDOR = "0x8086" ]; then
     sed -i 's/^video.driver:.*/video.driver:vaapi/g' /usr/share/enigma2/xine.conf
-  elif [ $VENDOR = "0x1002" ]; then
-    sed -i 's/^video.driver:.*/video.driver:opengl/g' /usr/share/enigma2/xine.conf
   else
     sed -i 's/^video.driver:.*/video.driver:xshm/g' /usr/share/enigma2/xine.conf
   fi
@@ -57,43 +55,3 @@ fi
 chvt 4
 sync
 LD_PRELOAD=$LIBS ${exec_prefix}/bin/enigma2
-
-# enigma2 exit codes:
-#
-# 0 - restart enigma
-# 1 - halt
-# 2 - reboot
-#
-# >128 signal
-
-ret=$?
-case $ret in
-	1)
-		cmp -s  ${prefix}/etc/stb/fp/wakeup_time  ${prefix}/etc/stb/fp/wakeup_time_compare > /dev/null
-                if [ $? -eq 1 ]; then
-                        cat ${prefix}/etc/stb/fp/wakeup_time > /sys/class/rtc/rtc0/wakealarm
-                        cat ${prefix}/etc/stb/fp/wakeup_time > ${prefix}/etc/stb/fp/wakeup_time_compare
-                fi
-		/sbin/poweroff
-#		/usr/sbin/pm-suspend
-		;;
-	2)
-		/sbin/reboot
-		;;
-	4)
-		/sbin/rmmod lcd
-		/usr/sbin/fpupgrade --upgrade 2>&1 | tee /home/root/fpupgrade.log
-		sleep 1;
-		/sbin/rmmod fp
-		/sbin/modprobe fp
-		/sbin/reboot
-		;;
-	42)
-		# bind the console (when available)
-		[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
-		opkg upgrade 2>&1 | tee /home/root/ipkgupgrade.log
-		/sbin/reboot
-		;;
-	*)
-		;;
-esac
