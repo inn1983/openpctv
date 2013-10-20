@@ -1,0 +1,12 @@
+PKG_NAME=hid-mapper
+PKG_URL_REV=7732485
+PKG_VERSION=1.3a+r${PKG_URL_REV}
+PKG_URL_PROTO=git
+PKG_URL="https://github.com/Claudio-Sjo/HID_linux_xbmc_driver.git"
+PKG_REV=1
+PKG_DEPENDS="$TARGET_LIBC"
+PKG_BUILD_DEPENDS="toolchain"
+PKG_PRIORITY=optional
+PKG_SECTION=drivers
+PKG_SHORTDESC="Generic HID Remote Driver for XBMC"
+PKG_LONGDESC="A generic hid driver for use with XBMC if your computer came with a hid remote or you bought one."

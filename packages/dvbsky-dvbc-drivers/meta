@@ -1,0 +1,8 @@
+PKG_NAME=dvbsky-dvbc-drivers
+PKG_VERSION=130806
+PKG_URL="http://www.dvbsky.net/download/linux/media_build-bst-${PKG_VERSION}.tar.gz"
+PKG_REV=1
+PKG_PRIORITY=optional
+PKG_SECTION=drivers
+PKG_SHORTDESC="DVBSky DVB-C drivers for Linux - Original code from LinuxTV org"
+PKG_LONGDESC="These drivers add (experimental) support for dvbsky devices."

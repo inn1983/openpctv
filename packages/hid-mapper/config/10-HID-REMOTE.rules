@@ -1,0 +1,21 @@
+# hid_mapper (Generic HID Remote Driver Daemon:/usr/sbin/hid_mapper)
+
+SUBSYSTEM=="usb", ENV{INTERFACE}=="*/2", ATTRS{idVendor}=="1241", ATTRS{idProduct}=="e000", ENV{HID_MAPPER_SUPPORTED}="1", \
+        RUN+="/bin/sh -c '/sbin/modprobe -b uinput; sleep 1 && /usr/sbin/hid_mapper \
+        --lookup-id --manufacturer 1241 --product e000 --map /etc/hid/yaocoo.map 2>&1 &'"
+
+SUBSYSTEM=="usb", ENV{INTERFACE}=="*/2", ATTRS{idVendor}=="13ec", ATTRS{idProduct}=="0006", ENV{HID_MAPPER_SUPPORTED}="1", \
+        RUN+="/bin/sh -c '/sbin/modprobe -b uinput;  /usr/sbin/hid_mapper \
+        --lookup-id --manufacturer 13ec --product 0006 --map /etc/hid/yaocoo.map 2>&1 &'"
+
+SUBSYSTEM=="usb", ENV{INTERFACE}=="*/2", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="05df", ENV{HID_MAPPER_SUPPORTED}="1", \
+        RUN+="/bin/sh -c '/sbin/modprobe -b uinput;  /usr/sbin/hid_mapper \
+        --lookup-id --manufacturer 16c0 --product 05df --map /etc/hid/yaocoo.map 2>&1 &'"
+
+SUBSYSTEM=="usb", ENV{INTERFACE}=="*/2", ATTRS{idVendor}=="0755", ATTRS{idProduct}=="2626", ENV{HID_MAPPER_SUPPORTED}="1", \
+        RUN+="/bin/sh -c '/sbin/modprobe -b uinput;  /usr/sbin/hid_mapper \
+        --lookup-id --manufacturer 0755 --product 2626 --map /etc/hid/aureal.map 2>&1 &'"
+
+SUBSYSTEM=="usb", ACTION=="remove", ENV{HID_MAPPER_SUPPORTED}=="1", RUN+="/usr/bin/killall hid_mapper"
+
+SUBSYSTEMS=="input", ATTRS{name}=="Generic USB input mapper" SYMLINK+="input/hid_mapper"

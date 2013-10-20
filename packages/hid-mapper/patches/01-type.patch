@@ -1,0 +1,11 @@
+diff -uNr hid-driver-1.3a+r7732485.orig/hid.c hid-driver-1.3a+r7732485/hid.c
+--- hid-driver-1.3a+r7732485.orig/hid.c	2013-06-11 20:25:35.000000000 +0800
++++ hid-driver-1.3a+r7732485/hid.c	2013-10-18 20:44:25.083088894 +0800
+@@ -23,6 +23,7 @@
+ #include <dirent.h>
+ #include <stdio.h>
+ #include <string.h>
++#include <sys/types.h>
+ 
+ #define SYSFS_HIDRAW_CLASS_PATH "/sys/class/hidraw"
+ 

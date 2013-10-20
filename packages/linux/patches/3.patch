@@ -1,0 +1,28 @@
+From 26682480c202e7360cbcdc3bc9e962bf749c6b8d Mon Sep 17 00:00:00 2001
+From: Thomas Hellstrom <thellstrom@vmware.com>
+Date: Wed, 09 Oct 2013 08:42:50 +0000
+Subject: drm/vmwgfx: Don't put resources with invalid id's on lru list
+
+The evict code may try to swap them out causing a BUG in the destroy
+function.
+
+Signed-off-by: Thomas Hellstrom <thellstrom@vmware.com>
+Reviewed-by: Jakob Bornecrantz <jakob@vmware.com>
+Cc: stable@vger.kernel.org
+Signed-off-by: Dave Airlie <airlied@redhat.com>
+---
+diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_resource.c b/drivers/gpu/drm/vmwgfx/vmwgfx_resource.c
+index 0e67cf4..37fb4be 100644
+--- a/drivers/gpu/drm/vmwgfx/vmwgfx_resource.c
++++ b/drivers/gpu/drm/vmwgfx/vmwgfx_resource.c
+@@ -970,7 +970,7 @@ void vmw_resource_unreserve(struct vmw_resource *res,
+ 	if (new_backup)
+ 		res->backup_offset = new_backup_offset;
+ 
+-	if (!res->func->may_evict)
++	if (!res->func->may_evict || res->id == -1)
+ 		return;
+ 
+ 	write_lock(&dev_priv->resource_lock);
+--
+cgit v0.9.0.2-2-gbebe
