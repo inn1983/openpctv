@@ -36,6 +36,7 @@ do_configure 	--sysconfdir=/etc/ssh \
                 --disable-utmpx \
                 --disable-wtmp \
                 --disable-wtmpx \
+		--enable-shared \
                 --without-rpath \
                 --with-ssl-engine \
                 --without-pam

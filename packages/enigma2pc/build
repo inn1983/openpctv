@@ -13,6 +13,8 @@ cd $BUILD/$1*
 
 do_autoconf
 
+export CXXFLAGS="$CXXFLAGS -I../linux-3.*/include/uapi/"
+
 export PYTHON_VERSION=2.7
 export PYTHON_CPPFLAGS=-I$LIB_PREFIX/include/python2.7
 export PYTHON_LDFLAGS="-L$LIB_PREFIX/lib/python2.7 -lpython2.7"
@@ -25,8 +27,7 @@ export SWIG_LIB=$ROOT/$TOOLCHAIN/share/swig/$SWIG_VER
 do_configure \
              --with-arch=$TARGET_ARCH \
              --with-cpu=$TARGET_CPU \
-             --with-xlib \
-             --with-debug
+             --with-xlib
 
 make
 make_install

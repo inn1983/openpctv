@@ -52,6 +52,8 @@ MSMenuinfo="$(gettext "Select the Network Interface Card you want to configure")
 #检查internet是否联通
 function checkNet
 {
+. /etc/network
+[ X"$SSID" != X ] && systemctl restart wpa_supplicant
 systemctl restart connman
 ison="no"
 printf "Restarting network, please wait ..."
@@ -174,6 +176,7 @@ esac
 #设定无线网络
 function setWlan
 {
+rfkill unblock wlan
 ifconfig $IF up
 iwlist $IF scan > ${TMP}/iwlist.log
 

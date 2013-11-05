@@ -1,11 +1,12 @@
 #!/bin/sh
 
 . config/options
+get_meta vdr
 get_meta $1
 
 mkdir -p $INSTALL/usr/lib/vdr
-for i in $BUILD/$1*/libvdr-*.so; do
-  cp $i $INSTALL/usr/lib/vdr/${i##*/}.2.1.1
+for i in $BUILD/$1*/lib$1*.so; do
+  cp $i $INSTALL/usr/lib/vdr/${i##*/}.${API_VERSION}
 done
 
 for i in $BUILD/$1*/po/*.po; do
@@ -17,7 +18,7 @@ done
 NAME=`echo ${PKG_NAME} | sed s/vdr-//`
 mkdir -p $INSTALL/etc/vdr/plugins.d
 echo "PLUGIN=${NAME}" > $INSTALL/etc/vdr/plugins.d/50_$NAME
-echo "ENABLED=yes" >> $INSTALL/etc/vdr/plugins.d/50_$NAME
+echo "ENABLED=no" >> $INSTALL/etc/vdr/plugins.d/50_$NAME
 
 mkdir -p $INSTALL/etc/vdr/plugins/$NAME
 cp $BUILD/$1*/conf/override.conf $INSTALL/etc/vdr/plugins/$NAME/

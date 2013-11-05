@@ -52,7 +52,9 @@ echo "2> $RESULTTMP" >> $DIALOGTMP
 . $DIALOGTMP
 for i in $(sed 's/\"//g' $RESULTTMP); do
   echo ":$i" > ${CHANNELS}.$i
-  eval $(grep $i $CMDLINE)
+  cmd="sh -c 'source /etc/profile;$(grep $i $CMDLINE)'"
+#  eval $(grep $i $CMDLINE)
+  eval $cmd
 done
 cat /dev/null > ${CHANNELS}.radio
 cat /dev/null > ${CHANNELS}.tv

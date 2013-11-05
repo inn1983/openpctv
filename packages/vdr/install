@@ -23,7 +23,7 @@ mkdir -p $INSTALL/etc/vdr/plugins
 mkdir -p $INSTALL/etc/vdr/plugins.d
 
 for i in dvbsddevice epgtableid0 pictures dvbhddevice rcu status; do
-  do_install usr/lib/vdr/libvdr-$i.so.$PKG_VERSION
+  do_install usr/lib/vdr/libvdr-$i.so.$API_VERSION
   echo "PLUGIN=${i}" > $INSTALL/etc/vdr/plugins.d/50_$i
   echo "ENABLED=no" >> $INSTALL/etc/vdr/plugins.d/50_$i
 done

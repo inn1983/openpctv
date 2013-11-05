@@ -143,7 +143,6 @@ do_configure \
   --enable-ffmpeg-libvorbis \
   --disable-asap-codec \
   --disable-external-libraries \
-  --enable-texturepacker \
   $CFG_TEGRA \
   $EXTRA_CONFIG \
 
@@ -159,7 +158,7 @@ export MAKEFLAGS=-j3
 make externals 
 make xbmc.bin 
 make xbmc-xrandr 
-make skins
+make skins CXX_FOR_BUILD="$CXX" CXXFLAGS_FOR_BUILD="$CXXFLAGS $CXXFLAGS_FOR_BUILD -I../../xbmc -I../../xbmc/linux -I../../lib"
 make_install
 
 if [ "$TARGET_ARCH" = arm ]; then

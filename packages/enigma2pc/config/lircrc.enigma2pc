@@ -1,308 +1,308 @@
 begin
         prog = irxevent
-        button = KEY_OK
+        button = OK
         config = Key Return CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_MEDIA
+        button = Home
         config = Key space CurrentWindow
-        repeat = 1
+        repeat = 3
 end
 
 begin
         prog = irxevent
-        button = KEY_RED
+        button = Star
         config = Key F1 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_GREEN
+        button = Hash
         config = Key F2 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_YELLOW
+        button = Clear
         config = Key  F3 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_BLUE
+        button = Enter
         config = Key F4 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_NUMERIC_STAR
+        button = TV
         config = Key F1 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_NUMERIC_POUND
+        button = Videos
         config = Key F4 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_DELETE
+        button = Music
         config = Key F2 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_LEFT
+        button = Left
         config = Key Left CurrentWindow
-        repeat = 0
+        repeat = 3
 end
 
 begin
         prog = irxevent
-        button = KEY_CHANNELDOWN
+        button = ChanDown
         config = Key Left CurrentWindow
-        repeat = 0
+        repeat = 3
 end
 
 begin
         prog = irxevent
-        button = KEY_CHANNELUP
+        button = ChanUp
         config = Key Right CurrentWindow
-        repeat = 0
+        repeat = 3
 end
 
 begin
         prog = irxevent
-        button = KEY_EXIT
+        button = Back
         config = Key Escape CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_RIGHT
+        button = Right
         config = Key Right CurrentWindow
-        repeat = 0
+        repeat = 3
 end
 
 begin
         prog = irxevent
-        button = KEY_UP
+        button = Up
         config = Key Up CurrentWindow
-        repeat = 1
+        repeat = 3
 end
 
 begin
         prog = irxevent
-        button = KEY_DOWN
+        button = Down
         config = Key Down CurrentWindow
-        repeat = 1
+        repeat = 3
 end
 
 begin
         prog = irxevent
-        button = KEY_ENTER
+        button = Pictures
         config = Key  F3 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_MUTE
+        button = Mute
         config = Key M CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_VOLUMEUP
+        button = VolUp
 #        config = Key plus CurrentWindow
         config = Key KP_Add CurrentWindow
-        repeat = 1
+        repeat = 2
 end
 
 begin
         prog = irxevent
-        button = KEY_VOLUMEDOWN
+        button = VolDown
         config = Key KP_Subtract CurrentWindow
-        repeat = 1
+        repeat = 2
 end
 
 begin
         prog = irxevent
-        button = KEY_NUMERIC_1
+        button = One
         config = Key 1 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_NUMERIC_2
+        button = Two
         config = Key 2 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_NUMERIC_3
+        button = Three
         config = Key 3 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_NUMERIC_4
+        button = Four
         config = Key 4 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_NUMERIC_5
+        button = Five
         config = Key 5 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_NUMERIC_6
+        button = Six
         config = Key 6 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_NUMERIC_7
+        button = Seven
         config = Key 7 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_NUMERIC_9
+        button = Nine
         config = Key 9 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_NUMERIC_0
+        button = Zero
         config = Key 0 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_NUMERIC_8
+        button = Eight
         config = Key 8 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_INFO
+        button = More
         config = Key I CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_PVR
+        button = RecTV
         config = Key R CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_NEXT
+        button = Skip
         config = Key W CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_PREVIOUS
+        button = Replay
         config = Key Q CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_PLAY
+        button = Play
         config = Key P CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_STOP
+        button = Stop
         config = Key S CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_DVD
+        button = DVD
         config = Key D CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_TUNER
+        button = LiveTV
         config = Key T CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_EPG
+        button = Guide
         config = Key V CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_REWIND
+        button = Rewind
         config = Key G CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_FASTFORWARD
+        button = Foward
         config = Key H CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = KEY_PAUSE
+        button = Pause
         config = Key A CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irexec
-        button = KEY_SLEEP
+        button = Power
         config = /sbin/poweroff
         repeat = 3
 end
 
 begin
 	prog = irexec
-	button = KEY_RECORD
+	button = Record
 	config = systemctl restart enigma2pc
 	repeat = 3
 end

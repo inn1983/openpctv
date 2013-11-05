@@ -1,10 +1,10 @@
 PKG_NAME=xbmc-addon-xvdr
-#PKG_URL_PROTO=git
-#PKG_URL_REV=fd060928
-#PKG_URL="git://github.com/pipelka/xbmc-addon-xvdr.git"
-#PKG_VERSION=0.9.7+r${PKG_URL_REV}
-PKG_VERSION=12.2+racd4e14
-PKG_URL="$SFNET_SRCS/openpctv/sources/xbmc-addon-xvdr-frodo-acd4e14.tar.xz"
+PKG_URL_PROTO=git
+PKG_URL_REV=0f92994
+PKG_URL="https://github.com/pipelka/xbmc-addon-xvdr"
+PKG_VERSION=0.9.7+r${PKG_URL_REV}
+#PKG_VERSION=12.2+racd4e14
+#PKG_URL="$SFNET_SRCS/openpctv/sources/xbmc-addon-xvdr-frodo-acd4e14.tar.xz"
 PKG_REV=1
 PKG_BUILD_DEPENDS="toolchain"
 PKG_RUN_DEPENDS="$TARGET_LIBC xbmc"

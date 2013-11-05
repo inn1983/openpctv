@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-20 20:30+0800\n"
+"POT-Creation-Date: 2013-11-04 19:56+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1071,7 +1071,7 @@ msgid ""
 "process may be quite long, please be patient."
 msgstr ""
 
-#: packages/setup/scripts/update-channels:59
+#: packages/setup/scripts/update-channels:61
 msgid "Split channels in TV and Radio..."
 msgstr ""
 
@@ -1092,14 +1092,14 @@ msgstr ""
 msgid "Update /etc/enigma2/satellites.xml..."
 msgstr ""
 
-#: packages/setup/scripts/update-transponders:18
+#: packages/setup/scripts/update-transponders:19
 msgid "update transponders for vdr-reelchannelscan"
 msgstr ""
 
-#: packages/setup/scripts/update-transponders:20
+#: packages/setup/scripts/update-transponders:21
 msgid "Convert transponders data sheet and update transponders for scan-s2..."
 msgstr ""
 
-#: packages/setup/scripts/update-transponders:29
+#: packages/setup/scripts/update-transponders:30
 msgid "Done!"
 msgstr ""

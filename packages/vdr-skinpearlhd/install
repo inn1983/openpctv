@@ -1,12 +1,12 @@
 #!/bin/sh
 
 . config/options
-
-cd $BUILD/$1*
+get_meta vdr
+get_meta $1
 
 mkdir -p $INSTALL/usr/lib/vdr
-for i in ${ROOT}/$BUILD/$1*/lib$1*.so; do
-  cp $i $INSTALL/usr/lib/vdr/${i##*/}.2.1.1
+for i in $BUILD/$1*/lib$1*.so; do
+  cp $i $INSTALL/usr/lib/vdr/${i##*/}.${API_VERSION}
 done
 
 for i in ${ROOT}/$BUILD/$1*/po/*.po; do

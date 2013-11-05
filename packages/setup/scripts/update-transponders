@@ -14,6 +14,7 @@ mkdir /tmp/transponders
 p7zip x /tmp/transponders.7z -o/tmp/transponders
 echo "$(gettext "Update /etc/enigma2/satellites.xml...")"
 unzip -o /tmp/dreambox.zip -d /etc/tuxbox
+[ -f /etc/tuxbox/satellites_extra.xml ] && sed -i '/<satellites>/ r /etc/tuxbox/satellites_extra.xml' /etc/tuxbox/satellites.xml
 [ ! -d /etc/vdr/plugins/transponders ] && mkdir -p /etc/vdr/plugins/transponders
 echo "$(gettext "update transponders for vdr-reelchannelscan")"
 [ ! -d /usr/share/transponders ] && mkdir -p /usr/share/transponders

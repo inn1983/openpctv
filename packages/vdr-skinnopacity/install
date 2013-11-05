@@ -2,9 +2,11 @@
 
 . config/options
 
+get_meta vdr
+
 mkdir -p $INSTALL/usr/lib/vdr
 for i in $BUILD/$1*/lib$1*.so; do
-  cp $i $INSTALL/usr/lib/vdr/${i##*/}.2.1.1
+  cp $i $INSTALL/usr/lib/vdr/${i##*/}.${API_VERSION}
 done
 
 for i in $BUILD/$1*/po/*.po; do
@@ -17,9 +19,11 @@ NAME=`echo $1 | sed s/vdr-//`
 mkdir -p $INSTALL/etc/vdr/plugins.d
 echo "PLUGIN=${NAME}" > $INSTALL/etc/vdr/plugins.d/50_$NAME
 echo "ENABLED=yes" >> $INSTALL/etc/vdr/plugins.d/50_$NAME
-mkdir -p $INSTALL/etc/vdr/plugins/$NAME/icons
-cp -a $BUILD/$1*/icons/* $INSTALL/etc/vdr/plugins/$NAME/icons
+mkdir -p $INSTALL/usr/share/vdr/plugins/$NAME/icons
+cp -a $BUILD/$1*/icons/* $INSTALL/usr/share/vdr/plugins/$NAME/icons
 mkdir -p $INSTALL/etc/vdr/themes
 cp -a $BUILD/$1*/themes/* $INSTALL/etc/vdr/themes
-mkdir -p $INSTALL/usr/share/vdr/plugins/skinnopacity
-cp -a $ROOT/$PACKAGES/$1/logos $INSTALL/usr/share/vdr/plugins/skinnopacity
+mkdir -p $INSTALL/usr/share/vdr/plugins/$NAME
+cp -a $ROOT/$PACKAGES/$1/logos $INSTALL/usr/share/vdr/plugins/$NAME
+mkdir -p $INSTALL/etc/vdr/plugins/$NAME/themeconfigs
+cp -a $BUILD/$1*/conf/theme-* $INSTALL/etc/vdr/plugins/$NAME/themeconfigs
