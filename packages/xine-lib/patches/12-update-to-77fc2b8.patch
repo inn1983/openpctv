@@ -1,0 +1,696 @@
+diff --git a/ChangeLog b/ChangeLog
+index 6e746e9..6ffd314 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,4 +1,8 @@
+ xine-lib (1.2.5) 201?-??-??
++  * Recognise & use HEVC/H.265. (ffmpeg)
++  * Add support for HEVC/H.265 to the mpeg-ts demuxer.
++  * Add support for HEVC/H.265 and VP9 to the matroska demuxer.
++  * Add VP8/VP9 decoder using libvpx.
+   * Add support for AC3 and EAC3 to the Quicktime demuxer.
+   * Recognise & use ADPCM G.726 and ATRAC3. (ffmpeg/libva)
+   * Some colour format conversion fixes.
+diff --git a/debian/control b/debian/control
+index 4aca689..a5c2d10 100644
+--- a/debian/control
++++ b/debian/control
+@@ -11,7 +11,7 @@ Build-Depends: debhelper (>= 5.0.1), binutils (>= 2.12.90.0.9), pkg-config,
+ 	libxcb-xv0-dev, libxcb-shm0-dev, libxcb-shape0-dev,
+ 	libxinerama-dev, libxv-dev, libxvmc-dev, libxt-dev,
+ 	libvdpau-dev | nvidia-libvdpau-dev,
+-	libva-dev,
++	libva-dev, libvpx-dev,
+ 	libasound2-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386],
+ 	libcam-dev [kfreebsd-i386 kfreebsd-amd64],
+ 	libaa1-dev, libcaca-dev, libmodplug-dev,
+diff --git a/include/xine/buffer.h b/include/xine/buffer.h
+index d6aa708..fe2f170 100644
+--- a/include/xine/buffer.h
++++ b/include/xine/buffer.h
+@@ -192,6 +192,8 @@ extern "C" {
+ #define BUF_VIDEO_VMNC		0x02660000
+ #define BUF_VIDEO_SNOW		0x02670000
+ #define BUF_VIDEO_VP8		0x02680000
++#define BUF_VIDEO_VP9		0x02690000
++#define BUF_VIDEO_HEVC		0x026A0000
+ /*@}*/
+ 
+ /**
+diff --git a/include/xine/input_plugin.h b/include/xine/input_plugin.h
+index e9e17cb..95c5757 100644
+--- a/include/xine/input_plugin.h
++++ b/include/xine/input_plugin.h
+@@ -311,6 +311,12 @@ struct input_plugin_s {
+ 
+ #define INPUT_CAP_RIP_FORBIDDEN        0x00000100
+ 
++/*
++ * INPUT_CAP_NO_CACHE:
++ *   do not use input cache plugin
++ */
++#define INPUT_CAP_NO_CACHE             0x00000200
++
+ 
+ #define INPUT_IS_SEEKABLE(input) (((input)->get_capabilities(input) & INPUT_CAP_SEEKABLE) != 0)
+ 
+diff --git a/m4/decoders.m4 b/m4/decoders.m4
+index fbea178..46be43e 100644
+--- a/m4/decoders.m4
++++ b/m4/decoders.m4
+@@ -534,6 +534,20 @@ AC_DEFUN([XINE_DECODER_PLUGINS], [
+     fi
+     AM_CONDITIONAL([ENABLE_WAVPACK], [test x"$have_wavpack" = x"yes"])
+ 
++    dnl libvpx decoder plugin
++    AC_ARG_ENABLE([vpx],
++                  [AS_HELP_STRING([--enable-vpx], [Enable libvpx VP8/VP9 decoder support (default: enabled)])],
++                  [test x"$enableval" != x"no" && enable_vpx="yes"])
++    if test x"$enable_vpx" != x"no"; then
++        PKG_CHECK_MODULES([VPX], [vpx] , [have_vpx=yes], [have_vpx=no])
++        if test x"$enable_vpx" = x"yes" && test x"$have_vpx" != x"yes"; then
++            AC_MSG_ERROR([VP8/VP9 support requested, but libvpx not found])
++        fi
++        AC_CHECK_LIB([vpx],[vpx_codec_vp9_dx], [
++                AC_DEFINE([HAVE_VPX_VP9_DECODER], 1, [Define this if you have VP9 support in libvpx])
++            ], [], [${VPX_LIBS}])
++    fi
++    AM_CONDITIONAL([ENABLE_VPX], [test x"$have_vpx" = x"yes"])
+ 
+     dnl Only enable building dmx image if either gdk_pixbuf or ImageMagick are enabled
+     AM_CONDITIONAL([BUILD_DMX_IMAGE], [test x"$have_imagemagick" = x"yes" -o x"$have_gdkpixbuf" = x"yes"])
+diff --git a/m4/summary.m4 b/m4/summary.m4
+index 8e084e6..449b430 100644
+--- a/m4/summary.m4
++++ b/m4/summary.m4
+@@ -83,6 +83,7 @@ AC_DEFUN([XINE_LIB_SUMMARY], [
+     test x"$have_theora" = x"yes"      && echo "   - theora"
+     test x"$have_w32dll" = x"yes"      && echo "   - w32dll"
+     test x"$have_vdpau" = x"yes"       && echo "   - vdpau"
++    test x"$have_vpx" = x"yes"         && echo "   - libvpx (VP8/VP9)"
+     if test x"$with_external_ffmpeg" != x"no"; then
+         echo "   - ffmpeg (external library)"
+     else
+diff --git a/src/combined/ffmpeg/mkcodeclist.pl b/src/combined/ffmpeg/mkcodeclist.pl
+index 50632af..3f640bc 100755
+--- a/src/combined/ffmpeg/mkcodeclist.pl
++++ b/src/combined/ffmpeg/mkcodeclist.pl
+@@ -19,7 +19,7 @@ if (substr ($line, 0, 12) eq 'AV_CODEC_ID_') {
+ }
+ while (defined $line) {
+   chomp $line;
+-  $line =~ s/^$ff_prefix//o;
++  $line =~ s/^$ff_prefix|\s+$//g;
+   $codecs{$line} = 0;
+   $line = <LIST>;
+ }
+diff --git a/src/combined/ffmpeg/xine_video.list b/src/combined/ffmpeg/xine_video.list
+index 6364c45..f3228e7 100644
+--- a/src/combined/ffmpeg/xine_video.list
++++ b/src/combined/ffmpeg/xine_video.list
+@@ -83,6 +83,7 @@ CAVS			CAVS			Chinese AVS
+ VMNC			VMNC			VMware Screen Codec
+ THEORA_RAW		THEORA			Theora
+ SNOW			SNOW			Snow
++HEVC			HEVC			HEVC/H.265
+ 
+ # disabled codecs (ref. configure.ac)
+ !			BMP
+diff --git a/src/demuxers/demux_matroska.c b/src/demuxers/demux_matroska.c
+index c7f2bdc..6364dbe 100644
+--- a/src/demuxers/demux_matroska.c
++++ b/src/demuxers/demux_matroska.c
+@@ -1092,6 +1092,28 @@ static void handle_vobsub (demux_plugin_t *this_gen, matroska_track_t *track,
+     free(data);
+ }
+ 
++static void fill_extra_data(matroska_track_t *track, uint32_t fourcc) {
++
++  xine_bmiheader *bih;
++
++  if (track->codec_private_len > 0x7fffffff - sizeof(xine_bmiheader))
++    track->codec_private_len = 0x7fffffff - sizeof(xine_bmiheader);
++
++  /* create a bitmap info header struct */
++  bih = calloc(1, sizeof(xine_bmiheader) + track->codec_private_len);
++  bih->biSize = sizeof(xine_bmiheader) + track->codec_private_len;
++  bih->biCompression = fourcc;
++  bih->biWidth = track->video_track->pixel_width;
++  bih->biHeight = track->video_track->pixel_height;
++  _x_bmiheader_le2me(bih);
++
++  /* add bih extra data */
++  memcpy(bih + 1, track->codec_private, track->codec_private_len);
++  free(track->codec_private);
++  track->codec_private = (uint8_t *)bih;
++  track->codec_private_len = bih->biSize;
++}
++
+ static int parse_track_entry(demux_matroska_t *this, matroska_track_t *track) {
+   ebml_parser_t *ebml = this->ebml;
+   int next_level = 3;
+@@ -1334,27 +1356,19 @@ static int parse_track_entry(demux_matroska_t *this, matroska_track_t *track) {
+       track->buf_type = BUF_VIDEO_MPEG;
+       init_codec = init_codec_video;
+     } else if (!strcmp(track->codec_id, MATROSKA_CODEC_ID_V_VP8)) {
+-      xine_bmiheader *bih;
+-
+       lprintf("MATROSKA_CODEC_ID_V_VP8\n");
+-      if (track->codec_private_len > 0x7fffffff - sizeof(xine_bmiheader))
+-        track->codec_private_len = 0x7fffffff - sizeof(xine_bmiheader);
+-
+-      /* create a bitmap info header struct for vp8 */
+-      bih = calloc(1, sizeof(xine_bmiheader) + track->codec_private_len);
+-      bih->biSize = sizeof(xine_bmiheader) + track->codec_private_len;
+-      bih->biCompression = ME_FOURCC('v', 'p', '8', '0');
+-      bih->biWidth = track->video_track->pixel_width;
+-      bih->biHeight = track->video_track->pixel_height;
+-      _x_bmiheader_le2me(bih);
+-
+-      /* add bih extra data */
+-      memcpy(bih + 1, track->codec_private, track->codec_private_len);
+-      free(track->codec_private);
+-      track->codec_private = (uint8_t *)bih;
+-      track->codec_private_len = bih->biSize;
++      fill_extra_data(track, ME_FOURCC('v', 'p', '8', '0'));
+       track->buf_type = BUF_VIDEO_VP8;
+-
++      init_codec = init_codec_video;
++    } else if (!strcmp(track->codec_id, MATROSKA_CODEC_ID_V_VP9)) {
++      lprintf("MATROSKA_CODEC_ID_V_VP9\n");
++      fill_extra_data(track, ME_FOURCC('v', 'p', '9', '0'));
++      track->buf_type = BUF_VIDEO_VP9;
++      init_codec = init_codec_video;
++    } else if (!strcmp(track->codec_id, MATROSKA_CODEC_ID_V_HEVC)) {
++      lprintf("MATROSKA_CODEC_ID_V_HEVC\n");
++      fill_extra_data(track, ME_FOURCC('h', 'e', 'v', 'c'));
++      track->buf_type = BUF_VIDEO_HEVC;
+       init_codec = init_codec_video;
+     } else if (!strcmp(track->codec_id, MATROSKA_CODEC_ID_V_REAL_RV10)) {
+     } else if (!strcmp(track->codec_id, MATROSKA_CODEC_ID_V_REAL_RV20)) {
+diff --git a/src/demuxers/demux_ts.c b/src/demuxers/demux_ts.c
+index 89fb48f..890b8e1 100644
+--- a/src/demuxers/demux_ts.c
++++ b/src/demuxers/demux_ts.c
+@@ -242,6 +242,8 @@
+       ISO_14496_PART2_VIDEO = 0x10,     /* ISO/IEC 14496-2 Visual (MPEG-4) */
+       ISO_14496_PART3_AUDIO = 0x11,     /* ISO/IEC 14496-3 Audio with LATM transport syntax */
+       ISO_14496_PART10_VIDEO = 0x1b,    /* ISO/IEC 14496-10 Video (MPEG-4 part 10/AVC, aka H.264) */
++      STREAM_VIDEO_HEVC = 0x24,
++
+       STREAM_VIDEO_MPEG      = 0x80,
+       STREAM_AUDIO_AC3       = 0x81,
+ 
+@@ -1098,6 +1100,11 @@ static int demux_ts_parse_pes_header (xine_t *xine, demux_ts_media *m,
+     return header_len;
+   }
+ 
++  if (m->descriptor_tag == STREAM_VIDEO_HEVC) {
++    m->type      = BUF_VIDEO_HEVC;
++    return header_len;
++  }
++
+   if (m->descriptor_tag == HDMV_SPU_BITMAP) {
+     m->type |= BUF_SPU_HDMV;
+     m->buf->decoder_info[2] = m->pes_bytes_left;
+@@ -1668,6 +1675,7 @@ printf("Program Number is %i, looking for %i\n",program_number,this->program_num
+     case ISO_13818_VIDEO:
+     case ISO_14496_PART2_VIDEO:
+     case ISO_14496_PART10_VIDEO:
++    case STREAM_VIDEO_HEVC:
+     case STREAM_VIDEO_VC1:
+       if (this->videoPid == INVALID_PID) {
+ #ifdef TS_PMT_LOG
+@@ -1715,6 +1723,19 @@ printf("Program Number is %i, looking for %i\n",program_number,this->program_num
+ #endif
+       break;
+     case ISO_13818_PES_PRIVATE:
++      {
++        uint32_t format_identifier=0;
++        demux_ts_get_reg_desc(this, &format_identifier, stream + 5, stream_info_length);
++        if (format_identifier == 0x48455643 /* HEVC */ ) {
++          mi = demux_ts_dynamic_pmt_find (this, pid, BUF_VIDEO_BASE, STREAM_VIDEO_HEVC);
++          if (mi >= 0) {
++            this->videoMedia = mi;
++            this->videoPid = pid;
++          }
++          break;
++        }
++      }
++
+       for (i = 5; i < coded_length; i += stream[i+1] + 2) {
+ 
+         if ((stream[i] == DESCRIPTOR_AC3) || (stream[i] == DESCRIPTOR_EAC3) || (stream[i] == DESCRIPTOR_DTS)) {
+diff --git a/src/demuxers/matroska.h b/src/demuxers/matroska.h
+index c608a06..68a8dbd 100644
+--- a/src/demuxers/matroska.h
++++ b/src/demuxers/matroska.h
+@@ -315,6 +315,8 @@ struct matroska_track_s {
+ #define MATROSKA_CODEC_ID_V_MJPEG        "V_MJPEG"
+ #define MATROSKA_CODEC_ID_V_THEORA       "V_THEORA"
+ #define MATROSKA_CODEC_ID_V_VP8          "V_VP8"
++#define MATROSKA_CODEC_ID_V_VP9          "V_VP9"
++#define MATROSKA_CODEC_ID_V_HEVC         "V_MPEGH/ISO/HEVC"
+ 
+ #define MATROSKA_CODEC_ID_A_MPEG1_L1     "A_MPEG/L1"
+ #define MATROSKA_CODEC_ID_A_MPEG1_L2     "A_MPEG/L2"
+diff --git a/src/video_dec/Makefile.am b/src/video_dec/Makefile.am
+index 10c6b18..c68c919 100644
+--- a/src/video_dec/Makefile.am
++++ b/src/video_dec/Makefile.am
+@@ -24,10 +24,15 @@ if ENABLE_LIBJPEG
+ libjpeg_module = xineplug_decode_libjpeg.la
+ endif
+ 
++if ENABLE_VPX
++libvpx_module = xineplug_decode_libvpx.la
++endif
++
+ xineplug_LTLIBRARIES = $(image_module) \
+ 	$(gdkpixbuf_module) \
+ 	$(libjpeg_module) \
+ 	$(theora_module) \
++	$(libvpx_module) \
+ 	xineplug_decode_bitplane.la \
+ 	xineplug_decode_rgb.la \
+ 	xineplug_decode_yuv.la
+@@ -52,3 +57,7 @@ xineplug_decode_gdk_pixbuf_la_CFLAGS = $(AM_CFLAGS) $(GDK_PIXBUF_CFLAGS)
+ xineplug_decode_libjpeg_la_SOURCES = libjpeg.c
+ xineplug_decode_libjpeg_la_LIBADD = $(XINE_LIB) $(JPEG_LIBS)
+ xineplug_decode_libjpeg_la_CFLAGS = $(AM_CFLAGS) $(JPEG_CFLAGS)
++
++xineplug_decode_libvpx_la_SOURCES = libvpx.c
++xineplug_decode_libvpx_la_LIBADD = $(XINE_LIB) $(VPX_LIBS)
++xineplug_decode_libvpx_la_CFLAGS = $(AM_CFLAGS) $(VPX_CFLAGS)
+diff --git a/src/video_dec/libvpx.c b/src/video_dec/libvpx.c
+new file mode 100644
+index 0000000..6b67675
+--- /dev/null
++++ b/src/video_dec/libvpx.c
+@@ -0,0 +1,364 @@
++/*
++ * Copyright (C) 2013 the xine project
++ *
++ * This file is part of xine, a free video player.
++ *
++ * xine is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * xine is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
++ *
++ * libvpx decoder wrapped by Petri Hintukainen <phintuka@users.sourceforge.net>
++ */
++
++#ifdef HAVE_CONFIG_H
++#include "config.h"
++#endif
++
++#include <stdio.h>
++#include <stdlib.h>
++
++#include <vpx/vpx_decoder.h>
++#include <vpx/vp8dx.h>
++
++#include <xine/xine_internal.h>
++#include <xine/video_out.h>
++#include <xine/buffer.h>
++#include <xine/xineutils.h>
++
++typedef struct {
++  video_decoder_class_t decoder_class;
++  uint32_t              buffer_type;
++} vpx_class_t;
++
++typedef struct vpx_decoder_s {
++  video_decoder_t   video_decoder;  /* parent video decoder structure */
++
++  vpx_class_t      *class;
++  xine_stream_t    *stream;
++
++  int64_t              pts;
++  struct vpx_codec_ctx ctx;
++  int                  decoder_ok;  /* current decoder status */
++
++  unsigned char    *buf;         /* the accumulated buffer data */
++  int               bufsize;     /* the maximum size of buf */
++  int               size;        /* the current size of buf */
++
++  int               width;       /* the width of a video frame */
++  int               height;      /* the height of a video frame */
++  double            ratio;       /* the width to height ratio */
++
++} vpx_decoder_t;
++
++/**************************************************************************
++ * xine video plugin functions
++ *************************************************************************/
++
++static void vpx_handle_header(vpx_decoder_t *this, buf_element_t *buf)
++{
++  xine_bmiheader *bih;
++
++  (this->stream->video_out->open) (this->stream->video_out, this->stream);
++
++  bih = (xine_bmiheader *) buf->content;
++  this->width = (bih->biWidth + 1) & ~1;
++  this->height = (bih->biHeight + 1) & ~1;
++
++  if (buf->decoder_flags & BUF_FLAG_ASPECT)
++    this->ratio = (double)buf->decoder_info[1] / (double)buf->decoder_info[2];
++  else
++    this->ratio = (double)this->width / (double)this->height;
++
++  free (this->buf);
++  this->buf = NULL;
++  this->bufsize = 0;
++  this->size = 0;
++
++  this->decoder_ok = 1;
++
++  switch (buf->type) {
++    case BUF_VIDEO_VP8:
++      _x_meta_info_set_utf8(this->stream, XINE_META_INFO_VIDEOCODEC, "VP8");
++      break;
++    case BUF_VIDEO_VP9:
++      _x_meta_info_set_utf8(this->stream, XINE_META_INFO_VIDEOCODEC, "VP9");
++      break;
++  }
++
++  _x_stream_info_set(this->stream, XINE_STREAM_INFO_VIDEO_WIDTH,  this->width);
++  _x_stream_info_set(this->stream, XINE_STREAM_INFO_VIDEO_HEIGHT, this->height);
++  _x_stream_info_set(this->stream, XINE_STREAM_INFO_VIDEO_RATIO,  this->ratio*10000);
++}
++
++static void vpx_decode_data (video_decoder_t *this_gen, buf_element_t *buf)
++{
++  vpx_decoder_t *this = (vpx_decoder_t *) this_gen;
++
++  if (buf->decoder_flags & BUF_FLAG_PREVIEW) {
++    return;
++  }
++
++  if (buf->decoder_flags & BUF_FLAG_STDHEADER) {
++    vpx_handle_header(this, buf);
++    return;
++  }
++
++  if (!this->decoder_ok || buf->decoder_flags & BUF_FLAG_SPECIAL) {
++    return;
++  }
++
++  /* collect data */
++  if (this->size + buf->size > this->bufsize) {
++    this->bufsize = this->size + 2 * buf->size;
++    this->buf = realloc (this->buf, this->bufsize);
++  }
++  xine_fast_memcpy (&this->buf[this->size], buf->content, buf->size);
++  this->size += buf->size;
++
++  /* save pts */
++  if (buf->pts > 0) {
++    this->pts = buf->pts;
++  }
++
++  if (!(buf->decoder_flags & BUF_FLAG_FRAME_END)) {
++    return;
++  }
++
++  /* decode */
++
++  struct vpx_codec_ctx *ctx = &this->ctx;
++  vpx_codec_err_t err;
++  vo_frame_t *img;
++  int64_t pts, *p_pts;
++
++  p_pts = malloc(sizeof(*p_pts));
++  *p_pts = this->pts;
++  err = vpx_codec_decode(ctx, this->buf, this->size, p_pts, 0);
++
++  this->size = 0;
++
++  if (err != VPX_CODEC_OK) {
++    const char *error  = vpx_codec_error(ctx);
++    const char *detail = vpx_codec_error_detail(ctx);
++    xprintf(this->stream->xine, XINE_VERBOSITY_LOG,
++            LOG_MODULE": Failed to decode frame: %s (%s)\n",
++            error, detail ? detail : "");
++    free(p_pts);
++    return;
++  }
++
++  const void *iter = NULL;
++  struct vpx_image *vpx_img = vpx_codec_get_frame(ctx, &iter);
++  if (!vpx_img)
++    return;
++
++  p_pts = vpx_img->user_priv;
++  vpx_img->user_priv = NULL;
++  pts = *p_pts;
++  free(p_pts);
++
++  if (vpx_img->fmt != VPX_IMG_FMT_I420) {
++    xprintf(this->stream->xine, XINE_VERBOSITY_LOG,
++            LOG_MODULE": Unsupported color space %d\n", vpx_img->fmt);
++    return;
++  }
++
++  img = this->stream->video_out->get_frame (this->stream->video_out,
++                                            this->width, this->height,
++                                            this->ratio, XINE_IMGFMT_YV12, VO_BOTH_FIELDS);
++
++  yv12_to_yv12(
++               /* Y */
++               vpx_img->planes[0], vpx_img->stride[0],
++               img->base[0], img->pitches[0],
++               /* U */
++               vpx_img->planes[1], vpx_img->stride[1],
++               img->base[1], img->pitches[1],
++               /* V */
++               vpx_img->planes[2], vpx_img->stride[2],
++               img->base[2], img->pitches[2],
++               /* width x height */
++               this->width, this->height);
++
++  img->pts       = pts;
++  img->bad_frame = 0;
++  img->progressive_frame = 1;
++
++  img->draw(img, this->stream);
++  img->free(img);
++}
++
++static void vpx_flush (video_decoder_t *this_gen)
++{
++}
++
++static void vpx_reset (video_decoder_t *this_gen)
++{
++  vpx_decoder_t *this = (vpx_decoder_t *) this_gen;
++
++  this->size = 0;
++}
++
++static void vpx_discontinuity (video_decoder_t *this_gen)
++{
++}
++
++/*
++ * This function frees the video decoder instance allocated to the decoder.
++ */
++static void vpx_dispose (video_decoder_t *this_gen)
++{
++  vpx_decoder_t *this = (vpx_decoder_t *) this_gen;
++
++  const void *iter = NULL;
++  while (1) {
++    struct vpx_image *img = vpx_codec_get_frame(&this->ctx, &iter);
++    if (!img)
++      break;
++    free(img->user_priv);
++    img->user_priv = NULL;
++  }
++
++  vpx_codec_destroy(&this->ctx);
++
++  free (this->buf);
++
++  if (this->decoder_ok) {
++    this->decoder_ok = 0;
++    this->stream->video_out->close(this->stream->video_out, this->stream);
++  }
++
++  free (this_gen);
++}
++
++static video_decoder_t *open_plugin (video_decoder_class_t *class_gen, xine_stream_t *stream)
++{
++  vpx_class_t    *cls = (vpx_class_t *)class_gen;
++  vpx_decoder_t  *this;
++
++  const struct vpx_codec_iface *iface;
++  struct vpx_codec_dec_cfg deccfg = { 0 };
++  int vp_version;
++
++  switch (cls->buffer_type) {
++    case BUF_VIDEO_VP8:
++      iface = &vpx_codec_vp8_dx_algo;
++      vp_version = 8;
++      break;
++#ifdef HAVE_VPX_VP9_DECODER
++    case BUF_VIDEO_VP9:
++      iface = &vpx_codec_vp9_dx_algo;
++      vp_version = 9;
++      break;
++#endif
++    default:
++      return NULL;
++  }
++
++
++  this = (vpx_decoder_t *) calloc(1, sizeof(vpx_decoder_t));
++
++  this->video_decoder.decode_data         = vpx_decode_data;
++  this->video_decoder.flush               = vpx_flush;
++  this->video_decoder.reset               = vpx_reset;
++  this->video_decoder.discontinuity       = vpx_discontinuity;
++  this->video_decoder.dispose             = vpx_dispose;
++
++  this->size                              = 0;
++
++  this->stream                            = stream;
++  this->class                             = (vpx_class_t *) class_gen;
++
++  this->decoder_ok    = 0;
++  this->buf           = NULL;
++
++  xprintf(this->stream->xine, XINE_VERBOSITY_DEBUG,
++          LOG_MODULE "VP%d: using libvpx version %s\n",
++          vp_version, vpx_codec_version_str());
++
++  if (vpx_codec_dec_init(&this->ctx, iface, &deccfg, 0) != VPX_CODEC_OK) {
++    const char *err = vpx_codec_error(&this->ctx);
++    xprintf(this->stream->xine, XINE_VERBOSITY_LOG,
++            LOG_MODULE": Failed to initialize VP%d decoder: %s\n",
++            vp_version, err);
++    free(this);
++    return NULL;
++  }
++
++  return &this->video_decoder;
++}
++
++static void *init_plugin (xine_t *xine, uint32_t buffer_type, const char *identifier)
++{
++  vpx_class_t *this;
++
++  this = (vpx_class_t *) calloc(1, sizeof(vpx_class_t));
++
++  this->decoder_class.open_plugin     = open_plugin;
++  this->decoder_class.identifier      = identifier;
++  this->decoder_class.description     = N_("WebM (VP8/VP9) video decoder plugin");
++  this->decoder_class.dispose         = default_video_decoder_class_dispose;
++
++  this->buffer_type = buffer_type;
++
++  return this;
++}
++
++static void *init_plugin_vp8 (xine_t *xine, void *data)
++{
++  return init_plugin(xine, BUF_VIDEO_VP8, "libvpx-vp8");
++}
++
++#ifdef HAVE_VPX_VP9_DECODER
++static void *init_plugin_vp9 (xine_t *xine, void *data)
++{
++  return init_plugin(xine, BUF_VIDEO_VP9, "libvpx-vp9");
++}
++#endif
++
++/*
++ * exported plugin catalog entry
++ */
++
++static const uint32_t video_types_vp8[] = {
++  BUF_VIDEO_VP8,
++  0
++};
++
++#ifdef HAVE_VPX_VP9_DECODER
++static const uint32_t video_types_vp9[] = {
++  BUF_VIDEO_VP9,
++  0
++};
++#endif
++
++static const decoder_info_t dec_info_video_vp8 = {
++  video_types_vp8,     /* supported types */
++  1                    /* priority        */
++};
++
++#ifdef HAVE_VPX_VP9_DECODER
++static const decoder_info_t dec_info_video_vp9 = {
++  video_types_vp9,     /* supported types */
++  1                    /* priority        */
++};
++#endif
++
++const plugin_info_t xine_plugin_info[] EXPORTED = {
++  /* type, API, "name", version, special_info, init_function */
++  { PLUGIN_VIDEO_DECODER, 19, "libvpx-vp8", XINE_VERSION_CODE, &dec_info_video_vp8, init_plugin_vp8 },
++#ifdef HAVE_VPX_VP9_DECODER
++  { PLUGIN_VIDEO_DECODER, 19, "libvpx-vp9", XINE_VERSION_CODE, &dec_info_video_vp9, init_plugin_vp9 },
++#endif
++  { PLUGIN_NONE, 0, "", 0, NULL, NULL }
++};
+diff --git a/src/xine-engine/buffer_types.c b/src/xine-engine/buffer_types.c
+index 2cca67e..a04de38 100644
+--- a/src/xine-engine/buffer_types.c
++++ b/src/xine-engine/buffer_types.c
+@@ -799,6 +799,25 @@ static const video_db_t video_db[] = {
+   BUF_VIDEO_VP8,
+   "On2 VP8"
+ },
++
++{
++  {
++    ME_FOURCC('V','P','9','0'),
++    0
++  },
++  BUF_VIDEO_VP9,
++  "VP9"
++},
++{
++  {
++    ME_FOURCC('h','e','v','c'),
++    0
++  },
++  BUF_VIDEO_HEVC,
++  "HEVC"
++},
++
++
+ { { 0 }, 0, "last entry" }
+ };
+ 
+diff --git a/src/xine-engine/xine.c b/src/xine-engine/xine.c
+index 49e4fd0..4bf7bba 100644
+--- a/src/xine-engine/xine.c
++++ b/src/xine-engine/xine.c
+@@ -1240,6 +1240,7 @@ static int open_internal (xine_stream_t *stream, const char *mrl) {
+ 
+   }
+ 
++  no_cache = no_cache || (stream->input_plugin->get_capabilities(stream->input_plugin) & INPUT_CAP_NO_CACHE);
+   if( !no_cache )
+     /* enable buffered input plugin (request optimizer) */
+     stream->input_plugin = _x_cache_plugin_get_instance(stream);

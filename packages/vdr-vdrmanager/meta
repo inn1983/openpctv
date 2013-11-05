@@ -1,0 +1,12 @@
+PKG_NAME=vdr-vdrmanager
+PKG_URL_PROTO=git
+PKG_URL_REV=ba89832
+PKG_URL="git://projects.vdr-developer.org/vdr-manager.git"
+PKG_VERSION=0.10+r${PKG_URL_REV}
+PKG_REV=1
+PKG_BUILD_DEPENDS="toolchain"
+PKG_RUN_DEPENDS="$TARGET_LIBC vdr"
+PKG_PRIORITY=optional
+PKG_SECTION=multimedia
+PKG_SHORTDESC="VDR -- vdrmanager plugin"
+PKG_LONGDESC="The VDR plugin allows remote programming VDR using VDR-Manager running on Android devices."

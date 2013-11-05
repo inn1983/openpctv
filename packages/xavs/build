@@ -1,0 +1,11 @@
+#!/bin/sh
+
+. config/options
+
+export ASFLAGS=""
+
+cd $BUILD/$1*
+
+sed -i 's#^prefix=.*#prefix=/usr#' configure
+./configure --enable-asm 
+make_install

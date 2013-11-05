@@ -1,0 +1,15 @@
+#!/bin/sh
+
+. config/options
+get_meta vdr
+get_meta $1
+mkdir -p $INSTALL/usr/lib/vdr
+for i in $BUILD/$1*/vdr-vdrmanager/lib$1*.so; do
+  cp $i $INSTALL/usr/lib/vdr/${i##*/}.${API_VERSION}
+done
+
+NAME=`echo $1 | sed s/vdr-//`
+mkdir -p $INSTALL/etc/vdr/plugins.d
+echo "PLUGIN=${NAME}" > $INSTALL/etc/vdr/plugins.d/50_$NAME
+echo "OPTIONS=\"-p 6420 -P change -c\"" >> $INSTALL/etc/vdr/plugins.d/50_$NAME
+echo "ENABLED=yes" >> $INSTALL/etc/vdr/plugins.d/50_$NAME
