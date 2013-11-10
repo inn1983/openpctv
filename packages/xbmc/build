@@ -67,6 +67,17 @@ if [ "$TARGET_MACHINE" = pandaboard ]; then
   EXTRA_CONFIG="$EXTRA_CONFIG --enable-player=gstplayer"
 fi
 
+if [ "$TARGET_PLATFORM" = a10 ]; then
+  #export CEDARLIBS="-lcedarv -lvecore"
+  export CEDARLIBS="-lcedarx"
+  EXTRA_CONFIG="$EXTRA_CONFIG --with-platform=allwinner-a10"
+fi
+
+if [ "$TARGET_PLATFORM" = imx6 ]; then
+  EXTRA_CONFIG="$EXTRA_CONFIG --enable-codec=imxvpu"
+fi
+
+
 if [ "$FPU_OPTIMIZATIONS" = "neon" -o  "$FPU_OPTIMIZATIONS" = "neon-vfp4" ]; then
   EXTRA_CONFIG="$EXTRA_CONFIG --enable-neon"
 fi
@@ -93,12 +104,14 @@ cd $PKG_BUILD_DIR
 touch .dummy.in
 
 # prefix on host
+export use_texturepacker_native=yes
 export USE_TEXTUREPACKER_NATIVE_ROOT=$ROOT/$TOOLCHAIN
-if [ "$TARGET_MACHINE" = cubox ] || [ "$TARGET_MACHINE" = raspberrypi ]; then
-  EXTRA_CONFIG="$EXTRA_CONFIG --enable-use_texturepacker_native"
+if [ "$TARGET_MACHINE" = cubox ] || [ "$TARGET_MACHINE" = raspberrypi ] || \
+   [ "$TARGET_MACHINE" = pandaboard ] || [ "$TARGET_PLATFORM" = a10 ]; then
+  EXTRA_CONFIG="$EXTRA_CONFIG --enable-texturepacker"
   export TEXTUREPACKER_NATIVE_ROOT=$USE_TEXTUREPACKER_NATIVE_ROOT
-else 
-  export use_texturepacker_native=yes
+else
+  EXTRA_CONFIG="$EXTRA_CONFIG --disable-texturepacker"
 fi
 
 # prevent internal error in gcc
@@ -136,13 +149,6 @@ do_configure \
   --disable-hal \
   --disable-asap-codec \
   --enable-projectm \
-  --disable-vtbdecoder \
-  --enable-udev \
-  --disable-libusb \
-  --enable-rtmp \
-  --enable-ffmpeg-libvorbis \
-  --disable-asap-codec \
-  --disable-external-libraries \
   $CFG_TEGRA \
   $EXTRA_CONFIG \
 

@@ -9,4 +9,4 @@ cd $BUILD/$1*
 #CC=$HOST_CC make
 #make_install
 unset CFLAGS
-make CC="$TARGET_CC"
+make CC="$TARGET_CC" CFLAGS="$HOST_CFLAGS -mcpu=$TARGET_CPU -mtune=$TARGET_CPU"

@@ -16,6 +16,8 @@ case $TARGET in
 #begin_targets
   cubieboard)  fs_types="fat32 ext4" ;;
   cubox)       fs_types="ext4"       ;;
+  cuboxi)      fs_types="ext3 ext4"  ;;
+  utilite)     fs_types="fat32 ext4" ;;
   raspberrypi) fs_types="fat32 ext4" ;;
   igepv2)      fs_types="fat32 ext2" ;  boot_part_size="16M" ;; 
   pandaboard)  fs_types="fat32 ext4" ;;
@@ -147,6 +149,11 @@ if [ $TARGET = cubieboard ] ; then
   echo "\n#### Writing boot record(s)..."
   dd if=$mountdir/boot/sunxi-spl.bin of=$DEVICE bs=1024 seek=8
   dd if=$mountdir/boot/u-boot.bin of=$DEVICE bs=1024 seek=32
+fi
+
+if [ $TARGET = cuboxi ] ; then
+  echo "\n#### Writing u-boot ..."
+  dd if=$mountdir/boot/u-boot.imx of=$DEVICE bs=512 seek=2 conv=fsync
 fi
 
 echo "\n#### Flushing buffers..."
