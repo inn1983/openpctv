@@ -3,6 +3,7 @@
 . config/options
 
 get_meta $1
+cd $PKG_BUILD_DIR
 
 VDR_DIR=`basename $BUILD/vdr-2*`
 
@@ -13,6 +14,7 @@ elif [ "$TARGET_ARCH" = powerpc64 ]; then
 elif [ "$TARGET_ARCH" = i386 ]; then
   CFLAGS="-march=$(echo $TARGET_NAME | cut -d- -f 1) -mtune=generic"
 elif [ "$TARGET_ARCH" = arm ]; then
+  sed -i "s/^CSAFLAGS/#CSAFLAGS/g" Makefile
   CFLAGS="-mcpu=$TARGET_CPU -mtune=$TARGET_CPU"
   [ "$FPU_OPTIMIZATIONS" = "neon" ] && CFLAGS="$CFLAGS -mfpu=neon $ARM_FLOAT_ABI"
   [ "$FPU_OPTIMIZATIONS" = "vfp2" ] && CFLAGS="$CFLAGS -mfpu=vfp $ARM_FLOAT_ABI"
@@ -32,7 +34,6 @@ CFLAGS="$CFLAGS -fPIC"
 CXXFLAGS="$CXXFLAGS -fPIC"
 LDFLAGS="$LDFLAGS -fPIC"
 
-cd $PKG_BUILD_DIR
 make \
   VDRDIR="../$VDR_DIR" \
   LIBDIR="." \

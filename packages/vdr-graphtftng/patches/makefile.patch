@@ -1,12 +1,26 @@
-diff -uNr vdr-graphtftng-0.4.1+r8308c113.orig/Makefile vdr-graphtftng-0.4.1+r8308c113/Makefile
---- vdr-graphtftng-0.4.1+r8308c113.orig/Makefile	2013-08-16 17:00:30.000000000 +0800
-+++ vdr-graphtftng-0.4.1+r8308c113/Makefile	2013-09-13 20:39:07.405081026 +0800
-@@ -92,7 +92,7 @@
+diff -uNr vdr-graphtftng-0.4.1+rbaa4bbb.orig/graphtft-fe/Makefile vdr-graphtftng-0.4.1+rbaa4bbb/graphtft-fe/Makefile
+--- vdr-graphtftng-0.4.1+rbaa4bbb.orig/graphtft-fe/Makefile	2013-11-11 02:53:29.000000000 +0800
++++ vdr-graphtftng-0.4.1+rbaa4bbb/graphtft-fe/Makefile	2013-11-13 22:13:06.979096842 +0800
+@@ -5,8 +5,9 @@
+ INCPATH   = -I.
+ LFLAGS    = -Wl,--no-undefined
+ LIBS      = -lpthread -ljpeg
+-LIBS      += $(shell imlib2-config --libs)
++LIBS	  += $(shell pkg-config imlib2 --libs)
+ AR        = ar
++INCLUDES  += $(shell pkg-config imlib2 --cflags)
+ 
+ TARGET = graphtft-fe
+ 
+diff -uNr vdr-graphtftng-0.4.1+rbaa4bbb.orig/Makefile vdr-graphtftng-0.4.1+rbaa4bbb/Makefile
+--- vdr-graphtftng-0.4.1+rbaa4bbb.orig/Makefile	2013-11-11 02:53:29.000000000 +0800
++++ vdr-graphtftng-0.4.1+rbaa4bbb/Makefile	2013-11-13 22:02:57.971122312 +0800
+@@ -106,7 +106,7 @@
  
  DEFINES += -D__STL_CONFIG_H
  
 -LIBS += $(shell imlib2-config --libs)
 +LIBS += $(shell pkg-config imlib2 --libs)
- LIBS += -ljpeg
  LIBS += $(shell pkg-config libgtop-2.0 --libs)
  
+ ifdef WITH_TCPCOM

@@ -15,7 +15,10 @@ do_install usr/bin/irw
 do_install usr/bin/lircrcd
 do_install usr/bin/mode2
 do_install usr/bin/pronto2lirc
-do_install usr/bin/irxevent
+
+if pkg_uses $1 xorg; then
+  do_install usr/bin/irxevent
+fi
 
 if pkg_uses $1 devtools; then
   do_install usr/bin

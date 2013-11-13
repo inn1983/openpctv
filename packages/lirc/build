@@ -10,11 +10,17 @@ else
   DEBUG_CONFIG="--disable-debug"
 fi
 
+if pkg_uses $1 xorg; then
+  XORG_CONFIG="--with-x"
+else
+  XORG_CONFIG="--without-x"
+fi
+
 export MAKEFLAGS=-j1
 
 cd $BUILD/$1-[0-9]*
 do_configure \
-            --with-x \
+            ${XORG_CONFIG} \
             --with-driver=userspace \
             --with-kerneldir=$(kernel_path) \
             $DEBUG_CONFIG \
