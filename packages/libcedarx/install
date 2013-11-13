@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+
+do_install lib/*.so
+do_install usr/bin
+
+exit 0
