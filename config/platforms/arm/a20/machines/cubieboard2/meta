@@ -1,5 +1,5 @@
 MACHINE_NAME=cubieboard2
 MACHINE_DESC="CubieBoard2"
 MACHINE_HELP="Please refer to http://linux-sunxi.org/Cubieboard"
-MACHINE_UBOOT_CONFIG="Cubieboard2"
+MACHINE_UBOOT_CONFIG="cubieboard2"
 MACHINE_BOARD_CONFIG="cubieboard2.fex"
