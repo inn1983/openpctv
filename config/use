@@ -34,13 +34,13 @@ config EGL_PROVIDER_IMX5
   select PKG_imx5-graphics
 
 config EGL_PROVIDER_IMX6
-  bool \"Freescale i.MX6 (Vivante GC400)\"
+  bool \"Freescale i.MX6 (Vivante GCxxx)\"
   depends on ( TAINT && TARGET_PLATFORM_arm_imx6 )
   select PKG_imx6-graphics
 
 config EGL_PROVIDER_MALI
   bool \"Mali 400\"
-  depends on ( TAINT && TARGET_PLATFORM_arm_ux500 )
+  depends on ( TAINT && ( TARGET_PLATFORM_arm_ux500 || TARGET_PLATFORM_arm_a10 ) )
   select PKG_mali400
 
 config EGL_PROVIDER_VIVANTE
@@ -82,13 +82,13 @@ config GLES_PROVIDER_IMX5
   select PKG_imx5-graphics
 
 config GLES_PROVIDER_IMX6
-  bool \"Freescale i.MX6 (Vivante GC400)\"
+  bool \"Freescale i.MX6 (Vivante GCxxx)\"
   depends on ( TAINT && TARGET_PLATFORM_arm_imx6 )
   select PKG_imx6-graphics
 
 config GLES_PROVIDER_MALI
   bool \"Mali 400\"
-  depends on ( TAINT && TARGET_PLATFORM_arm_ux500 )
+  depends on ( TAINT && ( TARGET_PLATFORM_arm_ux500 || TARGET_PLATFORM_arm_a10 ) )
   select PKG_mali400
 
 config GLES_PROVIDER_VIVANTE
@@ -125,14 +125,19 @@ config OVG_PROVIDER_IMX5
   select PKG_imx5-graphics
 
 config OVG_PROVIDER_IMX6
-  bool \"Freescale i.MX6 (Vivante GC400)\"
+  bool \"Freescale i.MX6 (Vivante GCxxx)\"
   depends on ( TAINT && TARGET_PLATFORM_arm_imx6 )
   select PKG_imx6-graphics
 
 config OVG_PROVIDER_MALI
   bool \"Mali 400\"
-  depends on ( TAINT && TARGET_PLATFORM_arm_ux500 )
+  depends on ( TAINT && ( TARGET_PLATFORM_arm_ux500 || TARGET_PLATFORM_arm_a10 ) )
   select PKG_mali400
+
+config OVG_PROVIDER_VIVANTE
+  bool \"Vivante\"
+  depends on ( TAINT && TARGET_PLATFORM_arm_armada5xx )
+  select PKG_libgles-gc
 
 config OVG_PROVIDER_VC
   bool \"Broadcom VideCoreIV\"
@@ -203,6 +208,12 @@ PKG_USE_DEPENDS_bluetooth="bluez"
 PKG_USE_NAME_bluray="Blu-Ray"
 PKG_USE_SECTION_bluray="multimedia"
 
+# cedarx
+PKG_USE_NAME_cedarx="CedarX"
+PKG_USE_SECTION_cedarx="hwaccel"
+PKG_USE_ARCH_cedarx="arm"
+PKG_USE_PLATFORM_cedarx="a10"
+
 # cryptsetup
 PKG_USE_NAME_cryptsetup="cryptsetup"
 PKG_USE_SECTION_cryptsetup="system"
@@ -225,6 +236,12 @@ PKG_USE_DEPENDS_directfb="DirectFB"
 PKG_USE_NAME_disko="disko"
 PKG_USE_SECTION_disko="toolkits"
 PKG_USE_DEPENDS_disko="disko"
+
+# dove
+PKG_USE_NAME_dove="Marvell Dove"
+PKG_USE_SECTION_dove="hwaccel"
+PKG_USE_ARCH_dove="arm"
+PKG_USE_PLATFORM_dove="armada5xx"
 
 # ducati
 PKG_USE_NAME_ducati="Ducati IVA-HD"

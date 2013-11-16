@@ -88,6 +88,9 @@ choice TOOLCHAIN
 config TOOLCHAIN_openbricks
   bool "OpenBricks"
 
+config TOOLCHAIN_openbricks_next
+  bool "OpenBricks next"
+
 config TOOLCHAIN_codesourcery
   bool "CodeSourcery"
   depends on ( TARGET_ARCH_arm || TARGET_ARCH_powerpc )
@@ -97,11 +100,15 @@ config TOOLCHAIN_linaro
   bool "Linaro"
   depends on TARGET_ARCH_arm
 
+config TOOLCHAIN_linaro_next
+  bool "Linaro next"
+  depends on TARGET_ARCH_arm
+
 endchoice
 
 choice TARGET_LIBC
   prompt "Target libc"
-  depends on ( TOOLCHAIN_openbricks || TOOLCHAIN_linaro )
+  depends on ( TOOLCHAIN_openbricks || TOOLCHAIN_openbricks_next || TOOLCHAIN_linaro || TOOLCHAIN_linaro_next )
   default TARGET_LIBC_eglibc
 
 config TARGET_LIBC_eglibc
@@ -141,7 +148,7 @@ config OPT_CODESOURCERY_ROOT
 
 config OPT_LOCAL_CC
   string "Local gcc location"
-  depends on ( TOOLCHAIN_openbricks || TOOLCHAIN_linaro )
+  depends on ( TOOLCHAIN_openbricks || TOOLCHAIN_openbricks_next || TOOLCHAIN_linaro || TOOLCHAIN_linaro_next )
   default ""
   help
     Need to point to your actual (host) gcc
@@ -150,7 +157,7 @@ config OPT_LOCAL_CC
 
 config OPT_LOCAL_CXX
   string "Local g++ location"
-  depends on ( TOOLCHAIN_openbricks || TOOLCHAIN_linaro )
+  depends on ( TOOLCHAIN_openbricks || TOOLCHAIN_openbricks_next || TOOLCHAIN_linaro || TOOLCHAIN_linaro_next )
   default ""
   help
     Need to point to your actual (host) g++
@@ -724,8 +731,17 @@ config OPT_FPU_OPTIMIZATIONS
 config OPT_TOOLCHAIN_TYPE
   string
   default "openbricks" if TOOLCHAIN_openbricks
+  default "openbricks" if TOOLCHAIN_openbricks_next
   default "codesourcery" if TOOLCHAIN_codesourcery
   default "linaro" if TOOLCHAIN_linaro
+  default "linaro" if TOOLCHAIN_linaro_next
+
+config OPT_TOOLCHAIN_FLAVOR
+  string
+  default "stable" if TOOLCHAIN_openbricks
+  default "stable" if TOOLCHAIN_linaro
+  default "next"   if TOOLCHAIN_openbricks_next
+  default "next"   if TOOLCHAIN_linaro_next
 
 config OPT_COMPRESSION_METHOD
   string
@@ -761,7 +777,7 @@ config OPT_GLES_PROVIDER
   default "tegra" if GLES_PROVIDER_TEGRA
   default "imx5" if GLES_PROVIDER_IMX5
   default "imx6" if GLES_PROVIDER_IMX6
-  default "mali" if OVG_PROVIDER_MALI
+  default "mali" if GLES_PROVIDER_MALI
   default "vivante" if GLES_PROVIDER_VIVANTE
   default "vc" if GLES_PROVIDER_VC
 
@@ -772,6 +788,7 @@ config OPT_OVG_PROVIDER
   default "imx5" if OVG_PROVIDER_IMX5
   default "imx6" if OVG_PROVIDER_IMX6
   default "mali" if OVG_PROVIDER_MALI
+  default "vivante" if OVG_PROVIDER_VIVANTE
   default "vc" if OVG_PROVIDER_VC
 
 config OPT_OMAX_PROVIDER
