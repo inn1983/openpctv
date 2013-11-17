@@ -1,0 +1,9 @@
+[Unit]
+Description=XBMC Media Center
+Requires=multi-user.target
+Conflicts=rescue.service rescue.target
+After=multi-user.target
+AllowIsolate=yes
+
+[Install]
+Alias=default.target
