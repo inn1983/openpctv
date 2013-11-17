@@ -5,8 +5,8 @@ pre_umount () {
   [ -f /lib/systemd/system/automounter-smb.service ] && systemctl stop automounter-smb.service
 }
 
-echo 0 > /sys/class/graphics/fbcon/cursor_blink
-
+#/usr/bin/videocache
+#chvt 4
 [ -n "$LOGFILE" ] || LOGFILE="/dev/null"
 /usr/lib/xbmc/xbmc.bin $@
 EXIT_CODE=$?
@@ -26,6 +26,5 @@ case "$EXIT_CODE" in
   ;;
   *) # 0=quit, 65=restart-app; let systemd restart the service
     echo "xbmc exited with EXIT_CODE=$EXIT_CODE at $(date). Returning -1 to systemd..." >>$LOGFILE
-    echo 1 > /sys/class/graphics/fbcon/cursor_blink
     exit 1
 esac
