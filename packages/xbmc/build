@@ -115,7 +115,7 @@ else
 fi
 
 # prevent internal error in gcc
-if [ ! -f configure ] ; then
+#if [ ! -f configure ] ; then
   do_autoconf || true
   cd lib/libid3tag/libid3tag && do_autoconf && cd -
   cd xbmc/screensavers/rsxs-0.9 && do_autoconf && cd -
@@ -126,7 +126,7 @@ if [ ! -f configure ] ; then
   cd lib/libdvd/libdvdcss && do_autoconf  && cd -
   cd lib/libdvd/libdvdread && do_autoconf  && cd -
   cd lib/libdvd/libdvdnav && do_autoconf  && cd -
-fi
+#fi
 
 if [ "$TARGET_MACHINE" != "pandaboard" ] ; then
   make -f codegenerator.mk

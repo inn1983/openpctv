@@ -1,7 +1,7 @@
 PKG_NAME=oscam
-PKG_URL_PROTO=git
-PKG_URL_REV=8259d72
-PKG_URL="https://github.com/gfto/oscam"
+PKG_URL_PROTO=svn
+PKG_URL_REV=9036
+PKG_URL="http://www.streamboard.tv/svn/oscam/trunk"
 PKG_VERSION=1.2+r${PKG_URL_REV}
 PKG_REV=1
 PKG_RUN_DEPENDS="$TARGET_LIBC libusb"

@@ -1,8 +1,12 @@
 PKG_NAME=xf86-video-ati
-PKG_VERSION=7.2.0
-PKG_URL="$XORG_SRCS/driver/${PKG_NAME}-${PKG_VERSION}.tar.bz2"
+PKG_URL_PROTO=git
+PKG_URL_REV=d571d6a
+PKG_URL="http://anongit.freedesktop.org/git/xorg/driver/xf86-video-ati.git"
+PKG_VERSION=0.2.1+r${PKG_URL_REV}
+#PKG_VERSION=7.2.0
+#PKG_URL="$XORG_SRCS/driver/${PKG_NAME}-${PKG_VERSION}.tar.bz2"
 PKG_REV=1
-PKG_DEPENDS="mesa xorg-server systemd libdrm libpciaccess"
+PKG_DEPENDS="mesa xorg-server systemd libdrm libpciaccess glamor"
 PKG_BUILD_DEPENDS="toolchain"
 PKG_RUN_DEPENDS="$TARGET_LIBC firmware-graphics-radeon"
 PKG_PRIORITY=optional
