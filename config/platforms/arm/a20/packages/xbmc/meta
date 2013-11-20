@@ -5,7 +5,7 @@ PKG_URL_PROTO=git
 #PKG_VERSION=frodo-12.0-r${PKG_URL_REV}
 #PKG_URL="https://github.com/empatzero/xbmca10.git"
 
-PKG_URL_REV=f6a809cff1ec0
+PKG_URL_REV=e7d9567
 PKG_VERSION=frodo-12.2-r${PKG_URL_REV}
 PKG_URL="https://github.com/rellla/xbmca10.git"
 

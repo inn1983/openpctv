@@ -25,6 +25,7 @@ if [ -f /sys/class/drm/card0/device/vendor ]; then
 	-e 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_xineliboutput
     sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_softhddevice
     sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_skinflat
+    sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_skinflatplus
     sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_skinnopacity
     sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_tvguide
   else
@@ -32,6 +33,7 @@ if [ -f /sys/class/drm/card0/device/vendor ]; then
         -e 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_xineliboutput
     sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_softhddevice
     sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_skinflat
+    sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_skinflatplus
     sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_skinnopacity
     sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_tvguide
   fi
