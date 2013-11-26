@@ -1,0 +1,39 @@
+diff -uNr cryptodev-linux-1.6.orig/cryptlib.c cryptodev-linux-1.6/cryptlib.c
+--- cryptodev-linux-1.6.orig/cryptlib.c	2013-11-24 11:14:48.840592967 +0800
++++ cryptodev-linux-1.6/cryptlib.c	2013-11-24 11:15:44.780591410 +0800
+@@ -220,7 +220,7 @@
+ {
+ 	int ret;
+ 
+-	INIT_COMPLETION(cdata->async.result->completion);
++	reinit_completion(&cdata->async.result->completion);
+ 
+ 	if (cdata->aead == 0) {
+ 		ablkcipher_request_set_crypt(cdata->async.request,
+@@ -243,7 +243,7 @@
+ {
+ 	int ret;
+ 
+-	INIT_COMPLETION(cdata->async.result->completion);
++	reinit_completion(&cdata->async.result->completion);
+ 	if (cdata->aead == 0) {
+ 		ablkcipher_request_set_crypt(cdata->async.request,
+ 			(struct scatterlist *)src, dst,
+@@ -355,7 +355,7 @@
+ {
+ 	int ret;
+ 
+-	INIT_COMPLETION(hdata->async.result->completion);
++	reinit_completion(&hdata->async.result->completion);
+ 	ahash_request_set_crypt(hdata->async.request, sg, NULL, len);
+ 
+ 	ret = crypto_ahash_update(hdata->async.request);
+@@ -367,7 +367,7 @@
+ {
+ 	int ret;
+ 
+-	INIT_COMPLETION(hdata->async.result->completion);
++	reinit_completion(&hdata->async.result->completion);
+ 	ahash_request_set_crypt(hdata->async.request, NULL, output, 0);
+ 
+ 	ret = crypto_ahash_final(hdata->async.request);

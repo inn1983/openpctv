@@ -1,0 +1,34 @@
+#!/bin/sh
+
+. /etc/system.options
+if [ $CAM = "OScam" ]; then
+  CAMPLUGIN="-Pdvbapi"
+elif [ $CAM = "VDR-SC" ]; then
+  CAMPLUGIN="-Psc"
+  /usr/bin/getcam auto
+  systemctl stop oscam
+fi
+
+#PLUGINS=""
+#for file in /etc/vdr/plugins.d/*; do
+#  if [ -f "$file" ]; then
+#    # plugins are enabled by default
+#    PLUGIN=""
+#    OPTIONS=""
+#    INITCMD=""
+#    ENABLED=yes
+#    . $file
+#    [ "$ENABLED" = yes ] && PLUGINS="$PLUGINS -P'$PLUGIN $OPTIONS'"
+#    [ -n "$INITCMD" ] && eval $INITCMD
+#  fi
+#done
+#
+#[ -r /etc/locale.conf ] && export LANG=`cat /etc/locale.conf | cut -d= -f2`
+#export LC_ALL=$LANG
+#export DISPLAY=":0.0"
+
+# special for germany :
+#[ "$LANG" = de_DE.UTF-8 ] && export VDR_CHARSET_OVERRIDE=”ISO-8859-15″
+#chvt 4
+epgen -i /video/epg.dat -o /tmp/epg.dat && epgtrans &
+eval vdr -g /tmp --vfat $CAMPLUGIN -Pvnsiserver3 -v /video -c /etc/vdr -E /etc/vdr/epg.data -s shutdown

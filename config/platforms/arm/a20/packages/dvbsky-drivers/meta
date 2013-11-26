@@ -1,0 +1,2 @@
+PKG_VERSION=121102
+PKG_URL="http://www.dvbsky.net/download/media_build_bst_${PKG_VERSION}.tar.gz"

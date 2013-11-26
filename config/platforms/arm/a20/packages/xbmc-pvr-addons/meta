@@ -1,0 +1,4 @@
+PKG_URL_PROTO=git
+PKG_URL_REV=56a77af
+PKG_URL="git://github.com/opdenkamp/xbmc-pvr-addons.git"
+PKG_VERSION=git+${PKG_URL_REV}

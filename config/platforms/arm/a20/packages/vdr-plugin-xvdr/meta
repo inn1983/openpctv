@@ -1,0 +1,4 @@
+PKG_URL_PROTO=git
+PKG_URL_REV=935a2941881b
+PKG_URL="git://github.com/pipelka/vdr-plugin-xvdr.git"
+PKG_VERSION=0.9.9+r${PKG_URL_REV}
