@@ -16,13 +16,13 @@ cd addons/pvr.vdr.vnsi/vdr-plugin-vnsiserver
 make all
 make_install
 
-mkdir -p $ROOT/$PKG_BUILD_DIR/.install/etc/vdr/plugins.d $ROOT/$PKG_BUILD_DIR/.install/etc/vdr/plugins
-NAME="vnsiserver"
+NAME="vnsiserver4"
+mkdir -p $ROOT/$PKG_BUILD_DIR/.install/etc/vdr/plugins.d $ROOT/$PKG_BUILD_DIR/.install/etc/vdr/plugins/$NAME
 cp -R .install $ROOT/$PKG_BUILD_DIR
-cp -r $NAME $ROOT/$PKG_BUILD_DIR/.install/etc/vdr/plugins/$NAME
+cp vnsiserver/allowed_hosts.conf $ROOT/$PKG_BUILD_DIR/.install/etc/vdr/plugins/$NAME/
 
-echo "PLUGIN=${NAME}4" > $ROOT/$PKG_BUILD_DIR/.install/etc/vdr/plugins.d/50_$NAME
-echo '0.0.0.0/0' >> $ROOT/$PKG_BUILD_DIR/.install/etc/vdr/plugins/$NAME/allowed_hosts.conf
+echo "PLUGIN=${NAME}" > $ROOT/$PKG_BUILD_DIR/.install/etc/vdr/plugins.d/50_$NAME
+echo '0.0.0.0/0' >> $ROOT/$PKG_BUILD_DIR/.install/etc/vdr/plugins/${NAME}/allowed_hosts.conf
 echo "ENABLED=yes" >> $ROOT/$PKG_BUILD_DIR/.install/etc/vdr/plugins.d/50_$NAME
 
 

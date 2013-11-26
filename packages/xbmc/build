@@ -67,7 +67,7 @@ if [ "$TARGET_MACHINE" = pandaboard ]; then
   EXTRA_CONFIG="$EXTRA_CONFIG --enable-player=gstplayer"
 fi
 
-if [ "$TARGET_PLATFORM" = a10 ]; then
+if [ "$TARGET_PLATFORM" = a10 -o "$TARGET_PLATFORM" = a20 ]; then
   #export CEDARLIBS="-lcedarv -lvecore"
   export CEDARLIBS="-lcedarx"
   EXTRA_CONFIG="$EXTRA_CONFIG --with-platform=allwinner-a10"
@@ -164,7 +164,7 @@ export MAKEFLAGS=-j3
 make externals 
 make xbmc.bin 
 make xbmc-xrandr 
-make skins CXX_FOR_BUILD="$CXX" CXXFLAGS_FOR_BUILD="$CXXFLAGS $CXXFLAGS_FOR_BUILD -I../../xbmc -I../../xbmc/linux -I../../lib"
+make skins CXX_FOR_BUILD="$CXX" CXXFLAGS_FOR_BUILD="$CXXFLAGS $CXXFLAGS_FOR_BUILD -I../../xbmc -I../../xbmc/linux -I../../xbmc/guilib -I../../lib"
 make_install
 
 if [ "$TARGET_ARCH" = arm ]; then
@@ -185,5 +185,15 @@ cp -P $ROOT/$PACKAGES/$1/scripts/xbmc-default-settings.sh \
 mkdir .install/root
 tar afx $ROOT/$PACKAGES/$1/config/xbmc_userdata.tar.xz -C \
   .install/root
+
+# remove unneeded files from skins
+for i in .install/usr/share/xbmc/addons/skin.*; do
+  rm $i/media/Makefile*
+
+  if [ -f $i/media/Textures.xbt ]; then
+    find $i/media -type f -not -iregex ".*\.xbt" -delete
+    find $i/media -type d -empty -delete
+  fi
+done
 
 exit 0

@@ -1,5 +1,5 @@
 MACHINE_NAME=cubietruck
 MACHINE_DESC="Cubietruck"
 MACHINE_HELP="Please refer to http://linux-sunxi.org/Cubieboard"
-MACHINE_UBOOT_CONFIG="Cubietruck"
+MACHINE_UBOOT_CONFIG="cubietruck"
 MACHINE_BOARD_CONFIG="cubietruck.fex"

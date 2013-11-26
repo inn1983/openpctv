@@ -453,7 +453,6 @@ PKG_USE_SECTION_vaapi="hwaccel"
 # vdpau
 PKG_USE_NAME_vdpau="VDPAU"
 PKG_USE_SECTION_vdpau="hwaccel"
-PKG_USE_ARCH_vdpau="i386 x86_64"
 
 # vlc
 PKG_USE_NAME_vlc="VLC"

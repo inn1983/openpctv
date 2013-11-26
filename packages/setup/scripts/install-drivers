@@ -65,13 +65,15 @@ else
 fi
 
 dialog --clear --title "$(gettext "Install additional V4L and DVB drive")" --menu \
-"$(gettext "Before proceeding please confirm your V4L and DVB device specific information. Choose the drives you need to install carefully.")" 15 80 6 \
+"$(gettext "Before proceeding please confirm your V4L and DVB device specific information. Choose the drives you need to install carefully.")" 17 80 8 \
  "Exit" "$(gettext "I do not want to install now.")" \
  "s2-liplianin" "$(gettext "Support most of the devices,such as DVBWorld,Tevii,Prof...")" \
  "tbs-drivers" "$(gettext "Support all the TBS devices")" \
  "dvbsky-drivers" "$(gettext "Support all the DVBSky devices")" \
  "tbs-dvbc-drivers" "$(gettext "Support all the TBS DVB-C devices")" \
- "dvbsky-dvbc-drivers" "$(gettext "Support all the DVBSky DVB-C devices")" 2> /tmp/driver.tmp
+ "dvbsky-dvbc-drivers" "$(gettext "Support all the DVBSky DVB-C devices")" \
+ "tbs-qbox-drivers" "$(gettext "Support the TBS QBOX I DVB-C devices")" \
+ "dvb3221-driver" "$(gettext "Support for DVB-C 3221 USB BOX")" 2> /tmp/driver.tmp
 kernelver=$(uname -r)
 if [[ "$(uname -m)" == *86 ]]; then
   machine=i586
@@ -107,10 +109,23 @@ case "$(cat /tmp/driver.tmp)" in
 		[ -f /usr/bin/enigma2.tbs ] && (rm /usr/bin/enigma2; ln -sf /usr/bin/enigma2.tbs /usr/bin/enigma2)
                 finishinstall
                 ;;
+  tbs-qbox-drivers)  tar -czf /root/kernel_media_$(date +%Y%m%d%H%M%S)_backup.tgz /lib/modules/$kernelver/kernel/drivers/media
+                rm -rf /lib/modules/$kernelver/kernel/drivers/media
+                echo "Download and install tbs-qbox-drivers-${kernelver}_Last_${machine}.opk, please wait..."
+                opkg install http://sourceforge.net/projects/openpctv/files/packages/tbs-qbox-drivers-${kernelver}_Last_${machine}.opk/download --force-overwrite || (echo "Can't download tbs-qbox-drivers-${kernelver}_Last_${machine}.opk, check your network settings."; exit)
+                [ -f /usr/bin/enigma2.tbs ] && (rm /usr/bin/enigma2; ln -sf /usr/bin/enigma2.tbs /usr/bin/enigma2)
+                finishinstall
+                ;;
   dvbsky-dvbc-drivers)  tar -czf /root/kernel_media_$(date +%Y%m%d%H%M%S)_backup.tgz /lib/modules/$kernelver/kernel/drivers/media
                 rm -rf /lib/modules/$kernelver/kernel/drivers/media
                 echo "Download and install dvbsky-dvbc-drivers-${kernelver}_Last_${machine}.opk, please wait..."
                 opkg install http://sourceforge.net/projects/openpctv/files/packages/dvbsky-dvbc-drivers-${kernelver}_Last_${machine}.opk/download --force-overwrite || (echo "Can't download dvbsky-dvbc-drivers-${kernelver}_Last_${machine}.opk, check your network settings."; exit)
+                finishinstall
+                ;;
+  dvb3221-driver)  tar -czf /root/kernel_media_$(date +%Y%m%d%H%M%S)_backup.tgz /lib/modules/$kernelver/kernel/drivers/media
+                rm -rf /lib/modules/$kernelver/kernel/drivers/media
+                echo "Download and install dvb3221-driver-${kernelver}_Last_${machine}.opk, please wait..."
+                opkg install http://sourceforge.net/projects/openpctv/files/packages/dvb3221-driver-${kernelver}_Last_${machine}.opk/download --force-overwrite || (echo "Can't download dvb3221-driver-${kernelver}_Last_${machine}.opk, check your network settings."; exit)
                 finishinstall
                 ;;
 esac

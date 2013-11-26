@@ -4,6 +4,8 @@ export TERM=linux
 . gettext.sh
 export TEXTDOMAIN=openpctv
 
+source /etc/profile
+
 DIALOG=/usr/bin/dialog
 SYSCONFIG="/etc/sysconfig"
 DIALOGOUT="/tmp/dialogout"

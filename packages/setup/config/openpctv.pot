@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-19 19:31+0800\n"
+"POT-Creation-Date: 2013-11-25 15:15+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: packages/setup/scripts/audio-config:8
 #: packages/setup/scripts/audio-config:48
-#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:239
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:241
 msgid "Soundcard Configuration"
 msgstr ""
 
@@ -364,7 +364,7 @@ msgstr ""
 msgid "Finished"
 msgstr ""
 
-#: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:239
+#: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:241
 msgid "Select a software emulated CAM"
 msgstr ""
 
@@ -446,7 +446,7 @@ msgid ""
 msgstr ""
 
 #: packages/setup/scripts/install-drivers:67
-#: packages/setup/scripts/setup.sh:239
+#: packages/setup/scripts/setup.sh:241
 msgid "Install additional V4L and DVB drive"
 msgstr ""
 
@@ -478,6 +478,14 @@ msgstr ""
 
 #: packages/setup/scripts/install-drivers:74
 msgid "Support all the DVBSky DVB-C devices"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:75
+msgid "Support the TBS QBOX I DVB-C devices"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:76
+msgid "Support for DVB-C 3221 USB BOX"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:13
@@ -731,7 +739,7 @@ msgid "Submit"
 msgstr ""
 
 #: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
-#: packages/setup/scripts/setup.sh:239
+#: packages/setup/scripts/setup.sh:241
 msgid "Set the monitor's best resolution"
 msgstr ""
 
@@ -859,7 +867,7 @@ msgid ""
 "a default device as Lirc support."
 msgstr ""
 
-#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:239
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:241
 msgid "Set the default target"
 msgstr ""
 
@@ -882,178 +890,178 @@ msgid ""
 "card"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:34 packages/setup/scripts/setup.sh:48
-#: packages/setup/scripts/setup.sh:56
+#: packages/setup/scripts/setup.sh:36 packages/setup/scripts/setup.sh:50
+#: packages/setup/scripts/setup.sh:58
 msgid "OK"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:34 packages/setup/scripts/setup.sh:43
-#: packages/setup/scripts/setup.sh:45 packages/setup/scripts/setup.sh:48
-#: packages/setup/scripts/setup.sh:56
+#: packages/setup/scripts/setup.sh:36 packages/setup/scripts/setup.sh:45
+#: packages/setup/scripts/setup.sh:47 packages/setup/scripts/setup.sh:50
+#: packages/setup/scripts/setup.sh:58
 msgid "Auto mount cifs"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:42
+#: packages/setup/scripts/setup.sh:44
 msgid "MSSMBMNT"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:42
+#: packages/setup/scripts/setup.sh:44
 msgid "MSSMBMNTINFO"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:43 packages/setup/scripts/setup.sh:45
+#: packages/setup/scripts/setup.sh:45 packages/setup/scripts/setup.sh:47
 msgid "Specifies"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:43
+#: packages/setup/scripts/setup.sh:45
 msgid "the username"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:45
+#: packages/setup/scripts/setup.sh:47
 msgid "the password"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:48 packages/setup/scripts/setup.sh:56
+#: packages/setup/scripts/setup.sh:50 packages/setup/scripts/setup.sh:58
 msgid "Mount"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:48 packages/setup/scripts/setup.sh:56
+#: packages/setup/scripts/setup.sh:50 packages/setup/scripts/setup.sh:58
 msgid "to"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:48
+#: packages/setup/scripts/setup.sh:50
 msgid "success"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:56
+#: packages/setup/scripts/setup.sh:58
 msgid "fail"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:71 packages/setup/scripts/setup.sh:73
+#: packages/setup/scripts/setup.sh:73 packages/setup/scripts/setup.sh:75
 msgid "MSNFSMNT"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:71
+#: packages/setup/scripts/setup.sh:73
 msgid "The NFS server name or IP address"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:73
+#: packages/setup/scripts/setup.sh:75
 msgid "The name of the NFS share"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:80 packages/setup/scripts/setup.sh:84
-#: packages/setup/scripts/setup.sh:89 packages/setup/scripts/setup.sh:94
-#: packages/setup/scripts/setup.sh:150
+#: packages/setup/scripts/setup.sh:82 packages/setup/scripts/setup.sh:86
+#: packages/setup/scripts/setup.sh:91 packages/setup/scripts/setup.sh:96
+#: packages/setup/scripts/setup.sh:152
 msgid "MSSC"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:80
+#: packages/setup/scripts/setup.sh:82
 msgid "The server name or IP address"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:84
+#: packages/setup/scripts/setup.sh:86
 msgid "The port of the server"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:89
+#: packages/setup/scripts/setup.sh:91
 msgid "Specifies the username"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:94
+#: packages/setup/scripts/setup.sh:96
 msgid "Specifies the password"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:150
+#: packages/setup/scripts/setup.sh:152
 msgid "Specifies the newcamd cfgkey"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:165
+#: packages/setup/scripts/setup.sh:167
 msgid "MSSCMENU"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:165
+#: packages/setup/scripts/setup.sh:167
 msgid "MSCCCAM"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:165
+#: packages/setup/scripts/setup.sh:167
 msgid "MSCAMD35"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:165
+#: packages/setup/scripts/setup.sh:167
 msgid "MSNEWCAMD"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:165
+#: packages/setup/scripts/setup.sh:167
 msgid "MSNOSC"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:174
+#: packages/setup/scripts/setup.sh:176
 msgid "EditSC"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:188
+#: packages/setup/scripts/setup.sh:190
 msgid "Select a partition for OpenPCTV cache..."
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:196
+#: packages/setup/scripts/setup.sh:198
 msgid "Size"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:196
+#: packages/setup/scripts/setup.sh:198
 msgid "Used"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:196
+#: packages/setup/scripts/setup.sh:198
 msgid "Available"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:199
+#: packages/setup/scripts/setup.sh:201
 msgid "Don't mount bind for OpenPCTV cache"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:230
+#: packages/setup/scripts/setup.sh:232
 msgid ""
 "Would you like to scan channels for VDR/XBMC(It'll take quiet long to do "
 "it)?  You can also scan channels with vdr reelscanchannels plugin in vdr."
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:239
+#: packages/setup/scripts/setup.sh:241
 msgid "OpenPCTV configurator"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:239
+#: packages/setup/scripts/setup.sh:241
 msgid "Main menu"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:239
+#: packages/setup/scripts/setup.sh:241
 msgid "Set global locale and language"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:239
+#: packages/setup/scripts/setup.sh:241
 msgid "Configure Network Environment"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:239
+#: packages/setup/scripts/setup.sh:241
 msgid "Select IR device"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:239
+#: packages/setup/scripts/setup.sh:241
 msgid "Auto update Satellite Transponders and EPG data"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:239
+#: packages/setup/scripts/setup.sh:241
 msgid "DiSEqC configurator"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:239
+#: packages/setup/scripts/setup.sh:241
 msgid "Auto scan channels"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:239
+#: packages/setup/scripts/setup.sh:241
 msgid "Reboot OpenPCTV"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:239
+#: packages/setup/scripts/setup.sh:241
 msgid "Exit to login shell"
 msgstr ""
 

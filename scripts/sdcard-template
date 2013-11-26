@@ -15,6 +15,7 @@ case $TARGET in
 #don't remove the following comment
 #begin_targets
   cubieboard)  fs_types="fat32 ext4" ;;
+  cubietruck)  fs_types="ext3 ext4"  ;;
   cubox)       fs_types="ext4"       ;;
   cuboxi)      fs_types="ext3 ext4"  ;;
   utilite)     fs_types="fat32 ext4" ;;
@@ -101,7 +102,7 @@ done
 # define partitions and prepare "fdisk" command
 echo $DEVICE | grep -q mmc && OPT=p
 partition_0=${DEVICE}${OPT}1 ; label_0="BOOT"
-partition_1=${DEVICE}${OPT}2 ; label_1="GEEXBOX"
+partition_1=${DEVICE}${OPT}2 ; label_1="OPENPCTV"
 
 if [ $part_count -lt 2 ] ; then
   fdisk_input="o\nn\np\n1\n2048\n\nt\n${boot_part_type}\na\n1\nw\n"
@@ -149,6 +150,13 @@ if [ $TARGET = cubieboard ] ; then
   echo "\n#### Writing boot record(s)..."
   dd if=$mountdir/boot/sunxi-spl.bin of=$DEVICE bs=1024 seek=8
   dd if=$mountdir/boot/u-boot.bin of=$DEVICE bs=1024 seek=32
+fi
+
+if [ $TARGET = cubietruck ] ; then
+  echo "\n#### Writing boot record(s)..."
+  dd if=/dev/zero of=$DEVICE bs=1k count=1024
+  dd if=$mountdir/boot/sunxi-spl.bin of=$DEVICE bs=1024 seek=8
+#  dd if=$mountdir/boot/u-boot.bin of=$DEVICE bs=1024 seek=40
 fi
 
 if [ $TARGET = cuboxi ] ; then

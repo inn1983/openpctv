@@ -10,12 +10,8 @@ install_dir="$PWD/.install"
 debug_dir="$PWD/.install-debuginfo/usr/lib/debug"
 mkdir -p $install_dir $debug_dir
 mkdir -p $install_dir/firmware
-cp *.fw $install_dir/firmware/
+cp firmware/*.fw $install_dir/firmware/
 
-tar xjvf linux-tbs-drivers.tar.bz2
-
-cd linux-tbs-drivers
-#patch -p1 < $ROOT/$PACKAGES/$1/config/Revert-most-of-15cc2bb-media-DVB-dtv_property_cache_submit-shouldn-t-modifiy-the-cache.patch
 chmod -R +x linux v4l
 if [ "$TARGET_ARCH" = "i386" ]; then
   sh ./v4l/tbs-x86_r3.sh

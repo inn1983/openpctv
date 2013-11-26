@@ -42,6 +42,10 @@ mkdir -p $INSTALL/etc/installator
 
 mkdir -p $INSTALL/lib/systemd/system/installator.target.wants/
 ln -s /lib/systemd/system/getty@.service $INSTALL/lib/systemd/system/installator.target.wants/getty@tty2.service
+ln -s /lib/systemd/system/getty@.service $INSTALL/lib/systemd/system/installator.target.wants/getty@tty3.service
+ln -s /lib/systemd/system/getty@.service $INSTALL/lib/systemd/system/installator.target.wants/getty@tty4.service
 
 mkdir -p $INSTALL/lib/systemd/system/setup.target.wants/
 ln -s /lib/systemd/system/getty@.service $INSTALL/lib/systemd/system/setup.target.wants/getty@tty2.service
+ln -s /lib/systemd/system/getty@.service $INSTALL/lib/systemd/system/setup.target.wants/getty@tty3.service
+ln -s /lib/systemd/system/getty@.service $INSTALL/lib/systemd/system/setup.target.wants/getty@tty4.service

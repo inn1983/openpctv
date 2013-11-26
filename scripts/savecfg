@@ -9,7 +9,7 @@ DOT_CONFIG="`ls -d $ROOT/$BUILD_NOARCH/kconfig-frontends-*`/.config"
 
 CFG_FILENAME="$FLAVOUR"
 
-[ "$FLAVOUR" = geexbox ] && \
+[ "$FLAVOUR" = openpctv ] && \
   CFG_FILENAME="${CFG_FILENAME}-${MEDIA_CENTER_FRONTEND}"
 
 if [ "$TARGET_ARCH" = arm ]; then
