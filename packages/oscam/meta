@@ -1,6 +1,6 @@
 PKG_NAME=oscam
 PKG_URL_PROTO=svn
-PKG_URL_REV=9053
+PKG_URL_REV=9059
 PKG_URL="http://www.streamboard.tv/svn/oscam/trunk"
 PKG_VERSION=1.2+r${PKG_URL_REV}
 PKG_REV=1
