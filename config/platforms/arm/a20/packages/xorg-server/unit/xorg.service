@@ -1,0 +1,14 @@
+[Unit]
+Description=Xorg server
+After=systemd-udevd.service
+
+[Service]
+Environment=DISPLAY=:0.0 TTY=4
+EnvironmentFile=/etc/X11/X.cfg
+ExecStartPre=/usr/lib/xorg/video-card-detect
+ExecStart=/usr/bin/Xorg vt${TTY} -s 0 -dpms -br -noreset -allowMouseOpenFail
+ExecStartPost=/usr/lib/xorg/xorg-post-start
+Restart=always
+
+[Install]
+WantedBy=graphical.target
