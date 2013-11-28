@@ -15,9 +15,9 @@ case $TARGET in
 #don't remove the following comment
 #begin_targets
   cubieboard)  fs_types="fat32 ext4" ;;
-  cubietruck)  fs_types="ext3 ext4"  ;;
+  cubietruck)  fs_types="fat32 ext4" ;;
   cubox)       fs_types="ext4"       ;;
-  cuboxi)      fs_types="ext3 ext4"  ;;
+  cuboxi)      fs_types="fat32 ext4"  ;;
   utilite)     fs_types="fat32 ext4" ;;
   raspberrypi) fs_types="fat32 ext4" ;;
   igepv2)      fs_types="fat32 ext2" ;  boot_part_size="16M" ;; 
@@ -148,14 +148,13 @@ fi
 
 if [ $TARGET = cubieboard ] ; then
   echo "\n#### Writing boot record(s)..."
-  dd if=$mountdir/boot/sunxi-spl.bin of=$DEVICE bs=1024 seek=8
-  dd if=$mountdir/boot/u-boot.bin of=$DEVICE bs=1024 seek=32
+  dd if=$mountdir/boot/u-boot-sunxi-with-spl.bin of=$DEVICE bs=1024 seek=8 conv=fsync
 fi
 
-if [ $TARGET = cubietruck ] ; then
+if [ $TARGET = cubietruck -o $TARGET = cubieboard2 ] ; then
   echo "\n#### Writing boot record(s)..."
   dd if=/dev/zero of=$DEVICE bs=1k count=1024
-  dd if=$mountdir/boot/sunxi-spl.bin of=$DEVICE bs=1024 seek=8
+  dd if=$mountdir/boot/u-boot-sunxi-with-spl.bin of=$DEVICE bs=1024 seek=8 conv=fsync
 #  dd if=$mountdir/boot/u-boot.bin of=$DEVICE bs=1024 seek=40
 fi
 

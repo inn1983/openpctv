@@ -160,7 +160,7 @@ fi
             --as=$AS \
             --cc=$CC \
             --host-cc=$HOST_CC \
-            --language=en \
+            --language=all \
             --disable-shm \
             --disable-dynamic-plugins \
             --extra-libs="$EXTRA_LIBS" \

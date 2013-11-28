@@ -67,7 +67,7 @@ if [ "$TARGET_MACHINE" = pandaboard ]; then
   EXTRA_CONFIG="$EXTRA_CONFIG --enable-player=gstplayer"
 fi
 
-if [ "$TARGET_PLATFORM" = a10 -o "$TARGET_PLATFORM" = a20 ]; then
+if [ "$TARGET_PLATFORM" = a10 ]; then
   #export CEDARLIBS="-lcedarv -lvecore"
   export CEDARLIBS="-lcedarx"
   EXTRA_CONFIG="$EXTRA_CONFIG --with-platform=allwinner-a10"
@@ -76,7 +76,6 @@ fi
 if [ "$TARGET_PLATFORM" = imx6 ]; then
   EXTRA_CONFIG="$EXTRA_CONFIG --enable-codec=imxvpu"
 fi
-
 
 if [ "$FPU_OPTIMIZATIONS" = "neon" -o  "$FPU_OPTIMIZATIONS" = "neon-vfp4" ]; then
   EXTRA_CONFIG="$EXTRA_CONFIG --enable-neon"
@@ -110,12 +109,13 @@ if [ "$TARGET_MACHINE" = cubox ] || [ "$TARGET_MACHINE" = raspberrypi ] || \
    [ "$TARGET_MACHINE" = pandaboard ] || [ "$TARGET_PLATFORM" = a10 ]; then
   EXTRA_CONFIG="$EXTRA_CONFIG --enable-texturepacker"
   export TEXTUREPACKER_NATIVE_ROOT=$USE_TEXTUREPACKER_NATIVE_ROOT
-else
+else 
   EXTRA_CONFIG="$EXTRA_CONFIG --disable-texturepacker"
 fi
 
+
 # prevent internal error in gcc
-#if [ ! -f configure ] ; then
+if [ ! -f configure ] ; then
   do_autoconf || true
   cd lib/libid3tag/libid3tag && do_autoconf && cd -
   cd xbmc/screensavers/rsxs-0.9 && do_autoconf && cd -
@@ -126,14 +126,12 @@ fi
   cd lib/libdvd/libdvdcss && do_autoconf  && cd -
   cd lib/libdvd/libdvdread && do_autoconf  && cd -
   cd lib/libdvd/libdvdnav && do_autoconf  && cd -
-#fi
+fi
 
 if [ "$TARGET_MACHINE" != "pandaboard" ] ; then
   make -f codegenerator.mk
 fi
 
-export LDFLAGS="$LDFLAGS -L${LIB_PREFIX}/lib/mesa"
-echo $LDFLAGS
 sed -i 's%PYTHON_VERSION=$ac_python_version%PYTHON_VERSION=2.7%' configure
 GCC_NO_LTO=1 GCC_NO_GOLD=1 GCC_NO_GRAPHITE=1 GCC_NO_LOOP_TREE=1 \
 do_configure \
@@ -160,11 +158,11 @@ sed -i lib/libdvd/libdvdnav/config.mak \
     -e "s:^DVDREAD_CFLAGS=.*$:DVDREAD_CFLAGS=-I$LIB_PREFIX/include:" \
     -e "s:^DVDREAD_LIBS=.*$:DVDREAD_LIBS=-L$LIB_PREFIX/lib -ldvdread:" \
 
-export MAKEFLAGS=-j3
-make externals 
-make xbmc.bin 
-make xbmc-xrandr 
-make skins CXX_FOR_BUILD="$CXX" CXXFLAGS_FOR_BUILD="$CXXFLAGS $CXXFLAGS_FOR_BUILD -I../../xbmc -I../../xbmc/linux -I../../xbmc/guilib -I../../lib"
+#export MAKEFLAGS=-j1
+make externals
+make xbmc.bin
+make xbmc-xrandr
+make skins
 make_install
 
 if [ "$TARGET_ARCH" = arm ]; then
@@ -182,10 +180,6 @@ done
 cp -P $ROOT/$PACKAGES/$1/scripts/xbmc-default-settings.sh \
   .install/usr/lib/xbmc/
 
-mkdir .install/root
-tar afx $ROOT/$PACKAGES/$1/config/xbmc_userdata.tar.xz -C \
-  .install/root
-
 # remove unneeded files from skins
 for i in .install/usr/share/xbmc/addons/skin.*; do
   rm $i/media/Makefile*
@@ -195,5 +189,10 @@ for i in .install/usr/share/xbmc/addons/skin.*; do
     find $i/media -type d -empty -delete
   fi
 done
+
+mkdir .install/root
+tar afx $ROOT/$PACKAGES/$1/config/xbmc_userdata.tar.xz -C \
+  .install/root
+
 
 exit 0

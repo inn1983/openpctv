@@ -22,6 +22,7 @@ EXTRA_LIBS="-lavcodec -lavformat -lavutil -lpostproc -lswscale -lfribidi -lfreet
 set_option $1 "sdl" "sdl"
 set_option $1 "xorg" "xv xvmc x11 xf86keysym gl"
 set_option $1 "unrar" "unrarexec"
+set_option $1 "vaapi" "vaapi"
 set_option $1 "vdpau" "vdpau"
 set_option $1 "bluray" "bluray"
 set_option $1 "dvb" "dvb"
@@ -57,12 +58,10 @@ if [ "$TARGET_ARCH" = arm ]; then
   VORBIS_CONFIG="--disable-libvorbis \
                  --enable-tremor-internal \
                  --enable-tremor-low \
+                 --enable-vfpv3 --enable-neon --enable-thumb \
                  --enable-tremor"
 else
-  VORBIS_CONFIG="--disable-libvorbis \
-                 --enable-tremor-internal \
-                 --enable-tremor-low \
-                 --enable-tremor"
+  VORBIS_CONFIG="--disable-libvorbis" 
 
 #  VORBIS_CONFIG="--enable-libvorbis \
 #                 --disable-tremor-internal \
@@ -78,7 +77,7 @@ else
   DEBUG_CONFIG="--disable-debug"
 fi
 
-export CFLAGS="$CFLAGS -ffast-math -DFIXED_POINT"
+export CFLAGS="$CFLAGS -ffast-math -DFIXED_POINT -Wunused-but-set-variable"
 
 cd $BUILD/$1*
 #rm -rf libavcodec # ensure we check for headers in external ffmpeg
@@ -132,49 +131,13 @@ fi
             --disable-gif \
             --disable-jpeg \
             --disable-liblzo \
-            --disable-xanim \
-            --disable-xvid \
-            --disable-x264 \
             --disable-demuxer=matroska \
             $LIBAV \
             --disable-speex \
             $VORBIS_CONFIG \
             --enable-theora \
-            --enable-faad \
-            --disable-faac \
-            --disable-ladspa \
-            --disable-libdv \
             --enable-mad \
             --disable-toolame \
-            --disable-xmms \
-            --enable-mp3lib \
-            --disable-liba52 \
-            --disable-libmpeg2 \
-            --disable-musepack \
-            --disable-vidix \
-            --disable-vidix-pcidb \
-            --disable-dga1 \
-            --disable-dga2 \
-            --disable-svga \
-            --disable-aa \
-            --disable-caca \
-            --disable-ggi \
-            --disable-ggiwmh \
-            --disable-directx \
-            --disable-dxr2 \
-            --disable-mga \
-            --disable-xmga \
-            --disable-vm \
-            --disable-xinerama \
-            --disable-mlib \
-            --disable-3dfx \
-            --disable-tdfxfb \
-            --disable-zr \
-            --disable-bl \
-            --disable-tdfxvid \
-            --disable-tga \
-            --disable-pnm \
-            --disable-yuv4mpeg \
             --disable-wii \
             --enable-fbdev \
             --disable-vesa \
@@ -198,10 +161,10 @@ fi
             --as=$AS \
             --cc=$CC \
             --host-cc=$HOST_CC \
-            --language=en \
+            --language=all \
             --disable-shm \
             --disable-dynamic-plugins \
             --extra-libs="$EXTRA_LIBS" \
             $DEBUG_CONFIG
-make
+make -j3
 make_install
