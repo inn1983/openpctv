@@ -1,5 +1,6 @@
 #!/bin/bash
 
+systemctl start plymouth-quit
 export TERM=linux
 . gettext.sh
 export TEXTDOMAIN=openpctv
@@ -238,7 +239,7 @@ fi
 function MainMenu
 {
 updatelocale
-  ${DIALOG} --no-cancel --backtitle "$(gettext "OpenPCTV configurator")" --menu "$(gettext "Main menu")" 21 60 14 Lang "$(gettext "Set global locale and language")" Target "$(gettext "Set the default target")" Netconf "$(gettext "Configure Network Environment")" Driver "$(gettext "Install additional V4L and DVB drive")" Lirc "$(gettext "Select IR device")" Monitor "$(gettext "Set the monitor's best resolution")" Audio "$(gettext "Soundcard Configuration")" Uptran "$(gettext "Auto update Satellite Transponders and EPG data")" CAM "$(gettext "Select a software emulated CAM")" DiSEqC "$(gettext "DiSEqC configurator")" Scan "$(gettext "Auto scan channels")" Reboot "$(gettext "Reboot OpenPCTV")" Exit "$(gettext "Exit to login shell")" 2> $DIALOGOUT
+  ${DIALOG} --clear --no-cancel --backtitle "$(gettext "OpenPCTV configurator")" --menu "$(gettext "Main menu")" 21 60 14 Lang "$(gettext "Set global locale and language")" Target "$(gettext "Set the default target")" Netconf "$(gettext "Configure Network Environment")" Driver "$(gettext "Install additional V4L and DVB drive")" Lirc "$(gettext "Select IR device")" Monitor "$(gettext "Set the monitor's best resolution")" Audio "$(gettext "Soundcard Configuration")" Uptran "$(gettext "Auto update Satellite Transponders and EPG data")" CAM "$(gettext "Select a software emulated CAM")" DiSEqC "$(gettext "DiSEqC configurator")" Scan "$(gettext "Auto scan channels")" Reboot "$(gettext "Reboot OpenPCTV")" Exit "$(gettext "Exit to login shell")" 2> $DIALOGOUT
   case "$(cat $DIALOGOUT)" in
     Lang)	/usr/bin/select-language
 		MainMenu
@@ -282,6 +283,7 @@ updatelocale
     Reboot)	reboot
 		;;
     Exit)	clear
+		agetty tty1 &
     		exit 0
     		;;
   esac

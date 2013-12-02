@@ -119,7 +119,11 @@ echo '/sbin/mdev' > /proc/sys/kernel/hotplug
 mdev -s
 
 # splash
-/bin/ply-image /plymouth/splash.png
+#/bin/ply-image /plymouth/splash.png
+#if [ -x /bin/plymouth ] && plymouth --ping; then
+#  /bin/plymouth hide-splash > /dev/null 2>&1
+#  plymouth hide-splash
+#fi
 
 # parse kernel cmdline
 for arg in $(cat /proc/cmdline); do

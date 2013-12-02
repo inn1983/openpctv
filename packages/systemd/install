@@ -13,8 +13,7 @@ do_install etc/sysctl.d
 do_install etc/tmpfiles.d
 do_install etc/systemd
 do_install etc/udev
-#pkg_uses $1 devtools && do_install usr/bin || do_install usr/bin/udevadm
-do_install usr/bin
+pkg_uses $1 devtools && do_install usr/bin || do_install usr/bin/udevadm
 ln -sf /usr/bin/udevadm $INSTALL/usr/bin/udevinfo
 do_install usr/share/dbus-1
 do_install usr/share/polkit-1
@@ -32,13 +31,14 @@ mkdir -p $INSTALL/sbin
 ln -s ../bin/systemctl $INSTALL/sbin/halt
 # busybox package installs wrappers for these
 ln -s ../bin/systemctl $INSTALL/sbin/poweroff
-ln -s ../bin/systemctl $INSTALL/sbin/reboot
 ln -s ../bin/systemctl $INSTALL/sbin/shutdown
+ln -s ../bin/systemctl $INSTALL/sbin/reboot
 ln -s ../lib/systemd/systemd $INSTALL/sbin/init
 
 # add more gettys
 for TTY in 2 3; do
-  ln -s /lib/systemd/system/getty/getty@service $INSTALL/etc/systemd/system/getty.target.wants/getty@tty$TTY.service
+  ln -s /lib/systemd/system/getty/getty@service \
+    $INSTALL/etc/systemd/system/getty.target.wants/getty@tty$TTY.service
 done
 
 [ -n "$MEDIA_CENTER_FRONTEND" ] && \
@@ -56,12 +56,16 @@ sed -i -e "s/#LogLevel=info/LogLevel=notice/" $INSTALL/etc/systemd/system.conf
 # we don't use display-manager ...
 ln -s /dev/null $INSTALL/etc/systemd/system/display-manager.service
 
-# on RaspberryPi we doesn't use X
-if [ "$TARGET_MACHINE" = raspberrypi ]; then
-  ln -s /dev/null $INSTALL/etc/systemd/system/xorg.service
-fi
+# don't try to start X when not needed
+[ $USE_xorg ] || ln -s /dev/null $INSTALL/etc/systemd/system/xorg.service
 
 # disable "Predictable Network Interface Names"
 ln -s /dev/null $INSTALL/etc/udev/rules.d/80-net-name-slot.rules
+
+# we enable RTC synchronisation for CuBox only
+# could also be done for RaspberryPi with ABIORTC module
+if [ "$TARGET_MACHINE" != cubox ]; then
+  ln -s /dev/null $INSTALL/etc/systemd/system/hwclock-sync.service
+fi
 
 exit 0

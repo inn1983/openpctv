@@ -321,9 +321,6 @@ do_shutdown() {
   poweroff
 }
 
-for i in /media/*; do
-  umount $i >/dev/null 2>&1
-done
 
 while true; do
   main_menu

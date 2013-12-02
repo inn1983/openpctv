@@ -122,9 +122,9 @@ append_grub_conf () {
 setup_grub () {
   local OPT_FS_TYPE
 
-  append_grub_conf $1 "OpenPCTV $VERSION " "" "" ""
-  append_grub_conf $1 "OpenPCTV $VERSION (debug)" "" debugging ""
-  append_grub_conf $1 "OpenPCTV $VERSION (reconfigure)" "" "" configure
+  append_grub_conf $1 "GeeXboX $VERSION " "" "" ""
+  append_grub_conf $1 "GeeXboX $VERSION (debug)" "" debugging ""
+  append_grub_conf $1 "GeeXboX $VERSION (reconfigure)" "" "" configure
 
   # put default options
   update_grub_conf_bootargs $1 lang `cmdline_default lang en`
@@ -186,7 +186,7 @@ choose_disk () {
     done
 
     # add volume groups to list
-    [ -x /usr/sbin/lvm ] && for i in `lvm vgs --noheadings --separator ":" --nosuffix --units M | sed "s/^\ *//g"`; do
+    [ -x /sbin/lvm ] && for i in `lvm vgs --noheadings --separator ":" --nosuffix --units M | sed "s/^\ *//g"`; do
       SIZE=`echo $i | cut -d\: -f6 | sed "s/\.[0-9]*//g"`
       VENDOR="LVM"
       MODEL="Volume Group"
@@ -232,7 +232,7 @@ choose_partition_dev () {
       esac
     done
     
-    [ -x /usr/sbin/lvm ] && for i in `lvm lvs --noheadings --nosuffix --units M --separator ":" $LOC_DISK 2>/dev/null | sed "s/^\ *//g"`; do
+    [ -x /sbin/lvm ] && for i in `lvm lvs --noheadings --nosuffix --units M --separator ":" $LOC_DISK 2>/dev/null | sed "s/^\ *//g"`; do
       SIZE=`echo $i | cut -d\: -f4 | sed "s/\.[0-9]*//g"`
       VENDOR="LVM"
       MODEL="Logical Volume"
@@ -298,7 +298,7 @@ format_if_needed () {
   local SUPPORTED_TYPES PART_TYPE
 
   # Set valid FS types based on selected install partition
-  if ( [ -x /usr/sbin/lvm ] && lvm lvdisplay $LOC_DEV >/dev/null 2>&1 ); then
+  if ( [ -x /sbin/lvm ] && lvm lvdisplay $LOC_DEV >/dev/null 2>&1 ); then
     SUPPORTED_TYPES="vfat ext4 ext3 ext2"
     PART_TYPE="LVM"
   else
@@ -340,7 +340,7 @@ format_if_needed () {
     && FORMAT=yes
 
   if [ "$FORMAT" = yes ]; then
-    if ( [ -x /usr/sbin/lvm ] && lvm lvdisplay $LOC_DEV >/dev/null 2>&1 ); then
+    if ( [ -x /sbin/lvm ] && lvm lvdisplay $LOC_DEV >/dev/null 2>&1 ); then
       LOC_MKFS_TYPE=`dialog --stdout --aspect 15 --backtitle "$BACKTITLE" \
         --title "$MSG_INSTALL_PART_TYPE" --menu "$MSG_INSTALL_PART_TYPE_DESC"\
         0 0 0 ext2 "Linux ext2" ext3 "Linux ext3" ext4 "Linux ext4" vfat "Dos vfat"` \
@@ -364,23 +364,23 @@ format_if_needed () {
     case $LOC_MKFS_TYPE in
       vfat)
         MKFS=mkfs.vfat
-        MKFS_OPT="-n OPENPCTV"
+        MKFS_OPT="-n GEEXBOX"
         LOC_MKFS_TYPE=vfat
         MKFS_TYPENAME="FAT"
         ;;
       ext2)
         MKFS=mke2fs
-        MKFS_OPT="-L OPENPCTV"
+        MKFS_OPT="-L GEEXBOX"
         MKFS_TYPENAME="Linux ext2"
         ;;
         ext3)
         MKFS=mke2fs
-        MKFS_OPT="-L OPENPCTV -j"
+        MKFS_OPT="-L GEEXBOX -j"
         MKFS_TYPENAME="Linux ext3"
         ;;
       ext4)
         MKFS=mke2fs
-        MKFS_OPT="-L OPENPCTV -t ext4"
+        MKFS_OPT="-L GEEXBOX -t ext4"
         MKFS_TYPENAME="Linux ext4"
     esac
 
@@ -457,11 +457,11 @@ install_grub (){
   rm -rf $GRUBDIR
   mkdir -p $GRUBDIR
 
-  [ -f "$BOOTDISK_MNT/OPENPCTV/usr/share/grub-i386-pc.tar.lzma" ] \
-    && tar xaf "$BOOTDISK_MNT/OPENPCTV/usr/share/grub-i386-pc.tar.lzma" -C /usr \
+  [ -f "$BOOTDISK_MNT/GEEXBOX/usr/share/grub-i386-pc.tar.lzma" ] \
+    && tar xaf "$BOOTDISK_MNT/GEEXBOX/usr/share/grub-i386-pc.tar.lzma" -C /usr \
     >> $LOGFILE 2>&1
 
-  [ -f "$BOOTDISK_MNT/OPENPCTV/usr/share/${SPLASHIMAGE}" ] && cp -f "$BOOTDISK_MNT/OPENPCTV/usr/share/${SPLASHIMAGE}" $GRUBDIR 
+  [ -f "$BOOTDISK_MNT/GEEXBOX/usr/share/${SPLASHIMAGE}" ] && cp -f "$BOOTDISK_MNT/GEEXBOX/usr/share/${SPLASHIMAGE}" $GRUBDIR 
 
   dbglg "grub-mkdevicemap --no-floppy --device-map=$DEVICE_MAP"
   grub-mkdevicemap --no-floppy --device-map=$DEVICE_MAP \
@@ -488,7 +488,7 @@ install_grub (){
   cat $GRUBDIR/grub.cfg >> $LOGFILE
   dbglg "*** End GRUB grub.cfg ***"
 
-  # Detect others OS and ask for MBR only in the case where OpenPCTV
+  # Detect others OS and ask for MBR only in the case where GeeXboX
   # is not installed on a removable device.
   # Note: lvm is not recognized as removable no matter what it's installed on!
   # FIXME: should be possible to have lvm boot on removable device as well, but with less priority
@@ -528,7 +528,7 @@ install_grub (){
     MBRDEV=$(echo $PARTDEV | sed 's/,[0-9]*//g')
   fi
 
-  # install to boot record of openpctv partition either way
+  # install to boot record of geexbox partition either way
   # order is critical, must be: other, disk, fs, partmap, devabstraction
   dbglg "grub probing..."
   MOD_OTHER="fs_uuid"
@@ -639,7 +639,7 @@ EOF
   dbglg "*** End GRUB grub.cfg ***"
 
   if [ "$MBR" != "yes" ]; then
-    # fixme: i18n strings should be updated. in fact, if not installed into mbr, openpctv is installed into respective partition.
+    # fixme: i18n strings should be updated. in fact, if not installed into mbr, geexbox is installed into respective partition.
     # so, if this is the first one and is bootable, booting works fine. otherwise, the (maybe) existing bootloader just has to be configured to chainload
     dialog --aspect 15 --backtitle "$BACKTITLE" --title "$MSG_BOOTLOADER" \
       --msgbox "\n${MSG_LOADER_ERROR}\n" 0 0 1>&2
@@ -656,7 +656,7 @@ EOF
 }
 
 VERSION=`cat VERSION`
-BACKTITLE="OpenPCTV $VERSION installator"
+BACKTITLE="GeeXboX $VERSION installator"
 
 # should not be present in install mode, but in case of ...
 initctl stop automountd >/dev/null 2>&1
@@ -673,7 +673,7 @@ DISK="`choose_disk`"
 [ -z "$DISK" ] && exit 1
 
 # Make sure disk partitions are not already mounted in case it's no VG
-if ( [ -x /usr/sbin/lvm ] && vgdisplay /dev/$DISK >/dev/null 2>&1 ); then
+if ( [ -x /sbin/lvm ] && vgdisplay /dev/$DISK >/dev/null 2>&1 ); then
   umount /dev/$DISK/* 2>/dev/null
 else
   umount /dev/${DISK}* 2>/dev/null
@@ -686,7 +686,7 @@ mkdir -p $BOOTDISK_MNT
 CFDISK_MSG="$MSG_CFDISK_BEGIN $MSG_DISK_PART $MSG_CFDISK_END"
 
 # Guide user on how to setup with cfdisk tool in the next step only if no VG was selected
-if ( ! [ -x /usr/sbin/lvm ] || ! lvm vgdisplay /dev/$DISK >/dev/null 2>&1 ); then
+if ( ! [ -x /sbin/lvm ] || ! lvm vgdisplay /dev/$DISK >/dev/null 2>&1 ); then
   dialog --stdout --backtitle "$BACKTITLE" --title "$MSG_INSTALL_DEV_CONFIG" \
     --msgbox "$CFDISK_MSG" 0 0 \
     || exit 1
@@ -717,7 +717,7 @@ fi
 dialog --backtitle "$BACKTITLE" --infobox "$MSG_INSTALLING_WAIT" 0 0
 
 # Cleanup if was left in a messy state previously- remove previous installs
-rm -rf $BOOTDISK_MNT/OPENPCTV 2>&1 >> $LOGFILE
+rm -rf $BOOTDISK_MNT/GEEXBOX 2>&1 >> $LOGFILE
 
 # Copy the main files to the install partition
 OS_RELEASE=$(uname -r)
@@ -727,8 +727,8 @@ INITRD_ELEMS="$INITRD_ELEMS $(find /lib -maxdepth 1)"
 INITRD_ELEMS="$INITRD_ELEMS $(find /lib/udev)"
 INITRD_ELEMS="$INITRD_ELEMS $(find /usr/lib/ -maxdepth 1 -name libdevmapper\*)"
 INITRD_ELEMS="$INITRD_ELEMS $(find /usr/lib/ -maxdepth 1 -name libgcc\*)"
-[ -x /usr/bin/ldd ]  && INITRD_ELEMS="$INITRD_ELEMS /usr/bin/ldd"
-[ -x /usr/sbin/lvm ] && INITRD_ELEMS="$INITRD_ELEMS /usr/sbin/lvm"
+[ -x /bin/ldd ]  && INITRD_ELEMS="$INITRD_ELEMS /bin/ldd"
+[ -x /sbin/lvm ] && INITRD_ELEMS="$INITRD_ELEMS /sbin/lvm"
 
 #TODO: not every empty directory is needed on initial ramdisk. List of needed directories probably depends on included software, so maybe some of these should be created on startup of the very daemon?
 EMPTY_DIRS="/proc /dev /dev/shm /sys /etc /tmp /bin /usr /usr/lib /usr/bin /sbin /usr/sbin /var /var/log /var/lib /var/lib/dbus /var/run /var/run/dbus /lib /lib/modules /lib/modules/${OS_RELEASE} /lib/modules/${OS_RELEASE}/kernel /lib/modules/${OS_RELEASE}/kernel/drivers /lib/modules/${OS_RELEASE}/kernel/drivers/md /root"
@@ -739,10 +739,10 @@ for e in $EMPTY_DIRS $INITRD_ELEMS; do
   echo "$e" >>/tmp/initrd.install
 done
 for e in $EMPTY_DIRS; do
-  mkdir -p $BOOTDISK_MNT/OPENPCTV/$e
+  mkdir -p $BOOTDISK_MNT/GEEXBOX/$e
 done
 for e in $DISK_ELEMS; do
-  find $e -xdev | sed 's/^\///g' | cpio -pd $BOOTDISK_MNT/OPENPCTV 2>&1 | grep -v "newer or same age file exists" >> $LOGFILE
+  find $e -xdev | sed 's/^\///g' | cpio -pd $BOOTDISK_MNT/GEEXBOX 2>&1 | grep -v "newer or same age file exists" >> $LOGFILE
 done
 # Fix install with cdrom
 CDROM=`grep boot=cdrom /proc/cmdline`
@@ -750,16 +750,16 @@ if [ -n "$CDROM" ] ; then
  mkdir -p /mnt/cd 
  mount /dev/cdrom /mnt/cd
  mkdir -p $BOOTDISK_MNT/boot 
- cp /mnt/cd/OPENPCTV/boot/vmlinuz $BOOTDISK_MNT/boot/
+ cp /mnt/cd/GEEXBOX/boot/vmlinuz $BOOTDISK_MNT/boot/
  umount /mnt/cd
 else
  mkdir -p $BOOTDISK_MNT/boot && cp /boot/vmlinuz $BOOTDISK_MNT/boot/
 fi
 
 # opkg
-mkdir -p $BOOTDISK_MNT/OPENPCTV/var/lib/opkg/info
-cp /var/lib/opkg/info/* $BOOTDISK_MNT/OPENPCTV/var/lib/opkg/info
-cp /var/lib/opkg/status $BOOTDISK_MNT/OPENPCTV/var/lib/opkg/        
+mkdir -p $BOOTDISK_MNT/GEEXBOX/var/lib/opkg/info
+cp /var/lib/opkg/info/* $BOOTDISK_MNT/GEEXBOX/var/lib/opkg/info
+cp /var/lib/opkg/status $BOOTDISK_MNT/GEEXBOX/var/lib/opkg/        
 
 cat /tmp/initrd.install | sed 's/^\///g' | cpio -o -H newc | gzip -9 > $BOOTDISK_MNT/boot/initrd.gz
 
@@ -767,11 +767,11 @@ cat /tmp/initrd.install | sed 's/^\///g' | cpio -o -H newc | gzip -9 > $BOOTDISK
 install_grub "$DEV" "$MKFS_TYPE"
 
 # Softlink grub.cfg
-rm -f $BOOTDISK_MNT/OPENPCTV/etc/grub/grub.cfg
-ln -s /boot/grub/grub.cfg $BOOTDISK_MNT/OPENPCTV/etc/grub/grub.cfg
+rm -f $BOOTDISK_MNT/GEEXBOX/etc/grub/grub.cfg
+ln -s /boot/grub/grub.cfg $BOOTDISK_MNT/GEEXBOX/etc/grub/grub.cfg
 
 # Remove unneeded boot dir from mounted install drive
-rm -rf $BOOTDISK_MNT/OPENPCTV/boot
+rm -rf $BOOTDISK_MNT/GEEXBOX/boot
 
 # Eject CD if it was the boot media
 [ -n "$CDROM" ] && eject -s /dev/cdrom &

@@ -5,46 +5,60 @@ get_meta $1
 
 cd $PKG_BUILD_DIR
 
-do_autoconf
 export ac_cv_func_malloc_0_nonnull=yes
+export ac_cv_path_KMOD="/usr/bin/kmod"
 GCC_NO_LTO=1 GCC_NO_GOLD=1 \
-do_configure \
-            --disable-gtk-doc-html \
-            --enable-gudev \
-            --enable-introspection=no \
-            --disable-selinux \
-            --disable-ima \
-            --disable-tcpwrap \
-            --disable-pam \
-            --disable-audit \
-            --disable-acl \
-            --disable-libcryptsetup \
-            --disable-binfmt \
-            --disable-hostnamed \
-            --disable-timedated \
-            --disable-localed \
-            --disable-logind \
-            --disable-coredump \
-            --disable-vconsole \
-            --disable-xz \
-            --disable-quotacheck \
-            --disable-readahead \
-            --disable-manpages \
-            --disable-qrencode \
-            --disable-microhttpd \
-            --with-python \
-            --disable-python-devel \
-            --with-dbussessionservicedir=/usr/share/dbus-1/services \
-            --with-dbussystemservicedir=/usr/share/dbus-1/system-services \
-            --with-dbusinterfacedir=/usr/share/dbus-1/interfaces \
-            --with-firmware-path=/firmware \
-            --with-sysvinit-path= \
-            --with-sysvrcnd-path= \
-            --with-pamlibdir= \
-            --with-rootprefix= \
-            --with-rootlibdir=/lib \
-            --without-python \
-            --disable-bootchart \
+do_configure ac_cv_func_malloc_0_nonnull=yes \
+                           --disable-nls \
+                           --disable-gtk-doc \
+                           --disable-gtk-doc-html \
+                           --disable-gtk-doc-pdf \
+                           --disable-coverage \
+                           --enable-kmod \
+                           --enable-blkid \
+                           --disable-ima \
+                           --disable-chkconfig \
+                           --disable-selinux \
+                           --disable-xz \
+                           --disable-tcpwrap \
+                           --disable-pam \
+                           --disable-acl \
+                           --disable-xattr \
+                           --disable-smack \
+                           --disable-gcrypt \
+                           --disable-audit \
+                           --disable-libcryptsetup \
+                           --disable-qrencode \
+                           --disable-microhttpd \
+                           --disable-binfmt \
+                           --disable-vconsole \
+                           --disable-readahead \
+                           --disable-bootchart \
+                           --disable-quotacheck \
+                           --enable-tmpfiles \
+                           --disable-randomseed \
+                           --enable-logind \
+                           --disable-backlight \
+                           --disable-machined \
+                           --disable-hostnamed \
+                           --disable-timedated \
+                           --disable-localed \
+                           --disable-coredump \
+                           --disable-myhostname \
+                           --enable-gudev \
+                           --disable-manpages \
+                           --disable-tests \
+                           --without-python \
+                           --disable-python-devel \
+                           --enable-split-usr \
+                           --with-sysvinit-path= \
+                           --with-sysvrcnd-path= \
+                           --with-tty-gid=5 \
+                           --with-rootprefix= \
+                           --with-dbussessionservicedir=/usr/share/dbus-1/services \
+                           --with-dbussystemservicedir=/usr/share/dbus-1/system-services \
+                           --with-dbusinterfacedir=/usr/share/dbus-1/interfaces \
+                           --with-rootlibdir=/lib
 
 export MAKEFLAGS=-j1
 make
@@ -55,6 +69,8 @@ SYSUNITS=$SYSTEMD/system
 
 # we don't care about utmp (it's not even supported by our libc)
 rm -f $SYSTEMD/systemd-update-utmp
+rm -f $SYSUNITS/systemd-update-utmp.service
+rm -f $SYSUNITS/sysinit.target.wants/systemd-update-utmp.service
 rm -f $SYSUNITS/systemd-update-utmp-runlevel.service
 rm -f $SYSUNITS/systemd-update-utmp-shutdown.service
 rm -f $SYSUNITS/shutdown.target.wants/systemd-update-utmp-shutdown.service
@@ -68,5 +84,5 @@ for i in gudev-1.0 systemd-daemon systemd-id128 systemd-journal; do
   ln -sf ../../../lib/lib${i}.so.0 .install/usr/lib/lib${i}.so
 done
 ln -sf ../../../lib/libudev.so.1 .install/usr/lib/libudev.so
-sed -i 's/GROUP=".*"//g' .install/lib/udev/rules.d/*
+#sed -i 's/GROUP=".*"//g' .install/lib/udev/rules.d/*
 

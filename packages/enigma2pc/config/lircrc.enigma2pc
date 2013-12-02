@@ -42,21 +42,21 @@ end
 
 begin
         prog = irxevent
-        button = TV
+        button = Red
         config = Key F1 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = Videos
+        button = Blue
         config = Key F4 CurrentWindow
         repeat = 0
 end
 
 begin
         prog = irxevent
-        button = Music
+        button = Green
         config = Key F2 CurrentWindow
         repeat = 0
 end
@@ -112,7 +112,7 @@ end
 
 begin
         prog = irxevent
-        button = Pictures
+        button = Yellow
         config = Key  F3 CurrentWindow
         repeat = 0
 end

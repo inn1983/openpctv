@@ -11,7 +11,7 @@ mkdir -p $INSTALL/share/initramfs/mnt
 mkdir -p $INSTALL/share/initramfs/newroot
 mkdir -p $INSTALL/share/initramfs/squashfs
 mkdir -p $INSTALL/share/initramfs/rw
-mkdir -p $INSTALL/share/initramfs/plymouth
+#mkdir -p $INSTALL/share/initramfs/plymouth
 mkdir -p $INSTALL/share/initramfs/lib
 mkdir -p $INSTALL/share/initramfs/etc
 
@@ -19,8 +19,7 @@ cp $PACKAGES/$1/scripts/linuxrc $INSTALL/share/initramfs/init
 cp $PACKAGES/$1/scripts/shutdown $INSTALL/share/initramfs/bin
 cp $PACKAGES/$1/scripts/assign-ip $INSTALL/share/initramfs/bin
 cp $BUILD/$1*/busybox $INSTALL/share/initramfs/bin
-cp $BUILD/plymouth-lite*/.install/usr/share/plymouth/splash.png $INSTALL/share/initramfs/plymouth
-cp $BUILD/plymouth-lite*/.install/usr/bin/ply-image $INSTALL/share/initramfs/bin
+#cp -rf $BUILD/plymouth-[0-9]*/.install/* $INSTALL/share/initramfs/
 cp $BUILD/samba-*/source*/.install/usr/sbin/mount.cifs $INSTALL/share/initramfs/sbin
 
 cp -a $BUILD/util-linux-ng-*/objdir-target/.install/bin/mount $INSTALL/share/initramfs/bin
@@ -37,6 +36,7 @@ cp $ROOTFS/lib/librt.so.1 $INSTALL/share/initramfs/lib
 cp $ROOTFS/lib/libc.so.6 $INSTALL/share/initramfs/lib
 cp $ROOTFS/lib/libpthread.so.0 $INSTALL/share/initramfs/lib
 cp $ROOTFS/bin/ntfs-3g $INSTALL/share/initramfs/bin
+#cp -a $ROOTFS/lib/libm*.so* $INSTALL/share/initramfs/lib
 ln -sf /bin/ntfs-3g $INSTALL/share/initramfs/sbin/mount.ntfs
 ln -sf /lib $INSTALL/share/initramfs/lib64
 echo "ntfs" >> $INSTALL/share/initramfs/etc/filesystems

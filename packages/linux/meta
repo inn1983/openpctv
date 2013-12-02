@@ -1,6 +1,6 @@
 PKG_NAME=linux
-PKG_VERSION=3.13-rc1
-PKG_URL="http://www.kernel.org/pub/linux/kernel/v3.x/testing/linux-${PKG_VERSION}.tar.xz"
+PKG_VERSION=3.12.2
+PKG_URL="http://www.kernel.org/pub/linux/kernel/v3.x/linux-${PKG_VERSION}.tar.xz"
 #PKG_URL_PROTO=git
 #PKG_URL_REV=1a4082f8
 #PKG_URL="git://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git"

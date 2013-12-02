@@ -1,5 +1,6 @@
 #!/bin/sh
 
+systemctl start plymouth-quit
 export TERM=linux
 . gettext.sh
 export TEXTDOMAIN=openpctv
@@ -664,4 +665,5 @@ dialog --aspect 15 --backtitle "$BACKTITLE" --title "$MSG_SUCCESS" \
 # umount $BOOTDISK_MNT && rmdir $BOOTDISK_MNT
 
 # Exit cleanly
+agetty tty1 &
 return 0

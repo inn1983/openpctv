@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPCTV 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 15:14+0800\n"
+"POT-Creation-Date: 2013-12-01 21:30+0800\n"
 "PO-Revision-Date: 2013-07-23 16:56+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: packages/setup/scripts/audio-config:8
 #: packages/setup/scripts/audio-config:48
-#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:241
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:242
 msgid "Soundcard Configuration"
 msgstr "配置声卡"
 
@@ -378,7 +378,7 @@ msgstr "diseqc.conf已被编辑"
 msgid "Finished"
 msgstr "完成"
 
-#: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:241
+#: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:242
 msgid "Select a software emulated CAM"
 msgstr "选择一种模拟CAM软件"
 
@@ -472,7 +472,7 @@ msgstr ""
 "加的驱动吗？"
 
 #: packages/setup/scripts/install-drivers:67
-#: packages/setup/scripts/setup.sh:241
+#: packages/setup/scripts/setup.sh:242
 msgid "Install additional V4L and DVB drive"
 msgstr "安装附加的V4L及DVB驱动"
 
@@ -507,56 +507,55 @@ msgid "Support all the DVBSky DVB-C devices"
 msgstr "支持DVBSky DVB-C全系列的设备"
 
 #: packages/setup/scripts/install-drivers:75
-#, fuzzy
 msgid "Support the TBS QBOX I DVB-C devices"
-msgstr "支持TBS DVB-C全系列的设备"
+msgstr "支持TBS QBOX I设备"
 
 #: packages/setup/scripts/install-drivers:76
 msgid "Support for DVB-C 3221 USB BOX"
-msgstr ""
+msgstr "支持DVB3221 USB盒子"
 
-#: packages/setup/scripts/installator.sh:13
+#: packages/setup/scripts/installator.sh:14
 msgid "Not found or not a block device."
 msgstr "没有发现或不存在块设备"
 
-#: packages/setup/scripts/installator.sh:14
+#: packages/setup/scripts/installator.sh:15
 msgid "does not have any corresponding BIOS drive."
 msgstr "没有任何相应的BIOS驱动"
 
-#: packages/setup/scripts/installator.sh:17
+#: packages/setup/scripts/installator.sh:18
 msgid "Keymap selection"
 msgstr "键位映射选择"
 
-#: packages/setup/scripts/installator.sh:19
+#: packages/setup/scripts/installator.sh:20
 msgid "Choose Keymap"
 msgstr "选择键位映射"
 
-#: packages/setup/scripts/installator.sh:20
+#: packages/setup/scripts/installator.sh:21
 msgid "Which keymap do you want to use ?"
 msgstr "你想要使用哪种键位映射？"
 
-#: packages/setup/scripts/installator.sh:23
+#: packages/setup/scripts/installator.sh:24
 msgid "Warning"
 msgstr "警告"
 
-#: packages/setup/scripts/installator.sh:24
+#: packages/setup/scripts/installator.sh:25
 msgid "ERROR"
 msgstr "错误"
 
-#: packages/setup/scripts/installator.sh:26
+#: packages/setup/scripts/installator.sh:27
 msgid "No disks found on this system.\\nCheck again ?"
 msgstr "在这个系统中没发现磁盘。\\n再检查一次吗？"
 
-#: packages/setup/scripts/installator.sh:27
+#: packages/setup/scripts/installator.sh:28
 msgid "refresh list"
 msgstr "刷新列表"
 
-#: packages/setup/scripts/installator.sh:29
-#: packages/setup/scripts/installator.sh:38
+#: packages/setup/scripts/installator.sh:30
+#: packages/setup/scripts/installator.sh:39
 msgid "Installation device"
 msgstr "安装设备"
 
-#: packages/setup/scripts/installator.sh:30
+#: packages/setup/scripts/installator.sh:31
 msgid ""
 "You are going to install OpenPCTV. For this you will need an empty partition "
 "with about 5 GB of free space. Be careful to choose the right disk! We won't "
@@ -565,11 +564,11 @@ msgstr ""
 "你将要安装OpenPCTV。对此，你将需要一个空白的并不少于5G空间的分区。小心选择正"
 "确的磁盘！我们不会对任何数据损失负责。"
 
-#: packages/setup/scripts/installator.sh:32
+#: packages/setup/scripts/installator.sh:33
 msgid "Linux EXT4 partition"
 msgstr "Linux EXT4分区"
 
-#: packages/setup/scripts/installator.sh:34
+#: packages/setup/scripts/installator.sh:35
 msgid ""
 "Before continue the installator program you need to define the Linux "
 "partition(s) on your hard disk. We can use other partitioning tool under "
@@ -580,7 +579,7 @@ msgstr ""
 "Windows或Linux的分区工具。或者如果你选择'是'，你将使用cfdisk来编辑你的分区表"
 "来建立一个"
 
-#: packages/setup/scripts/installator.sh:35
+#: packages/setup/scripts/installator.sh:36
 msgid ""
 "with about 5 GB of free space. The partition type can be arbitrary. Don't "
 "forget to set the bootable flag to this partition. Remember to commit the "
@@ -591,88 +590,88 @@ msgstr ""
 "们不会对由此造成的任何数据损失负责。如果你选择'否'意味着你已经为它准备好了一"
 "个分区。"
 
-#: packages/setup/scripts/installator.sh:40
+#: packages/setup/scripts/installator.sh:41
 msgid "You don't have any"
 msgstr "你没有任何"
 
-#: packages/setup/scripts/installator.sh:41
+#: packages/setup/scripts/installator.sh:42
 msgid ""
 "partition on your system. Please create a partition first using for example "
 "cfdisk."
 msgstr "分区在你的系统上。请首先使用像cfdisk这个的工具来建立一个分区。"
 
-#: packages/setup/scripts/installator.sh:42
+#: packages/setup/scripts/installator.sh:43
 msgid "Where do you want to install OpenPCTV? Please choose carefully!"
 msgstr "你想将OpenPCV安装到哪里？请谨慎选择!"
 
-#: packages/setup/scripts/installator.sh:43
+#: packages/setup/scripts/installator.sh:44
 msgid "is not a valid block device."
 msgstr "不是一个有效的块设备。"
 
-#: packages/setup/scripts/installator.sh:45
+#: packages/setup/scripts/installator.sh:46
 msgid "Partition is not formated"
 msgstr "分区没有被格式化"
 
-#: packages/setup/scripts/installator.sh:46
+#: packages/setup/scripts/installator.sh:47
 msgid "Partition format type"
 msgstr "分区格式类型"
 
-#: packages/setup/scripts/installator.sh:47
+#: packages/setup/scripts/installator.sh:48
 msgid "is not supported in your partition type"
 msgstr "不支持你分区类型"
 
-#: packages/setup/scripts/installator.sh:48
+#: packages/setup/scripts/installator.sh:49
 msgid "Partition is already formated"
 msgstr "分区已经被格式化"
 
-#: packages/setup/scripts/installator.sh:49
-#: packages/setup/scripts/installator.sh:51
+#: packages/setup/scripts/installator.sh:50
+#: packages/setup/scripts/installator.sh:52
 msgid "Formatting"
 msgstr "格式化中"
 
-#: packages/setup/scripts/installator.sh:50
+#: packages/setup/scripts/installator.sh:51
 msgid "Do you want to format"
 msgstr "你想格式化"
 
-#: packages/setup/scripts/installator.sh:52
+#: packages/setup/scripts/installator.sh:53
 msgid "...\\nPlease wait"
 msgstr "...\\n请等待"
 
-#: packages/setup/scripts/installator.sh:54
+#: packages/setup/scripts/installator.sh:55
 msgid "Linux partition type"
 msgstr "Linux分区类型"
 
-#: packages/setup/scripts/installator.sh:55
+#: packages/setup/scripts/installator.sh:56
 msgid "Which type of Linux partition you want ?"
 msgstr "你想要哪种Linux分区类型？"
 
-#: packages/setup/scripts/installator.sh:57
+#: packages/setup/scripts/installator.sh:58
 msgid ""
 "As you don't have formatting tool installed, I won't be able to format the "
 "partition."
 msgstr "因为你没有任何用来格式化的工具被安装，我无法格式化分区。"
 
-#: packages/setup/scripts/installator.sh:58
+#: packages/setup/scripts/installator.sh:59
 msgid "Hopefully it is already formatted."
 msgstr "但愿它已经被格式化了。"
 
-#: packages/setup/scripts/installator.sh:59
+#: packages/setup/scripts/installator.sh:60
 msgid "should be formatted as"
 msgstr "应该被格式化为"
 
-#: packages/setup/scripts/installator.sh:61
+#: packages/setup/scripts/installator.sh:62
 msgid "Failed to mount"
 msgstr "挂载失败"
 
-#: packages/setup/scripts/installator.sh:63
+#: packages/setup/scripts/installator.sh:64
 msgid "Installing... Please wait"
 msgstr "安装中... 请等待"
 
-#: packages/setup/scripts/installator.sh:66
+#: packages/setup/scripts/installator.sh:67
 msgid "Support for HDTV through X.Org ?"
 msgstr "通过X.Org支持HDTV吗？"
 
-#: packages/setup/scripts/installator.sh:67
+#: packages/setup/scripts/installator.sh:68
 msgid ""
 "It appears that this version of OpenPCTV has been compiled with support for "
 "HDTV through X.Org video server. Remember that X.Org is only useful if you "
@@ -682,19 +681,19 @@ msgid ""
 "available)"
 msgstr ""
 
-#: packages/setup/scripts/installator.sh:70
+#: packages/setup/scripts/installator.sh:71
 msgid "Bootloader"
 msgstr "引导管理器"
 
-#: packages/setup/scripts/installator.sh:72
+#: packages/setup/scripts/installator.sh:73
 msgid "Couldn't find my GRUB partition representation"
 msgstr "不能找到我的GRUB分区"
 
-#: packages/setup/scripts/installator.sh:73
+#: packages/setup/scripts/installator.sh:74
 msgid "Couldn't install GRUB bootloader!"
 msgstr "不能安装GRUB引导管理器！"
 
-#: packages/setup/scripts/installator.sh:75
+#: packages/setup/scripts/installator.sh:76
 msgid ""
 "is now a OpenPCTV partition. To boot from it, you will need to install a "
 "bootloader. I can install one for you. If you have any other operating "
@@ -706,11 +705,11 @@ msgstr ""
 "安装GRUB引导管理。如果在你的计算机上还拥有其它的操作系统，我也将为你安装多重"
 "引导。如果你不想安装一个新的引导管理器，你将需要自己配置。我已找到："
 
-#: packages/setup/scripts/installator.sh:76
+#: packages/setup/scripts/installator.sh:77
 msgid "Do you want to install me to install the boot loader (GRUB) for you ?"
 msgstr "你想安装引导管理器（GRUB）吗？"
 
-#: packages/setup/scripts/installator.sh:77
+#: packages/setup/scripts/installator.sh:78
 msgid ""
 "is now a OpenPCTV partition. I didn't recognize any other OS on your system, "
 "want me to install boot loader on your MBR ?"
@@ -718,45 +717,45 @@ msgstr ""
 "现在是一个OpenPCTV的分区了。我们可以识别在你计算机中的其它操作系统，你想在硬"
 "盘的MBR上安装一个引导管理器吗？"
 
-#: packages/setup/scripts/installator.sh:78
+#: packages/setup/scripts/installator.sh:79
 msgid "You must install a boot loader to boot OpenPCTV"
 msgstr "你必须为启动OpenPCTV安装一个启动引导器"
 
-#: packages/setup/scripts/installator.sh:81
+#: packages/setup/scripts/installator.sh:82
 msgid "Installation Log"
 msgstr "安装日志"
 
-#: packages/setup/scripts/installator.sh:82
+#: packages/setup/scripts/installator.sh:83
 msgid ""
 "Do you want to check installation logs ? (it is probably useful for debug "
 "purpose only)"
 msgstr "你想检查安装日志吗？（对于以调试为目的或许有用）"
 
-#: packages/setup/scripts/installator.sh:85
+#: packages/setup/scripts/installator.sh:86
 msgid "Have Fun!"
 msgstr "祝好运！"
 
-#: packages/setup/scripts/installator.sh:86
+#: packages/setup/scripts/installator.sh:87
 msgid "OpenPCTV is now installed on"
 msgstr "OpenPCTV现在已经安装"
 
-#: packages/setup/scripts/installator.sh:87
+#: packages/setup/scripts/installator.sh:88
 msgid "Do you want to reboot? Or press Alt+F2 to configure by manual"
 msgstr "你想重新启动吗？或者按Alt+F2登录并进行手动配置"
 
-#: packages/setup/scripts/installator.sh:89
+#: packages/setup/scripts/installator.sh:90
 msgid "Start"
 msgstr "启动"
 
-#: packages/setup/scripts/installator.sh:90
+#: packages/setup/scripts/installator.sh:91
 msgid "Default target"
 msgstr "默认启动项"
 
-#: packages/setup/scripts/installator.sh:91
+#: packages/setup/scripts/installator.sh:92
 msgid "setup mode"
 msgstr "配置模式"
 
-#: packages/setup/scripts/installator.sh:92
+#: packages/setup/scripts/installator.sh:93
 msgid "debugging mode"
 msgstr "调试模式"
 
@@ -783,7 +782,7 @@ msgid "Submit"
 msgstr "提交"
 
 #: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
-#: packages/setup/scripts/setup.sh:241
+#: packages/setup/scripts/setup.sh:242
 msgid "Set the monitor's best resolution"
 msgstr "设定显示器的最佳分辨率"
 
@@ -912,7 +911,7 @@ msgid ""
 "a default device as Lirc support."
 msgstr "在这台机器上找到了如下红外接遥控接收设备，请为lirc选择一种默认设备"
 
-#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:241
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:242
 msgid "Set the default target"
 msgstr "选择默认的启动项"
 
@@ -935,136 +934,136 @@ msgid ""
 "card"
 msgstr "开源的家庭剧院，NVIDIA/Intel/AMD显卡可以工作得很好。"
 
-#: packages/setup/scripts/setup.sh:36 packages/setup/scripts/setup.sh:50
-#: packages/setup/scripts/setup.sh:58
+#: packages/setup/scripts/setup.sh:37 packages/setup/scripts/setup.sh:51
+#: packages/setup/scripts/setup.sh:59
 msgid "OK"
 msgstr "确认"
 
-#: packages/setup/scripts/setup.sh:36 packages/setup/scripts/setup.sh:45
-#: packages/setup/scripts/setup.sh:47 packages/setup/scripts/setup.sh:50
-#: packages/setup/scripts/setup.sh:58
+#: packages/setup/scripts/setup.sh:37 packages/setup/scripts/setup.sh:46
+#: packages/setup/scripts/setup.sh:48 packages/setup/scripts/setup.sh:51
+#: packages/setup/scripts/setup.sh:59
 msgid "Auto mount cifs"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:44
+#: packages/setup/scripts/setup.sh:45
 msgid "MSSMBMNT"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:44
+#: packages/setup/scripts/setup.sh:45
 msgid "MSSMBMNTINFO"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:45 packages/setup/scripts/setup.sh:47
+#: packages/setup/scripts/setup.sh:46 packages/setup/scripts/setup.sh:48
 msgid "Specifies"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:45
+#: packages/setup/scripts/setup.sh:46
 msgid "the username"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:47
+#: packages/setup/scripts/setup.sh:48
 msgid "the password"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:50 packages/setup/scripts/setup.sh:58
+#: packages/setup/scripts/setup.sh:51 packages/setup/scripts/setup.sh:59
 msgid "Mount"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:50 packages/setup/scripts/setup.sh:58
+#: packages/setup/scripts/setup.sh:51 packages/setup/scripts/setup.sh:59
 msgid "to"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:50
+#: packages/setup/scripts/setup.sh:51
 msgid "success"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:58
+#: packages/setup/scripts/setup.sh:59
 msgid "fail"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:73 packages/setup/scripts/setup.sh:75
+#: packages/setup/scripts/setup.sh:74 packages/setup/scripts/setup.sh:76
 msgid "MSNFSMNT"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:73
+#: packages/setup/scripts/setup.sh:74
 msgid "The NFS server name or IP address"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:75
+#: packages/setup/scripts/setup.sh:76
 msgid "The name of the NFS share"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:82 packages/setup/scripts/setup.sh:86
-#: packages/setup/scripts/setup.sh:91 packages/setup/scripts/setup.sh:96
-#: packages/setup/scripts/setup.sh:152
+#: packages/setup/scripts/setup.sh:83 packages/setup/scripts/setup.sh:87
+#: packages/setup/scripts/setup.sh:92 packages/setup/scripts/setup.sh:97
+#: packages/setup/scripts/setup.sh:153
 msgid "MSSC"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:82
+#: packages/setup/scripts/setup.sh:83
 msgid "The server name or IP address"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:86
+#: packages/setup/scripts/setup.sh:87
 msgid "The port of the server"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:91
+#: packages/setup/scripts/setup.sh:92
 msgid "Specifies the username"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:96
+#: packages/setup/scripts/setup.sh:97
 msgid "Specifies the password"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:152
+#: packages/setup/scripts/setup.sh:153
 msgid "Specifies the newcamd cfgkey"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:167
+#: packages/setup/scripts/setup.sh:168
 msgid "MSSCMENU"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:167
+#: packages/setup/scripts/setup.sh:168
 msgid "MSCCCAM"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:167
+#: packages/setup/scripts/setup.sh:168
 msgid "MSCAMD35"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:167
+#: packages/setup/scripts/setup.sh:168
 msgid "MSNEWCAMD"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:167
+#: packages/setup/scripts/setup.sh:168
 msgid "MSNOSC"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:176
+#: packages/setup/scripts/setup.sh:177
 msgid "EditSC"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:190
+#: packages/setup/scripts/setup.sh:191
 msgid "Select a partition for OpenPCTV cache..."
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:198
+#: packages/setup/scripts/setup.sh:199
 msgid "Size"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:198
+#: packages/setup/scripts/setup.sh:199
 msgid "Used"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:198
+#: packages/setup/scripts/setup.sh:199
 msgid "Available"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:201
+#: packages/setup/scripts/setup.sh:202
 msgid "Don't mount bind for OpenPCTV cache"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:232
+#: packages/setup/scripts/setup.sh:233
 msgid ""
 "Would you like to scan channels for VDR/XBMC(It'll take quiet long to do "
 "it)?  You can also scan channels with vdr reelscanchannels plugin in vdr."
@@ -1072,43 +1071,43 @@ msgstr ""
 "你想为VDR/XBMC进行进行频道扫描吗(将会花较的时间）？你也可以在VDR中利用"
 "reelscanchannels插件进行频道扫描。"
 
-#: packages/setup/scripts/setup.sh:241
+#: packages/setup/scripts/setup.sh:242
 msgid "OpenPCTV configurator"
 msgstr "配置OpenPCTV"
 
-#: packages/setup/scripts/setup.sh:241
+#: packages/setup/scripts/setup.sh:242
 msgid "Main menu"
 msgstr "主菜单"
 
-#: packages/setup/scripts/setup.sh:241
+#: packages/setup/scripts/setup.sh:242
 msgid "Set global locale and language"
 msgstr "设置全局区域和语言"
 
-#: packages/setup/scripts/setup.sh:241
+#: packages/setup/scripts/setup.sh:242
 msgid "Configure Network Environment"
 msgstr "配置网络环境"
 
-#: packages/setup/scripts/setup.sh:241
+#: packages/setup/scripts/setup.sh:242
 msgid "Select IR device"
 msgstr "选择红外接收设备"
 
-#: packages/setup/scripts/setup.sh:241
+#: packages/setup/scripts/setup.sh:242
 msgid "Auto update Satellite Transponders and EPG data"
 msgstr "自动更新卫星参数及EPG数据"
 
-#: packages/setup/scripts/setup.sh:241
+#: packages/setup/scripts/setup.sh:242
 msgid "DiSEqC configurator"
 msgstr "DiSEqC配置"
 
-#: packages/setup/scripts/setup.sh:241
+#: packages/setup/scripts/setup.sh:242
 msgid "Auto scan channels"
 msgstr "自动扫描频道"
 
-#: packages/setup/scripts/setup.sh:241
+#: packages/setup/scripts/setup.sh:242
 msgid "Reboot OpenPCTV"
 msgstr "重新启动OpenPCTV"
 
-#: packages/setup/scripts/setup.sh:241
+#: packages/setup/scripts/setup.sh:242
 msgid "Exit to login shell"
 msgstr "退出并登录shell"
 
