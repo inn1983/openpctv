@@ -1,0 +1,317 @@
+diff -uNr media_build-bst.orig/linux/drivers/media/i2c/tvp514x.c media_build-bst/linux/drivers/media/i2c/tvp514x.c
+--- media_build-bst.orig/linux/drivers/media/i2c/tvp514x.c	2012-10-06 11:45:26.000000000 +0800
++++ media_build-bst/linux/drivers/media/i2c/tvp514x.c	2013-11-24 20:15:38.635690639 +0800
+@@ -33,6 +33,7 @@
+ #include <linux/delay.h>
+ #include <linux/videodev2.h>
+ #include <linux/module.h>
++#include <linux/of.h>
+ 
+ #include <media/v4l2-device.h>
+ #include <media/v4l2-common.h>
+@@ -112,6 +113,7 @@
+ 	/* Input and Output Routing parameters */
+ 	u32 input;
+ 	u32 output;
++	struct tvp514x_reg *int_seq;
+ };
+ 
+ /* TVP514x default register values */
+@@ -857,11 +859,12 @@
+ 	}
+ 	case 1:
+ 	{
+-		struct tvp514x_reg *int_seq = (struct tvp514x_reg *)
+-				client->driver->id_table->driver_data;
++		//struct tvp514x_reg *int_seq = (struct tvp514x_reg *)
++		//		client->driver->id_table->driver_data;
+ 
+ 		/* Power Up Sequence */
+-		err = tvp514x_write_regs(sd, int_seq);
++		//err = tvp514x_write_regs(sd, int_seq);
++		err = tvp514x_write_regs(sd, decoder->int_seq);
+ 		if (err) {
+ 			v4l2_err(sd, "Unable to turn on decoder\n");
+ 			return err;
+diff -uNr media_build-bst.orig/linux/drivers/media/platform/blackfin/bfin_capture.c media_build-bst/linux/drivers/media/platform/blackfin/bfin_capture.c
+--- media_build-bst.orig/linux/drivers/media/platform/blackfin/bfin_capture.c	2013-01-25 12:46:09.000000000 +0800
++++ media_build-bst/linux/drivers/media/platform/blackfin/bfin_capture.c	2013-11-24 18:54:27.747826084 +0800
+@@ -430,7 +430,7 @@
+ 		return ret;
+ 	}
+ 
+-	INIT_COMPLETION(bcap_dev->comp);
++	reinit_completion(&bcap_dev->comp);
+ 	bcap_dev->stop = false;
+ 	return 0;
+ }
+diff -uNr media_build-bst.orig/linux/drivers/media/platform/coda.c media_build-bst/linux/drivers/media/platform/coda.c
+--- media_build-bst.orig/linux/drivers/media/platform/coda.c	2013-01-25 12:46:09.000000000 +0800
++++ media_build-bst/linux/drivers/media/platform/coda.c	2013-11-24 18:54:10.879826553 +0800
+@@ -734,7 +734,7 @@
+ 	/* 1 second timeout in case CODA locks up */
+ 	schedule_delayed_work(&dev->timeout, HZ);
+ 
+-	INIT_COMPLETION(dev->done);
++	reinit_completion(&dev->done);
+ 	coda_command_async(ctx, CODA_COMMAND_PIC_RUN);
+ }
+ 
+diff -uNr media_build-bst.orig/linux/drivers/media/radio/radio-wl1273.c media_build-bst/linux/drivers/media/radio/radio-wl1273.c
+--- media_build-bst.orig/linux/drivers/media/radio/radio-wl1273.c	2013-01-25 12:46:09.000000000 +0800
++++ media_build-bst/linux/drivers/media/radio/radio-wl1273.c	2013-11-24 18:54:15.383826427 +0800
+@@ -375,7 +375,7 @@
+ 	if (r)
+ 		return r;
+ 
+-	INIT_COMPLETION(radio->busy);
++	reinit_completion(&radio->busy);
+ 
+ 	/* wait for the FR IRQ */
+ 	r = wait_for_completion_timeout(&radio->busy, msecs_to_jiffies(2000));
+@@ -389,7 +389,7 @@
+ 	if (r)
+ 		return r;
+ 
+-	INIT_COMPLETION(radio->busy);
++	reinit_completion(&radio->busy);
+ 
+ 	/* wait for the POWER_ENB IRQ */
+ 	r = wait_for_completion_timeout(&radio->busy, msecs_to_jiffies(1000));
+@@ -444,7 +444,7 @@
+ 		goto err;
+ 	}
+ 
+-	INIT_COMPLETION(radio->busy);
++	reinit_completion(&radio->busy);
+ 
+ 	r = wait_for_completion_timeout(&radio->busy, msecs_to_jiffies(2000));
+ 	if (!r) {
+@@ -805,7 +805,7 @@
+ 	if (level < SCHAR_MIN || level > SCHAR_MAX)
+ 		return -EINVAL;
+ 
+-	INIT_COMPLETION(radio->busy);
++	reinit_completion(&radio->busy);
+ 	dev_dbg(radio->dev, "%s: BUSY\n", __func__);
+ 
+ 	r = core->write(core, WL1273_INT_MASK_SET, radio->irq_flags);
+@@ -847,7 +847,7 @@
+ 	if (r)
+ 		goto out;
+ 
+-	INIT_COMPLETION(radio->busy);
++	reinit_completion(&radio->busy);
+ 	dev_dbg(radio->dev, "%s: BUSY\n", __func__);
+ 
+ 	r = core->write(core, WL1273_TUNER_MODE_SET, TUNER_MODE_AUTO_SEEK);
+diff -uNr media_build-bst.orig/linux/drivers/media/radio/si470x/radio-si470x-common.c media_build-bst/linux/drivers/media/radio/si470x/radio-si470x-common.c
+--- media_build-bst.orig/linux/drivers/media/radio/si470x/radio-si470x-common.c	2012-09-28 11:45:18.000000000 +0800
++++ media_build-bst/linux/drivers/media/radio/si470x/radio-si470x-common.c	2013-11-24 18:54:31.967825966 +0800
+@@ -218,7 +218,7 @@
+ 		goto done;
+ 
+ 	/* wait till tune operation has completed */
+-	INIT_COMPLETION(radio->completion);
++	reinit_completion(&radio->completion);
+ 	retval = wait_for_completion_timeout(&radio->completion,
+ 			msecs_to_jiffies(tune_timeout));
+ 	if (!retval)
+@@ -341,7 +341,7 @@
+ 		return retval;
+ 
+ 	/* wait till tune operation has completed */
+-	INIT_COMPLETION(radio->completion);
++	reinit_completion(&radio->completion);
+ 	retval = wait_for_completion_timeout(&radio->completion,
+ 			msecs_to_jiffies(seek_timeout));
+ 	if (!retval)
+diff -uNr media_build-bst.orig/linux/drivers/media/rc/iguanair.c media_build-bst/linux/drivers/media/rc/iguanair.c
+--- media_build-bst.orig/linux/drivers/media/rc/iguanair.c	2013-01-25 12:46:09.000000000 +0800
++++ media_build-bst/linux/drivers/media/rc/iguanair.c	2013-11-24 18:54:20.979826272 +0800
+@@ -202,7 +202,7 @@
+ {
+ 	int rc;
+ 
+-	INIT_COMPLETION(ir->completion);
++	reinit_completion(&ir->completion);
+ 
+ 	ir->urb_out->transfer_buffer_length = size;
+ 	rc = usb_submit_urb(ir->urb_out, GFP_KERNEL);
+diff -uNr media_build-bst.orig/linux/drivers/media/v4l2-core/tuner-core.c media_build-bst/linux/drivers/media/v4l2-core/tuner-core.c
+--- media_build-bst.orig/linux/drivers/media/v4l2-core/tuner-core.c	2012-08-14 11:45:22.000000000 +0800
++++ media_build-bst/linux/drivers/media/v4l2-core/tuner-core.c	2013-11-24 19:27:17.895771300 +0800
+@@ -43,7 +43,7 @@
+ 
+ #define UNSET (-1U)
+ 
+-#define PREFIX (t->i2c->driver->driver.name)
++#define PREFIX (t->i2c->dev.driver->name)
+ 
+ /*
+  * Driver modprobe parameters
+@@ -475,7 +475,7 @@
+ 	}
+ 
+ 	tuner_dbg("%s %s I2C addr 0x%02x with type %d used for 0x%02x\n",
+-		  c->adapter->name, c->driver->driver.name, c->addr << 1, type,
++		  c->adapter->name, c->dev.driver->name, c->addr << 1, type,
+ 		  t->mode_mask);
+ 	return;
+ 
+@@ -579,7 +579,7 @@
+ 		int mode_mask;
+ 
+ 		if (pos->i2c->adapter != adap ||
+-		    strcmp(pos->i2c->driver->driver.name, "tuner"))
++		    strcmp(pos->i2c->dev.driver->name, "tuner"))
+ 			continue;
+ 
+ 		mode_mask = pos->mode_mask;
+diff -uNr media_build-bst.orig/linux/drivers/media/v4l2-core/v4l2-common.c media_build-bst/linux/drivers/media/v4l2-core/v4l2-common.c
+--- media_build-bst.orig/linux/drivers/media/v4l2-core/v4l2-common.c	2012-12-22 12:45:52.000000000 +0800
++++ media_build-bst/linux/drivers/media/v4l2-core/v4l2-common.c	2013-11-24 20:41:51.067646915 +0800
+@@ -248,13 +248,13 @@
+ 
+ 	switch (match->type) {
+ 	case V4L2_CHIP_MATCH_I2C_DRIVER:
+-		if (c->driver == NULL || c->driver->driver.name == NULL)
++		if (c->dev.driver == NULL || c->dev.driver->name == NULL)
+ 			return 0;
+-		len = strlen(c->driver->driver.name);
++		len = strlen(c->dev.driver->name);
+ 		/* legacy drivers have a ' suffix, don't try to match that */
+-		if (len && c->driver->driver.name[len - 1] == '\'')
++		if (len && c->dev.driver->name[len - 1] == '\'')
+ 			len--;
+-		return len && !strncmp(c->driver->driver.name, match->name, len);
++		return len && !strncmp(c->dev.driver->name, match->name, len);
+ 	case V4L2_CHIP_MATCH_I2C_ADDR:
+ 		return c->addr == match->addr;
+ 	default:
+@@ -291,13 +291,13 @@
+ 	v4l2_subdev_init(sd, ops);
+ 	sd->flags |= V4L2_SUBDEV_FL_IS_I2C;
+ 	/* the owner is the same as the i2c_client's driver owner */
+-	sd->owner = client->driver->driver.owner;
++	sd->owner = client->dev.driver->owner;
+ 	/* i2c_client and v4l2_subdev point to one another */
+ 	v4l2_set_subdevdata(sd, client);
+ 	i2c_set_clientdata(client, sd);
+ 	/* initialize name */
+ 	snprintf(sd->name, sizeof(sd->name), "%s %d-%04x",
+-		client->driver->driver.name, i2c_adapter_id(client->adapter),
++		client->dev.driver->name, i2c_adapter_id(client->adapter),
+ 		client->addr);
+ }
+ EXPORT_SYMBOL_GPL(v4l2_i2c_subdev_init);
+@@ -330,11 +330,11 @@
+ 	   loaded. This delay-load mechanism doesn't work if other drivers
+ 	   want to use the i2c device, so explicitly loading the module
+ 	   is the best alternative. */
+-	if (client == NULL || client->driver == NULL)
++	if (client == NULL || client->dev.driver == NULL)
+ 		goto error;
+ 
+ 	/* Lock the module so we can safely get the v4l2_subdev pointer */
+-	if (!try_module_get(client->driver->driver.owner))
++	if (!try_module_get(client->dev.driver->owner))
+ 		goto error;
+ 	sd = i2c_get_clientdata(client);
+ 
+@@ -343,7 +343,7 @@
+ 	if (v4l2_device_register_subdev(v4l2_dev, sd))
+ 		sd = NULL;
+ 	/* Decrease the module use count to match the first try_module_get. */
+-	module_put(client->driver->driver.owner);
++	module_put(client->dev.driver->owner);
+ 
+ error:
+ 	/* If we have a client but no subdev, then something went wrong and
+diff -uNr media_build-bst.orig/linux/drivers/media/v4l2-core/v4l2-dev.c media_build-bst/linux/drivers/media/v4l2-core/v4l2-dev.c
+--- media_build-bst.orig/linux/drivers/media/v4l2-core/v4l2-dev.c	2013-01-28 12:06:07.000000000 +0800
++++ media_build-bst/linux/drivers/media/v4l2-core/v4l2-dev.c	2013-11-24 19:56:02.543723343 +0800
+@@ -38,24 +38,25 @@
+  *	sysfs stuff
+  */
+ 
+-static ssize_t show_index(struct device *cd,
+-			 struct device_attribute *attr, char *buf)
++static ssize_t index_show(struct device *cd,
++			  struct device_attribute *attr, char *buf)
+ {
+ 	struct video_device *vdev = to_video_device(cd);
+ 
+ 	return sprintf(buf, "%i\n", vdev->index);
+ }
++static DEVICE_ATTR_RO(index);
+ 
+-static ssize_t show_debug(struct device *cd,
+-			 struct device_attribute *attr, char *buf)
++static ssize_t debug_show(struct device *cd,
++			  struct device_attribute *attr, char *buf)
+ {
+ 	struct video_device *vdev = to_video_device(cd);
+ 
+ 	return sprintf(buf, "%i\n", vdev->debug);
+ }
+ 
+-static ssize_t set_debug(struct device *cd, struct device_attribute *attr,
+-		   const char *buf, size_t len)
++static ssize_t debug_store(struct device *cd, struct device_attribute *attr,
++			  const char *buf, size_t len)
+ {
+ 	struct video_device *vdev = to_video_device(cd);
+ 	int res = 0;
+@@ -68,21 +69,24 @@
+ 	vdev->debug = value;
+ 	return len;
+ }
++static DEVICE_ATTR_RW(debug);
+ 
+-static ssize_t show_name(struct device *cd,
++static ssize_t name_show(struct device *cd,
+ 			 struct device_attribute *attr, char *buf)
+ {
+ 	struct video_device *vdev = to_video_device(cd);
+ 
+ 	return sprintf(buf, "%.*s\n", (int)sizeof(vdev->name), vdev->name);
+ }
++static DEVICE_ATTR_RO(name);
+ 
+-static struct device_attribute video_device_attrs[] = {
+-	__ATTR(name, S_IRUGO, show_name, NULL),
+-	__ATTR(debug, 0644, show_debug, set_debug),
+-	__ATTR(index, S_IRUGO, show_index, NULL),
+-	__ATTR_NULL
++static struct attribute *video_device_attrs[] = {
++	&dev_attr_name.attr,
++	&dev_attr_debug.attr,
++	&dev_attr_index.attr,
++	NULL,
+ };
++ATTRIBUTE_GROUPS(video_device);
+ 
+ /*
+  *	Active devices
+@@ -217,7 +221,7 @@
+ 
+ static struct class video_class = {
+ 	.name = VIDEO_NAME,
+-	.dev_attrs = video_device_attrs,
++	.dev_groups = video_device_groups,
+ };
+ 
+ struct video_device *video_devdata(struct file *file)
+diff -uNr media_build-bst.orig/linux/include/media/v4l2-common.h media_build-bst/linux/include/media/v4l2-common.h
+--- media_build-bst.orig/linux/include/media/v4l2-common.h	2012-12-22 12:45:53.000000000 +0800
++++ media_build-bst/linux/include/media/v4l2-common.h	2013-11-24 18:47:18.875838010 +0800
+@@ -35,7 +35,7 @@
+ 	printk(level "%s %d-%04x: " fmt, name, i2c_adapter_id(adapter), addr , ## arg)
+ 
+ #define v4l_client_printk(level, client, fmt, arg...)			    \
+-	v4l_printk(level, (client)->driver->driver.name, (client)->adapter, \
++	v4l_printk(level, (client)->dev.driver->name, (client)->adapter, \
+ 		   (client)->addr, fmt , ## arg)
+ 
+ #define v4l_err(client, fmt, arg...) \

@@ -1,0 +1,249 @@
+diff -uNr tbs-drivers-v130927.orig/linux/drivers/media/radio/radio-wl1273.c tbs-drivers-v130927/linux/drivers/media/radio/radio-wl1273.c
+--- tbs-drivers-v130927.orig/linux/drivers/media/radio/radio-wl1273.c	2013-03-19 03:40:05.000000000 +0800
++++ tbs-drivers-v130927/linux/drivers/media/radio/radio-wl1273.c	2013-11-24 23:01:01.319414720 +0800
+@@ -375,7 +375,7 @@
+ 	if (r)
+ 		return r;
+ 
+-	INIT_COMPLETION(radio->busy);
++	reinit_completion(&radio->busy);
+ 
+ 	/* wait for the FR IRQ */
+ 	r = wait_for_completion_timeout(&radio->busy, msecs_to_jiffies(2000));
+@@ -389,7 +389,7 @@
+ 	if (r)
+ 		return r;
+ 
+-	INIT_COMPLETION(radio->busy);
++	reinit_completion(&radio->busy);
+ 
+ 	/* wait for the POWER_ENB IRQ */
+ 	r = wait_for_completion_timeout(&radio->busy, msecs_to_jiffies(1000));
+@@ -444,7 +444,7 @@
+ 		goto err;
+ 	}
+ 
+-	INIT_COMPLETION(radio->busy);
++	reinit_completion(&radio->busy);
+ 
+ 	r = wait_for_completion_timeout(&radio->busy, msecs_to_jiffies(2000));
+ 	if (!r) {
+@@ -805,7 +805,7 @@
+ 	if (level < SCHAR_MIN || level > SCHAR_MAX)
+ 		return -EINVAL;
+ 
+-	INIT_COMPLETION(radio->busy);
++	reinit_completion(&radio->busy);
+ 	dev_dbg(radio->dev, "%s: BUSY\n", __func__);
+ 
+ 	r = core->write(core, WL1273_INT_MASK_SET, radio->irq_flags);
+@@ -847,7 +847,7 @@
+ 	if (r)
+ 		goto out;
+ 
+-	INIT_COMPLETION(radio->busy);
++	reinit_completion(&radio->busy);
+ 	dev_dbg(radio->dev, "%s: BUSY\n", __func__);
+ 
+ 	r = core->write(core, WL1273_TUNER_MODE_SET, TUNER_MODE_AUTO_SEEK);
+diff -uNr tbs-drivers-v130927.orig/linux/drivers/media/radio/si470x/radio-si470x-common.c tbs-drivers-v130927/linux/drivers/media/radio/si470x/radio-si470x-common.c
+--- tbs-drivers-v130927.orig/linux/drivers/media/radio/si470x/radio-si470x-common.c	2011-04-30 11:45:26.000000000 +0800
++++ tbs-drivers-v130927/linux/drivers/media/radio/si470x/radio-si470x-common.c	2013-11-24 23:01:24.291414083 +0800
+@@ -176,7 +176,7 @@
+ 
+ 	/* currently I2C driver only uses interrupt way to tune */
+ 	if (radio->stci_enabled) {
+-		INIT_COMPLETION(radio->completion);
++		reinit_completion(&radio->completion);
+ 
+ 		/* wait till tune operation has completed */
+ 		retval = wait_for_completion_timeout(&radio->completion,
+@@ -324,7 +324,7 @@
+ 
+ 	/* currently I2C driver only uses interrupt way to seek */
+ 	if (radio->stci_enabled) {
+-		INIT_COMPLETION(radio->completion);
++		reinit_completion(&radio->completion);
+ 
+ 		/* wait till seek operation has completed */
+ 		retval = wait_for_completion_timeout(&radio->completion,
+diff -uNr tbs-drivers-v130927.orig/linux/drivers/media/video/tuner-core.c tbs-drivers-v130927/linux/drivers/media/video/tuner-core.c
+--- tbs-drivers-v130927.orig/linux/drivers/media/video/tuner-core.c	2011-07-23 11:45:23.000000000 +0800
++++ tbs-drivers-v130927/linux/drivers/media/video/tuner-core.c	2013-11-24 22:00:46.839515228 +0800
+@@ -43,7 +43,7 @@
+ 
+ #define UNSET (-1U)
+ 
+-#define PREFIX (t->i2c->driver->driver.name)
++#define PREFIX (t->i2c->dev.driver->name)
+ 
+ /*
+  * Driver modprobe parameters
+@@ -448,7 +448,7 @@
+ 	}
+ 
+ 	tuner_dbg("%s %s I2C addr 0x%02x with type %d used for 0x%02x\n",
+-		  c->adapter->name, c->driver->driver.name, c->addr << 1, type,
++		  c->adapter->name, c->dev.driver->name, c->addr << 1, type,
+ 		  t->mode_mask);
+ 	return;
+ 
+@@ -552,7 +552,7 @@
+ 		int mode_mask;
+ 
+ 		if (pos->i2c->adapter != adap ||
+-		    strcmp(pos->i2c->driver->driver.name, "tuner"))
++		    strcmp(pos->i2c->dev.driver->name, "tuner"))
+ 			continue;
+ 
+ 		mode_mask = pos->mode_mask;
+diff -uNr tbs-drivers-v130927.orig/linux/drivers/media/video/tvp514x.c tbs-drivers-v130927/linux/drivers/media/video/tvp514x.c
+--- tbs-drivers-v130927.orig/linux/drivers/media/video/tvp514x.c	2012-06-02 02:35:57.000000000 +0800
++++ tbs-drivers-v130927/linux/drivers/media/video/tvp514x.c	2013-11-24 22:54:16.103425988 +0800
+@@ -112,6 +112,7 @@
+ 	/* Input and Output Routing parameters */
+ 	u32 input;
+ 	u32 output;
++	struct tvp514x_reg *int_seq;
+ };
+ 
+ /* TVP514x default register values */
+@@ -922,11 +923,12 @@
+ 	}
+ 	case 1:
+ 	{
+-		struct tvp514x_reg *int_seq = (struct tvp514x_reg *)
+-				client->driver->id_table->driver_data;
++		//struct tvp514x_reg *int_seq = (struct tvp514x_reg *)
++		//		client->driver->id_table->driver_data;
+ 
+ 		/* Power Up Sequence */
+-		err = tvp514x_write_regs(sd, int_seq);
++		//err = tvp514x_write_regs(sd, int_seq);
++		err = tvp514x_write_regs(sd, decoder->int_seq);
+ 		if (err) {
+ 			v4l2_err(sd, "Unable to turn on decoder\n");
+ 			return err;
+diff -uNr tbs-drivers-v130927.orig/linux/drivers/media/video/v4l2-common.c tbs-drivers-v130927/linux/drivers/media/video/v4l2-common.c
+--- tbs-drivers-v130927.orig/linux/drivers/media/video/v4l2-common.c	2012-06-02 02:48:56.000000000 +0800
++++ tbs-drivers-v130927/linux/drivers/media/video/v4l2-common.c	2013-11-24 23:00:40.235415308 +0800
+@@ -248,13 +248,13 @@
+ 
+ 	switch (match->type) {
+ 	case V4L2_CHIP_MATCH_I2C_DRIVER:
+-		if (c->driver == NULL || c->driver->driver.name == NULL)
++		if (c->dev.driver == NULL || c->dev.driver->name == NULL)
+ 			return 0;
+-		len = strlen(c->driver->driver.name);
++		len = strlen(c->dev.driver->name);
+ 		/* legacy drivers have a ' suffix, don't try to match that */
+-		if (len && c->driver->driver.name[len - 1] == '\'')
++		if (len && c->dev.driver->name[len - 1] == '\'')
+ 			len--;
+-		return len && !strncmp(c->driver->driver.name, match->name, len);
++		return len && !strncmp(c->dev.driver->name, match->name, len);
+ 	case V4L2_CHIP_MATCH_I2C_ADDR:
+ 		return c->addr == match->addr;
+ 	default:
+@@ -291,13 +291,13 @@
+ 	v4l2_subdev_init(sd, ops);
+ 	sd->flags |= V4L2_SUBDEV_FL_IS_I2C;
+ 	/* the owner is the same as the i2c_client's driver owner */
+-	sd->owner = client->driver->driver.owner;
++	sd->owner = client->dev.driver->owner;
+ 	/* i2c_client and v4l2_subdev point to one another */
+ 	v4l2_set_subdevdata(sd, client);
+ 	i2c_set_clientdata(client, sd);
+ 	/* initialize name */
+ 	snprintf(sd->name, sizeof(sd->name), "%s %d-%04x",
+-		client->driver->driver.name, i2c_adapter_id(client->adapter),
++		client->dev.driver->name, i2c_adapter_id(client->adapter),
+ 		client->addr);
+ }
+ EXPORT_SYMBOL_GPL(v4l2_i2c_subdev_init);
+@@ -334,11 +334,11 @@
+ 	   loaded. This delay-load mechanism doesn't work if other drivers
+ 	   want to use the i2c device, so explicitly loading the module
+ 	   is the best alternative. */
+-	if (client == NULL || client->driver == NULL)
++	if (client == NULL || client->dev.driver == NULL)
+ 		goto error;
+ 
+ 	/* Lock the module so we can safely get the v4l2_subdev pointer */
+-	if (!try_module_get(client->driver->driver.owner))
++	if (!try_module_get(client->dev.driver->owner))
+ 		goto error;
+ 	sd = i2c_get_clientdata(client);
+ 
+@@ -347,7 +347,7 @@
+ 	if (v4l2_device_register_subdev(v4l2_dev, sd))
+ 		sd = NULL;
+ 	/* Decrease the module use count to match the first try_module_get. */
+-	module_put(client->driver->driver.owner);
++	module_put(client->dev.driver->owner);
+ 
+ error:
+ 	/* If we have a client but no subdev, then something went wrong and
+diff -uNr tbs-drivers-v130927.orig/linux/drivers/media/video/v4l2-dev.c tbs-drivers-v130927/linux/drivers/media/video/v4l2-dev.c
+--- tbs-drivers-v130927.orig/linux/drivers/media/video/v4l2-dev.c	2012-06-02 02:48:34.000000000 +0800
++++ tbs-drivers-v130927/linux/drivers/media/video/v4l2-dev.c	2013-11-24 23:00:25.343415722 +0800
+@@ -38,7 +38,7 @@
+  *	sysfs stuff
+  */
+ 
+-static ssize_t show_index(struct device *cd,
++static ssize_t index_show(struct device *cd,
+ 			 struct device_attribute *attr, char *buf)
+ {
+ 	struct video_device *vdev = to_video_device(cd);
+@@ -46,7 +46,9 @@
+ 	return sprintf(buf, "%i\n", vdev->index);
+ }
+ 
+-static ssize_t show_name(struct device *cd,
++static DEVICE_ATTR_RO(index);
++
++static ssize_t name_show(struct device *cd,
+ 			 struct device_attribute *attr, char *buf)
+ {
+ 	struct video_device *vdev = to_video_device(cd);
+@@ -54,11 +56,14 @@
+ 	return sprintf(buf, "%.*s\n", (int)sizeof(vdev->name), vdev->name);
+ }
+ 
+-static struct device_attribute video_device_attrs[] = {
+-	__ATTR(name, S_IRUGO, show_name, NULL),
+-	__ATTR(index, S_IRUGO, show_index, NULL),
+-	__ATTR_NULL
++static DEVICE_ATTR_RO(name);
++
++static struct attribute *video_device_attrs[] = {
++	&dev_attr_name.attr,
++	&dev_attr_index.attr,
++	NULL,
+ };
++ATTRIBUTE_GROUPS(video_device);
+ 
+ /*
+  *	Active devices
+@@ -183,7 +188,7 @@
+ 
+ static struct class video_class = {
+ 	.name = VIDEO_NAME,
+-	.dev_attrs = video_device_attrs,
++	.dev_groups = video_device_groups,
+ };
+ 
+ struct video_device *video_devdata(struct file *file)
+diff -uNr tbs-drivers-v130927.orig/linux/include/media/v4l2-common.h tbs-drivers-v130927/linux/include/media/v4l2-common.h
+--- tbs-drivers-v130927.orig/linux/include/media/v4l2-common.h	2011-03-23 12:45:35.000000000 +0800
++++ tbs-drivers-v130927/linux/include/media/v4l2-common.h	2013-11-24 22:59:53.387416610 +0800
+@@ -35,7 +35,7 @@
+ 	printk(level "%s %d-%04x: " fmt, name, i2c_adapter_id(adapter), addr , ## arg)
+ 
+ #define v4l_client_printk(level, client, fmt, arg...)			    \
+-	v4l_printk(level, (client)->driver->driver.name, (client)->adapter, \
++	v4l_printk(level, (client)->dev.driver->name, (client)->adapter, \
+ 		   (client)->addr, fmt , ## arg)
+ 
+ #define v4l_err(client, fmt, arg...) \

@@ -1,0 +1,4 @@
+PKG_URL_PROTO=git
+PKG_URL_REV=11d59d18
+PKG_VERSION=r${PKG_URL_REV}
+PKG_URL="https://github.com/willswang/vlc"
