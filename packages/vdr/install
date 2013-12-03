@@ -42,6 +42,3 @@ mkdir $INSTALL/video
 
 mkdir -p $INSTALL/lib/systemd/system/vdr.target.wants
 ln -s ../lircd.service $INSTALL/lib/systemd/system/vdr.target.wants
-
-mkdir -p $INSTALL/etc/systemd/system
-ln -sf '/etc/systemd/system/vdr.target' $INSTALL/etc/systemd/system/default.target

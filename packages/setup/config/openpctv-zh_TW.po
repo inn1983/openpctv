@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openpctv 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-01 21:30+0800\n"
+"POT-Creation-Date: 2013-12-03 21:40+0800\n"
 "PO-Revision-Date: 2013-07-28 09:19+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: packages/setup/scripts/audio-config:8
 #: packages/setup/scripts/audio-config:48
-#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:242
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:252
 msgid "Soundcard Configuration"
 msgstr "配置音效卡"
 
@@ -379,7 +379,7 @@ msgstr "diseqc.conf已被編輯"
 msgid "Finished"
 msgstr "完成"
 
-#: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:242
+#: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:252
 msgid "Select a software emulated CAM"
 msgstr ""
 
@@ -466,7 +466,7 @@ msgstr ""
 "加的驅動嗎？"
 
 #: packages/setup/scripts/install-drivers:67
-#: packages/setup/scripts/setup.sh:242
+#: packages/setup/scripts/setup.sh:252
 msgid "Install additional V4L and DVB drive"
 msgstr "安裝附加的V4L及DVB驅動"
 
@@ -772,7 +772,7 @@ msgid "Submit"
 msgstr "提交"
 
 #: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
-#: packages/setup/scripts/setup.sh:242
+#: packages/setup/scripts/setup.sh:252
 msgid "Set the monitor's best resolution"
 msgstr "設定顯示器的最佳解析度"
 
@@ -901,7 +901,7 @@ msgid ""
 "a default device as Lirc support."
 msgstr "在這台機器上找到了如下紅外接遙控接收設備，請為lirc選擇一種預設設備"
 
-#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:242
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:252
 msgid "Set the default target"
 msgstr ""
 
@@ -924,179 +924,179 @@ msgid ""
 "card"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:37 packages/setup/scripts/setup.sh:51
-#: packages/setup/scripts/setup.sh:59
+#: packages/setup/scripts/setup.sh:47 packages/setup/scripts/setup.sh:61
+#: packages/setup/scripts/setup.sh:69
 msgid "OK"
 msgstr "確認"
 
-#: packages/setup/scripts/setup.sh:37 packages/setup/scripts/setup.sh:46
-#: packages/setup/scripts/setup.sh:48 packages/setup/scripts/setup.sh:51
-#: packages/setup/scripts/setup.sh:59
+#: packages/setup/scripts/setup.sh:47 packages/setup/scripts/setup.sh:56
+#: packages/setup/scripts/setup.sh:58 packages/setup/scripts/setup.sh:61
+#: packages/setup/scripts/setup.sh:69
 msgid "Auto mount cifs"
 msgstr "自動掛載cifs"
 
-#: packages/setup/scripts/setup.sh:45
+#: packages/setup/scripts/setup.sh:55
 msgid "MSSMBMNT"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:45
+#: packages/setup/scripts/setup.sh:55
 msgid "MSSMBMNTINFO"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:46 packages/setup/scripts/setup.sh:48
+#: packages/setup/scripts/setup.sh:56 packages/setup/scripts/setup.sh:58
 msgid "Specifies"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:46
+#: packages/setup/scripts/setup.sh:56
 msgid "the username"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:48
+#: packages/setup/scripts/setup.sh:58
 msgid "the password"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:51 packages/setup/scripts/setup.sh:59
+#: packages/setup/scripts/setup.sh:61 packages/setup/scripts/setup.sh:69
 msgid "Mount"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:51 packages/setup/scripts/setup.sh:59
+#: packages/setup/scripts/setup.sh:61 packages/setup/scripts/setup.sh:69
 msgid "to"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:51
+#: packages/setup/scripts/setup.sh:61
 msgid "success"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:59
+#: packages/setup/scripts/setup.sh:69
 msgid "fail"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:74 packages/setup/scripts/setup.sh:76
+#: packages/setup/scripts/setup.sh:84 packages/setup/scripts/setup.sh:86
 msgid "MSNFSMNT"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:74
+#: packages/setup/scripts/setup.sh:84
 msgid "The NFS server name or IP address"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:76
+#: packages/setup/scripts/setup.sh:86
 msgid "The name of the NFS share"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:83 packages/setup/scripts/setup.sh:87
-#: packages/setup/scripts/setup.sh:92 packages/setup/scripts/setup.sh:97
-#: packages/setup/scripts/setup.sh:153
+#: packages/setup/scripts/setup.sh:93 packages/setup/scripts/setup.sh:97
+#: packages/setup/scripts/setup.sh:102 packages/setup/scripts/setup.sh:107
+#: packages/setup/scripts/setup.sh:163
 msgid "MSSC"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:83
+#: packages/setup/scripts/setup.sh:93
 msgid "The server name or IP address"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:87
+#: packages/setup/scripts/setup.sh:97
 msgid "The port of the server"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:92
+#: packages/setup/scripts/setup.sh:102
 msgid "Specifies the username"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:97
+#: packages/setup/scripts/setup.sh:107
 msgid "Specifies the password"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:153
+#: packages/setup/scripts/setup.sh:163
 msgid "Specifies the newcamd cfgkey"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:168
+#: packages/setup/scripts/setup.sh:178
 msgid "MSSCMENU"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:168
+#: packages/setup/scripts/setup.sh:178
 msgid "MSCCCAM"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:168
+#: packages/setup/scripts/setup.sh:178
 msgid "MSCAMD35"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:168
+#: packages/setup/scripts/setup.sh:178
 msgid "MSNEWCAMD"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:168
+#: packages/setup/scripts/setup.sh:178
 msgid "MSNOSC"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:177
+#: packages/setup/scripts/setup.sh:187
 msgid "EditSC"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:191
+#: packages/setup/scripts/setup.sh:201
 msgid "Select a partition for OpenPCTV cache..."
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:199
+#: packages/setup/scripts/setup.sh:209
 msgid "Size"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:199
+#: packages/setup/scripts/setup.sh:209
 msgid "Used"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:199
+#: packages/setup/scripts/setup.sh:209
 msgid "Available"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:202
+#: packages/setup/scripts/setup.sh:212
 msgid "Don't mount bind for OpenPCTV cache"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:233
+#: packages/setup/scripts/setup.sh:243
 msgid ""
 "Would you like to scan channels for VDR/XBMC(It'll take quiet long to do "
 "it)?  You can also scan channels with vdr reelscanchannels plugin in vdr."
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:242
+#: packages/setup/scripts/setup.sh:252
 msgid "OpenPCTV configurator"
 msgstr "配置OpenPCTV"
 
-#: packages/setup/scripts/setup.sh:242
+#: packages/setup/scripts/setup.sh:252
 msgid "Main menu"
 msgstr "主菜單"
 
-#: packages/setup/scripts/setup.sh:242
+#: packages/setup/scripts/setup.sh:252
 msgid "Set global locale and language"
 msgstr "設置全域區域和語言"
 
-#: packages/setup/scripts/setup.sh:242
+#: packages/setup/scripts/setup.sh:252
 msgid "Configure Network Environment"
 msgstr "配置網路環境"
 
-#: packages/setup/scripts/setup.sh:242
+#: packages/setup/scripts/setup.sh:252
 msgid "Select IR device"
 msgstr "選擇紅外接收設備"
 
-#: packages/setup/scripts/setup.sh:242
+#: packages/setup/scripts/setup.sh:252
 #, fuzzy
 msgid "Auto update Satellite Transponders and EPG data"
 msgstr "從fastsatfinder自動更新衛星參數"
 
-#: packages/setup/scripts/setup.sh:242
+#: packages/setup/scripts/setup.sh:252
 msgid "DiSEqC configurator"
 msgstr "DiSEqC配置"
 
-#: packages/setup/scripts/setup.sh:242
+#: packages/setup/scripts/setup.sh:252
 msgid "Auto scan channels"
 msgstr "自動掃描頻道"
 
-#: packages/setup/scripts/setup.sh:242
+#: packages/setup/scripts/setup.sh:252
 msgid "Reboot OpenPCTV"
 msgstr "重新啟動OpenPCTV"
 
-#: packages/setup/scripts/setup.sh:242
+#: packages/setup/scripts/setup.sh:252
 msgid "Exit to login shell"
 msgstr "退出並登錄shell"
 

@@ -2,6 +2,16 @@
 
 systemctl start plymouth-quit
 export TERM=linux
+
+if grep -q -i arm /proc/cpuinfo; then
+  ARCH=arm
+  if dialog --clear --title "Do you want to configure system?" --pause "Or wait 5 seconds after you will enter XBMC"  10 50 5; then
+    systemctl start getty\@ttymxc0
+    systemctl start vdr-backend
+    systemctl start xbmc
+  fi
+fi
+
 . gettext.sh
 export TEXTDOMAIN=openpctv
 
@@ -283,7 +293,7 @@ updatelocale
     Reboot)	reboot
 		;;
     Exit)	clear
-		agetty tty1 &
+		systemctl start getty\@tty1
     		exit 0
     		;;
   esac

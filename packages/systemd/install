@@ -41,6 +41,13 @@ for TTY in 2 3; do
     $INSTALL/etc/systemd/system/getty.target.wants/getty@tty$TTY.service
 done
 
+if [ "$TARGET_ARCH" = arm ] ; then
+  mv $INSTALL/etc/systemd/system/getty.target.wants/getty@tty1.service \
+    $INSTALL/etc/systemd/system/
+  ln -s /lib/systemd/system/getty/getty@ttymxc0.service \
+    $INSTALL/etc/systemd/system/getty.target.wants/getty@ttymxc0.service
+fi
+
 [ -n "$MEDIA_CENTER_FRONTEND" ] && \
   DEFAULT_SYSTEMD_TARGET=$MEDIA_CENTER_FRONTEND
 

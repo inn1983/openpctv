@@ -1,7 +1,13 @@
-diff -uNr u-boot-v2009.08-imx_3.0.35_4.1.0.orig/include/configs/mx6q_sabresd.h u-boot-v2009.08-imx_3.0.35_4.1.0/include/configs/mx6q_sabresd.h
---- u-boot-v2009.08-imx_3.0.35_4.1.0.orig/include/configs/mx6q_sabresd.h	2013-11-15 23:18:43.214269379 +0800
-+++ u-boot-v2009.08-imx_3.0.35_4.1.0/include/configs/mx6q_sabresd.h	2013-11-15 23:23:51.906256470 +0800
-@@ -126,12 +126,12 @@
+diff -uNr u-boot-2009.08-imx-12.08.00.orig/include/configs/mx6q_sabresd.h u-boot-2009.08-imx-12.08.00/include/configs/mx6q_sabresd.h
+--- u-boot-2009.08-imx-12.08.00.orig/include/configs/mx6q_sabresd.h	2013-12-03 20:26:29.697971336 +0800
++++ u-boot-2009.08-imx-12.08.00/include/configs/mx6q_sabresd.h	2013-12-03 20:37:59.909986004 +0800
+@@ -120,17 +120,17 @@
+ 		"uboot=u-boot.bin\0"			\
+ 		"kernel=uImage\0"				\
+ 		"nfsroot=/opt/eldk/arm\0"				\
+-		"bootargs_base=setenv bootargs console=ttymxc0,115200\0"\
++		"bootargs_base=setenv bootargs console=ttymxc0,115200 di0_primary console=tty1\0"\
+ 		"bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
  			"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
  		"bootcmd_net=run bootargs_base bootargs_nfs; "		\
  			"tftpboot ${loadaddr} ${kernel}; bootm\0"	\

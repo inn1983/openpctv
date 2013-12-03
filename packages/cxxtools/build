@@ -19,7 +19,7 @@ mv .install/usr/bin/cxxtools-config .install/usr/bin/cxxtools-host-config
 cd ..
 
 mkdir -p objdir-target && cd objdir-target
-do_configure target
+do_configure target 
 
 make -j3
 make_install

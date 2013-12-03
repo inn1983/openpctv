@@ -123,7 +123,6 @@ case "$(cat /tmp/driver.tmp)" in
                 finishinstall
                 ;;
   dvb3221-driver)  tar -czf /root/kernel_media_$(date +%Y%m%d%H%M%S)_backup.tgz /lib/modules/$kernelver/kernel/drivers/media
-                rm -rf /lib/modules/$kernelver/kernel/drivers/media
                 echo "Download and install dvb3221-driver-${kernelver}_Last_${machine}.opk, please wait..."
                 opkg install http://sourceforge.net/projects/openpctv/files/packages/dvb3221-driver-${kernelver}_Last_${machine}.opk/download --force-overwrite || (echo "Can't download dvb3221-driver-${kernelver}_Last_${machine}.opk, check your network settings."; exit)
                 finishinstall
