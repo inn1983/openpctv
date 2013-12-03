@@ -5,6 +5,8 @@ get_meta $1
 
 cd $PKG_BUILD_DIR
 
+do_autoconf
+
 mkdir -p objdir-host && cd objdir-host
 do_configure host
 
