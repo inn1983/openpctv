@@ -11,6 +11,7 @@ do_configure \
             --enable-dri \
             --enable-exa \
             --enable-kms \
+            --enable-glamor \
             --with-xorg-module-dir=$XORG_PATH_MODULES
 
 make

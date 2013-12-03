@@ -1,6 +1,6 @@
 PKG_NAME=mesa
-PKG_VERSION=10.0-rc2
-PKG_URL="http://cgit.freedesktop.org/mesa/mesa/snapshot/mesa-${PKG_VERSION}.tar.gz"
+PKG_VERSION=10.0
+PKG_URL="ftp://ftp.freedesktop.org/pub/mesa/10.0/MesaLib-10.0.0.tar.bz2"
 #PKG_URL_PROTO=git
 #PKG_URL_REV=f407ea1
 #PKG_URL="git://anongit.freedesktop.org/mesa/mesa"
