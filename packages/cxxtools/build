@@ -16,10 +16,18 @@ make_install toolchain
 sed -i "s:\(['= ]\)/usr:\\1$ROOT/$TOOLCHAIN:g" .install/usr/bin/cxxtools-config
 mv .install/usr/bin/cxxtools-config .install/usr/bin/cxxtools-host-config
 
+#if [ "$TARGET_ARCH" = powerpc ]; then
+#  ARGS="--with-atomictype=att_ppc"
+#elif [ "$TARGET_ARCH" = arm ]; then
+#  ARGS="--with-atomictype=att_arm"
+#elif [ "$TARGET_ARCH" = mips ]; then
+#  ARGS="--with-atomictype=att_mips"
+#fi
+
 cd ..
 
 mkdir -p objdir-target && cd objdir-target
-do_configure target 
+do_configure target --with-atomictype=pthread
 
 make -j3
 make_install
