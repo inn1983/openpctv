@@ -11,6 +11,9 @@ require_cxx $1
 
 cd $BUILD/$1*
 
+sed -i 's/^video.output.vdpau_enable_inverse_telecine:0/video.output.vdpau_enable_inverse_telecine:1/' \
+	data/xine.conf
+
 do_autoconf
 
 export CXXFLAGS="$CXXFLAGS -I../linux-3.*/include/uapi/"

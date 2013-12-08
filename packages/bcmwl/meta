@@ -1,6 +1,6 @@
 PKG_NAME=bcmwl
-PKG_VERSION="6.20.155"
-PKG_URL="$DISTRO_SRCS/bcmwl_${PKG_VERSION}.1+bdcom.tar.gz"
+PKG_VERSION="6.20.155.1"
+PKG_URL="$SFNET_SRCS/openpctv/sources/bcm_sta-${PKG_VERSION}.tar.xz"
 PKG_REV=1
 PKG_ARCH="i386 x86_64"
 PKG_LICENSE=non-free

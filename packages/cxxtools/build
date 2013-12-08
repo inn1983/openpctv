@@ -5,31 +5,21 @@ get_meta $1
 
 cd $PKG_BUILD_DIR
 
-do_autoconf
-
 mkdir -p objdir-host && cd objdir-host
 do_configure host
 
-make -j3
+make
 make_install toolchain
 
 sed -i "s:\(['= ]\)/usr:\\1$ROOT/$TOOLCHAIN:g" .install/usr/bin/cxxtools-config
 mv .install/usr/bin/cxxtools-config .install/usr/bin/cxxtools-host-config
 
-#if [ "$TARGET_ARCH" = powerpc ]; then
-#  ARGS="--with-atomictype=att_ppc"
-#elif [ "$TARGET_ARCH" = arm ]; then
-#  ARGS="--with-atomictype=att_arm"
-#elif [ "$TARGET_ARCH" = mips ]; then
-#  ARGS="--with-atomictype=att_mips"
-#fi
-
 cd ..
 
 mkdir -p objdir-target && cd objdir-target
-do_configure target --with-atomictype=pthread
+do_configure target
 
-make -j3
+make
 make_install
 
 sed -i "s:\(['= ]\)/usr:\\1$LIB_PREFIX:g" .install/usr/bin/cxxtools-config

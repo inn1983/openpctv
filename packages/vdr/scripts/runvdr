@@ -38,6 +38,12 @@ if [ -f /sys/class/drm/card0/device/vendor ]; then
     sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_tvguide
   fi
 fi
+
+if [ $VIDEOID = "0x10de" -o $VIDEOID = "0x1002" ]; then
+  sed -i 's#.InverseTelecine =.*#.InverseTelecine = 1#' \
+       /etc/vdr/setup.conf
+fi
+
 sync
 epgen -i /video/epg.dat -o /tmp/epg.dat && epgtrans &
 
