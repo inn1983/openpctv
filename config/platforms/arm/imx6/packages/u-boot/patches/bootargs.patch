@@ -1,0 +1,25 @@
+diff -uNr u-boot-2009.08-imx-12.08.00.orig/include/configs/mx6q_sabresd.h u-boot-2009.08-imx-12.08.00/include/configs/mx6q_sabresd.h
+--- u-boot-2009.08-imx-12.08.00.orig/include/configs/mx6q_sabresd.h	2013-12-03 20:26:29.697971336 +0800
++++ u-boot-2009.08-imx-12.08.00/include/configs/mx6q_sabresd.h	2013-12-03 20:37:59.909986004 +0800
+@@ -120,17 +120,17 @@
+ 		"uboot=u-boot.bin\0"			\
+ 		"kernel=uImage\0"				\
+ 		"nfsroot=/opt/eldk/arm\0"				\
+-		"bootargs_base=setenv bootargs console=ttymxc0,115200\0"\
++		"bootargs_base=setenv bootargs console=ttymxc0,115200 di0_primary console=tty1\0"\
+ 		"bootargs_nfs=setenv bootargs ${bootargs} root=/dev/nfs "\
+ 			"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0"\
+ 		"bootcmd_net=run bootargs_base bootargs_nfs; "		\
+ 			"tftpboot ${loadaddr} ${kernel}; bootm\0"	\
+-		"bootargs_mmc=setenv bootargs ${bootargs} ip=dhcp "     \
+-			"root=/dev/mmcblk0p1 rootwait\0"                \
++		"bootargs_mmc=setenv bootargs ${bootargs} "     \
++			"root=/dev/mmcblk0p1 rootwait video=mxcfb1:dev=ldb,LDB-XGA,if=RGB666 video=mxcfb0:dev=hdmi,1920x1080M@60 video=mxcfb1:off video=mxcfb2:off fbmem=28M consoleblank=0\0"                \
+ 		"bootcmd_mmc=run bootargs_base bootargs_mmc; "   \
+ 		"mmc dev 3; "	\
+ 		"mmc read ${loadaddr} 0x800 0x2000; bootm\0"	\
+-		"bootcmd=run bootcmd_net\0"                             \
++		"bootcmd=run bootcmd_mmc\0"                             \
+ 
+ 
+ #define CONFIG_ARP_TIMEOUT	200UL
