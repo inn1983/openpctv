@@ -17,7 +17,7 @@ case $TARGET_ARCH in
     [ -n "$MACHINE_UBOOT_CONFIG" ] && IMAGE=uImage || IMAGE=zImage
     ;;
 esac
-#cp $ROOT/$PACKAGES/$1/config/linux.conf .config
+
 make $IMAGE
 make modules
 
