@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPCTV 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-03 21:40+0800\n"
+"POT-Creation-Date: 2013-12-15 13:23+0800\n"
 "PO-Revision-Date: 2013-07-23 16:56+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: packages/setup/scripts/audio-config:8
 #: packages/setup/scripts/audio-config:48
-#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:106
 msgid "Soundcard Configuration"
 msgstr "配置声卡"
 
@@ -378,7 +378,7 @@ msgstr "diseqc.conf已被编辑"
 msgid "Finished"
 msgstr "完成"
 
-#: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:109
 msgid "Select a software emulated CAM"
 msgstr "选择一种模拟CAM软件"
 
@@ -472,7 +472,7 @@ msgstr ""
 "加的驱动吗？"
 
 #: packages/setup/scripts/install-drivers:67
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:103
 msgid "Install additional V4L and DVB drive"
 msgstr "安装附加的V4L及DVB驱动"
 
@@ -782,7 +782,7 @@ msgid "Submit"
 msgstr "提交"
 
 #: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:105
 msgid "Set the monitor's best resolution"
 msgstr "设定显示器的最佳分辨率"
 
@@ -911,7 +911,7 @@ msgid ""
 "a default device as Lirc support."
 msgstr "在这台机器上找到了如下红外接遥控接收设备，请为lirc选择一种默认设备"
 
-#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:101
 msgid "Set the default target"
 msgstr "选择默认的启动项"
 
@@ -934,136 +934,15 @@ msgid ""
 "card"
 msgstr "开源的家庭剧院，NVIDIA/Intel/AMD显卡可以工作得很好。"
 
-#: packages/setup/scripts/setup.sh:47 packages/setup/scripts/setup.sh:61
-#: packages/setup/scripts/setup.sh:69
-msgid "OK"
-msgstr "确认"
+#: packages/setup/scripts/setup.sh:16
+msgid "Press any key to enter setup,"
+msgstr "按任意键进入配置程序，"
 
-#: packages/setup/scripts/setup.sh:47 packages/setup/scripts/setup.sh:56
-#: packages/setup/scripts/setup.sh:58 packages/setup/scripts/setup.sh:61
-#: packages/setup/scripts/setup.sh:69
-msgid "Auto mount cifs"
-msgstr ""
+#: packages/setup/scripts/setup.sh:16
+msgid "or 3 seconds after enter XBMC automatically."
+msgstr "否则三秒后自动进入XBMC。"
 
-#: packages/setup/scripts/setup.sh:55
-msgid "MSSMBMNT"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:55
-msgid "MSSMBMNTINFO"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:56 packages/setup/scripts/setup.sh:58
-msgid "Specifies"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:56
-msgid "the username"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:58
-msgid "the password"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:61 packages/setup/scripts/setup.sh:69
-msgid "Mount"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:61 packages/setup/scripts/setup.sh:69
-msgid "to"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:61
-msgid "success"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:69
-msgid "fail"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:84 packages/setup/scripts/setup.sh:86
-msgid "MSNFSMNT"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:84
-msgid "The NFS server name or IP address"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:86
-msgid "The name of the NFS share"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:93 packages/setup/scripts/setup.sh:97
-#: packages/setup/scripts/setup.sh:102 packages/setup/scripts/setup.sh:107
-#: packages/setup/scripts/setup.sh:163
-msgid "MSSC"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:93
-msgid "The server name or IP address"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:97
-msgid "The port of the server"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:102
-msgid "Specifies the username"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:107
-msgid "Specifies the password"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:163
-msgid "Specifies the newcamd cfgkey"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:178
-msgid "MSSCMENU"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:178
-msgid "MSCCCAM"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:178
-msgid "MSCAMD35"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:178
-msgid "MSNEWCAMD"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:178
-msgid "MSNOSC"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:187
-msgid "EditSC"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:201
-msgid "Select a partition for OpenPCTV cache..."
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:209
-msgid "Size"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:209
-msgid "Used"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:209
-msgid "Available"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:212
-msgid "Don't mount bind for OpenPCTV cache"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:243
+#: packages/setup/scripts/setup.sh:90
 msgid ""
 "Would you like to scan channels for VDR/XBMC(It'll take quiet long to do "
 "it)?  You can also scan channels with vdr reelscanchannels plugin in vdr."
@@ -1071,43 +950,51 @@ msgstr ""
 "你想为VDR/XBMC进行进行频道扫描吗(将会花较的时间）？你也可以在VDR中利用"
 "reelscanchannels插件进行频道扫描。"
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:99
 msgid "OpenPCTV configurator"
 msgstr "配置OpenPCTV"
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:99
 msgid "Main menu"
 msgstr "主菜单"
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:100
 msgid "Set global locale and language"
 msgstr "设置全局区域和语言"
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:102
 msgid "Configure Network Environment"
 msgstr "配置网络环境"
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:104
 msgid "Select IR device"
 msgstr "选择红外接收设备"
 
-#: packages/setup/scripts/setup.sh:252
-msgid "Auto update Satellite Transponders and EPG data"
-msgstr "自动更新卫星参数及EPG数据"
+#: packages/setup/scripts/setup.sh:107
+msgid "Update Satellite Transponders"
+msgstr "更新卫星参数"
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:108
+msgid "Update EPG data"
+msgstr "更新第三方EPG数据"
+
+#: packages/setup/scripts/setup.sh:110
 msgid "DiSEqC configurator"
 msgstr "DiSEqC配置"
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:111
 msgid "Auto scan channels"
 msgstr "自动扫描频道"
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:112
+msgid "Start XBMC with VDR"
+msgstr "启动带有VDR后台的XBMC"
+
+#: packages/setup/scripts/setup.sh:113
 msgid "Reboot OpenPCTV"
 msgstr "重新启动OpenPCTV"
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:114
 msgid "Exit to login shell"
 msgstr "退出并登录shell"
 
@@ -1158,6 +1045,9 @@ msgstr "转换卫星参数并更新基于scan-s2的卫星参数"
 #: packages/setup/scripts/update-transponders:30
 msgid "Done!"
 msgstr "完成！"
+
+#~ msgid "OK"
+#~ msgstr "确认"
 
 #~ msgid "Microsoft FAT16/32 partition or Linux EXT2/3 partition"
 #~ msgstr "微软FAT16/32分区或Linux EXT2/3分区"

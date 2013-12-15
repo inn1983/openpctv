@@ -1,302 +1,170 @@
 #!/bin/bash
 
-systemctl start plymouth-quit
 export TERM=linux
-
-if grep -q -i arm /proc/cpuinfo; then
-  ARCH=arm
-  if dialog --clear --title "Do you want to configure system?" --pause "Or wait 5 seconds after you will enter XBMC"  10 50 5; then
-    systemctl start getty\@ttymxc0
-    systemctl start vdr-backend
-    systemctl start xbmc
-  fi
-fi
 
 . gettext.sh
 export TEXTDOMAIN=openpctv
 
 source /etc/profile
 
+if grep -q -i arm /proc/cpuinfo; then
+  ARCH=arm
+  echo -e -n "\e[31m$(gettext "Press any key to enter setup,")\e[0m \e[32m$(gettext "or 3 seconds after enter XBMC automatically.")\e[0m"
+  read -s -n1 -t3
+  result=$?
+  if [ $result = 142 -o $result = 130 ]; then
+    systemctl start getty\@ttymxc0
+    systemctl start vdr-backend
+    systemctl start xbmc
+    exit 0
+  elif [ $result = 0 ]; then
+    chvt 1
+    clear
+  fi
+else
+  systemctl start plymouth-quit
+fi
+
+
 DIALOG=/usr/bin/dialog
-SYSCONFIG="/etc/sysconfig"
 DIALOGOUT="/tmp/dialogout"
 VDRETCDIR=/etc/vdr
 EDIT=/bin/nano
+
+MENUTMP=/tmp/menu.$$
+
+RUN_LANG=/usr/bin/select-language
+RUN_TARGET=/usr/bin/select-target
+RUN_NET=/usr/bin/netconfig
+RUN_DRV=/usr/bin/install-drivers
+RUN_IR=/usr/bin/select-irdrv
+RUN_MONITOR=/usr/bin/monitor.sh
+RUN_AUDIO=/usr/bin/audio-config
+RUN_CAM=/usr/bin/getcam
+RUN_EPG=/usr/bin/update-epg
+RUN_TRANS=/usr/bin/update-transponders
+RUN_DVB=/usr/bin/update-dvbdevice
+RUN_DISEQC=/usr/bin/diseqcsetup
+RUN_CHANNELS=/usr/bin/update-channels
 
 function updatelocale
 {
 . /etc/locale.conf && export LANG
 }
 
-function selectSMBFS
-{
-setConfig SMBFS ""
-smbtree --no-pass | sed -e '/^[\t][\t]\\\\/!d' -e '/\$/d' -e '/OpenPCTV/d' -e 's/^[\t][\t]//g' -e 's/  /\t/g' -e 's/\\/\//g' | \
-  awk -F"\t" '{print $1}' | sed 's/[[:blank:]]\+$//' | while read line; do
-  SERVER=`echo $line | cut -d\/ -f3`
-  SHARE=`echo $line | cut -d\/ -f4`
-  MNTPOINT="/media/${SERVER}/$(echo ${SHARE} | tr " " "|")"
-  IP=`nmblookup.samba3 ${SERVER} | sed -n '2p' | awk '{print $1}'`
-  SMBFS=$(getConfig "SMBFS")
-  if [ ! -d ${MNTPOINT} ]; then
-    mkdir -p ${MNTPOINT}
-  elif mountpoint ${MNTPOINT} > /dev/null 2>&1 ; then
-    umount ${MNTPOINT}
-  fi
-  if mount -t cifs -o iocharset=utf8,guest "//${IP}/${SHARE}" ${MNTPOINT} > /dev/null 2>&1 ; then
-    ${DIALOG} --ok-label $(gettext "OK") --no-cancel --title "$(gettext "Auto mount cifs")" --pause "Mount //${SERVER}/${SHARE} on ${MNTPOINT} success" 12 60 2
-    SMBFS2=`echo "guest@${SERVER}/${SHARE}" | tr ' ' '|'`
-    if [ X"${SMBFS}" = "X" ]; then
-      setConfig SMBFS "${SMBFS2}"
-    else
-      setConfig SMBFS "${SMBFS} ${SMBFS2}"
-    fi
-  else
-    if ${DIALOG} --title "$(gettext MSSMBMNT)" --yesno "$(gettext MSSMBMNTINFO)://${SERVER}/${SHARE} on ${MNTPOINT}" 6 80 2>/dev/null; then
-      ${DIALOG} --nocancel --title "$(gettext "Auto mount cifs")" --inputbox "$(gettext "Specifies")://${SERVER}/${SHARE} $(gettext "the username"):" 10 70 "${user:=root}" 2> $DIALOGOUT
-      user=$(cat $DIALOGOUT)
-      ${DIALOG} --nocancel --title "$(gettext "Auto mount cifs")" --inputbox "$(gettext "Specifies")://${SERVER}/${SHARE} $(gettext "the password"):" 10 70 "${pass:=password}" 2> $DIALOGOUT
-      pass=$(cat $DIALOGOUT)
-      if mount -t cifs -o iocharset=utf8,user=${user},pass=${pass} "//${IP}/${SHARE}" ${MNTPOINT} > /dev/null 2>&1 ; then
-        ${DIALOG} --ok-label $(gettext "OK") --no-cancel --title "$(gettext "Auto mount cifs")" --pause "$(gettext "Mount") //${SERVER}/${SHARE} $(gettext "to") ${MNTPOINT} $(gettext "success")" 12 60 2
-        SMBFS2=`echo "${user}:${pass}@${SERVER}/${SHARE}" | tr ' ' '|'`
-        if [ "X${SMBFS}" = "X" ]; then
-          setConfig SMBFS "${SMBFS2}"
-        else
-          setConfig SMBFS "${SMBFS} ${SMBFS2}"
-        fi
-      else
-        ${DIALOG} --ok-label $(gettext "OK") --no-cancel --title "$(gettext "Auto mount cifs")" --pause "$(gettext "Mount") //${SERVER}/${SHARE} $(gettext "to") ${MNTPOINT} $(gettext "fail")" 12 60 2
-      fi
-    fi
-  fi
-done
-}
-
-function selectNFSMNT
-{
-unset line server port user pass cfgkey
-NFSMNT=$(getConfig "NFSMNT")
-if [ X"NFSMNT" != "X" ]; then
-   server=$(echo $NFSMNT | cut -d: -f1)
-   share=$(echo $NFSMNT  | cut -d: -f2)
-fi
-${DIALOG} --nocancel --title "$(gettext MSNFSMNT)" --inputbox "$(gettext "The NFS server name or IP address")" 10 70 "${server:=192.168.1.10}" 2> $DIALOGOUT
-server=$(cat $DIALOGOUT)
-${DIALOG} --nocancel --title "$(gettext MSNFSMNT)" --inputbox "$(gettext "The name of the NFS share")" 10 70 "${share:=/home}" 2> $DIALOGOUT
-share=$(cat $DIALOGOUT)
-setConfig NFSMNT "${server}:${share}"
-}
-
-function selectSCINPUT
-{
-  ${DIALOG} --nocancel --title "$(gettext MSSC)" --inputbox "$(gettext "The server name or IP address")" 10 70 "${server}" 2> $DIALOGOUT
-  server=$(cat $DIALOGOUT)
-  [ "X$server" = "X" ] && scfailinput
-  if [ "X$exitsc" != "Xyes" ]; then
-     ${DIALOG} --nocancel --title "$(gettext MSSC)" --inputbox "$(gettext "The port of the server")" 10 70 "${port}" 2> $DIALOGOUT
-     port=$(cat $DIALOGOUT)
-     [ "X$port" = "X" ] && scfailinput
-  fi
-  if [ "X$exitsc" != "Xyes" ]; then
-     ${DIALOG} --nocancel --title "$(gettext MSSC)" --inputbox "$(gettext "Specifies the username")" 10 70 "${user}" 2> $DIALOGOUT
-     user=$(cat $DIALOGOUT)
-     [ "X$user" = "X" ] && scfailinput
-  fi
-  if [ "X$exitsc" != "Xyes" ]; then
-     ${DIALOG} --nocancel --title "$(gettext MSSC)" --inputbox "$(gettext "Specifies the password")" 10 70 "${pass}" 2> $DIALOGOUT
-     pass=$(cat $DIALOGOUT)
-     [ "X$pass" = "X" ] && scfailinput
-  fi
-}
-
-function selectCCCAM
-{
-  if grep "^cccam2" ${VDRETCDIR}/plugins/sc/cardclient.conf > /dev/null; then
-     line=$(grep "^cccam2" ${VDRETCDIR}/plugins/sc/cardclient.conf | sed -n '1p')
-     server=$(echo $line | cut -d: -f2)
-     port=$(echo $line | cut -d: -f3)
-     user=$(echo $line | cut -d: -f5)
-     pass=$(echo $line | cut -d: -f6)
-  fi
-  selectSCINPUT
-  if [ "X$server" != "X" -a "X$port" != "X" -a "X$user" != "X" -a "X$pass" != "X" ]; then
-     if [ "X$line" = "X" ]; then
-        echo "cccam2:${server}:${port}:0/0000/0000:${user}:${pass}" >> ${VDRETCDIR}/plugins/sc/cardclient.conf
-     else
-        sed -i "s#^cccam2.*#cccam2:${server}:${port}:0/0000/0000:${user}:${pass}#g" ${VDRETCDIR}/plugins/sc/cardclient.conf
-     fi
-  fi
-}
-
-function selectCAMD35
-{
-  if grep "^camd35" ${VDRETCDIR}/plugins/sc/cardclient.conf > /dev/null; then
-     line=$(grep "^camd35" ${VDRETCDIR}/plugins/sc/cardclient.conf | sed -n '1p')
-     server=$(echo $line | cut -d: -f2)
-     port=$(echo $line | cut -d: -f3)
-     user=$(echo $line | cut -d: -f5)
-     pass=$(echo $line | cut -d: -f6)
-  fi
-  selectSCINPUT
-  if [ "X$server" != "X" -a "X$port" != "X" -a "X$user" != "X" -a "X$pass" != "X" ]; then
-     if [ "X$line" = "X" ]; then
-        echo "camd35:${server}:${port}:0/0500,0600,1800,1801,0B00,0602,0604,0606/FFFF:${user}:${pass}" >> ${VDRETCDIR}/plugins/sc/cardclient.conf
-     else
-        sed -i "s#^camd35.*#camd35:${server}:${port}:0/0500,0600,1800,1801,0B00,0602,0604,0606/FFFF:${user}:${pass}#g" ${VDRETCDIR}/plugins/sc/cardclient.conf
-     fi
-  fi
-}
-
-function selectNEWCAMD
-{
-  if grep "^newcamd" ${VDRETCDIR}/plugins/sc/cardclient.conf > /dev/null; then
-     line=$(grep "^newcamd" ${VDRETCDIR}/plugins/sc/cardclient.conf | sed -n '1p')
-     server=$(echo $line | cut -d: -f2)
-     port=$(echo $line | cut -d: -f3)
-     user=$(echo $line | cut -d: -f5)
-     pass=$(echo $line | cut -d: -f6)
-     cfgkey=$(echo $line | cut -d: -f7)
-  fi
-  selectSCINPUT
-  if [ "X$exitsc" != "Xyes" ]; then
-     ${DIALOG} --nocancel --title "$(gettext MSSC)" --inputbox "$(gettext "Specifies the newcamd cfgkey")" 10 70 "${cfgkey:=0102030405060708091011121314}" 2> $DIALOGOUT
-     cfgkey=$(cat $DIALOGOUT)
-  fi
-  if [ "X$server" != "X" -a "X$port" != "X" -a "X$user" != "X" -a "X$pass" != "X" -a "X${cfgkey}" != "X" ]; then
-     if [ "X$line" = "X" ]; then
-        echo "newcamd:${server}:${port}:0/0500,0600,1800,1801,0B00,0602,0604,0606/FFFF:${user}:${pass}:${cfgkey}" >> ${VDRETCDIR}/plugins/sc/cardclient.conf
-     else
-        sed -i "s#^newcamd.*#newcamd:${server}:${port}:0/0500,0600,1800,1801,0B00,0602,0604,0606/FFFF:${user}:${pass}:${cfgkey}#g" ${VDRETCDIR}/plugins/sc/cardclient.conf
-     fi
-  fi
-}
-
-function selectSC
-{
-  unset line server port user pass cfgkey
-  ${DIALOG} --no-cancel --default-item "NoSC" --menu "$(gettext MSSCMENU)" 12 50 5 CCcam "$(gettext MSCCCAM)" Camd35 "$(gettext MSCAMD35)" Newcamd "$(gettext MSNEWCAMD)" NoSC "$(gettext MSNOSC)" 2> $DIALOGOUT
-  case $(cat $DIALOGOUT) in
-    CCcam)	selectCCCAM
-  		;;
-    Camd35)	selectCAMD35
-  		;;
-    Newcamd)	selectNEWCAMD
-  		;;
-  esac
-  ${DIALOG} --defaultno --yesno "$(gettext "EditSC")" 10 70
-  if [ $? -eq 0 ]; then
-    $EDIT ${VDRETCDIR}/plugins/sc/cardclient.conf
-  fi
-}
-
-function selectCACHE
-{
-CACHE="$(getConfig "CACHE")"
-if [ x"${CACHE}" != x ]; then
-   DEFAULTITEM="--default-item ${CACHE}"
-else
-   DEFAULTITEM=""
-fi
-echo "${DIALOG} ${DEFAULTITEM} --no-cancel --menu \"$(gettext "Select a partition for OpenPCTV cache...")\" 12 65 10 \\" > /tmp/selectCACHEMENU
-df  | grep "/media" | awk '{if($4 > 6000000) print $2,$3,$4,$6}' | while read line; do
-  Size=$(($(echo ${line} | awk '{print $1}')/1048576))G
-  Used=$(($(echo ${line} | awk '{print $2}')/1048576))G
-  Available=$(($(echo ${line} | awk '{print $3}')/1048576))G
-  Mounted=`echo ${line} | awk '{print $4}'`
-  if touch ${Mounted}/testfile 2> /dev/null; then
-    rm ${Mounted}/testfile
-    echo "${Mounted} \"$(gettext Size):${Size},$(gettext Used):${Used},$(gettext Available):${Available}\" \\" >> /tmp/selectCACHEMENU
-  fi
-done
-echo "None \"$(gettext "Don't mount bind for OpenPCTV cache")\" \\" >> /tmp/selectCACHEMENU
-echo "2> $DIALOGOUT" >> /tmp/selectCACHEMENU
-. /tmp/selectCACHEMENU
-CACHE=`cat $DIALOGOUT`
-rm /tmp/selectCACHEMENU
-if [ X"${CACHE}" != "XNone" ]; then
-   [ ! -d ${CACHE}/cnvdrcache ] && mkdir -p ${CACHE}/cnvdrcache
-   [ ! -d ${CACHE}/cnvdrcache/video ] && mkdir -p ${CACHE}/cnvdrcache/video
-   [ ! -d ${CACHE}/cnvdrcache/pps ] && mkdir -p ${CACHE}/cnvdrcache/pps
-   setConfig "CACHE" "$CACHE"
-fi
-}
-
 function setupinit
 {
-/usr/bin/select-language
-updatelocale
-/usr/bin/select-target
-/usr/bin/netconfig
-/usr/bin/install-drivers
-/usr/bin/select-irdrv
-systemctl restart lircd
-systemctl stop vdr
-systemctl stop vdr-backend
-/usr/bin/monitor.sh
-/usr/bin/audio-config init
-/usr/bin/getcam
-/usr/bin/update-epg
-/usr/bin/update-transponders
-/usr/bin/update-dvbdevice
-/usr/bin/diseqcsetup
+if [ X$ARCH = arm ]; then
+  $RUN_LANG
+  updatelocale
+  $RUN_NET
+  systemctl stop vdr
+  systemctl stop vdr-backend
+  $RUN_AUDIO init
+  $RUN_CAM
+  $RUN_EPG
+  $RUN_TRANS
+  $RUN_DISEQC
+else
+  $RUN_LANG
+  updatelocale
+  $RUN_TARGET
+  $RUN_NET
+  $RUN_DRV
+  $RUN_IR
+  systemctl restart lircd
+  systemctl stop vdr
+  systemctl stop vdr-backend
+  $RUN_MONITOR
+  $RUN_AUDIO init
+  $RUN_CAM
+  $RUN_EPG
+  $RUN_TRANS
+  $RUN_DVB
+  $RUN_DISEQC
+fi
 dialog --defaultno --clear --yesno "$(gettext "Would you like to scan channels for VDR/XBMC(It'll take quiet long to do it)?  You can also scan channels with vdr reelscanchannels plugin in vdr.")" 7 70
 if [ $? -eq 0 ]; then
-  /usr/bin/update-channels
+  $RUN_CHANNELS
 fi
 }
 
 function MainMenu
 {
 updatelocale
-  ${DIALOG} --clear --no-cancel --backtitle "$(gettext "OpenPCTV configurator")" --menu "$(gettext "Main menu")" 21 60 14 Lang "$(gettext "Set global locale and language")" Target "$(gettext "Set the default target")" Netconf "$(gettext "Configure Network Environment")" Driver "$(gettext "Install additional V4L and DVB drive")" Lirc "$(gettext "Select IR device")" Monitor "$(gettext "Set the monitor's best resolution")" Audio "$(gettext "Soundcard Configuration")" Uptran "$(gettext "Auto update Satellite Transponders and EPG data")" CAM "$(gettext "Select a software emulated CAM")" DiSEqC "$(gettext "DiSEqC configurator")" Scan "$(gettext "Auto scan channels")" Reboot "$(gettext "Reboot OpenPCTV")" Exit "$(gettext "Exit to login shell")" 2> $DIALOGOUT
-  case "$(cat $DIALOGOUT)" in
-    Lang)	/usr/bin/select-language
+echo "${DIALOG} --clear --no-cancel --backtitle \"$(gettext "OpenPCTV configurator")\" --menu \"$(gettext "Main menu")\" 21 60 14 \\" > $MENUTMP
+[ -f $RUN_LANG ] && echo "Lang \"$(gettext "Set global locale and language")\" \\" >> $MENUTMP
+[ -f $RUN_TARGET ] && echo "Target \"$(gettext "Set the default target")\" \\" >> $MENUTMP
+[ -f $RUN_NET ] && echo "Netconf \"$(gettext "Configure Network Environment")\" \\" >> $MENUTMP
+[ -f $RUN_DRV ] && echo "Driver \"$(gettext "Install additional V4L and DVB drive")\" \\" >> $MENUTMP
+[ -f $RUN_IR ] && echo "Lirc \"$(gettext "Select IR device")\" \\" >> $MENUTMP
+[ -f $RUN_MONITOR ] && echo "Monitor \"$(gettext "Set the monitor's best resolution")\" \\" >> $MENUTMP
+[ -f $RUN_AUDIO ] && echo "Audio \"$(gettext "Soundcard Configuration")\" \\" >> $MENUTMP
+[ -f $RUN_TRANS ] && echo "Uptran \"$(gettext "Update Satellite Transponders")\" \\" >> $MENUTMP
+[ -f $RUN_EPG ] && echo "EPG \"$(gettext "Update EPG data")\" \\" >> $MENUTMP
+[ -f $RUN_CAM ] && echo "CAM \"$(gettext "Select a software emulated CAM")\" \\" >> $MENUTMP
+[ -f $RUN_DISEQC ] && echo "DiSEqC \"$(gettext "DiSEqC configurator")\" \\" >> $MENUTMP
+[ -f $RUN_CHANNELS ] && echo "Scan \"$(gettext "Auto scan channels")\" \\" >> $MENUTMP
+[ X$ARCH = "Xarm" ] && echo "XBMC \"$(gettext "Start XBMC with VDR")\" \\" >> $MENUTMP
+echo "Reboot \"$(gettext "Reboot OpenPCTV")\" \\" >> $MENUTMP
+echo "Exit \"$(gettext "Exit to login shell")\" 2> $DIALOGOUT" >> $MENUTMP
+. $MENUTMP
+rm $MENUTMP
+case "$(cat $DIALOGOUT)" in
+    Lang)	$RUN_LANG
 		MainMenu
 		;;
-    Target)	/usr/bin/select-target
+    Target)	$RUN_TARGET
 		MainMenu
 		;;
-    Netconf)	/usr/bin/netconfig
+    Netconf)	$RUN_NET
 		MainMenu
 		;;
-    Driver)	/usr/bin/install-drivers
+    Driver)	$RUN_DRV
 		MainMenu
 		;;
-    Lirc)	/usr/bin/select-irdrv
+    Lirc)	$RUN_IR
 		systemctl restart lircd
     		MainMenu
  		;;
-    Uptran)	/usr/bin/update-transponders
-		/usr/bin/update-epg
+    Uptran)	$RUN_TRANS
     		MainMenu
   		;;
-    CAM)	/usr/bin/getcam
+    EPG)	$RUN_EPG
+		MainMenu
+		;;
+    CAM)	$RUN_CAM
 		MainMenu
 		;;
     DiSEqC)	systemctl stop vdr
 		systemctl stop vdr-backend
-		/usr/bin/diseqcsetup
+		$RUN_DISEQC
     		MainMenu
   		;;
     Scan)	systemctl stop vdr
 		systemctl stop vdr-backend
-                /usr/bin/update-channels
+		$RUN_CHANNELS
 		MainMenu
 		;;
-    Monitor)	/usr/bin/monitor.sh
+    Monitor)	$RUN_MONITOR
 		MainMenu
 		;;
-    Audio)	/usr/bin/audio-config
+    Audio)	$RUN_AUDIO
 		MainMenu
+		;;
+    XBMC)	systemctl start getty\@ttymxc0
+		systemctl start vdr-backend
+		systemctl start xbmc
 		;;
     Reboot)	reboot
 		;;
     Exit)	clear
 		systemctl start getty\@tty1
+		systemctl start getty\@ttymxc0
     		exit 0
     		;;
-  esac
+esac
+rm $DIALOGOUT
 }
 
 [ X$1 = "Xinit" -a ! -f /etc/system.options ] && setupinit

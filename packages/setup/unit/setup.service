@@ -1,6 +1,6 @@
 [Unit]
 Description=Setup
-After=systemd-user-sessions.service plymouth-quit-wait.service 
+After=systemd-user-sessions.service plymouth-quit-wait.service plymouth-lite.service
 Before=getty.target
 
 [Service]

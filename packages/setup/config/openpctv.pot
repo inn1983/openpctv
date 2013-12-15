@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-08 11:22+0800\n"
+"POT-Creation-Date: 2013-12-15 19:43+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: packages/setup/scripts/audio-config:8
 #: packages/setup/scripts/audio-config:48
-#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:106
 msgid "Soundcard Configuration"
 msgstr ""
 
@@ -364,7 +364,7 @@ msgstr ""
 msgid "Finished"
 msgstr ""
 
-#: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:109
 msgid "Select a software emulated CAM"
 msgstr ""
 
@@ -446,7 +446,7 @@ msgid ""
 msgstr ""
 
 #: packages/setup/scripts/install-drivers:67
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:103
 msgid "Install additional V4L and DVB drive"
 msgstr ""
 
@@ -739,7 +739,7 @@ msgid "Submit"
 msgstr ""
 
 #: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:105
 msgid "Set the monitor's best resolution"
 msgstr ""
 
@@ -867,7 +867,7 @@ msgid ""
 "a default device as Lirc support."
 msgstr ""
 
-#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:101
 msgid "Set the default target"
 msgstr ""
 
@@ -890,178 +890,65 @@ msgid ""
 "card"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:47 packages/setup/scripts/setup.sh:61
-#: packages/setup/scripts/setup.sh:69
-msgid "OK"
+#: packages/setup/scripts/setup.sh:16
+msgid "Press any key to enter setup,"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:47 packages/setup/scripts/setup.sh:56
-#: packages/setup/scripts/setup.sh:58 packages/setup/scripts/setup.sh:61
-#: packages/setup/scripts/setup.sh:69
-msgid "Auto mount cifs"
+#: packages/setup/scripts/setup.sh:16
+msgid "or 3 seconds after enter XBMC automatically."
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:55
-msgid "MSSMBMNT"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:55
-msgid "MSSMBMNTINFO"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:56 packages/setup/scripts/setup.sh:58
-msgid "Specifies"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:56
-msgid "the username"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:58
-msgid "the password"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:61 packages/setup/scripts/setup.sh:69
-msgid "Mount"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:61 packages/setup/scripts/setup.sh:69
-msgid "to"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:61
-msgid "success"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:69
-msgid "fail"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:84 packages/setup/scripts/setup.sh:86
-msgid "MSNFSMNT"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:84
-msgid "The NFS server name or IP address"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:86
-msgid "The name of the NFS share"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:93 packages/setup/scripts/setup.sh:97
-#: packages/setup/scripts/setup.sh:102 packages/setup/scripts/setup.sh:107
-#: packages/setup/scripts/setup.sh:163
-msgid "MSSC"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:93
-msgid "The server name or IP address"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:97
-msgid "The port of the server"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:102
-msgid "Specifies the username"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:107
-msgid "Specifies the password"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:163
-msgid "Specifies the newcamd cfgkey"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:178
-msgid "MSSCMENU"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:178
-msgid "MSCCCAM"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:178
-msgid "MSCAMD35"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:178
-msgid "MSNEWCAMD"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:178
-msgid "MSNOSC"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:187
-msgid "EditSC"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:201
-msgid "Select a partition for OpenPCTV cache..."
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:209
-msgid "Size"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:209
-msgid "Used"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:209
-msgid "Available"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:212
-msgid "Don't mount bind for OpenPCTV cache"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:243
+#: packages/setup/scripts/setup.sh:90
 msgid ""
 "Would you like to scan channels for VDR/XBMC(It'll take quiet long to do "
 "it)?  You can also scan channels with vdr reelscanchannels plugin in vdr."
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:99
 msgid "OpenPCTV configurator"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:99
 msgid "Main menu"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:100
 msgid "Set global locale and language"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:102
 msgid "Configure Network Environment"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:104
 msgid "Select IR device"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:252
-msgid "Auto update Satellite Transponders and EPG data"
+#: packages/setup/scripts/setup.sh:107
+msgid "Update Satellite Transponders"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:108
+msgid "Update EPG data"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:110
 msgid "DiSEqC configurator"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:111
 msgid "Auto scan channels"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:112
+msgid "Start XBMC with VDR"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:113
 msgid "Reboot OpenPCTV"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:252
+#: packages/setup/scripts/setup.sh:114
 msgid "Exit to login shell"
 msgstr ""
 

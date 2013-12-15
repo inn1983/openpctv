@@ -11,8 +11,14 @@ sed $PACKAGES/$1/scripts/installator.sh \
   $INSTALL/sbin/installator
 chmod 755 $INSTALL/sbin/*
 
+if [ "$TARGET_ARCH" = arm ]; then
+  INSTALL_SCRIPTS="diseqcsetup select-irdrv update-channels update-transponders netconfig select-language audio-config videocache getcam update-epg"
+else
+  INSTALL_SCRIPTS="diseqcsetup monitor.sh update-channels update-dvbdevice update-transponders install-drivers netconfig select-irdrv select-language audio-config videocache getcam select-target update-epg screenshot"
+fi
+
 mkdir -p $INSTALL/usr/bin
-for i in diseqcsetup monitor.sh select-irdrv update-channels update-dvbdevice update-transponders install-drivers netconfig select-irdrv select-language audio-config videocache getcam select-target update-epg screenshot; do
+for i in $INSTALL_SCRIPTS; do
   cp $PACKAGES/$1/scripts/$i $INSTALL/usr/bin
   chmod 755 $INSTALL/usr/bin/$i
 done
@@ -52,8 +58,9 @@ ln -s /lib/systemd/system/getty@.service $INSTALL/lib/systemd/system/setup.targe
 
 if [ "$TARGET_ARCH" = arm ] ; then
   mkdir -p $INSTALL/lib/systemd/system/multi-user.target.wants
+  mkdir -p $INSTALL/etc/systemd/system
   ln -s /lib/systemd/system/setup.service \
     $INSTALL/lib/systemd/system/multi-user.target.wants/
   ln -sf /lib/systemd/system/multi-user.target \
-    /etc/systemd/system/default.target
+    $INSTALL/etc/systemd/system/default.target
 fi
