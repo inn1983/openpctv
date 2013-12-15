@@ -1,6 +1,5 @@
 #!/bin/sh
 
-[ -f /etc/system.options ] || echo "CAM=OScam" > /etc/system.options
 . /etc/system.options
 
 target=$(systemctl get-default)
