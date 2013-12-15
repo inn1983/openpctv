@@ -7,7 +7,7 @@ cd $BUILD/$1*
 mkdir -p .install/lib .install/include .install/usr/bin
 
 out_dir=../../.install
-api_version=2
+#api_version=
 
 if [ "$ARM_HARDFLOAT_ABI" = yes ] ; then
   cd libcedarv/linux-armhf$api_version
@@ -17,8 +17,8 @@ else
 fi
 
 export CROSS_COMPILE=$TARGET_PREFIX
-export CEDARX_CHIP_VERSION=A20
-make CC=$CC CPP=$CXX AR=$AR
+export CEDARX_CHIP_VERSION=A10
+make
 
 if [ -z $api_version ] ; then
   cp *.h $out_dir/include/
@@ -37,16 +37,15 @@ else
   cp vdecoder/adapter/*.h $out_dir/include/
   cp vdecoder/adapter/adapter_cedarx_linux_$CEDARX_CHIP_VERSION/*.h $out_dir/include/
   cp vdecoder/libve/*.h $out_dir/include/
-  cp vdecoder/libve/libvecore.so $out_dir/lib/libvecore-native.so
-  cp ./ve $out_dir/usr/bin/
+  cp vdecoder/libve/$CEDARX_CHIP_VERSION/libvecore.so $out_dir/lib/libvecore-native.so
+  cp ./ve_test $out_dir/usr/bin/
 
 fi
 
-#cp libcedarv.a $out_dir/lib/
-#cp libcedarx.so $out_dir/lib/
-ln -sf 'libvecore-native.so' $out_dir/lib/libvecore.so
-ln -sf 'libvecore-native.so' $out_dir/lib/libcedarx.so
-ln -sf 'libvecore-native.so' $out_dir/lib/libcedarv.a
+cp libcedarv.a $out_dir/lib/
+cp libcedarx.so $out_dir/lib/
+ln -sf libvecore-native.so $out_dir/lib/libvecore.so
+
 
 # build test program
 if [ -d sample ] ; then
