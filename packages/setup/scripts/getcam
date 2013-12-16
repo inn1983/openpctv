@@ -81,9 +81,15 @@ if [ $? -eq 0 ]; then
   esac
 fi
 }
+
+if grep -q -i arm /proc/cpuinfo; then
+  ARCH=arm
+  echo "CAM=OScam" >> /etc/system.options
+fi
+
 if [ X$1 = "Xauto" ]; then
   commitcam
 else
-  selectcam
+  [ X$ARCH = Xarm ] || selectcam
   editcam
 fi

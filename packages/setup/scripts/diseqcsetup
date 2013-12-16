@@ -20,7 +20,7 @@
 
 # Author: Yinghong Liu <relaxbsd@gmail.com>
 
-VERSION=0.16
+VERSION=0.17
 export TERM=linux
 . gettext.sh
 export TEXTDOMAIN=openpctv
@@ -91,6 +91,7 @@ FINISHDIALOG2="$(gettext "or the configuration file(s):")"
 FINISHDIALOG3="$(eval_gettext "It will be placed in /tmp, you can edit and place it into \${VDRCONFDIR} by manual")"
 DIFFDISEQC="$(gettext "diseqc.conf has been edited")"
 CANCELLABEL="$(gettext "Finished")"
+DEVICEINFO="$(gettext "device is detected")"
 
 function defaultenv
 {
@@ -281,21 +282,25 @@ unset FULLVALUE LO HI SLOF PLAR DISEQC_1 DISEQC_2 TONEBURSTD LO_SALLITE LO_LNB T
 
 function finished
 {
-$DIALOG --title "$FINISHTILE1" --backtitle "${SYSTEM}" --clear \
-	--yesno "${FINISHDIALOG1}${VDRCONFDIR}/diseqc.conf,${VDRCONFDIR}/setup.conf
-${FINISHDIALOG2} diseqc.conf,setup.conf ${FINISHDIALOG3}" 8 72
-if [ $? -eq 0 ]; then
+#$DIALOG --title "$FINISHTILE1" --backtitle "${SYSTEM}" --clear \
+#	--yesno "${FINISHDIALOG1}${VDRCONFDIR}/diseqc.conf,${VDRCONFDIR}/setup.conf
+#${FINISHDIALOG2} diseqc.conf,setup.conf ${FINISHDIALOG3}" 8 72
+#if [ $? -eq 0 ]; then
   [ -f ${VDRCONFDIR}/diseqc.conf ] && cp ${VDRCONFDIR}/diseqc.conf ${VDRCONFDIR}/diseqc.conf.${origdate}
   [ -f ${VDRCONFDIR}/setup.conf ] && cp ${VDRCONFDIR}/setup.conf ${VDRCONFDIR}/setup.conf.${origdate}
   cp -f /tmp/diseqc.conf ${VDRCONFDIR}/diseqc.conf
   cp -f /tmp/setup.conf ${VDRCONFDIR}/setup.conf
   rm -f /tmp/diseqc.conf /tmp/setup.conf
-fi
-exit 0
+#fi
 }
 
 function nodiseqcsetup
 {
+setsatellite
+. ${tempsatellitemenu}
+rm -f ${tempsatellitemenu}
+SATELLITE_NODIDEQC=`cat ${tempfile}`
+rm -f ${tempfile}
 setlnbtype
 if [ ${LnbFrequLo} -eq 0 ]; then
   LnbFrequLo=${LnbFrequHi}
@@ -306,16 +311,12 @@ sed -e 's#DiSEqC.*#DiSEqC = 0#' \
     -e 's#LnbFrequLo.*#LnbFrequLo = '$LnbFrequLo'#' \
     -e 's#LnbSLOF.*#LnbSLOF = '$LnbSLOF'#' \
     ${VDRCONFDIR}/setup.conf > /tmp/setup.conf
-$DIALOG --title "$FINISHTILE1" --backtitle "${SYSTEM}" --clear \
-	--yesno "${FINISHDIALOG1}${VDRCONFDIR}/setup.conf
-${FINISHDIALOG2} setup.conf ${FINISHDIALOG3}" 8 72
-if [ $? -eq 0 ]; then
-  cp -f ${VDRCONFDIR}/setup.conf ${VDRCONFDIR}/setup.conf.orig
-  cp -f /tmp/setup.conf ${VDRCONFDIR}/setup.conf
-  rm -f /tmp/setup.conf
-fi
+cp -f ${VDRCONFDIR}/setup.conf ${VDRCONFDIR}/setup.conf.orig
+cp -f /tmp/setup.conf ${VDRCONFDIR}/setup.conf
+rm -f /tmp/setup.conf
+echo "#codeline#/$SATELLITE_NODIDEQC:${LnbFrequLo}/${LnbFrequHi}/${LnbPolar}%0_1:%|" >> /tmp/diseqc.temp
 [ -f /tmp/diseqc.temp ] && cp /tmp/diseqc.temp ${VDRCONFDIR}/diseqc.conf
-exit 0
+exit
 }
 
 function completesetup
@@ -347,8 +348,6 @@ fi
 sed 's#DiSEqC.*#DiSEqC = 1#' ${VDRCONFDIR}/setup.conf > /tmp/setup.conf
 
 rm -f /tmp/diseqc.temp /tmp/diseqc.diff
-finished
-
 }
 
 function customlnbtype
@@ -991,7 +990,7 @@ done
 }
 		
 function setdiseqcmode {
-$DIALOG --clear --no-cancel --item-help --backtitle "${SYSTEM}" --menu "${SETDISEQCMODE}" 15 60 8 \
+$DIALOG --clear --item-help --backtitle "${SYSTEM}" --menu "${SETDISEQCMODE}" 15 60 8 \
 	"Tune-22k" "${SETDISEQC_22K}" "${DISEQC_22K_INFO}" \
 	"Tuneburst" "${SETDISEQC_TONEBURST}"  "${DISEQC_TONEBURST_INFO}" \
 	"DiSEqC-1.0" "${SETDISEQC_10}"  "${DISEQC_10_INFO}" \
@@ -1060,7 +1059,7 @@ case $retval in
   exit 0
   ;;
 esac
-completesetup
+#completesetup
 }
 
 #case none"$LANG$LC_CTYPE$LC_ALL" in
@@ -1078,8 +1077,39 @@ completesetup
 [ -f ${VDRCONFDIR}/diseqc.conf ] && cp ${VDRCONFDIR}/diseqc.conf ${VDRCONFDIR}/diseqc.conf.${origdate}
 [ -f ${VDRCONFDIR}/setup.conf ] && cp ${VDRCONFDIR}/setup.conf ${VDRCONFDIR}/setup.conf.${origdate}
 
+[ -d /dev/dvb/adapter0 ] || exit
+
 defaultenv
-setdiseqcmode
+for i in /dev/dvb/adapter*; do
+  id=`echo $i | sed 's#/dev/dvb/adapter##'`
+  num=$(($id+1))
+  echo ":$num" >> /tmp/diseqc.temp
+  if [ -f /usr/bin/dvbsnoop ]; then
+    dvbsnoop -s feinfo -adapter $id > /tmp/dvbinfo.$id
+    name=`grep "Name:" /tmp/dvbinfo.$id | cut -d\" -f2`
+    name="$name adapter$id"
+    if grep -q DVB-S /tmp/dvbinfo.$id; then
+      type=DVB-S2
+      dialog --msgbox "DVB-S2 $DEVICEINFO:\n$name" 7 60
+      setdiseqcmode
+    elif grep -q DVB-C /tmp/dvbinfo.$id; then
+      type=DVB-C
+      echo "#DVB-C" >> /tmp/diseqc.temp
+      dialog --msgbox "DVB-C $DEVICEINFO:\n$name" 7 60
+    elif grep -q DVB-T /tmp/dvbinfo.$id; then
+      type=DVB-T
+      echo "#DVB-T" >> /tmp/diseqc.temp
+      dialog --msgbox "DVB-T $DEVICEINFO:\n$name" 7 60
+    fi
+    rm /tmp/dvbinfo.$id
+  else
+    type=DVB-S2
+    break
+  fi
+done
+
+completesetup
+finished
 
 for i in $tempfile $tempsatellitemenu $tempdiseqcmenu $tempsetlnbtypemenu $tempsetdiseqclnb $tempsettune22k $tempsetdiseqcuser; do
   [ -f $i ] && rm $i

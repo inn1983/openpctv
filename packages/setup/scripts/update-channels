@@ -20,30 +20,7 @@ DIALOGTMP=/tmp/dialogtmp.$$
 RESULTTMP=/tmp/resulttmp.$$
 CMDLINE=/tmp/cmdline.$$
 
-cat $DISEQCCONF | grep ^#codeline# | while read line; do
-  FULLVALUE=$(echo $line | sed 's/#codeline#//g')
-  LO=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f1 | cut -d/ -f1 | cut -d: -f2`
-  HI=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f1 | cut -d/ -f2 | cut -d: -f2`
-  SAT=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f1 | cut -d/ -f2 | cut -d: -f1`
-  SLOF=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f1 | cut -d/ -f3`
-  DISEQC_1=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f2 | cut -d: -f1`
-  DISEQC_2=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f2 | cut -d: -f2`
-  if [ $(echo $DISEQC_1 | cut -d_ -f1) = 0 ]; then
-    D_F1="-s $(expr $(echo $DISEQC_1 | cut -d_ -f2) - 1 )"
-  elif [ $(echo $DISEQC_1 | cut -d_ -f1) = 1 ]; then
-    D_F1="-S $(expr $(echo $DISEQC_1 | cut -d_ -f2) - 1 )"
-  fi
-  if [ -n "$DISEQC_2" ]; then
-    if [ $(echo $DISEQC_2 | cut -d_ -f1) = 0 ]; then
-      D_F2="-s $(expr $(echo $DISEQC_2 | cut -d_ -f2) - 1 )"
-    elif [ $(echo $DISEQC_2 | cut -d_ -f1) = 1 ]; then
-      D_F2="-S $(expr $(echo $DISEQC_2 | cut -d_ -f2) - 1 )"
-    fi
-  fi
-  if [ "X$LO" = "X" ]; then LO=$HI; SLOF=$HI; fi
-  echo "scan-s2 /usr/share/transponders/${SAT}.ini -O $SAT -l $LO,$HI,$SLOF $D_F1 $D_F2 -5 -x -2 -o vdr -v -U >> ${CHANNELS}.${SAT}" >> $CMDLINE
-done
-
+getdiseqcline () {
 echo "dialog --backtitle \"$(gettext "Scan channels for VDR")\" --title \"$(gettext "Select Satellite")\"  --checklist \"$(gettext "Please select the satellite you want to scan, noted that the scanning process may be quite long, please be patient.")\" 15 60 8 \\" > $DIALOGTMP
 for i in $(cat $CMDLINE | awk '{print $4}'); do
   echo "$i \"\" on \\" >> $DIALOGTMP
@@ -56,10 +33,57 @@ for i in $(sed 's/\"//g' $RESULTTMP); do
 #  eval $(grep $i $CMDLINE)
   eval $cmd
 done
+}
+
+cat $DISEQCCONF | while read line; do
+  if echo "$line" | grep -q "^:"; then
+    id=${line##:}
+    num=`expr $id - 1`
+  elif echo "$line" | grep -q "^#DVB-C"; then
+    if dialog --yesno "$(gettext "Please put the transponders list in /etc/dvbc for scan-s2, Are you ready?")" 7 60; then
+      echo ":DVB-C" > ${CHANNELS}.DVB-C
+      scan-s2 -a $num -A 2 -x -2 -o vdr -v -U /etc/dvbc >> ${CHANNELS}.DVB-C
+    else
+      exit
+    fi
+  elif echo "$line" | grep -q "^#DVB-T"; then
+    if dialog --yesno "$(gettext "Please put the transponders list in /etc/dvbt for scan-s2, Are you ready?")" 7 60; then
+      echo ":DVB-T" > ${CHANNELS}.DVB-T
+      scan-s2 -a $num -A 1 -x -2 -o vdr -v -U /etc/dvbt >> ${CHANNELS}.DVB-T
+    else
+      exit
+    fi
+  elif echo "$line" | grep -q "^#codeline#"; then
+    FULLVALUE=$(echo $line | sed 's/#codeline#//g')
+    LO=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f1 | cut -d/ -f1 | cut -d: -f2`
+    HI=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f1 | cut -d/ -f2 | cut -d: -f2`
+    SAT=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f1 | cut -d/ -f2 | cut -d: -f1`
+    SLOF=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f1 | cut -d/ -f3`
+    DISEQC_1=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f2 | cut -d: -f1`
+    DISEQC_2=`echo ${FULLVALUE} | cut -d\| -f1 | cut -d% -f2 | cut -d: -f2`
+    if [ $(echo $DISEQC_1 | cut -d_ -f1) = 0 ]; then
+      D_F1="-s $(expr $(echo $DISEQC_1 | cut -d_ -f2) - 1 )"
+    elif [ $(echo $DISEQC_1 | cut -d_ -f1) = 1 ]; then
+      D_F1="-S $(expr $(echo $DISEQC_1 | cut -d_ -f2) - 1 )"
+    fi
+    if [ -n "$DISEQC_2" ]; then
+      if [ $(echo $DISEQC_2 | cut -d_ -f1) = 0 ]; then
+        D_F2="-s $(expr $(echo $DISEQC_2 | cut -d_ -f2) - 1 )"
+      elif [ $(echo $DISEQC_2 | cut -d_ -f1) = 1 ]; then
+        D_F2="-S $(expr $(echo $DISEQC_2 | cut -d_ -f2) - 1 )"
+      fi
+    fi
+    if [ "X$LO" = "X" ]; then LO=$HI; SLOF=$HI; fi
+    echo "scan-s2 /usr/share/transponders/${SAT}.ini -O $SAT -a $num -l $LO,$HI,$SLOF $D_F1 $D_F2 -5 -x -2 -o vdr -v -U >> ${CHANNELS}.${SAT}" >> $CMDLINE
+  fi
+done
+
+grep -q "^#codeline#" $DISEQCCONF && getdiseqcline
+
 cat /dev/null > ${CHANNELS}.radio
 cat /dev/null > ${CHANNELS}.tv
 echo "$(gettext "Split channels in TV and Radio...")"
-cat ${CHANNELS}.S* | while read line; do
+cat ${CHANNELS}.[DS]* | while read line; do
   echo $line | grep -i ^:S >> ${CHANNELS}.radio
   if test "$(echo $line | awk -F: '{print $6}')" = "0" || echo $line | grep -i radio > /dev/null; then
      echo $line >> ${CHANNELS}.radio
