@@ -28,22 +28,28 @@ tztime=$(grep ^$tzlocal /usr/share/zoneinfo/zone.tab -m1 | awk '{print $3}')
 sed -i "s/^LANG=.*/LANG=$locale/g" /etc/locale.conf
 source /etc/profile
 
-sed -i -e "s#<language>.*#<language>$xbmclang</language>#g" \
-	-e "s#<country>.*#<country>$xbmcregion</country>#g" \
-	-e "s#<font>Default</font>#<font>Arial</font>#g" \
-	/root/.xbmc/userdata/guisettings.xml
+if [ -x /usr/bin/xbmc ]; then
+  sed -i -e "s#<language>.*#<language>$xbmclang</language>#g" \
+         -e "s#<country>.*#<country>$xbmcregion</country>#g" \
+         -e "s#<font>Default</font>#<font>Arial</font>#g" \
+         /root/.xbmc/userdata/guisettings.xml
+fi
 
-[ "$vdrlang" = "none" ] && vdrlang=en_US
-sed -i "s/^OSDLanguage\ =.*/OSDLanguage\ =\ $vdrlang/g" /etc/vdr/setup.conf
+if [ -x /usr/bin/vdr ]; then
+  [ "$vdrlang" = "none" ] && vdrlang=en_US
+  sed -i "s/^OSDLanguage\ =.*/OSDLanguage\ =\ $vdrlang/g" /etc/vdr/setup.conf
+fi
 
-if grep "^config.osd.language" /etc/enigma2/settings > /dev/null; then
-  if [ "$e2lang" = "none" ]; then
-     sed -i /^config.osd.language/d /etc/enigma2/settings
+if [ -x /usr/bin/enigma2 ]; then
+  if grep "^config.osd.language" /etc/enigma2/settings > /dev/null; then
+    if [ "$e2lang" = "none" ]; then
+       sed -i /^config.osd.language/d /etc/enigma2/settings
+    else
+       sed -i "s/^config.osd.language=.*/config.osd.language=$e2lang/g" /etc/enigma2/settings
+    fi
   else
-     sed -i "s/^config.osd.language=.*/config.osd.language=$e2lang/g" /etc/enigma2/settings
+    [ "$e2lang" != "none" ] && echo "config.osd.language=$e2lang" >> /etc/enigma2/settings
   fi
-else
-  [ "$e2lang" != "none" ] && echo "config.osd.language=$e2lang" >> /etc/enigma2/settings
 fi
 
 cp /usr/share/zoneinfo/$tztime /etc/localtime
