@@ -1078,7 +1078,7 @@ esac
 [ -f ${VDRCONFDIR}/diseqc.conf ] && cp ${VDRCONFDIR}/diseqc.conf ${VDRCONFDIR}/diseqc.conf.${origdate}
 [ -f ${VDRCONFDIR}/setup.conf ] && cp ${VDRCONFDIR}/setup.conf ${VDRCONFDIR}/setup.conf.${origdate}
 
-[ -d /dev/dvb/adapter0 ] || dialog --msgbox "$NODEVICEINFO" 7 60; exit
+[ -d /dev/dvb/adapter0 ] || (dialog --msgbox "$NODEVICEINFO" 7 60; exit)
 
 defaultenv
 for i in /dev/dvb/adapter*; do

@@ -18,7 +18,6 @@ if grep -q -i arm /proc/cpuinfo; then
     systemctl start xbmc
     exit 0
   elif [ $result = 0 ]; then
-    chvt 1
     clear
   fi
 else
