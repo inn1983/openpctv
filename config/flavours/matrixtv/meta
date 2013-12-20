@@ -1,0 +1,65 @@
+FLAVOUR_NAME="matrixtv"
+FLAVOUR_DISTRONAME="MatrixTV"
+FLAVOUR_DEPENDS="base-files toolchain busybox util-linux-ng linux systemd opkg alsa"
+FLAVOUR_USE="alsa fb xorg egl opengl egl opengles openvg lirc mplayer bluray dab dvb dvd v4l wifi radio"
+FLAVOUR_SHORTDESC="MatrixTV - A Linux distribution based VDR/XBMC"
+FLAVOUR_LONGDESC="MatrixTV is integrated with XBMC 12.2frodo,VDR 2.0.2."
+FLAVOUR_KCONFIG="
+choice MATRIXTV_FRONTEND
+  prompt \"Mediacenter frontend\"
+  depends on FLAVOUR_matrixtv
+  default FRONTEND_enna
+
+config FRONTEND_enna
+  bool \"Enna MediaCenter\"
+  select PKG_enna
+
+config FRONTEND_xbmc
+  bool \"XBMC\"
+  select PKG_xbmc
+
+config FRONTEND_boxee
+  bool \"Boxee\"
+  select PKG_boxee
+
+config FRONTEND_qtmediahub
+  bool \"QtMediaHub\"
+  select PKG_qtmediahub
+
+config FRONTEND_freevo
+  bool \"Freevo\"
+  select PKG_freevo
+  help
+    Freevo is a complete home theater framework. It can operate as a
+    Personal Video Recorder system for saving television input to disk, but
+    can also browse and play pictures, music, games, and movies either from
+    the hard disk or from CDs and DVDs. Freevo can be used to build a
+    dedicated home theater system with a TV (plus remote), or can simply be
+    run on a regular desktop computer with a monitor, mouse, and keyboard.
+
+config FRONTEND_mythtv
+  bool \"MythTV\"
+  select PKG_mythtv
+
+config FRONTEND_showtime
+  bool \"HTS Showtime\"
+  select PKG_showtime
+
+config FRONTEND_vdr
+  bool \"VDR\"
+  select PKG_vdr
+
+
+endchoice
+
+config OPT_MEDIA_CENTER_FRONTEND
+  string
+  default \"enna\" if FRONTEND_enna
+  default \"xbmc\" if FRONTEND_xbmc
+  default \"boxee\" if FRONTEND_boxee
+  default \"qtmediahub\" if FRONTEND_qtmediahub
+  default \"freevo\" if FRONTEND_freevo
+  default \"mythtv\" if FRONTEND_mythtv
+  default \"showtime\" if FRONTEND_showtime
+  default \"VDR\" if FRONTEND_vdr
+"
