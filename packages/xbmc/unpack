@@ -23,8 +23,9 @@ fix_soname $1 VORBISENC    vorbisenc
 fix_soname $1 VORBISFILE   vorbisfile
 
 # replace media art
+LOGO_FILE="$ROOT/$CONFIG/flavours/$FLAVOUR/splash-logo.png"
+[ -f "$LOGO_FILE" ] && cp "$LOGO_FILE" $BUILD/${PKG_NAME}-${PKG_VERSION}/addons/skin.confluence/media/xbmc-logo.png
 #cp -P $PACKAGES/$1/config/Splash.png $BUILD/${PKG_NAME}-${PKG_VERSION}/media
-#cp -P $PACKAGES/$1/config/XBMC_Logo.png $BUILD/${PKG_NAME}-${PKG_VERSION}/addons/skin.confluence/media/xbmc-logo.png
 
 exit 0
 
