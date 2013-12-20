@@ -14,19 +14,26 @@ boot_part_size="64M"
 case $TARGET in
 #don't remove the following comment
 #begin_targets
-  cubieboard)  fs_types="fat32 ext4" ;;
-  cubietruck)  fs_types="fat32 ext4" ;;
-  cubox)       fs_types="ext4"       ;;
-  cuboxi)      fs_types="fat32 ext4"  ;;
-  utilite)     fs_types="fat32 ext4" ;;
-  raspberrypi) fs_types="fat32 ext4" ;;
-  igepv2)      fs_types="fat32 ext2" ;  boot_part_size="16M" ;; 
-  pandaboard)  fs_types="fat32 ext4" ;;
-  snowball-v5) fs_types="fat32 ext4" ;;
-  efikamx)     fs_types="undefined"  ;;
-  ac100)       fs_types="undefined"  ;;
-  harmony)     fs_types="undefined"  ;;
-  sabrelite)   fs_types="undefined"  ;;
+  cubieboard)    fs_types="fat32 ext4" ;;
+  cubietruck)    fs_types="fat32 ext4" ;;
+  cubox)         fs_types="ext4"       ;;
+  c1solo)        fs_types="fat32 ext4" ;;
+  c1dl)          fs_types="fat32 ext4" ;;
+  c1d)           fs_types="fat32 ext4" ;;
+  c1q)           fs_types="fat32 ext4" ;;
+  cubox-i1)      fs_types="fat32 ext4" ;;
+  cubox-i2)      fs_types="fat32 ext4" ;;
+  cubox-i2ultra) fs_types="fat32 ext4" ;;
+  cubox-i4pro)   fs_types="fat32 ext4" ;;
+  utilite)       fs_types="fat32 ext4" ;;
+  raspberrypi)   fs_types="fat32 ext4" ;;
+  igepv2)        fs_types="fat32 ext2" ;  boot_part_size="16M" ;; 
+  pandaboard)    fs_types="fat32 ext4" ;;
+  snowball-v5)   fs_types="fat32 ext4" ;;
+  efikamx)       fs_types="undefined"  ;;
+  ac100)         fs_types="undefined"  ;;
+  harmony)       fs_types="undefined"  ;;
+  sabrelite)     fs_types="undefined"  ;;
 #end_targets
 #don't remove the preceeding comment
 esac
@@ -153,12 +160,13 @@ fi
 
 if [ $TARGET = cubietruck -o $TARGET = cubieboard2 ] ; then
   echo "\n#### Writing boot record(s)..."
-  dd if=/dev/zero of=$DEVICE bs=1k count=1024
   dd if=$mountdir/boot/u-boot-sunxi-with-spl.bin of=$DEVICE bs=1024 seek=8 conv=fsync
 #  dd if=$mountdir/boot/u-boot.bin of=$DEVICE bs=1024 seek=40
 fi
 
-if [ $TARGET = cuboxi ] ; then
+if [ $TARGET = c1solo -o $TARGET = c1dl -o $TARGET = c1d -o $TARGET = c1q -o $TARGET = "cubox-i1" -o $TARGET = "cubox-i2" -o $TARGET = "cubox-i2ultra" -o $TARGET = "cubox-i4pro" ] ; then
+  echo "\n#### Selecting u-boot : $TARGET ..."
+  cp $mountdir/boot/extra-uboot/u-boot.imx.mx6_$TARGET $mountdir/boot/u-boot.imx
   echo "\n#### Writing u-boot ..."
   dd if=$mountdir/boot/u-boot.imx of=$DEVICE bs=512 seek=2 conv=fsync
 fi

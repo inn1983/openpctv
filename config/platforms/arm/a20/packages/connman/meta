@@ -1,2 +1,0 @@
-PKG_VERSION=1.9
-PKG_URL="http://www.kernel.org/pub/linux/network/connman/connman-${PKG_VERSION}.tar.xz"

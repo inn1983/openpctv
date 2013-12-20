@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-18 20:35+0800\n"
+"POT-Creation-Date: 2013-12-19 23:34+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: packages/setup/scripts/audio-config:8
 #: packages/setup/scripts/audio-config:48
-#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:89
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:88
 msgid "Soundcard Configuration"
 msgstr ""
 
@@ -374,7 +374,7 @@ msgid ""
 "No DVB devices has been discovered. Please check whether the device is ready."
 msgstr ""
 
-#: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:92
+#: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:91
 msgid "Select a software emulated CAM"
 msgstr ""
 
@@ -456,7 +456,7 @@ msgid ""
 msgstr ""
 
 #: packages/setup/scripts/install-drivers:67
-#: packages/setup/scripts/setup.sh:86
+#: packages/setup/scripts/setup.sh:85
 msgid "Install additional V4L and DVB drive"
 msgstr ""
 
@@ -749,7 +749,7 @@ msgid "Submit"
 msgstr ""
 
 #: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
-#: packages/setup/scripts/setup.sh:88
+#: packages/setup/scripts/setup.sh:87
 msgid "Set the monitor's best resolution"
 msgstr ""
 
@@ -877,7 +877,7 @@ msgid ""
 "a default device as Lirc support."
 msgstr ""
 
-#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:84
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:83
 msgid "Set the default target"
 msgstr ""
 
@@ -908,57 +908,57 @@ msgstr ""
 msgid "or 3 seconds after enter XBMC automatically."
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:73
+#: packages/setup/scripts/setup.sh:72
 msgid ""
 "Would you like to scan channels for VDR/XBMC(It'll take quiet long to do "
 "it)?  You can also scan channels with vdr reelscanchannels plugin in vdr."
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:82
+#: packages/setup/scripts/setup.sh:81
 msgid "OpenPCTV configurator"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:82
+#: packages/setup/scripts/setup.sh:81
 msgid "Main menu"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:83
+#: packages/setup/scripts/setup.sh:82
 msgid "Set global locale and language"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:85
+#: packages/setup/scripts/setup.sh:84
 msgid "Configure Network Environment"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:87
+#: packages/setup/scripts/setup.sh:86
 msgid "Select IR device"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:90
+#: packages/setup/scripts/setup.sh:89
 msgid "Update Satellite Transponders"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:91
+#: packages/setup/scripts/setup.sh:90
 msgid "Update EPG data"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:93
+#: packages/setup/scripts/setup.sh:92
 msgid "DiSEqC configurator"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:94
+#: packages/setup/scripts/setup.sh:93
 msgid "Auto scan channels"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:95
+#: packages/setup/scripts/setup.sh:94
 msgid "Start XBMC with VDR"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:96
+#: packages/setup/scripts/setup.sh:95
 msgid "Reboot OpenPCTV"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:97
+#: packages/setup/scripts/setup.sh:96
 msgid "Exit to login shell"
 msgstr ""
 
