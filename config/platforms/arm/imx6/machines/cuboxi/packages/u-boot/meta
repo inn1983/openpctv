@@ -1,7 +1,7 @@
-PKG_URL_REV=eb08d21f17
-PKG_VERSION=u-boot-imx6+${PKG_URL_REV}
+PKG_URL_REV=dccc1b018cb
+PKG_VERSION=imx6+${PKG_URL_REV}
 PKG_URL_PROTO=git
-PKG_URL="https://github.com/linux4kix/u-boot.git"
+PKG_URL="https://github.com/rabeeh/u-boot-imx6"
 PKG_REV=1
 PKG_BUILD_DEPENDS="toolchain uboot-mkimage"
 PKG_PRIORITY=optional
