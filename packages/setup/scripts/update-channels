@@ -4,7 +4,9 @@ export TERM=linux
 . gettext.sh
 export TEXTDOMAIN=openpctv
 
-[ -d /dev/dvb/adapter0 ] || dialog --msgbox "$(gettext "No DVB devices has been discovered. Please check whether the device is ready.")" 7 60; exit
+if [ ! -d /dev/dvb/adapter0 ];then
+  dialog --msgbox "$(gettext "No DVB devices has been discovered. Please check whether the device is ready.")" 7 60; exit
+fi
 
 if [ -d /video -a -f /video/diseqc.conf ]; then
   DISEQCCONF="/video/diseqc.conf"
