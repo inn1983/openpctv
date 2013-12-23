@@ -1,0 +1,553 @@
+diff --git a/ChangeLog b/ChangeLog
+index 00c8f04..207d65d 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,4 +1,6 @@
+ xine-lib (1.2.5) 201?-??-??
++  * Add experimental YCgCo colorspace support.
++  * FFmpeg compatibility fixes.
+   * Add avformat demux plugin.
+     - Support for new formats and protocols.
+     - Proper rtsp support (with avformat+rtsp://, rtsp+tcp:// and rtsp+http:// mrls).
+diff --git a/include/xine/video_out.h b/include/xine/video_out.h
+index 94cf1ec..50df9c9 100644
+--- a/include/xine/video_out.h
++++ b/include/xine/video_out.h
+@@ -293,10 +293,10 @@ struct xine_video_port_s {
+ #define VO_CHROMA_422        32 /* used by VDPAU, default is chroma_420 */
+ #define VO_STILL_IMAGE       64
+ 
+-/* ((mpeg_color_matrix << 1) | color_range) inside frame.flags bits 11-8 */
++/* ((mpeg_color_matrix << 1) | color_range) inside frame.flags bits 12-8 */
+ #define VO_FULLRANGE 0x100
+-#define VO_GET_FLAGS_CM(flags) ((flags >> 8) & 15)
+-#define VO_SET_FLAGS_CM(cm,flags) flags = ((flags) & ~0xf00) | (((cm) & 15) << 8)
++#define VO_GET_FLAGS_CM(flags) ((flags >> 8) & 31)
++#define VO_SET_FLAGS_CM(cm,flags) flags = ((flags) & ~0x1f00) | (((cm) & 31) << 8)
+ 
+ /* video driver capabilities */
+ #define VO_CAP_YV12                   0x00000001 /* driver can handle YUV 4:2:0 pictures */
+diff --git a/src/combined/ffmpeg/ff_video_decoder.c b/src/combined/ffmpeg/ff_video_decoder.c
+index d4c2682..367fe44 100644
+--- a/src/combined/ffmpeg/ff_video_decoder.c
++++ b/src/combined/ffmpeg/ff_video_decoder.c
+@@ -175,6 +175,7 @@ struct ff_video_decoder_s {
+ };
+ 
+ /* import color matrix names */
++#define CM_HAVE_YCGCO_SUPPORT 1
+ #include "../../video_out/color_matrix.c"
+ 
+ static void ff_check_colorspace (ff_video_decoder_t *this) {
+@@ -199,7 +200,7 @@ static void ff_check_colorspace (ff_video_decoder_t *this) {
+   if (cm != this->color_matrix) {
+     this->color_matrix = cm;
+     xprintf (this->stream->xine, XINE_VERBOSITY_LOG,
+-      "ffmpeg_video_dec: color matrix #%d [%s]\n", cm >> 1, cm_names[cm & 15]);
++      "ffmpeg_video_dec: color matrix #%d [%s]\n", cm >> 1, cm_names[cm & 31]);
+ 
+     caps = this->stream->video_out->get_capabilities (this->stream->video_out);
+ 
+@@ -273,15 +274,20 @@ static int get_buffer (AVCodecContext *context, AVFrame *av_frame)
+   vo_frame_t *img;
+ #ifdef AV_BUFFER
+   ff_saved_frame_t *ffsf;
+-  int width  = av_frame->width;
+-  int height = av_frame->height;
+-#else
++#endif
++  int buf_width  = av_frame->width;
++  int buf_height = av_frame->height;
++  /* The visible size, may be smaller. */
+   int width  = context->width;
+   int height = context->height;
+-#endif
+-  int crop_right = 0, crop_bottom = 0;
+   int guarded_render = 0;
+ 
++  /* A bit of unmotivated paranoia... */
++  if (buf_width < width)
++    buf_width = width;
++  if (buf_height < height)
++    buf_height = height;
++
+   ff_check_colorspace (this);
+ 
+   if (!this->bih.biWidth || !this->bih.biHeight) {
+@@ -296,7 +302,7 @@ static int get_buffer (AVCodecContext *context, AVFrame *av_frame)
+     this->set_stream_info = 1;
+   }
+ 
+-  avcodec_align_dimensions(context, &width, &height);
++  avcodec_align_dimensions(context, &buf_width, &buf_height);
+ 
+ #ifdef ENABLE_VAAPI
+   if( this->context->pix_fmt == PIX_FMT_VAAPI_VLD) {
+@@ -319,13 +325,12 @@ static int get_buffer (AVCodecContext *context, AVFrame *av_frame)
+ #endif
+ 
+     /* reinitialize vaapi for new image size */
+-    if (context->width != this->vaapi_width || context->height != this->vaapi_height) {
++    if (width != this->vaapi_width || height != this->vaapi_height) {
+       VAStatus status;
+ 
+-      this->vaapi_width  = context->width;
+-      this->vaapi_height = context->height;
+-      status = this->accel->vaapi_init (this->accel_img, this->vaapi_profile,
+-        context->width, context->height, 0);
++      this->vaapi_width  = width;
++      this->vaapi_height = height;
++      status = this->accel->vaapi_init (this->accel_img, this->vaapi_profile, width, height, 0);
+ 
+       if (status == VA_STATUS_SUCCESS) {
+         ff_vaapi_context_t *va_context = this->accel->get_context (this->accel_img);
+@@ -403,10 +408,10 @@ static int get_buffer (AVCodecContext *context, AVFrame *av_frame)
+ #endif /* ENABLE_VAAPI */
+ 
+   /* The alignment rhapsody */
+-  width  += 2 * this->edge;
+-  height += 2 * this->edge;
+-  width   = (width + 15) & ~15;
+-  height  = (height + 15) & ~15;
++  buf_width  += 2 * this->edge + 15;
++  buf_width  &= ~15;
++  buf_height += 2 * this->edge + 15;
++  buf_height &= ~15;
+ 
+   if ((this->full2mpeg || (this->context->pix_fmt != PIX_FMT_YUV420P &&
+ 			   this->context->pix_fmt != PIX_FMT_YUVJ420P)) || guarded_render) {
+@@ -427,11 +432,8 @@ static int get_buffer (AVCodecContext *context, AVFrame *av_frame)
+ #endif
+   }
+ 
+-  if((width != this->bih.biWidth) || (height != this->bih.biHeight)) {
+-    if(this->stream->video_out->get_capabilities(this->stream->video_out) & VO_CAP_CROP) {
+-      crop_right = width - this->bih.biWidth - this->edge;
+-      crop_bottom = height - this->bih.biHeight - this->edge;
+-    } else {
++  if ((buf_width != width) || (buf_height != height)) {
++    if (!(this->stream->video_out->get_capabilities(this->stream->video_out) & VO_CAP_CROP)) {
+       if (!this->is_direct_rendering_disabled) {
+         xprintf(this->stream->xine, XINE_VERBOSITY_LOG,
+                 _("ffmpeg_video_dec: unsupported frame dimensions, DR1 disabled.\n"));
+@@ -452,8 +454,8 @@ static int get_buffer (AVCodecContext *context, AVFrame *av_frame)
+   this->is_direct_rendering_disabled = 0;
+ 
+   img = this->stream->video_out->get_frame (this->stream->video_out,
+-                                            width,
+-                                            height,
++                                            buf_width,
++                                            buf_height,
+                                             this->aspect_ratio,
+                                             this->output_format,
+                                             VO_BOTH_FIELDS|this->frame_flags);
+@@ -508,8 +510,8 @@ static int get_buffer (AVCodecContext *context, AVFrame *av_frame)
+     av_frame->data[2] += (img->pitches[2] + 1) * this->edge / 2;
+     img->crop_left   = this->edge;
+     img->crop_top    = this->edge;
+-    img->crop_right  = crop_right;
+-    img->crop_bottom = crop_bottom;
++    img->crop_right  = buf_width  - width  - this->edge;
++    img->crop_bottom = buf_height - height - this->edge;
+   }
+ 
+   /* We should really keep track of the ages of xine frames (see
+diff --git a/src/video_out/color_matrix.c b/src/video_out/color_matrix.c
+index 32fe3f6..22dad1d 100644
+--- a/src/video_out/color_matrix.c
++++ b/src/video_out/color_matrix.c
+@@ -26,6 +26,7 @@
+   This file must be included after declaration of xxxx_driver_t,
+   and #define'ing CM_DRIVER_T to it.
+   That struct must contain the integer value cm_state.
++  Also #define CM_HAVE_YCGCO_SUPPORT if you already handle that.
+ 
+   cm_from_frame () returns current (color_matrix << 1) | color_range control value.
+   Having only 1 var simplifies change event handling and avoids unecessary vo
+@@ -52,9 +53,8 @@
+   So I decided to provide functionality, and let the user decide if and how
+   to actually use it.
+ 
+-  BTW. VDPAU already has its own matrix switch based on stream info.
+-  Rumour has it that proprietory ATI drivers auto switch their xv ports
+-  based on video size. Both not user configurable, and both not tested...
++  BTW. Rumour has it that proprietory ATI drivers auto switch their xv ports
++  based on video size. not user configurable, and not tested...
+ */
+ 
+ /* eveybody gets these */
+@@ -88,6 +88,25 @@ static const char * const cm_names[] = {
+   "full range SMPTE 170M",
+   "SMPTE 240M",
+   "full range SMPTE 240M"
++#ifdef CM_HAVE_YCGCO_SUPPORT
++  ,
++  "YCgCo",
++  "YCgCo", /* this is always fullrange */
++  "#9",
++  "fullrange #9",
++  "#10",
++  "fullrange #10",
++  "#11",
++  "fullrange #11",
++  "#12",
++  "fullrange #12",
++  "#13",
++  "fullrange #13",
++  "#14",
++  "fullrange #14",
++  "#15",
++  "fullrange #15"
++#endif
+ };
+ 
+ #ifdef CM_DRIVER_T
+@@ -153,10 +172,10 @@ static void cm_init (CM_DRIVER_T *this) {
+ }
+ 
+ static uint8_t cm_m[] = {
+-  5, 1, 5, 3, 4, 5, 6, 7, /* SIGNAL */
+-  5, 1, 5, 3, 4, 5, 6, 7, /* SIZE */
+-  5, 5, 5, 5, 5, 5, 5, 5, /* SD */
+-  5, 1, 1, 1, 1, 1, 1, 1  /* HD */
++  5, 1, 5, 3, 4, 5, 6, 7, 8, 5, 5, 5, 5, 5, 5, 5, /* SIGNAL */
++  5, 1, 5, 3, 4, 5, 6, 7, 8, 5, 5, 5, 5, 5, 5, 5, /* SIZE */
++  5, 5, 5, 5, 5, 5, 5, 5, 8, 5, 5, 5, 5, 5, 5, 5, /* SD */
++  5, 1, 1, 1, 1, 1, 1, 1, 8, 1, 1, 1, 1, 1, 1, 1  /* HD */
+ };
+ 
+ static uint8_t cm_r[] = {0, 0, 1, 0}; /* AUTO, MPEG, FULL, safety */
+@@ -166,10 +185,14 @@ static int cm_from_frame (vo_frame_t *frame) {
+   int cm = VO_GET_FLAGS_CM (frame->flags);
+   int cf = this->cm_state;
+ 
+-  cm_m[10] = (frame->height - frame->crop_top - frame->crop_bottom >= 720) ||
++  cm_m[18] = (frame->height - frame->crop_top - frame->crop_bottom >= 720) ||
+              (frame->width - frame->crop_left - frame->crop_right >= 1280) ? 1 : 5;
+   cm_r[0] = cm & 1;
+-  return ((cm_m[((cf >> 2) << 3) | (cm >> 1)] << 1) | cm_r[cf & 2]);
++#ifdef CM_HAVE_YCGCO_SUPPORT
++  return ((cm_m[((cf >> 2) << 4) | (cm >> 1)] << 1) | cm_r[cf & 2]);
++#else
++  return ((cm_m[((cf >> 2) << 4) | (cm >> 1)] << 1) | cm_r[cf & 2]) & 15;
++#endif
+ }
+ 
+ static void cm_close (CM_DRIVER_T *this) {
+diff --git a/src/video_out/video_out_opengl2.c b/src/video_out/video_out_opengl2.c
+index aadfca1..03ae3be 100644
+--- a/src/video_out/video_out_opengl2.c
++++ b/src/video_out/video_out_opengl2.c
+@@ -168,6 +168,7 @@ typedef struct {
+ } opengl2_driver_t;
+ 
+ /* import common color matrix stuff */
++#define CM_HAVE_YCGCO_SUPPORT 1
+ #define CM_DRIVER_T opengl2_driver_t
+ #include "color_matrix.c"
+ 
+@@ -815,47 +816,67 @@ static void opengl2_update_csc_matrix (opengl2_driver_t *that, opengl2_frame_t *
+     float brightness = that->brightness;
+     float uvcos = saturation * cos( hue );
+     float uvsin = saturation * sin( hue );
+-    float kb, kr;
+-    float vr, vg, ug, ub;
+-    float ygain, yoffset;
+     int i;
+ 
+-    switch (color_standard >> 1) {
+-      case 1:  kb = 0.0722; kr = 0.2126; break; /* ITU-R 709 */
+-      case 4:  kb = 0.1100; kr = 0.3000; break; /* FCC */
+-      case 7:  kb = 0.0870; kr = 0.2120; break; /* SMPTE 240 */
+-      default: kb = 0.1140; kr = 0.2990;        /* ITU-R 601 */
+-    }
+-    vr = 2.0 * (1.0 - kr);
+-    vg = -2.0 * kr * (1.0 - kr) / (1.0 - kb - kr);
+-    ug = -2.0 * kb * (1.0 - kb) / (1.0 - kb - kr);
+-    ub = 2.0 * (1.0 - kb);
+-
+-    if (color_standard & 1) {
+-      /* fullrange mode */
+-      yoffset = brightness;
+-      ygain = contrast;
+-      uvcos *= contrast * 255.0 / 254.0;
+-      uvsin *= contrast * 255.0 / 254.0;
++    if ((color_standard >> 1) == 8) {
++      /* YCgCo. This is really quite simple. */
++      uvsin *= contrast;
++      uvcos *= contrast;
++      /* csc_matrix[rgb][yuv1] */
++      that->csc_matrix[1] = -1.0 * uvcos - 1.0 * uvsin;
++      that->csc_matrix[2] =  1.0 * uvcos - 1.0 * uvsin;
++      that->csc_matrix[5] =  1.0 * uvcos;
++      that->csc_matrix[6] =                1.0 * uvsin;
++      that->csc_matrix[9] = -1.0 * uvcos + 1.0 * uvsin;
++      that->csc_matrix[10] = -1.0 * uvcos - 1.0 * uvsin;
++      for (i = 0; i < 12; i += 4) {
++        that->csc_matrix[i] = contrast;
++        that->csc_matrix[i + 3] = (brightness * contrast
++          - 128.0 * (that->csc_matrix[i + 1] + that->csc_matrix[i + 2])) / 255.0;
++      }
+     } else {
+-      /* mpeg range */
+-      yoffset = brightness - 16.0;
+-      ygain = contrast * 255.0 / 219.0;
+-      uvcos *= contrast * 255.0 / 224.0;
+-      uvsin *= contrast * 255.0 / 224.0;
+-    }
++      /* YCbCr */
++      float kb, kr;
++      float vr, vg, ug, ub;
++      float ygain, yoffset;
++
++      switch (color_standard >> 1) {
++        case 1:  kb = 0.0722; kr = 0.2126; break; /* ITU-R 709 */
++        case 4:  kb = 0.1100; kr = 0.3000; break; /* FCC */
++        case 7:  kb = 0.0870; kr = 0.2120; break; /* SMPTE 240 */
++        default: kb = 0.1140; kr = 0.2990;        /* ITU-R 601 */
++      }
++      vr = 2.0 * (1.0 - kr);
++      vg = -2.0 * kr * (1.0 - kr) / (1.0 - kb - kr);
++      ug = -2.0 * kb * (1.0 - kb) / (1.0 - kb - kr);
++      ub = 2.0 * (1.0 - kb);
++
++      if (color_standard & 1) {
++        /* fullrange mode */
++        yoffset = brightness;
++        ygain = contrast;
++        uvcos *= contrast * 255.0 / 254.0;
++        uvsin *= contrast * 255.0 / 254.0;
++      } else {
++        /* mpeg range */
++        yoffset = brightness - 16.0;
++        ygain = contrast * 255.0 / 219.0;
++        uvcos *= contrast * 255.0 / 224.0;
++        uvsin *= contrast * 255.0 / 224.0;
++      }
+ 
+-    /* csc_matrix[rgb][yuv1] */
+-    that->csc_matrix[1] = -uvsin * vr;
+-    that->csc_matrix[2] = uvcos * vr;
+-    that->csc_matrix[5] = uvcos * ug - uvsin * vg;
+-    that->csc_matrix[6] = uvcos * vg + uvsin * ug;
+-    that->csc_matrix[9] = uvcos * ub;
+-    that->csc_matrix[10] = uvsin * ub;
+-    for (i = 0; i < 12; i += 4) {
+-      that->csc_matrix[i] = ygain;
+-      that->csc_matrix[i + 3] = (yoffset * ygain
+-        - 128.0 * (that->csc_matrix[i + 1] + that->csc_matrix[i + 2])) / 255.0;
++      /* csc_matrix[rgb][yuv1] */
++      that->csc_matrix[1] = -uvsin * vr;
++      that->csc_matrix[2] = uvcos * vr;
++      that->csc_matrix[5] = uvcos * ug - uvsin * vg;
++      that->csc_matrix[6] = uvcos * vg + uvsin * ug;
++      that->csc_matrix[9] = uvcos * ub;
++      that->csc_matrix[10] = uvsin * ub;
++      for (i = 0; i < 12; i += 4) {
++        that->csc_matrix[i] = ygain;
++        that->csc_matrix[i + 3] = (yoffset * ygain
++          - 128.0 * (that->csc_matrix[i + 1] + that->csc_matrix[i + 2])) / 255.0;
++      }
+     }
+ 
+     that->color_standard = color_standard;
+diff --git a/src/video_out/video_out_vdpau.c b/src/video_out/video_out_vdpau.c
+index 06476ef..aa6fb95 100644
+--- a/src/video_out/video_out_vdpau.c
++++ b/src/video_out/video_out_vdpau.c
+@@ -429,6 +429,7 @@ typedef struct {
+ } vdpau_driver_t;
+ 
+ /* import common color matrix stuff */
++#define CM_HAVE_YCGCO_SUPPORT 1
+ #define CM_DRIVER_T vdpau_driver_t
+ #include "color_matrix.c"
+ 
+@@ -1603,49 +1604,65 @@ static void vdpau_update_csc_matrix (vdpau_driver_t *that, vdpau_frame_t *frame)
+     float brightness = that->brightness;
+     float uvcos = saturation * cos( hue );
+     float uvsin = saturation * sin( hue );
+-    float kb, kr;
+-    float vr, vg, ug, ub;
+-    float ygain, yoffset;
+     int i;
+ 
+-    switch (color_matrix >> 1) {
+-      case 1:  kb = 0.0722; kr = 0.2126; /* ITU-R 709 */
+-        break;
+-      case 4:  kb = 0.1100; kr = 0.3000; /* FCC */
+-        break;
+-      case 7:  kb = 0.0870; kr = 0.2120; /* SMPTE 240 */
+-        break;
+-      default: kb = 0.1140; kr = 0.2990; /* ITU-R 601 */
+-    }
+-    vr = 2.0 * (1.0 - kr);
+-    vg = -2.0 * kr * (1.0 - kr) / (1.0 - kb - kr);
+-    ug = -2.0 * kb * (1.0 - kb) / (1.0 - kb - kr);
+-    ub = 2.0 * (1.0 - kb);
+-
+-    if (color_matrix & 1) {
+-      /* fullrange mode */
+-      yoffset = brightness;
+-      ygain = contrast;
+-      uvcos *= contrast * 255.0 / 254.0;
+-      uvsin *= contrast * 255.0 / 254.0;
++    if ((color_matrix >> 1) == 8) {
++      /* YCgCo. This is really quite simple. */
++      uvsin *= contrast;
++      uvcos *= contrast;
++      /* matrix[rgb][yuv1] */
++      matrix[0][1] = -1.0 * uvcos - 1.0 * uvsin;
++      matrix[0][2] =  1.0 * uvcos - 1.0 * uvsin;
++      matrix[1][1] =  1.0 * uvcos;
++      matrix[1][2] =                1.0 * uvsin;
++      matrix[2][1] = -1.0 * uvcos + 1.0 * uvsin;
++      matrix[2][2] = -1.0 * uvcos - 1.0 * uvsin;
++      for (i = 0; i < 3; i++) {
++        matrix[i][0] = contrast;
++        matrix[i][3] = (brightness * contrast - 128.0 * (matrix[i][1] + matrix[i][2])) / 255.0;
++      }
+     } else {
+-      /* mpeg range */
+-      yoffset = brightness - 16.0;
+-      ygain = contrast * 255.0 / 219.0;
+-      uvcos *= contrast * 255.0 / 224.0;
+-      uvsin *= contrast * 255.0 / 224.0;
+-    }
++      /* YCbCr */
++      float kb, kr;
++      float vr, vg, ug, ub;
++      float ygain, yoffset;
++
++      switch (color_matrix >> 1) {
++        case 1:  kb = 0.0722; kr = 0.2126; break; /* ITU-R 709 */
++        case 4:  kb = 0.1100; kr = 0.3000; break; /* FCC */
++        case 7:  kb = 0.0870; kr = 0.2120; break; /* SMPTE 240 */
++        default: kb = 0.1140; kr = 0.2990;        /* ITU-R 601 */
++      }
++      vr = 2.0 * (1.0 - kr);
++      vg = -2.0 * kr * (1.0 - kr) / (1.0 - kb - kr);
++      ug = -2.0 * kb * (1.0 - kb) / (1.0 - kb - kr);
++      ub = 2.0 * (1.0 - kb);
++
++      if (color_matrix & 1) {
++        /* fullrange mode */
++        yoffset = brightness;
++        ygain = contrast;
++        uvcos *= contrast * 255.0 / 254.0;
++        uvsin *= contrast * 255.0 / 254.0;
++      } else {
++        /* mpeg range */
++        yoffset = brightness - 16.0;
++        ygain = contrast * 255.0 / 219.0;
++        uvcos *= contrast * 255.0 / 224.0;
++        uvsin *= contrast * 255.0 / 224.0;
++      }
+ 
+-    /* matrix[rgb][yuv1] */
+-    matrix[0][1] = -uvsin * vr;
+-    matrix[0][2] = uvcos * vr;
+-    matrix[1][1] = uvcos * ug - uvsin * vg;
+-    matrix[1][2] = uvcos * vg + uvsin * ug;
+-    matrix[2][1] = uvcos * ub;
+-    matrix[2][2] = uvsin * ub;
+-    for (i = 0; i < 3; i++) {
+-      matrix[i][0] = ygain;
+-      matrix[i][3] = (yoffset * ygain - 128.0 * (matrix[i][1] + matrix[i][2])) / 255.0;
++      /* matrix[rgb][yuv1] */
++      matrix[0][1] = -uvsin * vr;
++      matrix[0][2] = uvcos * vr;
++      matrix[1][1] = uvcos * ug - uvsin * vg;
++      matrix[1][2] = uvcos * vg + uvsin * ug;
++      matrix[2][1] = uvcos * ub;
++      matrix[2][2] = uvsin * ub;
++      for (i = 0; i < 3; i++) {
++        matrix[i][0] = ygain;
++        matrix[i][3] = (yoffset * ygain - 128.0 * (matrix[i][1] + matrix[i][2])) / 255.0;
++      }
+     }
+ 
+     that->color_matrix = color_matrix;
+diff --git a/src/xine-engine/metronom.c b/src/xine-engine/metronom.c
+index cdadf11..1baa73f 100644
+--- a/src/xine-engine/metronom.c
++++ b/src/xine-engine/metronom.c
+@@ -481,41 +481,62 @@ static void metronom_got_video_frame (metronom_t *this, vo_frame_t *img) {
+         this->force_video_jump = 0;
+         this->video_vpts       = vpts;
+         this->video_drift      = 0;
++        this->video_drift_step = 0;
+ 
+-        xprintf(this->xine, XINE_VERBOSITY_DEBUG, "video jump\n");
++        xprintf(this->xine, XINE_VERBOSITY_DEBUG, "metronom: video jump by %"PRId64" pts\n", diff);
+ 
+       } else {
+-
+-        this->video_drift = diff;
+-        this->video_drift_step = diff / 30;
+-        /* this will fix video drift with a constant compensation each
+-	 frame for about 1 second of video.  */
+-
+-        if (diff) lprintf("video drift, drift is %" PRId64 "\n", this->video_drift);
++        /* TJ. Drift into new value over the next 30 frames.
++           Dont fall into the asymptote trap of bringing down step with remaining drift. */
++        int64_t step;
++        if (diff < 0) {
++          step = (diff - 29) / 30;
++          if (this->video_drift_step < step)
++            step = this->video_drift_step < diff ? diff : this->video_drift_step;
++        } else {
++          step = (diff + 29) / 30;
++          if (this->video_drift_step > step)
++            step = this->video_drift_step > diff ? diff : this->video_drift_step;
++        }
++        this->video_drift      = diff;
++        this->video_drift_step = step;
+       }
+     } else {
+       /* VIDEO_PTS_MODE: do not use the predicted value */
+-      this->video_vpts = vpts;
++      this->video_drift      = 0;
++      this->video_drift_step = 0;
++      this->video_vpts       = vpts;
+     }
+   }
+ 
+   img->vpts = this->video_vpts + this->av_offset;
+ 
++  /* We need to update this->video_vpts is both modes.
++   * this->video_vpts is used as the next frame vpts if next frame pts=0
++   */
++  this->video_vpts += this->img_duration - this->video_drift_step;
++
+   if (this->video_mode == VIDEO_PREDICTION_MODE) {
+     lprintf("video vpts for %10"PRId64" : %10"PRId64" (duration:%d drift:%" PRId64 " step:%" PRId64 ")\n",
+ 	  pts, this->video_vpts, img->duration, this->video_drift, this->video_drift_step );
+ 
+-    if (this->video_drift * this->video_drift_step > 0) {
+-      img->duration -= this->video_drift_step;
+-      this->img_duration = img->duration;
++    /* reset drift compensation if work is done after this frame */
++    if (this->video_drift_step) {
+       this->video_drift -= this->video_drift_step;
++      if (this->video_drift_step < 0) {
++        if (this->video_drift >= 0) {
++          this->video_drift      = 0;
++          this->video_drift_step = 0;
++        }
++      } else {
++        if (this->video_drift <= 0) {
++          this->video_drift      = 0;
++          this->video_drift_step = 0;
++        }
++      }
+     }
+   }
+ 
+-  /* We need to update this->video_vpts is both modes.
+-   * this->video_vpts is used as the next frame vpts if next frame pts=0
+-   */
+-  this->video_vpts += this->img_duration;
+ 
+   if (this->master) {
+     this->master->set_option(this->master, METRONOM_LOCK, 0);
