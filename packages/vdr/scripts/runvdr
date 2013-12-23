@@ -45,7 +45,8 @@ if [ $VIDEOID = "0x10de" -o $VIDEOID = "0x1002" ]; then
 fi
 
 sync
-epgen -i /video/epg.dat -o /tmp/epg.dat && epgtrans &
+
+[ X$E2EPG = "Xyes" ] && epgen -i /video/epg.dat -o /tmp/epg.dat && epgtrans &
 
 sleep 0.1
 for file in /etc/vdr/plugins.d/*; do

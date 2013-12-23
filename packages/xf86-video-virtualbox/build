@@ -4,7 +4,7 @@
 
 get_meta $1
 #myver=`echo $PKG_VERSION |cut -d- -f1`
-myver=4.3.0
+myver=4.3.4
 echo $myver
 
 $SCRIPTS/build linux

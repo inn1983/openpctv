@@ -93,6 +93,7 @@ DIFFDISEQC="$(gettext "diseqc.conf has been edited")"
 CANCELLABEL="$(gettext "Finished")"
 DEVICEINFO="$(gettext "device is detected")"
 NODEVICEINFO="$(gettext "No DVB devices has been discovered. Please check whether the device is ready.")"
+UNUSEDTUNER="$(gettext "This tuner is empty/unused")"
 
 function defaultenv
 {
@@ -992,6 +993,7 @@ done
 		
 function setdiseqcmode {
 $DIALOG --clear --item-help --backtitle "${SYSTEM}" --menu "${SETDISEQCMODE}" 15 60 8 \
+        "Unused" "${UNUSEDTUNER}" "${UNUSEDTUNER}" \
 	"Tune-22k" "${SETDISEQC_22K}" "${DISEQC_22K_INFO}" \
 	"Tuneburst" "${SETDISEQC_TONEBURST}"  "${DISEQC_TONEBURST_INFO}" \
 	"DiSEqC-1.0" "${SETDISEQC_10}"  "${DISEQC_10_INFO}" \
@@ -1078,7 +1080,10 @@ esac
 [ -f ${VDRCONFDIR}/diseqc.conf ] && cp ${VDRCONFDIR}/diseqc.conf ${VDRCONFDIR}/diseqc.conf.${origdate}
 [ -f ${VDRCONFDIR}/setup.conf ] && cp ${VDRCONFDIR}/setup.conf ${VDRCONFDIR}/setup.conf.${origdate}
 
-[ -d /dev/dvb/adapter0 ] || (dialog --msgbox "$NODEVICEINFO" 7 60; exit)
+if [ ! -d /dev/dvb/adapter0 ]; then
+  dialog --msgbox "$NODEVICEINFO" 7 60
+  exit
+fi
 
 defaultenv
 for i in /dev/dvb/adapter*; do

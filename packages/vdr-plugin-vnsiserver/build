@@ -16,7 +16,7 @@ cd addons/pvr.vdr.vnsi/vdr-plugin-vnsiserver
 make all
 make_install
 
-NAME="vnsiserver4"
+NAME="vnsiserver5"
 mkdir -p $ROOT/$PKG_BUILD_DIR/.install/etc/vdr/plugins.d $ROOT/$PKG_BUILD_DIR/.install/etc/vdr/plugins/$NAME
 cp -R .install $ROOT/$PKG_BUILD_DIR
 cp vnsiserver/allowed_hosts.conf $ROOT/$PKG_BUILD_DIR/.install/etc/vdr/plugins/$NAME/

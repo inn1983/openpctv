@@ -30,5 +30,7 @@ fi
 # special for germany :
 #[ "$LANG" = de_DE.UTF-8 ] && export VDR_CHARSET_OVERRIDE=”ISO-8859-15″
 #chvt 4
-epgen -i /video/epg.dat -o /tmp/epg.dat && epgtrans &
-eval vdr -g /tmp --vfat $CAMPLUGIN -Pvnsiserver4 -Pxvdr -Pstreamdev-server -v /video -c /etc/vdr -E /etc/vdr/epg.data -s shutdown
+if [ X$E2EPG = "Xyes" ]; then
+  epgen -i /video/epg.dat -o /tmp/epg.dat && epgtrans &
+fi
+eval vdr -g /tmp --vfat $CAMPLUGIN -Pvnsiserver5 -Pxvdr -Pstreamdev-server -v /video -c /etc/vdr -E /etc/vdr/epg.data -s shutdown

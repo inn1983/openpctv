@@ -1,6 +1,6 @@
 PKG_NAME=xbmc-pvr-addons
 PKG_URL_PROTO=git
-PKG_URL_REV=d4cb4d5
+PKG_URL_REV=a32a0bd
 PKG_URL="https://github.com/opdenkamp/xbmc-pvr-addons"
 PKG_VERSION=git+${PKG_URL_REV}
 #PKG_VERSION=12.2+r78b0aae

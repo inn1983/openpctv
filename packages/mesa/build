@@ -56,6 +56,7 @@ do_configure target \
   --disable-selinux \
   --enable-glx-tls \
   --enable-dri \
+  --enable-asm \
   --with-dri-drivers="$DRI_DRIVERS" \
   --with-dri-driverdir="$XORG_PATH_DRI" \
   --with-egl-platforms="$EGL_DISPLAYS" \
@@ -72,7 +73,7 @@ do_configure target \
   --enable-shared-dricore \
   --enable-driglx-direct \
   --enable-dependency-tracking \
-  --enable-gallium-tests \
+  --disable-gallium-tests \
   $VDPAU \
   $XVMC \
   $OSMESA \

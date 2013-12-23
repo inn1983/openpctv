@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openpctv 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-19 23:34+0800\n"
+"POT-Creation-Date: 2013-12-22 01:24+0800\n"
 "PO-Revision-Date: 2013-07-28 09:19+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -384,9 +384,13 @@ msgid "device is detected"
 msgstr ""
 
 #: packages/setup/scripts/diseqcsetup:95
-#: packages/setup/scripts/update-channels:7
+#: packages/setup/scripts/update-channels:8
 msgid ""
 "No DVB devices has been discovered. Please check whether the device is ready."
+msgstr ""
+
+#: packages/setup/scripts/diseqcsetup:96
+msgid "This tuner is empty/unused"
 msgstr ""
 
 #: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:91
@@ -997,32 +1001,32 @@ msgstr "重新啟動OpenPCTV"
 msgid "Exit to login shell"
 msgstr "退出並登錄shell"
 
-#: packages/setup/scripts/update-channels:26
+#: packages/setup/scripts/update-channels:28
 msgid "Scan channels for VDR"
 msgstr "為VDR掃描頻道"
 
-#: packages/setup/scripts/update-channels:26
+#: packages/setup/scripts/update-channels:28
 msgid "Select Satellite"
 msgstr "選擇衛星"
 
-#: packages/setup/scripts/update-channels:26
+#: packages/setup/scripts/update-channels:28
 msgid ""
 "Please select the satellite you want to scan, noted that the scanning "
 "process may be quite long, please be patient."
 msgstr ""
 "請選擇你想要掃描的衛星，注意整個掃描的過程可能需要很長時間，請耐心等待。"
 
-#: packages/setup/scripts/update-channels:45
+#: packages/setup/scripts/update-channels:47
 msgid ""
 "Please put the transponders list in /etc/dvbc for scan-s2, Are you ready?"
 msgstr ""
 
-#: packages/setup/scripts/update-channels:52
+#: packages/setup/scripts/update-channels:54
 msgid ""
 "Please put the transponders list in /etc/dvbt for scan-s2, Are you ready?"
 msgstr ""
 
-#: packages/setup/scripts/update-channels:87
+#: packages/setup/scripts/update-channels:89
 msgid "Split channels in TV and Radio..."
 msgstr "分離電視和收音的頻道清單"
 

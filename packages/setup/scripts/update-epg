@@ -19,16 +19,14 @@ zh_epgurl=http://epg.xltvrobbs.net/epg/G/gemini.tgz
 
 case $LANG in
   zh*)
-    for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
-      if wget -t 3 $zh_epgurl -O /tmp/epg.tgz; then
-        break
-      else
-        sleep 1
+    if wget -t 3 $zh_epgurl -O /tmp/epg.tgz; then
+      tar zvfx /tmp/epg.tgz -C /tmp || exit
+      epgen -i /tmp/gemini.epg.dat -o $cachedir/epg.dat -v7le
+      rm /tmp/epg.tgz /tmp/gemini.epg.dat
+      if ! grep -q "^E2EPG=" /etc/system.options >/dev/null 2>&1; then
+        echo "E2EPG=yes" >> /etc/system.options
       fi
-    done
-    tar zvfx /tmp/epg.tgz -C /tmp || exit
-    epgen -i /tmp/gemini.epg.dat -o $cachedir/epg.dat -v7le
-    rm /tmp/epg.tgz /tmp/gemini.epg.dat
+    fi
     ;;
   *)
     exit
