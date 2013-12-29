@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openpctv 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-22 01:24+0800\n"
+"POT-Creation-Date: 2013-12-29 12:39+0800\n"
 "PO-Revision-Date: 2013-07-28 09:19+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -1060,6 +1060,12 @@ msgstr "下載基於enigma2的衛星參數"
 #: packages/setup/scripts/update-transponders:32
 msgid "Update /etc/enigma2/satellites.xml..."
 msgstr "更新 /etc/enigma2/satellites.xml..."
+
+#: packages/setup/scripts/update-transponders:39
+msgid ""
+"Do you want to update the satellite transponders from fastsatfinder.com? If "
+"you do not update it, your transponder parameters may not be the latest."
+msgstr ""
 
 #~ msgid "OK"
 #~ msgstr "確認"

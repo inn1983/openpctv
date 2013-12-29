@@ -36,5 +36,7 @@ rm -rf /tmp/dreambox.zip
 echo "$(gettext "Done!")"
 }
 
-[ -x /usr/bin/vdr ] && scan_trans
-[ -x /usr/bin/enigma2 ] && enigma2_trans
+if dialog --yesno "$(gettext "Do you want to update the satellite transponders from fastsatfinder.com? If you do not update it, your transponder parameters may not be the latest.")" 7 60; then
+  [ -x /usr/bin/vdr ] && scan_trans
+  [ -x /usr/bin/enigma2 ] && enigma2_trans
+fi

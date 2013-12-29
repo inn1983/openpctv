@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPCTV 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-22 01:24+0800\n"
+"POT-Creation-Date: 2013-12-29 12:39+0800\n"
 "PO-Revision-Date: 2013-07-23 16:56+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -390,7 +390,7 @@ msgstr "没有发现DVB设备。请检查设备是否已准备就绪。"
 
 #: packages/setup/scripts/diseqcsetup:96
 msgid "This tuner is empty/unused"
-msgstr ""
+msgstr "这个调谐器是空的/未使用"
 
 #: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:91
 msgid "Select a software emulated CAM"
@@ -1070,3 +1070,11 @@ msgstr "下载基于enigma2的卫星参数"
 #: packages/setup/scripts/update-transponders:32
 msgid "Update /etc/enigma2/satellites.xml..."
 msgstr "更新 /etc/enigma2/satellites.xml..."
+
+#: packages/setup/scripts/update-transponders:39
+msgid ""
+"Do you want to update the satellite transponders from fastsatfinder.com? If "
+"you do not update it, your transponder parameters may not be the latest."
+msgstr ""
+"你想从fastsatfinder.com更新卫星转发器参数吗？如果不升级的话，你的转发器参数"
+"可能不是最新的。"
