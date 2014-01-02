@@ -80,6 +80,15 @@ sed -i -e "s/^ALSA_CARD=.*/ALSA_CARD=\"$cardid\"/g" \
 	-e "s/^ALSA_DEVICE=.*/ALSA_DEVICE=\"$deviceid\"/g" \
 	-e "s/^SOUNDCARD_MODE=.*/SOUNDCARD_MODE=\"$output\"/g" \
 	-e "s/^CHANNELS=.*/CHANNELS=\"$channels\"/g" /etc/audio
+if grep -q "Freescale i.MX 6Quad" /proc/cpuinfo; then
+  if [ $cardid = 0 -a $deviceid = 0 ]; then
+    sed -i 's#<fvolumelevel>.*#<fvolumelevel>0.455554</fvolumelevel>#g' \
+    /root/.xbmc/userdata/guisettings.xml
+  else
+    sed -i 's#<fvolumelevel>.*#<fvolumelevel>1.000000</fvolumelevel>#g' \
+    /root/.xbmc/userdata/guisettings.xml
+  fi
+fi
 }
 
 aplay -l > /tmp/aplay.log

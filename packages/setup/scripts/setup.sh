@@ -7,6 +7,8 @@ export TEXTDOMAIN=openpctv
 
 source /etc/profile
 
+grep -q BCM2708 /proc/cpuinfo && sleep 2
+
 if grep -q -i arm /proc/cpuinfo; then
   ARCH=arm
   echo -e -n "\e[31m$(gettext "Press any key to enter setup,")\e[0m \e[32m$(gettext "or 3 seconds after enter XBMC automatically.")\e[0m"
