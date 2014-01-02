@@ -51,7 +51,7 @@ diff -uNr u-boot-v2009.08-imx_3.0.35_4.1.0.orig/include/configs/mx6q_sabresd.h u
  		"mmc dev 3; "	\
 -		"mmc read ${loadaddr} 0x800 0x2000; bootm\0"	\
 -		"bootcmd=run bootcmd_net\0"                             \
-+		"mmc read ${loadaddr} 0x800 0x2500; bootm\0"	\
++		"mmc read ${loadaddr} 0x800 0x4000; bootm\0"	\
 +		"bootcmd=run bootcmd_mmc\0"                             \
  
  
