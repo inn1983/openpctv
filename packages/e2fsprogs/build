@@ -11,7 +11,7 @@ do_configure \
   --disable-profile \
   --disable-checker \
   --disable-imager \
-  --disable-resizer \
+  --enable-resizer \
   --disable-fsck \
   --disable-e2initrd-helper \
   --disable-uuid \
