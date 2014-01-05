@@ -44,9 +44,9 @@ cat $DISEQCCONF | while read line; do
     id=${line##:}
     num=`expr $id - 1`
   elif echo "$line" | grep -q "^#DVB-C"; then
-    if dialog --yesno "$(gettext "Please put the transponders list in /etc/dvbc for scan-s2, Are you ready?")" 7 60; then
+    if dialog --yesno "$(gettext "We'll use w_scan to scan channels, are you ready?")" 7 60; then
       echo ":DVB-C" > ${CHANNELS}.DVB-C
-      scan-s2 -a $num -A 2 -x -2 -o vdr -v -U /etc/dvbc >> ${CHANNELS}.DVB-C
+      w_scan -a $num -f c -Q 0 -S 1 -o 21 >> ${CHANNELS}.DVB-C
     else
       exit
     fi

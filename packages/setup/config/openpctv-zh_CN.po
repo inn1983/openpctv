@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPCTV 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-01 13:13+0800\n"
+"POT-Creation-Date: 2014-01-05 13:02+0800\n"
 "PO-Revision-Date: 2013-07-23 16:56+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -1028,9 +1028,8 @@ msgstr ""
 "请选择你想要扫描的卫星，注意整个扫描的过程可能需要很长时间，请耐心等待。"
 
 #: packages/setup/scripts/update-channels:47
-msgid ""
-"Please put the transponders list in /etc/dvbc for scan-s2, Are you ready?"
-msgstr "请将频点参数列表放至/etc/dvbc，你准备好了吗？"
+msgid "We'll use w_scan to scan channels, are you ready?"
+msgstr ""
 
 #: packages/setup/scripts/update-channels:54
 msgid ""
@@ -1078,3 +1077,7 @@ msgid ""
 msgstr ""
 "你想从fastsatfinder.com更新卫星转发器参数吗？如果不升级的话，你的转发器参数可"
 "能不是最新的。"
+
+#~ msgid ""
+#~ "Please put the transponders list in /etc/dvbc for scan-s2, Are you ready?"
+#~ msgstr "请将频点参数列表放至/etc/dvbc，你准备好了吗？"
