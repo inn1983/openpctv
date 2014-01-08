@@ -6,7 +6,7 @@ cd $BUILD/$1*
 
 mkdir -p .install/boot
 cp -P boot/*.elf boot/*.dat boot/bootcode.bin .install/boot/
-echo "$DISTRONAME $TARGET_ARCH $DISTRO_VERSION (C) 2002-2013" \
+echo "$DISTRONAME $TARGET_ARCH $DISTRO_VERSION $DISTRO_COPYRIGHT" \
   > .install/boot/issue.txt
 
 if [ "$RPI_SDTV_COLORBURST" = yes ]; then
@@ -17,26 +17,71 @@ fi
 cat > .install/boot/config.txt <<EOF
 sdtv_mode=$RPI_SDTV_MODE
 sdtv_aspect=$RPI_SDTV_ASPECT
+hdmi_group=1
+hdmi_mode=16
+disable_overscan=1
 sdtv_disable_colourburst=$no_colorburst
+
+#hdmi_ignore_cec_init=1
+
 EOF
 
 if [ -n "$RPI_MPEG2_LICENSE" ]; then
   echo "decode_MPG2=$RPI_MPEG2_LICENSE" >> .install/boot/config.txt
+else
+  echo "#decode_MPG2=0x00000000" >> .install/boot/config.txt
 fi
 
 if [ -n "$RPI_VC1_LICENSE" ]; then
   echo "decode_WVC1=$RPI_VC1_LICENSE" >> .install/boot/config.txt
+else
+  echo "#decode_WVC1=0x00000000" >> .install/boot/config.txt
 fi
 
-CMDLINE="dwc_otg.lpm_enable=0 console=ttyAMA0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait"
+CMDLINE="dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 quiet root=/dev/mmcblk0p2 rootfstype=ext4 rootwait vt.global_cursor_default=0"
 if [ "$RPI_USE_CMA" = yes ]; then
   CMDLINE="$CMDLINE coherent_pool=2M cma=2M smsc95xx.turbo_mode=N"
   cat >> .install/boot/config.txt <<EOF
+
 gpu_mem_256=160
 gpu_mem_512=316
 cma_lwm=16
 cma_hwm=32
 EOF
 fi
-echo "$CMDLINE" > .install/boot/cmdline.txt
 
+cat >> .install/boot/config.txt <<EOF
+## Some over clocking settings, govenor already set to ondemand
+
+##None
+#arm_freq=700
+#core_freq=250
+#sdram_freq=400
+#over_voltage=0
+
+##Modest
+#arm_freq=800
+#core_freq=250
+#sdram_freq=400
+#over_voltage=0
+
+##Medium
+#arm_freq=900
+#core_freq=250
+#sdram_freq=450
+#over_voltage=2
+
+##High
+#arm_freq=950
+#core_freq=250
+#sdram_freq=450
+#over_voltage=6
+
+##Turbo
+#arm_freq=1000
+#core_freq=500
+#sdram_freq=600
+#over_voltage=6
+EOF
+
+echo "$CMDLINE" > .install/boot/cmdline.txt
