@@ -4,22 +4,15 @@
 
 get_meta $1
 
-$SCRIPTS/unpack mesa
+if pkg_uses $1 mesa; then
+  XORG_MESA="--enable-glx --enable-dri"
+else
+  XORG_MESA="--disable-glx --disable-dri"
+fi
 
 cd $PKG_BUILD_DIR
 
 do_autoconf
-
-# xorg-server needs some mesa includes to build
-get_meta mesa
-MESA_DIR="$ROOT/$PKG_BUILD_DIR"
-export local_cppflags="-I$MESA_DIR/include"
-export GL_CFLAGS="-I$MESA_DIR/include"
-export GL_LIBS=" "
-export DRI_CFLAGS="-I$LIB_PREFIX/include"
-export DRI_LIBS=" "
-sed -i 's%dridriverdir=`$PKG_CONFIG --variable=dridriverdir dri`%dridriverdir=/usr/lib/dri%' configure
-get_meta $1
 
 export LIBS="-ludev"
 GCC_NO_GOLD=1 GCC_NO_LTO=1 \
@@ -47,8 +40,6 @@ do_configure \
             --enable-screensaver \
             --disable-xdmcp \
             --disable-xdm-auth-1 \
-            --enable-glx \
-            --enable-dri \
             --enable-dri2 \
             --enable-gestures \
             --enable-xinerama \
@@ -88,6 +79,7 @@ do_configure \
             --with-fontrootdir=$XORG_PATH_FONTS \
             --with-default-font-path="$XORG_PATH_FONTS/misc,built-ins" \
             --with-sha1=libgcrypt \
+            $XORG_MESA
 
 make V=1 -j3
 make_install
