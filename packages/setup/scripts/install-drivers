@@ -4,8 +4,11 @@ export TERM=linux
 . gettext.sh
 export TEXTDOMAIN=openpctv
 
+. /etc/lsb-release
+[ -z ${DISTRIB_ID} ] && DISTRIB_ID=OpenPCTV
+
 finishinstall () {
-dialog --title "$(gettext "Reboot OpenPCTV?")" --clear --yesno "$(gettext "Driver package has been installed successfully. Now you have to reboot to verify whether the drive can work well.")" 8 61
+dialog --title "$(gettext "Reboot") ${DISTRIB_ID}?" --clear --yesno "$(gettext "Driver package has been installed successfully. Now you have to reboot to verify whether the driver works.")" 8 61
 retval=$?
 [ $retval -eq 0 ] && reboot
 }
@@ -24,7 +27,7 @@ modprobe $field1 $field2
 
 dvbcard () {
 field=$1
-dialog --title "$(eval_gettext "Found \$field")" --clear --defaultno --yesno "$(gettext "Sometimes board has no valid PCI(e) Subsystem ID and can't be autodetected. You can specify the model of the card to pass card=<n> insmod option to workaround that. Redirect complaints to the vendor of the TV card. Do you want to do this?")" 9 61
+dialog --title "$(eval_gettext "Found \$field")" --clear --defaultno --yesno "$(gettext "Sometimes a board without valid PCI(e) Subsystem ID can't be autodetected. You can specify the model of the card to pass card=<n> insmod option to workaround that. Redirect complaints to the vendor of the TV card. Do you want to do this?")" 9 61
 }
 
 cardlist () {
@@ -53,19 +56,19 @@ done
 rm /tmp/lspci.log
 
 if [ -c /dev/dvb/adapter[0..9]/dvr[0...9] -a -c /dev/dvb/adapter[0..9]/frontend[0..9] -a -c /dev/dvb/adapter[0..9]/demux[0..9] ]; then
-  dialog --title "$(gettext "Additional V4L and DVB drive")" --clear --defaultno \
-  --yesno "$(gettext "Your V4L and DVB devices seem to be normal. Perhaps you do not need to install other additional drivers. If you want to install additional drives please select 'Yes'")" 8 61
+  dialog --title "$(gettext "Additional DVB driver")" --clear --defaultno \
+  --yesno "$(gettext "Your DVB devices seem to be normal. Perhaps you do not need to install other additional drivers. If you want to install additional drivers please select 'Yes'")" 8 61
   retval=$?
   [ $retval -eq 1 ] && exit
 else
-  dialog --title "$(gettext "Additional V4L and DVB drive")" --clear \
-  --yesno "$(gettext "Your V4L and DVB device does not seem to work properly. Perhaps you should install another driver. Do you want to install the additional drives?")" 8 61
+  dialog --title "$(gettext "Additional DVB driver")" --clear \
+  --yesno "$(gettext "Your DVB device does not seem to work properly. Perhaps you should install another driver. Do you want to install the additional drivers?")" 8 61
   retval=$?
   [ $retval -eq 1 ] && exit
 fi
 
-dialog --clear --title "$(gettext "Install additional V4L and DVB drive")" --menu \
-"$(gettext "Before proceeding please confirm your V4L and DVB device specific information. Choose the drives you need to install carefully.")" 17 80 8 \
+dialog --clear --title "$(gettext "Install additional DVB driver")" --menu \
+"$(gettext "Before proceeding please confirm your DVB device specific information. Choose the driver you need to install carefully.")" 17 80 8 \
  "Exit" "$(gettext "I do not want to install now.")" \
  "s2-liplianin" "$(gettext "Support most of the devices,such as DVBWorld,Tevii,Prof...")" \
  "tbs-drivers" "$(gettext "Support all the TBS devices")" \

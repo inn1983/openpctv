@@ -10,7 +10,7 @@ RESULTTMP=/tmp/resulttmp.$$
 [ ! -d /sys/class/rc ] && exit
 ls /sys/class/rc/* >/dev/null 2>&1 || exit
 
-echo "dialog --backtitle \"$(gettext "IR configuration")\" --title \"$(gettext "Select IR Device")\" --clear --radiolist \"$(gettext "In this machine found the following infrared receiver devices. Please select a default device as Lirc support.")\" 13 70 3 \\" > $DIALOGTMP
+echo "dialog --backtitle \"$(gettext "IR configuration")\" --title \"$(gettext "Select IR Device")\" --clear --radiolist \"$(gettext "The following infrared receiver devices are found in this machine. Please select a default device as Lirc support.")\" 13 70 3 \\" > $DIALOGTMP
 item=on
 for i in /sys/class/rc/*; do
   drv=$(grep DRV_NAME $i/uevent |sed 's/DRV_NAME=//g')

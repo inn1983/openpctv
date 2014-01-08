@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 # Copyright (c) 2009-2010 CNVDR.
-# Copyright (c) 2013 OpenPCTV.
+# Copyright (c) 2013 OPENPCTV.
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,8 +28,8 @@ export TEXTDOMAIN=openpctv
 SYSTEM="$(eval_gettext "DiSEqC configuration for VDR v\${VERSION}")"
 SETDISEQCMODE="$(gettext "DiSEqC (Digital Satellite Equipment Control) System Mode.")"
 SETDISEQCMODE_NO="$(gettext "No DiSEqC switch")"
-SETSATELLITE="$(eval_gettext "Specify the satellite for this LNBF.If the satellite you want to select is not in this list, you should first patch for your \${VDRCONFDIR}sources.conf.")"
-SETLNBTYPE="$(gettext "Select LNBF LO frequency.There are two different ways that a satellite can broadcast its signal.If linear,it broadcasts Horizontal and Vertical.If circular, it broadcasts Right Circular and Left Circular. ")"
+SETSATELLITE="$(eval_gettext "Select a satellite for this LNBF.If the satellite you need is not on the list, you should first patch for your \${VDRCONFDIR}sources.conf.")"
+SETLNBTYPE="$(gettext "Select the LNBF LO frequency. There are two ways how satellite broadcasts the signal, linear and circular.With linear, the signal is horizontal or vertical, with circular, the signal is right circular or left circular.")"
 SETLNBTYPE_5150_LINEAR="$(gettext "5150MHz Single Linear C Band LNBF")"
 SETLNBTYPE_5750_LINEAR="$(gettext "5750MHz Single Linear C Band LNBF")"
 SETLNBTYPE_9750_LINEAR="$(gettext "9750MHz Single Linear Ku Band LNBF")"
@@ -49,8 +49,8 @@ SETLNBTYPE_11300_CIRCULAR="$(gettext "11300MHz Single Circular Ku Band LNBF")"
 SETLNBTYPE_9750_10600_CIRCULAR="$(gettext "9750/10600MHz Dual Circular Ku Band Universal LNBF")"
 SETLNBTYPE_9750_10750_CIRCULAR="$(gettext "9750/10750MHz Dual Circular Ku Band Universal LNBF")"
 SETLNBTYPE_CUSTON="$(gettext "User-defined LNBF LO frequency")"
-LNBPOLAR="$(gettext "Polarization,HV for Linear LNBF,RL for Circular LNBF")"
-CUSTOMLNBTYPE="$(gettext "Input LO frequency, if you use a single C/Ku band LNB, please specify LnbFrequLo and LnbSLOF with '0'")"
+LNBPOLAR="$(gettext "Polarization, HV for linear LNBF, RL for circular LNBF.")"
+CUSTOMLNBTYPE="$(gettext "Input LO frequency, if you us a single c/Ku band LNB, please set LnbFreuLo and LnbSLOF to '0'.")"
 LNBFREQULO="$(gettext "Low LO frequency")"
 LNBFREQUHI="$(gettext "High LO frequency")"
 LNBSLOF="$(gettext "Correct LO frequency")"
@@ -62,19 +62,19 @@ SETDISEQC_10="$(gettext "Set DiSEqC 1.0/2.0 committed Switch")"
 SETDISEQC_11="$(gettext "Set DiSEqC 1.1/2.1 uncommitted Switch")"
 SETDISEQC_12="$(gettext "Set DiSEqC 1.2/2.2 Switch")"
 SETDISEQC_USER="$(gettext "Non-standard user defined configuration")"
-DISEQC_22K_INFO="$(gettext "Dual LNBF includes 0/22KHZ switch, also be used to switch between two different single LNBF")"
-DISEQC_TONEBURST_INFO="$(gettext "Also be called MiniDiSEqC,switch A & B two different LNB and different from the 0/22K switch")"
+DISEQC_22K_INFO="$(gettext "The 0/22KHz switch is used for switch between two different single LNBFs")"
+DISEQC_TONEBURST_INFO="$(gettext "Also known as MiniDiSEqC, for switch between two different LNBs, it's different from the 0/22KHz switch.")"
 DISEQC_10_INFO="$(gettext "Allow switching between up to 4 committed LNB's(4x1 DiSEqC Switch)")"
 DISEQC_11_INFO="$(gettext "Allow switching between up to 16 Uncommitted LNB's(8x1,10x1,12x1,16x1 DiSEqC Switch)")"
 DISEQC_12_INFO="$(gettext "Allow switching between up to 16 LNB's, and control of a single axis satellite motor")"
 DISEQCWAITINFO="$(gettext "Wait nn milliseconds of commands(nn:a integer number,Default: 244)")"
 DISEQCREPEATINFO="$(gettext "Select repetitions of commands(Default:1)")"
 DISEQCREPEAT_1="$(gettext "One Repeat (Default)")"
-DISEQCREPEAT_2="$(gettext "Two Repeat")"
-DISEQCREPEAT_3="$(gettext "Three repeat")"
+DISEQCREPEAT_2="$(gettext "Two repeats")"
+DISEQCREPEAT_3="$(gettext "Three repeats")"
 LNB_22K_NOTSET="$(gettext "0/22k has not been set")"
 LNB_22K_SET="$(gettext "0/22k has been set")"
-DISEQC_USER_INFO="$(gettext "With an uncommited diseqc 1.1 switch(one out of 16) and 16 commited diseqc 1.0(one out of 4) you can have up to 64 satellites (16*4).")"
+DISEQC_USER_INFO="$(gettext "With an uncommited DiSEqC 1.1 switch (one out of 16) and 16 commited DiSEqC 1.0(one out of 4) you can have up to 64 satellites (16*4).")"
 SETDISEQCLNB_1ST="$(gettext "Set the first DiSEqC port")"
 SETDISEQCLNB_2ND="$(gettext "Set the second DiSEqC port")"
 SETTUNE22K="$(gettext "22Khz Tone Control Devices")"
@@ -88,11 +88,11 @@ COMPLETEDIALOG1="$(gettext "You can edit diseqc.conf by manual, or you'll skip t
 FINISHTILE="$(gettext "Do you want to save these settings?")"
 FINISHDIALOG1="$(gettext "The configuration file(s) will be saved:")"
 FINISHDIALOG2="$(gettext "or the configuration file(s):")"
-FINISHDIALOG3="$(eval_gettext "It will be placed in /tmp, you can edit and place it into \${VDRCONFDIR} by manual")"
+FINISHDIALOG3="$(eval_gettext "It will be placed in /tmp, you can edit and place it into \${VDRCONFDIR} manually")"
 DIFFDISEQC="$(gettext "diseqc.conf has been edited")"
 CANCELLABEL="$(gettext "Finished")"
 DEVICEINFO="$(gettext "device is detected")"
-NODEVICEINFO="$(gettext "No DVB devices has been discovered. Please check whether the device is ready.")"
+NODEVICEINFO="$(gettext "No DVB device has been detected. Please check whether the device is ready.")"
 UNUSEDTUNER="$(gettext "This tuner is empty/unused")"
 
 function defaultenv
@@ -1110,6 +1110,7 @@ for i in /dev/dvb/adapter*; do
     rm /tmp/dvbinfo.$id
   else
     type=DVB-S2
+    setdiseqcmode
     break
   fi
 done

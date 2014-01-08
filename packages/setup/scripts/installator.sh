@@ -7,12 +7,14 @@ export TEXTDOMAIN=openpctv
 
 LOGFILE=/tmp/install.log
 BOOTDISK_MNT=/mnt/BootDisk
-. /etc/os-release
+
+. /etc/lsb-release
+[ -z ${DISTRIB_ID} ] && DISTRIB_ID=OpenPCTV
 
 installmsg () {
 # Convert an OS device to the corresponding GRUB drive.
-MSG_DEV_NO_BLOCK="$(gettext "Not found or not a block device.")"
-MSG_BIOS_NO_DRIVE="$(gettext "does not have any corresponding BIOS drive.")"
+MSG_DEV_NO_BLOCK="$(gettext "Not found or no block device exists.")"
+MSG_BIOS_NO_DRIVE="$(gettext "Does not have any corresponding BIOS driver.")"
 
 # Keymap Setup
 MSG_KEYMAP_CONFIG="$(gettext "Keymap selection")"
@@ -28,25 +30,25 @@ MSG_DISK_NOT_FOUND="$(gettext "No disks found on this system.\nCheck again ?")"
 MSG_DISK_REFRESH="$(gettext "refresh list")"
 
 MSG_DISK_DEVICE="$(gettext "Installation device")"
-MSG_DISK_DEVICE_DESC="$(gettext "You are going to install OpenPCTV. For this you will need an empty partition with about 5 GB of free space. Be careful to choose the right disk! We won't take responsibility for any data loss.")"
+MSG_DISK_DEVICE_DESC="$(gettext "You are going to install") ${DISTRIB_ID}. $(gettext "For this you will need an empty partition with about 5 GB of free space. Be careful to choose the right disk! We won't take responsibility for any data loss.")"
 
 MSG_DISK_PART="$(gettext "Linux EXT4 partition")"
 
 MSG_CFDISK_BEGIN="$(gettext "Before continue the installator program you need to define the Linux partition(s) on your hard disk. We can use other partitioning tool under Linux/Windows before this. Or if you select 'Yes', you'll use cfdisk to edit your partition table to create a")"
-MSG_CFDISK_END="$(gettext "with about 5 GB of free space. The partition type can be arbitrary. Don't forget to set the bootable flag to this partition. Remember to commit the changes when done. We won't take responsibility for any data loss. If you choose 'No' means that you've prepared a partition for it.")"
+MSG_CFDISK_END="$(gettext "with about 5 GB of free space. The partition type can be arbitrary. Don't forget to set the bootable flag to this partition. Remember to submit the changes when done. We won't take responsibility for any data loss. If you choose 'No' means that you've prepared a partition for it.")"
 
 # Installation
 MSG_INSTALL_DEV_CONFIG="$(gettext "Installation device")"
 
 MSG_INSTALL_DEV_NOPART_BEGIN="$(gettext "You don't have any")"
 MSG_INSTALL_DEV_NOPART_END="$(gettext "partition on your system. Please create a partition first using for example cfdisk.")"
-MSG_INSTALL_DEV_DESC="$(gettext "Where do you want to install OpenPCTV? Please choose carefully!")"
+MSG_INSTALL_DEV_DESC="$(gettext "Where do you want to install") ${DISTRIB_ID}? $(gettext "Please choose carefully!")"
 MSG_INSTALL_DEV_BAD_BLOCK="$(gettext "is not a valid block device.")"
 
-MSG_INSTALL_DEV_NO_FORMAT="$(gettext "Partition is not formated")"
+MSG_INSTALL_DEV_NO_FORMAT="$(gettext "Partition is not formatted")"
 MSG_INSTALL_DEV_FORMAT_BEGIN="$(gettext "Partition format type")"
 MSG_INSTALL_DEV_FORMAT_END="$(gettext "is not supported in your partition type")"
-MSG_INSTALL_DEV_FORMATED="$(gettext "Partition is already formated")"
+MSG_INSTALL_DEV_FORMATED="$(gettext "Partition is already formatted")"
 MSG_INSTALL_DEV_FORMAT="$(gettext "Formatting")"
 MSG_INSTALL_DEV_FORMAT_DESC="$(gettext "Do you want to format")"
 MSG_INSTALL_DEV_FORMATTING_WAIT_BEGIN="$(gettext "Formatting")"
@@ -55,7 +57,7 @@ MSG_INSTALL_DEV_FORMATTING_WAIT_END="$(gettext "...\nPlease wait")"
 MSG_INSTALL_PART_TYPE="$(gettext "Linux partition type")"
 MSG_INSTALL_PART_TYPE_DESC="$(gettext "Which type of Linux partition you want ?")"
 
-MSG_INSTALL_FORMAT_NO_TOOLS="$(gettext "As you don't have formatting tool installed, I won't be able to format the partition.")"
+MSG_INSTALL_FORMAT_NO_TOOLS="$(gettext "No formatting tooled is installed, partition can't be formatted.")"
 MSG_INSTALL_FORMAT_ALREADY="$(gettext "Hopefully it is already formatted.")"
 MSG_INSTALL_FORMAT_BAD_TYPE="$(gettext "should be formatted as")"
 
@@ -65,7 +67,7 @@ MSG_INSTALLING_WAIT="$(gettext "Installing... Please wait")"
 
 # Config Options
 MSG_CFG_HDTV="$(gettext "Support for HDTV through X.Org ?")"
-MSG_CFG_HDTV_DESC="$(gettext "It appears that this version of OpenPCTV has been compiled with support for HDTV through X.Org video server. Remember that X.Org is only useful if you want to display high-resolution movies on a wide display (LCD TVs, Plasma screens ...). It doesn't provide TVOut support any longer. Do you want to enable support for HDTV as a default ? (previous non-HD mode will still be available)")"
+MSG_CFG_HDTV_DESC="$(gettext "It appears that this version of") ${DISTRIB_ID} $(gettext "has been compiled with support for HDTV through X.Org video server. Please note that X.Org is only useful for playback of high-resolution movies on a widescreen (LCD TV, Plasma screens ...). It doesn't provide TVOut support any longer. Do you want to enable support for HDTV as a default ? (previous non-HD mode will still be available)")"
 
 # Bootloader
 MSG_BOOTLOADER="$(gettext "Bootloader")"
@@ -73,10 +75,10 @@ MSG_BOOTLOADER="$(gettext "Bootloader")"
 MSG_GRUB_NO_ROOTDEV="$(gettext "Couldn't find my GRUB partition representation")"
 MSG_GRUB_SETUP_ERROR="$(gettext "Couldn't install GRUB bootloader!")"
 
-MSG_LOADER_MULTIBOOT_BEGIN="$(gettext "is now a OpenPCTV partition. To boot from it, you will need to install a bootloader. I can install one for you. If you have any other operating system on your computer, I will also install a multiboot for you. If you do not want me to install a new bootloader, you will need to configure yours alone.\nI have found:")"
-MSG_LOADER_MULTIBOOT_END="$(gettext "Do you want to install me to install the boot loader (GRUB) for you ?")"
-MSG_LOADER_NONE="$(gettext "is now a OpenPCTV partition. I didn't recognize any other OS on your system, want me to install boot loader on your MBR ?")"
-MSG_LOADER_ERROR="$(gettext "You must install a boot loader to boot OpenPCTV")"
+MSG_LOADER_MULTIBOOT_BEGIN="$(gettext "is now a") ${DISTRIB_ID} $(gettext "partition. To boot from it, you will need to install a bootloader. One can be installed. If you have any other operating system on your computer, a multi-bootloader can also be installed. If you do not want to install a new bootloader, you will need to configure it yourself. \nI have found:")"
+MSG_LOADER_MULTIBOOT_END="$(gettext "Do you want to install a new bootloader (GRUB)?")"
+MSG_LOADER_NONE="$(gettext "is now a") ${DISTRIB_ID} $(gettext "partition. No OS on your system is recognized. Do you want to install a new bootloader on your MBR?")"
+MSG_LOADER_ERROR="$(gettext "You must install a new bootloader to boot") ${DISTRIB_ID}."
 
 # Log Messages
 MSG_LOG="$(gettext "Installation Log")"
@@ -84,8 +86,8 @@ MSG_LOG_DESC="$(gettext "Do you want to check installation logs ? (it is probabl
 
 # End of install
 MSG_SUCCESS="$(gettext "Have Fun!")"
-MSG_SUCCESS_DESC_BEGIN="$(gettext "OpenPCTV is now installed on")"
-MSG_SUCCESS_DESC_END="$(gettext "Do you want to reboot? Or press Alt+F2 to configure by manual")"
+MSG_SUCCESS_DESC_BEGIN="${DISTRIB_ID} $(gettext "is now installed on")"
+MSG_SUCCESS_DESC_END="$(gettext "Do you want to reboot? Or press Alt + F2 to configure manually.")"
 
 MSG_GRUB_START="$(gettext "Start")"
 MSG_GRUB_DEFAULT="$(gettext "Default target")"
@@ -495,7 +497,7 @@ install_grub (){
 
   dbglg "boot drive: $BOOT_DRV"
 
-  # Detect others OS and ask for MBR only in the case where OpenPCTV
+  # Detect others OS and ask for MBR only in the case where openpctv
   # is not installed on a removable device.
   # Note: lvm is not recognized as removable no matter what it's installed on!
   # should be possible to have lvm boot on removable device as well, but with less priority
@@ -541,9 +543,9 @@ has_ssd_with_tirm() {
   return $RETVAL
 }
 
-DISTRO=OpenPCTV
+DISTRO=${DISTRIB_ID}
 INSTALL_FSYS=flat
-BACKTITLE="OpenPCTV $VERSION installator"
+BACKTITLE="${DISTRIB_ID} $VERSION $(gettext "installator")"
 
 # should not be present in install mode, but in case of ...
 systemctl stop automountd >/dev/null 2>&1

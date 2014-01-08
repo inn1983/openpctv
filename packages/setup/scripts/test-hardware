@@ -1,0 +1,117 @@
+#!/bin/bash
+
+#USB1 侧面上
+USB1=no
+#USB2 单独
+USB2=no
+#USB3 侧面下
+USB3=no
+#PCIE minipcie接口
+PCIE=no
+#ANALOG 模拟音频接口
+ANALOG=no
+#DIGITAL 光纤音频接口
+DIGITAL=no
+#HDMI HDMI音频接口
+HDMI=no
+#ETH 有线网络
+ETH=no
+#WLAN 无线网络
+WLAN=no
+#SATA sata硬盘接口
+SATA=no
+#SD读卡器
+SD=no
+#TF读卡器
+TF=no
+
+#ROUTE路由器地址
+ROUTE=192.168.1.1
+#本机网络地址
+IP=192.168.1.120
+#用于测试的无线网络ssid
+SSID=test
+#用于测试的无线网络psk密码
+PSK=test
+
+cp /etc/network /tmp
+cp /etc/audio /tmp
+
+if [ -r /dev/disk/by-path/platform-fsl-ehci.1-usb-0:1.1:1.0-scsi-0:0:0:0 \
+     -o -r /dev/input/by-path/platform-fsl-ehci.1-usb-0:1.1:1.0-event-kbd ]; then
+  USB1=yes
+fi
+
+if [ -r /dev/disk/by-path/platform-fsl-ehci.1-usb-0:1.2:1.0-scsi-0:0:0:0 \
+     -o -r /dev/input/by-path/platform-fsl-ehci.1-usb-0:1.2:1.0-event-kbd ]; then
+  USB2=yes
+fi
+
+if [ -r /dev/disk/by-path/platform-fsl-ehci.1-usb-0:1.3:1.0-scsi-0:0:0:0 \
+     -o -r /dev/input/by-path/platform-fsl-ehci.1-usb-0:1.3:1.0-event-kbd ]; then
+  USB3=yes
+fi
+
+if [ -r /dev/disk/by-path/platform-sdhci-esdhc-imx.2 ]; then
+  SD=yes
+fi
+
+if [ -r /dev/disk/by-path/platform-sdhci-esdhc-imx.1 ]; then
+  TF=yes
+fi
+
+if [ -r /dev/disk/by-path/platform-ahci.0-scsi-0:0:0:0 ]; then
+  SATA=yes
+fi
+
+sed -i -e "s/^NETWORK=.*/NETWORK=\"LAN\"/g" \
+        -e "s/^IFACE=.*/IFACE=\"eth0\"/g" \
+        -e "s#^ADDRESS=.*#ADDRESS=\"$IP/24\"#g" \
+        -e "s/^GATEWAY=.*/GATEWAY=\"192.168.1.1\"/g" \
+        -e "s/^DNS_SERVER=.*/DNS_SERVER=\"192.168.1.1\ 8.8.8.8\"/g" /etc/network
+ifconfig eth0 down
+ifconfig wlan0 down
+systemctl restart connman
+ison="no"                                                                                                                            
+printf "Restarting network, please wait ..."                                                                                 
+for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do                                       
+  ping -c 2 -W 2 192.168.1.1 > /dev/null 2>&1                        
+  if [ $? -eq 0 ]; then                                                          
+    ison="yes"                                                 
+  else                                                  
+    ping -c 5 -W 5 114.114.114.114 > /dev/null 2>&1     
+    [ $? -eq 0 ] && ison="yes"                                             }/IP
+  fi                                                                           
+  [ $ison = "yes" ] && break                                                   
+  sleep 1                                                                      
+  printf " $i"                                                                                  
+done                                                                                            
+printf "\n"                                                                                     
+
+
+sed -i -e "s/^IFACE=.*/IFACE=\"wlan0\"/g" \                                                                             
+        -e "s#^ADDRESS=.*#ADDRESS=\"$IP/24\"#g" \                                                        
+        -e "s/^GATEWAY=.*/GATEWAY=\"192.168.1.1\"/g" \
+        -e "s/^NETWORK=.*/NETWORK=\"WLAN\"/g" \
+        -e "s/^SSID=.*/SSID=\"$SSID\"/g" \
+        -e "s/^SECURITY=.*/SECURITY=\"WPA\"/g" \
+        -e "s/^PASSPHRASE=.*/PASSPHRASE=\"${KEY}\"/g" /etc/network
+ifconfig eth0 down
+ifconfig wlan0 down
+systemctl restart wpa_supplicant                 
+systemctl restart connman
+ison="no"                                                                                                                            
+printf "Restarting network, please wait ..."                                                                                 
+for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do                                       
+  ping -c 2 -W 2 8.8.8.8 > /dev/null 2>&1                        
+  if [ $? -eq 0 ]; then                                                          
+    ison="yes"                                                 
+  else                                                  
+    ping -c 5 -W 5 114.114.114.114 > /dev/null 2>&1     
+    [ $? -eq 0 ] && ison="yes"                                             }/IP
+  fi                                                                           
+  [ $ison = "yes" ] && break                                                   
+  sleep 1                                                                      
+  printf " $i"                                                                                  
+done                                                                                            
+printf "\n"                                                                                     

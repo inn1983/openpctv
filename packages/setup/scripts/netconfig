@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 # Copyright (c) 2009-2010 CNVDR. All rights reserved.
-# Copyright (c) 2013 OpenPCTV. All rights reserved.
+# Copyright (c) 2013 OPENPCTV. All rights reserved.
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,8 +24,8 @@ export TERM=linux
 . gettext.sh
 export TEXTDOMAIN=openpctv
 
-MSOKNet="$(gettext "You have successfully detected accessing the Internet")"
-MSFailNet="$(gettext "Failed to detect your Internet connection, please check your hardware or check /etc/network to configure by manual.")"
+MSOKNet="$(gettext "You are connected with the Internet successfully")"
+MSFailNet="$(gettext "Failed to detect your Internet connection, please check your hardware or check /etc/network to configure manually.")"
 MSEnableDHCP="$(gettext "Do you want to use DHCP to automatically obtain network address?")"
 MSIP="$(gettext "Please enter the IP address")"
 MSNetmask="$(gettext "Please enter the subnet mask")"
@@ -34,18 +34,18 @@ MSNameserver="$(gettext "Please enter the domain name server address (DNS)")"
 MSSSID="$(gettext "Wireless network name (SSID)")"
 MSKEY="$(gettext "Please enter the WEP encryption key")"
 MSPSK="$(gettext "Please enter the WPA Shared Key")"
-MSEDITWLAN="$(gettext "Configure wireless network by manual")"
-MSENCRYPTION="$(gettext "Safe Mode")"
+MSEDITWLAN="$(gettext "Configure wireless network manually")"
+MSENCRYPTION="$(gettext "Safe mode")"
 MSPAIRWISE="$(gettext "WPA Algorithms")"
-MSEDITWIRE="$(gettext "Configure wireless network by manual")"
+MSEDITWIRE="$(gettext "Configure wireless network manually")"
 MSEDITWLANINFO="$(gettext "Select the wireless network encryption, it must be consistent with your router settings.")"
 MSWEPINFO="$(gettext "WEP encrypted wireless network mode")"
 MSWPAINFO="$(gettext "WPA/WPA2 wireless encryption mode")"
 NOKEYINFO="$(gettext "Open mode")"
 MSMENUWLAN="$(gettext "Choose A Wireless Network")"
 MSMENUWLANINFO="$(gettext "Please select the wireless network intercepted, if it is not in the list, you can enter manual settings")"
-MSGoconfig="$(gettext "You have successfully detected accessing the Internet, do you still want to configure your network?")"
-MSNoNet="$(gettext "Scan Network Interface Card fail, please check it or its driver.")"
+MSGoconfig="$(gettext "You are connected with the Internet, do you still want to configure your network?")"
+MSNoNet="$(gettext "Scan Network Interface Card failed, please check it or its driver.")"
 MSMenu="$(gettext "Select the Network Interface Card")"
 MSMenuinfo="$(gettext "Select the Network Interface Card you want to configure")"
 

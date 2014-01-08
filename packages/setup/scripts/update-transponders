@@ -6,7 +6,7 @@ export TEXTDOMAIN=openpctv
 scan_trans () {
 url1="http://www.fastsatfinder.com/bin/DVBViewerTE_Satellite_Transponders.exe"
 echo "$(gettext "Download transponders for scan-s2")"
-wget -t 3 $url1 -O /tmp/transponders.7z || (echo "$(gettext "Can't download,Please check your network settings")"; exit)
+wget -t 3 $url1 -O /tmp/transponders.7z || (echo "$(gettext "Can't download, please check your network settings")"; exit)
 [ -d /tmp/transponders ] && rm -rf /tmp/transponders
 mkdir /tmp/transponders
 p7zip x /tmp/transponders.7z -o/tmp/transponders
@@ -28,7 +28,7 @@ echo "$(gettext "Done!")"
 enigma2_trans () {
 url2="http://www.fastsatfinder.com/bin/Dreambox-Transponders.zip"
 echo "$(gettext "Download transponders for enigma2")"
-wget -t 3 $url2 -O /tmp/dreambox.zip || (echo "$(gettext "Can't download,Please check your network settings")"; exit)
+wget -t 3 $url2 -O /tmp/dreambox.zip || (echo "$(gettext "Can't download, please check your network settings")"; exit)
 echo "$(gettext "Update /etc/enigma2/satellites.xml...")"
 unzip -o /tmp/dreambox.zip -d /etc/tuxbox
 [ -f /etc/tuxbox/satellites_extra.xml ] && sed -i '/<satellites>/ r /etc/tuxbox/satellites_extra.xml' /etc/tuxbox/satellites.xml

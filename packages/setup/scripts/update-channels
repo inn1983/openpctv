@@ -25,7 +25,7 @@ RESULTTMP=/tmp/resulttmp.$$
 CMDLINE=/tmp/cmdline.$$
 
 getdiseqcline () {
-echo "dialog --backtitle \"$(gettext "Scan channels for VDR")\" --title \"$(gettext "Select Satellite")\"  --checklist \"$(gettext "Please select the satellite you want to scan, noted that the scanning process may be quite long, please be patient.")\" 15 60 8 \\" > $DIALOGTMP
+echo "dialog --backtitle \"$(gettext "Scan channels for VDR")\" --title \"$(gettext "Select Satellite")\"  --checklist \"$(gettext "Please select the satellite you want to scan, and note that the scanning process may take some minutes, please be patient.")\" 15 60 8 \\" > $DIALOGTMP
 for i in $(cat $CMDLINE | awk '{print $4}'); do
   echo "$i \"\" on \\" >> $DIALOGTMP
 done
