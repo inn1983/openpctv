@@ -32,4 +32,8 @@ if [ -r $BUILD/$1*/boot.ini ]; then
   fi  
 fi
 
+if [ -r $CONFIG_MACHINE/uEnv.txt ]; then
+  cp $CONFIG_MACHINE/uEnv.txt $INSTALL/share/u-boot/
+fi
+
 exit 0
