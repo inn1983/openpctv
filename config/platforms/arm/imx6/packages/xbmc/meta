@@ -1,7 +1,6 @@
 PKG_NAME=xbmc
 PKG_URL_PROTO=git
-PKG_URL_REV=5ab853f
-#PKG_URL_REV=bc8b4d4
+PKG_URL_REV=b1cd86b
 PKG_VERSION=13.alpha-imx-r${PKG_URL_REV}
 PKG_URL="https://github.com/wolfgar/xbmc.git"
 PKG_REV=1
