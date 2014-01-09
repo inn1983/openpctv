@@ -31,5 +31,7 @@ if pkg_uses $1 devtools; then
   strip_bins $SDKSTAGE/usr/bin $debug_dir/usr/bin
 fi
 
+cp $install_dir/usr/src/hello_pi/libs/ilclient/ilclient.h $install_dir/usr/include/interface/vmcs_host/linux
+
 exit 0
 
