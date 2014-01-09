@@ -1,8 +1,8 @@
 PKG_NAME=libdvbsi2plus
-PKG_VERSION=HEAD
+PKG_VERSION=f3c5e6c
 PKG_URL_PROTO=git
 PKG_URL="git://git.opendreambox.org/git/obi/libdvbsi++"
-PKG_VERSION=git20130615
+PKG_VERSION=0.3.7+git20130924
 PKG_REV=1
 PKG_RUN_DEPENDS="$TARGET_LIBC"
 PKG_BUILD_DEPENDS="toolchain"

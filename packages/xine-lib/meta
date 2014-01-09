@@ -6,12 +6,13 @@ PKG_BUILD_DEPENDS="toolchain"
 PKG_RUN_DEPENDS="$TARGET_LIBC"
 PKG_DEPENDS="zlib ffmpeg freetype alsa-lib"
 
-PKG_USE="uclibc vdpau xorg sdl vdr"
+PKG_USE="uclibc vdpau xorg sdl vdr mesa"
 PKG_USE_NAME_vdr="VDR"
 PKG_DEPENDS_vdr="libjpeg-turbo"
 PKG_DEPENDS_uclibc="libiconv"
-PKG_BUILD_DEPENDS_vdpau="libvdpau libglu"
-PKG_DEPENDS_xorg="libX11 libxcb libXext libXv mesa"
+PKG_BUILD_DEPENDS_vdpau="libvdpau"
+PKG_BUILD_DEPENDS_mesa="libglu mesa"
+PKG_DEPENDS_xorg="libX11 libxcb libXext libXv"
 PKG_DEPENDS_sdl="SDL"
 
 PKG_PRIORITY=optional

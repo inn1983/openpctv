@@ -96,7 +96,8 @@ echo "${DIALOG} --clear --no-cancel --backtitle \"${DISTRIB_ID} $(gettext "confi
 [ -f $RUN_CAM ] && echo "CAM \"$(gettext "Select a software emulated CAM")\" \\" >> $MENUTMP
 [ -f $RUN_DISEQC ] && echo "DiSEqC \"$(gettext "DiSEqC configuration")\" \\" >> $MENUTMP
 [ -f $RUN_CHANNELS ] && echo "Scan \"$(gettext "Auto scan channels")\" \\" >> $MENUTMP
-[ X$ARCH = "Xarm" ] && echo "XBMC \"$(gettext "Start XBMC with VDR")\" \\" >> $MENUTMP
+[ X$TARGET_PLATFORM = "Xbcm2708" ] && echo "VDR \"$(gettext "Start VDR with rpihddevice frontend")\" \\" >> $MENUTMP
+[ X$ARCH = "Xarm" ] && echo "XBMC \"$(gettext "Start XBMC pvr with VDR backend")\" \\" >> $MENUTMP
 echo "Reboot \"$(gettext "Reboot") ${DISTRIB_ID}\" \\" >> $MENUTMP
 echo "Exit \"$(gettext "Exit to login shell")\" 2> $DIALOGOUT" >> $MENUTMP
 . $MENUTMP
@@ -142,6 +143,8 @@ case "$(cat $DIALOGOUT)" in
 		;;
     Audio)	$RUN_AUDIO
 		MainMenu
+		;;
+    VDR)	systemctl start vdr
 		;;
     XBMC)	systemctl start getty\@ttymxc0
 		systemctl start vdr-backend

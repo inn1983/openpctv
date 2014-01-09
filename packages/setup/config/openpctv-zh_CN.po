@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPCTV 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 21:36+0800\n"
+"POT-Creation-Date: 2014-01-09 18:52+0800\n"
 "PO-Revision-Date: 2013-07-23 16:56+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -426,7 +426,7 @@ msgstr ""
 "读取并写入OScam/VDR-SC的配置文件中。"
 
 #: packages/setup/scripts/install-drivers:11
-#: packages/setup/scripts/setup.sh:100
+#: packages/setup/scripts/setup.sh:101
 msgid "Reboot"
 msgstr "重新启动"
 
@@ -1015,10 +1015,15 @@ msgid "Auto scan channels"
 msgstr "自动扫描频道"
 
 #: packages/setup/scripts/setup.sh:99
-msgid "Start XBMC with VDR"
+msgid "Start VDR with rpihddevice frontend"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:100
+#, fuzzy
+msgid "Start XBMC pvr with VDR backend"
 msgstr "启动带有VDR后台的XBMC"
 
-#: packages/setup/scripts/setup.sh:101
+#: packages/setup/scripts/setup.sh:102
 msgid "Exit to login shell"
 msgstr "退出并登录shell"
 

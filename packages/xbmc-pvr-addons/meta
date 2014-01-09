@@ -1,10 +1,8 @@
 PKG_NAME=xbmc-pvr-addons
 PKG_URL_PROTO=git
-PKG_URL_REV=fb736a6
+PKG_URL_REV=9021115
 PKG_URL="https://github.com/opdenkamp/xbmc-pvr-addons"
 PKG_VERSION=git+${PKG_URL_REV}
-#PKG_VERSION=12.2+r78b0aae
-#PKG_URL="$SFNET_SRCS/openpctv/sources/xbmc-pvr-addons-frodo-78b0aae.tar.xz"
 PKG_REV=1
 PKG_BUILD_DEPENDS="toolchain"
 PKG_RUN_DEPENDS="$TARGET_LIBC"

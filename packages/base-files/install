@@ -26,8 +26,8 @@ ln -s /run $INSTALL/var/run
 ln -s /run/lock $INSTALL/var/lock
 
 if [ $TARGET_ARCH = x86_64 -o $TARGET_ARCH = powerpc64 ]; then
-  ln -s /lib $INSTALL/lib64
-  ln -s lib $INSTALL/usr/lib64
+  ln -sf /lib $INSTALL/lib64
+  ln -sf lib $INSTALL/usr/lib64
 fi
 
 ln -s /proc/self/mounts $INSTALL/etc/mtab
@@ -37,7 +37,7 @@ echo -n "" > $INSTALL/var/mnts
 # copy system and config files
 cp $PACKAGES/$1/scripts/r[ow] $INSTALL/usr/bin
 
-ln -s /firmware $INSTALL/lib
+ln -sf /firmware $INSTALL/lib
 echo $TARGET_ARCH > $INSTALL/etc/arch
 
 if [ -n "$TARGET_PLATFORM" ]; then

@@ -33,6 +33,24 @@ else
   OPTIM_CONFIG="--disable-small"
 fi
 
+case "$TARGET_ARCH" in
+  arm)
+      FFMPEG_CPU=""
+      FFMPEG_TABLES="--enable-hardcoded-tables"
+      FFMPEG_PIC="--enable-pic"
+  ;;
+  i?86)
+      FFMPEG_CPU=""
+      FFMPEG_TABLES="--disable-hardcoded-tables"
+      FFMPEG_PIC="--disable-pic"
+  ;;
+  x86_64)
+      FFMPEG_CPU=""
+      FFMPEG_TABLES="--disable-hardcoded-tables"
+      FFMPEG_PIC="--enable-pic"
+  ;;
+esac
+
 if [ "$FPU_OPTIMIZATIONS" = neon -o "$FPU_OPTIMIZATIONS" = "neon-vfp4" ]; then
   FPU_CONFIG="--enable-neon"
 else
@@ -75,69 +93,11 @@ do_gcc_strip_gold
             --enable-bzlib \
             --disable-ffplay \
             --disable-libvpx \
-            --disable-hardcoded-tables \
-            --disable-pic \
-            --disable-nonfree \
-            --disable-extra-warnings \
-            --disable-ffprobe \
-            --enable-avdevice \
-            --enable-avcodec \
-            --enable-avformat \
-            --enable-swscale \
-            --disable-w32threads \
-            --enable-network \
-            --disable-gray \
-            --enable-swscale-alpha \
-            --disable-dxva2 \
-            --enable-runtime-cpudetect \
-            --disable-encoders \
-            --enable-encoder=ac3 \
-            --enable-encoder=aac \
-            --disable-decoder=mpeg_xvmc \
-            --enable-hwaccels \
-            --disable-muxers \
-            --enable-muxer=spdif \
-            --enable-muxer=adts \
-            --enable-demuxers \
-            --enable-parsers \
-            --enable-bsfs \
-            --enable-protocol=http \
-            --disable-indevs \
-            --disable-outdevs \
-            --enable-filters \
-            --disable-avisynth \
-            --enable-bzlib \
-            --disable-frei0r \
-            --disable-libopencore-amrnb \
-            --disable-libopencore-amrwb \
-            --disable-libopencv \
-            --disable-libdc1394 \
-            --disable-libfaac \
-            --disable-libfreetype \
-            --disable-libgsm \
-            --disable-libmp3lame \
-            --disable-libnut \
-            --disable-libopenjpeg \
-            --disable-librtmp \
-            --disable-libschroedinger \
-            --disable-libspeex \
-            --disable-libtheora \
-            --disable-libvo-aacenc \
-            --disable-libvo-amrwbenc \
-            --enable-libvorbis --enable-muxer=ogg --enable-encoder=libvorbis \
-            --disable-libvpx \
-            --disable-libx264 \
-            --disable-libxavs \
-            --disable-libxvid \
-            --enable-zlib \
-            --enable-asm \
-            --disable-altivec \
-            --disable-vis \
-            --enable-yasm \
-            --disable-sram \
-            --disable-symver \
-            --enable-swresample \
             $DEBUG_CONFIG \
+            $FFMPEG_TABLES \
+            $FFMPEG_CPU \
+            $FFMPEG_FPU \
+            $FFMPEG_PIC \
             $VDPAU_CONFIG \
             $VAAPI_CONFIG \
             $XAVS_CONFIG \

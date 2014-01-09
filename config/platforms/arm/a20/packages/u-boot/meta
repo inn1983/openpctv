@@ -1,5 +1,5 @@
 PKG_NAME=u-boot
-PKG_URL_REV=25ae46b
+PKG_URL_REV=a5f58fb
 PKG_VERSION=2013.12-sunxi+${PKG_URL_REV}
 PKG_URL_PROTO=git
 PKG_URL="git://github.com/linux-sunxi/u-boot-sunxi.git"

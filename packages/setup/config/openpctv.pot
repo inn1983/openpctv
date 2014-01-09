@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 21:36+0800\n"
+"POT-Creation-Date: 2014-01-09 21:42+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -407,7 +407,7 @@ msgid ""
 msgstr ""
 
 #: packages/setup/scripts/install-drivers:11
-#: packages/setup/scripts/setup.sh:100
+#: packages/setup/scripts/setup.sh:101
 msgid "Reboot"
 msgstr ""
 
@@ -969,10 +969,14 @@ msgid "Auto scan channels"
 msgstr ""
 
 #: packages/setup/scripts/setup.sh:99
-msgid "Start XBMC with VDR"
+msgid "Start VDR with rpihddevice frontend"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:101
+#: packages/setup/scripts/setup.sh:100
+msgid "Start XBMC pvr with VDR backend"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:102
 msgid "Exit to login shell"
 msgstr ""
 

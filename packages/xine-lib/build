@@ -97,6 +97,7 @@ do_configure \
             $XORG_CONFIG \
             $CONSOLE_CONFIG \
             $SDL_CONFIG \
+            $VDPAU_CONFIG \
             $VDR_CONFIG
 make -j3
 make_install

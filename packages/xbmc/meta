@@ -1,13 +1,13 @@
 PKG_NAME=xbmc
 PKG_URL_PROTO=git
-PKG_URL_REV=4da7cfb
+PKG_URL_REV=69e279b
 PKG_VERSION=13.0-r${PKG_URL_REV}
 PKG_URL="https://github.com/xbmc/xbmc.git"
 #PKG_VERSION=12.2
 #PKG_URL="http://mirrors.xbmc.org/releases/source/xbmc-$PKG_VERSION.tar.gz"
 #PKG_URL="https://github.com/xbmc/xbmc/archive/Gotham_alpha9.tar.gz"
 PKG_REV=1
-PKG_DEPENDS="$TARGET_LIBC Python boost zlib bzip2 lzo pcre libssh libass enca curl dbus fontconfig fribidi libjpeg-turbo libpng tiff freetype jasper libmad libsamplerate libogg libvorbis libcdio libmms libmodplug faad2 flac wavpack libmpeg2 sqlite alsa yajl libplist openssl python-simplejson tinyxml systemd taglib libshairplay"
+PKG_DEPENDS="$TARGET_LIBC Python boost zlib bzip2 lzo pcre libssh libass enca curl dbus fontconfig fribidi libjpeg-turbo libpng tiff freetype jasper libmad libsamplerate libogg libvorbis libcdio libmms libmodplug faad2 flac wavpack libmpeg2 sqlite alsa yajl libplist openssl python-simplejson tinyxml systemd taglib libshairplay libxslt"
 PKG_RUN_DEPENDS="libmysqlclient libsmbclient python-lsb-release"
 PKG_BUILD_DEPENDS="toolchain boost mysql samba unzip-host zip swig SDL-image-host"
 PKG_USE="opengl opengles openmax joystick zeroconf webserver vdpau xvba vaapi crystalhd pulseaudio dvdcss bluray rtmp nonfree externalffmpeg externalffmpeglibav pvr addons libcec libnfs afpclient airtunes screensavers dove gstreamer xorg sdl alsa cedarx imx"
