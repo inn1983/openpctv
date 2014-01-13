@@ -8,7 +8,7 @@ else
 fi
 
 if [ -f $cachedir/epg.dat ]; then
-  a=`find $cachedir -mmin +480 -name epg.dat -print`
+  a=`find $cachedir -mmin +120 -name epg.dat -print`
   [ X$a = "X" ] && exit 0
 fi
 

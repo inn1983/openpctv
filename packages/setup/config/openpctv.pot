@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-09 21:42+0800\n"
+"POT-Creation-Date: 2014-01-13 09:29+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: packages/setup/scripts/audio-config:8
 #: packages/setup/scripts/audio-config:48
-#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:93
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:100
 msgid "Sound card Configuration"
 msgstr ""
 
@@ -375,7 +375,7 @@ msgstr ""
 msgid "This tuner is empty/unused"
 msgstr ""
 
-#: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:96
+#: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:103
 msgid "Select a software emulated CAM"
 msgstr ""
 
@@ -407,7 +407,7 @@ msgid ""
 msgstr ""
 
 #: packages/setup/scripts/install-drivers:11
-#: packages/setup/scripts/setup.sh:101
+#: packages/setup/scripts/setup.sh:108
 msgid "Reboot"
 msgstr ""
 
@@ -458,7 +458,7 @@ msgid ""
 msgstr ""
 
 #: packages/setup/scripts/install-drivers:70
-#: packages/setup/scripts/setup.sh:90
+#: packages/setup/scripts/setup.sh:97
 msgid "Install additional DVB driver"
 msgstr ""
 
@@ -494,10 +494,6 @@ msgstr ""
 
 #: packages/setup/scripts/install-drivers:78
 msgid "Support the TBS QBOX I DVB-C devices"
-msgstr ""
-
-#: packages/setup/scripts/install-drivers:79
-msgid "Support for DVB-C 3221 USB BOX"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:16
@@ -768,7 +764,7 @@ msgid "Submit"
 msgstr ""
 
 #: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
-#: packages/setup/scripts/setup.sh:92
+#: packages/setup/scripts/setup.sh:99
 msgid "Set the monitor's best resolution"
 msgstr ""
 
@@ -896,7 +892,7 @@ msgid ""
 "select a default device as Lirc support."
 msgstr ""
 
-#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:88
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:95
 msgid "Set the default target"
 msgstr ""
 
@@ -904,79 +900,79 @@ msgstr ""
 msgid "Please select the default target to boot into."
 msgstr ""
 
-#: packages/setup/scripts/select-target:8
+#: packages/setup/scripts/select-target:13
 msgid ""
 "Enigma2 is a series of DVB television receivers for Dreambox. It has been "
 "ported to PC."
 msgstr ""
 
-#: packages/setup/scripts/select-target:8
+#: packages/setup/scripts/select-target:19
 msgid "A digital video recorder using standard PC components."
 msgstr ""
 
-#: packages/setup/scripts/select-target:8
+#: packages/setup/scripts/select-target:25
 msgid "A free and open source media player developed by the XBMC Foundation"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:17
+#: packages/setup/scripts/setup.sh:19
 msgid "Press any key to enter setup,"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:17
-msgid "or 3 seconds later enter XBMC automatically."
+#: packages/setup/scripts/setup.sh:19
+msgid "or 3 seconds later enter XBMC/VDR automatically."
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:77
+#: packages/setup/scripts/setup.sh:84
 msgid ""
 "Would you like to scan channels for VDR/XBMC(It'll some minutes to do it)?  "
 "You can also scan channels with vdr reelscanchannels plugin in vdr."
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:86
+#: packages/setup/scripts/setup.sh:93
 msgid "configuration"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:86
+#: packages/setup/scripts/setup.sh:93
 msgid "Main menu"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:87
+#: packages/setup/scripts/setup.sh:94
 msgid "Set global location and language"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:89
+#: packages/setup/scripts/setup.sh:96
 msgid "Configure Network Environment"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:91
+#: packages/setup/scripts/setup.sh:98
 msgid "Select IR device"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:94
+#: packages/setup/scripts/setup.sh:101
 msgid "Update Satellite Transponders"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:95
+#: packages/setup/scripts/setup.sh:102
 msgid "Update EPG data"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:97
+#: packages/setup/scripts/setup.sh:104
 msgid "DiSEqC configuration"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:98
+#: packages/setup/scripts/setup.sh:105
 msgid "Auto scan channels"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:99
+#: packages/setup/scripts/setup.sh:106
 msgid "Start VDR with rpihddevice frontend"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:100
+#: packages/setup/scripts/setup.sh:107
 msgid "Start XBMC pvr with VDR backend"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:102
+#: packages/setup/scripts/setup.sh:109
 msgid "Exit to login shell"
 msgstr ""
 

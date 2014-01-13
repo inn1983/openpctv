@@ -12,7 +12,7 @@ sed $PACKAGES/$1/scripts/installator.sh \
 chmod 755 $INSTALL/sbin/*
 
 if [ "$TARGET_ARCH" = arm ]; then
-  INSTALL_SCRIPTS="diseqcsetup select-irdrv update-channels update-transponders netconfig select-language audio-config videocache getcam update-epg"
+  INSTALL_SCRIPTS="diseqcsetup select-irdrv update-channels update-transponders netconfig select-language audio-config videocache getcam select-target update-epg"
 else
   INSTALL_SCRIPTS="diseqcsetup monitor.sh update-channels update-dvbdevice update-transponders install-drivers netconfig select-irdrv select-language audio-config videocache getcam select-target update-epg screenshot"
 fi

@@ -4,10 +4,39 @@ export TERM=linux
 . gettext.sh
 export TEXTDOMAIN=openpctv
 
+i=0
+echo "dialog --no-cancel --clear --title \"$(gettext "Set the default target")\" --menu \"$(gettext "Please select the default target to boot into.")\" 10 85 3 \\" > /tmp/menu.tmp
 
-dialog --no-cancel --clear --title "$(gettext "Set the default target")" --menu "$(gettext "Please select the default target to boot into.")" 10 85 3 enigma2pc "$(gettext "Enigma2 is a series of DVB television receivers for Dreambox. It has been ported to PC.")" vdr "$(gettext "A digital video recorder using standard PC components.")" xbmc "$(gettext "A free and open source media player developed by the XBMC Foundation")" 2> /tmp/target.tmp
-target=$(cat /tmp/target.tmp)
-rm /tmp/target.tmp
+if [ -f /usr/bin/runenigma2 ]; then
+  i=`expr $i + 1`
+  target=enigma2pc
+  echo "enigma2pc \"$(gettext "Enigma2 is a series of DVB television receivers for Dreambox. It has been ported to PC.")\" \\" >> /tmp/menu.tmp
+fi
+
+if [ -f /usr/bin/runvdr ]; then
+  i=`expr $i + 1`
+  target=vdr
+  echo "vdr \"$(gettext "A digital video recorder using standard PC components.")\" \\" >> /tmp/menu.tmp
+fi
+
+if [ -f /usr/bin/runxbmc ]; then
+  i=`expr $i + 1`
+  target=xbmc
+  echo "xbmc \"$(gettext "A free and open source media player developed by the XBMC Foundation")\" 2> /tmp/target.tmp" >> /tmp/menu.tmp
+fi
+
+if [ $i -ne 1 ]; then
+  . /tmp/menu.tmp
+  target=$(cat /tmp/target.tmp)
+  rm /tmp/target.tmp /tmp/menu.tmp
+fi
+
+if grep -q "^DEFTARGET=" /etc/system.options >/dev/null 2>&1; then
+   sed -i "s/^DEFTARGET=.*/DEFTARGET=$target/g" /etc/system.options
+else
+   echo "DEFTARGET=$target" >> /etc/system.options
+fi
+
 case $target in
   vdr)
     systemctl set-default vdr.target;;

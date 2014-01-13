@@ -75,8 +75,7 @@ dialog --clear --title "$(gettext "Install additional DVB driver")" --menu \
  "dvbsky-drivers" "$(gettext "Support all the DVBSky devices")" \
  "tbs-dvbc-drivers" "$(gettext "Support all the TBS DVB-C devices")" \
  "dvbsky-dvbc-drivers" "$(gettext "Support all the DVBSky DVB-C devices")" \
- "tbs-qbox-drivers" "$(gettext "Support the TBS QBOX I DVB-C devices")" \
- "dvb3221-driver" "$(gettext "Support for DVB-C 3221 USB BOX")" 2> /tmp/driver.tmp
+ "tbs-qbox-drivers" "$(gettext "Support the TBS QBOX I DVB-C devices")" 2> /tmp/driver.tmp
 kernelver=$(uname -r)
 if [[ "$(uname -m)" == *86 ]]; then
   machine=i586
@@ -123,11 +122,6 @@ case "$(cat /tmp/driver.tmp)" in
                 rm -rf /lib/modules/$kernelver/kernel/drivers/media
                 echo "Download and install dvbsky-dvbc-drivers-${kernelver}_Last_${machine}.opk, please wait..."
                 opkg install http://sourceforge.net/projects/openpctv/files/packages/dvbsky-dvbc-drivers-${kernelver}_Last_${machine}.opk/download --force-overwrite || (echo "Can't download dvbsky-dvbc-drivers-${kernelver}_Last_${machine}.opk, check your network settings."; exit)
-                finishinstall
-                ;;
-  dvb3221-driver)  tar -czf /root/kernel_media_$(date +%Y%m%d%H%M%S)_backup.tgz /lib/modules/$kernelver/kernel/drivers/media
-                echo "Download and install dvb3221-driver-${kernelver}_Last_${machine}.opk, please wait..."
-                opkg install http://sourceforge.net/projects/openpctv/files/packages/dvb3221-driver-${kernelver}_Last_${machine}.opk/download --force-overwrite || (echo "Can't download dvb3221-driver-${kernelver}_Last_${machine}.opk, check your network settings."; exit)
                 finishinstall
                 ;;
 esac

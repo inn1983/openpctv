@@ -7,21 +7,28 @@ export TEXTDOMAIN=openpctv
 
 . /etc/lsb-release
 [ -z ${DISTRIB_ID} ] && DISTRIB_ID=OpenPCTV
+. /etc/system.options
+[ -z $DEFTARGET ] && DEFTARGET=xbmc
 
 source /etc/profile
 
-grep -q BCM2708 /proc/cpuinfo && sleep 2
+grep -q BCM2708 /proc/cpuinfo && sleep 1
 
 if grep -q -i arm /proc/cpuinfo; then
   ARCH=arm
-  echo -e -n "\e[31m$(gettext "Press any key to enter setup,")\e[0m \e[32m$(gettext "or 3 seconds later enter XBMC automatically.")\e[0m"
+  echo -e -n "\e[31m$(gettext "Press any key to enter setup,")\e[0m \e[32m$(gettext "or 3 seconds later enter XBMC/VDR automatically.")\e[0m"
   read -s -n1 -t4
   result=$?
   if [ $result = 142 -o $result = 130 ]; then
-    systemctl start getty\@ttymxc0
-    systemctl start vdr-backend
-    systemctl start xbmc
-    exit 0
+    if [ $DEFTARGET = "xbmc" ]; then
+      systemctl start getty\@ttymxc0
+      systemctl start vdr-backend
+      systemctl start xbmc
+      exit 0
+    elif [ $DEFTARGET = "vdr" ]; then
+      systemctl start vdr
+      exit 0
+    fi
   elif [ $result = 0 ]; then
     clear
   fi
@@ -60,9 +67,9 @@ function setupinit
 {
 [ -f $RUN_LANG ] && $RUN_LANG
 updatelocale
-[ -f $RUN_TARGET ] && $RUN_TARGET
 [ -f $RUN_NET ] && $RUN_NET
 [ -f $RUN_DRV ] && $RUN_DRV
+[ -f $RUN_TARGET ] && $RUN_TARGET
 [ -f $RUN_IR ] && $RUN_IR
 systemctl restart lircd
 systemctl stop vdr
@@ -96,7 +103,7 @@ echo "${DIALOG} --clear --no-cancel --backtitle \"${DISTRIB_ID} $(gettext "confi
 [ -f $RUN_CAM ] && echo "CAM \"$(gettext "Select a software emulated CAM")\" \\" >> $MENUTMP
 [ -f $RUN_DISEQC ] && echo "DiSEqC \"$(gettext "DiSEqC configuration")\" \\" >> $MENUTMP
 [ -f $RUN_CHANNELS ] && echo "Scan \"$(gettext "Auto scan channels")\" \\" >> $MENUTMP
-[ X$TARGET_PLATFORM = "Xbcm2708" ] && echo "VDR \"$(gettext "Start VDR with rpihddevice frontend")\" \\" >> $MENUTMP
+grep -q BCM2708 /proc/cpuinfo && echo "VDR \"$(gettext "Start VDR with rpihddevice frontend")\" \\" >> $MENUTMP
 [ X$ARCH = "Xarm" ] && echo "XBMC \"$(gettext "Start XBMC pvr with VDR backend")\" \\" >> $MENUTMP
 echo "Reboot \"$(gettext "Reboot") ${DISTRIB_ID}\" \\" >> $MENUTMP
 echo "Exit \"$(gettext "Exit to login shell")\" 2> $DIALOGOUT" >> $MENUTMP
@@ -113,6 +120,7 @@ case "$(cat $DIALOGOUT)" in
 		MainMenu
 		;;
     Driver)	$RUN_DRV
+		$RUN_DVB
 		MainMenu
 		;;
     Lirc)	$RUN_IR
