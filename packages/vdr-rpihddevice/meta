@@ -4,6 +4,7 @@ PKG_URL_REV=88f137d
 PKG_URL="git://projects.vdr-developer.org/vdr-plugin-rpihddevice.git"
 PKG_VERSION=0.0.7+r${PKG_URL_REV}
 PKG_REV=1
+PKG_ARCH=arm
 PKG_DEPENDS="ffmpeg"
 PKG_BUILD_DEPENDS="toolchain OpenMAX"
 PKG_RUN_DEPENDS="$TARGET_LIBC vdr"
