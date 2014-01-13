@@ -26,6 +26,11 @@ else
   do_install usr/bin/irpty
 fi
 
+if [ "$TARGET_PLATFORM" = bcm2708 ]; then
+  [ -d $INSTALL/usr/lib/modules-load.d ] || mkdir -p $INSTALL/usr/lib/modules-load.d
+  echo "lirc_rpi" > $INSTALL/usr/lib/modules-load.d/lirc_rpi.conf
+fi
+
 mkdir -p $INSTALL/etc/lirc
 cp $ROOT/$PACKAGES/$1/config/lircd.conf.mceusb $INSTALL/etc/lirc/
 cp $INSTALL/etc/lirc/lircd.conf.mceusb $INSTALL/etc/lirc/lircd.conf
