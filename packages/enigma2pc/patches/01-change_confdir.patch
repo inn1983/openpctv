@@ -1,0 +1,644 @@
+diff -uNr enigma2pc-20130727.orig/lib/base/eenv.cpp enigma2pc-20130727/lib/base/eenv.cpp
+--- enigma2pc-20130727.orig/lib/base/eenv.cpp	2014-01-11 21:55:51.990103188 +0800
++++ enigma2pc-20130727/lib/base/eenv.cpp	2014-01-11 22:17:37.186048601 +0800
+@@ -13,7 +13,7 @@
+ 		std::string name;
+ 		std::string value;
+ 	} cfgenv[] = {
+-		{ "prefix", "/usr/local/e2" },
++		{ "prefix", "/usr" },
+ 		{ "exec_prefix", "${prefix}" },
+ 		{ "bindir", "${exec_prefix}/bin" },
+ 		{ "sbindir", "${exec_prefix}/sbin" },
+diff -uNr enigma2pc-20130727.orig/lib/driver/avswitch.cpp enigma2pc-20130727/lib/driver/avswitch.cpp
+--- enigma2pc-20130727.orig/lib/driver/avswitch.cpp	2014-01-11 21:55:52.382103172 +0800
++++ enigma2pc-20130727/lib/driver/avswitch.cpp	2014-01-11 22:16:45.902050746 +0800
+@@ -53,7 +53,7 @@
+ 		if (f)
+ 		{
+ 			if (fscanf(f, "%d", &val) != 1)
+-				eDebug("read /usr/local/e2/etc/stb/fp/vcr_fns failed!! (%m)");
++				eDebug("read /etc/stb/fp/vcr_fns failed!! (%m)");
+ 			fclose(f);
+ 		}
+ 		else if (ioctl(m_fp_fd, FP_IOCTL_GET_VCR, &val) < 0)
+@@ -76,7 +76,7 @@
+ 		{
+ 			int events;
+ 			if (fscanf(f, "%d", &events) != 1)
+-				eDebug("read /usr/local/e2/etc/stb/fp/events failed!! (%m)");
++				eDebug("read /etc/stb/fp/events failed!! (%m)");
+ 			else if (events & FP_EVENT_VCR_SB_CHANGED)
+ 				/* emit */ vcr_sb_notifier(getVCRSlowBlanking());
+ 			fclose(f);
+@@ -108,7 +108,7 @@
+ 	char tmp[255];
+ 	int fd = open(eEnv::resolve("${sysconfdir}/stb/avs/0/input_choices").c_str(), O_RDONLY);
+ 	if(fd < 0) {
+-		eDebug("cannot open /usr/local/e2/etc/stb/avs/0/input_choices");
++		eDebug("cannot open /etc/stb/avs/0/input_choices");
+ 		return false;
+ 	}
+ 	read(fd, tmp, 255);
+@@ -131,7 +131,7 @@
+ 	m_active = val == 0;
+ 
+ 	if((fd = open(eEnv::resolve("${sysconfdir}/stb/avs/0/input").c_str(), O_WRONLY)) < 0) {
+-		eDebug("cannot open /usr/local/e2/etc/stb/avs/0/input");
++		eDebug("cannot open /etc/stb/avs/0/input");
+ 		return;
+ 	}
+ 
+@@ -158,7 +158,7 @@
+ 	int fd;
+ 	
+ 	if((fd = open(eEnv::resolve("${sysconfdir}/stb/avs/0/colorformat").c_str(), O_WRONLY)) < 0) {
+-		printf("cannot open /usr/local/e2/etc/stb/avs/0/colorformat\n");
++		printf("cannot open /etc/stb/avs/0/colorformat\n");
+ 		return;
+ 	}
+ 	switch(format) {
+@@ -197,7 +197,7 @@
+ 
+ 	int fd;
+ 	if((fd = open(eEnv::resolve("${sysconfdir}/stb/video/aspect").c_str(), O_WRONLY)) < 0) {
+-		eDebug("cannot open /usr/local/e2/etc/stb/video/aspect");
++		eDebug("cannot open /etc/stb/video/aspect");
+ 		return;
+ 	}
+ //	eDebug("set aspect to %s", aspect[ratio]);
+@@ -205,7 +205,7 @@
+ 	close(fd);
+ 
+ 	if((fd = open(eEnv::resolve("${sysconfdir}/stb/video/policy").c_str(), O_WRONLY)) < 0) {
+-		eDebug("cannot open /usr/local/e2/etc/stb/video/policy");
++		eDebug("cannot open /etc/stb/video/policy");
+ 		return;
+ 	}
+ //	eDebug("set ratio to %s", policy[ratio]);
+@@ -226,12 +226,12 @@
+ 	{
+ 		int fd1 = open(eEnv::resolve("${sysconfdir}/stb/video/videomode_50hz").c_str(), O_WRONLY);
+ 		if(fd1 < 0) {
+-			eDebug("cannot open /usr/local/e2/etc/stb/video/videomode_50hz");
++			eDebug("cannot open /etc/stb/video/videomode_50hz");
+ 			return;
+ 		}
+ 		int fd2 = open(eEnv::resolve("${sysconfdir}/stb/video/videomode_60hz").c_str(), O_WRONLY);
+ 		if(fd2 < 0) {
+-			eDebug("cannot open /usr/local/e2/etc/stb/video/videomode_60hz");
++			eDebug("cannot open /etc/stb/video/videomode_60hz");
+ 			close(fd1);
+ 			return;
+ 		}
+@@ -244,7 +244,7 @@
+ 	{
+ 		int fd = open(eEnv::resolve("${sysconfdir}/stb/video/videomode").c_str(), O_WRONLY);
+ 		if(fd < 0) {
+-			eDebug("cannot open /usr/local/e2/etc/stb/video/videomode");
++			eDebug("cannot open /etc/stb/video/videomode");
+ 			return;
+ 		}
+ 		switch(mode) {
+@@ -267,7 +267,7 @@
+ {
+ 	int fd;
+ 	if((fd = open(eEnv::resolve("${sysconfdir}/stb/denc/0/wss").c_str(), O_WRONLY)) < 0) {
+-		eDebug("cannot open /usr/local/e2/etc/stb/denc/0/wss");
++		eDebug("cannot open /etc/stb/denc/0/wss");
+ 		return;
+ 	}
+ 	const char *wss[] = {
+diff -uNr enigma2pc-20130727.orig/lib/dvb/decoder.cpp enigma2pc-20130727/lib/dvb/decoder.cpp
+--- enigma2pc-20130727.orig/lib/dvb/decoder.cpp	2014-01-11 21:55:52.382103172 +0800
++++ enigma2pc-20130727/lib/dvb/decoder.cpp	2014-01-11 22:16:45.926050744 +0800
+@@ -528,7 +528,7 @@
+ 		m_progressive = readMpegProc("progressive", m_dev);
+ /*	{
+ 		char tmp[64];
+-		sprintf(tmp, "/usr/local/e2/etc/stb/vmpeg/%d/progressive", m_dev);
++		sprintf(tmp, "/etc/stb/vmpeg/%d/progressive", m_dev);
+ 		FILE *f = fopen(tmp, "r");
+ 		if (f)
+ 		{
+diff -uNr enigma2pc-20130727.orig/lib/dvb/volume.cpp enigma2pc-20130727/lib/dvb/volume.cpp
+--- enigma2pc-20130727.orig/lib/dvb/volume.cpp	2014-01-11 21:55:52.382103172 +0800
++++ enigma2pc-20130727/lib/dvb/volume.cpp	2014-01-11 22:16:45.986050743 +0800
+@@ -158,7 +158,7 @@
+ 	//HACK?
+ 	FILE *f;
+ 	if((f = fopen(eEnv::resolve("${sysconfdir}/stb/avs/0/volume").c_str(), "wb")) == NULL) {
+-		eDebug("cannot open /usr/local/e2/etc/stb/avs/0/volume(%m)");
++		eDebug("cannot open /etc/stb/avs/0/volume(%m)");
+ 		return;
+ 	}
+ 
+@@ -198,7 +198,7 @@
+ 	//HACK?
+ 	FILE *f;
+ 	if((f = fopen(eEnv::resolve("${sysconfdir}/stb/audio/j1_mute").c_str(), "wb")) == NULL) {
+-		eDebug("cannot open /usr/local/e2/etc/stb/audio/j1_mute(%m)");
++		eDebug("cannot open /etc/stb/audio/j1_mute(%m)");
+ 		return;
+ 	}
+ 	
+@@ -229,7 +229,7 @@
+ 	//HACK?
+ 	FILE *f;
+ 	if((f = fopen(eEnv::resolve("${sysconfdir}/stb/audio/j1_mute").c_str(), "wb")) == NULL) {
+-		eDebug("cannot open /usr/local/e2/etc/stb/audio/j1_mute(%m)");
++		eDebug("cannot open /etc/stb/audio/j1_mute(%m)");
+ 		return;
+ 	}
+ 	
+diff -uNr enigma2pc-20130727.orig/lib/gui/evideo.cpp enigma2pc-20130727/lib/gui/evideo.cpp
+--- enigma2pc-20130727.orig/lib/gui/evideo.cpp	2014-01-11 21:55:51.994103188 +0800
++++ enigma2pc-20130727/lib/gui/evideo.cpp	2014-01-11 22:16:46.022050740 +0800
+@@ -74,7 +74,7 @@
+ void eVideoWidget::setPosition(int index, int left, int top, int width, int height)
+ {
+ 	char filenamebase[128];
+-	snprintf(filenamebase, sizeof(filenamebase), "/usr/local/e2/etc/stb/vmpeg/%d/dst_", index);
++	snprintf(filenamebase, sizeof(filenamebase), "/etc/stb/vmpeg/%d/dst_", index);
+ 	std::string filename = filenamebase;
+ 	writeProc(filename + "left", left);
+ 	writeProc(filename + "top", top);
+diff -uNr enigma2pc-20130727.orig/lib/python/Components/About.py enigma2pc-20130727/lib/python/Components/About.py
+--- enigma2pc-20130727.orig/lib/python/Components/About.py	2014-01-11 21:55:52.002103188 +0800
++++ enigma2pc-20130727/lib/python/Components/About.py	2014-01-11 22:08:30.198071477 +0800
+@@ -30,12 +30,12 @@
+ 
+ def getHardwareTypeString():                                                    
+ 	try:
+-		if os.path.isfile("/usr/local/e2/etc/stb/info/boxtype"):                            
+-			return open("/usr/local/e2/etc/stb/info/boxtype").read().strip().upper() + " (" + open("/usr/local/e2/etc/stb/info/board_revision").read().strip() + "-" + open("/usr/local/e2/etc/stb/info/version").read().strip() + ")"
+-		if os.path.isfile("/usr/local/e2/etc/stb/info/vumodel"):                            
+-			return "VU+" + open("/usr/local/e2/etc/stb/info/vumodel").read().strip().upper() + "(" + open("/usr/local/e2/etc/stb/info/version").read().strip().upper() + ")" 
+-		if os.path.isfile("/usr/local/e2/etc/stb/info/model"):                              
+-			return open("/usr/local/e2/etc/stb/info/model").read().strip().upper()      
++		if os.path.isfile("/etc/stb/info/boxtype"):                            
++			return open("/etc/stb/info/boxtype").read().strip().upper() + " (" + open("/etc/stb/info/board_revision").read().strip() + "-" + open("/etc/stb/info/version").read().strip() + ")"
++		if os.path.isfile("/etc/stb/info/vumodel"):                            
++			return "VU+" + open("/etc/stb/info/vumodel").read().strip().upper() + "(" + open("/etc/stb/info/version").read().strip().upper() + ")" 
++		if os.path.isfile("/etc/stb/info/model"):                              
++			return open("/etc/stb/info/model").read().strip().upper()      
+ 	except:
+ 		pass
+ 	return "Unavailable"                                                    
+diff -uNr enigma2pc-20130727.orig/lib/python/Components/AVSwitch.py enigma2pc-20130727/lib/python/Components/AVSwitch.py
+--- enigma2pc-20130727.orig/lib/python/Components/AVSwitch.py	2014-01-11 21:55:52.002103188 +0800
++++ enigma2pc-20130727/lib/python/Components/AVSwitch.py	2014-01-11 22:08:30.198071477 +0800
+@@ -99,7 +99,7 @@
+ 	"scale": _("Just scale"),
+   
+   "zoom": _("Zoom")}
+-	if os.path.exists("/usr/local/e2/etc/stb/video/policy2_choices") and "auto" in open("/usr/local/e2/etc/stb/video/policy2_choices").readline():
++	if os.path.exists("/etc/stb/video/policy2_choices") and "auto" in open("/etc/stb/video/policy2_choices").readline():
+ 		# TRANSLATORS: (aspect ratio policy: always try to display as fullscreen, when there is no content (black bars) on left/right, even if this breaks the aspect.
+ 		policy2_choices.update({"auto": _("Auto")})
+ 	config.av.policy_169 = ConfigSelection(choices=policy2_choices, default = "letterbox")
+diff -uNr enigma2pc-20130727.orig/lib/python/Components/FanControl.py enigma2pc-20130727/lib/python/Components/FanControl.py
+--- enigma2pc-20130727.orig/lib/python/Components/FanControl.py	2014-01-11 21:55:52.002103188 +0800
++++ enigma2pc-20130727/lib/python/Components/FanControl.py	2014-01-11 22:08:30.210071477 +0800
+@@ -9,7 +9,7 @@
+ class FanControl:
+ 	# ATM there's only support for one fan
+ 	def __init__(self):
+-		if os.path.exists("/usr/local/e2/etc/stb/fp/fan_vlt") or os.path.exists("/usr/local/e2/etc/stb/fp/fan_pwm") or os.path.exists("/usr/local/e2/etc/stb/fp/fan_speed"):
++		if os.path.exists("/etc/stb/fp/fan_vlt") or os.path.exists("/etc/stb/fp/fan_pwm") or os.path.exists("/etc/stb/fp/fan_speed"):
+ 			self.fancount = 1
+ 		else:
+ 			self.fancount = 0
+@@ -77,19 +77,19 @@
+ 		return self.fancount
+ 	
+ 	def hasRPMSensor(self, fanid):
+-		return os.path.exists("/usr/local/e2/etc/stb/fp/fan_speed")
++		return os.path.exists("/etc/stb/fp/fan_speed")
+ 	
+ 	def hasFanControl(self, fanid):
+-		return os.path.exists("/usr/local/e2/etc/stb/fp/fan_vlt") or os.path.exists("/usr/local/e2/etc/stb/fp/fan_pwm")
++		return os.path.exists("/etc/stb/fp/fan_vlt") or os.path.exists("/etc/stb/fp/fan_pwm")
+ 	
+ 	def getFanSpeed(self, fanid):
+-		f = open("/usr/local/e2/etc/stb/fp/fan_speed", "r")
++		f = open("/etc/stb/fp/fan_speed", "r")
+ 		value = int(f.readline().strip()[:-4])
+ 		f.close()
+ 		return value
+ 	
+ 	def getVoltage(self, fanid):
+-		f = open("/usr/local/e2/etc/stb/fp/fan_vlt", "r")
++		f = open("/etc/stb/fp/fan_vlt", "r")
+ 		value = int(f.readline().strip(), 16)
+ 		f.close()
+ 		return value
+@@ -97,12 +97,12 @@
+ 	def setVoltage(self, fanid, value):
+ 		if value > 255:
+ 			return
+-		f = open("/usr/local/e2/etc/stb/fp/fan_vlt", "w")
++		f = open("/etc/stb/fp/fan_vlt", "w")
+ 		f.write("%x" % value)
+ 		f.close()
+ 		
+ 	def getPWM(self, fanid):
+-		f = open("/usr/local/e2/etc/stb/fp/fan_pwm", "r")
++		f = open("/etc/stb/fp/fan_pwm", "r")
+ 		value = int(f.readline().strip(), 16)
+ 		f.close()
+ 		return value
+@@ -110,7 +110,7 @@
+ 	def setPWM(self, fanid, value):
+ 		if value > 255:
+ 			return
+-		f = open("/usr/local/e2/etc/stb/fp/fan_pwm", "w")
++		f = open("/etc/stb/fp/fan_pwm", "w")
+ 		f.write("%x" % value)
+ 		f.close()
+ 	
+diff -uNr enigma2pc-20130727.orig/lib/python/Components/NimManager.py enigma2pc-20130727/lib/python/Components/NimManager.py
+--- enigma2pc-20130727.orig/lib/python/Components/NimManager.py	2014-01-11 21:55:52.002103188 +0800
++++ enigma2pc-20130727/lib/python/Components/NimManager.py	2014-01-11 22:08:30.230071477 +0800
+@@ -697,9 +697,9 @@
+ 			#db.readATSC(self.atscList, self.transpondersatsc)
+ 
+ 	def enumerateNIMs(self):
+-		# enum available NIMs. This is currently very dreambox-centric and uses the /usr/local/e2/etc/tuxbox/nim_sockets interface.
++		# enum available NIMs. This is currently very dreambox-centric and uses the /etc/tuxbox/nim_sockets interface.
+ 		# the result will be stored into nim_slots.
+-		# the content of /usr/local/e2/etc/tuxbox/nim_sockets looks like:
++		# the content of /etc/tuxbox/nim_sockets looks like:
+ 		# NIM Socket 0:
+ 		#          Type: DVB-S
+ 		#          Name: BCM4501 DVB-S2 NIM (internal)
+diff -uNr enigma2pc-20130727.orig/lib/python/Components/Renderer/FrontpanelLed.py enigma2pc-20130727/lib/python/Components/Renderer/FrontpanelLed.py
+--- enigma2pc-20130727.orig/lib/python/Components/Renderer/FrontpanelLed.py	2014-01-11 21:55:52.002103188 +0800
++++ enigma2pc-20130727/lib/python/Components/Renderer/FrontpanelLed.py	2014-01-11 22:08:27.694071581 +0800
+@@ -17,16 +17,16 @@
+ 		(speed, pattern, pattern_4bit) = self.patterns[val]
+ 
+ 		try:
+-			open("/usr/local/e2/etc/stb/fp/led%d_pattern" % self.which, "w").write("%08x" % pattern)
++			open("/etc/stb/fp/led%d_pattern" % self.which, "w").write("%08x" % pattern)
+ 		except IOError:
+ 			pass
+ 		if self.which == 0:
+ 			try:
+-				open("/usr/local/e2/etc/stb/fp/led_set_pattern", "w").write("%08x" % pattern_4bit)
+-				open("/usr/local/e2/etc/stb/fp/led_set_speed", "w").write("%d" % speed)
++				open("/etc/stb/fp/led_set_pattern", "w").write("%08x" % pattern_4bit)
++				open("/etc/stb/fp/led_set_speed", "w").write("%d" % speed)
+ 			except IOError:
+ 				pass
+ 			try:
+-				open("/usr/local/e2/etc/stb/fp/led_pattern_speed", "w").write("%d" % speed)
++				open("/etc/stb/fp/led_pattern_speed", "w").write("%d" % speed)
+ 			except IOError:
+ 				pass
+diff -uNr enigma2pc-20130727.orig/lib/python/Components/Sensors.py enigma2pc-20130727/lib/python/Components/Sensors.py
+--- enigma2pc-20130727.orig/lib/python/Components/Sensors.py	2014-01-11 21:55:52.006103188 +0800
++++ enigma2pc-20130727/lib/python/Components/Sensors.py	2014-01-11 22:08:30.238071475 +0800
+@@ -53,18 +53,18 @@
+ 
+ 	def addSensors(self):
+ 		import os
+-		if os.path.exists("/usr/local/e2/etc/stb/sensors"):
+-			for dirname in os.listdir("/usr/local/e2/etc/stb/sensors"):
++		if os.path.exists("/etc/stb/sensors"):
++			for dirname in os.listdir("/etc/stb/sensors"):
+ 				if dirname.find("temp", 0, 4) == 0:
+-					f = open("/usr/local/e2/etc/stb/sensors/%s/name" % dirname, "r")
++					f = open("/etc/stb/sensors/%s/name" % dirname, "r")
+ 					name = f.readline().strip()
+ 					f.close()
+ 					
+-					f = open("/usr/local/e2/etc/stb/sensors/%s/unit" % dirname, "r")
++					f = open("/etc/stb/sensors/%s/unit" % dirname, "r")
+ 					unit = f.readline().strip()
+ 					f.close()
+ 					
+-					self.sensors_list.append((self.TYPE_TEMPERATURE, name, unit, "/usr/local/e2/etc/stb/sensors/%s" % dirname))
++					self.sensors_list.append((self.TYPE_TEMPERATURE, name, unit, "/etc/stb/sensors/%s" % dirname))
+ 		for fanid in range(fancontrol.getFanCount()):
+ 			if fancontrol.hasRPMSensor(fanid):
+ 				self.sensors_list.append((self.TYPE_FAN_RPM, _("Fan %d") % (fanid + 1), "rpm", fanid))
+diff -uNr enigma2pc-20130727.orig/lib/python/Components/SystemInfo.py enigma2pc-20130727/lib/python/Components/SystemInfo.py
+--- enigma2pc-20130727.orig/lib/python/Components/SystemInfo.py	2014-01-11 21:55:52.006103188 +0800
++++ enigma2pc-20130727/lib/python/Components/SystemInfo.py	2014-01-11 22:08:30.238071475 +0800
+@@ -17,10 +17,10 @@
+ 
+ def countFrontpanelLEDs():
+ 	leds = 0
+-	if fileExists("/usr/local/e2/etc/stb/fp/led_set_pattern"):
++	if fileExists("/etc/stb/fp/led_set_pattern"):
+ 		leds += 1
+ 
+-	while fileExists("/usr/local/e2/etc/stb/fp/led%d_pattern" % leds):
++	while fileExists("/etc/stb/fp/led%d_pattern" % leds):
+ 		leds += 1
+ 
+ 	return leds
+diff -uNr enigma2pc-20130727.orig/lib/python/Components/UsageConfig.py enigma2pc-20130727/lib/python/Components/UsageConfig.py
+--- enigma2pc-20130727.orig/lib/python/Components/UsageConfig.py	2014-01-11 21:55:52.002103188 +0800
++++ enigma2pc-20130727/lib/python/Components/UsageConfig.py	2014-01-11 22:08:30.246071475 +0800
+@@ -309,11 +309,11 @@
+ 		("3", _("Everywhere"))])
+ 	config.misc.erase_flags.addNotifier(updateEraseFlags, immediate_feedback = False)
+ 
+-	SystemInfo["ZapMode"] = os.path.exists("/usr/local/e2/etc/stb/video/zapmode")
++	SystemInfo["ZapMode"] = os.path.exists("/etc/stb/video/zapmode")
+ 	if SystemInfo["ZapMode"]:
+ 		def setZapmode(el):
+ 			try:
+-				file = open("/usr/local/e2/etc/stb/video/zapmode", "w")
++				file = open("/etc/stb/video/zapmode", "w")
+ 				file.write(el.value)
+ 				file.close()
+ 			except:
+diff -uNr enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/FrontprocessorUpgrade/plugin.py enigma2pc-20130727/lib/python/Plugins/SystemPlugins/FrontprocessorUpgrade/plugin.py
+--- enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/FrontprocessorUpgrade/plugin.py	2014-01-11 21:55:52.026103186 +0800
++++ enigma2pc-20130727/lib/python/Plugins/SystemPlugins/FrontprocessorUpgrade/plugin.py	2014-01-11 22:08:25.562071671 +0800
+@@ -79,7 +79,7 @@
+ 		list.append(PluginDescriptor(name="FP Upgrade", where = PluginDescriptor.WHERE_WIZARD, needsRestart = True, fnc=(8, FPUpgrade)))
+ 
+ 	try:
+-		msg = open("/usr/local/e2/etc/stb/message").read()
++		msg = open("/etc/stb/message").read()
+ 		list.append(PluginDescriptor(name="System Message Check", where = PluginDescriptor.WHERE_WIZARD, needsRestart = True, fnc=(9, SystemMessage, msg)))
+ 	except:
+ 		pass
+diff -uNr enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/OSD3DSetup/plugin.py enigma2pc-20130727/lib/python/Plugins/SystemPlugins/OSD3DSetup/plugin.py
+--- enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/OSD3DSetup/plugin.py	2014-01-11 21:55:52.018103186 +0800
++++ enigma2pc-20130727/lib/python/Plugins/SystemPlugins/OSD3DSetup/plugin.py	2014-01-11 22:08:25.566071672 +0800
+@@ -74,10 +74,10 @@
+ 
+ def applySettings(mode, znorm):
+ 	try:
+-		file = open("/usr/local/e2/etc/stb/fb/3dmode", "w")
++		file = open("/etc/stb/fb/3dmode", "w")
+ 		file.write(mode)
+ 		file.close()
+-		file = open("/usr/local/e2/etc/stb/fb/znorm", "w")
++		file = open("/etc/stb/fb/znorm", "w")
+ 		file.write('%d' % znorm)
+ 		file.close()
+ 	except:
+@@ -94,7 +94,7 @@
+ 
+ def Plugins(**kwargs):
+ 	from os import path
+-	if path.exists("/usr/local/e2/etc/stb/fb/3dmode"):
++	if path.exists("/etc/stb/fb/3dmode"):
+ 		from Plugins.Plugin import PluginDescriptor
+ 		return [PluginDescriptor(name = "OSD 3D setup", description = _("Adjust 3D settings"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main),
+ 					PluginDescriptor(name = "OSD 3D setup", description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup)]
+diff -uNr enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/OSDPositionSetup/plugin.py enigma2pc-20130727/lib/python/Plugins/SystemPlugins/OSDPositionSetup/plugin.py
+--- enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/OSDPositionSetup/plugin.py	2014-01-11 21:55:52.026103186 +0800
++++ enigma2pc-20130727/lib/python/Plugins/SystemPlugins/OSDPositionSetup/plugin.py	2014-01-11 22:08:25.566071672 +0800
+@@ -86,16 +86,16 @@
+ 	if dst_top + dst_height > 576:
+ 		dst_height = 576 - dst_top
+ 	try:
+-		file = open("/usr/local/e2/etc/stb/fb/dst_left", "w")
++		file = open("/etc/stb/fb/dst_left", "w")
+ 		file.write('%X' % dst_left)
+ 		file.close()
+-		file = open("/usr/local/e2/etc/stb/fb/dst_width", "w")
++		file = open("/etc/stb/fb/dst_width", "w")
+ 		file.write('%X' % dst_width)
+ 		file.close()
+-		file = open("/usr/local/e2/etc/stb/fb/dst_top", "w")
++		file = open("/etc/stb/fb/dst_top", "w")
+ 		file.write('%X' % dst_top)
+ 		file.close()
+-		file = open("/usr/local/e2/etc/stb/fb/dst_height", "w")
++		file = open("/etc/stb/fb/dst_height", "w")
+ 		file.write('%X' % dst_height)
+ 		file.close()
+ 	except:
+@@ -112,7 +112,7 @@
+ 
+ def Plugins(**kwargs):
+ 	from os import path
+-	if path.exists("/usr/local/e2/etc/stb/fb/dst_left"):
++	if path.exists("/etc/stb/fb/dst_left"):
+ 		from Plugins.Plugin import PluginDescriptor
+ 		return [PluginDescriptor(name = "OSD position setup", description = "Compensate for overscan", where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main),
+ 					PluginDescriptor(name = "OSD position setup", description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup)]
+diff -uNr enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/SoftwareManager/BackupRestore.py enigma2pc-20130727/lib/python/Plugins/SystemPlugins/SoftwareManager/BackupRestore.py
+--- enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/SoftwareManager/BackupRestore.py	2014-01-11 21:55:52.014103186 +0800
++++ enigma2pc-20130727/lib/python/Plugins/SystemPlugins/SoftwareManager/BackupRestore.py	2014-01-11 22:08:25.574071671 +0800
+@@ -312,8 +312,8 @@
+ 		self.setTitle(_("Restore is running..."))
+ 
+ 	def doRestore(self):
+-		if path.exists("/usr/local/e2/etc/stb/vmpeg/0/dst_width"):
+-			restorecmdlist = ["tar -xzvf " + self.fullbackupfilename + " -C /", "echo 0 > /usr/local/e2/etc/stb/vmpeg/0/dst_height", "echo 0 > /usr/local/e2/etc/stb/vmpeg/0/dst_left", "echo 0 > /usr/local/e2/etc/stb/vmpeg/0/dst_top", "echo 0 > /usr/local/e2/etc/stb/vmpeg/0/dst_width", "killall -9 enigma2"]
++		if path.exists("/etc/stb/vmpeg/0/dst_width"):
++			restorecmdlist = ["tar -xzvf " + self.fullbackupfilename + " -C /", "echo 0 > /etc/stb/vmpeg/0/dst_height", "echo 0 > /etc/stb/vmpeg/0/dst_left", "echo 0 > /etc/stb/vmpeg/0/dst_top", "echo 0 > /etc/stb/vmpeg/0/dst_width", "killall -9 enigma2"]
+ 		else:
+ 			restorecmdlist = ["tar -xzvf " + self.fullbackupfilename + " -C /", "killall -9 enigma2"]
+ 		if self.finished_cb:
+diff -uNr enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py enigma2pc-20130727/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py
+--- enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py	2014-01-11 21:55:52.018103186 +0800
++++ enigma2pc-20130727/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py	2014-01-11 22:08:25.578071671 +0800
+@@ -254,12 +254,12 @@
+ 		picon = None
+ 		default = True
+ 		try:
+-			if os.path.isfile("/usr/local/e2/etc/stb/info/boxtype"):
+-				boxType = open("/usr/local/e2/etc/stb/info/boxtype").read().strip().lower()
+-			elif os.path.isfile("/usr/local/e2/etc/stb/info/vumodel"):
+-				boxType = "vu" + open("/usr/local/e2/etc/stb/info/vumodel").read().strip().lower()
+-			elif os.path.isfile("/usr/local/e2/etc/stb/info/model"):
+-				boxType = open("/usr/local/e2/etc/stb/info/model").read().strip().lower()
++			if os.path.isfile("/etc/stb/info/boxtype"):
++				boxType = open("/etc/stb/info/boxtype").read().strip().lower()
++			elif os.path.isfile("/etc/stb/info/vumodel"):
++				boxType = "vu" + open("/etc/stb/info/vumodel").read().strip().lower()
++			elif os.path.isfile("/etc/stb/info/model"):
++				boxType = open("/etc/stb/info/model").read().strip().lower()
+ 			# TODO: Use Twisted's URL fetcher, urlopen is evil. And it can
+ 			# run in parallel to the package update.
+ 			if boxType in urlopen("http://openpli.org/status").read():
+diff -uNr enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/VideoClippingSetup/plugin.py enigma2pc-20130727/lib/python/Plugins/SystemPlugins/VideoClippingSetup/plugin.py
+--- enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/VideoClippingSetup/plugin.py	2014-01-11 21:55:52.026103186 +0800
++++ enigma2pc-20130727/lib/python/Plugins/SystemPlugins/VideoClippingSetup/plugin.py	2014-01-11 22:08:25.582071671 +0800
+@@ -96,16 +96,16 @@
+ 	if clip_top + clip_height > 576:
+ 		clip_height = 576 - clip_top
+ 	try:
+-		file = open("/usr/local/e2/etc/stb/vmpeg/0/clip_left", "w")
++		file = open("/etc/stb/vmpeg/0/clip_left", "w")
+ 		file.write('%X' % clip_left)
+ 		file.close()
+-		file = open("/usr/local/e2/etc/stb/vmpeg/0/clip_width", "w")
++		file = open("/etc/stb/vmpeg/0/clip_width", "w")
+ 		file.write('%X' % clip_width)
+ 		file.close()
+-		file = open("/usr/local/e2/etc/stb/vmpeg/0/clip_top", "w")
++		file = open("/etc/stb/vmpeg/0/clip_top", "w")
+ 		file.write('%X' % clip_top)
+ 		file.close()
+-		file = open("/usr/local/e2/etc/stb/vmpeg/0/clip_height", "w")
++		file = open("/etc/stb/vmpeg/0/clip_height", "w")
+ 		file.write('%X' % clip_height)
+ 		file.close()
+ 	except:
+@@ -122,7 +122,7 @@
+ 
+ def Plugins(**kwargs):
+ 	from os import path
+-	if path.exists("/usr/local/e2/etc/stb/vmpeg/0/clip_left"):
++	if path.exists("/etc/stb/vmpeg/0/clip_left"):
+ 		from Plugins.Plugin import PluginDescriptor
+ 		return [PluginDescriptor(name = "Video clipping setup", description = "clip overscan / letterbox borders", where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main),
+ 					PluginDescriptor(name = "Video clipping  setup", description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup)]
+diff -uNr enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/VideoEnhancement/plugin.py enigma2pc-20130727/lib/python/Plugins/SystemPlugins/VideoEnhancement/plugin.py
+--- enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/VideoEnhancement/plugin.py	2014-01-11 21:55:52.034103187 +0800
++++ enigma2pc-20130727/lib/python/Plugins/SystemPlugins/VideoEnhancement/plugin.py	2014-01-11 22:08:25.582071671 +0800
+@@ -394,6 +394,6 @@
+ 
+ def Plugins(**kwargs):
+ 	list = []
+-	if config.usage.setup_level.index >= 2 and os_path.exists("/usr/local/e2/etc/stb/vmpeg/0/pep_apply"):
++	if config.usage.setup_level.index >= 2 and os_path.exists("/etc/stb/vmpeg/0/pep_apply"):
+ 		list.append(PluginDescriptor(name=_("Video enhancement setup"), description=_("Advanced video enhancement setup"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=startSetup))
+ 	return list
+diff -uNr enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/VideoEnhancement/VideoEnhancement.py enigma2pc-20130727/lib/python/Plugins/SystemPlugins/VideoEnhancement/VideoEnhancement.py
+--- enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/VideoEnhancement/VideoEnhancement.py	2014-01-11 21:55:52.034103187 +0800
++++ enigma2pc-20130727/lib/python/Plugins/SystemPlugins/VideoEnhancement/VideoEnhancement.py	2014-01-11 22:08:25.582071671 +0800
+@@ -2,7 +2,7 @@
+ from Tools.CList import CList
+ from os import path as os_path
+ from enigma import eEnv
+-# The "VideoEnhancement" is the interface to /usr/local/e2/etc/stb/vmpeg/0.
++# The "VideoEnhancement" is the interface to /etc/stb/vmpeg/0.
+ 
+ class VideoEnhancement:
+ 	firstRun = True
+diff -uNr enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/Videomode/VideoHardware.py enigma2pc-20130727/lib/python/Plugins/SystemPlugins/Videomode/VideoHardware.py
+--- enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/Videomode/VideoHardware.py	2014-01-11 21:55:52.026103186 +0800
++++ enigma2pc-20130727/lib/python/Plugins/SystemPlugins/Videomode/VideoHardware.py	2014-01-11 22:08:25.586071671 +0800
+@@ -5,7 +5,7 @@
+ from Tools.HardwareInfo import HardwareInfo
+ from Components.AVSwitch import AVSwitch
+ 
+-# The "VideoHardware" is the interface to /usr/local/e2/etc/stb/video.
++# The "VideoHardware" is the interface to /etc/stb/video.
+ # It generates hotplug events, and gives you the list of 
+ # available and preferred modes, as well as handling the currently
+ # selected mode. No other strict checking is done.
+@@ -92,12 +92,12 @@
+ 			mode_60 = mode_50
+ 
+ 		#try:
+-		#	open("/usr/local/e2/etc/stb/video/videomode_50hz", "w").write(mode_50)
+-		#	open("/usr/local/e2/etc/stb/video/videomode_60hz", "w").write(mode_60)
++		#	open("/etc/stb/video/videomode_50hz", "w").write(mode_50)
++		#	open("/etc/stb/video/videomode_60hz", "w").write(mode_60)
+ 		#except IOError:
+ 		#	try:
+ 		#		# fallback if no possibility to setup 50/60 hz mode
+-		#		open("/usr/local/e2/etc/stb/video/videomode", "w").write(mode_50)
++		#		open("/etc/stb/video/videomode", "w").write(mode_50)
+ 		#	except IOError:
+ 		#		print "setting videomode failed."
+ 
+diff -uNr enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/WirelessLan/plugin.py enigma2pc-20130727/lib/python/Plugins/SystemPlugins/WirelessLan/plugin.py
+--- enigma2pc-20130727.orig/lib/python/Plugins/SystemPlugins/WirelessLan/plugin.py	2014-01-11 21:55:52.026103186 +0800
++++ enigma2pc-20130727/lib/python/Plugins/SystemPlugins/WirelessLan/plugin.py	2014-01-11 22:10:30.654066439 +0800
+@@ -436,7 +436,7 @@
+ 
+ def configStrings(iface):
+ 	try:
+-		device = open("/usr/local/etc/stb/info/model", "r").readline().strip()
++		device = open("/etc/stb/info/model", "r").readline().strip()
+ 	except:
+ 		device = ""
+ 	if device != "e2pc":
+diff -uNr enigma2pc-20130727.orig/lib/python/Screens/PictureInPicture.py enigma2pc-20130727/lib/python/Screens/PictureInPicture.py
+--- enigma2pc-20130727.orig/lib/python/Screens/PictureInPicture.py	2014-01-11 21:55:52.006103188 +0800
++++ enigma2pc-20130727/lib/python/Screens/PictureInPicture.py	2014-01-11 22:08:30.286071474 +0800
+@@ -18,7 +18,7 @@
+ 		self["video"] = VideoWindow()
+ 		self.pipActive = session.instantiateDialog(PictureInPictureZapping)
+ 		self.currentService = None
+-		self.has_external_pip = access("/usr/local/e2/etc/stb/vmpeg/1/external", W_OK)
++		self.has_external_pip = access("/etc/stb/vmpeg/1/external", W_OK)
+ 		if not pip_config_initialized:
+ 			config.av.pip = ConfigPosition(default=[-1, -1, -1, -1], args = (719, 567, 720, 568))
+ 			config.av.external_pip = ConfigYesNo(default = False)
+@@ -55,7 +55,7 @@
+ 
+ 	def setExternalPiP(self, onoff):
+ 		if self.has_external_pip:
+-			procentry = open("/usr/local/e2/etc/stb/vmpeg/1/external", "w")
++			procentry = open("/etc/stb/vmpeg/1/external", "w")
+ 			if onoff:
+ 				procentry.write("on")
+ 			else:
+diff -uNr enigma2pc-20130727.orig/lib/python/Tools/HardwareInfo.py enigma2pc-20130727/lib/python/Tools/HardwareInfo.py
+--- enigma2pc-20130727.orig/lib/python/Tools/HardwareInfo.py	2014-01-11 21:55:52.002103188 +0800
++++ enigma2pc-20130727/lib/python/Tools/HardwareInfo.py	2014-01-11 22:08:30.310071473 +0800
+@@ -15,7 +15,7 @@
+ 			HardwareInfo.device_name = file.readline().strip()
+ 			file.close()
+ 			try:
+-				file = open("/usr/local/e2/etc/stb/info/version", "r")
++				file = open("/etc/stb/info/version", "r")
+ 				HardwareInfo.device_version = file.readline().strip()
+ 				file.close()
+ 			except:
+@@ -24,7 +24,7 @@
+ 			print "----------------"
+ 			print "you should upgrade to new drivers for the hardware detection to work properly"
+ 			print "----------------"
+-			print "fallback to detect hardware via /usr/local/e2/etc/cpuinfo!!"
++			print "fallback to detect hardware via /etc/cpuinfo!!"
+ 			try:
+ 				rd = open("/proc/cpuinfo", "r").read()
+ 				if rd.find("Brcm4380 V4.2") != -1:
+diff -uNr enigma2pc-20130727.orig/lib/service/servicedvd.cpp enigma2pc-20130727/lib/service/servicedvd.cpp
+--- enigma2pc-20130727.orig/lib/service/servicedvd.cpp	2014-01-11 21:55:51.994103188 +0800
++++ enigma2pc-20130727/lib/service/servicedvd.cpp	2014-01-11 22:16:46.050050740 +0800
+@@ -107,7 +107,7 @@
+ 	if (ddvd_language != "")
+ 		ddvd_set_language(m_ddvdconfig, (ddvd_language.substr(0,2)).c_str());
+ 
+-	int fd = open("/usr/local/e2/etc/stb/video/aspect", O_RDONLY);
++	int fd = open("/etc/stb/video/aspect", O_RDONLY);
+ 	if (fd > -1)
+ 	{
+ 		rd = read(fd, tmp, 255);
+@@ -118,7 +118,7 @@
+ 		close(fd);
+ 	}
+ 
+- 	fd = open("/usr/local/e2/etc/stb/video/policy", O_RDONLY);
++ 	fd = open("/etc/stb/video/policy", O_RDONLY);
+ 	if (fd > -1)
+ 	{
+ 		rd = read(fd, tmp, 255);
+@@ -130,7 +130,7 @@
+ 	}
+ 
+ #ifdef DDVD_SUPPORTS_16_10_SCALING
+- 	fd = open("/usr/local/e2/etc/stb/video/policy2", O_RDONLY);
++ 	fd = open("/etc/stb/video/policy2", O_RDONLY);
+ 	if (fd > -1)
+ 	{
+ 		rd = read(fd, tmp, 255);
+diff -uNr enigma2pc-20130727.orig/main/enigma.cpp enigma2pc-20130727/main/enigma.cpp
+--- enigma2pc-20130727.orig/main/enigma.cpp	2014-01-11 21:55:52.906103149 +0800
++++ enigma2pc-20130727/main/enigma.cpp	2014-01-11 22:16:49.810050583 +0800
+@@ -267,7 +267,7 @@
+ 
+ void quitMainloop(int exitCode)
+ {
+-	FILE *f = fopen("/usr/local/e2/etc/stb/fp/was_timer_wakeup", "w");
++	FILE *f = fopen("/etc/stb/fp/was_timer_wakeup", "w");
+ 	if (f)
+ 	{
+ 		fprintf(f, "%d", 0);
