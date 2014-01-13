@@ -3,16 +3,15 @@
 . config/options
 get_meta $1
 
-#$SCRIPTS/unpack $PKG_PARENT
+$SCRIPTS/unpack $PKG_PARENT
 
-cd $BUILD/$1*
+cd $BUILD/${PKG_PARENT}-${PKG_VERSION}
 
 mkdir -p objdir-host
 cd objdir-host
 
 do_configure host \
   --disable-manpages
-# --disable-static --enable-shared
 
 make
 make_install toolchain
