@@ -4,49 +4,51 @@ PLUGINS=""
 . /etc/system.options
 export VDPAU_NVIDIA_NO_OVERLAY=1
 if [ $CAM = "OScam" ]; then
-  sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/10_sc
-  sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_dvbapi
-  sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_dvbapi_ttcam
+  [ -f /etc/vdr/plugins.d/10_sc ] && sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/10_sc
+  [ -f /etc/vdr/plugins.d/50_dvbapi ] && sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_dvbapi
+  [ -f /etc/vdr/plugins.d/50_dvbapi_ttcam ] && sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_dvbapi_ttcam
 elif [ $CAM = "TTcam" ]; then
-  sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/10_sc
-  sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_dvbapi
-  sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_dvbapi_ttcam
+  [ -f /etc/vdr/plugins.d/10_sc ] && sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/10_sc
+  [ -f /etc/vdr/plugins.d/50_dvbapi ] && sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_dvbapi
+  [ -f /etc/vdr/plugins.d/50_dvbapi_ttcam ] && sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_dvbapi_ttcam
 elif [ $CAM = "VDR-SC" ]; then
-  sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/10_sc
-  sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_dvbapi
-  sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_dvbapi_ttcam
+  [ -f /etc/vdr/plugins.d/10_sc ] && sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/10_sc
+  [ -f /etc/vdr/plugins.d/50_dvbapi ] && sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_dvbapi
+  [ -f /etc/vdr/plugins.d/50_dvbapi_ttcam ] && sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_dvbapi_ttcam
   /usr/bin/getcam auto
   systemctl stop oscam
 fi
 if [ -f /sys/class/drm/card0/device/vendor ]; then
   VENDOR=$(cat /sys/class/drm/card0/device/vendor)
   if [ $VENDOR = "0x8086" ]; then
-    sed -i -e 's/^OPTIONS=.*/OPTIONS="-l sxfe -A alsa -V vaapi -f"/' \
+    [ -f /etc/vdr/plugins.d/50_xineliboutput ] && sed -i -e 's/^OPTIONS=.*/OPTIONS="-l sxfe -A alsa -V vaapi -f"/' \
 	-e 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_xineliboutput
-    sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_softhddevice
-    sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_skinflat
-    sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_skinflatplus
-    sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_skinnopacity
-    sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_tvguide
+    [ -f /etc/vdr/plugins.d/50_softhddevice ] && sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_softhddevice
+    [ -f /etc/vdr/plugins.d/50_skinflat ] && sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_skinflat
+    [ -f /etc/vdr/plugins.d/50_skinflatplus ] && sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_skinflatplus
+    [ -f /etc/vdr/plugins.d/50_skinnopacity ] && sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_skinnopacity
+    [ -f /etc/vdr/plugins.d/50_tvguide ] && sed -i 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_tvguide
   else
-    sed -i -e 's/^OPTIONS=.*/OPTIONS="-l sxfe -A alsa -V vdpau -f"/' \
+    [ -f /etc/vdr/plugins.d/50_xineliboutput ] && sed -i -e 's/^OPTIONS=.*/OPTIONS="-l sxfe -A alsa -V vdpau -f"/' \
         -e 's/^ENABLED=.*/ENABLED=no/g' /etc/vdr/plugins.d/50_xineliboutput
-    sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_softhddevice
-    sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_skinflat
-    sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_skinflatplus
-    sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_skinnopacity
-    sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_tvguide
+    [ -f /etc/vdr/plugins.d/50_softhddevice ] && sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_softhddevice
+    [ -f /etc/vdr/plugins.d/50_skinflat ] && sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_skinflat
+    [ -f /etc/vdr/plugins.d/50_skinflatplus ] && sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_skinflatplus
+    [ -f /etc/vdr/plugins.d/50_skinnopacity ] && sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_skinnopacity
+    [ -f /etc/vdr/plugins.d/50_tvguide ] && sed -i 's/^ENABLED=.*/ENABLED=yes/g' /etc/vdr/plugins.d/50_tvguide
   fi
 fi
 
-if [ $VIDEOID = "0x10de" -o $VIDEOID = "0x1002" ]; then
-  sed -i 's#.InverseTelecine =.*#.InverseTelecine = 1#' \
-       /etc/vdr/setup.conf
-fi
+#if [ X$VIDEOID = "X0x10de" -o X$VIDEOID = "X0x1002" ]; then
+#  sed -i 's#.InverseTelecine =.*#.InverseTelecine = 1#' \
+#       /etc/vdr/setup.conf
+#fi
 
 sync
 
-[ X$E2EPG = "Xyes" ] && epgen -i /video/epg.dat -o /tmp/epg.dat && epgtrans &
+if [ X$E2EPG = "Xyes" -a -f /usr/bin/epgen -a -f /usr/bin/epgtrans ]; then
+  epgen -i /video/epg.dat -o /tmp/epg.dat && epgtrans &
+fi
 
 sleep 0.1
 for file in /etc/vdr/plugins.d/*; do
@@ -67,5 +69,9 @@ export DISPLAY=":0.0"
 
 # special for germany :
 [ "$LANG" = de_DE.UTF-8 ] && export VDR_CHARSET_OVERRIDE=”ISO-8859-15″
+
+if grep -q BCM2708 /proc/cpuinfo; then
+  setterm -clear -cursor off > /dev/tty4
+fi
 chvt 4
 eval vdr -g /tmp --vfat $PLUGINS -v /video -c /etc/vdr --lirc -E /etc/vdr/epg.data -s shutdown
