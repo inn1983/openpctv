@@ -1,11 +1,13 @@
 #!/bin/sh
 
 . config/options
-
+get_meta vdr
 get_meta $1
 
 mkdir -p $INSTALL/usr/lib/vdr
-cp -a $PKG_BUILD_DIR/lib*.so.* $INSTALL/usr/lib/vdr
+for i in $BUILD/$1*/lib$1*.so; do
+  cp $i $INSTALL/usr/lib/vdr/${i##*/}.${API_VERSION}
+done
 
 #for i in $BUILD/$1*/po/*.po; do
 #  loc=$(basename $i | cut -d\- -f2 | sed 's/.po//g')

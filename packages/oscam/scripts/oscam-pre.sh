@@ -2,6 +2,8 @@
 
 . /etc/system.options
 
+[ X$CAM = XNO ] && exit 1
+
 target=$(systemctl get-default)
 if (grep -v -q "systemd" /proc/cmdline && test X$target = "Xenigma2pc.target") || grep -q enigma2pc /proc/cmdline; then
   target=enigma2pc

@@ -17,11 +17,18 @@ for i in 0 1 2 3 4 5 6 7 8 9; do
 done
 
 for i in 0 1 2 3 4 5 6 7 8 9; do
-  ls /sys/class/rc/* >/dev/null 2>&1 && break
+  if test -r /dev/lirc0 || ls /sys/class/rc/* >/dev/null 2>&1; then
+     break
+  fi
   sleep 0.3
 done
 
 FIRSTIR="yes"
+if [ X$DRV_NAME = Xlirc_rpi ]; then
+  DEVEVENT2=lirc0
+  FIRSTIR="no"
+fi
+
 for i in /sys/class/rc/*; do
   [ $FIRSTIR == "yes" ] && DEVEVENT2=$(ls -d $i/lirc*)
   grep -i "$DRV_NAME" $i/uevent >/dev/null 2>&1 && DEVEVENT1=$(ls -d $i/lirc*)

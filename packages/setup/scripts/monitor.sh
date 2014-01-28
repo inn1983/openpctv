@@ -5,7 +5,7 @@ export TERM=linux
 export TEXTDOMAIN=openpctv
 modeconf=/etc/X11/xorg.conf.d/100-mode.conf
 
-dialog --title "$(gettext "Do you need to set the monitor's best resolution?")" --defaultno --yesno "$(gettext "Most modern monitors/TVs can be probed for EDID data concerning their capabilities and requirements.So normally you do not need to make any settings for Xorg. But EDID is not always completely accurate, and for some situations such as older or unusual display hardware or many HDTVs, it will be necessary to create a modeline to get the right settings. We'll enter the monitor configuration if you select 'Yes'")" 11 70
+dialog --title "$(gettext "Do you need to set the monitor's best resolution?")" --defaultno --yesno "$(gettext "Most modern monitors/TVs can be probed for EDID data concerning their capabilities and requirements.So normally you do not need to make any settings for Xorg. But EDID is not always completely accurate, and for some situations such as older or unusual display hardware or many HDTVs, it will be necessary to create a modeline to get the right settings. We'll enter the monitor configuration if you select 'Yes'")" 10 70
 
 [ $? -eq 1 ] && exit
 
@@ -17,7 +17,7 @@ while test $returncode != 1 && test $returncode != 250
 do
 exec 3>&1
 value=`dialog --ok-label "$(gettext "Submit")" --backtitle "$(gettext "Set the monitor's best resolution")" --clear \
-	--form "$(gettext "Confirm the optimal resolution your monitor supported. Note that the full HD resolution is 1920x1080.")" 15 60 3 \
+	--form "$(gettext "Confirm the optimal resolution your monitor supported. Note that the full HD resolution is 1920x1080.")" 10 60 3 \
 	"X:"		1 15	"$x"		1 25 5 0 \
 	"Y:"		2 15	"$y"		2 25 5 0 \
 	"Refresh:"	3 15	"$refresh"	3 25 5 0 \

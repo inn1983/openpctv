@@ -50,6 +50,7 @@ fi
 
 export VDRDIR="$ROOT/$BUILD/$VDR_DIR"
 
+gcc -o mpg2c mpg2c.c
 make \
   LIBDIR="." \
   LOCALEDIR="./locale" \

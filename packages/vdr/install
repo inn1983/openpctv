@@ -7,7 +7,13 @@ cd $PKG_BUILD_DIR
 
 do_install usr/bin/vdr
 do_install usr/bin/svdrpsend
-cp $ROOT/$PACKAGES/${PKG_NAME}/scripts/* $INSTALL/usr/bin
+
+for i in epgtrans restartvdr start-setup start-xterm vdrshutdown xmltv2vdr.pl xmltv2vdr.sh; do
+  cp $ROOT/$PACKAGES/${PKG_NAME}/scripts/$i $INSTALL/usr/bin
+done
+if [ "$TARGET_ARCH" != arm -o "$TARGET_PLATFORM" = bcm2708 -o "$TARGET_PLATFORM" = a20 ]; then
+  cp $ROOT/$PACKAGES/${PKG_NAME}/scripts/runvdr $INSTALL/usr/bin
+fi
 
 mkdir -p $INSTALL/usr/lib/vdr
 

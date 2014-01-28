@@ -14,18 +14,24 @@ set_option() {
   return 0
 }
 
-cd $BUILD/$1*
+get_meta $1
 
-for opt in archive browser game music news video zoneminder; do
+$SCRIPTS/unpack $PKG_PARENT
+
+cd $BUILD/${PKG_PARENT}-${PKG_VERSION}
+cd mythplugins
+
+for opt in archive browser game music netvision news zoneminder; do
   set_option $1 myth${opt}
 done
 
 set_option $1 mythgallery "mythgallery exif dcraw"
 set_option $1 opengl
-set_option $1 visualizations "libvisual fftw sdl"
 
+#sed -i "s#\$prefix/include/mythtv#$SYSROOT_PREFIX/usr/local/include/mythtv/libmythbase#" configure
+sed -i "s#\$prefix/include#$SYSROOT_PREFIX/usr/local/include#" configure
 ./configure \
-  --prefix=/usr/local \
+  --prefix=/usr \
   --sysroot=$SYSROOT_PREFIX \
   --qmake="$QMAKE" \
   --disable-all \

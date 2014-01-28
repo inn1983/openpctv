@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPCTV 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-12 12:19+0800\n"
+"POT-Creation-Date: 2014-01-27 13:45+0800\n"
 "PO-Revision-Date: 2013-07-23 16:56+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: packages/setup/scripts/audio-config:8
 #: packages/setup/scripts/audio-config:48
-#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:100
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:102
 msgid "Sound card Configuration"
 msgstr "配置声卡"
 
@@ -389,34 +389,7 @@ msgstr "没有发现DVB设备。请检查设备是否已准备就绪。"
 msgid "This tuner is empty/unused"
 msgstr "这个调谐器是空的/未使用"
 
-#: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:103
-msgid "Select a software emulated CAM"
-msgstr "选择一种模拟CAM软件"
-
-#: packages/setup/scripts/getcam:62
-msgid ""
-"OScam can be used by Enigma2(Through dvbsoftwareca module to create symlinks "
-"for dvb adapters),VDR(Through VDR-DVBAPI plugin to act as a bridge between "
-"VDR and OScam) and XBMC(throgh VDR backend, so the same as VDR). VDR-SC is "
-"only used by VDR(A software emulated CAM, VDR plugin) and XBMC."
-msgstr ""
-"Enigma2(通过dvbsoftwareca内核模块为DVB卡建立ca链接), VDR(通过VDR-DVBAPI插件来"
-"实现VDR与OScam之间的通信)和XBMC（通过VDR后端，因此与VDR相同)可使用OScam，而"
-"VDR-SC（一种CAM模拟软件，VDR的插件)和XBMC可使用VDR-SC"
-
-#: packages/setup/scripts/getcam:62
-msgid "Open Source Conditional Access Module software"
-msgstr "开放源代码的条件接收模块"
-
-#: packages/setup/scripts/getcam:62
-msgid "A software CAM emulation, a VDR plugin"
-msgstr "一种CAM模拟软件，VDR的插件"
-
-#: packages/setup/scripts/getcam:62
-msgid "TTcam CAM - Applicable to China's exclusive CAM"
-msgstr "TTcam CAM - 只适用于中国的专用CAM"
-
-#: packages/setup/scripts/getcam:73
+#: packages/setup/scripts/getcam:74
 msgid ""
 "Would you like to configure OScam/VDR-SC? Of course, you can also put CCcam."
 "cfg file into an USB flash drive, the system will automatically read and "
@@ -425,8 +398,12 @@ msgstr ""
 "你想要配置OScam/VDR-SC吗？当然你也可以将CCcam.cfg文件放在U盘中，系统将会自动"
 "读取并写入OScam/VDR-SC的配置文件中。"
 
+#: packages/setup/scripts/getcam:89
+msgid "Would you like to enable SoftCAM (OScam) on this machine?"
+msgstr "你想在这台机器上运行SoftCAM(OScam)吗？"
+
 #: packages/setup/scripts/install-drivers:11
-#: packages/setup/scripts/setup.sh:108
+#: packages/setup/scripts/setup.sh:111
 msgid "Reboot"
 msgstr "重新启动"
 
@@ -484,7 +461,7 @@ msgstr ""
 "动吗？"
 
 #: packages/setup/scripts/install-drivers:70
-#: packages/setup/scripts/setup.sh:97
+#: packages/setup/scripts/setup.sh:99
 msgid "Install additional DVB driver"
 msgstr "安装附加的DVB驱动"
 
@@ -807,7 +784,7 @@ msgid "Submit"
 msgstr "提交"
 
 #: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
-#: packages/setup/scripts/setup.sh:99
+#: packages/setup/scripts/setup.sh:101
 msgid "Set the monitor's best resolution"
 msgstr "设定显示器的最佳分辨率"
 
@@ -820,11 +797,11 @@ msgstr ""
 
 #: packages/setup/scripts/monitor.sh:34
 msgid "Are you sure to quit?"
-msgstr ""
+msgstr "你确定退出吗？"
 
 #: packages/setup/scripts/netconfig:27
 msgid "You are connected with the Internet successfully"
-msgstr ""
+msgstr "已成功联入互联网"
 
 #: packages/setup/scripts/netconfig:28
 msgid ""
@@ -922,21 +899,38 @@ msgstr "选择网卡"
 msgid "Select the Network Interface Card you want to configure"
 msgstr "请选择你将要配置的网卡"
 
-#: packages/setup/scripts/select-irdrv:13
+#: packages/setup/scripts/select-irdrv:10
 msgid "IR configuration"
 msgstr "红外线接收配置"
 
-#: packages/setup/scripts/select-irdrv:13
+#: packages/setup/scripts/select-irdrv:10
 msgid "Select IR Device"
 msgstr "选择红外线设备"
 
-#: packages/setup/scripts/select-irdrv:13
+#: packages/setup/scripts/select-irdrv:10
 msgid ""
 "The following infrared receiver devices are found in this machine. Please "
 "select a default device as Lirc support."
 msgstr "在这台机器上找到了如下红外接遥控接收设备，请为lirc选择一种默认设备"
 
-#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:95
+#: packages/setup/scripts/select-plugins:26
+msgid "Do you want to select VDR-plugins?"
+msgstr "你是否想要选择VDR插件?"
+
+#: packages/setup/scripts/select-plugins:26
+msgid "This step is not necessary, because we provide a normal list."
+msgstr "这一步并不是必须的，因为我们为你提供了一个缺省即可正常运行的列表。"
+
+#: packages/setup/scripts/select-plugins:29
+#: packages/setup/scripts/setup.sh:105
+msgid "Select VDR-plugins"
+msgstr "选择VDR插件"
+
+#: packages/setup/scripts/select-plugins:29
+msgid "You can enable or disable VDR-plugins on the list."
+msgstr "你可以在下面的列表中允许或禁止VDR插件。"
+
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:97
 msgid "Set the default target"
 msgstr "选择默认的启动项"
 
@@ -963,11 +957,10 @@ msgid "Press any key to enter setup,"
 msgstr "按任意键进入配置程序，"
 
 #: packages/setup/scripts/setup.sh:19
-#, fuzzy
-msgid "or 3 seconds later enter XBMC/VDR automatically."
-msgstr "否则三秒后自动进入XBMC。"
+msgid "or 3 seconds later enter"
+msgstr "否则三秒后将自动进入"
 
-#: packages/setup/scripts/setup.sh:84
+#: packages/setup/scripts/setup.sh:86
 msgid ""
 "Would you like to scan channels for VDR/XBMC(It'll some minutes to do it)?  "
 "You can also scan channels with vdr reelscanchannels plugin in vdr."
@@ -975,52 +968,55 @@ msgstr ""
 "你想为VDR/XBMC进行进行频道扫描吗(这将会费几分钟的时间）？你也可以在VDR中利用"
 "reelscanchannels插件进行频道扫描。"
 
-#: packages/setup/scripts/setup.sh:93
+#: packages/setup/scripts/setup.sh:95
 msgid "configuration"
 msgstr "配置"
 
-#: packages/setup/scripts/setup.sh:93
+#: packages/setup/scripts/setup.sh:95
 msgid "Main menu"
 msgstr "主菜单"
 
-#: packages/setup/scripts/setup.sh:94
+#: packages/setup/scripts/setup.sh:96
 msgid "Set global location and language"
 msgstr "设置全局区域和语言"
 
-#: packages/setup/scripts/setup.sh:96
+#: packages/setup/scripts/setup.sh:98
 msgid "Configure Network Environment"
 msgstr "配置网络环境"
 
-#: packages/setup/scripts/setup.sh:98
+#: packages/setup/scripts/setup.sh:100
 msgid "Select IR device"
 msgstr "选择红外接收设备"
 
-#: packages/setup/scripts/setup.sh:101
+#: packages/setup/scripts/setup.sh:103
 msgid "Update Satellite Transponders"
 msgstr "更新卫星参数"
 
-#: packages/setup/scripts/setup.sh:102
+#: packages/setup/scripts/setup.sh:104
 msgid "Update EPG data"
 msgstr "更新第三方EPG数据"
 
-#: packages/setup/scripts/setup.sh:104
+#: packages/setup/scripts/setup.sh:106
+msgid "Select a software emulated CAM"
+msgstr "选择一种模拟CAM软件"
+
+#: packages/setup/scripts/setup.sh:107
 msgid "DiSEqC configuration"
 msgstr "DiSEqC配置"
 
-#: packages/setup/scripts/setup.sh:105
+#: packages/setup/scripts/setup.sh:108
 msgid "Auto scan channels"
 msgstr "自动扫描频道"
 
-#: packages/setup/scripts/setup.sh:106
+#: packages/setup/scripts/setup.sh:109
 msgid "Start VDR with rpihddevice frontend"
-msgstr ""
+msgstr "启动带有rpihddevice的VDR"
 
-#: packages/setup/scripts/setup.sh:107
-#, fuzzy
+#: packages/setup/scripts/setup.sh:110
 msgid "Start XBMC pvr with VDR backend"
 msgstr "启动带有VDR后台的XBMC"
 
-#: packages/setup/scripts/setup.sh:109
+#: packages/setup/scripts/setup.sh:112
 msgid "Exit to login shell"
 msgstr "退出并登录shell"
 
@@ -1045,13 +1041,9 @@ msgstr ""
 "请选择你想要扫描的卫星，注意整个扫描的过程可能需要很长时间，请耐心等待。"
 
 #: packages/setup/scripts/update-channels:47
+#: packages/setup/scripts/update-channels:54
 msgid "We'll use w_scan to scan channels, are you ready?"
 msgstr "我们将使用w_scan扫描频道，你准备好了吗？"
-
-#: packages/setup/scripts/update-channels:54
-msgid ""
-"Please put the transponders list in /etc/dvbt for scan-s2, Are you ready?"
-msgstr "请将频点参数列表放至/etc/dvbt，你准备好了吗？"
 
 #: packages/setup/scripts/update-channels:89
 msgid "Split channels in TV and Radio..."
@@ -1095,5 +1087,26 @@ msgstr ""
 "你想从fastsatfinder.com更新卫星转发器参数吗？如果不升级的话，你的转发器参数可"
 "能不是最新的。"
 
-#~ msgid "Support for DVB-C 3221 USB BOX"
-#~ msgstr "支持DVB3221 USB盒子"
+#~ msgid ""
+#~ "OScam can be used by Enigma2(Through dvbsoftwareca module to create "
+#~ "symlinks for dvb adapters),VDR(Through VDR-DVBAPI plugin to act as a "
+#~ "bridge between VDR and OScam) and XBMC(throgh VDR backend, so the same as "
+#~ "VDR). VDR-SC is only used by VDR(A software emulated CAM, VDR plugin) and "
+#~ "XBMC."
+#~ msgstr ""
+#~ "Enigma2(通过dvbsoftwareca内核模块为DVB卡建立ca链接), VDR(通过VDR-DVBAPI插"
+#~ "件来实现VDR与OScam之间的通信)和XBMC（通过VDR后端，因此与VDR相同)可使用"
+#~ "OScam，而VDR-SC（一种CAM模拟软件，VDR的插件)和XBMC可使用VDR-SC"
+
+#~ msgid "Open Source Conditional Access Module software"
+#~ msgstr "开放源代码的条件接收模块"
+
+#~ msgid "A software CAM emulation, a VDR plugin"
+#~ msgstr "一种CAM模拟软件，VDR的插件"
+
+#~ msgid "TTcam CAM - Applicable to China's exclusive CAM"
+#~ msgstr "TTcam CAM - 只适用于中国的专用CAM"
+
+#~ msgid ""
+#~ "Please put the transponders list in /etc/dvbt for scan-s2, Are you ready?"
+#~ msgstr "请将频点参数列表放至/etc/dvbt，你准备好了吗？"

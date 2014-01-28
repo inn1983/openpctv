@@ -6,7 +6,8 @@ require_cxx $1
 
 $SCRIPTS/build linux
 
-cd $BUILD/$1*
+get_meta $1
+cd $PKG_BUILD_DIR/mythtv
 
 if pkg_uses $1 alsa; then
   ALSA_CONFIG="--enable-audio-alsa"
@@ -26,14 +27,14 @@ else
   LIRC_CONFIG="--disable-lirc"
 fi
 
-if pkg_uses $1 v4l; then
-  V4L_CONFIG="--enable-v4l --disable-ivtv --enable-hdpvr"
-else
-  V4L_CONFIG="--disable-v4l --disable-ivtv --disable-hdpvr"
-fi
+#if pkg_uses $1 v4l; then
+#  V4L_CONFIG="--enable-v4l --disable-ivtv --enable-hdpvr"
+#else
+#  V4L_CONFIG="--disable-v4l --disable-ivtv --disable-hdpvr"
+#fi
 
 if pkg_uses $1 dvb; then
-  DVB_CONFIG="--enable-dvb --dvb-path=$(kernel_path)/include"
+  DVB_CONFIG="--enable-dvb --dvb-path=$SYSROOT_PREFIX/usr/include"
 else
   DVB_CONFIG="--disable-dvb"
 fi
@@ -60,6 +61,12 @@ if pkg_uses $1 vdpau; then
   VDPAU_CONFIG="--enable-vdpau"
 else
   VDPAU_CONFIG="--disable-vdpau"
+fi
+
+if pkg_uses $1 vaapi; then
+  VAAPI_CONFIG="--enable-vaapi"
+else
+  VAAPI_CONFIG="--disable-vaapi"
 fi
 
 if pkg_uses $1 directfb; then
@@ -115,7 +122,6 @@ esac
             --disable-audio-oss \
             --disable-audio-jack \
             --disable-valgrind \
-            --enable-iptv \
             --enable-hdhomerun \
             --disable-mac-bundle \
             --without-bindings=perl,python \
@@ -123,12 +129,10 @@ esac
             $PULSEAUDIO_CONFIG \
             $LIRC_CONFIG \
             $FIREWIRE_CONFIG \
-            $V4L_CONFIG \
             $DVB_CONFIG \
             $XORG_CONFIG \
-            $XVMC_CONFIG \
             $VDPAU_CONFIG \
-            $DIRECTFB_CONFIG \
+            $VAAPI_CONFIG \
             $CRYSTALHD_CONFIG \
             $JOYSTICK_CONFIG \
 

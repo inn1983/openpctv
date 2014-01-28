@@ -2,7 +2,10 @@
 
 . config/options
 
-cd $BUILD/$1*
+get_meta $1
+
+cd $BUILD/${PKG_PARENT}-${PKG_VERSION}
+cd mythplugins
 
 do_install usr/bin
 do_install usr/lib/mythtv/plugins/*.so

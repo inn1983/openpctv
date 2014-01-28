@@ -37,11 +37,13 @@ else
    echo "DEFTARGET=$target" >> /etc/system.options
 fi
 
-case $target in
-  vdr)
-    systemctl set-default vdr.target;;
-  xbmc)
-    systemctl set-default xbmc.target;;
-  enigma2pc)
-    systemctl set-default enigma2pc.target;
-esac
+if ! grep -q -i arm /proc/cpuinfo; then
+  case $target in
+    vdr)
+      systemctl set-default vdr.target;;
+    xbmc)
+      systemctl set-default xbmc.target;;
+    enigma2pc)
+      systemctl set-default enigma2pc.target;
+  esac
+fi

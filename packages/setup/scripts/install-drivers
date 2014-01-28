@@ -68,7 +68,7 @@ else
 fi
 
 dialog --clear --title "$(gettext "Install additional DVB driver")" --menu \
-"$(gettext "Before proceeding please confirm your DVB device specific information. Choose the driver you need to install carefully.")" 17 80 8 \
+"$(gettext "Before proceeding please confirm your DVB device specific information. Choose the driver you need to install carefully.")" 14 80 7 \
  "Exit" "$(gettext "I do not want to install now.")" \
  "s2-liplianin" "$(gettext "Support most of the devices,such as DVBWorld,Tevii,Prof...")" \
  "tbs-drivers" "$(gettext "Support all the TBS devices")" \

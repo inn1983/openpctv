@@ -83,5 +83,7 @@ do_configure \
 
 make V=1 -j3
 make_install
-mkdir -p .install/usr/lib/mesa
-cp -P .install/$XORG_PATH_MODULES/extensions/libglx.so .install/usr/lib/mesa
+if pkg_uses $1 mesa; then
+  mkdir -p .install/usr/lib/mesa
+  cp -P .install/$XORG_PATH_MODULES/extensions/libglx.so .install/usr/lib/mesa
+fi

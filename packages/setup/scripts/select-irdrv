@@ -7,11 +7,19 @@ export TEXTDOMAIN=openpctv
 DIALOGTMP=/tmp/dialogtmp.$$
 RESULTTMP=/tmp/resulttmp.$$
 
-[ ! -d /sys/class/rc ] && exit
-ls /sys/class/rc/* >/dev/null 2>&1 || exit
-
 echo "dialog --backtitle \"$(gettext "IR configuration")\" --title \"$(gettext "Select IR Device")\" --clear --radiolist \"$(gettext "The following infrared receiver devices are found in this machine. Please select a default device as Lirc support.")\" 13 70 3 \\" > $DIALOGTMP
 item=on
+
+if grep -q "BCM2708" /proc/cpuinfo; then
+  modprobe lirc_rpi
+  sleep 0.1
+  [ -r /dev/lirc0 ] && echo "\"lirc_rpi\" \"RPi GPIO IR Receiver\" $item \\" >> $DIALOGTMP
+  item=off
+else
+  [ ! -d /sys/class/rc ] && exit
+  ls /sys/class/rc/* >/dev/null 2>&1 || exit
+fi
+
 for i in /sys/class/rc/*; do
   drv=$(grep DRV_NAME $i/uevent |sed 's/DRV_NAME=//g')
   name=$(cat $i/input*/name)

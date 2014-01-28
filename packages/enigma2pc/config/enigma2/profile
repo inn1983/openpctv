@@ -44,7 +44,6 @@
   0.260	RecordingConfig
   0.261	UsageConfig
   0.265	keymapparser
-  0.272	Network
   0.273	LCD
   0.273	RFMod
   0.273	Init:CI
@@ -79,15 +78,12 @@
   0.365	plugin FrontprocessorUpgrade
   0.368	plugin HdmiCEC
   0.369	plugin Hotplug
-  0.369	plugin NFIFlash
-  0.371	plugin NetworkWizard
   0.371	plugin OSD3DSetup
   0.372	plugin OSDPositionSetup
   0.372	plugin PositionerSetup
   0.374	plugin SatelliteEquipmentControl
   0.374	plugin Satfinder
   0.375	plugin SkinSelector
-  0.375	plugin SoftwareManager
   0.380	plugin SystemTime
   0.383	plugin VideoClippingSetup
   0.384	plugin VideoEnhancement

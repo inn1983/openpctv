@@ -5,6 +5,8 @@ pre_umount () {
   [ -f /lib/systemd/system/automounter-smb.service ] && systemctl stop automounter-smb.service
 }
 
+export IMX_NOPTS=1
+
 echo 0 > /sys/class/graphics/fbcon/cursor_blink
 
 [ -n "$LOGFILE" ] || LOGFILE="/dev/null"

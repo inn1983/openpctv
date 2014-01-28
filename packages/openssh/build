@@ -9,6 +9,8 @@ export LDFLAGS="$TARGET_CFLAGS $TARGET_LDFLAGS"
 
 cd $BUILD/$1*
 
+do_autoconf
+
 #./configure --host=$HOST_NAME \
 #             --build=$HOST_NAME \
 #             --target=$TARGET_NAME \

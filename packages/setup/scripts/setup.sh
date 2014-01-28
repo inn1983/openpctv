@@ -12,11 +12,11 @@ export TEXTDOMAIN=openpctv
 
 source /etc/profile
 
-grep -q BCM2708 /proc/cpuinfo && sleep 1
+grep -E -q "BCM2708|A20" /proc/cpuinfo && sleep 1.5
 
 if grep -q -i arm /proc/cpuinfo; then
   ARCH=arm
-  echo -e -n "\e[31m$(gettext "Press any key to enter setup,")\e[0m \e[32m$(gettext "or 3 seconds later enter XBMC/VDR automatically.")\e[0m"
+  echo -e -n "\e[31m$(gettext "Press any key to enter setup,")\e[0m \e[32m$(gettext "or 3 seconds later enter") ${DEFTARGET}.\e[0m"
   read -s -n1 -t4
   result=$?
   if [ $result = 142 -o $result = 130 ]; then
@@ -57,6 +57,7 @@ RUN_TRANS=/usr/bin/update-transponders
 RUN_DVB=/usr/bin/update-dvbdevice
 RUN_DISEQC=/usr/bin/diseqcsetup
 RUN_CHANNELS=/usr/bin/update-channels
+RUN_PLUGINS=/usr/bin/select-plugins
 
 function updatelocale
 {
@@ -76,6 +77,7 @@ systemctl stop vdr
 systemctl stop vdr-backend
 [ -f $RUN_MONITOR ] && $RUN_MONITOR
 [ -f $RUN_AUDIO ] && $RUN_AUDIO init
+[ -f $RUN_PLUGINS ] && $RUN_PLUGINS
 [ -f $RUN_CAM ] && $RUN_CAM
 [ -f $RUN_EPG ] && $RUN_EPG
 [ -f $RUN_TRANS ] && $RUN_TRANS
@@ -90,7 +92,7 @@ fi
 function MainMenu
 {
 updatelocale
-echo "${DIALOG} --clear --no-cancel --backtitle \"${DISTRIB_ID} $(gettext "configuration")\" --menu \"$(gettext "Main menu")\" 21 60 14 \\" > $MENUTMP
+echo "${DIALOG} --clear --no-cancel --backtitle \"${DISTRIB_ID} $(gettext "configuration")\" --menu \"$(gettext "Main menu")\" 22 60 15 \\" > $MENUTMP
 [ -f $RUN_LANG ] && echo "Lang \"$(gettext "Set global location and language")\" \\" >> $MENUTMP
 [ -f $RUN_TARGET ] && echo "Target \"$(gettext "Set the default target")\" \\" >> $MENUTMP
 [ -f $RUN_NET ] && echo "Netconf \"$(gettext "Configure Network Environment")\" \\" >> $MENUTMP
@@ -100,6 +102,7 @@ echo "${DIALOG} --clear --no-cancel --backtitle \"${DISTRIB_ID} $(gettext "confi
 [ -f $RUN_AUDIO ] && echo "Audio \"$(gettext "Sound card Configuration")\" \\" >> $MENUTMP
 [ -f $RUN_TRANS ] && echo "Uptran \"$(gettext "Update Satellite Transponders")\" \\" >> $MENUTMP
 [ -f $RUN_EPG ] && echo "EPG \"$(gettext "Update EPG data")\" \\" >> $MENUTMP
+[ -f $RUN_PLUGINS ] && echo "Plugins \"$(gettext "Select VDR-plugins")\" \\" >> $MENUTMP
 [ -f $RUN_CAM ] && echo "CAM \"$(gettext "Select a software emulated CAM")\" \\" >> $MENUTMP
 [ -f $RUN_DISEQC ] && echo "DiSEqC \"$(gettext "DiSEqC configuration")\" \\" >> $MENUTMP
 [ -f $RUN_CHANNELS ] && echo "Scan \"$(gettext "Auto scan channels")\" \\" >> $MENUTMP
@@ -131,6 +134,9 @@ case "$(cat $DIALOGOUT)" in
     		MainMenu
   		;;
     EPG)	$RUN_EPG
+		MainMenu
+		;;
+    Plugins)	$RUN_PLUGINS
 		MainMenu
 		;;
     CAM)	$RUN_CAM

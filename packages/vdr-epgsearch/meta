@@ -1,5 +1,5 @@
 PKG_NAME=vdr-epgsearch
-PKG_URL_REV=e74817a510484b5e45d872e811323d99f53110ff
+PKG_URL_REV=29c174a
 PKG_VERSION=1.0.1+${PKG_URL_REV}
 PKG_URL_PROTO=git
 PKG_URL="git://projects.vdr-developer.org/vdr-plugin-epgsearch.git"

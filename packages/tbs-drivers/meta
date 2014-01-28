@@ -1,7 +1,7 @@
 PKG_NAME=tbs-drivers
-PKG_VERSION=v130927
+PKG_VERSION=v140113
 PKG_REV=1
-PKG_URL="$SFNET_SRCS/openpctv/sources/${PKG_NAME}-${PKG_VERSION}.tar.xz"
+PKG_URL="$SFNET_SRCS/openpctv/sources/tbs-drivers-${PKG_VERSION}.tar.xz"
 PKG_ARCH="i386 x86_64"
 PKG_BUILD_DEPENDS="toolchain"
 PKG_RUN_DEPENDS="$TARGET_LIBC linux kmod"

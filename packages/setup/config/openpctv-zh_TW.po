@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openpctv 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-12 12:19+0800\n"
+"POT-Creation-Date: 2014-01-27 13:45+0800\n"
 "PO-Revision-Date: 2013-07-28 09:19+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: packages/setup/scripts/audio-config:8
 #: packages/setup/scripts/audio-config:48
-#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:100
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:102
 #, fuzzy
 msgid "Sound card Configuration"
 msgstr "配置音效卡"
@@ -405,39 +405,19 @@ msgstr ""
 msgid "This tuner is empty/unused"
 msgstr ""
 
-#: packages/setup/scripts/getcam:62 packages/setup/scripts/setup.sh:103
-msgid "Select a software emulated CAM"
-msgstr ""
-
-#: packages/setup/scripts/getcam:62
-msgid ""
-"OScam can be used by Enigma2(Through dvbsoftwareca module to create symlinks "
-"for dvb adapters),VDR(Through VDR-DVBAPI plugin to act as a bridge between "
-"VDR and OScam) and XBMC(throgh VDR backend, so the same as VDR). VDR-SC is "
-"only used by VDR(A software emulated CAM, VDR plugin) and XBMC."
-msgstr ""
-
-#: packages/setup/scripts/getcam:62
-msgid "Open Source Conditional Access Module software"
-msgstr ""
-
-#: packages/setup/scripts/getcam:62
-msgid "A software CAM emulation, a VDR plugin"
-msgstr ""
-
-#: packages/setup/scripts/getcam:62
-msgid "TTcam CAM - Applicable to China's exclusive CAM"
-msgstr ""
-
-#: packages/setup/scripts/getcam:73
+#: packages/setup/scripts/getcam:74
 msgid ""
 "Would you like to configure OScam/VDR-SC? Of course, you can also put CCcam."
 "cfg file into an USB flash drive, the system will automatically read and "
 "write into the OScam/VDR-SC configuration file."
 msgstr ""
 
+#: packages/setup/scripts/getcam:89
+msgid "Would you like to enable SoftCAM (OScam) on this machine?"
+msgstr ""
+
 #: packages/setup/scripts/install-drivers:11
-#: packages/setup/scripts/setup.sh:108
+#: packages/setup/scripts/setup.sh:111
 msgid "Reboot"
 msgstr ""
 
@@ -496,7 +476,7 @@ msgstr ""
 "加的驅動嗎？"
 
 #: packages/setup/scripts/install-drivers:70
-#: packages/setup/scripts/setup.sh:97
+#: packages/setup/scripts/setup.sh:99
 #, fuzzy
 msgid "Install additional DVB driver"
 msgstr "安裝附加的V4L及DVB驅動"
@@ -818,7 +798,7 @@ msgid "Submit"
 msgstr "提交"
 
 #: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
-#: packages/setup/scripts/setup.sh:99
+#: packages/setup/scripts/setup.sh:101
 msgid "Set the monitor's best resolution"
 msgstr "設定顯示器的最佳解析度"
 
@@ -938,22 +918,40 @@ msgstr "選擇網卡"
 msgid "Select the Network Interface Card you want to configure"
 msgstr "請選擇你將要配置的網卡"
 
-#: packages/setup/scripts/select-irdrv:13
+#: packages/setup/scripts/select-irdrv:10
 msgid "IR configuration"
 msgstr "紅外線接收配置"
 
-#: packages/setup/scripts/select-irdrv:13
+#: packages/setup/scripts/select-irdrv:10
 msgid "Select IR Device"
 msgstr "選擇紅外線設備"
 
-#: packages/setup/scripts/select-irdrv:13
+#: packages/setup/scripts/select-irdrv:10
 #, fuzzy
 msgid ""
 "The following infrared receiver devices are found in this machine. Please "
 "select a default device as Lirc support."
 msgstr "在這台機器上找到了如下紅外接遙控接收設備，請為lirc選擇一種預設設備"
 
-#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:95
+#: packages/setup/scripts/select-plugins:26
+#, fuzzy
+msgid "Do you want to select VDR-plugins?"
+msgstr "是否保存這些設置?"
+
+#: packages/setup/scripts/select-plugins:26
+msgid "This step is not necessary, because we provide a normal list."
+msgstr ""
+
+#: packages/setup/scripts/select-plugins:29
+#: packages/setup/scripts/setup.sh:105
+msgid "Select VDR-plugins"
+msgstr ""
+
+#: packages/setup/scripts/select-plugins:29
+msgid "You can enable or disable VDR-plugins on the list."
+msgstr ""
+
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:97
 msgid "Set the default target"
 msgstr ""
 
@@ -980,64 +978,68 @@ msgid "Press any key to enter setup,"
 msgstr ""
 
 #: packages/setup/scripts/setup.sh:19
-msgid "or 3 seconds later enter XBMC/VDR automatically."
+msgid "or 3 seconds later enter"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:84
+#: packages/setup/scripts/setup.sh:86
 msgid ""
 "Would you like to scan channels for VDR/XBMC(It'll some minutes to do it)?  "
 "You can also scan channels with vdr reelscanchannels plugin in vdr."
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:93
+#: packages/setup/scripts/setup.sh:95
 #, fuzzy
 msgid "configuration"
 msgstr "紅外線接收配置"
 
-#: packages/setup/scripts/setup.sh:93
+#: packages/setup/scripts/setup.sh:95
 msgid "Main menu"
 msgstr "主菜單"
 
-#: packages/setup/scripts/setup.sh:94
+#: packages/setup/scripts/setup.sh:96
 #, fuzzy
 msgid "Set global location and language"
 msgstr "設置全域區域和語言"
 
-#: packages/setup/scripts/setup.sh:96
+#: packages/setup/scripts/setup.sh:98
 msgid "Configure Network Environment"
 msgstr "配置網路環境"
 
-#: packages/setup/scripts/setup.sh:98
+#: packages/setup/scripts/setup.sh:100
 msgid "Select IR device"
 msgstr "選擇紅外接收設備"
 
-#: packages/setup/scripts/setup.sh:101
+#: packages/setup/scripts/setup.sh:103
 #, fuzzy
 msgid "Update Satellite Transponders"
 msgstr "從fastsatfinder自動更新衛星參數"
 
-#: packages/setup/scripts/setup.sh:102
+#: packages/setup/scripts/setup.sh:104
 msgid "Update EPG data"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:104
+#: packages/setup/scripts/setup.sh:106
+msgid "Select a software emulated CAM"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:107
 #, fuzzy
 msgid "DiSEqC configuration"
 msgstr "DiSEqC配置"
 
-#: packages/setup/scripts/setup.sh:105
+#: packages/setup/scripts/setup.sh:108
 msgid "Auto scan channels"
 msgstr "自動掃描頻道"
 
-#: packages/setup/scripts/setup.sh:106
+#: packages/setup/scripts/setup.sh:109
 msgid "Start VDR with rpihddevice frontend"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:107
+#: packages/setup/scripts/setup.sh:110
 msgid "Start XBMC pvr with VDR backend"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:109
+#: packages/setup/scripts/setup.sh:112
 msgid "Exit to login shell"
 msgstr "退出並登錄shell"
 
@@ -1063,12 +1065,8 @@ msgstr ""
 "請選擇你想要掃描的衛星，注意整個掃描的過程可能需要很長時間，請耐心等待。"
 
 #: packages/setup/scripts/update-channels:47
-msgid "We'll use w_scan to scan channels, are you ready?"
-msgstr ""
-
 #: packages/setup/scripts/update-channels:54
-msgid ""
-"Please put the transponders list in /etc/dvbt for scan-s2, Are you ready?"
+msgid "We'll use w_scan to scan channels, are you ready?"
 msgstr ""
 
 #: packages/setup/scripts/update-channels:89

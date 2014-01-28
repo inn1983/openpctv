@@ -1,10 +1,10 @@
-PKG_NAME=xf86-video-sunxifb
+PKG_NAME=xf86-video-fbturbo
 PKG_URL_PROTO=git
 
 #PKG_URL_REV=b93dab5cae
-PKG_URL_REV=9808a58
-PKG_VERSION=0.2.0+r${PKG_URL_REV}
-PKG_URL="https://github.com/ssvb/xf86-video-sunxifb.git"
+PKG_URL_REV=ef851c6
+PKG_VERSION=0.5.1+r${PKG_URL_REV}
+PKG_URL="https://github.com/ssvb/xf86-video-fbturbo"
 
 PKG_REV=1
 PKG_ARCH=arm

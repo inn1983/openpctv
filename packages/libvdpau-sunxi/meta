@@ -1,6 +1,6 @@
 PKG_NAME=libvdpau-sunxi
 PKG_URL_PROTO=git
-PKG_URL_REV=074b13b
+PKG_URL_REV=60d3888
 PKG_URL="https://github.com/linux-sunxi/libvdpau-sunxi"
 PKG_VERSION=0.2.0+r${PKG_URL_REV}
 PKG_REV=1

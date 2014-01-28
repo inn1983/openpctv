@@ -5,11 +5,22 @@
 cd $BUILD/$1*
 do_configure \
   --enable-largefile \
+  --disable-nls \
   --disable-debug \
+  --disable-extra \
+  --disable-browser \
   --disable-help \
+  --disable-justify \
   --disable-mouse \
+  --disable-operatingdir \
+  --disable-speller \
+  --disable-tabcomp \
+  --disable-wrapping \
+  --disable-wrapping-as-root \
   --enable-color \
+  --disable-multibuffer \
   --enable-nanorc \
+  --disable-utf8 \
   --enable-altrcname=/etc/nanorc \
   --disable-glibtest \
   --with-gnu-ld \
