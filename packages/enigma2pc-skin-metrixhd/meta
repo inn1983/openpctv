@@ -1,0 +1,11 @@
+PKG_NAME=enigma2pc-skin-metrixhd
+PKG_URL_REV=70e24d9
+PKG_VERSION=20130622+${PKG_URL_REV}
+PKG_URL_PROTO=git
+PKG_URL="https://github.com/BiNiCKNiCH/enigma2-plugin-skins-metrixhd-mod-by-binicknich.git"
+PKG_REV=1
+PKG_RUN_DEPENDS="enigma2pc"
+PKG_PRIORITY=optional
+PKG_SECTION=multimedia
+PKG_SHORTDESC="Emigma2pc skins Metrixhd mod"
+PKG_LONGDESC="This is a MOD of MyMetrixHD plugin originally created by iMaxxx for VTi e2 images."

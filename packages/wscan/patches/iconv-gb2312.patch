@@ -1,0 +1,12 @@
+diff -uNr w_scan-20140118.orig/char-coding.c w_scan-20140118/char-coding.c
+--- w_scan-20140118.orig/char-coding.c	2014-01-28 20:51:16.711051404 +0800
++++ w_scan-20140118/char-coding.c	2014-01-28 23:50:22.334501496 +0800
+@@ -203,7 +203,7 @@
+      strcpy(&usr[strlen(iconv_codes[user_charset_id])], "//IGNORE");
+ 
+      debug("\t\t%s: converting '%s' from '%s' to '%s'\n", __FUNCTION__, *inbuf, iconv_codes[dvb_charset_id], usr);
+-     conversion_descriptor = iconv_open((const char *) usr, iconv_codes[dvb_charset_id]);
++     conversion_descriptor = iconv_open("GB2312", iconv_codes[dvb_charset_id]);
+      free(usr);
+ 
+      if (conversion_descriptor == (iconv_t)(-1)) {

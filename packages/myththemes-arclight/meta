@@ -1,0 +1,16 @@
+PKG_NAME=myththemes-arclight
+#PKG_VERSION=0.24
+#PKG_URL="http://ftp.osuosl.org/pub/mythtv/old_releases/myththemes-${PKG_VERSION}.tar.bz2"
+PKG_URL_PROTO=git
+PKG_URL_REV=b7c3389
+PKG_VERSION=27.1+r${PKG_URL_REV}
+PKG_URL="https://github.com/MythTV-Themes/Arclight"
+PKG_REV=1
+PKG_RUN_DEPENDS="$TARGET_LIBC"
+PKG_BUILD_DEPENDS="toolchain"
+PKG_DEPENDS="mythtv"
+PKG_PRIORITY=optional
+PKG_SECTION=multimedia
+PKG_SHORTDESC="extra themes for MythTV"
+PKG_LONGDESC="MythTV implements a fully-features PVR with a unified graphical interface."
+

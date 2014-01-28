@@ -1,0 +1,54 @@
+#!/bin/sh
+
+[ -f /usr/bin/runvdr ] || exit
+
+export TERM=linux
+. gettext.sh
+export TEXTDOMAIN=openpctv
+
+configdir=/etc/vdr/plugins.d
+
+isenable ()
+{
+VAR="$1"
+configfile=$(ls $configdir/[0-9][0-9]_$VAR)
+grep "^ENABLED=" $configfile | sed 's/ENABLED=//'
+}
+
+setenable ()
+{
+VAR="$1"
+VAL="$2"
+configfile=$(ls $configdir/[0-9][0-9]_$VAR)
+sed -i "s/^ENABLED=.*/ENABLED=$VAL/" $configfile
+}
+
+dialog --title "$(gettext "Do you want to select VDR-plugins?")" --clear --defaultno --yesno "$(gettext "This step is not necessary, because we provide a normal list.")" 6 70
+[ $? -eq 1 ] && exit
+
+echo "dialog --title \"$(gettext "Select VDR-plugins")\" --checklist \"$(gettext "You can enable or disable VDR-plugins on the list.")\" 28 40 20 \\" > /tmp/menufile.tmp
+
+
+for i in $configdir/[0-9][0-9]_*; do
+  j=$(basename $i | sed 's/[0-9][0-9]_//')
+  if ! echo "dvbapi rpihddevice softhddevice xineliboutput" | grep -q $j; then
+    check=$(isenable $j | sed -e 's/yes/on/' -e 's/no/off/')
+    echo "$j \"\" $check \\" >> /tmp/menufile.tmp
+  fi
+done
+echo "2> /tmp/result.tmp" >> /tmp/menufile.tmp
+
+. /tmp/menufile.tmp
+rm /tmp/menufile.tmp
+
+for i in $configdir/[0-9][0-9]_*; do
+  j=$(basename $i | sed 's/[0-9][0-9]_//')
+  if ! echo "dvbapi rpihddevice softhddevice xineliboutput" | grep -q $j; then
+    if grep -q $j /tmp/result.tmp; then
+      setenable $j yes
+    else
+      setenable $j no
+    fi
+  fi
+done
+rm /tmp/result.tmp

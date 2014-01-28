@@ -1,0 +1,17 @@
+#!/bin/sh
+
+. config/options
+get_meta $1
+
+export MAKEFLAGS=-j1
+
+cd $PKG_BUILD_DIR
+
+#cd config
+#$AUTOCONF -o ../configure
+#cd ..
+#do_configure
+./bootstrap.linux
+cd build
+make
+make_install

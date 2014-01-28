@@ -1,0 +1,12 @@
+PKG_NAME=pcsc-lite
+PKG_URL_PROTO=svn
+PKG_URL_REV=6829
+PKG_URL="svn://anonscm.debian.org/pcsclite/trunk/PCSC"
+PKG_VERSION=1.8.10+r${PKG_URL_REV}
+PKG_REV=1
+PKG_RUN_DEPENDS="$TARGET_LIBC"
+PKG_BUILD_DEPENDS="toolchain"
+PKG_PRIORITY=optional
+PKG_SECTION=libs
+PKG_SHORTDESC="PCSC Lite"
+PKG_LONGDESC="The purpose of PCSC Lite is to provide a Windows(R) SCard interface in a very small form factor for communicating to smart cards and readers. PCSC Lite can be compiled directly to a desired reader driver or can be used to dynamically allocate/deallocate reader drivers at runtime (default)."

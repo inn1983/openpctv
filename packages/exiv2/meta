@@ -1,0 +1,10 @@
+PKG_NAME=exiv2
+PKG_VERSION=0.24
+PKG_URL="http://www.exiv2.org/exiv2-${PKG_VERSION}.tar.gz"
+PKG_REV=1
+PKG_RUN_DEPENDS="$TARGET_LIBC"
+PKG_BUILD_DEPENDS="toolchain"
+PKG_PRIORITY=optional
+PKG_SECTION=libs
+PKG_SHORTDESC="A C++ library and a command line utility to manage image metadata"
+PKG_LONGDESC="xiv2 is a C++ library and a command line utility to manage image metadata. It provides fast and easy read and write access to the Exif, IPTC and XMP metadata of images in various formats"

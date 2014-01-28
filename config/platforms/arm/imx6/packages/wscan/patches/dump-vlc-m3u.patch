@@ -1,0 +1,398 @@
+diff -uNr a/dump-vlc-m3u.c b/dump-vlc-m3u.c
+--- a/dump-vlc-m3u.c	2014-01-18 23:28:06.000000000 +0800
++++ b/dump-vlc-m3u.c	2014-01-27 18:10:50.288310530 +0800
+@@ -38,9 +38,9 @@
+  *       support.
+  *
+  * TODO:
+- *       1) IMPLEMENT DVB-S2 SYNTAX FOR VLC.                        <- done.
+- *       2) check all values for system, modulation, fec, ..        <- done.
+- *       3) enshure UTF-8 compliance of service names (should be the easiest task) <- wrong. It's the hardest task. Names are converted by iconv to UTF8 and still probs..
++ *       1) IMPLEMENT DVB-S2 SYNTAX FOR VLC.
++ *       2) check all values for system, modulation, fec, ..
++ *       3) enshure UTF-8 compliance of service names (should be the easiest task)
+  *****************************************************************************/
+ static int idx = 1;
+ 
+@@ -65,34 +65,76 @@
+                 }
+ }
+ 
+-static const char * vlc_fec(int fec) {
+-  static const char * const code_rate_vlc[] = { "0", "1/2", "2/3", "3/4" ,"4/5", "5/6", "6/7", "7/8", "8/9", "9", "3/5", "9/10" }; /*"1/4", "1/3",*/ 
+-  if (fec > FEC_9_10) return ""; 
+-  return code_rate_vlc[fec];
++int vlc_fec(int fec) {
++        switch(fec) {
++                case FEC_NONE:                  return 0;
++                case FEC_1_2:                   return 1;
++                case FEC_2_3:                   return 2;
++                case FEC_3_4:                   return 3;
++                case FEC_4_5:                   return 4;
++                case FEC_5_6:                   return 5;
++                case FEC_6_7:                   return 6;
++                case FEC_7_8:                   return 7;
++                case FEC_8_9:                   return 8;
++/* not known to vlc-1.1.4. I think this is a bug. What about *DVB-S2* and VLC?
++   Even buggier. Where is rolloff, and modulation system to be found in VLC ? :-(((
++                case FEC_3_5:                   return ????;
++                case FEC_9_10:                  return ????;
++*/
++                default:                        return 9;
++                }
+ }
+ 
+-static const char * vlc_modulation(int modulation) { 
+-  static const char * const mod_vlc[] = {"QPSK", "16QAM", "32QAM", "64QAM", "128QAM", "256QAM", "QAM", "8VSB", "16VSB", "8PSK", "16APSK", "32APSK", "DQPSK"}; 
+-  return  mod_vlc[modulation];
++int vlc_modulation_OFDM(int modulation) {
++        switch(modulation) {
++                case QPSK:                      return -1;
++                case QAM_AUTO:                  return 0;
++                case QAM_16:                    return 16;
++                case QAM_32:                    return 32;
++                case QAM_64:                    return 64;
++                case QAM_128:                   return 128;
++                case QAM_256:                   return 256;
++                default:                        return 0;
++    }
+ }
+ 
+-static const char * vlc_delsys (int guard_interval) {
+-        switch(guard_interval) {          
+-                case SYS_DVBC_ANNEX_A:    return "dvb-c";
+-                case SYS_DVBC_ANNEX_B:    return "dvb-c";
+-                case SYS_DVBT        :    return "dvb-t";
+-                case SYS_DVBS        :    return "dvb-s";
+-                case SYS_DVBS2       :    return "dvb-s2";
+-                case SYS_ISDBT       :    return "isdb-t";
+-                case SYS_ISDBS       :    return "isdb-s";
+-                case SYS_ISDBC       :    return "isdb-t";
+-                case SYS_ATSC        :    return "atsc";
+-                case SYS_DVBT2       :    return "dvb-t2";
+-                case SYS_DVBC_ANNEX_C:    return "dvb-c";
+-                default:                  return "unknown";
+-                }                        
++int vlc_modulation_ATSC(int modulation) {
++        switch(modulation) {
++                case QAM_AUTO:                  return 0;
++                case QAM_16:                    return 16;
++                case QAM_32:                    return 32;
++                case QAM_64:                    return 64;
++                case QAM_128:                   return 128;
++                case QAM_256:                   return 256;
++                case VSB_8:                     return 8;
++                case VSB_16:                    return 16;
++                default:                        return 0;
++    }
++}
++
++int vlc_modulation_QAM(int modulation) {
++        switch(modulation) {
++                case QAM_16:                    return 16;
++                case QAM_32:                    return 32;
++                case QAM_64:                    return 64;
++                case QAM_128:                   return 128;
++                case QAM_256:                   return 256;
++                default:                        return 0;
++                }
++}
++
++int vlc_modulation_QPSK(int modulation) {
++        switch(modulation) {
++                case QPSK:                      return -1;
++                case QAM_16:                    return 16;
++/* the following are not known to VLC-1.1.4:
++                case PSK_8:                     return ????; 
++                case APSK_16:                   return ????;
++                case APSK_32:                   return ????;
++*/
++                default:                        return 0;
++                }
+ }
+-  
+ 
+ int vlc_bandwidth (int bandwidth) {
+         switch(bandwidth) {                  
+@@ -100,8 +142,8 @@
+                 case 7000000:                   return 7;
+                 case 6000000:                   return 6;
+                 case 5000000:                   return 5;
+-                case 10000000:                  return 10;
+-                case 1712000:                   return 2;     // wrong in VLC. It's 1.712, not 2.
++                case 10000000:                  return 10;    // check.
++                case 1712000:                   return 1.712; // check.
+                 default:                        return 0;
+                 }                         
+ }
+@@ -111,29 +153,29 @@
+                 case TRANSMISSION_MODE_2K:      return 2;
+                 case TRANSMISSION_MODE_8K:      return 8;
+                 case TRANSMISSION_MODE_4K:      return 4;
+-                case TRANSMISSION_MODE_1K:      return 1;
+-                case TRANSMISSION_MODE_16K:     return 16;
+-                case TRANSMISSION_MODE_32K:     return 32;
++                case TRANSMISSION_MODE_1K:      return 1;     // check.
++                case TRANSMISSION_MODE_16K:     return 16;    // check.
++                case TRANSMISSION_MODE_32K:     return 32;    // check.
+                 default:                        return 0;
+                 }                         
+ }  
+ 
+-static const char * vlc_guard (int guard_interval) {
++int vlc_guard (int guard_interval) {
+         switch(guard_interval) {          
+-                case GUARD_INTERVAL_1_32:       return "1/32";
+-                case GUARD_INTERVAL_1_16:       return "1/16";
+-                case GUARD_INTERVAL_1_8:        return "1/8";
+-                case GUARD_INTERVAL_1_4:        return "1/4";
+-                case GUARD_INTERVAL_1_128:      return "1/128";
+-                case GUARD_INTERVAL_19_128:     return "19/128";
+-                case GUARD_INTERVAL_19_256:     return "19/256";
++                case GUARD_INTERVAL_1_32:       return 32;
++                case GUARD_INTERVAL_1_16:       return 16;
++                case GUARD_INTERVAL_1_8:        return 8;
++                case GUARD_INTERVAL_1_4:        return 4;
++                case GUARD_INTERVAL_1_128:      return 128;   // check. 
++                case GUARD_INTERVAL_19_128:     return 19128; // check.
++                case GUARD_INTERVAL_19_256:     return 19256; // check.
+                 default:                        return 0;
+                 }                        
+ }  
+ 
+ int vlc_hierarchy (int hierarchy) {
+         switch(hierarchy) {                  
+-                case HIERARCHY_NONE:            return 0;
++                case HIERARCHY_NONE:            return -1;
+                 case HIERARCHY_1:               return 1;
+                 case HIERARCHY_2:               return 2;
+                 case HIERARCHY_4:               return 4;
+@@ -141,15 +183,104 @@
+                 }                         
+ }
+ 
+-int vlc_rolloff (int rolloff) {
+-        switch(rolloff) {                  
+-                case ROLLOFF_35:                return 35;
+-                case ROLLOFF_20:                return 20;
+-                case ROLLOFF_25:                return 25;
+-                default:                        return 35;
+-                }                         
++void vlc_file_header(FILE *f, uint16_t adapter, uint16_t frontend, struct w_scan_flags * flags, struct lnb_types_st *lnbp)
++{
++        fprintf (f, "%s\n", "#EXTM3U");
++
++        fprintf (f, "#EXTVLCOPT:dvb-adapter=%i\n", adapter);
++
++        switch (flags->scantype) {
++        case SCAN_SATELLITE: 
++                fprintf (f, "#EXTVLCOPT:dvb-lnb-lof1=%lu\n", lnbp->low_val);
++                fprintf (f, "#EXTVLCOPT:dvb-lnb-lof2=%lu\n", lnbp->high_val);
++                fprintf (f, "#EXTVLCOPT:dvb-lnb-slof=%lu\n", lnbp->switch_val);
++                break;
++        default:;
++        };
++
++
++}
++
++void vlc_dump_dvb_parameters (FILE * f, struct tuning_parameters * p, struct w_scan_flags * flags, struct lnb_types_st * lnbp)
++{
++        switch (flags->scantype) {
++        case SCAN_TERRCABLE_ATSC:
++                fprintf (f, "#EXTVLCOPT:dvb-frequency=%i\n",    p->frequency);
++                fprintf (f, "#EXTVLCOPT:dvb-modulation=%i\n",   vlc_modulation_ATSC(p->u.atsc.modulation));
++                /* NOTE: VLC is not honoring srate here. Most probably cable clear-qam tuning will fail
++                 *       in several cases, where the frontend doesnt support 'AUTO'.
++                 */
++                break;
++        case SCAN_CABLE:
++                fprintf (f, "#EXTVLCOPT:dvb-frequency=%i\n",    p->frequency);
++                fprintf (f, "#EXTVLCOPT:dvb-inversion=%i\n",    vlc_inversion(p->inversion));
++                /* VLC defaults to srate = 6875000 ??!
++                 * NOTE: quite *uncommon* value for European DVB-C; Looks like a VLC bug. This value will
++                 *       avoid DVB-C tuning for about 75% of European DVB-C users.
++                 *       VLC should default to srate = 6900000 and QAM_64 or QAM_AUTO (QAM_AUTO is done.)
++                 */
++                fprintf (f, "#EXTVLCOPT:dvb-srate=%i\n",        p->u.cable.symbol_rate); 
++                fprintf (f, "#EXTVLCOPT:dvb-fec=%i\n",          vlc_fec(p->u.cable.fec_inner));
++                fprintf (f, "#EXTVLCOPT:dvb-modulation=%i\n",   vlc_modulation_QAM(p->u.cable.modulation));
++                break;
++        case SCAN_TERRESTRIAL:
++                fprintf (f, "#EXTVLCOPT:dvb-frequency=%i\n",    p->frequency);
++                fprintf (f, "#EXTVLCOPT:dvb-inversion=%i\n",    vlc_inversion(p->inversion));
++                fprintf (f, "#EXTVLCOPT:dvb-bandwidth=%i\n",    vlc_bandwidth(p->u.terr.bandwidth));
++                fprintf (f, "#EXTVLCOPT:dvb-code-rate-hp=%i\n", vlc_fec(p->u.terr.code_rate_HP));
++                fprintf (f, "#EXTVLCOPT:dvb-code-rate-lp=%i\n", vlc_fec(p->u.terr.code_rate_LP));
++                fprintf (f, "#EXTVLCOPT:dvb-modulation=%i\n",   vlc_modulation_OFDM(p->u.terr.constellation));
++                fprintf (f, "#EXTVLCOPT:dvb-transmission=%i\n", vlc_transmission(p->u.terr.transmission_mode));
++                fprintf (f, "#EXTVLCOPT:dvb-guard=%i\n",        vlc_guard(p->u.terr.guard_interval));
++                fprintf (f, "#EXTVLCOPT:dvb-hierarchy=%i\n",    vlc_hierarchy(p->u.terr.hierarchy_information));
++                break;
++        case SCAN_SATELLITE:
++                fprintf (f, "#EXTVLCOPT:dvb-frequency=%i\n",    p->frequency);
++                fprintf (f, "#EXTVLCOPT:dvb-inversion=%i\n",    vlc_inversion(p->inversion));
++                fprintf (f, "#EXTVLCOPT:dvb-srate=%i\n",        p->u.sat.symbol_rate);
++                fprintf (f, "#EXTVLCOPT:dvb-fec=%i\n",          vlc_fec(p->u.sat.fec_inner));
++                switch (p->u.sat.polarization) {
++                        case POLARIZATION_HORIZONTAL:
++                        case POLARIZATION_CIRCULAR_LEFT:
++                                fprintf (f, "#EXTVLCOPT:dvb-voltage=18\n");
++                                break;
++                        default:
++                                fprintf (f, "#EXTVLCOPT:dvb-voltage=13\n");
++                                break;                                
++                        }
++                fprintf (f, "#EXTVLCOPT:dvb-tone=%i\n", p->frequency >= lnbp->switch_val);
++
++                if ((flags->sw_pos & 0xF) < 0xF)
++                        fprintf (f, "#EXTVLCOPT:dvb-satno=%i\n", flags->sw_pos & 0xF);
++
++                break;
++        default:
++                fatal("Unknown scantype %d\n", flags->scantype);
++        };
+ }
+ 
++void vlc_dump_service_parameter_set (FILE *f, 
++                                const char *service_name,
++                                const char *provider_name,
++                                struct tuning_parameters *p,
++                                uint16_t video_pid,
++                                uint16_t *audio_pid,
++                                uint16_t service_id,
++                                struct w_scan_flags * flags,
++                                struct lnb_types_st *lnbp)
++{
++        if (video_pid || audio_pid[0]) {
++                if (provider_name)
++                        fprintf (f, "#EXTINF:0,%s;%s\n", service_name, provider_name);
++                else
++                        fprintf (f, "#EXTINF:0,%s\n", service_name);
++                vlc_dump_dvb_parameters (f, p, flags, lnbp);
++                //fprintf (f, "#EXTVLCOPT:sout-ts-pid-video=%i\n", video_pid);
++                //fprintf (f, "#EXTVLCOPT:sout-ts-pid-audio=%i\n", audio_pid[0]); // FIXME: should get preferred LANG audio pid
++                fprintf (f, "#EXTVLCOPT:program=%i\n", service_id);
++                fprintf (f, "%s\n", "dvb://");
++                }
++}
+ 
+ void vlc_xspf_prolog(FILE * f, uint16_t adapter, uint16_t frontend, struct w_scan_flags * flags, struct lnb_types_st * lnbp)
+ {
+@@ -184,13 +315,13 @@
+         case SCAN_TERRCABLE_ATSC:
+                 fprintf (f, "%s", "atsc://");
+                 fprintf (f, "frequency=%i:",      p->frequency);
+-                fprintf (f, "modulation=%s",      vlc_modulation(p->u.atsc.modulation));
++                fprintf (f, "modulation=%i",      vlc_modulation_ATSC(p->u.atsc.modulation));
+                 /* NOTE: VLC is not honoring srate here. Most probably cable clear-qam tuning will fail
+                  *       in several cases, where the frontend doesnt support 'AUTO'.
+                  */
+                 break;
+         case SCAN_CABLE:
+-                fprintf (f, "%s://",                    vlc_delsys(p->u.cable.delivery_system));
++                fprintf (f, "%s", "dvb-c://");
+                 fprintf (f, "frequency=%i:",            p->frequency);
+                 fprintf (f, "inversion=%i:",            vlc_inversion(p->inversion));
+                 /* VLC defaults to srate = 6875000 ??!
+@@ -199,54 +330,38 @@
+                  *       VLC should default to srate = 6900000 and QAM_64 or QAM_AUTO (QAM_AUTO is done.)
+                  */
+                 fprintf (f, "srate=%i:",                p->u.cable.symbol_rate); 
+-                fprintf (f, "fec=%s:",                  vlc_fec(p->u.cable.fec_inner));
+-                fprintf (f, "modulation=%s",            vlc_modulation(p->u.cable.modulation));
++                fprintf (f, "fec=%i:",                  vlc_fec(p->u.cable.fec_inner));
++                fprintf (f, "modulation=%i",            vlc_modulation_QAM(p->u.cable.modulation));
+                 break;
+         case SCAN_TERRESTRIAL:
+-                fprintf (f, "%s://",                    vlc_delsys(p->u.terr.delivery_system));
++                fprintf (f, "%s",                       "dvb-t://");
+                 fprintf (f, "frequency=%i:",            p->frequency);
+                 fprintf (f, "inversion=%i:",            vlc_inversion(p->inversion));
+                 fprintf (f, "bandwidth=%i:",            vlc_bandwidth(p->u.terr.bandwidth));
+-                fprintf (f, "code-rate-hp=%s:",         vlc_fec(p->u.terr.code_rate_HP));
+-                fprintf (f, "code-rate-lp=%s:",         vlc_fec(p->u.terr.code_rate_LP));
+-                fprintf (f, "modulation=%s:",           vlc_modulation(p->u.terr.constellation));
++                fprintf (f, "code-rate-hp=%i:",         vlc_fec(p->u.terr.code_rate_HP));
++                fprintf (f, "code-rate-lp=%i:",         vlc_fec(p->u.terr.code_rate_LP));
++                fprintf (f, "modulation=%i:",           vlc_modulation_OFDM(p->u.terr.constellation));
+                 fprintf (f, "transmission=%i:",         vlc_transmission(p->u.terr.transmission_mode));
+-                fprintf (f, "guard=%s:",                vlc_guard(p->u.terr.guard_interval));
++                fprintf (f, "guard=%i:",                vlc_guard(p->u.terr.guard_interval));
+                 fprintf (f, "hierarchy=%i",             vlc_hierarchy(p->u.terr.hierarchy_information));
+                 break;
+         case SCAN_SATELLITE:
+                 /* NOTE: VLC (1.1.4, 20101113) doesnt seem to support DVB-S2 at all, DVB-S only. */
+-                /* NOTE: VLC         20140102) more than 3 years later.. 
+-                 *       now supports DVB API v5 and S2 - good. But still seems to miss Rotor/positioner, SCR and DISEQC support.
+-                 *       But at least they broke this xspf file format successfully several times in this time.
+-                 *       - Comma vs. Semicolon change
+-                 *       - VLC still dies if '&' occurs in channel name.
+-                 *       - obsoleting options
+-                 *       - still NO FILE DOCUMENTATION for this dvb xspf format. :-(
+-                 */
+-                fprintf (f, "%s://",                    vlc_delsys(p->u.sat.modulation_system));
+-                if (p->u.sat.modulation_system != SYS_DVBS) {
+-                   fprintf (f, "modulation=%s:",    vlc_modulation(p->u.sat.modulation_type));
+-                   fprintf (f, "rolloff=%i:",       vlc_rolloff(p->u.sat.rolloff));
+-                   }
++                fprintf (f, "%s", "dvb-s://");
+                 fprintf (f, "frequency=%i:",            p->frequency);
+                 fprintf (f, "inversion=%i:",            vlc_inversion(p->inversion));
+                 fprintf (f, "srate=%i:",                p->u.sat.symbol_rate);
+-                if (p->u.sat.modulation_system == SYS_DVBS)
+-                if (p->u.sat.fec_inner != FEC_AUTO)
+-                   fprintf (f, "fec=%s:",               vlc_fec(p->u.sat.fec_inner));
++                fprintf (f, "fec=%i:",                  vlc_fec(p->u.sat.fec_inner));
+                 switch (p->u.sat.polarization) {
+                         case POLARIZATION_HORIZONTAL:
+                         case POLARIZATION_CIRCULAR_LEFT:
+-                                fprintf (f, "polarization=H:");
++                                fprintf (f, "voltage=18:");
+                                 break;
+                         default:
+-                                fprintf (f, "polarization=V:");
++                                fprintf (f, "voltage=13:");
+                                 break;                                
+                         }
+                 fprintf (f, "tone=%i", p->frequency >= lnbp->switch_val);
+-                // "main access error: unsafe option "dvb-tone" has been ignored for security reasons"
+-                //     (uh.. No, this is not the NSA export function calling home, it's really needed)
+ 
+                 if ((flags->sw_pos & 0xF) < 0xF)
+                         fprintf (f, ":satno=%i", flags->sw_pos & 0xF);
+@@ -263,33 +378,8 @@
+                                 struct w_scan_flags * flags,
+                                 struct lnb_types_st *lnbp)
+ {
+-        // restrict allowed chars.
+-        char buf[256];
+-        int i,j,len = s->service_name? strlen(s->service_name):0;
+-        for (i=0,j=0; i<len; i++) {
+-            if (((s->service_name[i] >= '0') && (s->service_name[i] <= '9')) ||
+-                ((s->service_name[i] >= 'a') && (s->service_name[i] <= 'z')) ||
+-                ((s->service_name[i] >= 'A') && (s->service_name[i] <= 'Z')) ||
+-                 (s->service_name[i] == '.'))
+-               buf[j++]=s->service_name[i];
+-            else {
+-               switch(s->service_name[i]) {
+-                  case 'ä':  {buf[j++]='a'; buf[j++]='e'; break;}
+-                  case 'ö':  {buf[j++]='o'; buf[j++]='e'; break;}
+-                  case 'ü':  {buf[j++]='u'; buf[j++]='e'; break;}
+-                  case 'Ä':  {buf[j++]='A'; buf[j++]='e'; break;}
+-                  case 'Ö':  {buf[j++]='O'; buf[j++]='e'; break;}
+-                  case 'Ü':  {buf[j++]='U'; buf[j++]='e'; break;}
+-                  case 'ß':  {buf[j++]='s'; buf[j++]='s'; break;}
+-                  default: buf[j++]='_';
+-                  }
+-               
+-               } 
+-            }
+-        buf[j++]=0;
+-
+         fprintf_tab3("<track>\n");
+-        fprintf (f, "%s%s%.4d. %s%s\n", T4, "<title>", idx++, buf, "</title>");
++        fprintf (f, "%s%s%.4d. %s%s\n", T4, "<title>", idx++, s->service_name, "</title>");
+         fprintf (f, "%s%s",             T4, "<location>");
+ 
+         vlc_dump_dvb_parameters_as_xspf(f, &t->param, flags, lnbp);
