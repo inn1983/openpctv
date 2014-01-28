@@ -1,6 +1,5 @@
-diff -uNr linux-3.0.35.orig/arch/arm/mach-mx6/board-mx6q_sabresd.c linux-3.0.35/arch/arm/mach-mx6/board-mx6q_sabresd.c
---- linux-3.0.35.orig/arch/arm/mach-mx6/board-mx6q_sabresd.c	2013-12-29 11:08:41.737656873 +0800
-+++ linux-3.0.35/arch/arm/mach-mx6/board-mx6q_sabresd.c	2013-12-29 11:09:15.609655298 +0800
+--- a/arch/arm/mach-mx6/board-mx6q_sabresd.c	2013-12-29 11:08:41.737656873 +0800
++++ b/arch/arm/mach-mx6/board-mx6q_sabresd.c	2013-12-29 11:09:15.609655298 +0800
 @@ -795,66 +795,11 @@
  static struct fsl_mxc_lightsensor_platform_data ls_data = {
  	.rext = 499,	/* calibration: 499K->700K */
@@ -258,9 +257,8 @@ diff -uNr linux-3.0.35.orig/arch/arm/mach-mx6/board-mx6q_sabresd.c linux-3.0.35/
  
  	pm_power_off = mx6_snvs_poweroff;
  	imx6q_add_busfreq();
-diff -uNr linux-3.0.35.orig/arch/arm/mach-mx6/board-mx6q_sabresd.h linux-3.0.35/arch/arm/mach-mx6/board-mx6q_sabresd.h
---- linux-3.0.35.orig/arch/arm/mach-mx6/board-mx6q_sabresd.h	2013-12-29 11:08:41.745656873 +0800
-+++ linux-3.0.35/arch/arm/mach-mx6/board-mx6q_sabresd.h	2013-12-29 11:09:15.613655298 +0800
+--- a/arch/arm/mach-mx6/board-mx6q_sabresd.h	2013-12-29 11:08:41.745656873 +0800
++++ b/arch/arm/mach-mx6/board-mx6q_sabresd.h	2013-12-29 11:09:15.613655298 +0800
 @@ -28,6 +28,7 @@
  	MX6Q_PAD_CSI0_DAT7__AUDMUX_AUD3_RXD,
  
@@ -281,9 +279,8 @@ diff -uNr linux-3.0.35.orig/arch/arm/mach-mx6/board-mx6q_sabresd.h linux-3.0.35/
  };
  
  static iomux_v3_cfg_t mx6q_sabresd_csi0_sensor_pads[] = {
-diff -uNr linux-3.0.35.orig/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.c linux-3.0.35/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.c
---- linux-3.0.35.orig/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.c	2013-12-29 11:08:52.185656388 +0800
-+++ linux-3.0.35/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.c	2013-12-29 11:09:23.517654930 +0800
+--- a/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.c	2013-12-29 11:08:52.185656388 +0800
++++ b/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.c	2013-12-29 11:09:23.517654930 +0800
 @@ -886,7 +886,7 @@
  {
      gceSTATUS status = gcvSTATUS_OK;
@@ -293,9 +290,8 @@ diff -uNr linux-3.0.35.orig/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel.c linux
      gctBOOL locked = gcvFALSE;
      gctPHYS_ADDR physical = gcvNULL;
      gctPOINTER logical = gcvNULL;
-diff -uNr linux-3.0.35.orig/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel_command_vg.c linux-3.0.35/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel_command_vg.c
---- linux-3.0.35.orig/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel_command_vg.c	2013-12-29 11:08:52.185656388 +0800
-+++ linux-3.0.35/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel_command_vg.c	2013-12-29 11:09:23.521654931 +0800
+--- a/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel_command_vg.c	2013-12-29 11:08:52.185656388 +0800
++++ b/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel_command_vg.c	2013-12-29 11:09:23.521654931 +0800
 @@ -1106,7 +1106,7 @@
          gctUINT requestedSize;
          gctUINT allocationSize;
@@ -305,9 +301,8 @@ diff -uNr linux-3.0.35.orig/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel_command
          gctUINT8_PTR endCommand;
  
          /* Determine the aligned header size. */
-diff -uNr linux-3.0.35.orig/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel_video_memory.c linux-3.0.35/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel_video_memory.c
---- linux-3.0.35.orig/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel_video_memory.c	2013-12-29 11:08:52.185656388 +0800
-+++ linux-3.0.35/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel_video_memory.c	2013-12-29 11:09:23.521654931 +0800
+--- a/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel_video_memory.c	2013-12-29 11:08:52.185656388 +0800
++++ b/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel_video_memory.c	2013-12-29 11:09:23.521654931 +0800
 @@ -1661,7 +1661,7 @@
      gctBOOL acquired = gcvFALSE;
      gctBOOL locked = gcvFALSE;
@@ -317,9 +312,8 @@ diff -uNr linux-3.0.35.orig/drivers/mxc/gpu-viv/hal/kernel/gc_hal_kernel_video_m
      gctUINT32 baseAddress;
  
      gcmkHEADER_ARG("Node=0x%x", Node);
-diff -uNr linux-3.0.35.orig/drivers/mxc/hdmi-cec/mxc_hdmi-cec.c linux-3.0.35/drivers/mxc/hdmi-cec/mxc_hdmi-cec.c
---- linux-3.0.35.orig/drivers/mxc/hdmi-cec/mxc_hdmi-cec.c	2013-12-29 11:08:53.061656348 +0800
-+++ linux-3.0.35/drivers/mxc/hdmi-cec/mxc_hdmi-cec.c	2013-12-29 11:37:52.345575474 +0800
+--- a/drivers/mxc/hdmi-cec/mxc_hdmi-cec.c	2013-12-29 11:08:53.061656348 +0800
++++ b/drivers/mxc/hdmi-cec/mxc_hdmi-cec.c	2013-12-29 11:37:52.345575474 +0800
 @@ -1,5 +1,5 @@
  /*
 - * Copyright (C) 2012-2013 Freescale Semiconductor, Inc. All Rights Reserved.
@@ -1303,10 +1297,9 @@ diff -uNr linux-3.0.35.orig/drivers/mxc/hdmi-cec/mxc_hdmi-cec.c linux-3.0.35/dri
  module_init(hdmi_cec_init);
 -module_exit(hdmi_cec_exit);
 +module_exit(hdmi_cec_exit);
-\ 文件尾没有 newline 字符
-diff -uNr linux-3.0.35.orig/drivers/mxc/ipu3/ipu_param_mem.h linux-3.0.35/drivers/mxc/ipu3/ipu_param_mem.h
---- linux-3.0.35.orig/drivers/mxc/ipu3/ipu_param_mem.h	2013-12-29 11:08:53.057656347 +0800
-+++ linux-3.0.35/drivers/mxc/ipu3/ipu_param_mem.h	2013-12-29 11:09:23.525654932 +0800
+\ No newline at end of file
+--- a/drivers/mxc/ipu3/ipu_param_mem.h	2013-12-29 11:08:53.057656347 +0800
++++ b/drivers/mxc/ipu3/ipu_param_mem.h	2013-12-29 11:09:23.525654932 +0800
 @@ -382,7 +382,7 @@
  			ipu_ch_param_set_field(&params, 1, 78, 7, 15);  /* burst size */
  			uv_stride = uv_stride*2;
@@ -1316,9 +1309,8 @@ diff -uNr linux-3.0.35.orig/drivers/mxc/ipu3/ipu_param_mem.h linux-3.0.35/driver
  		}
  		break;
  	case IPU_PIX_FMT_YVU420P:
-diff -uNr linux-3.0.35.orig/drivers/video/mxc_hdmi.c linux-3.0.35/drivers/video/mxc_hdmi.c
---- linux-3.0.35.orig/drivers/video/mxc_hdmi.c	2013-12-29 11:08:47.485656607 +0800
-+++ linux-3.0.35/drivers/video/mxc_hdmi.c	2013-12-29 11:09:23.529654932 +0800
+--- a/drivers/video/mxc_hdmi.c	2013-12-29 11:08:47.485656607 +0800
++++ b/drivers/video/mxc_hdmi.c	2013-12-29 11:09:23.529654932 +0800
 @@ -1360,7 +1360,7 @@
  	 ********************************************/
  
@@ -1327,10 +1319,9 @@ diff -uNr linux-3.0.35.orig/drivers/video/mxc_hdmi.c linux-3.0.35/drivers/video/
 +		HDMI_FC_AVICONF2_RGB_QUANT_FULL_RANGE |
  		HDMI_FC_AVICONF2_SCALING_NONE;
  	hdmi_writeb(val, HDMI_FC_AVICONF2);
- 
-diff -uNr linux-3.0.35.orig/sound/soc/codecs/sgtl5000.c linux-3.0.35/sound/soc/codecs/sgtl5000.c
---- linux-3.0.35.orig/sound/soc/codecs/sgtl5000.c	2013-12-29 11:08:45.837656684 +0800
-+++ linux-3.0.35/sound/soc/codecs/sgtl5000.c	2013-12-29 11:09:23.561654930 +0800
+
+--- a/sound/soc/codecs/sgtl5000.c	2013-12-29 11:08:45.837656684 +0800
++++ b/sound/soc/codecs/sgtl5000.c	2013-12-29 11:09:23.561654930 +0800
 @@ -1193,7 +1193,7 @@
  	.name = "sgtl5000",
  	.playback = {
@@ -1349,9 +1340,8 @@ diff -uNr linux-3.0.35.orig/sound/soc/codecs/sgtl5000.c linux-3.0.35/sound/soc/c
  		.channels_max = 2,
  		.rates = SNDRV_PCM_RATE_8000_48000 | SNDRV_PCM_RATE_96000,
  		.formats = SGTL5000_FORMATS,
-diff -uNr linux-3.0.35.orig/sound/soc/imx/imx-sgtl5000.c linux-3.0.35/sound/soc/imx/imx-sgtl5000.c
---- linux-3.0.35.orig/sound/soc/imx/imx-sgtl5000.c	2013-12-29 11:08:45.825656684 +0800
-+++ linux-3.0.35/sound/soc/imx/imx-sgtl5000.c	2013-12-29 11:09:23.573654929 +0800
+--- a/sound/soc/imx/imx-sgtl5000.c	2013-12-29 11:08:45.825656684 +0800
++++ b/sound/soc/imx/imx-sgtl5000.c	2013-12-29 11:09:23.573654929 +0800
 @@ -355,6 +355,28 @@
  		   },
  };
