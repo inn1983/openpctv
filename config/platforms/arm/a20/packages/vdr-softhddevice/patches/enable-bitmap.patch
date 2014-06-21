@@ -1,0 +1,12 @@
+diff -uNr vdr-softhddevice-0.6.1+r5207af6.orig/Makefile vdr-softhddevice-0.6.1+r5207af6/Makefile
+--- vdr-softhddevice-0.6.1+r5207af6.orig/Makefile	2014-06-05 01:32:44.000000000 +0800
++++ vdr-softhddevice-0.6.1+r5207af6/Makefile	2014-06-16 12:42:57.652182113 +0800
+@@ -41,7 +41,7 @@
+ #CONFIG += -DUSE_MPEG_COMPLETE		# support only complete mpeg packets
+ #CONFIG += -DH264_EOS_TRICKSPEED	# insert seq end packets for trickspeed
+ #CONDIF += -DDUMP_TRICKSPEED		# dump trickspeed packets
+-#CONFIG += -DUSE_BITMAP			# VDPAU, use bitmap surface for OSD
++CONFIG += -DUSE_BITMAP			# VDPAU, use bitmap surface for OSD
+ CONFIG += -DUSE_VDR_SPU			# use VDR SPU decoder.
+ #CONFIG += -DUSE_SOFTLIMIT		# (tobe removed) limit the buffer fill
+ 

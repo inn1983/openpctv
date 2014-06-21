@@ -1,0 +1,12 @@
+diff -uNr mali400-rd343311.orig/test/Makefile mali400-rd343311/test/Makefile
+--- mali400-rd343311.orig/test/Makefile	2014-06-14 23:06:42.581516932 +0800
++++ mali400-rd343311/test/Makefile	2014-06-14 23:07:33.193518245 +0800
+@@ -5,7 +5,7 @@
+ all: test
+ 
+ test: ../config.mk test.c
+-	$(CC) $(CFLAGS) -o $@ test.c -lEGL -lGLESv2
++	$(CC) $(CFLAGS) -o $@ test.c -lEGL -lGLESv2 -ldrm -lXrandr -ldri2 -lXfixes
+ 
+ clean:
+ 	rm -f test

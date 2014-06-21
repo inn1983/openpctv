@@ -1,0 +1,15 @@
+diff -uNr vdr-softhddevice-0.6.1+r450c9b6.orig/Makefile vdr-softhddevice-0.6.1+r450c9b6/Makefile
+--- vdr-softhddevice-0.6.1+r450c9b6.orig/Makefile	2014-02-05 20:34:44.477802063 +0800
++++ vdr-softhddevice-0.6.1+r450c9b6/Makefile	2014-02-05 20:39:10.868528915 +0800
+@@ -18,9 +18,9 @@
+     # support VDPAU video output module
+ VDPAU ?= $(shell pkg-config --exists vdpau && echo 1)
+     # support VA-API video output module (deprecated)
+-#VAAPI ?= $(shell pkg-config --exists libva && echo 1)
++VAAPI ?= $(shell pkg-config --exists libva && echo 1)
+     # support glx output
+-#OPENGL ?= $(shell pkg-config --exists gl glu && echo 1)
++OPENGL ?= $(shell pkg-config --exists gl glu && echo 1)
+     # screensaver disable/enable
+ SCREENSAVER ?= 1
+     # use ffmpeg libswresample

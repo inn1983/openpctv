@@ -1,0 +1,12 @@
+PKG_NAME=libump
+PKG_URL_PROTO=git
+PKG_URL_REV=ec06806
+PKG_URL="https://github.com/linux-sunxi/libump"
+PKG_VERSION=r3p0+r${PKG_URL_REV}
+PKG_REV=1
+PKG_RUN_DEPENDS="$TARGET_LIBC"
+PKG_BUILD_DEPENDS="toolchain"
+PKG_PRIORITY="optional"
+PKG_SECTION="libs"
+PKG_SHORTDESC="the ARMs Universal Memory Provider userspace library"
+PKG_LONGDESC="This repository contains the ARMs Universal Memory Provider userspace library. This library is a requirement for ARMs binary Mali driver."
