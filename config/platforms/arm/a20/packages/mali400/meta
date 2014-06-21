@@ -1,6 +1,6 @@
 PKG_NAME=mali400
 PKG_URL_PROTO=git
-PKG_URL_REV=9971394
+PKG_URL_REV=d343311
 PKG_VERSION=r${PKG_URL_REV}
 PKG_URL="https://github.com/linux-sunxi/sunxi-mali.git"
 
@@ -9,7 +9,7 @@ PKG_ARCH=arm
 PKG_BUILD_DEPENDS="toolchain"
 PKG_RUN_DEPENDS="$TARGET_LIBC"
 #PKG_DEPENDS="xorg-server libdri2 libdrm"
-PKG_DEPENDS="libdri2 libdrm"
+PKG_DEPENDS="libdri2 libdrm libump"
 PKG_PRIORITY=optional
 PKG_SECTION=x11
 PKG_SHORTDESC="A10 Mali support libraries"

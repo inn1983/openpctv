@@ -1,15 +1,16 @@
 PKG_NAME=xine-lib
-PKG_VERSION=1.2.3_git20130615
+PKG_VERSION=1.2.4_git20140612
 PKG_URL=$SFNET_SRCS/openpctv/sources/xine-lib-${PKG_VERSION}.tar.xz
 PKG_REV=2
 PKG_BUILD_DEPENDS="toolchain"
 PKG_RUN_DEPENDS="$TARGET_LIBC"
-PKG_DEPENDS="zlib ffmpeg freetype alsa-lib"
+PKG_DEPENDS="zlib ffmpeg freetype alsa-lib libglu"
 
-PKG_USE="uclibc vdpau xorg sdl vdr mesa"
+PKG_USE="uclibc vaapi vdpau xorg sdl vdr mesa"
 PKG_USE_NAME_vdr="VDR"
 PKG_DEPENDS_vdr="libjpeg-turbo"
 PKG_DEPENDS_uclibc="libiconv"
+PKG_DEPENDS_vaapi="libva"
 PKG_BUILD_DEPENDS_vdpau="libvdpau"
 PKG_BUILD_DEPENDS_mesa="libglu mesa"
 PKG_DEPENDS_xorg="libX11 libxcb libXext libXv"

@@ -33,4 +33,4 @@ fi
 if [ X$E2EPG = "Xyes" ]; then
   epgen -i /video/epg.dat -o /tmp/epg.dat && epgtrans &
 fi
-eval vdr -g /tmp --vfat $CAMPLUGIN -Pvnsiserver5 -Pxvdr -Pstreamdev-server -v /video -c /etc/vdr -E /etc/vdr/epg.data -s shutdown
+eval vdr -g /tmp --vfat $CAMPLUGIN -Pvnsiserver -Pxvdr -Pstreamdev-server -v /video -c /etc/vdr -E /etc/vdr/epg.data -s shutdown

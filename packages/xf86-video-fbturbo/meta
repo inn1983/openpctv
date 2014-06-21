@@ -2,7 +2,7 @@ PKG_NAME=xf86-video-fbturbo
 PKG_URL_PROTO=git
 
 #PKG_URL_REV=b93dab5cae
-PKG_URL_REV=ef851c6
+PKG_URL_REV=4c7313c
 PKG_VERSION=0.5.1+r${PKG_URL_REV}
 PKG_URL="https://github.com/ssvb/xf86-video-fbturbo"
 

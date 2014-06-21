@@ -6,7 +6,7 @@ cd $BUILD/$1*
 
 setup_toolchain target
 
-do_configure --disable-pango --disable-gtk --enable-static
+do_configure --disable-pango --disable-gtk --disable-documentation --enable-systemd-integration
 make
 make_install
 

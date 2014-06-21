@@ -1,6 +1,6 @@
 PKG_NAME=scan-s2
 PKG_URL_PROTO=hg
-PKG_URL_REV=ab02737
+PKG_URL_REV=5acf171
 PKG_URL="https://bitbucket.org/CrazyCat/scan-s2"
 PKG_VERSION=r${PKG_URL_REV}
 PKG_REV=5

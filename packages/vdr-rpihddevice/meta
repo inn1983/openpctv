@@ -1,8 +1,8 @@
 PKG_NAME=vdr-rpihddevice
 PKG_URL_PROTO=git
-PKG_URL_REV=88f137d
+PKG_URL_REV=94b323f
 PKG_URL="git://projects.vdr-developer.org/vdr-plugin-rpihddevice.git"
-PKG_VERSION=0.0.7+r${PKG_URL_REV}
+PKG_VERSION=0.0.9+r${PKG_URL_REV}
 PKG_REV=1
 PKG_ARCH=arm
 PKG_DEPENDS="ffmpeg"

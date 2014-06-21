@@ -1,8 +1,8 @@
 PKG_NAME=vdr-graphtftng
 PKG_URL_PROTO=git
-PKG_URL_REV=ea57e2d
+PKG_URL_REV=6459127
 PKG_URL="git://projects.vdr-developer.org/vdr-plugin-graphtftng.git"
-PKG_VERSION=0.4.1+r${PKG_URL_REV}
+PKG_VERSION=0.4.10+r${PKG_URL_REV}
 PKG_REV=1
 PKG_DEPENDS="libgtop imlib2 ffmpeg libjpeg-turbo"
 PKG_BUILD_DEPENDS="toolchain"

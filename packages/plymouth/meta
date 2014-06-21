@@ -1,8 +1,8 @@
 PKG_NAME=plymouth
-PKG_VERSION=0.8.8
+PKG_VERSION=0.9.0
 PKG_URL="http://www.freedesktop.org/software/plymouth/releases/${PKG_NAME}-${PKG_VERSION}.tar.bz2"
 PKG_REV=1
-PKG_DEPENDS="libpng libdrm"
+PKG_DEPENDS="libpng libdrm systemd"
 PKG_RUN_DEPENDS="$TARGET_LIBC"
 PKG_BUILD_DEPENDS="toolchain"
 PKG_PRIORITY=optional

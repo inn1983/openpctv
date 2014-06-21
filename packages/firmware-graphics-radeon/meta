@@ -1,5 +1,5 @@
 PKG_NAME=firmware-graphics-radeon
-PKG_VERSION=20131111
+PKG_VERSION=20140330
 PKG_URL="$SFNET_SRCS/openpctv/sources/$PKG_NAME-$PKG_VERSION.tar.xz"
 PKG_BUILD_DEPENDS="toolchain"
 PKG_PRIORITY=optional

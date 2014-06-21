@@ -1,11 +1,9 @@
 PKG_NAME="vdr-xmltv2vdr"
-#PKG_VERSION="30903cc0"
 PKG_URL_PROTO=git
-PKG_URL_REV=8d66725
+PKG_URL_REV=d45bad0
 PKG_URL="git://projects.vdr-developer.org/vdr-plugin-xmltv2vdr.git"
 PKG_VERSION=0.1.2+r${PKG_URL_REV}
 PKG_REV="1"
-#PKG_URL="http://projects.vdr-developer.org/git/vdr-plugin-xmltv2vdr.git/snapshot/vdr-plugin-xmltv2vdr-${PKG_VERSION}.tar.gz"
 PKG_DEPENDS="vdr curl libxml2"
 PKG_BUILD_DEPENDS="toolchain vdr sqlite curl libzip libxml2 libxslt enca pcre"
 PKG_PRIORITY="optional"

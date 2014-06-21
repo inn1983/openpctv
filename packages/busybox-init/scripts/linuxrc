@@ -284,7 +284,7 @@ fi
 if [ -z "$ROOT" ]; then
   dbg_echo "Scanning for root device:"
   cd /sys/block
-  for i in 0 1 2 3 4 5 6 7 8 9; do
+  for i in 1 2 3 4 5 6 7 8 9; do
     for dev in *; do
       echo $dev | grep -q loop && continue
       echo $dev | grep -q ram && continue
@@ -341,7 +341,7 @@ if [ -z "$ROOT" ]; then
       fi
     done
     [ -n "$FOUND_ROOTFS" ] && break
-    sleep 1
+    sleep $i
   done
   cd /
 fi

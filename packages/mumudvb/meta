@@ -1,6 +1,6 @@
 PKG_NAME=mumudvb
 PKG_URL_PROTO=git
-PKG_URL_REV=6d7c579
+PKG_URL_REV=bf01e0e
 PKG_URL="https://github.com/braice/MuMuDVB"
 PKG_VERSION=1.7.3+r${PKG_URL_REV}
 PKG_REV=1

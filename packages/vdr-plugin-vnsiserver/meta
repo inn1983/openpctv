@@ -1,5 +1,9 @@
 PKG_PARENT=xbmc-pvr-addons
 PKG_NAME=vdr-plugin-vnsiserver
+PKG_URL_PROTO=git
+PKG_URL_REV=7d4aa81
+PKG_URL="https://github.com/FernetMenta/vdr-plugin-vnsiserver.git"
+PKG_VERSION=1.1.0+r${PKG_URL_REV}
 PKG_REV=1
 PKG_BUILD_DEPENDS="toolchain zlib"
 PKG_DEPENDS="vdr"

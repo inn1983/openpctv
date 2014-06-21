@@ -1,5 +1,5 @@
 PKG_NAME=libdrm
-PKG_VERSION=2.4.51
+PKG_VERSION=2.4.54
 PKG_URL="http://dri.freedesktop.org/${PKG_NAME}/${PKG_NAME}-${PKG_VERSION}.tar.bz2"
 #PKG_URL_PROTO=git
 #PKG_URL_REV=ddbbdb1

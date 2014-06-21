@@ -1,9 +1,10 @@
 PKG_NAME=libcec
 PKG_URL_PROTO=git
-PKG_URL_REV=90b994705e
-PKG_VERSION=2.1.3-1+r${PKG_URL_REV}
-#PKG_VERSION="2.1.3"
-PKG_URL="https://github.com/wolfgar/libcec.git"
+PKG_URL_REV=4cf83161
+PKG_VERSION=2.1.4-2+r${PKG_URL_REV}
+PKG_URL="https://github.com/xbmc-imx6/${PKG_NAME}.git"
+#PKG_VERSION="2.1.4-2"
+#PKG_URL="http://packages.pulse-eight.net/pulse/sources/${PKG_NAME}/${PKG_NAME}-${PKG_VERSION}.tar.gz"
 PKG_REV=1
 PKG_RUN_DEPENDS="$TARGET_LIBC"
 PKG_DEPENDS="systemd liblockdev"

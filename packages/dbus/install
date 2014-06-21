@@ -10,6 +10,7 @@ cd objdir-target
 do_install usr/bin
 do_install usr/lib/libdbus-1.so*
 do_install lib/systemd
+do_install var
 
 mkdir -p $INSTALL/var/lib/dbus
 mkdir -p $INSTALL/usr/share/dbus-1/services

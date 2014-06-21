@@ -4,7 +4,8 @@
 
 $SCRIPTS/build linux
 
-cd $BUILD/$1*
+get_meta $1
+cd $PKG_BUILD_DIR
 
 chmod -R +x linux v4l
 

@@ -32,6 +32,12 @@ else
   VDR_CONFIG="--disable-vdr"
 fi
 
+if pkg_uses $1 vaapi; then
+  VAAPI_CONFIG="--enable-vaapi"
+else
+  VAAPI_CONFIG="--disable-vaapi"
+fi
+
 if pkg_uses $1 vdpau; then
   VDPAU_CONFIG="--enable-vdpau"
   LDFLAGS="$LDFLAGS -lvdpau"
@@ -97,6 +103,7 @@ do_configure \
             $XORG_CONFIG \
             $CONSOLE_CONFIG \
             $SDL_CONFIG \
+            $VAAPI_CONFIG \
             $VDPAU_CONFIG \
             $VDR_CONFIG
 make -j3

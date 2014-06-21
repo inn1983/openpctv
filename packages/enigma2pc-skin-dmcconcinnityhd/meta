@@ -1,6 +1,6 @@
 PKG_NAME=enigma2pc-skin-dmcconcinnityhd
-PKG_URL_REV=2b5d180
-PKG_VERSION=20140116+${PKG_URL_REV}
+PKG_URL_REV=8b007c8
+PKG_VERSION=20140518+${PKG_URL_REV}
 PKG_URL_PROTO=git
 PKG_URL="https://github.com/openatv/enigma2-plugin-skins-dmcconcinnityhd.git"
 PKG_REV=1

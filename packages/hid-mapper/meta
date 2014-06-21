@@ -1,5 +1,5 @@
 PKG_NAME=hid-mapper
-PKG_URL_REV=7732485
+PKG_URL_REV=4e60834
 PKG_VERSION=1.3a+r${PKG_URL_REV}
 PKG_URL_PROTO=git
 PKG_URL="https://github.com/Claudio-Sjo/HID_linux_xbmc_driver.git"

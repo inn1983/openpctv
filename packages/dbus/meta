@@ -1,10 +1,10 @@
 PKG_NAME=dbus
-PKG_VERSION=1.6.8
+PKG_VERSION=1.8.4
 PKG_URL="http://dbus.freedesktop.org/releases/${PKG_NAME}/${PKG_NAME}-${PKG_VERSION}.tar.gz"
 PKG_REV=1
 PKG_DEPENDS="expat"
 PKG_RUN_DEPENDS="$TARGET_LIBC"
-PKG_BUILD_DEPENDS="toolchain"
+PKG_BUILD_DEPENDS="toolchain systemd"
 PKG_USE="xorg"
 PKG_DEPENDS_xorg="libX11"
 PKG_PRIORITY=required

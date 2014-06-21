@@ -23,6 +23,9 @@ cp $ROOT/$PACKAGES/$1/config/logo.mvi $INSTALL/etc/tuxbox
 cp $ROOT/$PACKAGES/$1/config/satellites_extra.xml $INSTALL/etc/tuxbox
 cp $ROOT/$PACKAGES/$1/config/terrestrial.xml $INSTALL/etc/tuxbox
 
+mkdir -p $INSTALL/usr/local/e2
+ln -sf "/etc" $INSTALL/usr/local/e2/etc
+
 ln -sf video $INSTALL/hdd
 
 mkdir -p $INSTALL/lib/systemd/system/enigma2pc.target.wants
