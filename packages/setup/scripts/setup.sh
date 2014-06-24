@@ -7,7 +7,7 @@ export TEXTDOMAIN=openpctv
 
 . /etc/lsb-release
 [ -z ${DISTRIB_ID} ] && DISTRIB_ID=OpenPCTV
-[-f /etc/system.options ] && . /etc/system.options
+[ -f /etc/system.options ] && . /etc/system.options
 [ -z $DEFTARGET ] && DEFTARGET=xbmc
 
 source /etc/profile

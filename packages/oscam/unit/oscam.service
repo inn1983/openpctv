@@ -1,7 +1,7 @@
 [Unit]
 Description=Open Source CAM
-Requires=pcscd.service
-After=syslog.target pcscd.service
+Requires=pcscd.service network.target
+After=syslog.target pcscd.service network.target
 ConditionPathExists=/etc/oscam/oscam.conf
 
 [Service]

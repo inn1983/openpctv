@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPCTV 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-27 13:45+0800\n"
+"POT-Creation-Date: 2014-06-24 08:02+0800\n"
 "PO-Revision-Date: 2013-07-23 16:56+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -402,23 +402,44 @@ msgstr ""
 msgid "Would you like to enable SoftCAM (OScam) on this machine?"
 msgstr "你想在这台机器上运行SoftCAM(OScam)吗？"
 
-#: packages/setup/scripts/install-drivers:11
+#: packages/setup/scripts/install-drivers:18
 #: packages/setup/scripts/setup.sh:111
 msgid "Reboot"
 msgstr "重新启动"
 
-#: packages/setup/scripts/install-drivers:11
+#: packages/setup/scripts/install-drivers:18
 msgid ""
 "Driver package has been installed successfully. Now you have to reboot to "
 "verify whether the driver works."
 msgstr "驱动包已安装成功，现在你必须重新启动以验证驱动是否能工作。"
 
-#: packages/setup/scripts/install-drivers:30
+#: packages/setup/scripts/install-drivers:24
+msgid "Select NVIDIA graphics driver"
+msgstr "选择NVIDIA显卡驱动"
+
+#: packages/setup/scripts/install-drivers:25
+msgid ""
+"Both nouveau and nvidia enable VDPAU driver support for hardware-accelerated "
+"video decoding. By default we use the nouveau driver, you can also use the "
+"nvidia driver to get better support."
+msgstr ""
+"nouveau与nvidia都具备支持硬解码视频的vdpau驱动，缺省情况下我们使用了nouveau驱"
+"动,你也可以使用nvidia驱动以获得更完美的支持。"
+
+#: packages/setup/scripts/install-drivers:26
+msgid "Open-source NVIDIA graphics driver"
+msgstr "开源的NVIDIA显卡驱动"
+
+#: packages/setup/scripts/install-drivers:27
+msgid "NVIDIA's binary Linux graphics driver"
+msgstr "NVIDIA官方二进制Linux显卡驱动"
+
+#: packages/setup/scripts/install-drivers:75
 #, sh-format
 msgid "Found $field"
 msgstr "找到$field"
 
-#: packages/setup/scripts/install-drivers:30
+#: packages/setup/scripts/install-drivers:75
 msgid ""
 "Sometimes a board without valid PCI(e) Subsystem ID can't be autodetected. "
 "You can specify the model of the card to pass card=<n> insmod option to "
@@ -429,21 +450,21 @@ msgstr ""
 "载驱动时附带的card=<n>参数来使用之加载正常。同时你可以向电视卡商询问其解决方"
 "案。你想继续吗？"
 
-#: packages/setup/scripts/install-drivers:35
+#: packages/setup/scripts/install-drivers:80
 #, sh-format
 msgid "Specify the card number of $field board"
 msgstr "指定$field 卡的序号"
 
-#: packages/setup/scripts/install-drivers:35
+#: packages/setup/scripts/install-drivers:80
 msgid "Here is a list of valid choices for the card=<n> insmod option"
 msgstr "这里是电视卡设备有效的列表，请选择你的卡的正确编号。"
 
-#: packages/setup/scripts/install-drivers:59
-#: packages/setup/scripts/install-drivers:64
+#: packages/setup/scripts/install-drivers:104
+#: packages/setup/scripts/install-drivers:109
 msgid "Additional DVB driver"
 msgstr "附加的DVB驱动"
 
-#: packages/setup/scripts/install-drivers:60
+#: packages/setup/scripts/install-drivers:105
 msgid ""
 "Your DVB devices seem to be normal. Perhaps you do not need to install other "
 "additional drivers. If you want to install additional drivers please select "
@@ -452,7 +473,7 @@ msgstr ""
 "你的DVB设备驱动看上是正常的。也许你并不需要安装其它附加的驱动。如果你想安装附"
 "加驱动，请选择'是'"
 
-#: packages/setup/scripts/install-drivers:65
+#: packages/setup/scripts/install-drivers:110
 msgid ""
 "Your DVB device does not seem to work properly. Perhaps you should install "
 "another driver. Do you want to install the additional drivers?"
@@ -460,42 +481,42 @@ msgstr ""
 "你的DVB设备看上去似乎并不正常，或许你应该安装另外一个驱动。你想要安装附加的驱"
 "动吗？"
 
-#: packages/setup/scripts/install-drivers:70
+#: packages/setup/scripts/install-drivers:115
 #: packages/setup/scripts/setup.sh:99
 msgid "Install additional DVB driver"
 msgstr "安装附加的DVB驱动"
 
-#: packages/setup/scripts/install-drivers:71
+#: packages/setup/scripts/install-drivers:116
 msgid ""
 "Before proceeding please confirm your DVB device specific information. "
 "Choose the driver you need to install carefully."
 msgstr "在继续之前你请确认你的V4L及DVB设备的信息，仔细选择你想要安装的驱动。"
 
-#: packages/setup/scripts/install-drivers:72
+#: packages/setup/scripts/install-drivers:117
 msgid "I do not want to install now."
 msgstr "我现在不想要安装。"
 
-#: packages/setup/scripts/install-drivers:73
+#: packages/setup/scripts/install-drivers:118
 msgid "Support most of the devices,such as DVBWorld,Tevii,Prof..."
 msgstr "支持大多数的设备，例如DVBWorld，Tevii，Prof等"
 
-#: packages/setup/scripts/install-drivers:74
+#: packages/setup/scripts/install-drivers:119
 msgid "Support all the TBS devices"
 msgstr "支持TBS全系列的设备"
 
-#: packages/setup/scripts/install-drivers:75
+#: packages/setup/scripts/install-drivers:120
 msgid "Support all the DVBSky devices"
 msgstr "支持DVBSky全系列的设备"
 
-#: packages/setup/scripts/install-drivers:76
+#: packages/setup/scripts/install-drivers:121
 msgid "Support all the TBS DVB-C devices"
 msgstr "支持TBS DVB-C全系列的设备"
 
-#: packages/setup/scripts/install-drivers:77
+#: packages/setup/scripts/install-drivers:122
 msgid "Support all the DVBSky DVB-C devices"
 msgstr "支持DVBSky DVB-C全系列的设备"
 
-#: packages/setup/scripts/install-drivers:78
+#: packages/setup/scripts/install-drivers:123
 msgid "Support the TBS QBOX I DVB-C devices"
 msgstr "支持TBS QBOX I设备"
 
@@ -899,6 +920,14 @@ msgstr "选择网卡"
 msgid "Select the Network Interface Card you want to configure"
 msgstr "请选择你将要配置的网卡"
 
+#: packages/setup/scripts/netconfig:51
+msgid "Restarting network, please wait ..."
+msgstr "重启网络，请等待 ..."
+
+#: packages/setup/scripts/netconfig:52
+msgid "Checking the network connection, please wait ..."
+msgstr "检查网络的联接情况，请等待 ..."
+
 #: packages/setup/scripts/select-irdrv:10
 msgid "IR configuration"
 msgstr "红外线接收配置"
@@ -1086,27 +1115,3 @@ msgid ""
 msgstr ""
 "你想从fastsatfinder.com更新卫星转发器参数吗？如果不升级的话，你的转发器参数可"
 "能不是最新的。"
-
-#~ msgid ""
-#~ "OScam can be used by Enigma2(Through dvbsoftwareca module to create "
-#~ "symlinks for dvb adapters),VDR(Through VDR-DVBAPI plugin to act as a "
-#~ "bridge between VDR and OScam) and XBMC(throgh VDR backend, so the same as "
-#~ "VDR). VDR-SC is only used by VDR(A software emulated CAM, VDR plugin) and "
-#~ "XBMC."
-#~ msgstr ""
-#~ "Enigma2(通过dvbsoftwareca内核模块为DVB卡建立ca链接), VDR(通过VDR-DVBAPI插"
-#~ "件来实现VDR与OScam之间的通信)和XBMC（通过VDR后端，因此与VDR相同)可使用"
-#~ "OScam，而VDR-SC（一种CAM模拟软件，VDR的插件)和XBMC可使用VDR-SC"
-
-#~ msgid "Open Source Conditional Access Module software"
-#~ msgstr "开放源代码的条件接收模块"
-
-#~ msgid "A software CAM emulation, a VDR plugin"
-#~ msgstr "一种CAM模拟软件，VDR的插件"
-
-#~ msgid "TTcam CAM - Applicable to China's exclusive CAM"
-#~ msgstr "TTcam CAM - 只适用于中国的专用CAM"
-
-#~ msgid ""
-#~ "Please put the transponders list in /etc/dvbt for scan-s2, Are you ready?"
-#~ msgstr "请将频点参数列表放至/etc/dvbt，你准备好了吗？"

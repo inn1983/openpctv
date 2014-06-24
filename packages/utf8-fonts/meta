@@ -1,7 +1,7 @@
 PKG_NAME=utf8-fonts
-PKG_VERSION=20130619
-PKG_URL="$SFNET_SRCS/openpctv/sources/enigma2pc-fonts-${PKG_VERSION}.tar.xz"
-PKG_REV=2
+PKG_VERSION=20140622
+PKG_URL="$SFNET_SRCS/openpctv/sources/${PKG_NAME}-${PKG_VERSION}.tar.xz"
+PKG_REV=1
 PKG_PRIORITY=standard
 PKG_SECTION=fonts
 PKG_SHORTDESC="utf8 fonts"

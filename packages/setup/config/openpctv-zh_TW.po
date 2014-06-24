@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openpctv 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-27 13:45+0800\n"
+"POT-Creation-Date: 2014-06-24 08:02+0800\n"
 "PO-Revision-Date: 2013-07-28 09:19+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -416,24 +416,43 @@ msgstr ""
 msgid "Would you like to enable SoftCAM (OScam) on this machine?"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:11
+#: packages/setup/scripts/install-drivers:18
 #: packages/setup/scripts/setup.sh:111
 msgid "Reboot"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:11
+#: packages/setup/scripts/install-drivers:18
 #, fuzzy
 msgid ""
 "Driver package has been installed successfully. Now you have to reboot to "
 "verify whether the driver works."
 msgstr "驅動包已安裝成功，現在你必須重新啟動以驗證驅動是否能工作。"
 
-#: packages/setup/scripts/install-drivers:30
+#: packages/setup/scripts/install-drivers:24
+msgid "Select NVIDIA graphics driver"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:25
+msgid ""
+"Both nouveau and nvidia enable VDPAU driver support for hardware-accelerated "
+"video decoding. By default we use the nouveau driver, you can also use the "
+"nvidia driver to get better support."
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:26
+msgid "Open-source NVIDIA graphics driver"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:27
+msgid "NVIDIA's binary Linux graphics driver"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:75
 #, sh-format
 msgid "Found $field"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:30
+#: packages/setup/scripts/install-drivers:75
 msgid ""
 "Sometimes a board without valid PCI(e) Subsystem ID can't be autodetected. "
 "You can specify the model of the card to pass card=<n> insmod option to "
@@ -441,22 +460,22 @@ msgid ""
 "want to do this?"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:35
+#: packages/setup/scripts/install-drivers:80
 #, fuzzy, sh-format
 msgid "Specify the card number of $field board"
 msgstr "指定輸出聲道數量"
 
-#: packages/setup/scripts/install-drivers:35
+#: packages/setup/scripts/install-drivers:80
 msgid "Here is a list of valid choices for the card=<n> insmod option"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:59
-#: packages/setup/scripts/install-drivers:64
+#: packages/setup/scripts/install-drivers:104
+#: packages/setup/scripts/install-drivers:109
 #, fuzzy
 msgid "Additional DVB driver"
 msgstr "附加的V4L及DVB驅動"
 
-#: packages/setup/scripts/install-drivers:60
+#: packages/setup/scripts/install-drivers:105
 #, fuzzy
 msgid ""
 "Your DVB devices seem to be normal. Perhaps you do not need to install other "
@@ -466,7 +485,7 @@ msgstr ""
 "你的V4L及DVB設備驅動看上是正常的。也許你並不需要安裝其它附加的驅動。如果你想"
 "安裝附加驅動，請選擇'否'"
 
-#: packages/setup/scripts/install-drivers:65
+#: packages/setup/scripts/install-drivers:110
 #, fuzzy
 msgid ""
 "Your DVB device does not seem to work properly. Perhaps you should install "
@@ -475,47 +494,47 @@ msgstr ""
 "你的V4L及DVB設備看上去似乎並不正常，或許你應該安裝另外一個驅動。你想要安裝附"
 "加的驅動嗎？"
 
-#: packages/setup/scripts/install-drivers:70
+#: packages/setup/scripts/install-drivers:115
 #: packages/setup/scripts/setup.sh:99
 #, fuzzy
 msgid "Install additional DVB driver"
 msgstr "安裝附加的V4L及DVB驅動"
 
-#: packages/setup/scripts/install-drivers:71
+#: packages/setup/scripts/install-drivers:116
 #, fuzzy
 msgid ""
 "Before proceeding please confirm your DVB device specific information. "
 "Choose the driver you need to install carefully."
 msgstr "在繼續之前你請確認你的V4L及DVB設備的資訊，仔細選擇你想要安裝的驅動。"
 
-#: packages/setup/scripts/install-drivers:72
+#: packages/setup/scripts/install-drivers:117
 msgid "I do not want to install now."
 msgstr "我現在不想要安裝。"
 
-#: packages/setup/scripts/install-drivers:73
+#: packages/setup/scripts/install-drivers:118
 msgid "Support most of the devices,such as DVBWorld,Tevii,Prof..."
 msgstr "支援大多數的設備，例如DVBWorld，Tevii，Prof等"
 
-#: packages/setup/scripts/install-drivers:74
+#: packages/setup/scripts/install-drivers:119
 msgid "Support all the TBS devices"
 msgstr "支援全系列的TBS設備"
 
-#: packages/setup/scripts/install-drivers:75
+#: packages/setup/scripts/install-drivers:120
 #, fuzzy
 msgid "Support all the DVBSky devices"
 msgstr "支援全系列的TBS設備"
 
-#: packages/setup/scripts/install-drivers:76
+#: packages/setup/scripts/install-drivers:121
 #, fuzzy
 msgid "Support all the TBS DVB-C devices"
 msgstr "支援全系列的TBS設備"
 
-#: packages/setup/scripts/install-drivers:77
+#: packages/setup/scripts/install-drivers:122
 #, fuzzy
 msgid "Support all the DVBSky DVB-C devices"
 msgstr "支援全系列的TBS設備"
 
-#: packages/setup/scripts/install-drivers:78
+#: packages/setup/scripts/install-drivers:123
 #, fuzzy
 msgid "Support the TBS QBOX I DVB-C devices"
 msgstr "支援全系列的TBS設備"
@@ -917,6 +936,14 @@ msgstr "選擇網卡"
 #: packages/setup/scripts/netconfig:50
 msgid "Select the Network Interface Card you want to configure"
 msgstr "請選擇你將要配置的網卡"
+
+#: packages/setup/scripts/netconfig:51
+msgid "Restarting network, please wait ..."
+msgstr ""
+
+#: packages/setup/scripts/netconfig:52
+msgid "Checking the network connection, please wait ..."
+msgstr ""
 
 #: packages/setup/scripts/select-irdrv:10
 msgid "IR configuration"

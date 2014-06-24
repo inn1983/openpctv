@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-19 18:53+0800\n"
+"POT-Creation-Date: 2014-06-24 08:02+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -386,23 +386,42 @@ msgstr ""
 msgid "Would you like to enable SoftCAM (OScam) on this machine?"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:11
+#: packages/setup/scripts/install-drivers:18
 #: packages/setup/scripts/setup.sh:111
 msgid "Reboot"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:11
+#: packages/setup/scripts/install-drivers:18
 msgid ""
 "Driver package has been installed successfully. Now you have to reboot to "
 "verify whether the driver works."
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:30
+#: packages/setup/scripts/install-drivers:24
+msgid "Select NVIDIA graphics driver"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:25
+msgid ""
+"Both nouveau and nvidia enable VDPAU driver support for hardware-accelerated "
+"video decoding. By default we use the nouveau driver, you can also use the "
+"nvidia driver to get better support."
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:26
+msgid "Open-source NVIDIA graphics driver"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:27
+msgid "NVIDIA's binary Linux graphics driver"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:75
 #, sh-format
 msgid "Found $field"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:30
+#: packages/setup/scripts/install-drivers:75
 msgid ""
 "Sometimes a board without valid PCI(e) Subsystem ID can't be autodetected. "
 "You can specify the model of the card to pass card=<n> insmod option to "
@@ -410,69 +429,69 @@ msgid ""
 "want to do this?"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:35
+#: packages/setup/scripts/install-drivers:80
 #, sh-format
 msgid "Specify the card number of $field board"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:35
+#: packages/setup/scripts/install-drivers:80
 msgid "Here is a list of valid choices for the card=<n> insmod option"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:59
-#: packages/setup/scripts/install-drivers:64
+#: packages/setup/scripts/install-drivers:104
+#: packages/setup/scripts/install-drivers:109
 msgid "Additional DVB driver"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:60
+#: packages/setup/scripts/install-drivers:105
 msgid ""
 "Your DVB devices seem to be normal. Perhaps you do not need to install other "
 "additional drivers. If you want to install additional drivers please select "
 "'Yes'"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:65
+#: packages/setup/scripts/install-drivers:110
 msgid ""
 "Your DVB device does not seem to work properly. Perhaps you should install "
 "another driver. Do you want to install the additional drivers?"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:70
+#: packages/setup/scripts/install-drivers:115
 #: packages/setup/scripts/setup.sh:99
 msgid "Install additional DVB driver"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:71
+#: packages/setup/scripts/install-drivers:116
 msgid ""
 "Before proceeding please confirm your DVB device specific information. "
 "Choose the driver you need to install carefully."
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:72
+#: packages/setup/scripts/install-drivers:117
 msgid "I do not want to install now."
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:73
+#: packages/setup/scripts/install-drivers:118
 msgid "Support most of the devices,such as DVBWorld,Tevii,Prof..."
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:74
+#: packages/setup/scripts/install-drivers:119
 msgid "Support all the TBS devices"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:75
+#: packages/setup/scripts/install-drivers:120
 msgid "Support all the DVBSky devices"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:76
+#: packages/setup/scripts/install-drivers:121
 msgid "Support all the TBS DVB-C devices"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:77
+#: packages/setup/scripts/install-drivers:122
 msgid "Support all the DVBSky DVB-C devices"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:78
+#: packages/setup/scripts/install-drivers:123
 msgid "Support the TBS QBOX I DVB-C devices"
 msgstr ""
 
@@ -856,6 +875,14 @@ msgstr ""
 
 #: packages/setup/scripts/netconfig:50
 msgid "Select the Network Interface Card you want to configure"
+msgstr ""
+
+#: packages/setup/scripts/netconfig:51
+msgid "Restarting network, please wait ..."
+msgstr ""
+
+#: packages/setup/scripts/netconfig:52
+msgid "Checking the network connection, please wait ..."
 msgstr ""
 
 #: packages/setup/scripts/select-irdrv:10

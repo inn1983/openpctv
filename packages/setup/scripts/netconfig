@@ -48,15 +48,18 @@ MSGoconfig="$(gettext "You are connected with the Internet, do you still want to
 MSNoNet="$(gettext "Scan Network Interface Card failed, please check it or its driver.")"
 MSMenu="$(gettext "Select the Network Interface Card")"
 MSMenuinfo="$(gettext "Select the Network Interface Card you want to configure")"
+MSRestart="$(gettext "Restarting network, please wait ...")"
+MSCheck="$(gettext "Checking the network connection, please wait ...")"
 
 #检查internet是否联通
 function checkNet
 {
 . /etc/network
+echo "${MSRestart}"
 [ X"$SSID" != X ] && systemctl restart wpa_supplicant
 systemctl restart connman
 ison="no"
-printf "Restarting network, please wait ..."
+printf "${MSCheck}"
 for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
   ping -c 2 -W 2 8.8.8.8 > /dev/null 2>&1
   if [ $? -eq 0 ]; then
@@ -287,6 +290,7 @@ echo "$IF $IFTYPE" > /tmp/iftest
 case ${IFTYPE} in
  eth*)
    selectDHCP
+   sed -i -e "s/^NETWORK=.*/NETWORK=\"LAN\"/g" $NETCONF
    finishNet;;
  wlan*)
    setWlan
