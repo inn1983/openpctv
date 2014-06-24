@@ -50,6 +50,7 @@ MSMenu="$(gettext "Select the Network Interface Card")"
 MSMenuinfo="$(gettext "Select the Network Interface Card you want to configure")"
 MSRestart="$(gettext "Restarting network, please wait ...")"
 MSCheck="$(gettext "Checking the network connection, please wait ...")"
+MSSCANWLAN="$(gettext "Searching for wireless networks, please wait ...")"
 
 #检查internet是否联通
 function checkNet
@@ -181,6 +182,8 @@ function setWlan
 {
 rfkill unblock wlan
 ifconfig $IF up
+echo "${MSSCANWLAN}"
+sleep 2
 iwlist $IF scan > ${TMP}/iwlist.log
 
 echo "dialog --no-cancel --clear --title \"${MSMENUWLAN}\" --menu \"${MSMENUWLANINFO}\" 12 80 5 \\" > ${TMP}/menu.wlan

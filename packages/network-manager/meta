@@ -1,0 +1,9 @@
+PKG_NAME=network-manager
+PKG_VERSION="0.9.9.98"
+PKG_URL="http://ftp.gnome.org/pub/gnome/sources/NetworkManager/0.9/NetworkManager-${PKG_VERSION}.tar.xz"
+PKG_REV=1
+PKG_BUILD_DEPENDS="toolchain"
+PKG_PRIORITY=optional
+PKG_SECTION=net
+PKG_SHORTDESC="NetworkManager"
+PKG_LONGDESC="NetworkManager attempts to keep an active network connection available at all times."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-24 08:02+0800\n"
+"POT-Creation-Date: 2014-06-24 21:56+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -883,6 +883,10 @@ msgstr ""
 
 #: packages/setup/scripts/netconfig:52
 msgid "Checking the network connection, please wait ..."
+msgstr ""
+
+#: packages/setup/scripts/netconfig:53
+msgid "Searching for wireless networks, please wait ..."
 msgstr ""
 
 #: packages/setup/scripts/select-irdrv:10

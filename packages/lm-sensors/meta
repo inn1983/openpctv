@@ -1,0 +1,9 @@
+PKG_NAME=lm-sensors
+PKG_VERSION=3.3.5
+PKG_REV=1
+PKG_URL="http://ftp.gwdg.de/pub/linux/misc/lm-sensors/lm_sensors-$PKG_VERSION.tar.bz2"
+PKG_BUILD_DEPENDS="toolchain"
+PKG_PRIORITY=optional
+PKG_SECTION="utils"
+PKG_SHORTDESC="lm_sensors: Hardware monitoring via the SMBus"
+PKG_LONGDESC="lm_sensors is a package to get data from the SMB (System Management Bus - an i2c bus) on modern mainboards. It consists of kernel modules and users space tools to get stuff like cpu / mb temperature, voltages, fan speed..."
