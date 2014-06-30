@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-24 21:56+0800\n"
+"POT-Creation-Date: 2014-06-29 21:58+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -404,24 +404,24 @@ msgstr ""
 #: packages/setup/scripts/install-drivers:25
 msgid ""
 "Both nouveau and nvidia enable VDPAU driver support for hardware-accelerated "
-"video decoding. By default we use the nouveau driver, you can also use the "
-"nvidia driver to get better support."
+"video decoding. By default we use the nvidia driver, using the nvidia driver "
+"may get a better experience."
 msgstr ""
 
 #: packages/setup/scripts/install-drivers:26
-msgid "Open-source NVIDIA graphics driver"
-msgstr ""
-
-#: packages/setup/scripts/install-drivers:27
 msgid "NVIDIA's binary Linux graphics driver"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:75
+#: packages/setup/scripts/install-drivers:27
+msgid "Open-source NVIDIA graphics driver"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:93
 #, sh-format
 msgid "Found $field"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:75
+#: packages/setup/scripts/install-drivers:93
 msgid ""
 "Sometimes a board without valid PCI(e) Subsystem ID can't be autodetected. "
 "You can specify the model of the card to pass card=<n> insmod option to "
@@ -429,69 +429,69 @@ msgid ""
 "want to do this?"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:80
+#: packages/setup/scripts/install-drivers:98
 #, sh-format
 msgid "Specify the card number of $field board"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:80
+#: packages/setup/scripts/install-drivers:98
 msgid "Here is a list of valid choices for the card=<n> insmod option"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:104
-#: packages/setup/scripts/install-drivers:109
+#: packages/setup/scripts/install-drivers:122
+#: packages/setup/scripts/install-drivers:127
 msgid "Additional DVB driver"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:105
+#: packages/setup/scripts/install-drivers:123
 msgid ""
 "Your DVB devices seem to be normal. Perhaps you do not need to install other "
 "additional drivers. If you want to install additional drivers please select "
 "'Yes'"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:110
+#: packages/setup/scripts/install-drivers:128
 msgid ""
 "Your DVB device does not seem to work properly. Perhaps you should install "
 "another driver. Do you want to install the additional drivers?"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:115
+#: packages/setup/scripts/install-drivers:133
 #: packages/setup/scripts/setup.sh:99
 msgid "Install additional DVB driver"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:116
+#: packages/setup/scripts/install-drivers:134
 msgid ""
 "Before proceeding please confirm your DVB device specific information. "
 "Choose the driver you need to install carefully."
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:117
+#: packages/setup/scripts/install-drivers:135
 msgid "I do not want to install now."
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:118
+#: packages/setup/scripts/install-drivers:136
 msgid "Support most of the devices,such as DVBWorld,Tevii,Prof..."
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:119
+#: packages/setup/scripts/install-drivers:137
 msgid "Support all the TBS devices"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:120
+#: packages/setup/scripts/install-drivers:138
 msgid "Support all the DVBSky devices"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:121
+#: packages/setup/scripts/install-drivers:139
 msgid "Support all the TBS DVB-C devices"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:122
+#: packages/setup/scripts/install-drivers:140
 msgid "Support all the DVBSky DVB-C devices"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:123
+#: packages/setup/scripts/install-drivers:141
 msgid "Support the TBS QBOX I DVB-C devices"
 msgstr ""
 
@@ -940,6 +940,10 @@ msgstr ""
 
 #: packages/setup/scripts/select-target:25
 msgid "A free and open source media player developed by the XBMC Foundation"
+msgstr ""
+
+#: packages/setup/scripts/select-target:31
+msgid "TV streaming server VDR/TVheadend"
 msgstr ""
 
 #: packages/setup/scripts/setup.sh:19

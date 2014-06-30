@@ -22,16 +22,34 @@ retval=$?
 
 selectnvidia () {
 dialog --clear --title "$(gettext "Select NVIDIA graphics driver")" --menu \
-"$(gettext "Both nouveau and nvidia enable VDPAU driver support for hardware-accelerated video decoding. By default we use the nouveau driver, you can also use the nvidia driver to get better support.")" 12 80 3 \
- "nouveau" "$(gettext "Open-source NVIDIA graphics driver")" \
- "nvidia" "$(gettext "NVIDIA's binary Linux graphics driver")" 2> /tmp/driver_nvidia.tmp
+"$(gettext "Both nouveau and nvidia enable VDPAU driver support for hardware-accelerated video decoding. By default we use the nvidia driver, using the nvidia driver may get a better experience.")" 12 80 3 \
+ "nvidia" "$(gettext "NVIDIA's binary Linux graphics driver")" \
+ "nouveau" "$(gettext "Open-source NVIDIA graphics driver")" 2> /tmp/driver_nvidia.tmp
 
 if [ $(cat /tmp/driver_nvidia.tmp) = "nvidia" -a ${CURRENT_DRV} = "nouveau" ]; then
-   echo "Download and install xf86-video-nvidia-\${kernelver}_Last_\${machine}.opk, please wait..."
-   opkg install http://sourceforge.net/projects/openpctv/files/packages/xf86-video-nvidia-${kernelver}_Last_${machine}.opk/download || (echo "Can't download xf86-video-nvidia-${kernelver}_Last_${machine}.opk, check your network settings."; exit)
+#   echo "Download and install xf86-video-nvidia-\${kernelver}_Last_\${machine}.opk, please wait..."
+#   opkg install http://sourceforge.net/projects/openpctv/files/packages/xf86-video-nvidia-${kernelver}_Last_${machine}.opk/download || (echo "Can't download xf86-video-nvidia-${kernelver}_Last_${machine}.opk, check your network settings."; exit)
+   if [ ! -f /etc/modprobe.d/nvidia.conf -a ! -f /usr/lib/modules-load.d/uvesafb.conf ]; then
+      cat > /etc/modprobe.d/nvidia.conf << _EOF
+# NVIDIA binary driver and nouveau do not play well together
+
+# Disable nouveau
+blacklist nouveau
+
+# Disable NVIDIA binary driver
+#blacklist nvidia
+
+options uvesafb mode_option=1360x768-32 scroll=ywrap
+_EOF
+      echo "uvesafb" > /usr/lib/modules-load.d/uvesafb.conf
+   fi
    HAS_INSTALLED=yes
 elif [ $(cat /tmp/driver_nvidia.tmp) = "nouveau" -a ${CURRENT_DRV} = "nvidia" ]; then
-   opkg remove xf86-video-nvidia
+#   opkg remove xf86-video-nvidia
+   if [ -f /etc/modprobe.d/nvidia.conf -a -f /usr/lib/modules-load.d/uvesafb.conf ]; then
+      rm /etc/modprobe.d/nvidia.conf /usr/lib/modules-load.d/uvesafb.conf
+   fi
+   HAS_INSTALLED=yes
 fi
 rm /tmp/driver*.tmp
 }

@@ -1,0 +1,14 @@
+[Unit]
+Description=TV streaming server
+After=oscam.service network.target
+Before=xbmc.service
+
+[Service]
+ExecStart=/usr/bin/runbackend
+StandardInput=tty
+StandardOutput=tty
+TTYPath=/dev/tty6
+Restart=always
+
+[Install]
+WantedBy=backend.target

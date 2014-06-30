@@ -5,7 +5,7 @@ export TERM=linux
 export TEXTDOMAIN=openpctv
 
 i=0
-echo "dialog --no-cancel --clear --title \"$(gettext "Set the default target")\" --menu \"$(gettext "Please select the default target to boot into.")\" 10 85 3 \\" > /tmp/menu.tmp
+echo "dialog --no-cancel --clear --title \"$(gettext "Set the default target")\" --menu \"$(gettext "Please select the default target to boot into.")\" 11 85 4 \\" > /tmp/menu.tmp
 
 if [ -f /usr/bin/runenigma2 ]; then
   i=`expr $i + 1`
@@ -22,7 +22,13 @@ fi
 if [ -f /usr/bin/runxbmc ]; then
   i=`expr $i + 1`
   target=xbmc
-  echo "xbmc \"$(gettext "A free and open source media player developed by the XBMC Foundation")\" 2> /tmp/target.tmp" >> /tmp/menu.tmp
+  echo "xbmc \"$(gettext "A free and open source media player developed by the XBMC Foundation")\" \\" >> /tmp/menu.tmp
+fi
+
+if [ -f /usr/bin/runbackend ]; then
+  i=`expr $i + 1`
+  target=backend
+  echo "backend \"$(gettext "TV streaming server VDR/TVheadend")\" 2> /tmp/target.tmp" >> /tmp/menu.tmp
 fi
 
 if [ $i -ne 1 ]; then
@@ -35,6 +41,12 @@ if grep -q "^DEFTARGET=" /etc/system.options >/dev/null 2>&1; then
    sed -i "s/^DEFTARGET=.*/DEFTARGET=$target/g" /etc/system.options
 else
    echo "DEFTARGET=$target" >> /etc/system.options
+fi
+
+if grep -q "^BACKEND=" /etc/system.options >/dev/null 2>&1; then
+   sed -i "s/^BACKEND=.*/BACKEND=vdr/g" /etc/system.options
+else
+   echo "BACKEND=vdr" >> /etc/system.options
 fi
 
 if ! grep -q -i arm /proc/cpuinfo; then

@@ -1,0 +1,7 @@
+PKG_NAME=backend-service
+PKG_REV=1
+PKG_RUN_DEPENDS="vdr tvheadend mumudvb dvblast"
+PKG_PRIORITY=optional
+PKG_SECTION=multimedia
+PKG_SHORTDESC="DVB backend service for XBMC/VLC"
+PKG_LONGDESC="DVB backend service for XBMC/VLC"

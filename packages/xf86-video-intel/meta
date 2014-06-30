@@ -1,6 +1,6 @@
 PKG_NAME=xf86-video-intel
 PKG_URL_PROTO=git
-PKG_URL_REV=6c5658b
+PKG_URL_REV=c5c7dd2
 PKG_URL="http://anongit.freedesktop.org/git/xorg/driver/xf86-video-intel.git"
 PKG_VERSION=2.99.912+r${PKG_URL_REV}
 PKG_REV=1

@@ -1,10 +1,10 @@
 PKG_NAME=xf86-video-ati
-PKG_URL_PROTO=git
-PKG_URL_REV=cc615d0
-PKG_URL="http://anongit.freedesktop.org/git/xorg/driver/xf86-video-ati.git"
-PKG_VERSION=7.3.0+r${PKG_URL_REV}
-#PKG_VERSION=7.3.0
-#PKG_URL="$XORG_SRCS/driver/${PKG_NAME}-${PKG_VERSION}.tar.bz2"
+#PKG_URL_PROTO=git
+#PKG_URL_REV=cc615d0
+#PKG_URL="http://anongit.freedesktop.org/git/xorg/driver/xf86-video-ati.git"
+#PKG_VERSION=7.4.0+r${PKG_URL_REV}
+PKG_VERSION=7.4.0
+PKG_URL="$XORG_SRCS/driver/${PKG_NAME}-${PKG_VERSION}.tar.bz2"
 PKG_REV=1
 PKG_DEPENDS="mesa xorg-server systemd libdrm libpciaccess glamor"
 PKG_BUILD_DEPENDS="toolchain"

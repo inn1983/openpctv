@@ -26,6 +26,7 @@ fi
             $CFG_AVAHI \
             $CFG_DVBCSA \
             --disable-libav \
+            --enable-bundle
 
 make
 make_install

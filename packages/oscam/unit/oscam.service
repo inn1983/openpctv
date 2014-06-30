@@ -7,6 +7,9 @@ ConditionPathExists=/etc/oscam/oscam.conf
 [Service]
 ExecStartPre=/usr/bin/oscam-pre.sh
 ExecStart=/usr/bin/oscam.sh
+StandardInput=tty
+StandardOutput=tty
+TTYPath=/dev/tty5
 
 [Install]
 WantedBy=multi-user.target

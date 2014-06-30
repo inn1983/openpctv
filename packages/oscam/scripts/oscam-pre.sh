@@ -5,7 +5,7 @@
 [ X$CAM = XNO ] && exit 1
 
 target=$(systemctl get-default)
-if (grep -v -q "systemd" /proc/cmdline && test X$target = "Xenigma2pc.target") || grep -q enigma2pc /proc/cmdline; then
+if (grep -v -q "systemd.unit" /proc/cmdline && test X$target = "Xenigma2pc.target") || grep -q enigma2pc /proc/cmdline; then
   target=enigma2pc
   for i in 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1; do
     if [ -c /dev/dvb/adapter0/dvr0 -a -c /dev/dvb/adapter0/frontend0 ]; then

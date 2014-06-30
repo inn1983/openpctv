@@ -8,14 +8,16 @@ for i in 10 9 8 7 6 5 4 3 2 1; do
    fi
 done
 
-if [ $(cat /sys/class/drm/card0/device/vendor) = "0x10de" -a -f /usr/lib/nvidia/libGL.so.1 ]; then
+if [ $(cat /sys/class/drm/card0/device/vendor) = "0x10de" -a -f /usr/lib/nvidia/libGL.so.1 ] && lsmod | grep -i -q -w nvidia; then
    # symlink GL libs
    ln -sf /usr/lib/nvidia/libGL.so.1 /usr/lib/libGL.so.1
    ln -sf /usr/lib/nvidia/libglx.so  /usr/lib/xorg/modules/extensions/libglx.so
    # symlink Xorg config file
    ln -sf /etc/X11/gpu/90-nvidia.conf /etc/X11/xorg.conf.d/90-nvidia.conf
+   sync
 else
    ln -sf /usr/lib/mesa/libGL.so.1 /usr/lib/libGL.so.1
    ln -sf /usr/lib/mesa/libglx.so  /usr/lib/xorg/modules/extensions/libglx.so
    [ -f /etc/X11/xorg.conf.d/90-nvidia.conf ] && rm /etc/X11/xorg.conf.d/90-nvidia.conf
+   sync
 fi

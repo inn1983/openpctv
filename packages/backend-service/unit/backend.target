@@ -1,8 +1,8 @@
 [Unit]
 Description=TV streaming server
-Requires=graphical.target
+Requires=network.target
 Conflicts=rescue.service rescue.target
-After=graphical.target
+After=network.target oscam.target
 AllowIsolate=yes
 
 [Install]

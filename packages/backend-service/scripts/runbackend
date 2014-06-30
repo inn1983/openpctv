@@ -1,0 +1,21 @@
+#!/bin/sh
+
+. /etc/system.options
+if [ $CAM = "OScam" ]; then
+  CAMPLUGIN="-Pdvbapi"
+elif [ $CAM = "VDR-SC" ]; then
+  CAMPLUGIN="-Psc"
+  /usr/bin/getcam auto
+  systemctl stop oscam
+fi
+
+if [ X$BACKEND = "Xvdr" ]; then
+  if [ X$E2EPG = "Xyes" ]; then
+    epgen -i /video/epg.dat -o /tmp/epg.dat && epgtrans &
+  fi
+  eval vdr -g /tmp --vfat $CAMPLUGIN -Pvnsiserver -Pxvdr -Pstreamdev-server -v /video -c /etc/vdr -E /etc/vdr/epg.data -s shutdown
+elif [ X$BACKEND = "Xtvheadend" ]; then
+  eval tvheadend -c /etc/tvheadend -s
+else
+  exit 0
+fi

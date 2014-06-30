@@ -13,7 +13,7 @@ ConditionPathExists=/dev/fb0
 # ConditionKernelCommandLine=splash
 
 [Service]
-ExecStartPre=/bin/sh -c 'for ((i=1;$i-70;i++)); do echo ""> /dev/tty1; done'
+#ExecStartPre=/bin/sh -c 'for ((i=1;$i-70;i++)); do echo ""> /dev/tty1; done'
 ExecStart=/usr/bin/ply-image /usr/share/plymouth/splash.png
 
 [Install]

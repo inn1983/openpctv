@@ -63,6 +63,13 @@ end
 
 begin
         prog = irxevent
+        button = Record
+        config = Key F10 CurrentWindow
+        repeat = 3
+end
+
+begin
+        prog = irxevent
         button = Left
         config = Key Left CurrentWindow
         repeat = 3
@@ -300,9 +307,9 @@ begin
         repeat = 3
 end
 
-begin
-	prog = irexec
-	button = Record
-	config = systemctl restart enigma2pc
-	repeat = 3
-end
+#begin
+#	prog = irexec
+#	button = Record
+#	config = systemctl restart enigma2pc
+#	repeat = 3
+#end

@@ -24,7 +24,6 @@ do_configure \
             --disable-hostnamed \
             --disable-timedated \
             --disable-localed \
-            --disable-logind \
             --disable-coredump \
             --disable-vconsole \
             --disable-xz \

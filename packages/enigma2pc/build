@@ -9,12 +9,7 @@ get_meta $1
 
 require_cxx $1
 
-./scripts/unpack tbs-drivers
-
 cd $BUILD/$1*
-
-cp -rf ../tbs-drivers-*/linux/include ./tbs_include
-cp $ROOT/$PACKAGES/$1/config/compiler.h ./tbs_include/linux
 
 sed -i 's/^video.output.vdpau_enable_inverse_telecine:0/video.output.vdpau_enable_inverse_telecine:1/' \
 	data/xine.conf
@@ -47,18 +42,5 @@ cp data/black.mvi .install/etc/tuxbox/logo.mvi
 #cp -fR scripts/* .install/usr/bin/
 rm .install/usr/share/fonts/nmsbd.ttf
 rm .install/usr/share/fonts/ae_AlMateen.ttf
-
-#Compile with TBS DVB cards(Because of the low API version)
-make clean
-do_configure \
-             --with-dvbincludes=./tbs_include \
-             --with-arch=$TARGET_ARCH \
-             --with-cpu=$TARGET_CPU \
-             --with-xlib
-make
-
 mv .install/usr/bin/enigma2 .install/usr/bin/enigma2.orig
 ln -sf enigma2.orig .install/usr/bin/enigma2
-strip main/enigma2
-cp main/enigma2 .install/usr/bin/enigma2.tbs
-chmod 755 .install/usr/bin/*
