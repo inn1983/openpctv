@@ -1,5 +1,5 @@
 PKG_NAME=dvbsky-dvbc-drivers
-PKG_VERSION=14-140601
+PKG_VERSION=14-140621
 PKG_URL="http://www.dvbsky.net/download/linux/media_build-bst-${PKG_VERSION}.tar.gz"
 PKG_REV=1
 PKG_PRIORITY=optional

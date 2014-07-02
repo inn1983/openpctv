@@ -25,8 +25,11 @@ fi
             --cc="$TARGET_CC" \
             $CFG_AVAHI \
             $CFG_DVBCSA \
-            --disable-libav \
-            --enable-bundle
+            --disable-libav
+#            --enable-bundle
+
+rm data/dvb-scan/dvb-s/*
+cp -P $ROOT/$PACKAGES/$1/config/dvb-s/* data/dvb-scan/dvb-s/
 
 make
 make_install
