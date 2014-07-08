@@ -37,6 +37,15 @@ else
   cp $ROOT/$PACKAGES/$1/config/splash.png $ISOLINUX_DIR
 fi
 
+cp $ROOT/$PACKAGES/$1/config/unzip.exe $INSTALL/
+
+dd if=/dev/zero of=$INSTALL/loopdisk.img bs=1M seek=500 count=0
+sync
+sleep 0.5
+/sbin/mke2fs -T ext4 -F -q $INSTALL/loopdisk.img
+zip -j $INSTALL/loopdisk.zip $INSTALL/loopdisk.img
+rm $INSTALL/loopdisk.img
+
 [ "$TARGET_ARCH" = i386 -o "$TARGET_ARCH" = x86_64 ] && INS_PARAMS="^#INS#" || INS_PARAMS="^#INS#.*"
 sed -i s%$INS_PARAMS%% $ISOLINUX_DIR/openpctv.cfg
 

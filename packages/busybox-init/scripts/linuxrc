@@ -177,6 +177,8 @@ for arg in $(cat /proc/cmdline); do
   esac
 done
 
+[ "$QUIET" = yes ] || clear
+
 # if rootro, always mount root as r/o
 # if rootrw, always mount root as r/w
 # if neither, mount root as r/w only if persistent is enabled and we're
@@ -375,12 +377,22 @@ else
   if [ -z "$DATA" -a -z "$EXTERNAL_PERSISTENT" ]; then
     if [ X$ROOT_TYPE != "Xcdrom" ]; then
       if [ ! -f /mnt/loopdisk.img ]; then
-        dd if=/dev/zero of=/mnt/loopdisk.img bs=1M seek=500 count=0
-	sync
-	sleep 1
-	/sbin/mke2fs -T ext4 -F -q /mnt/loopdisk.img
-	sync
-	sleep 1
+        echo 8 > /proc/sys/kernel/printk
+        if [ -f /mnt/loopdisk.zip ]; then
+          echo "Uncompress loopdisk.zip, This may take a longer time, please wait patiently..."
+          unzip /mnt/loopdisk.zip -d /mnt
+          sync
+          sleep 1
+        else
+          echo "Creating loopdisk.img, This may take a longer time, please wait patiently..."
+          dd if=/dev/zero of=/mnt/loopdisk.img bs=1M seek=500 count=0
+          sync
+          sleep 1
+          /sbin/mke2fs -T ext4 -F -q /mnt/loopdisk.img
+          sync
+          sleep 1
+        fi
+        echo 0 > /proc/sys/kernel/printk
       fi
       for i in 0 1 2 3 4 5 6 7 8 9; do
         mount -o loop,sync /mnt/loopdisk.img /rw && break

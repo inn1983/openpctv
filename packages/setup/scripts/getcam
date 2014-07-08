@@ -71,7 +71,7 @@ fi
 }
 
 editcam () {
-dialog --defaultno --clear --yesno "$(gettext "Would you like to configure OScam/VDR-SC? Of course, you can also put CCcam.cfg file into an USB flash drive, the system will automatically read and write into the OScam/VDR-SC configuration file.")" 8 70
+dialog --defaultno --clear --yesno "$(gettext "Would you like to configure OScam/VDR-SC? You can also put CCcam.cfg file into an USB flash drive, the system will automatically read and write into the OScam/VDR-SC configuration file.")" 8 70
 if [ $? -eq 0 ]; then
 . /etc/system.options
   case $CAM in

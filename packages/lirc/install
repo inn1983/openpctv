@@ -33,8 +33,9 @@ fi
 
 mkdir -p $INSTALL/etc/lirc
 cp $ROOT/$PACKAGES/$1/config/lircd.conf.mceusb $INSTALL/etc/lirc/
-cp $INSTALL/etc/lirc/lircd.conf.mceusb $INSTALL/etc/lirc/lircd.conf
-cp remotes/devinput/lircd.conf.devinput $INSTALL/etc/lirc/
+ln -sf lircd.conf.mceusb $INSTALL/etc/lirc/lircd.conf
+cp remotes/devinput/lircd.conf.devinput $INSTALL/etc/lirc/lircd.conf.devinput_orig
+cp $ROOT/$PACKAGES/$1/config/lircd.conf.devinput $INSTALL/etc/lirc/
 cp -R remotes $INSTALL/etc/lirc
 cp $ROOT/$PACKAGES/$1/config/hardware.conf $INSTALL/etc/lirc
 cp $ROOT/$PACKAGES/$1/scripts/lircd_pre.sh $INSTALL/usr/bin

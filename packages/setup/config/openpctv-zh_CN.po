@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPCTV 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-29 09:28+0800\n"
-"PO-Revision-Date: 2013-07-23 16:56+0800\n"
+"POT-Creation-Date: 2014-07-09 00:20+0800\n"
+"PO-Revision-Date: 2014-07-08 17:58+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
 "Language: Simplified Chinese(zh_CN)\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: packages/setup/scripts/audio-config:8
 #: packages/setup/scripts/audio-config:48
-#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:102
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:105
 msgid "Sound card Configuration"
 msgstr "配置声卡"
 
@@ -41,14 +41,22 @@ msgstr ""
 msgid "Audio ouput test completed"
 msgstr "音频输出测试"
 
+#: packages/setup/scripts/audio-config:43
+msgid "Finish"
+msgstr "完成"
+
+#: packages/setup/scripts/audio-config:43
+msgid "Re-configure"
+msgstr "重新配置"
+
 #: packages/setup/scripts/audio-config:44
 msgid ""
 "The test fails if you cannot hear any sound, the reason could be that the "
 "sound came out from a wrong speaker. In this case, check your connection "
-"again carefully.Select 'No' to return to the previous step."
+"again carefully."
 msgstr ""
 "测试成功吗？或许测试失败其中的一个原因是--声音输出到错误的喇叭。在这种情况下"
-"仔细检查你的联接。如果你选择“否”，那将会返回上一步"
+"仔细检查你的联接。"
 
 #: packages/setup/scripts/audio-config:49
 msgid ""
@@ -391,9 +399,9 @@ msgstr "这个调谐器是空的/未使用"
 
 #: packages/setup/scripts/getcam:74
 msgid ""
-"Would you like to configure OScam/VDR-SC? Of course, you can also put CCcam."
-"cfg file into an USB flash drive, the system will automatically read and "
-"write into the OScam/VDR-SC configuration file."
+"Would you like to configure OScam/VDR-SC? You can also put CCcam.cfg file "
+"into an USB flash drive, the system will automatically read and write into "
+"the OScam/VDR-SC configuration file."
 msgstr ""
 "你想要配置OScam/VDR-SC吗？当然你也可以将CCcam.cfg文件放在U盘中，系统将会自动"
 "读取并写入OScam/VDR-SC的配置文件中。"
@@ -403,7 +411,7 @@ msgid "Would you like to enable SoftCAM (OScam) on this machine?"
 msgstr "你想在这台机器上运行SoftCAM(OScam)吗？"
 
 #: packages/setup/scripts/install-drivers:18
-#: packages/setup/scripts/setup.sh:111
+#: packages/setup/scripts/setup.sh:90 packages/setup/scripts/setup.sh:116
 msgid "Reboot"
 msgstr "重新启动"
 
@@ -434,12 +442,12 @@ msgstr "NVIDIA官方二进制Linux显卡驱动"
 msgid "Open-source NVIDIA graphics driver"
 msgstr "开源的NVIDIA显卡驱动"
 
-#: packages/setup/scripts/install-drivers:93
+#: packages/setup/scripts/install-drivers:96
 #, sh-format
 msgid "Found $field"
 msgstr "找到$field"
 
-#: packages/setup/scripts/install-drivers:93
+#: packages/setup/scripts/install-drivers:96
 msgid ""
 "Sometimes a board without valid PCI(e) Subsystem ID can't be autodetected. "
 "You can specify the model of the card to pass card=<n> insmod option to "
@@ -450,21 +458,21 @@ msgstr ""
 "载驱动时附带的card=<n>参数来使用之加载正常。同时你可以向电视卡商询问其解决方"
 "案。你想继续吗？"
 
-#: packages/setup/scripts/install-drivers:98
+#: packages/setup/scripts/install-drivers:101
 #, sh-format
 msgid "Specify the card number of $field board"
 msgstr "指定$field 卡的序号"
 
-#: packages/setup/scripts/install-drivers:98
+#: packages/setup/scripts/install-drivers:101
 msgid "Here is a list of valid choices for the card=<n> insmod option"
 msgstr "这里是电视卡设备有效的列表，请选择你的卡的正确编号。"
 
-#: packages/setup/scripts/install-drivers:122
-#: packages/setup/scripts/install-drivers:127
+#: packages/setup/scripts/install-drivers:125
+#: packages/setup/scripts/install-drivers:130
 msgid "Additional DVB driver"
 msgstr "附加的DVB驱动"
 
-#: packages/setup/scripts/install-drivers:123
+#: packages/setup/scripts/install-drivers:126
 msgid ""
 "Your DVB devices seem to be normal. Perhaps you do not need to install other "
 "additional drivers. If you want to install additional drivers please select "
@@ -473,7 +481,7 @@ msgstr ""
 "你的DVB设备驱动看上是正常的。也许你并不需要安装其它附加的驱动。如果你想安装附"
 "加驱动，请选择'是'"
 
-#: packages/setup/scripts/install-drivers:128
+#: packages/setup/scripts/install-drivers:131
 msgid ""
 "Your DVB device does not seem to work properly. Perhaps you should install "
 "another driver. Do you want to install the additional drivers?"
@@ -481,42 +489,42 @@ msgstr ""
 "你的DVB设备看上去似乎并不正常，或许你应该安装另外一个驱动。你想要安装附加的驱"
 "动吗？"
 
-#: packages/setup/scripts/install-drivers:133
-#: packages/setup/scripts/setup.sh:99
+#: packages/setup/scripts/install-drivers:136
+#: packages/setup/scripts/setup.sh:102
 msgid "Install additional DVB driver"
 msgstr "安装附加的DVB驱动"
 
-#: packages/setup/scripts/install-drivers:134
+#: packages/setup/scripts/install-drivers:137
 msgid ""
 "Before proceeding please confirm your DVB device specific information. "
 "Choose the driver you need to install carefully."
 msgstr "在继续之前你请确认你的V4L及DVB设备的信息，仔细选择你想要安装的驱动。"
 
-#: packages/setup/scripts/install-drivers:135
+#: packages/setup/scripts/install-drivers:138
 msgid "I do not want to install now."
 msgstr "我现在不想要安装。"
 
-#: packages/setup/scripts/install-drivers:136
+#: packages/setup/scripts/install-drivers:139
 msgid "Support most of the devices,such as DVBWorld,Tevii,Prof..."
 msgstr "支持大多数的设备，例如DVBWorld，Tevii，Prof等"
 
-#: packages/setup/scripts/install-drivers:137
+#: packages/setup/scripts/install-drivers:140
 msgid "Support all the TBS devices"
 msgstr "支持TBS全系列的设备"
 
-#: packages/setup/scripts/install-drivers:138
+#: packages/setup/scripts/install-drivers:141
 msgid "Support all the DVBSky devices"
 msgstr "支持DVBSky全系列的设备"
 
-#: packages/setup/scripts/install-drivers:139
+#: packages/setup/scripts/install-drivers:142
 msgid "Support all the TBS DVB-C devices"
 msgstr "支持TBS DVB-C全系列的设备"
 
-#: packages/setup/scripts/install-drivers:140
+#: packages/setup/scripts/install-drivers:143
 msgid "Support all the DVBSky DVB-C devices"
 msgstr "支持DVBSky DVB-C全系列的设备"
 
-#: packages/setup/scripts/install-drivers:141
+#: packages/setup/scripts/install-drivers:144
 msgid "Support the TBS QBOX I DVB-C devices"
 msgstr "支持TBS QBOX I设备"
 
@@ -787,25 +795,31 @@ msgid "Do you need to set the monitor's best resolution?"
 msgstr "你需要为你显示器设定最佳分辨率吗？"
 
 #: packages/setup/scripts/monitor.sh:8
+msgid "Change the resolution"
+msgstr "改变分辨率"
+
+#: packages/setup/scripts/monitor.sh:8
+msgid "Automatic detection"
+msgstr "自动检测"
+
+#: packages/setup/scripts/monitor.sh:8
 msgid ""
 "Most modern monitors/TVs can be probed for EDID data concerning their "
 "capabilities and requirements.So normally you do not need to make any "
 "settings for Xorg. But EDID is not always completely accurate, and for some "
 "situations such as older or unusual display hardware or many HDTVs, it will "
-"be necessary to create a modeline to get the right settings. We'll enter the "
-"monitor configuration if you select 'Yes'"
+"be necessary to create a modeline to get the right settings."
 msgstr ""
 "大多数型号的显示器/电视机可以通过检测其EDID数据获得其参数性能。因此一般情况下"
 "你并不需要为xorg作任何设置。但是EDID并不总是完全准确，在某些情况下比如旧的或"
-"不标准的硬件及许多高清电视机，有必要指定其最佳分辨率以获得正确的设定。如果你"
-"选择'是'的话将进入显示器设置"
+"不标准的硬件及许多高清电视机，有必要指定其最佳分辨率以获得正确的设定。"
 
 #: packages/setup/scripts/monitor.sh:19
 msgid "Submit"
 msgstr "提交"
 
 #: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
-#: packages/setup/scripts/setup.sh:101
+#: packages/setup/scripts/setup.sh:104
 msgid "Set the monitor's best resolution"
 msgstr "设定显示器的最佳分辨率"
 
@@ -932,15 +946,15 @@ msgstr "检查网络的联接情况，请等待 ..."
 msgid "Searching for wireless networks, please wait ..."
 msgstr "正在搜索无线网络，请等待 ..."
 
-#: packages/setup/scripts/select-irdrv:10
+#: packages/setup/scripts/select-irdrv:11
 msgid "IR configuration"
 msgstr "红外线接收配置"
 
-#: packages/setup/scripts/select-irdrv:10
+#: packages/setup/scripts/select-irdrv:11
 msgid "Select IR Device"
 msgstr "选择红外线设备"
 
-#: packages/setup/scripts/select-irdrv:10
+#: packages/setup/scripts/select-irdrv:11
 msgid ""
 "The following infrared receiver devices are found in this machine. Please "
 "select a default device as Lirc support."
@@ -955,7 +969,7 @@ msgid "This step is not necessary, because we provide a normal list."
 msgstr "这一步并不是必须的，因为我们为你提供了一个缺省即可正常运行的列表。"
 
 #: packages/setup/scripts/select-plugins:29
-#: packages/setup/scripts/setup.sh:105
+#: packages/setup/scripts/setup.sh:108
 msgid "Select VDR-plugins"
 msgstr "选择VDR插件"
 
@@ -963,7 +977,7 @@ msgstr "选择VDR插件"
 msgid "You can enable or disable VDR-plugins on the list."
 msgstr "你可以在下面的列表中允许或禁止VDR插件。"
 
-#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:97
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:100
 msgid "Set the default target"
 msgstr "选择默认的启动项"
 
@@ -975,7 +989,7 @@ msgstr "请选择默认的启动项"
 msgid ""
 "Enigma2 is a series of DVB television receivers for Dreambox. It has been "
 "ported to PC."
-msgstr "Engiam2是Dreambox接收机的系统，现已 被移植到PC上。"
+msgstr "Engiam2是Dreambox接收机的系统，现已被移植到PC上。"
 
 #: packages/setup/scripts/select-target:19
 msgid "A digital video recorder using standard PC components."
@@ -997,63 +1011,81 @@ msgstr "按任意键进入配置程序，"
 msgid "or 3 seconds later enter"
 msgstr "否则三秒后将自动进入"
 
-#: packages/setup/scripts/setup.sh:86
+#: packages/setup/scripts/setup.sh:85
+msgid "Configure VDR"
+msgstr "配置VDR"
+
+#: packages/setup/scripts/setup.sh:85
+msgid "Configure VDR later"
+msgstr "稍后配置VDR"
+
+#: packages/setup/scripts/setup.sh:85
 msgid ""
-"Would you like to scan channels for VDR/XBMC(It'll some minutes to do it)?  "
-"You can also scan channels with vdr reelscanchannels plugin in vdr."
+"The following configuration is for the VDR (note the XBMC uses VDR as a PVR "
+"backend), if you only use Engima2, then you do not need to configure or re-"
+"configure VDR later."
 msgstr ""
-"你想为VDR/XBMC进行进行频道扫描吗(这将会费几分钟的时间）？你也可以在VDR中利用"
-"reelscanchannels插件进行频道扫描。"
+"接下来的配置只是针对VDR的（注意XBMC使用了VDR作为一种PVR后端），如果你只使用"
+"Enigma2,那么你可不必配置或稍后再配置VDR。"
 
-#: packages/setup/scripts/setup.sh:95
-msgid "configuration"
-msgstr "配置"
-
-#: packages/setup/scripts/setup.sh:95
+#: packages/setup/scripts/setup.sh:90 packages/setup/scripts/setup.sh:98
 msgid "Main menu"
 msgstr "主菜单"
 
-#: packages/setup/scripts/setup.sh:96
+#: packages/setup/scripts/setup.sh:90
+msgid ""
+"Now, you have completed the most configurations of VDR(for Enigma2 need to "
+"be in its OSD menu) . Now you can select 'Reboot' or 'Main Menu' to continue "
+"the configuration."
+msgstr ""
+"现在，你已经完成了OpenPCTV 的大部分配置（针对Enigma2需要在其OSD中设置），现在"
+"你可以选择'重新启动'或'主菜单'来继续进行配置。"
+
+#: packages/setup/scripts/setup.sh:98
+msgid "configuration"
+msgstr "配置"
+
+#: packages/setup/scripts/setup.sh:99
 msgid "Set global location and language"
 msgstr "设置全局区域和语言"
 
-#: packages/setup/scripts/setup.sh:98
+#: packages/setup/scripts/setup.sh:101
 msgid "Configure Network Environment"
 msgstr "配置网络环境"
 
-#: packages/setup/scripts/setup.sh:100
-msgid "Select IR device"
-msgstr "选择红外接收设备"
-
-#: packages/setup/scripts/setup.sh:103
+#: packages/setup/scripts/setup.sh:106
 msgid "Update Satellite Transponders"
 msgstr "更新卫星参数"
 
-#: packages/setup/scripts/setup.sh:104
+#: packages/setup/scripts/setup.sh:107
 msgid "Update EPG data"
 msgstr "更新第三方EPG数据"
 
-#: packages/setup/scripts/setup.sh:106
+#: packages/setup/scripts/setup.sh:109
 msgid "Select a software emulated CAM"
 msgstr "选择一种模拟CAM软件"
 
-#: packages/setup/scripts/setup.sh:107
+#: packages/setup/scripts/setup.sh:110
 msgid "DiSEqC configuration"
 msgstr "DiSEqC配置"
 
-#: packages/setup/scripts/setup.sh:108
+#: packages/setup/scripts/setup.sh:111
 msgid "Auto scan channels"
 msgstr "自动扫描频道"
 
-#: packages/setup/scripts/setup.sh:109
+#: packages/setup/scripts/setup.sh:112
 msgid "Start VDR with rpihddevice frontend"
 msgstr "启动带有rpihddevice的VDR"
 
-#: packages/setup/scripts/setup.sh:110
+#: packages/setup/scripts/setup.sh:113
 msgid "Start XBMC pvr with VDR backend"
 msgstr "启动带有VDR后台的XBMC"
 
-#: packages/setup/scripts/setup.sh:112
+#: packages/setup/scripts/setup.sh:114
+msgid "Install OpenPCTV to your hard disk"
+msgstr "将OpenPCTV安装到你的硬盘"
+
+#: packages/setup/scripts/setup.sh:115
 msgid "Exit to login shell"
 msgstr "退出并登录shell"
 

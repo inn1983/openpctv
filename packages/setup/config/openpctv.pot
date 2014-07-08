@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-02 00:23+0800\n"
+"POT-Creation-Date: 2014-07-09 00:20+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: packages/setup/scripts/audio-config:8
 #: packages/setup/scripts/audio-config:48
-#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:102
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:105
 msgid "Sound card Configuration"
 msgstr ""
 
@@ -41,11 +41,19 @@ msgstr ""
 msgid "Audio ouput test completed"
 msgstr ""
 
+#: packages/setup/scripts/audio-config:43
+msgid "Finish"
+msgstr ""
+
+#: packages/setup/scripts/audio-config:43
+msgid "Re-configure"
+msgstr ""
+
 #: packages/setup/scripts/audio-config:44
 msgid ""
 "The test fails if you cannot hear any sound, the reason could be that the "
 "sound came out from a wrong speaker. In this case, check your connection "
-"again carefully.Select 'No' to return to the previous step."
+"again carefully."
 msgstr ""
 
 #: packages/setup/scripts/audio-config:49
@@ -377,9 +385,9 @@ msgstr ""
 
 #: packages/setup/scripts/getcam:74
 msgid ""
-"Would you like to configure OScam/VDR-SC? Of course, you can also put CCcam."
-"cfg file into an USB flash drive, the system will automatically read and "
-"write into the OScam/VDR-SC configuration file."
+"Would you like to configure OScam/VDR-SC? You can also put CCcam.cfg file "
+"into an USB flash drive, the system will automatically read and write into "
+"the OScam/VDR-SC configuration file."
 msgstr ""
 
 #: packages/setup/scripts/getcam:89
@@ -387,7 +395,7 @@ msgid "Would you like to enable SoftCAM (OScam) on this machine?"
 msgstr ""
 
 #: packages/setup/scripts/install-drivers:18
-#: packages/setup/scripts/setup.sh:111
+#: packages/setup/scripts/setup.sh:90 packages/setup/scripts/setup.sh:116
 msgid "Reboot"
 msgstr ""
 
@@ -416,12 +424,12 @@ msgstr ""
 msgid "Open-source NVIDIA graphics driver"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:93
+#: packages/setup/scripts/install-drivers:96
 #, sh-format
 msgid "Found $field"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:93
+#: packages/setup/scripts/install-drivers:96
 msgid ""
 "Sometimes a board without valid PCI(e) Subsystem ID can't be autodetected. "
 "You can specify the model of the card to pass card=<n> insmod option to "
@@ -429,69 +437,69 @@ msgid ""
 "want to do this?"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:98
+#: packages/setup/scripts/install-drivers:101
 #, sh-format
 msgid "Specify the card number of $field board"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:98
+#: packages/setup/scripts/install-drivers:101
 msgid "Here is a list of valid choices for the card=<n> insmod option"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:122
-#: packages/setup/scripts/install-drivers:127
+#: packages/setup/scripts/install-drivers:125
+#: packages/setup/scripts/install-drivers:130
 msgid "Additional DVB driver"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:123
+#: packages/setup/scripts/install-drivers:126
 msgid ""
 "Your DVB devices seem to be normal. Perhaps you do not need to install other "
 "additional drivers. If you want to install additional drivers please select "
 "'Yes'"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:128
+#: packages/setup/scripts/install-drivers:131
 msgid ""
 "Your DVB device does not seem to work properly. Perhaps you should install "
 "another driver. Do you want to install the additional drivers?"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:133
-#: packages/setup/scripts/setup.sh:99
+#: packages/setup/scripts/install-drivers:136
+#: packages/setup/scripts/setup.sh:102
 msgid "Install additional DVB driver"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:134
+#: packages/setup/scripts/install-drivers:137
 msgid ""
 "Before proceeding please confirm your DVB device specific information. "
 "Choose the driver you need to install carefully."
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:135
+#: packages/setup/scripts/install-drivers:138
 msgid "I do not want to install now."
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:136
+#: packages/setup/scripts/install-drivers:139
 msgid "Support most of the devices,such as DVBWorld,Tevii,Prof..."
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:137
+#: packages/setup/scripts/install-drivers:140
 msgid "Support all the TBS devices"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:138
+#: packages/setup/scripts/install-drivers:141
 msgid "Support all the DVBSky devices"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:139
+#: packages/setup/scripts/install-drivers:142
 msgid "Support all the TBS DVB-C devices"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:140
+#: packages/setup/scripts/install-drivers:143
 msgid "Support all the DVBSky DVB-C devices"
 msgstr ""
 
-#: packages/setup/scripts/install-drivers:141
+#: packages/setup/scripts/install-drivers:144
 msgid "Support the TBS QBOX I DVB-C devices"
 msgstr ""
 
@@ -749,13 +757,20 @@ msgid "Do you need to set the monitor's best resolution?"
 msgstr ""
 
 #: packages/setup/scripts/monitor.sh:8
+msgid "Change the resolution"
+msgstr ""
+
+#: packages/setup/scripts/monitor.sh:8
+msgid "Automatic detection"
+msgstr ""
+
+#: packages/setup/scripts/monitor.sh:8
 msgid ""
 "Most modern monitors/TVs can be probed for EDID data concerning their "
 "capabilities and requirements.So normally you do not need to make any "
 "settings for Xorg. But EDID is not always completely accurate, and for some "
 "situations such as older or unusual display hardware or many HDTVs, it will "
-"be necessary to create a modeline to get the right settings. We'll enter the "
-"monitor configuration if you select 'Yes'"
+"be necessary to create a modeline to get the right settings."
 msgstr ""
 
 #: packages/setup/scripts/monitor.sh:19
@@ -763,7 +778,7 @@ msgid "Submit"
 msgstr ""
 
 #: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
-#: packages/setup/scripts/setup.sh:101
+#: packages/setup/scripts/setup.sh:104
 msgid "Set the monitor's best resolution"
 msgstr ""
 
@@ -889,15 +904,15 @@ msgstr ""
 msgid "Searching for wireless networks, please wait ..."
 msgstr ""
 
-#: packages/setup/scripts/select-irdrv:10
+#: packages/setup/scripts/select-irdrv:11
 msgid "IR configuration"
 msgstr ""
 
-#: packages/setup/scripts/select-irdrv:10
+#: packages/setup/scripts/select-irdrv:11
 msgid "Select IR Device"
 msgstr ""
 
-#: packages/setup/scripts/select-irdrv:10
+#: packages/setup/scripts/select-irdrv:11
 msgid ""
 "The following infrared receiver devices are found in this machine. Please "
 "select a default device as Lirc support."
@@ -912,7 +927,7 @@ msgid "This step is not necessary, because we provide a normal list."
 msgstr ""
 
 #: packages/setup/scripts/select-plugins:29
-#: packages/setup/scripts/setup.sh:105
+#: packages/setup/scripts/setup.sh:108
 msgid "Select VDR-plugins"
 msgstr ""
 
@@ -920,7 +935,7 @@ msgstr ""
 msgid "You can enable or disable VDR-plugins on the list."
 msgstr ""
 
-#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:97
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:100
 msgid "Set the default target"
 msgstr ""
 
@@ -954,61 +969,77 @@ msgstr ""
 msgid "or 3 seconds later enter"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:86
+#: packages/setup/scripts/setup.sh:85
+msgid "Configure VDR"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:85
+msgid "Configure VDR later"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:85
 msgid ""
-"Would you like to scan channels for VDR/XBMC(It'll some minutes to do it)?  "
-"You can also scan channels with vdr reelscanchannels plugin in vdr."
+"The following configuration is for the VDR (note the XBMC uses VDR as a PVR "
+"backend), if you only use Engima2, then you do not need to configure or re-"
+"configure VDR later."
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:95
-msgid "configuration"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:95
+#: packages/setup/scripts/setup.sh:90 packages/setup/scripts/setup.sh:98
 msgid "Main menu"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:96
-msgid "Set global location and language"
+#: packages/setup/scripts/setup.sh:90
+msgid ""
+"Now, you have completed the most configurations of VDR(for Enigma2 need to "
+"be in its OSD menu) . Now you can select 'Reboot' or 'Main Menu' to continue "
+"the configuration."
 msgstr ""
 
 #: packages/setup/scripts/setup.sh:98
+msgid "configuration"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:99
+msgid "Set global location and language"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:101
 msgid "Configure Network Environment"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:100
-msgid "Select IR device"
-msgstr ""
-
-#: packages/setup/scripts/setup.sh:103
+#: packages/setup/scripts/setup.sh:106
 msgid "Update Satellite Transponders"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:104
+#: packages/setup/scripts/setup.sh:107
 msgid "Update EPG data"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:106
+#: packages/setup/scripts/setup.sh:109
 msgid "Select a software emulated CAM"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:107
+#: packages/setup/scripts/setup.sh:110
 msgid "DiSEqC configuration"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:108
+#: packages/setup/scripts/setup.sh:111
 msgid "Auto scan channels"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:109
+#: packages/setup/scripts/setup.sh:112
 msgid "Start VDR with rpihddevice frontend"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:110
+#: packages/setup/scripts/setup.sh:113
 msgid "Start XBMC pvr with VDR backend"
 msgstr ""
 
-#: packages/setup/scripts/setup.sh:112
+#: packages/setup/scripts/setup.sh:114
+msgid "Install OpenPCTV to your hard disk"
+msgstr ""
+
+#: packages/setup/scripts/setup.sh:115
 msgid "Exit to login shell"
 msgstr ""
 

@@ -12,7 +12,8 @@ do_configure
 make
 make_install
 
-for file in lircd eventlircd; do
-  mv .install/lib/udev/rules.d/98-$file.rules.disabled \
-    .install/lib/udev/rules.d/98-$file.rules
-done
+rm .install/lib/udev/rules.d/*
+#for file in lircd eventlircd; do
+#  mv .install/lib/udev/rules.d/98-$file.rules.disabled \
+#    .install/lib/udev/rules.d/98-$file.rules
+#done

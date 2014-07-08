@@ -34,8 +34,18 @@ if [ -e ${exec_prefix}/lib/libpassthrough.so ]; then
 	LIBS="$LIBS ${exec_prefix}/lib/libpassthrough.so"
 fi
 
-x=$(xrandr | grep "\*" | awk '{print $1}' | cut -dx -f1)
-y=$(xrandr | grep "\*" | awk '{print $1}' | cut -dx -f2)
+#for i in 1 2 3 4 5 6 7 8 9 10; do
+#  if pgrep Xorg > /dev/null; then
+#    break
+#  else
+#    sleep 0.2
+#  fi
+#done
+
+xy=$(xrandr | grep "\*" | awk '{print $1}')
+
+x=$(echo $xy | cut -dx -f1)
+y=$(echo $xy | cut -dx -f2)
 
 [ x$x != "x" -a x$y != "x" ] && \
 sed -i -e "s/^config.pc.initial_window_width=.*/config.pc.initial_window_width=$x/g" \

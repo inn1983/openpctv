@@ -58,6 +58,7 @@ RUN_DVB=/usr/bin/update-dvbdevice
 RUN_DISEQC=/usr/bin/diseqcsetup
 RUN_CHANNELS=/usr/bin/update-channels
 RUN_PLUGINS=/usr/bin/select-plugins
+RUN_INSTALLER=/sbin/installator
 
 function updatelocale
 {
@@ -71,21 +72,23 @@ updatelocale
 [ -f $RUN_NET ] && $RUN_NET
 [ -f $RUN_DRV ] && $RUN_DRV
 [ -f $RUN_TARGET ] && $RUN_TARGET
-[ -f $RUN_IR ] && $RUN_IR
-systemctl restart lircd
+#[ -f $RUN_IR ] && $RUN_IR
+#systemctl restart lircd
 systemctl stop vdr
 systemctl stop vdr-backend
 [ -f $RUN_MONITOR ] && $RUN_MONITOR
 [ -f $RUN_AUDIO ] && $RUN_AUDIO init
-[ -f $RUN_PLUGINS ] && $RUN_PLUGINS
 [ -f $RUN_CAM ] && $RUN_CAM
 [ -f $RUN_EPG ] && $RUN_EPG
 [ -f $RUN_TRANS ] && $RUN_TRANS
 [ -f $RUN_DVB ] && $RUN_DVB
-[ -f $RUN_DISEQC ] && $RUN_DISEQC
-dialog --defaultno --clear --yesno "$(gettext "Would you like to scan channels for VDR/XBMC(It'll some minutes to do it)?  You can also scan channels with vdr reelscanchannels plugin in vdr.")" 7 70
-if [ $? -eq 0 ]; then
-  $RUN_CHANNELS
+if dialog --defaultno --clear --yes-label "$(gettext "Configure VDR")" --no-label "$(gettext "Configure VDR later")" --yesno "$(gettext "The following configuration is for the VDR (note the XBMC uses VDR as a PVR backend), if you only use Engima2, then you do not need to configure or re-configure VDR later.")" 7 70; then
+  [ -f $RUN_PLUGINS ] && $RUN_PLUGINS
+  [ -f $RUN_DISEQC ] && $RUN_DISEQC
+  [ -f $RUN_CHANNELS ] && $RUN_CHANNELS
+fi
+if dialog --clear --yes-label "$(gettext "Reboot")" --no-label "$(gettext "Main menu")" --yesno "$(gettext "Now, you have completed the most configurations of VDR(for Enigma2 need to be in its OSD menu) . Now you can select 'Reboot' or 'Main Menu' to continue the configuration.")" 8 70; then
+  reboot
 fi
 }
 
@@ -97,7 +100,7 @@ echo "${DIALOG} --clear --no-cancel --backtitle \"${DISTRIB_ID} $(gettext "confi
 [ -f $RUN_TARGET ] && echo "Target \"$(gettext "Set the default target")\" \\" >> $MENUTMP
 [ -f $RUN_NET ] && echo "Netconf \"$(gettext "Configure Network Environment")\" \\" >> $MENUTMP
 [ -f $RUN_DRV ] && echo "Driver \"$(gettext "Install additional DVB driver")\" \\" >> $MENUTMP
-[ -f $RUN_IR ] && echo "Lirc \"$(gettext "Select IR device")\" \\" >> $MENUTMP
+#[ -f $RUN_IR ] && echo "Lirc \"$(gettext "Select IR device")\" \\" >> $MENUTMP
 [ -f $RUN_MONITOR ] && echo "Monitor \"$(gettext "Set the monitor's best resolution")\" \\" >> $MENUTMP
 [ -f $RUN_AUDIO ] && echo "Audio \"$(gettext "Sound card Configuration")\" \\" >> $MENUTMP
 [ -f $RUN_TRANS ] && echo "Uptran \"$(gettext "Update Satellite Transponders")\" \\" >> $MENUTMP
@@ -108,8 +111,9 @@ echo "${DIALOG} --clear --no-cancel --backtitle \"${DISTRIB_ID} $(gettext "confi
 [ -f $RUN_CHANNELS ] && echo "Scan \"$(gettext "Auto scan channels")\" \\" >> $MENUTMP
 grep -q BCM2708 /proc/cpuinfo && echo "VDR \"$(gettext "Start VDR with rpihddevice frontend")\" \\" >> $MENUTMP
 [ X$ARCH = "Xarm" ] && echo "XBMC \"$(gettext "Start XBMC pvr with VDR backend")\" \\" >> $MENUTMP
-echo "Reboot \"$(gettext "Reboot") ${DISTRIB_ID}\" \\" >> $MENUTMP
-echo "Exit \"$(gettext "Exit to login shell")\" 2> $DIALOGOUT" >> $MENUTMP
+[ X$ARCH != "Xarm" -a -f $RUN_INSTALLER ] && echo "Install \"$(gettext "Install OpenPCTV to your hard disk")\" \\" >> $MENUTMP
+echo "Exit \"$(gettext "Exit to login shell")\" \\" >> $MENUTMP
+echo "Reboot \"$(gettext "Reboot") ${DISTRIB_ID}\" 2> $DIALOGOUT" >> $MENUTMP
 . $MENUTMP
 rm $MENUTMP
 case "$(cat $DIALOGOUT)" in
@@ -163,6 +167,8 @@ case "$(cat $DIALOGOUT)" in
     XBMC)	systemctl start getty\@ttymxc0
 		systemctl start vdr-backend
 		systemctl start xbmc
+		;;
+    Install)	$RUN_INSTALLER
 		;;
     Reboot)	reboot
 		;;

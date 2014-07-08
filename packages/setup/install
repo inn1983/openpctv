@@ -61,8 +61,12 @@ ln -s /lib/systemd/system/getty@.service $INSTALL/lib/systemd/system/setup.targe
 if [ "$TARGET_ARCH" = arm ] ; then
   mkdir -p $INSTALL/lib/systemd/system/multi-user.target.wants
   mkdir -p $INSTALL/etc/systemd/system
-  ln -s /lib/systemd/system/setup.service \
+  ln -sf /lib/systemd/system/setup.service \
     $INSTALL/lib/systemd/system/multi-user.target.wants/
   ln -sf /lib/systemd/system/multi-user.target \
+    $INSTALL/etc/systemd/system/default.target
+else
+  mkdir -p $INSTALL/etc/systemd/system
+  ln -sf /lib/systemd/system/setup.target \
     $INSTALL/etc/systemd/system/default.target
 fi

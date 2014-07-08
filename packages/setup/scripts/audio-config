@@ -40,8 +40,8 @@ case $channels in
     suboption="-c6";;
 esac
 speaker-test $suboption -twav -l1
-dialog --title "$(gettext "Audio ouput test completed")" --yesno \
-"$(gettext "The test fails if you cannot hear any sound, the reason could be that the sound came out from a wrong speaker. In this case, check your connection again carefully.Select 'No' to return to the previous step.")" 9 60
+dialog --title "$(gettext "Audio ouput test completed")" --yes-label "$(gettext "Finish")" --no-label "$(gettext "Re-configure")" --yesno \
+"$(gettext "The test fails if you cannot hear any sound, the reason could be that the sound came out from a wrong speaker. In this case, check your connection again carefully.")" 9 60
 [ $? -eq 1 ] && mainmenu
 }
 mainmenu () {

@@ -5,7 +5,7 @@ export TERM=linux
 export TEXTDOMAIN=openpctv
 modeconf=/etc/X11/xorg.conf.d/100-mode.conf
 
-dialog --title "$(gettext "Do you need to set the monitor's best resolution?")" --defaultno --yesno "$(gettext "Most modern monitors/TVs can be probed for EDID data concerning their capabilities and requirements.So normally you do not need to make any settings for Xorg. But EDID is not always completely accurate, and for some situations such as older or unusual display hardware or many HDTVs, it will be necessary to create a modeline to get the right settings. We'll enter the monitor configuration if you select 'Yes'")" 10 70
+dialog --title "$(gettext "Do you need to set the monitor's best resolution?")" --defaultno --yes-label "$(gettext "Change the resolution")" --no-label "$(gettext "Automatic detection")" --yesno "$(gettext "Most modern monitors/TVs can be probed for EDID data concerning their capabilities and requirements.So normally you do not need to make any settings for Xorg. But EDID is not always completely accurate, and for some situations such as older or unusual display hardware or many HDTVs, it will be necessary to create a modeline to get the right settings.")" 10 70
 
 [ $? -eq 1 ] && exit
 

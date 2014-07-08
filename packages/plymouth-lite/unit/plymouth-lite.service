@@ -10,7 +10,7 @@ Description=Show Plymouth-lite Boot Screen
 After=systemd-udev-settle.service
 
 ConditionPathExists=/dev/fb0
-# ConditionKernelCommandLine=splash
+ConditionKernelCommandLine=splash
 
 [Service]
 #ExecStartPre=/bin/sh -c 'for ((i=1;$i-70;i++)); do echo ""> /dev/tty1; done'

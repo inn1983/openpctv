@@ -1,5 +1,5 @@
 PKG_NAME=s2-liplianin
-PKG_URL_REV=4457d4a
+PKG_URL_REV=c8bc280
 PKG_VERSION=v39+r${PKG_URL_REV}
 PKG_URL_PROTO=hg
 PKG_URL="https://bitbucket.org/CrazyCat/s2-liplianin-v39"

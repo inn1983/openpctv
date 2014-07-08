@@ -29,7 +29,7 @@ dialog --clear --title "$(gettext "Select NVIDIA graphics driver")" --menu \
 if [ $(cat /tmp/driver_nvidia.tmp) = "nvidia" -a ${CURRENT_DRV} = "nouveau" ]; then
 #   echo "Download and install xf86-video-nvidia-\${kernelver}_Last_\${machine}.opk, please wait..."
 #   opkg install http://sourceforge.net/projects/openpctv/files/packages/xf86-video-nvidia-${kernelver}_Last_${machine}.opk/download || (echo "Can't download xf86-video-nvidia-${kernelver}_Last_${machine}.opk, check your network settings."; exit)
-   if [ ! -f /etc/modprobe.d/nvidia.conf -a ! -f /usr/lib/modules-load.d/uvesafb.conf ]; then
+   if [ ! -f /etc/modprobe.d/nvidia.conf -o ! -f /usr/lib/modules-load.d/uvesafb.conf ]; then
       cat > /etc/modprobe.d/nvidia.conf << _EOF
 # NVIDIA binary driver and nouveau do not play well together
 
@@ -71,6 +71,9 @@ if [ $(cat /sys/class/drm/card0/device/vendor) = "0x10de" ]; then
     CURRENT_DRV=nouveau
   fi
   selectnvidia
+elif [ $(cat /sys/class/drm/card0/device/vendor) = "0x80ee" ]; then
+  echo "uvesafb" > /usr/lib/modules-load.d/uvesafb.conf
+  echo "options uvesafb mode_option=1360x768-32 scroll=ywrap" > /etc/modprobe.d/uvesafb.conf
 fi
 [ X${HAS_INSTALLED} = "Xyes" ] && finishinstall
 exit
@@ -143,7 +146,7 @@ dialog --clear --title "$(gettext "Install additional DVB driver")" --menu \
 case "$(cat /tmp/driver.tmp)" in
   s2-liplianin)	tar -czf /root/kernel_media_$(date +%Y%m%d%H%M%S)_backup.tgz /lib/modules/$kernelver/kernel/drivers/media
 		rm -rf /lib/modules/$kernelver/kernel/drivers/media
-		echo "Download and install s2-liplianin-\${kernelver}_Last_\${machine}.opk, please wait..."
+		echo "Download and install s2-liplianin-${kernelver}_Last_${machine}.opk, please wait..."
 		opkg install http://sourceforge.net/projects/openpctv/files/packages/s2-liplianin-${kernelver}_Last_${machine}.opk/download --force-overwrite || (echo "Can't download s2-liplianin-${kernelver}_Last_${machine}.opk, check your network settings."; exit)
 		HAS_INSTALLED=yes
 		;;

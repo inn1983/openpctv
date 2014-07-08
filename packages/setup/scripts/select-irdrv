@@ -6,8 +6,9 @@ export TEXTDOMAIN=openpctv
 
 DIALOGTMP=/tmp/dialogtmp.$$
 RESULTTMP=/tmp/resulttmp.$$
+NAMETMP=/tmp/nametmp.$$
 
-echo "dialog --backtitle \"$(gettext "IR configuration")\" --title \"$(gettext "Select IR Device")\" --clear --radiolist \"$(gettext "The following infrared receiver devices are found in this machine. Please select a default device as Lirc support.")\" 13 70 3 \\" > $DIALOGTMP
+echo "dialog --backtitle \"$(gettext "IR configuration")\" --title \"$(gettext "Select IR Device")\" --clear --radiolist \"$(gettext "The following infrared receiver devices are found in this machine. Please select a default device as Lirc support.")\" 13 70 5 \\" > $DIALOGTMP
 item=on
 
 if grep -q "BCM2708" /proc/cpuinfo; then
@@ -15,23 +16,55 @@ if grep -q "BCM2708" /proc/cpuinfo; then
   sleep 0.1
   [ -r /dev/lirc0 ] && echo "\"lirc_rpi\" \"RPi GPIO IR Receiver\" $item \\" >> $DIALOGTMP
   item=off
-else
-  [ ! -d /sys/class/rc ] && exit
-  ls /sys/class/rc/* >/dev/null 2>&1 || exit
 fi
 
+test -d /sys/class/rc && ls /sys/class/rc/* >/dev/null 2>&1 && \
 for i in /sys/class/rc/*; do
   drv=$(grep DRV_NAME $i/uevent |sed 's/DRV_NAME=//g')
   name=$(cat $i/input*/name)
+  echo "NAME_$drv:$name" >> $NAMETMP
   echo "\"$drv\"" "\"$name\" $item \\" >> $DIALOGTMP
   item=off
 done
+
+ls /dev/input/by-id/*ir >/dev/null 2>&1 && \
+for i in /dev/input/by-id/*ir; do
+  drv=$(basename $(readlink $i))
+  name="$(cat /sys/class/input/$drv/device/name)"
+  echo "NAME_$drv:$name" >> $NAMETMP
+  eval DRV_$drv="$(basename $i)"
+  echo "\"$drv\"" "\"$name\" $item \\" >> $DIALOGTMP
+  item=off
+done
+
 echo "2> $RESULTTMP" >> $DIALOGTMP
 . $DIALOGTMP
 
 drv=$(cat $RESULTTMP)
-sed -i "s/^DRV_NAME=.*/DRV_NAME=\"$drv\"/g" /etc/lirc/hardware.conf
+if [[ X$drv == Xevent* ]]; then
+  DRV=$(eval echo '$'DRV_$drv)
+  DRIVER=devinput
+  ln -sf lircd.conf.devinput /etc/lirc/lircd.conf
+else
+  DRV=$drv
+  DRIVER=default
+  ln -sf lircd.conf.mceusb /etc/lirc/lircd.conf
+fi
 
-for i in $DIALOGTMP $RESULTTMP; do
+sed -i "s/^DRV_NAME=.*/DRV_NAME=\"$DRV\"/g" /etc/lirc/hardware.conf
+sed -i "s/^DRIVER=.*/DRIVER=\"$DRIVER\"/g" /etc/lirc/hardware.conf
+
+EVDEV="$(grep "^NAME_$drv" $NAMETMP | cut -d: -f2)"
+
+cat > /etc/X11/xorg.conf.d/20-evdev.conf << _EOF
+Section "InputClass"
+  Identifier "$EVDEV"
+  MatchProduct "$EVDEV"
+  MatchIsKeyboard "true"
+  Option "Ignore" "true"
+EndSection
+_EOF
+
+for i in $DIALOGTMP $RESULTTMP $NAMETMP; do
   [ -f $i ] && rm $i
 done
