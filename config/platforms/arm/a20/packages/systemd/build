@@ -5,13 +5,17 @@ get_meta $1
 
 cd $PKG_BUILD_DIR
 
+#rm -f docs/gtk-doc.make
+#echo 'EXTRA_DIST =' > docs/gtk-doc.make
+#do_autoconf
+./autogen.sh
 export ac_cv_func_malloc_0_nonnull=yes
 export ac_cv_path_KMOD="/usr/bin/kmod"
 GCC_NO_LTO=1 GCC_NO_GOLD=1 \
 do_configure \
-            --disable-gtk-doc-html \
             --enable-gudev \
             --enable-introspection=no \
+            --disable-dbus \
             --disable-selinux \
             --disable-ima \
             --disable-tcpwrap \
@@ -23,7 +27,6 @@ do_configure \
             --disable-hostnamed \
             --disable-timedated \
             --disable-localed \
-            --disable-logind \
             --disable-coredump \
             --disable-vconsole \
             --disable-xz \
@@ -33,6 +36,45 @@ do_configure \
             --disable-qrencode \
             --disable-microhttpd \
             --without-python \
+            --disable-timesyncd \
+            --disable-polkit \
+            --disable-resolved \
+            --disable-networkd \
+            --disable-efi \
+            --disable-multi-seat-x \
+            --disable-kdbus \
+            --disable-myhostname \
+            --enable-split-usr \
+            --disable-tests \
+            --disable-python-devel \
+            --disable-nls \
+            --disable-gtk-doc \
+            --disable-gtk-doc-html \
+            --disable-gtk-doc-pdf \
+            --disable-compat-libs \
+            --disable-coverage \
+            --enable-kmod \
+            --enable-blkid \
+            --disable-seccomp \
+            --disable-chkconfig \
+            --disable-apparmor \
+            --disable-smack \
+            --disable-gcrypt \
+            --disable-audit \
+            --disable-libcryptsetup \
+            --disable-qrencode \
+            --disable-microhttpd \
+            --disable-gnutls \
+            --disable-binfmt \
+            --disable-vconsole \
+            --disable-readahead \
+            --enable-tmpfiles \
+            --disable-randomseed \
+            --disable-backlight \
+            --disable-rfkill \
+            --enable-logind \
+            --disable-machined \
+            --with-dbuspolicydir=/etc/dbus-1/system.d \
             --with-dbussessionservicedir=/usr/share/dbus-1/services \
             --with-dbussystemservicedir=/usr/share/dbus-1/system-services \
             --with-dbusinterfacedir=/usr/share/dbus-1/interfaces \
@@ -69,5 +111,4 @@ for i in gudev-1.0 systemd-daemon systemd-id128 systemd-journal; do
   ln -sf ../../../lib/lib${i}.so.0 .install/usr/lib/lib${i}.so
 done
 ln -sf ../../../lib/libudev.so.1 .install/usr/lib/libudev.so
-sed -i -e 's/, *GROUP=\"[^\"]*\"//g' .install/lib/udev/rules.d/*
-
+sed -i 's/GROUP="[a-z]*"/GROUP="root"/g' .install/lib/udev/rules.d/*

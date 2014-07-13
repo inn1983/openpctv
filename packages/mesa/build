@@ -67,6 +67,7 @@ do_configure target \
   --enable-opengl \
   --enable-gles1 \
   --enable-gles2 \
+  --enable-xa \
   $GALLIUM_OVG \
   $GALLIUM_LLVM \
   --enable-shared-glapi \

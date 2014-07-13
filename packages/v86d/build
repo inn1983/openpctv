@@ -5,7 +5,8 @@
 cd $BUILD/$1*
 
 #sed -i "s#export CC = klcc#export CC = $ROOT/$TOOLCHAIN/bin/klcc#" Makefile
-./configure --with-klibc
+./configure --with-x86emu
+#--with-klibc
 make
 make_install
 strip_bins .install

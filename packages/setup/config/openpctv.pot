@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-09 00:20+0800\n"
+"POT-Creation-Date: 2014-07-13 11:36+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,8 @@ msgstr ""
 msgid ""
 "The test fails if you cannot hear any sound, the reason could be that the "
 "sound came out from a wrong speaker. In this case, check your connection "
-"again carefully."
+"again carefully. Note NVIDIA HDMI tested here may be silent, in fact it is "
+"normal."
 msgstr ""
 
 #: packages/setup/scripts/audio-config:49
@@ -496,11 +497,15 @@ msgid "Support all the TBS DVB-C devices"
 msgstr ""
 
 #: packages/setup/scripts/install-drivers:143
-msgid "Support all the DVBSky DVB-C devices"
+msgid "Support all the TBS ATSC devices"
 msgstr ""
 
 #: packages/setup/scripts/install-drivers:144
-msgid "Support the TBS QBOX I DVB-C devices"
+msgid "Support all the DVBSky DVB-C devices"
+msgstr ""
+
+#: packages/setup/scripts/install-drivers:145
+msgid "Support the TBS QBOX I DVB-S2 devices"
 msgstr ""
 
 #: packages/setup/scripts/installator.sh:16

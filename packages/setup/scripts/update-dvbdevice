@@ -8,12 +8,14 @@ for i in /dev/dvb/adapter*; do
   dvbsnoop -s feinfo -adapter $id > /tmp/dvbinfo.$id
   name=`grep "Name:" /tmp/dvbinfo.$id | cut -d\" -f2`
   name="$name adapter$id"
-  if grep -q DVB-S /tmp/dvbinfo.$id; then
+  if grep Frontend-type /tmp/dvbinfo.$id | grep -q "DVB-S"; then
     type=DVB-S2
-  elif grep -q DVB-C /tmp/dvbinfo.$id; then
+  elif grep Frontend-type /tmp/dvbinfo.$id | grep -q "DVB-C"; then
     type=DVB-C
-  elif grep -q DVB-T /tmp/dvbinfo.$id; then
-    type=DVB-T
+  elif grep Frontend-type /tmp/dvbinfo.$id | grep -q "DVB-T"; then
+    type=DVB-T2
+  elif grep Frontend-type /tmp/dvbinfo.$id | grep -q "ATSC"; then
+    type=ATSC
   fi
   rm /tmp/dvbinfo.$id
   cat >> /etc/tuxbox/nim_sockets << _EOF

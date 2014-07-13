@@ -5,69 +5,61 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: openpctv 1.0\n"
+"Project-Id-Version: OpenPCTV 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-09 00:20+0800\n"
-"PO-Revision-Date: 2013-07-28 09:19+0800\n"
+"POT-Creation-Date: 2014-07-13 11:30+0800\n"
+"PO-Revision-Date: 2014-07-08 17:58+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
 "Language: Traditional Chinese(zh_TW)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
 
 #: packages/setup/scripts/audio-config:8
 #: packages/setup/scripts/audio-config:48
 #: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:105
-#, fuzzy
 msgid "Sound card Configuration"
 msgstr "配置音效卡"
 
 #: packages/setup/scripts/audio-config:9
-#, fuzzy
 msgid "Select a default PCM output device from the existing device list"
-msgstr "從已有的列表中選擇一種預設的音訊輸出設備"
+msgstr "從已有的列表中選擇一種預設的音頻輸出設備"
 
 #: packages/setup/scripts/audio-config:31
 msgid "Audio output test"
-msgstr "音訊輸出測試"
+msgstr "音頻輸出測試"
 
 #: packages/setup/scripts/audio-config:32
-#, fuzzy
 msgid ""
 "Now we are going to test the audio output to confirm whether it works, turn "
 "on all your speakers."
 msgstr ""
-"接下來讓我們測試音訊輸出，我們想要知道音訊輸出是否工作，打開你的音箱電源"
+"接下來讓我們測試音頻輸出，我們想要知道音頻輸出是否工作，打開你的音箱電源"
 
 #: packages/setup/scripts/audio-config:43
-#, fuzzy
 msgid "Audio ouput test completed"
-msgstr "音訊輸出測試"
+msgstr "音頻輸出測試"
 
 #: packages/setup/scripts/audio-config:43
-#, fuzzy
 msgid "Finish"
 msgstr "完成"
 
 #: packages/setup/scripts/audio-config:43
-#, fuzzy
 msgid "Re-configure"
-msgstr "紅外線接收配置"
+msgstr "重新配置"
 
 #: packages/setup/scripts/audio-config:44
-#, fuzzy
 msgid ""
 "The test fails if you cannot hear any sound, the reason could be that the "
 "sound came out from a wrong speaker. In this case, check your connection "
-"again carefully."
+"again carefully. Note NVIDIA HDMI tested here may be silent, in fact it is "
+"normal."
 msgstr ""
 "測試成功嗎？或許測試失敗其中的一個原因是--聲音輸出到錯誤的喇叭。在這種情況下"
-"仔細檢查你的聯接。如果你選擇“否”，那將會返回上一步"
+"仔細檢查你的聯接。注意NVIDIA HDMI在這裡測試可能會無聲，但實際上是正常的。"
 
 #: packages/setup/scripts/audio-config:49
-#, fuzzy
 msgid ""
 "First you should get a list of all the existing sound cards in the testing "
 "computer,if more than one available. Each sound card might have multiple "
@@ -75,14 +67,13 @@ msgid ""
 "output.Select a default PCM output device from the list, and then specify "
 "the number of channels."
 msgstr ""
-"首先我們需要獲得所有音效卡的清單（如果你擁有多塊音效卡的話）並且每張音效卡會"
-"有多個介面(比如一組類比音訊輸出，一組數位音訊輸出及HDMI輸出)。從已有的列表中"
-"選擇一個缺省的音訊輸出設備，並指定輸出喇叭的數量。"
+"首先我們需要獲得所有音效卡的列表（如果你擁有多塊音效卡的話）並且每張音效卡會有多個"
+"介面(比如一組模擬音頻輸出，一組數字音頻輸出及HDMI輸出)。從已有的列表中選擇一"
+"個預設的音頻輸出設備，並指定輸出喇叭的數量。"
 
 #: packages/setup/scripts/audio-config:52
-#, fuzzy
 msgid "Configuration completed, continue to test audio output."
-msgstr "配置完成，繼續音訊測試"
+msgstr "配置完成，繼續音頻測試"
 
 #: packages/setup/scripts/audio-config:68
 msgid "Specify the number of channel"
@@ -103,7 +94,7 @@ msgstr "5.1聲道"
 #: packages/setup/scripts/diseqcsetup:28
 #, sh-format
 msgid "DiSEqC configuration for VDR v${VERSION}"
-msgstr "基於VDR的DiSEqC配置程式 v${VERSION}"
+msgstr "基于VDR的DiSEqC配置程序 v${VERSION}"
 
 #: packages/setup/scripts/diseqcsetup:29
 msgid "DiSEqC (Digital Satellite Equipment Control) System Mode."
@@ -114,23 +105,22 @@ msgid "No DiSEqC switch"
 msgstr "無DiSEqC切換器"
 
 #: packages/setup/scripts/diseqcsetup:31
-#, fuzzy, sh-format
+#, sh-format
 msgid ""
 "Select a satellite for this LNBF.If the satellite you need is not on the "
 "list, you should first patch for your ${VDRCONFDIR}sources.conf."
 msgstr ""
 "指定這個高頻頭的衛星編號，如果你想要選擇的衛星編號不在這個列表中，你應該為 "
-"${VDRCONFDIR}sources.conf 文件打個補丁。"
+"${VDRCONFDIR}sources.conf 檔案打個補丁。"
 
 #: packages/setup/scripts/diseqcsetup:32
-#, fuzzy
 msgid ""
 "Select the LNBF LO frequency. There are two ways how satellite broadcasts "
 "the signal, linear and circular.With linear, the signal is horizontal or "
 "vertical, with circular, the signal is right circular or left circular."
 msgstr ""
-"請設置該埠上所連接的高頻頭類型，有兩種極化方式接收衛星信號，如果是線性極化"
-"的，它分為水準極化與垂直極化，如果是圓極化的，它分為左旋極化與右旋極化"
+"請設置該連接埠上所連接的高頻頭類型，有兩種極化方式接收衛星信號，如果是線性極化"
+"的，它分為水平極化與垂直極化，如果是圓極化的，它分為左旋極化與右旋極化"
 
 #: packages/setup/scripts/diseqcsetup:33
 msgid "5150MHz Single Linear C Band LNBF"
@@ -206,21 +196,19 @@ msgstr "9750/10750MHz Ku波段圓極化雙本振高頻頭"
 
 #: packages/setup/scripts/diseqcsetup:51
 msgid "User-defined LNBF LO frequency"
-msgstr "自訂高頻頭類型"
+msgstr "自定義高頻頭類型"
 
 #: packages/setup/scripts/diseqcsetup:52
-#, fuzzy
 msgid "Polarization, HV for linear LNBF, RL for circular LNBF."
 msgstr "極化，線性極化請輸入HV，圓極化請輸入RL"
 
 #: packages/setup/scripts/diseqcsetup:53
-#, fuzzy
 msgid ""
 "Input LO frequency, if you us a single c/Ku band LNB, please set LnbFreuLo "
 "and LnbSLOF to '0'."
 msgstr ""
-"請輸入自訂高頻頭頻率，如果你用單本振高頻頭，請將LnbFrequHi與LnbSLOF兩個位置的"
-"值設定為0"
+"請輸入自定義高頻頭頻率，如果你用單本振高頻頭，請將LnbFrequHi與LnbSLOF兩個位置"
+"的值設定為0"
 
 #: packages/setup/scripts/diseqcsetup:54
 msgid "Low LO frequency"
@@ -264,16 +252,14 @@ msgstr "設定 DiSEqC 1.2/2.2 切換器"
 
 #: packages/setup/scripts/diseqcsetup:64
 msgid "Non-standard user defined configuration"
-msgstr "非標準使用者定義的配置"
+msgstr "非標準用戶定義的配置"
 
 #: packages/setup/scripts/diseqcsetup:65
-#, fuzzy
 msgid ""
 "The 0/22KHz switch is used for switch between two different single LNBFs"
 msgstr "0/22k切換器使用個一個22k開關來調整輸入以切換兩個不同的衛星信號"
 
 #: packages/setup/scripts/diseqcsetup:66
-#, fuzzy
 msgid ""
 "Also known as MiniDiSEqC, for switch between two different LNBs, it's "
 "different from the 0/22KHz switch."
@@ -307,15 +293,13 @@ msgstr "選擇重複次"
 
 #: packages/setup/scripts/diseqcsetup:72
 msgid "One Repeat (Default)"
-msgstr "重複一次（默認）"
+msgstr "重複一次（預設）"
 
 #: packages/setup/scripts/diseqcsetup:73
-#, fuzzy
 msgid "Two repeats"
 msgstr "重複兩次"
 
 #: packages/setup/scripts/diseqcsetup:74
-#, fuzzy
 msgid "Three repeats"
 msgstr "重複三次"
 
@@ -328,7 +312,6 @@ msgid "0/22k has been set"
 msgstr "22K已設定"
 
 #: packages/setup/scripts/diseqcsetup:77
-#, fuzzy
 msgid ""
 "With an uncommited DiSEqC 1.1 switch (one out of 16) and 16 commited DiSEqC "
 "1.0(one out of 4) you can have up to 64 satellites (16*4)."
@@ -337,11 +320,11 @@ msgstr ""
 
 #: packages/setup/scripts/diseqcsetup:78
 msgid "Set the first DiSEqC port"
-msgstr "設定第一個DiSEqC 埠"
+msgstr "設定第一個DiSEqC 連接埠"
 
 #: packages/setup/scripts/diseqcsetup:79
 msgid "Set the second DiSEqC port"
-msgstr "設定第二個DiSEqC 埠"
+msgstr "設定第二個DiSEqC 連接埠"
 
 #: packages/setup/scripts/diseqcsetup:80
 msgid "22Khz Tone Control Devices"
@@ -373,7 +356,7 @@ msgstr "編輯diseqc.conf"
 
 #: packages/setup/scripts/diseqcsetup:87
 msgid "You can edit diseqc.conf by manual, or you'll skip this step"
-msgstr "你可以手動編輯diseqc.conf檔，否則將跳過這一步"
+msgstr "你可以手動編輯diseqc.conf檔案，否則將跳過這一步"
 
 #: packages/setup/scripts/diseqcsetup:88
 msgid "Do you want to save these settings?"
@@ -381,14 +364,14 @@ msgstr "是否保存這些設置?"
 
 #: packages/setup/scripts/diseqcsetup:89
 msgid "The configuration file(s) will be saved:"
-msgstr "即將保存的設定檔:"
+msgstr "即將保存的配置檔案:"
 
 #: packages/setup/scripts/diseqcsetup:90
 msgid "or the configuration file(s):"
-msgstr "否則你設定檔:"
+msgstr "否則你配置檔案:"
 
 #: packages/setup/scripts/diseqcsetup:91
-#, fuzzy, sh-format
+#, sh-format
 msgid ""
 "It will be placed in /tmp, you can edit and place it into ${VDRCONFDIR} "
 "manually"
@@ -404,16 +387,16 @@ msgstr "完成"
 
 #: packages/setup/scripts/diseqcsetup:94
 msgid "device is detected"
-msgstr ""
+msgstr "檢測到設備"
 
 #: packages/setup/scripts/diseqcsetup:95
 msgid ""
 "No DVB device has been detected. Please check whether the device is ready."
-msgstr ""
+msgstr "沒有發現DVB設備。請檢查設備是否已準備就緒。"
 
 #: packages/setup/scripts/diseqcsetup:96
 msgid "This tuner is empty/unused"
-msgstr ""
+msgstr "這個調諧器是空的/未使用"
 
 #: packages/setup/scripts/getcam:74
 msgid ""
@@ -421,18 +404,19 @@ msgid ""
 "into an USB flash drive, the system will automatically read and write into "
 "the OScam/VDR-SC configuration file."
 msgstr ""
+"你想要配置OScam/VDR-SC嗎？當然你也可以將CCcam.cfg檔案放在U盤中，系統將會自動"
+"讀取並寫入OScam/VDR-SC的配置檔案中。"
 
 #: packages/setup/scripts/getcam:89
 msgid "Would you like to enable SoftCAM (OScam) on this machine?"
-msgstr ""
+msgstr "你想在這台機器上運行SoftCAM(OScam)嗎？"
 
 #: packages/setup/scripts/install-drivers:18
 #: packages/setup/scripts/setup.sh:90 packages/setup/scripts/setup.sh:116
 msgid "Reboot"
-msgstr ""
+msgstr "重新啟動"
 
 #: packages/setup/scripts/install-drivers:18
-#, fuzzy
 msgid ""
 "Driver package has been installed successfully. Now you have to reboot to "
 "verify whether the driver works."
@@ -440,7 +424,7 @@ msgstr "驅動包已安裝成功，現在你必須重新啟動以驗證驅動是
 
 #: packages/setup/scripts/install-drivers:24
 msgid "Select NVIDIA graphics driver"
-msgstr ""
+msgstr "選擇NVIDIA顯卡驅動"
 
 #: packages/setup/scripts/install-drivers:25
 msgid ""
@@ -448,19 +432,21 @@ msgid ""
 "video decoding. By default we use the nvidia driver, using the nvidia driver "
 "may get a better experience."
 msgstr ""
+"nouveau與nvidia都具備支持硬解碼視頻的vdpau驅動，預設情況下我們使用了nvidia驅"
+"動,如果你使用nvidia驅動或許可以獲得更佳的體驗。"
 
 #: packages/setup/scripts/install-drivers:26
 msgid "NVIDIA's binary Linux graphics driver"
-msgstr ""
+msgstr "NVIDIA官方二進制Linux顯卡驅動"
 
 #: packages/setup/scripts/install-drivers:27
 msgid "Open-source NVIDIA graphics driver"
-msgstr ""
+msgstr "開源的NVIDIA顯卡驅動"
 
 #: packages/setup/scripts/install-drivers:96
 #, sh-format
 msgid "Found $field"
-msgstr ""
+msgstr "找到$field"
 
 #: packages/setup/scripts/install-drivers:96
 msgid ""
@@ -469,53 +455,51 @@ msgid ""
 "workaround that. Redirect complaints to the vendor of the TV card. Do you "
 "want to do this?"
 msgstr ""
+"有時DVB卡沒有有效的PCI(e)硬件ID並且系統不能自動檢測到。你可以通過指定insmod加"
+"載驅動時附帶的card=<n>參數來使用之加載正常。同時你可以向電視卡商詢問其解決方"
+"案。你想繼續嗎？"
 
 #: packages/setup/scripts/install-drivers:101
-#, fuzzy, sh-format
+#, sh-format
 msgid "Specify the card number of $field board"
-msgstr "指定輸出聲道數量"
+msgstr "指定$field 卡的序號"
 
 #: packages/setup/scripts/install-drivers:101
 msgid "Here is a list of valid choices for the card=<n> insmod option"
-msgstr ""
+msgstr "這裡是電視卡設備有效的列表，請選擇你的卡的正確編號。"
 
 #: packages/setup/scripts/install-drivers:125
 #: packages/setup/scripts/install-drivers:130
-#, fuzzy
 msgid "Additional DVB driver"
-msgstr "附加的V4L及DVB驅動"
+msgstr "附加的DVB驅動"
 
 #: packages/setup/scripts/install-drivers:126
-#, fuzzy
 msgid ""
 "Your DVB devices seem to be normal. Perhaps you do not need to install other "
 "additional drivers. If you want to install additional drivers please select "
 "'Yes'"
 msgstr ""
-"你的V4L及DVB設備驅動看上是正常的。也許你並不需要安裝其它附加的驅動。如果你想"
-"安裝附加驅動，請選擇'否'"
+"你的DVB設備驅動看上是正常的。也許你並不需要安裝其它附加的驅動。如果你想安裝附"
+"加驅動，請選擇'是'"
 
 #: packages/setup/scripts/install-drivers:131
-#, fuzzy
 msgid ""
 "Your DVB device does not seem to work properly. Perhaps you should install "
 "another driver. Do you want to install the additional drivers?"
 msgstr ""
-"你的V4L及DVB設備看上去似乎並不正常，或許你應該安裝另外一個驅動。你想要安裝附"
-"加的驅動嗎？"
+"你的DVB設備看上去似乎並不正常，或許你應該安裝另外一個驅動。你想要安裝附加的驅"
+"動嗎？"
 
 #: packages/setup/scripts/install-drivers:136
 #: packages/setup/scripts/setup.sh:102
-#, fuzzy
 msgid "Install additional DVB driver"
-msgstr "安裝附加的V4L及DVB驅動"
+msgstr "安裝附加的DVB驅動"
 
 #: packages/setup/scripts/install-drivers:137
-#, fuzzy
 msgid ""
 "Before proceeding please confirm your DVB device specific information. "
 "Choose the driver you need to install carefully."
-msgstr "在繼續之前你請確認你的V4L及DVB設備的資訊，仔細選擇你想要安裝的驅動。"
+msgstr "在繼續之前你請確認你的V4L及DVB設備的信息，仔細選擇你想要安裝的驅動。"
 
 #: packages/setup/scripts/install-drivers:138
 msgid "I do not want to install now."
@@ -523,76 +507,76 @@ msgstr "我現在不想要安裝。"
 
 #: packages/setup/scripts/install-drivers:139
 msgid "Support most of the devices,such as DVBWorld,Tevii,Prof..."
-msgstr "支援大多數的設備，例如DVBWorld，Tevii，Prof等"
+msgstr "支持大多數的設備，例如DVBWorld，Tevii，Prof等"
 
 #: packages/setup/scripts/install-drivers:140
 msgid "Support all the TBS devices"
-msgstr "支援全系列的TBS設備"
+msgstr "支持TBS全系列的設備"
 
 #: packages/setup/scripts/install-drivers:141
-#, fuzzy
 msgid "Support all the DVBSky devices"
-msgstr "支援全系列的TBS設備"
+msgstr "支持DVBSky全系列的設備"
 
 #: packages/setup/scripts/install-drivers:142
-#, fuzzy
 msgid "Support all the TBS DVB-C devices"
-msgstr "支援全系列的TBS設備"
+msgstr "支持TBS DVB-C全系列的設備"
 
 #: packages/setup/scripts/install-drivers:143
-#, fuzzy
-msgid "Support all the DVBSky DVB-C devices"
-msgstr "支援全系列的TBS設備"
+msgid "Support all the TBS ATSC devices"
+msgstr "支持TBS ATSC全系列的設備"
 
 #: packages/setup/scripts/install-drivers:144
-#, fuzzy
-msgid "Support the TBS QBOX I DVB-C devices"
-msgstr "支援全系列的TBS設備"
+msgid "Support all the DVBSky DVB-C devices"
+msgstr "支持DVBSky DVB-C全系列的設備"
+
+#: packages/setup/scripts/install-drivers:145
+msgid "Support the TBS QBOX I DVB-S2 devices"
+msgstr "支持TBS QBOX I DVB-S2設備"
 
 #: packages/setup/scripts/installator.sh:16
 msgid "Not found or no block device exists."
-msgstr ""
+msgstr "沒有發現或不存在塊設備"
 
 #: packages/setup/scripts/installator.sh:17
 msgid "Does not have any corresponding BIOS driver."
-msgstr ""
+msgstr "沒有任何相應的BIOS驅動"
 
 #: packages/setup/scripts/installator.sh:20
 msgid "Keymap selection"
-msgstr ""
+msgstr "鍵位映射選擇"
 
 #: packages/setup/scripts/installator.sh:22
 msgid "Choose Keymap"
-msgstr ""
+msgstr "選擇鍵位映射"
 
 #: packages/setup/scripts/installator.sh:23
 msgid "Which keymap do you want to use ?"
-msgstr ""
+msgstr "你想要使用哪種鍵位映射？"
 
 #: packages/setup/scripts/installator.sh:26
 msgid "Warning"
-msgstr ""
+msgstr "警告"
 
 #: packages/setup/scripts/installator.sh:27
 msgid "ERROR"
-msgstr ""
+msgstr "錯誤"
 
 #: packages/setup/scripts/installator.sh:29
 msgid "No disks found on this system.\\nCheck again ?"
-msgstr ""
+msgstr "在這個系統中沒發現磁碟。\\n再檢查一次嗎？"
 
 #: packages/setup/scripts/installator.sh:30
 msgid "refresh list"
-msgstr ""
+msgstr "刷新列表"
 
 #: packages/setup/scripts/installator.sh:32
 #: packages/setup/scripts/installator.sh:41
 msgid "Installation device"
-msgstr ""
+msgstr "安裝設備"
 
 #: packages/setup/scripts/installator.sh:33
 msgid "You are going to install"
-msgstr ""
+msgstr "你將要安裝"
 
 #: packages/setup/scripts/installator.sh:33
 msgid ""
@@ -600,10 +584,12 @@ msgid ""
 "careful to choose the right disk! We won't take responsibility for any data "
 "loss."
 msgstr ""
+"對此，你將需要一個空白的並不少於5G空間的分區。小心選擇正確的磁碟！我們不會對"
+"任何數據損失負責。"
 
 #: packages/setup/scripts/installator.sh:35
 msgid "Linux EXT4 partition"
-msgstr ""
+msgstr "Linux EXT4分區"
 
 #: packages/setup/scripts/installator.sh:37
 msgid ""
@@ -612,6 +598,9 @@ msgid ""
 "Linux/Windows before this. Or if you select 'Yes', you'll use cfdisk to edit "
 "your partition table to create a"
 msgstr ""
+"在繼續安裝之前你需要在你的硬碟上準備一個Linux分區。我們可以在此之前使用"
+"Windows或Linux的分區工具。或者如果你選擇'是'，你將使用cfdisk來編輯你的分區表"
+"來建立一個"
 
 #: packages/setup/scripts/installator.sh:38
 msgid ""
@@ -620,91 +609,92 @@ msgid ""
 "changes when done. We won't take responsibility for any data loss. If you "
 "choose 'No' means that you've prepared a partition for it."
 msgstr ""
+"不少於5 GB空間的分區。這個分區類型可能是任意的。不要忘記在完成後提交修改。我"
+"們不會對由此造成的任何數據損失負責。如果你選擇'否'意味着你已經為它準備好了一"
+"個分區。"
 
 #: packages/setup/scripts/installator.sh:43
 msgid "You don't have any"
-msgstr ""
+msgstr "你沒有任何"
 
 #: packages/setup/scripts/installator.sh:44
 msgid ""
 "partition on your system. Please create a partition first using for example "
 "cfdisk."
-msgstr ""
+msgstr "分區在你的系統上。請首先使用像cfdisk這個的工具來建立一個分區。"
 
 #: packages/setup/scripts/installator.sh:45
-#, fuzzy
 msgid "Where do you want to install"
-msgstr "我現在不想要安裝。"
+msgstr "你想安裝的位置"
 
 #: packages/setup/scripts/installator.sh:45
 msgid "Please choose carefully!"
-msgstr ""
+msgstr "請認真選擇！"
 
 #: packages/setup/scripts/installator.sh:46
 msgid "is not a valid block device."
-msgstr ""
+msgstr "不是一個有效的塊設備。"
 
 #: packages/setup/scripts/installator.sh:48
 msgid "Partition is not formatted"
-msgstr ""
+msgstr "分區沒有被格式化"
 
 #: packages/setup/scripts/installator.sh:49
 msgid "Partition format type"
-msgstr ""
+msgstr "分區格式類型"
 
 #: packages/setup/scripts/installator.sh:50
 msgid "is not supported in your partition type"
-msgstr ""
+msgstr "不支持你分區類型"
 
 #: packages/setup/scripts/installator.sh:51
 msgid "Partition is already formatted"
-msgstr ""
+msgstr "分區已經被格式化"
 
 #: packages/setup/scripts/installator.sh:52
 #: packages/setup/scripts/installator.sh:54
 msgid "Formatting"
-msgstr ""
+msgstr "格式化中"
 
 #: packages/setup/scripts/installator.sh:53
-#, fuzzy
 msgid "Do you want to format"
-msgstr "是否保存這些設置?"
+msgstr "你想格式化"
 
 #: packages/setup/scripts/installator.sh:55
 msgid "...\\nPlease wait"
-msgstr ""
+msgstr "...\\n請等待"
 
 #: packages/setup/scripts/installator.sh:57
 msgid "Linux partition type"
-msgstr ""
+msgstr "Linux分區類型"
 
 #: packages/setup/scripts/installator.sh:58
 msgid "Which type of Linux partition you want ?"
-msgstr ""
+msgstr "你想要哪種Linux分區類型？"
 
 #: packages/setup/scripts/installator.sh:60
 msgid "No formatting tooled is installed, partition can't be formatted."
-msgstr ""
+msgstr "因為你安裝沒有任何用來格式化的工具，分區無法格式化。"
 
 #: packages/setup/scripts/installator.sh:61
 msgid "Hopefully it is already formatted."
-msgstr ""
+msgstr "但願它已經被格式化了。"
 
 #: packages/setup/scripts/installator.sh:62
 msgid "should be formatted as"
-msgstr ""
+msgstr "應該被格式化為"
 
 #: packages/setup/scripts/installator.sh:64
 msgid "Failed to mount"
-msgstr ""
+msgstr "掛載失敗"
 
 #: packages/setup/scripts/installator.sh:66
 msgid "Installing... Please wait"
-msgstr ""
+msgstr "安裝中... 請等待"
 
 #: packages/setup/scripts/installator.sh:69
 msgid "Support for HDTV through X.Org ?"
-msgstr ""
+msgstr "通過X.Org支持HDTV嗎？"
 
 #: packages/setup/scripts/installator.sh:70
 msgid "It appears that this version of"
@@ -721,20 +711,20 @@ msgstr ""
 
 #: packages/setup/scripts/installator.sh:73
 msgid "Bootloader"
-msgstr ""
+msgstr "引導管理器"
 
 #: packages/setup/scripts/installator.sh:75
 msgid "Couldn't find my GRUB partition representation"
-msgstr ""
+msgstr "不能找到我的GRUB分區"
 
 #: packages/setup/scripts/installator.sh:76
 msgid "Couldn't install GRUB bootloader!"
-msgstr ""
+msgstr "不能安裝GRUB引導管理器！"
 
 #: packages/setup/scripts/installator.sh:78
 #: packages/setup/scripts/installator.sh:80
 msgid "is now a"
-msgstr ""
+msgstr "現在已經是一個"
 
 #: packages/setup/scripts/installator.sh:78
 msgid ""
@@ -743,80 +733,81 @@ msgid ""
 "multi-bootloader can also be installed. If you do not want to install a new "
 "bootloader, you will need to configure it yourself. \\nI have found:"
 msgstr ""
+"分區了。為了從之啟動，你將需要安裝一個引導管理器。我能為你安裝GRUB引導管理。"
+"如果在你的計算機上還擁有其它的操作系統，我也將為你安裝多重引導。如果你不想安"
+"裝一個新的引導管理器，你將需要自己配置。我已找到："
 
 #: packages/setup/scripts/installator.sh:79
 msgid "Do you want to install a new bootloader (GRUB)?"
-msgstr ""
+msgstr "你想安裝引導管理器（GRUB）嗎？"
 
 #: packages/setup/scripts/installator.sh:80
 msgid ""
 "partition. No OS on your system is recognized. Do you want to install a new "
 "bootloader on your MBR?"
 msgstr ""
+"分區。我們可以識別在你計算機中的其它操作系統，你想在硬碟的MBR上安裝一個引導管"
+"理器嗎？"
 
 #: packages/setup/scripts/installator.sh:81
 msgid "You must install a new bootloader to boot"
-msgstr ""
+msgstr "你必須安裝一個啟動引導器來啟動"
 
 #: packages/setup/scripts/installator.sh:84
 msgid "Installation Log"
-msgstr ""
+msgstr "安裝日誌"
 
 #: packages/setup/scripts/installator.sh:85
 msgid ""
 "Do you want to check installation logs ? (it is probably useful for debug "
 "purpose only)"
-msgstr ""
+msgstr "你想檢查安裝日誌嗎？（對於以調試為目的或許有用）"
 
 #: packages/setup/scripts/installator.sh:88
 msgid "Have Fun!"
-msgstr ""
+msgstr "祝好運！"
 
 #: packages/setup/scripts/installator.sh:89
 msgid "is now installed on"
-msgstr ""
+msgstr "現在已經安裝"
 
 #: packages/setup/scripts/installator.sh:90
-#, fuzzy
 msgid "Do you want to reboot? Or press Alt + F2 to configure manually."
-msgstr "是否編輯diseqc.conf?"
+msgstr "你想重新啟動嗎？或者按Alt+F2登錄併進行手動配置"
 
 #: packages/setup/scripts/installator.sh:92
 msgid "Start"
-msgstr ""
+msgstr "啟動"
 
 #: packages/setup/scripts/installator.sh:93
 msgid "Default target"
-msgstr ""
+msgstr "預設啟動項"
 
 #: packages/setup/scripts/installator.sh:94
-#, fuzzy
 msgid "setup mode"
-msgstr "開放模式"
+msgstr "配置模式"
 
 #: packages/setup/scripts/installator.sh:95
-#, fuzzy
 msgid "debugging mode"
-msgstr "開放模式"
+msgstr "調試模式"
 
 #: packages/setup/scripts/installator.sh:548
 msgid "installator"
-msgstr ""
+msgstr "安裝程序"
 
 #: packages/setup/scripts/monitor.sh:8
 msgid "Do you need to set the monitor's best resolution?"
-msgstr "你需要為你顯示器設定最佳解析度嗎？"
+msgstr "你需要為你顯示器設定最佳分辨率嗎？"
 
 #: packages/setup/scripts/monitor.sh:8
 msgid "Change the resolution"
-msgstr ""
+msgstr "改變分辨率"
 
 #: packages/setup/scripts/monitor.sh:8
 msgid "Automatic detection"
-msgstr ""
+msgstr "自動檢測"
 
 #: packages/setup/scripts/monitor.sh:8
-#, fuzzy
 msgid ""
 "Most modern monitors/TVs can be probed for EDID data concerning their "
 "capabilities and requirements.So normally you do not need to make any "
@@ -824,10 +815,9 @@ msgid ""
 "situations such as older or unusual display hardware or many HDTVs, it will "
 "be necessary to create a modeline to get the right settings."
 msgstr ""
-"大多數型號的顯示器/電視機可以通過檢測其EDID資料獲得其參數性能。因此一般情況下"
+"大多數型號的顯示器/電視機可以通過檢測其EDID數據獲得其參數性能。因此一般情況下"
 "你並不需要為xorg作任何設置。但是EDID並不總是完全準確，在某些情況下比如舊的或"
-"不標準的硬體及許多高清電視機，有必要指定其最佳解析度以獲得正確的設定。如果你"
-"選擇'是'的話將進入顯示器設置"
+"不標準的硬件及許多高清電視機，有必要指定其最佳分辨率以獲得正確的設定。"
 
 #: packages/setup/scripts/monitor.sh:19
 msgid "Submit"
@@ -836,75 +826,72 @@ msgstr "提交"
 #: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
 #: packages/setup/scripts/setup.sh:104
 msgid "Set the monitor's best resolution"
-msgstr "設定顯示器的最佳解析度"
+msgstr "設定顯示器的最佳分辨率"
 
 #: packages/setup/scripts/monitor.sh:20
 msgid ""
 "Confirm the optimal resolution your monitor supported. Note that the full HD "
 "resolution is 1920x1080."
 msgstr ""
-"請確認你的顯示所支援的最佳解析度。注意的是全高清(Full HD)解析度是1920x1080"
+"請確認你的顯示所支持的最佳分辨率。注意的是全高清(Full HD)分辨率是1920x1080"
 
 #: packages/setup/scripts/monitor.sh:34
 msgid "Are you sure to quit?"
-msgstr ""
+msgstr "你確定退出嗎？"
 
 #: packages/setup/scripts/netconfig:27
 msgid "You are connected with the Internet successfully"
-msgstr ""
+msgstr "已成功聯入互聯網"
 
 #: packages/setup/scripts/netconfig:28
-#, fuzzy
 msgid ""
 "Failed to detect your Internet connection, please check your hardware or "
 "check /etc/network to configure manually."
-msgstr "檢測你的互聯網聯接失敗，請檢查你的硬體及檢查並手動配置 /etc/network"
+msgstr "檢測你的互聯網聯接失敗，請檢查你的硬件及檢查並手動配置 /etc/network"
 
 #: packages/setup/scripts/netconfig:29
 msgid "Do you want to use DHCP to automatically obtain network address?"
-msgstr "你想使用DHCP自動獲取網路位址嗎？"
+msgstr "你想使用DHCP自動獲取網絡地址嗎？"
 
 #: packages/setup/scripts/netconfig:30
 msgid "Please enter the IP address"
-msgstr "請輸入IP位址"
+msgstr "請輸入IP地址"
 
 #: packages/setup/scripts/netconfig:31
 msgid "Please enter the subnet mask"
-msgstr "請輸入子網路遮罩"
+msgstr "請輸入子網掩碼"
 
 #: packages/setup/scripts/netconfig:32
 msgid "Please enter the Gateway address"
-msgstr "請輸入閘道位址"
+msgstr "請輸入網關地址"
 
 #: packages/setup/scripts/netconfig:33
 msgid "Please enter the domain name server address (DNS)"
-msgstr "請輸入DNS伺服器位址"
+msgstr "請輸入DNS伺服器地址"
 
 #: packages/setup/scripts/netconfig:34
 msgid "Wireless network name (SSID)"
-msgstr "無線網路名(SSID)"
+msgstr "無線網絡名(SSID)"
 
 #: packages/setup/scripts/netconfig:35
 msgid "Please enter the WEP encryption key"
-msgstr "請輸入WEP加密金鑰"
+msgstr "請輸入WEP加密密鑰"
 
 #: packages/setup/scripts/netconfig:36
 msgid "Please enter the WPA Shared Key"
-msgstr "請輸入WPA共用金鑰"
+msgstr "請輸入WPA共享密鑰"
 
 #: packages/setup/scripts/netconfig:37 packages/setup/scripts/netconfig:40
-#, fuzzy
 msgid "Configure wireless network manually"
-msgstr "手動配置無線網路"
+msgstr "手動配置無線網絡"
 
 #: packages/setup/scripts/netconfig:38
-#, fuzzy
 msgid "Safe mode"
 msgstr "安全模式"
 
 #: packages/setup/scripts/netconfig:39
 msgid "WPA Algorithms"
-msgstr "WPA演算法"
+msgstr "WPA算法"
 
 #: packages/setup/scripts/netconfig:41
 msgid ""
@@ -914,11 +901,11 @@ msgstr "選擇無線加密模式，它應當與你的路由器設置保持一致
 
 #: packages/setup/scripts/netconfig:42
 msgid "WEP encrypted wireless network mode"
-msgstr "WEP無線網路加密模式"
+msgstr "WEP無線網絡加密模式"
 
 #: packages/setup/scripts/netconfig:43
 msgid "WPA/WPA2 wireless encryption mode"
-msgstr "WPA/WPA2無線網路加密模式"
+msgstr "WPA/WPA2無線網絡加密模式"
 
 #: packages/setup/scripts/netconfig:44
 msgid "Open mode"
@@ -926,25 +913,23 @@ msgstr "開放模式"
 
 #: packages/setup/scripts/netconfig:45
 msgid "Choose A Wireless Network"
-msgstr "選擇無線網路"
+msgstr "選擇無線網絡"
 
 #: packages/setup/scripts/netconfig:46
 msgid ""
 "Please select the wireless network intercepted, if it is not in the list, "
 "you can enter manual settings"
-msgstr "請選擇被截獲的無線網路，如果清單中未列出你你的無線網路，請選擇手動設置"
+msgstr "請選擇被截獲的無線網絡，如果列表中未列出你你的無線網絡，請選擇手動設置"
 
 #: packages/setup/scripts/netconfig:47
-#, fuzzy
 msgid ""
 "You are connected with the Internet, do you still want to configure your "
 "network?"
-msgstr "檢測到你的電腦成功聯入Internet，你仍想繼續配置你的網路嗎?"
+msgstr "檢測到你的計算機成功聯入Internet，你仍想繼續配置你的網絡嗎?"
 
 #: packages/setup/scripts/netconfig:48
-#, fuzzy
 msgid "Scan Network Interface Card failed, please check it or its driver."
-msgstr "沒有檢測到任何網路接入設備，請檢查你的網卡或驅動。"
+msgstr "沒有檢測到任何網絡接入設備，請檢查你的網卡或驅動。"
 
 #: packages/setup/scripts/netconfig:49
 msgid "Select the Network Interface Card"
@@ -956,15 +941,15 @@ msgstr "請選擇你將要配置的網卡"
 
 #: packages/setup/scripts/netconfig:51
 msgid "Restarting network, please wait ..."
-msgstr ""
+msgstr "重啟網絡，請等待 ..."
 
 #: packages/setup/scripts/netconfig:52
 msgid "Checking the network connection, please wait ..."
-msgstr ""
+msgstr "檢查網絡的聯接情況，請等待 ..."
 
 #: packages/setup/scripts/netconfig:53
 msgid "Searching for wireless networks, please wait ..."
-msgstr ""
+msgstr "正在搜索無線網絡，請等待 ..."
 
 #: packages/setup/scripts/select-irdrv:11
 msgid "IR configuration"
@@ -975,71 +960,69 @@ msgid "Select IR Device"
 msgstr "選擇紅外線設備"
 
 #: packages/setup/scripts/select-irdrv:11
-#, fuzzy
 msgid ""
 "The following infrared receiver devices are found in this machine. Please "
 "select a default device as Lirc support."
 msgstr "在這台機器上找到了如下紅外接遙控接收設備，請為lirc選擇一種預設設備"
 
 #: packages/setup/scripts/select-plugins:26
-#, fuzzy
 msgid "Do you want to select VDR-plugins?"
-msgstr "是否保存這些設置?"
+msgstr "你是否想要選擇VDR插件?"
 
 #: packages/setup/scripts/select-plugins:26
 msgid "This step is not necessary, because we provide a normal list."
-msgstr ""
+msgstr "這一步並不是必須的，因為我們為你提供了一個預設即可正常運行的列表。"
 
 #: packages/setup/scripts/select-plugins:29
 #: packages/setup/scripts/setup.sh:108
 msgid "Select VDR-plugins"
-msgstr ""
+msgstr "選擇VDR插件"
 
 #: packages/setup/scripts/select-plugins:29
 msgid "You can enable or disable VDR-plugins on the list."
-msgstr ""
+msgstr "你可以在下面的列表中允許或禁止VDR插件。"
 
 #: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:100
 msgid "Set the default target"
-msgstr ""
+msgstr "選擇預設的啟動項"
 
 #: packages/setup/scripts/select-target:8
 msgid "Please select the default target to boot into."
-msgstr ""
+msgstr "請選擇預設的啟動項"
 
 #: packages/setup/scripts/select-target:13
 msgid ""
 "Enigma2 is a series of DVB television receivers for Dreambox. It has been "
 "ported to PC."
-msgstr ""
+msgstr "Engiam2是Dreambox接收機的系統，現已被移植到PC上。"
 
 #: packages/setup/scripts/select-target:19
 msgid "A digital video recorder using standard PC components."
-msgstr ""
+msgstr "數字錄像機使用標準的PC組件。"
 
 #: packages/setup/scripts/select-target:25
 msgid "A free and open source media player developed by the XBMC Foundation"
-msgstr ""
+msgstr "一個自由和開放源碼的媒體播放器"
 
 #: packages/setup/scripts/select-target:31
 msgid "TV streaming server VDR/TVheadend"
-msgstr ""
+msgstr "TV 串流伺服器 VDR/TVheadend"
 
 #: packages/setup/scripts/setup.sh:19
 msgid "Press any key to enter setup,"
-msgstr ""
+msgstr "按任意鍵進入配置程序，"
 
 #: packages/setup/scripts/setup.sh:19
 msgid "or 3 seconds later enter"
-msgstr ""
+msgstr "否則三秒後將自動進入"
 
 #: packages/setup/scripts/setup.sh:85
 msgid "Configure VDR"
-msgstr ""
+msgstr "配置VDR"
 
 #: packages/setup/scripts/setup.sh:85
 msgid "Configure VDR later"
-msgstr ""
+msgstr "稍後配置VDR"
 
 #: packages/setup/scripts/setup.sh:85
 msgid ""
@@ -1047,6 +1030,8 @@ msgid ""
 "backend), if you only use Engima2, then you do not need to configure or re-"
 "configure VDR later."
 msgstr ""
+"接下來的配置只是針對VDR的（注意XBMC使用了VDR作為一種PVR後端），如果你只使用"
+"Enigma2,那麼你可不必配置或稍後再配置VDR。"
 
 #: packages/setup/scripts/setup.sh:90 packages/setup/scripts/setup.sh:98
 msgid "Main menu"
@@ -1058,54 +1043,52 @@ msgid ""
 "be in its OSD menu) . Now you can select 'Reboot' or 'Main Menu' to continue "
 "the configuration."
 msgstr ""
+"現在，你已經完成了OpenPCTV 的大部分配置（針對Enigma2需要在其OSD中設置），現在"
+"你可以選擇'重新啟動'或'主菜單'來繼續進行配置。"
 
 #: packages/setup/scripts/setup.sh:98
-#, fuzzy
 msgid "configuration"
-msgstr "紅外線接收配置"
+msgstr "配置"
 
 #: packages/setup/scripts/setup.sh:99
-#, fuzzy
 msgid "Set global location and language"
-msgstr "設置全域區域和語言"
+msgstr "設置全局區域和語言"
 
 #: packages/setup/scripts/setup.sh:101
 msgid "Configure Network Environment"
-msgstr "配置網路環境"
+msgstr "配置網絡環境"
 
 #: packages/setup/scripts/setup.sh:106
-#, fuzzy
 msgid "Update Satellite Transponders"
-msgstr "從fastsatfinder自動更新衛星參數"
+msgstr "更新衛星參數"
 
 #: packages/setup/scripts/setup.sh:107
 msgid "Update EPG data"
-msgstr ""
+msgstr "更新第三方EPG數據"
 
 #: packages/setup/scripts/setup.sh:109
 msgid "Select a software emulated CAM"
-msgstr ""
+msgstr "選擇一種模擬CAM軟件"
 
 #: packages/setup/scripts/setup.sh:110
-#, fuzzy
 msgid "DiSEqC configuration"
 msgstr "DiSEqC配置"
 
 #: packages/setup/scripts/setup.sh:111
 msgid "Auto scan channels"
-msgstr "自動掃描頻道"
+msgstr "自動掃瞄頻道"
 
 #: packages/setup/scripts/setup.sh:112
 msgid "Start VDR with rpihddevice frontend"
-msgstr ""
+msgstr "啟動帶有rpihddevice的VDR"
 
 #: packages/setup/scripts/setup.sh:113
 msgid "Start XBMC pvr with VDR backend"
-msgstr ""
+msgstr "啟動帶有VDR後台的XBMC"
 
 #: packages/setup/scripts/setup.sh:114
 msgid "Install OpenPCTV to your hard disk"
-msgstr ""
+msgstr "將OpenPCTV安裝到你的硬碟"
 
 #: packages/setup/scripts/setup.sh:115
 msgid "Exit to login shell"
@@ -1114,32 +1097,31 @@ msgstr "退出並登錄shell"
 #: packages/setup/scripts/update-channels:8
 msgid ""
 "No DVB devices has been discovered. Please check whether the device is ready."
-msgstr ""
+msgstr "沒有發現DVB設備。請檢查設備是否已準備就緒。"
 
 #: packages/setup/scripts/update-channels:28
 msgid "Scan channels for VDR"
-msgstr "為VDR掃描頻道"
+msgstr "為VDR掃瞄頻道"
 
 #: packages/setup/scripts/update-channels:28
 msgid "Select Satellite"
 msgstr "選擇衛星"
 
 #: packages/setup/scripts/update-channels:28
-#, fuzzy
 msgid ""
 "Please select the satellite you want to scan, and note that the scanning "
 "process may take some minutes, please be patient."
 msgstr ""
-"請選擇你想要掃描的衛星，注意整個掃描的過程可能需要很長時間，請耐心等待。"
+"請選擇你想要掃瞄的衛星，注意整個掃瞄的過程可能需要很長時間，請耐心等待。"
 
 #: packages/setup/scripts/update-channels:47
 #: packages/setup/scripts/update-channels:54
 msgid "We'll use w_scan to scan channels, are you ready?"
-msgstr ""
+msgstr "我們將使用w_scan掃瞄頻道，你準備好了嗎？"
 
 #: packages/setup/scripts/update-channels:89
 msgid "Split channels in TV and Radio..."
-msgstr "分離電視和收音的頻道清單"
+msgstr "分離電視和收音的頻道列表"
 
 #: packages/setup/scripts/update-transponders:8
 msgid "Download transponders for scan-s2"
@@ -1147,18 +1129,16 @@ msgstr "為scan-s2下載衛星參數"
 
 #: packages/setup/scripts/update-transponders:9
 #: packages/setup/scripts/update-transponders:31
-#, fuzzy
 msgid "Can't download, please check your network settings"
-msgstr "不能下載，請檢查你的網路設置"
+msgstr "不能下載，請檢查你的網絡設置"
 
 #: packages/setup/scripts/update-transponders:14
-#, fuzzy
 msgid "update transponders for vdr-reelchannelscan"
-msgstr "為scan-s2下載衛星參數"
+msgstr "為vdr-reelchannelscan下載衛星參數"
 
 #: packages/setup/scripts/update-transponders:16
 msgid "Convert transponders data sheet and update transponders for scan-s2..."
-msgstr "轉換衛星參數並更新基於scan-s2的衛星參數"
+msgstr "轉換衛星參數並更新基于scan-s2的衛星參數"
 
 #: packages/setup/scripts/update-transponders:25
 #: packages/setup/scripts/update-transponders:36
@@ -1167,7 +1147,7 @@ msgstr "完成！"
 
 #: packages/setup/scripts/update-transponders:30
 msgid "Download transponders for enigma2"
-msgstr "下載基於enigma2的衛星參數"
+msgstr "下載基于enigma2的衛星參數"
 
 #: packages/setup/scripts/update-transponders:32
 msgid "Update /etc/enigma2/satellites.xml..."
@@ -1178,43 +1158,5 @@ msgid ""
 "Do you want to update the satellite transponders from fastsatfinder.com? If "
 "you do not update it, your transponder parameters may not be the latest."
 msgstr ""
-
-#~ msgid "Select IR device"
-#~ msgstr "選擇紅外接收設備"
-
-#, fuzzy
-#~ msgid "Install additional and DVB driver"
-#~ msgstr "安裝附加的V4L及DVB驅動"
-
-#~ msgid "Reboot OpenPCTV?"
-#~ msgstr "重啟啟動OpenoPCTV"
-
-#, fuzzy
-#~ msgid "Where do you want to install OpenPCTV? Please choose carefully!"
-#~ msgstr "我現在不想要安裝。"
-
-#, fuzzy
-#~ msgid "OpenPCTV configuration"
-#~ msgstr "配置OpenPCTV"
-
-#~ msgid "Reboot OpenPCTV"
-#~ msgstr "重新啟動OpenPCTV"
-
-#~ msgid "Test audio finish"
-#~ msgstr "測試音訊完成"
-
-#~ msgid "Really quit?"
-#~ msgstr "真的退出嗎？"
-
-#~ msgid "You have successfully detected accessing the Internet"
-#~ msgstr "檢測到你已成功聯入互聯網"
-
-#~ msgid "OK"
-#~ msgstr "確認"
-
-#~ msgid "Auto mount cifs"
-#~ msgstr "自動掛載cifs"
-
-#, fuzzy
-#~ msgid "Do you want to proceed with its configuration ?"
-#~ msgstr "是否編輯diseqc.conf?"
+"你想從fastsatfinder.com更新衛星轉發器參數嗎？如果不升級的話，你的轉發器參數可"
+"能不是最新的。"

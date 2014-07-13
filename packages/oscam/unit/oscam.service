@@ -1,15 +1,11 @@
 [Unit]
 Description=Open Source CAM
-Requires=pcscd.service network.target
-After=syslog.target pcscd.service network.target
+After=syslog.target
 ConditionPathExists=/etc/oscam/oscam.conf
 
 [Service]
 ExecStartPre=/usr/bin/oscam-pre.sh
-ExecStart=/usr/bin/oscam.sh
-StandardInput=tty
-StandardOutput=tty
-TTYPath=/dev/tty5
+ExecStart=/usr/bin/oscam -c /etc/oscam
 
 [Install]
 WantedBy=multi-user.target

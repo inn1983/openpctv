@@ -47,4 +47,4 @@ cp $ROOT/$PACKAGES/${PKG_NAME}/config/channels.xml $INSTALL/etc/vdr/plugins
 mkdir $INSTALL/video
 
 mkdir -p $INSTALL/lib/systemd/system/vdr.target.wants
-ln -s ../lircd.service $INSTALL/lib/systemd/system/vdr.target.wants
+ln -s ../eventlircd.service $INSTALL/lib/systemd/system/vdr.target.wants

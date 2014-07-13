@@ -40,6 +40,3 @@ cp -R remotes $INSTALL/etc/lirc
 cp $ROOT/$PACKAGES/$1/config/hardware.conf $INSTALL/etc/lirc
 cp $ROOT/$PACKAGES/$1/scripts/lircd_pre.sh $INSTALL/usr/bin
 chmod 755 $INSTALL/usr/bin/lircd_pre.sh
-
-mkdir -p $INSTALL/lib/systemd/system/multi-user.target.wants
-ln -s ../lircd.service $INSTALL/lib/systemd/system/multi-user.target.wants

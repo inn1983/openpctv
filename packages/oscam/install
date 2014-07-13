@@ -10,12 +10,8 @@ do_install usr/bin/oscam
 
 mkdir -p $INSTALL/etc
 cp -a $ROOT/$PACKAGES/$1/config/* $INSTALL/etc/
-ln -sf "oscam.conf" $INSTALL/etc/oscam/TTcam.conf
-ln -sf "oscam.server" $INSTALL/etc/oscam/TTcam.server
 
 cp $ROOT/$PACKAGES/$1/scripts/oscam-pre.sh $INSTALL/usr/bin/
-cp $ROOT/$PACKAGES/$1/scripts/oscam.sh $INSTALL/usr/bin/
-cp $ROOT/$PACKAGES/$1/scripts/ttcam $INSTALL/usr/bin/
-chmod 755 $INSTALL/usr/bin/oscam-pre.sh $INSTALL/usr/bin/oscam.sh $INSTALL/usr/bin/ttcam
+chmod 755 $INSTALL/usr/bin/oscam-pre.sh 
 
 mkdir -p $INSTALL/var/log/oscam

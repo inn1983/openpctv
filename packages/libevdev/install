@@ -1,0 +1,8 @@
+#!/bin/sh
+
+. config/options
+
+cd $BUILD/$1*
+
+do_install usr/bin/touchpad-edge-detector
+do_install usr/lib/libevdev.so*

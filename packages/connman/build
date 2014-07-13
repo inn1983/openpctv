@@ -26,16 +26,6 @@ else
 fi
 
 do_configure \
-            --disable-gtk-doc \
-            --disable-debug \
-            --disable-session-policy-local \
-            --disable-selinux \
-            --disable-dundee \
-            --disable-pacrunner \
-            --disable-neard \
-            --disable-wispr \
-            --enable-datafiles \
-            --disable-silent-rules \
             --enable-ethernet \
             $WIFI_CONFIG \
             $BLUETOOTH_CONFIG \

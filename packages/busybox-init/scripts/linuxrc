@@ -119,7 +119,9 @@ echo '/sbin/mdev' > /proc/sys/kernel/hotplug
 mdev -s
 
 # splash
-#/bin/ply-image /plymouth/splash.png
+if [ "X$QUIET" != Xyes -a -c /dev/fb0 ]; then
+  /bin/ply-image /plymouth/splash.png
+fi
 #if [ -x /bin/plymouth ] && plymouth --ping; then
 #  /bin/plymouth hide-splash > /dev/null 2>&1
 #  plymouth hide-splash
@@ -201,7 +203,7 @@ if [ -n "$ROOT" ]; then
   COUNT="0 1 2 3 4 5 6 7 8 9"
   for i in $COUNT; do
     dbg_echo -n "[$i] Trying root=$ROOT as requested..."
-    ROOT_NEW=$(blkid | sed 's/\"//g' | grep -i $ROOT | cut -d: -f1)
+    ROOT_NEW=$(blkid | sed 's/\"//g' | grep -i $ROOT | cut -d: -f1 | sort -r)
     if mount -o $ROOT_MODE $ROOT_NEW /mnt >/dev/null 2>&1; then
       if [ "$ROOTFS" = flat ]; then
         dbg_echo "found."

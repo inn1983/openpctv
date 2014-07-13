@@ -14,6 +14,7 @@ cp -P $ROOT/$PACKAGES/$1/scripts/setwakeup.sh .install/usr/bin
 cp -P $ROOT/$PACKAGES/$1/config/*.xml .install/etc/xbmc
 mkdir -p .install/lib/systemd/system/xbmc.target.wants
 ln -sf ../backend.service .install/lib/systemd/system/xbmc.target.wants
+ln -sf ../eventlircd.service .install/lib/systemd/system/xbmc.target.wants
 
 do_install usr/bin
 do_install usr/lib

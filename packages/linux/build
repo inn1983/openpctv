@@ -18,6 +18,8 @@ case $TARGET_ARCH in
     ;;
 esac
 
+cp -R $ROOT/$PACKAGES/$1/firmware/* firmware/
+
 make $IMAGE
 make modules
 

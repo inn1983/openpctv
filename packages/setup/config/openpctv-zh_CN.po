@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPCTV 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-09 00:20+0800\n"
+"POT-Creation-Date: 2014-07-13 11:30+0800\n"
 "PO-Revision-Date: 2014-07-08 17:58+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -53,10 +53,11 @@ msgstr "重新配置"
 msgid ""
 "The test fails if you cannot hear any sound, the reason could be that the "
 "sound came out from a wrong speaker. In this case, check your connection "
-"again carefully."
+"again carefully. Note NVIDIA HDMI tested here may be silent, in fact it is "
+"normal."
 msgstr ""
 "测试成功吗？或许测试失败其中的一个原因是--声音输出到错误的喇叭。在这种情况下"
-"仔细检查你的联接。"
+"仔细检查你的联接。注意NVIDIA HDMI在这里测试可能会无声，但实际上是正常的。"
 
 #: packages/setup/scripts/audio-config:49
 msgid ""
@@ -521,12 +522,16 @@ msgid "Support all the TBS DVB-C devices"
 msgstr "支持TBS DVB-C全系列的设备"
 
 #: packages/setup/scripts/install-drivers:143
+msgid "Support all the TBS ATSC devices"
+msgstr "支持TBS ATSC全系列的设备"
+
+#: packages/setup/scripts/install-drivers:144
 msgid "Support all the DVBSky DVB-C devices"
 msgstr "支持DVBSky DVB-C全系列的设备"
 
-#: packages/setup/scripts/install-drivers:144
-msgid "Support the TBS QBOX I DVB-C devices"
-msgstr "支持TBS QBOX I设备"
+#: packages/setup/scripts/install-drivers:145
+msgid "Support the TBS QBOX I DVB-S2 devices"
+msgstr "支持TBS QBOX I DVB-S2设备"
 
 #: packages/setup/scripts/installator.sh:16
 msgid "Not found or no block device exists."

@@ -1,0 +1,11 @@
+PKG_NAME=enigma2pc-plugin-cooltvguide
+PKG_URL_REV=4c0ad78
+PKG_VERSION=20140120+${PKG_URL_REV}
+PKG_URL_PROTO=git
+PKG_URL="https://github.com/openatv/enigma2-plugin-extensions-cooltvguide"
+PKG_REV=1
+PKG_RUN_DEPENDS="enigma2pc"
+PKG_PRIORITY=optional
+PKG_SECTION=multimedia
+PKG_SHORTDESC="cooltvguide from coolman"
+PKG_LONGDESC="cooltvguide from coolman"

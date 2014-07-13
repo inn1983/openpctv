@@ -30,3 +30,5 @@ ln -sf video $INSTALL/hdd
 
 mkdir -p $INSTALL/lib/systemd/system/enigma2pc.target.wants
 ln -s ../oscam.service $INSTALL/lib/systemd/system/enigma2pc.target.wants
+
+ln -s ../eventlircd.service $INSTALL/lib/systemd/system/enigma2pc.target.wants

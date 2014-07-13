@@ -7,6 +7,7 @@ cd $PKG_BUILD_DIR
 
 do_install usr/lib/libgbm.so*
 do_install usr/lib/libglapi.so*
+do_install usr/lib/libxatracker.so*
 #do_install usr/lib/libdricore*.so*
 do_install usr/lib/dri
 do_install usr/lib/mesa

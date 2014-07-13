@@ -15,6 +15,7 @@ export ac_cv_path_NCURSES_CONFIG="$ROOT/$TOOLCHAIN/bin/ncurses-config"
 do_configure \
             --with-ncurses \
             --with-ncursesw \
+            --enable-nls \
             $CFG_XDIALOG
 
 make

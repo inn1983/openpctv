@@ -1,7 +1,7 @@
 [Unit]
 Description=Video Disk Recorder
 Wants=xorg.service
-After=xorg.service lircd.service eventlircd.service
+After=xorg.service eventlircd.service
 
 [Service]
 Environment=DISPLAY=:0.0

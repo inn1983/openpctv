@@ -65,3 +65,21 @@ fi
 chvt 4
 sync
 LD_PRELOAD=$LIBS ${exec_prefix}/bin/enigma2
+
+ret=$?                                                                                      
+case $ret in                                                                                
+        1)                                                                                  
+                cmp -s  /etc/stb/fp/wakeup_time  /etc/stb/fp/wakeup_time_compare > /dev/null
+                if [ $? -eq 1 ]; then                                                
+                        cat /etc/stb/fp/wakeup_time > /sys/class/rtc/rtc0/wakealarm  
+                        cat /etc/stb/fp/wakeup_time > /etc/stb/fp/wakeup_time_compare
+                fi                                   
+                /sbin/poweroff                                                        
+#               /usr/sbin/pm-suspend                                                                         
+                ;;          
+        2)                                        
+                /sbin/reboot                                                                
+                ;;                                                                      
+        *)                                                                       
+                ;;                                   
+esac

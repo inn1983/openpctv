@@ -7,6 +7,7 @@ $SCRIPTS/build samba
 $SCRIPTS/install fuse
 $SCRIPTS/install ntfs-3g
 $SCRIPTS/install util-linux-ng
+$SCRIPTS/install plymouth-lite
 
 cd $BUILD/$1*
 export ARCH=$TARGET_ARCH

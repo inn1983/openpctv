@@ -22,7 +22,7 @@ mkdir -p $INSTALL/usr/bin
 ln -sf /bin/udevadm $INSTALL/usr/bin/udevadm
 ln -sf /usr/bin/udevadm $INSTALL/usr/bin/udevinfo
 do_install usr/share/dbus-1
-do_install usr/share/polkit-1
+#do_install usr/share/polkit-1
 do_install usr/lib/systemd
 
 mkdir -p $INSTALL/usr/lib/modules-load.d

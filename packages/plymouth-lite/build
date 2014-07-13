@@ -9,7 +9,7 @@ setup_toolchain target
 SPLASH_FILE="$ROOT/$CONFIG/flavours/$FLAVOUR/splash-frontend.png"
 [ -f "$SPLASH_FILE" ] && cp -P "$SPLASH_FILE" splash.png
 
-make
+make CFLAGS="$CFLAGS -s -static"
 make_install
 
 

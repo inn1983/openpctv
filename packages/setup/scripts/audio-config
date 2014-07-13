@@ -41,7 +41,7 @@ case $channels in
 esac
 speaker-test $suboption -twav -l1
 dialog --title "$(gettext "Audio ouput test completed")" --yes-label "$(gettext "Finish")" --no-label "$(gettext "Re-configure")" --yesno \
-"$(gettext "The test fails if you cannot hear any sound, the reason could be that the sound came out from a wrong speaker. In this case, check your connection again carefully.")" 9 60
+"$(gettext "The test fails if you cannot hear any sound, the reason could be that the sound came out from a wrong speaker. In this case, check your connection again carefully. Note NVIDIA HDMI tested here may be silent, in fact it is normal.")" 9 60
 [ $? -eq 1 ] && mainmenu
 }
 mainmenu () {

@@ -1,11 +1,13 @@
 PKG_NAME=pcsc-lite
 PKG_URL_PROTO=svn
-PKG_URL_REV=6829
+PKG_URL_REV=6933
 PKG_URL="svn://anonscm.debian.org/pcsclite/trunk/PCSC"
 PKG_VERSION=1.8.10+r${PKG_URL_REV}
+#PKG_VERSION=1.8.11
+#PKG_URL="https://alioth.debian.org/frs/download.php/file/3391/${PKG_NAME}-${PKG_VERSION}.tar.bz2"
 PKG_REV=1
 PKG_RUN_DEPENDS="$TARGET_LIBC"
-PKG_BUILD_DEPENDS="toolchain"
+PKG_BUILD_DEPENDS="toolchain libusb"
 PKG_PRIORITY=optional
 PKG_SECTION=libs
 PKG_SHORTDESC="PCSC Lite"
