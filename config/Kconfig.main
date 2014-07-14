@@ -98,11 +98,12 @@ config TOOLCHAIN_codesourcery
 
 config TOOLCHAIN_linaro
   bool "Linaro"
-  depends on TARGET_ARCH_arm
+  depends on ( TARGET_ARCH_arm || TARGET_ARCH_arm64 )
+
 
 config TOOLCHAIN_linaro_next
   bool "Linaro next"
-  depends on TARGET_ARCH_arm
+  depends on ( TARGET_ARCH_arm || TARGET_ARCH_arm64 )
 
 endchoice
 
@@ -220,6 +221,12 @@ config OPT_DYNAMIC_SYSROOT
   help
    Rebuild the sysroot from scratch at each package compilation. Makes build
    slower but helps to catch wrong depends between packages.
+   
+config OPT_DEVROOTFS
+  bool "Rootfs for debug"
+  default n
+  help
+   Create a rootfs with unstripped libs
 
 config OPT_EATMYDATA
   bool "Disable fsync() during build"
@@ -304,6 +311,19 @@ config OPT_TARGET_SDCARD_GEN
 config OPT_TARGET_TARBALL
   bool "Flat rootfs tarball"
   default n
+
+choice TARGET_TARBALL_COMPRESSION
+  prompt "Compression method for TARBALL"
+  depends on OPT_TARGET_TARBALL
+  default OPT_TTC_XZ
+
+config OPT_TTC_TARBZ
+  bool "tar.bz2"
+
+config OPT_TTC_XZ
+  bool "xz"
+
+endchoice
 
 config OPT_TARGET_EXT2FS
   bool "ext2 filesystem image"
@@ -561,6 +581,12 @@ config NB_CONNMAN
   select PKG_connman
   help
     Intel Connection Manager daemon
+
+config NB_NM
+  bool "NetworkManager"
+  select PKG_networkmanager
+  help
+    Network Manager daemon
 
 config NB_UDHCPC
   bool "udhcpc"

@@ -1,0 +1,21 @@
+diff -uNr a/gcc/Makefile.in b/gcc/Makefile.in
+--- a/gcc/Makefile.in	2014-07-14 11:13:19.301639267 +0800
++++ b/gcc/Makefile.in	2014-07-14 11:39:35.733456370 +0800
+@@ -319,7 +319,7 @@
+ ISLINC = @ISLINC@
+ 
+ # How to find CLOOG
+-CLOOGLIBS = @CLOOGLIBS@
++CLOOGLIBS = @CLOOGLIBS@ -lm -lcloog-isl -lisl -lgmp
+ CLOOGINC = @CLOOGINC@
+ 
+ # Set to 'yes' if the LTO front end is enabled.
+@@ -983,7 +983,7 @@
+ # programs built during a bootstrap.
+ # autoconf inserts -DCROSS_DIRECTORY_STRUCTURE if we are building a
+ # cross compiler which does not use the native headers and libraries.
+-INTERNAL_CFLAGS = -DIN_GCC @CROSS@
++INTERNAL_CFLAGS = -DIN_GCC -DCLOOG_INT_GMP @CROSS@
+ 
+ # This is the variable actually used when we compile. If you change this,
+ # you probably want to update BUILD_CFLAGS in configure.ac

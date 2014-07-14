@@ -212,6 +212,7 @@ PKG_USE_SECTION_bluray="multimedia"
 PKG_USE_NAME_cedarx="CedarX"
 PKG_USE_SECTION_cedarx="hwaccel"
 PKG_USE_ARCH_cedarx="arm"
+PKG_USE_PLATFORM_cedarx="a10 a20"
 
 # cryptsetup
 PKG_USE_NAME_cryptsetup="cryptsetup"
@@ -453,6 +454,7 @@ PKG_USE_SECTION_vaapi="hwaccel"
 # vdpau
 PKG_USE_NAME_vdpau="VDPAU"
 PKG_USE_SECTION_vdpau="hwaccel"
+PKG_USE_ARCH_vdpau="i386 x86_64"
 
 # vlc
 PKG_USE_NAME_vlc="VLC"

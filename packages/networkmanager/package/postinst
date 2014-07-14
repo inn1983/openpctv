@@ -1,0 +1,7 @@
+#!/bin/sh
+
+echo "Post install:"
+echo "  Activating NetworkManager for next reboot ..."
+systemctl enable NetworkManager
+systemctl enable NetworkManager-dispatcher
+

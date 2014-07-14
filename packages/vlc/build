@@ -93,8 +93,9 @@ else
   CFG_CEDARX="--disable-cedar"
 fi
 
-cd $BUILD/$1*
-do_autoconf
+get_meta $1
+cd $PKG_BUILD_DIR
+
 do_configure \
             --enable-silent-rules \
             --disable-dependency-tracking \
