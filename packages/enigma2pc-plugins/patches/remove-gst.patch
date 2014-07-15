@@ -1,0 +1,22 @@
+diff -uNr enigma2pc-plugins-20130618.orig/plugins-enigma2/configure.ac enigma2pc-plugins-20130618/plugins-enigma2/configure.ac
+--- enigma2pc-plugins-20130618.orig/plugins-enigma2/configure.ac	2014-07-14 22:43:33.961430657 +0800
++++ enigma2pc-plugins-20130618/plugins-enigma2/configure.ac	2014-07-14 22:44:13.737627897 +0800
+@@ -23,7 +23,7 @@
+ TUXBOX_APPS_DVB
+ 
+ PKG_CHECK_MODULES(ENIGMA2, enigma2)
+-PKG_CHECK_MODULES(GSTREAMER, gstreamer-0.10 gstreamer-pbutils-0.10)
++#PKG_CHECK_MODULES(GSTREAMER, gstreamer-0.10 gstreamer-pbutils-0.10)
+ PKG_CHECK_MODULES(LIBCRYPTO, libcrypto)
+ 
+ AC_ARG_WITH(tpm,
+diff -uNr enigma2pc-plugins-20130618.orig/plugins-enigma2/Rules-cpp.mak enigma2pc-plugins-20130618/plugins-enigma2/Rules-cpp.mak
+--- enigma2pc-plugins-20130618.orig/plugins-enigma2/Rules-cpp.mak	2014-07-14 22:43:33.965430681 +0800
++++ enigma2pc-plugins-20130618/plugins-enigma2/Rules-cpp.mak	2014-07-14 22:45:17.737945261 +0800
+@@ -11,6 +11,5 @@
+ 	-Wall \
+ 	@DEBUG_CFLAGS@ \
+ 	@ENIGMA2_CFLAGS@ \
+-	@GSTREAMER_CFLAGS@ \
+ 	@LIBCRYPTO_CFLAGS@ \
+ 	@PTHREAD_CFLAGS@

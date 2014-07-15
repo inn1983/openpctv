@@ -1,0 +1,59 @@
+diff -uNr enigma2pc-20140612.orig/configure.ac enigma2pc-20140612/configure.ac
+--- enigma2pc-20140612.orig/configure.ac	2014-07-14 22:52:01.667948241 +0800
++++ enigma2pc-20140612/configure.ac	2014-07-14 22:52:20.696042601 +0800
+@@ -31,7 +31,7 @@
+ AM_CONDITIONAL(HAVE_GIT_DIR, test -d "$srcdir/.git")
+ AM_CONDITIONAL(HAVE_FAKE_GIT_DIR, test -f "$srcdir/.git/last_commit_info")
+ 
+-PKG_CHECK_MODULES(BASE, [freetype2 fribidi gstreamer-0.10 gstreamer-pbutils-0.10 libdvbsi++ libpng libxml-2.0 sigc++-1.2 libssl libcrypto libnl-3.0])
++PKG_CHECK_MODULES(BASE, [freetype2 fribidi libdvbsi++ libpng libxml-2.0 sigc++-1.2 libssl libcrypto libnl-3.0])
+ PKG_CHECK_MODULES(LIBDDVD, libdreamdvd, HAVE_LIBDDVD="yes", HAVE_LIBDDVD="no")
+ AM_CONDITIONAL(HAVE_LIBDDVD, test "$HAVE_LIBDDVD" = "yes")
+ 
+diff -uNr enigma2pc-20140612.orig/lib/service/Makefile.inc enigma2pc-20140612/lib/service/Makefile.inc
+--- enigma2pc-20140612.orig/lib/service/Makefile.inc	2014-06-12 20:25:59.000000000 +0800
++++ enigma2pc-20140612/lib/service/Makefile.inc	2014-07-14 22:32:27.342125076 +0800
+@@ -10,7 +10,6 @@
+ 	service/servicedvb.cpp \
+ 	service/servicedvbrecord.cpp \
+ 	service/servicefs.cpp \
+-	service/servicemp3.cpp \
+ 	service/servicem2ts.cpp \
+ 	service/servicedvbstream.cpp
+ 
+@@ -23,7 +22,6 @@
+ 	service/servicedvb.h \
+ 	service/servicedvbrecord.h \
+ 	service/servicefs.h \
+-	service/servicemp3.h \
+ 	service/servicem2ts.h \
+ 	service/servicedvbstream.h
+ 
+@@ -39,4 +37,4 @@
+ 	service/servicedvd.cpp
+ serviceinclude_HEADERS += \
+ 	service/servicedvd.h
+-endif
+\ 文件尾没有 newline 字符
++endif
+diff -uNr enigma2pc-20140612.orig/main/enigma.cpp enigma2pc-20140612/main/enigma.cpp
+--- enigma2pc-20140612.orig/main/enigma.cpp	2014-06-12 20:25:59.000000000 +0800
++++ enigma2pc-20140612/main/enigma.cpp	2014-07-14 22:34:51.258838714 +0800
+@@ -32,7 +32,7 @@
+ #include "bsod.h"
+ #include "version_info.h"
+ 
+-#include <gst/gst.h>
++//#include <gst/gst.h>
+ 
+ #ifdef OBJECT_DEBUG
+ int object_total_remaining;
+@@ -135,7 +135,7 @@
+ 	atexit(object_dump);
+ #endif
+ 
+-	gst_init(&argc, &argv);
++//	gst_init(&argc, &argv);
+ 
+ 	// set pythonpath if unset
+ 	setenv("PYTHONPATH", eEnv::resolve("${libdir}/enigma2/python").c_str(), 0);
