@@ -1,7 +1,8 @@
 PKG_NAME=linux-firmware
-PKG_URL_PROTO=git
-PKG_URL_REV=7d0c7a8
-PKG_VERSION=20131013-${PKG_URL_REV}
-PKG_URL="git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git"
-#PKG_URL="$DISTRO_SRCS/linux-firmware-$PKG_VERSION.tar.bz2"
+#PKG_URL_PROTO=git
+#PKG_URL_REV=7d0c7a8
+#PKG_VERSION=20131013-${PKG_URL_REV}
+#PKG_URL="git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git"
+PKG_VERSION=20140603
+PKG_URL="http://dev.gentoo.org/~chithanh/${PKG_NAME}/${PKG_NAME}-${PKG_VERSION}.tar.xz"
 PKG_REV=1

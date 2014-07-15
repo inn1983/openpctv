@@ -61,6 +61,8 @@ make \
 
 do_strip bin lib$1.so.*
 
+mkdir -p .install/usr/lib/vdr
+
 make_install 
 
 if pkg_uses $1 bluray; then

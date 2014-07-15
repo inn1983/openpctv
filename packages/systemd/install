@@ -7,16 +7,21 @@ cd $PKG_BUILD_DIR
 
 do_install bin
 do_install lib
-do_install etc/dbus-1
+#do_install etc/dbus-1
 do_install etc/modules-load.d
 do_install etc/sysctl.d
 do_install etc/tmpfiles.d
 do_install etc/systemd
 do_install etc/udev
-pkg_uses $1 devtools && do_install usr/bin || do_install usr/bin/udevadm
+
+if pkg_uses $1 devtools ; then 
+  do_install usr/bin
+fi
+mkdir -p $INSTALL/usr/bin
+# symlinks to udevadm
 ln -sf /usr/bin/udevadm $INSTALL/usr/bin/udevinfo
 do_install usr/share/dbus-1
-#do_install usr/share/polkit-1
+do_install usr/share/polkit-1
 do_install usr/lib/systemd
 
 mkdir -p $INSTALL/usr/lib/modules-load.d
@@ -41,13 +46,6 @@ for TTY in 2 3; do
     $INSTALL/etc/systemd/system/getty.target.wants/getty@tty$TTY.service
 done
 
-if [ "$TARGET_ARCH" = arm ] ; then
-  mv $INSTALL/etc/systemd/system/getty.target.wants/getty@tty1.service \
-    $INSTALL/etc/systemd/system/
-  ln -s /lib/systemd/system/getty/getty@ttymxc0.service \
-    $INSTALL/etc/systemd/system/getty.target.wants/getty@ttymxc0.service
-fi
-
 [ -n "$MEDIA_CENTER_FRONTEND" ] && \
   DEFAULT_SYSTEMD_TARGET=$MEDIA_CENTER_FRONTEND
 
@@ -69,9 +67,9 @@ ln -s /dev/null $INSTALL/etc/systemd/system/display-manager.service
 # disable "Predictable Network Interface Names"
 ln -s /dev/null $INSTALL/etc/udev/rules.d/80-net-name-slot.rules
 
-# we enable RTC synchronisation for CuBox only
+# we enable RTC synchronisation for CuBox and CuBox-i only
 # could also be done for RaspberryPi with ABIORTC module
-if [ "$TARGET_MACHINE" != cubox ]; then
+if [ "$TARGET_MACHINE" != cubox ] && [ "$TARGET_MACHINE" != cuboxi ] ; then
   ln -s /dev/null $INSTALL/etc/systemd/system/hwclock-sync.service
 fi
 

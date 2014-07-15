@@ -24,6 +24,7 @@ do_configure host \
             --enable-abstract-sockets \
             --disable-selinux \
             --disable-libaudit \
+            --disable-dnotify \
             --enable-inotify \
             --with-xml=expat \
             --without-x \
@@ -47,7 +48,7 @@ do_configure \
             --enable-abstract-sockets \
             --disable-selinux \
             --disable-libaudit \
-            --enable-dnotify \
+            --disable-dnotify \
             --enable-inotify \
             --with-xml=expat \
             $WITH_XORG \
