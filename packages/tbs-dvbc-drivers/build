@@ -26,7 +26,7 @@ make \
   KDIR=$(kernel_path) \
   KERNELRELEASE=$(kernel_version) \
   SRCDIR=$(kernel_path) \
-  OUTDIR=$(kernel_path)
+  OUTDIR=$(kernel_path) -j4
 
 make install \
   DESTDIR=$install_dir \

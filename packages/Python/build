@@ -40,6 +40,6 @@ do_configure \
 export PYTHON_MODULES_INCLUDE="$LIB_PREFIX/include $SYSROOT_PREFIX/include"
 export PYTHON_MODULES_LIB="$LIB_PREFIX/lib $SYSROOT_PREFIX/lib"
 
-make
+make -j4
 make_install
 do_python_strip

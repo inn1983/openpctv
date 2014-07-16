@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPCTV 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-13 11:30+0800\n"
+"POT-Creation-Date: 2014-07-16 14:21+0800\n"
 "PO-Revision-Date: 2014-07-08 17:58+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -532,6 +532,11 @@ msgstr "支持DVBSky DVB-C全系列的设备"
 #: packages/setup/scripts/install-drivers:145
 msgid "Support the TBS QBOX I DVB-S2 devices"
 msgstr "支持TBS QBOX I DVB-S2设备"
+
+#: packages/setup/scripts/install-drivers:146
+#, fuzzy
+msgid "Support the DVB3221 DVB-C device"
+msgstr "支持DVBSky DVB-C全系列的设备"
 
 #: packages/setup/scripts/installator.sh:16
 msgid "Not found or no block device exists."

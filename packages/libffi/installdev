@@ -7,7 +7,8 @@ get_meta $1
 cd $PKG_BUILD_DIR
 
 cd objdir-target
-do_installdev usr/lib
+[ -d .install/usr/lib64 ] && cp -a .install/usr/lib64/* .install/usr/lib/
+do_installdev usr/lib*
 
 mkdir .install/usr/include
 cp include/* .install/usr/include

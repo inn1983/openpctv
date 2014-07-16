@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPCTV 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-13 11:30+0800\n"
+"POT-Creation-Date: 2014-07-16 14:21+0800\n"
 "PO-Revision-Date: 2014-07-08 17:58+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -67,9 +67,9 @@ msgid ""
 "output.Select a default PCM output device from the list, and then specify "
 "the number of channels."
 msgstr ""
-"首先我們需要獲得所有音效卡的列表（如果你擁有多塊音效卡的話）並且每張音效卡會有多個"
-"介面(比如一組模擬音頻輸出，一組數字音頻輸出及HDMI輸出)。從已有的列表中選擇一"
-"個預設的音頻輸出設備，並指定輸出喇叭的數量。"
+"首先我們需要獲得所有音效卡的列表（如果你擁有多塊音效卡的話）並且每張音效卡會"
+"有多個介面(比如一組模擬音頻輸出，一組數字音頻輸出及HDMI輸出)。從已有的列表中"
+"選擇一個預設的音頻輸出設備，並指定輸出喇叭的數量。"
 
 #: packages/setup/scripts/audio-config:52
 msgid "Configuration completed, continue to test audio output."
@@ -119,8 +119,8 @@ msgid ""
 "the signal, linear and circular.With linear, the signal is horizontal or "
 "vertical, with circular, the signal is right circular or left circular."
 msgstr ""
-"請設置該連接埠上所連接的高頻頭類型，有兩種極化方式接收衛星信號，如果是線性極化"
-"的，它分為水平極化與垂直極化，如果是圓極化的，它分為左旋極化與右旋極化"
+"請設置該連接埠上所連接的高頻頭類型，有兩種極化方式接收衛星信號，如果是線性極"
+"化的，它分為水平極化與垂直極化，如果是圓極化的，它分為左旋極化與右旋極化"
 
 #: packages/setup/scripts/diseqcsetup:33
 msgid "5150MHz Single Linear C Band LNBF"
@@ -532,6 +532,11 @@ msgstr "支持DVBSky DVB-C全系列的設備"
 #: packages/setup/scripts/install-drivers:145
 msgid "Support the TBS QBOX I DVB-S2 devices"
 msgstr "支持TBS QBOX I DVB-S2設備"
+
+#: packages/setup/scripts/install-drivers:146
+#, fuzzy
+msgid "Support the DVB3221 DVB-C device"
+msgstr "支持DVBSky DVB-C全系列的設備"
 
 #: packages/setup/scripts/installator.sh:16
 msgid "Not found or no block device exists."

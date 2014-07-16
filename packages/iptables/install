@@ -6,5 +6,6 @@ cd $BUILD/$1*
 
 do_install usr/lib/libiptc.so.*
 do_install usr/lib/libip4tc.so.*
+do_install usr/lib/libip6tc.so.*
 do_install usr/lib/libxtables.so.*
 do_install usr/sbin

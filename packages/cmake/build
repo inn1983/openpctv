@@ -9,5 +9,5 @@ setup_toolchain host
 
 ./bootstrap --no-qt-gui --prefix=/usr
 
-make
+make -j4
 make_install toolchain

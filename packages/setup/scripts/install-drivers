@@ -8,10 +8,10 @@ export TEXTDOMAIN=openpctv
 [ -z ${DISTRIB_ID} ] && DISTRIB_ID=OpenPCTV
 
 kernelver=$(uname -r)
-if [[ "$(uname -m)" == *86 ]]; then
+if [[ "$(uname -m)" == i686 ]]; then
   machine=i586
-else
-  machine=i586
+elif [[ "$(uname -m)" == x86_64 ]]; then
+  machine=x86_64
 fi
 
 finishinstall () {
@@ -142,7 +142,8 @@ dialog --clear --title "$(gettext "Install additional DVB driver")" --menu \
  "tbs-dvbc-drivers" "$(gettext "Support all the TBS DVB-C devices")" \
  "tbs-atsc-drivers" "$(gettext "Support all the TBS ATSC devices")" \
  "dvbsky-dvbc-drivers" "$(gettext "Support all the DVBSky DVB-C devices")" \
- "tbs-qbox-drivers" "$(gettext "Support the TBS QBOX I DVB-S2 devices")" 2> /tmp/driver.tmp
+ "tbs-qbox-drivers" "$(gettext "Support the TBS QBOX I DVB-S2 devices")" \
+ "dvb3221-driver" "$(gettext "Support the DVB3221 DVB-C device")" 2> /tmp/driver.tmp
 
 case "$(cat /tmp/driver.tmp)" in
   s2-liplianin)	tar -czf /root/kernel_media_$(date +%Y%m%d%H%M%S)_backup.tgz /lib/modules/$kernelver/kernel/drivers/media
@@ -190,6 +191,12 @@ case "$(cat /tmp/driver.tmp)" in
                 echo "Download and install dvbsky-dvbc-drivers-${kernelver}_Last_${machine}.opk, please wait..."
                 opkg install http://sourceforge.net/projects/openpctv/files/packages/dvbsky-dvbc-drivers-${kernelver}_Last_${machine}.opk/download --force-overwrite || (echo "Can't download dvbsky-dvbc-drivers-${kernelver}_Last_${machine}.opk, check your network settings."; exit)
 		HAS_INSTALLED=yes
+                ;;
+  dvb3221-driver)  tar -czf /root/kernel_media_$(date +%Y%m%d%H%M%S)_backup.tgz /lib/modules/$kernelver/kernel/drivers/media
+                rm -rf /lib/modules/$kernelver/kernel/drivers/media
+                echo "Download and install dvb3221-driver-${kernelver}_Last_${machine}.opk, please wait..."
+                opkg install http://sourceforge.net/projects/openpctv/files/packages/dvb3221-driver-${kernelver}_Last_${machine}.opk/download --force-overwrite || (echo "Can't download dvb3221-driver-${kernelver}_Last_${machine}.opk, check your network settings."; exit)
+                HAS_INSTALLED=yes
                 ;;
 esac
 

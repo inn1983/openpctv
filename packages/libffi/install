@@ -7,4 +7,5 @@ get_meta $1
 cd $PKG_BUILD_DIR
 
 cd objdir-target
+[ -d .install/usr/lib64 ] && cp -a .install/usr/lib64/* .install/usr/lib/
 do_install usr/lib/libffi.so*
