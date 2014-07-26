@@ -185,7 +185,7 @@ esac
 #设定无线网络
 function setWlan
 {
-rfkill unblock wlan
+rfkill unblock wlan >/dev/null 2>&1
 ifconfig $IF up
 echo "${MSSCANWLAN}"
 sleep 2

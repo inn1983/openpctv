@@ -84,7 +84,7 @@ fi
 [ "$FPU_OPTIMIZATIONS" = "neon-vfp4" ] && CFLAGS="$CFLAGS -mfpu=vfpv4"
 [ "$FPU_OPTIMIZATIONS" = "neon-vfp4" ] && CXXFLAGS="$CXXFLAGS -mfpu=vfpv4"
 
-export LIBS="$LIBS -lstdc++"
+export LIBS="$LIBS -lstdc++ -liconv"
 export LIB_P=$LIB_PREFIX
 
 export PYTHON_VERSION=2.7
