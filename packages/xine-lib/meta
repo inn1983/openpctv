@@ -1,5 +1,5 @@
 PKG_NAME=xine-lib
-PKG_VERSION=1.2.4_git20140612
+PKG_VERSION=1.2.6_hg20140709
 PKG_URL=$SFNET_SRCS/openpctv/sources/xine-lib-${PKG_VERSION}.tar.xz
 PKG_REV=2
 PKG_BUILD_DEPENDS="toolchain"

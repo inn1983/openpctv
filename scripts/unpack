@@ -72,6 +72,7 @@ if [ -f $PACKAGE_URL -o -n "$PKG_URL" ]; then
   $SCRIPTS/extract $1 "*.tar.xz"  $PKG_BUILD_DIR
   $SCRIPTS/extract $1 "*.tar.bz*" $PKG_BUILD_DIR
   $SCRIPTS/extract $1 "*.tar.gz"  $PKG_BUILD_DIR
+  $SCRIPTS/extract $1 "*.tar.Z"  $PKG_BUILD_DIR
   $SCRIPTS/extract $1 "*.tgz"     $PKG_BUILD_DIR
   $SCRIPTS/extract $1 "*.tar"     $PKG_BUILD_DIR
   $SCRIPTS/extract $1 "*.zip"     $PKG_BUILD_DIR

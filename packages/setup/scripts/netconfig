@@ -56,6 +56,11 @@ MSSCANWLAN="$(gettext "Searching for wireless networks, please wait ...")"
 function checkNet
 {
 . /etc/network
+if [ X$IFACE = X ]; then
+  IFACE=$(ls --color=never /sys/class/net | grep -v lo | head -n1)
+  sed -i "s/^IFACE=.*/IFACE=\"$IFACE\"/" /etc/network
+  . /etc/network
+fi
 echo "${MSRestart}"
 [ X"$SSID" != X ] && systemctl restart wpa_supplicant
 systemctl restart connman
@@ -274,7 +279,11 @@ for i in /sys/class/net/*; do
   if [ -d $i/device ]; then
      IF=${i#/sys/class/net/}
      ID=$(grep PCI_ID ${i}/device/uevent | cut -d= -f2)
-     DEVICE=$(lspci -d ${ID} | cut -d: -f3 | sed 's/^[ \t]*//')
+     if [ X$ID = X ]; then
+       DEVICE=$(grep DRIVER ${i}/device/uevent | cut -d= -f2)
+     else
+       DEVICE=$(lspci -d ${ID} | cut -d: -f3 | sed 's/^[ \t]*//')
+     fi
      MENU="$MENU \"${IF}\" \"${DEVICE}\""
   fi
 done

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPCTV 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-16 14:21+0800\n"
+"POT-Creation-Date: 2014-07-26 10:57+0800\n"
 "PO-Revision-Date: 2014-07-08 17:58+0800\n"
 "Last-Translator: Henry Liu <relaxbsd@gmail.com>\n"
 "Language-Team: OpenPCTV\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: packages/setup/scripts/audio-config:8
 #: packages/setup/scripts/audio-config:48
-#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:105
+#: packages/setup/scripts/audio-config:67 packages/setup/scripts/setup.sh:103
 msgid "Sound card Configuration"
 msgstr "配置声卡"
 
@@ -412,7 +412,7 @@ msgid "Would you like to enable SoftCAM (OScam) on this machine?"
 msgstr "你想在这台机器上运行SoftCAM(OScam)吗？"
 
 #: packages/setup/scripts/install-drivers:18
-#: packages/setup/scripts/setup.sh:90 packages/setup/scripts/setup.sh:116
+#: packages/setup/scripts/setup.sh:88 packages/setup/scripts/setup.sh:114
 msgid "Reboot"
 msgstr "重新启动"
 
@@ -491,7 +491,7 @@ msgstr ""
 "动吗？"
 
 #: packages/setup/scripts/install-drivers:136
-#: packages/setup/scripts/setup.sh:102
+#: packages/setup/scripts/setup.sh:100
 msgid "Install additional DVB driver"
 msgstr "安装附加的DVB驱动"
 
@@ -829,7 +829,7 @@ msgid "Submit"
 msgstr "提交"
 
 #: packages/setup/scripts/monitor.sh:19 packages/setup/scripts/monitor.sh:33
-#: packages/setup/scripts/setup.sh:104
+#: packages/setup/scripts/setup.sh:102
 msgid "Set the monitor's best resolution"
 msgstr "设定显示器的最佳分辨率"
 
@@ -979,7 +979,7 @@ msgid "This step is not necessary, because we provide a normal list."
 msgstr "这一步并不是必须的，因为我们为你提供了一个缺省即可正常运行的列表。"
 
 #: packages/setup/scripts/select-plugins:29
-#: packages/setup/scripts/setup.sh:108
+#: packages/setup/scripts/setup.sh:106
 msgid "Select VDR-plugins"
 msgstr "选择VDR插件"
 
@@ -987,7 +987,7 @@ msgstr "选择VDR插件"
 msgid "You can enable or disable VDR-plugins on the list."
 msgstr "你可以在下面的列表中允许或禁止VDR插件。"
 
-#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:100
+#: packages/setup/scripts/select-target:8 packages/setup/scripts/setup.sh:98
 msgid "Set the default target"
 msgstr "选择默认的启动项"
 
@@ -1021,15 +1021,15 @@ msgstr "按任意键进入配置程序，"
 msgid "or 3 seconds later enter"
 msgstr "否则三秒后将自动进入"
 
-#: packages/setup/scripts/setup.sh:85
+#: packages/setup/scripts/setup.sh:83
 msgid "Configure VDR"
 msgstr "配置VDR"
 
-#: packages/setup/scripts/setup.sh:85
+#: packages/setup/scripts/setup.sh:83
 msgid "Configure VDR later"
 msgstr "稍后配置VDR"
 
-#: packages/setup/scripts/setup.sh:85
+#: packages/setup/scripts/setup.sh:83
 msgid ""
 "The following configuration is for the VDR (note the XBMC uses VDR as a PVR "
 "backend), if you only use Engima2, then you do not need to configure or re-"
@@ -1038,11 +1038,11 @@ msgstr ""
 "接下来的配置只是针对VDR的（注意XBMC使用了VDR作为一种PVR后端），如果你只使用"
 "Enigma2,那么你可不必配置或稍后再配置VDR。"
 
-#: packages/setup/scripts/setup.sh:90 packages/setup/scripts/setup.sh:98
+#: packages/setup/scripts/setup.sh:88 packages/setup/scripts/setup.sh:96
 msgid "Main menu"
 msgstr "主菜单"
 
-#: packages/setup/scripts/setup.sh:90
+#: packages/setup/scripts/setup.sh:88
 msgid ""
 "Now, you have completed the most configurations of VDR(for Enigma2 need to "
 "be in its OSD menu) . Now you can select 'Reboot' or 'Main Menu' to continue "
@@ -1051,51 +1051,51 @@ msgstr ""
 "现在，你已经完成了OpenPCTV 的大部分配置（针对Enigma2需要在其OSD中设置），现在"
 "你可以选择'重新启动'或'主菜单'来继续进行配置。"
 
-#: packages/setup/scripts/setup.sh:98
+#: packages/setup/scripts/setup.sh:96
 msgid "configuration"
 msgstr "配置"
 
-#: packages/setup/scripts/setup.sh:99
+#: packages/setup/scripts/setup.sh:97
 msgid "Set global location and language"
 msgstr "设置全局区域和语言"
 
-#: packages/setup/scripts/setup.sh:101
+#: packages/setup/scripts/setup.sh:99
 msgid "Configure Network Environment"
 msgstr "配置网络环境"
 
-#: packages/setup/scripts/setup.sh:106
+#: packages/setup/scripts/setup.sh:104
 msgid "Update Satellite Transponders"
 msgstr "更新卫星参数"
 
-#: packages/setup/scripts/setup.sh:107
+#: packages/setup/scripts/setup.sh:105
 msgid "Update EPG data"
 msgstr "更新第三方EPG数据"
 
-#: packages/setup/scripts/setup.sh:109
+#: packages/setup/scripts/setup.sh:107
 msgid "Select a software emulated CAM"
 msgstr "选择一种模拟CAM软件"
 
-#: packages/setup/scripts/setup.sh:110
+#: packages/setup/scripts/setup.sh:108
 msgid "DiSEqC configuration"
 msgstr "DiSEqC配置"
 
-#: packages/setup/scripts/setup.sh:111
+#: packages/setup/scripts/setup.sh:109
 msgid "Auto scan channels"
 msgstr "自动扫描频道"
 
-#: packages/setup/scripts/setup.sh:112
+#: packages/setup/scripts/setup.sh:110
 msgid "Start VDR with rpihddevice frontend"
 msgstr "启动带有rpihddevice的VDR"
 
-#: packages/setup/scripts/setup.sh:113
+#: packages/setup/scripts/setup.sh:111
 msgid "Start XBMC pvr with VDR backend"
 msgstr "启动带有VDR后台的XBMC"
 
-#: packages/setup/scripts/setup.sh:114
+#: packages/setup/scripts/setup.sh:112
 msgid "Install OpenPCTV to your hard disk"
 msgstr "将OpenPCTV安装到你的硬盘"
 
-#: packages/setup/scripts/setup.sh:115
+#: packages/setup/scripts/setup.sh:113
 msgid "Exit to login shell"
 msgstr "退出并登录shell"
 

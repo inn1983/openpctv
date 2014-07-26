@@ -73,5 +73,9 @@ export DISPLAY=":0.0"
 if grep -q BCM2708 /proc/cpuinfo; then
   setterm -clear -cursor off > /dev/tty4
 fi
+
 chvt 4
+if [ $(ps -A | grep -v grep | grep -c unclutter) -eq 0 -a -f /usr/bin/unclutter ]; then
+   /usr/bin/unclutter -idle 1 -root  &
+fi
 eval vdr -g /tmp --vfat $PLUGINS -v /video -c /etc/vdr --lirc -E /etc/vdr/epg.data -s shutdown

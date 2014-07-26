@@ -1,5 +1,5 @@
 PKG_NAME=tvheadend
-PKG_URL_REV=fceda8d
+PKG_URL_REV=f72733f
 PKG_VERSION=3.9+${PKG_URL_REV}
 PKG_URL_PROTO=git
 PKG_URL="https://github.com/tvheadend/tvheadend.git"

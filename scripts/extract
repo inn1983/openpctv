@@ -48,6 +48,9 @@ for s in $FILES; do
       *.tar.gz | *.tgz)
         tar xzf $f -C $3
         ;;
+      *.tar.Z)
+        tar xzf $f -C $3
+        ;;
       *.diff | *.patch)
         cat $f | patch -d $3 -p1
         ;;

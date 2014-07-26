@@ -1,8 +1,8 @@
 PKG_NAME=xf86-video-intel
 PKG_URL_PROTO=git
-PKG_URL_REV=8fa2296
+PKG_URL_REV=cac1548
 PKG_URL="http://anongit.freedesktop.org/git/xorg/driver/xf86-video-intel.git"
-PKG_VERSION=2.99.912+r${PKG_URL_REV}
+PKG_VERSION=2.99.914+r${PKG_URL_REV}
 PKG_REV=1
 PKG_ARCH="i386 x86_64"
 PKG_BUILD_DEPENDS="toolchain intel-gen4asm"

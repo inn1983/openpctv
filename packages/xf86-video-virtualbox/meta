@@ -1,6 +1,6 @@
 PKG_NAME=xf86-video-virtualbox
-PKG_VERSION=4.3.12-93733
-PKG_URL="http://download.virtualbox.org/virtualbox/4.3.12/VirtualBox-4.3.12-93733-Linux_x86.run"
+PKG_VERSION=4.3.14-95030
+PKG_URL="http://download.virtualbox.org/virtualbox/${PKG_VERSION%-*}/VirtualBox-${PKG_VERSION}-Linux_x86.run"
 PKG_REV=1
 PKG_ARCH="i386 x86_64"
 PKG_BUILD_DEPENDS="toolchain xorriso"

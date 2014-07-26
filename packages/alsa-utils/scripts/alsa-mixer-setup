@@ -145,9 +145,14 @@ pcm.dmixer {
 EOF
 else
   cat > /etc/asound.conf <<EOF
-defaults.pcm.card $ALSA_CARD
-defaults.pcm.device $ALSA_DEVICE
-defaults.ctl.card $ALSA_CARD
+#defaults.pcm.card $ALSA_CARD
+#defaults.pcm.device $ALSA_DEVICE
+#defaults.ctl.card $ALSA_CARD
+pcm.!default {
+  type hw
+  card $ALSA_CARD
+  device $ALSA_DEVICE
+}
 EOF
 fi
 

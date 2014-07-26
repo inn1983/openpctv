@@ -1,0 +1,9 @@
+PKG_NAME=firmware-wifi-atheros
+PKG_VERSION=20140724
+PKG_URL="$SFNET_SRCS/openpctv/sources/${PKG_NAME}-${PKG_VERSION}.tar.xz"
+PKG_BUILD_DEPENDS="toolchain"
+PKG_PRIORITY=optional
+PKG_SECTION=firmware
+PKG_LICENSE="non-free"
+PKG_SHORTDESC="Binary firmware for Atheros wireless cards"
+PKG_LONGDESC="This package contains the binary firmware for USB wireless network and Bluetooth cards supported by the ar5523, ar9170, ath3k, ath6kl_sdio, ath6kl_usb or ath9k_htc drivers."

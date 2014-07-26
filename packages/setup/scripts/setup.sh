@@ -32,8 +32,6 @@ if grep -q -i arm /proc/cpuinfo; then
   elif [ $result = 0 ]; then
     clear
   fi
-else
-  systemctl start plymouth-quit
 fi
 
 

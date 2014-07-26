@@ -6,18 +6,26 @@ get_meta $1
 
 cd $PKG_BUILD_DIR
 
-cd autoconf
-aclocal --force --verbose -I m4
-autoconf -v -f -I m4 -o ../configure
-cd ..
+#cd autoconf
+#do_autoconf
 
-mkdir -p objdir-target 
+#cd ..
+mkdir -p objdir-target
 cd objdir-target
 
-[ "$TARGET_ARCH" = i386 ] && ARCH=x86 || ARCH=$TARGET_ARCH
+ARCH=$TARGET_ARCH
 
-do_configure --host=$HOST_NAME \
-             --build=$HOST_NAME \
+if [ "$TARGET_ARCH" = i386 ] ; then 
+  ARCH="x86,r600"
+elif [ "$TARGET_ARCH" = x86_64 ] ; then
+  ARCH="x86_64,r600"
+elif [ "$TARGET_ARCH" = arm ] ; then
+  ARCH="arm"
+fi
+
+GCC_NO_LTO=1 GCC_NO_ATOM=1 \
+do_configure --host=$TARGET_NAME \
+             --build=$TARGET_NAME \
              --enable-polly \
              --enable-optimized \
              --disable-profiling \
@@ -25,7 +33,7 @@ do_configure --host=$HOST_NAME \
              --disable-expensive-checks \
              --enable-experimental-targets=R600 \
              --disable-debug-runtime \
-             --disable-debug-symbols \
+             --enable-keep-symbols \
              --enable-jit \
              --disable-docs \
              --disable-doxygen \
@@ -39,7 +47,6 @@ do_configure --host=$HOST_NAME \
              --disable-libffi \
              --disable-ltdl-install \
 
-export LLVM_TBLGEN="$ROOT/$TOOLCHAIN/bin/llvm-tblgen"
 
-make -j4
+make
 make_install

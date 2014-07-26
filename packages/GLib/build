@@ -45,6 +45,7 @@ do_configure \
             --disable-man \
             --disable-rebuilds \
             --disable-gtk-doc-html \
+            --with-libiconv=gnu \
             $EXTRA_OPTS
 
 make
